@@ -18,6 +18,11 @@
   --case:#262c32;--case-edge:#1a1f24;--cap:#353c44;--cap-edge:#20262c;--mod:#2b3138;--legend:#eef2f5;--jis:#77828c;
   --i:#7fb2e8;--f:#e8a265;--c:#7fb2e8;--v:#76c79a;--y:#b896e6;--k:#e48bb0;--l:#eef2f5;--d:#9aa7b3;--s:#9aa7b3;--x:#e57373;
   --heat:111,179,220;}}
+:root[data-theme="dark"]{
+  color-scheme:dark;--bg:#12171c;--surface:#1a2128;--border:#2d3741;--text:#e6ebef;--muted:#9aa7b3;--accent:#6fb3dc;
+  --case:#262c32;--case-edge:#1a1f24;--cap:#353c44;--cap-edge:#20262c;--mod:#2b3138;--legend:#eef2f5;--jis:#77828c;
+  --i:#7fb2e8;--f:#e8a265;--c:#7fb2e8;--v:#76c79a;--y:#b896e6;--k:#e48bb0;--l:#eef2f5;--d:#9aa7b3;--s:#9aa7b3;--x:#e57373;
+  --heat:111,179,220;}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Hiragino Sans","Noto Sans KR","Noto Sans JP",sans-serif}
 main{max-width:1180px;margin:0 auto;padding:24px 16px 40px}
@@ -43,12 +48,19 @@ svg{display:block;width:100%;min-width:720px;height:auto}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:.85rem;color:var(--muted)}
 .legend span b{font-weight:700}
 .note{color:var(--muted);font-size:.85rem;margin-top:10px;white-space:pre-wrap}
+html.capture,.capture body{background:transparent}
+.capture body{padding-left:1px}
+.capture main{padding:0;max-width:none}
+.capture main>:not(.board){display:none}
+.capture .board{background:none;border:0;border-radius:0;padding:0;overflow:visible}
+.capture svg{min-width:0}
 </style>
 </head>
 <body>
 <main>
   <h1>bada layout renderer</h1>
-  <p class="sub">Any bada ime layout on a JIS keyboard. Bottom of a key: unshifted. Top: Shift. Small grey: the JIS legend.</p>
+  <p class="sub">Any bada ime layout on a JIS keyboard. Bottom of a key: unshifted. Top: Shift. Small grey: the JIS legend.
+    Combinations (several layouts enabled together) put each layout in its own corner: Latin top left, Korean bottom left, kana bottom right.</p>
   <div class="bar">
     <label>Keyboard <select id="kb"></select></label>
     <label>Layout <select id="layout"></select></label>
@@ -71,15 +83,94 @@ svg{display:block;width:100%;min-width:720px;height:auto}
 <script src="keyboards.js"></script>
 <script src="layouts.js"></script>
 <script>
-const U = 60, PAD = 14, G = 3, R = 7;
+let U = 60;
+const PAD = 14, G = 3, R = 7;
+// Layouts enabled together in henkan mode (spec §4.3). Legends of every layout share the keycap.
+const BADA_COMBOS = [
+  { name: "QWERTY + bada + kana", ids: [0, 13, 20] },
+  { name: "bada + romaji", ids: [13, 21] },
+  { name: "QWERTY + romaji", ids: [0, 21] },
+  { name: "QWERTY + KTS", ids: [0, 10] },
+];
 const NS = "http://www.w3.org/2000/svg";
 const $ = id => document.getElementById(id);
 const el = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
-const state = { kb: "hhkb", layout: 0, jis: true, heat: false };
+const state = { kb: "hhkb", layout: "L0", jis: true, heat: false };
 try { Object.assign(state, JSON.parse(localStorage.getItem("bada-render") || "{}")); } catch (e) {}
+if (typeof state.layout === "number") state.layout = "L" + state.layout;
+// ?kb=hhkb&layers=0,13,20&theme=dark&capture : one board, nothing else (tools/render/export_png.py)
+const params = new URLSearchParams(location.search);
+if (params.has("kb")) state.kb = params.get("kb");
+if (params.has("layers")) {
+  const ids = params.get("layers").split(",").map(Number);
+  state.layout = ids.length === 1 ? "L" + BADA_LAYOUTS.findIndex(l => l.id === ids[0]) : "X" + ids.join(",");
+}
+if (params.has("jis")) state.jis = params.get("jis") !== "0";
+if (params.has("theme")) document.documentElement.dataset.theme = params.get("theme");
+const capture = params.has("capture");
+if (capture) document.documentElement.classList.add("capture");
 
 for (const [id, k] of Object.entries(BADA_KEYBOARDS)) $("kb").append(new Option(k.name, id));
-BADA_LAYOUTS.forEach((l, i) => $("layout").append(new Option(`${l.id} · ${l.name}`, i)));
+const single = document.createElement("optgroup"); single.label = "Layouts";
+BADA_LAYOUTS.forEach((l, i) => single.append(new Option(`${l.id} · ${l.name}`, "L" + i)));
+const combos = document.createElement("optgroup"); combos.label = "Combinations";
+BADA_COMBOS.forEach(c => combos.append(new Option(`${c.name} (${c.ids.join(" · ")})`, "X" + c.ids.join(","))));
+$("layout").append(single, combos);
+
+function selected() {
+  const v = String(state.layout);
+  if (v[0] === "X") {
+    const ids = v.slice(1).split(",").map(Number);
+    const layers = ids.map(id => BADA_LAYOUTS.find(l => l.id === id)).filter(Boolean);
+    const combo = BADA_COMBOS.find(c => c.ids.join(",") === ids.join(","));
+    if (layers.length) return { layers, name: combo ? combo.name : layers.map(l => l.display).join(" + "), id: ids.join(" · ") };
+  }
+  const lay = BADA_LAYOUTS[+v.slice(1)] || BADA_LAYOUTS[0];
+  return { layers: [lay], name: lay.name, id: lay.id };
+}
+
+// Combination keycaps: each layout takes a corner by script, the next free one if that's taken.
+const SLOT_PREF = id => id === 20 ? ["BR", "BL", "TL"] : (id < 10 || id === 18 || id === 21) ? ["TL", "BR", "BL"] : ["BL", "BR", "TL"];
+const norm = t => t.normalize("NFKC").toLowerCase();
+function assignSlots(layers) {
+  const used = new Set();
+  return layers.map(l => { const s = SLOT_PREF(l.id).find(x => !used.has(x)); used.add(s); return s; });
+}
+function comboKey(g, x, y, w, h, code, layers, slots) {
+  const shown = new Set();
+  const text = (t, lx, ly, size, cls, anchor = "start") => {
+    const e = el("text", { x: lx, y: ly, "font-size": size, "text-anchor": anchor, class: `lg c-${cls}` + (cls === "f" ? " under" : "") }, t);
+    if (cls === "f") e.setAttribute("text-decoration", "underline");
+    g.append(e);
+    t.split(/[\/ ]/).forEach(x => shown.add(norm(x)));   // a later layout's identical legend is left off
+  };
+  const fresh = cell => cell && cell.t && !shown.has(norm(cell.t));
+  layers.forEach((lay, i) => {
+    const k = lay.keys[code]; if (!k) return;
+    let base = fresh(k.base) ? k.base : null, shift = fresh(k.shift) ? k.shift : null;
+    if (base && shift && norm(base.t) === norm(shift.t)) shift = null;
+    const slot = slots[i];
+    if (slot === "TL") {
+      const letter = code.startsWith("Key") && base && /^[a-z]$/i.test(base.t);
+      if (letter) { text(base.t.toUpperCase(), x + 11, y + 26, 18, base.c); shift = null; }
+      else {
+        if (shift) text(shift.t, x + 11, y + 23, 13, shift.c);
+        if (base) text(base.t, x + 11, y + 41, 13, base.c);
+      }
+    } else if (slot === "BL") {
+      if (base) {
+        const [first, ...rest] = base.t.split("/");
+        text(first, x + 11, y + h - 13, first.length > 2 ? 15 : 23, base.c);
+        if (rest.length) text(rest.join(" "), x + 38, y + h - 27, 12, base.c);
+      }
+      // ⇧ legends that follow a rule (+ ㅏ syllables, the JIS character) stay off the cap; tense pairs show.
+      if (shift && !["y", "d", "s"].includes(shift.c) && !(base && base.t.includes("/"))) text(shift.t, x + 38, y + h - 27, 12, shift.c);
+    } else {
+      if (base) text(base.t, x + w - 11, y + h - 13, base.t.length > 2 ? 12 : 18, base.c, "end");
+      if (shift) text(shift.t, x + w - 11, y + h - 36, 12, shift.c, "end");
+    }
+  });
+}
 
 function rect(x, y, w, h) {
   const r = Math.min(R, w / 2, h / 2);
@@ -92,14 +183,19 @@ function enter(x, y) { // 1.5u on top, 1.25u below
 
 let svg, byCode = {};
 function render() {
-  localStorage.setItem("bada-render", JSON.stringify(state));
+  if (!capture) try { localStorage.setItem("bada-render", JSON.stringify(state)); } catch (e) {}
+  const kb = BADA_KEYBOARDS[state.kb] || BADA_KEYBOARDS.hhkb, sel = selected(), lay = sel.layers[0];
+  const multi = sel.layers.length > 1, slots = multi ? assignSlots(sel.layers) : null;
+  U = multi ? 80 : 60;
   $("kb").value = state.kb; $("layout").value = state.layout;
-  $("jisBtn").setAttribute("aria-pressed", state.jis); $("heatBtn").setAttribute("aria-pressed", state.heat);
-  const kb = BADA_KEYBOARDS[state.kb], lay = BADA_LAYOUTS[state.layout] || BADA_LAYOUTS[0];
+  $("jisBtn").setAttribute("aria-pressed", state.jis && !multi); $("heatBtn").setAttribute("aria-pressed", state.heat && !multi);
+  $("jisBtn").disabled = $("heatBtn").disabled = multi;
   const W = kb.width * U + PAD * 2, H = kb.height * U + PAD * 2 + 26;
-  svg = el("svg", { viewBox: `0 0 ${W} ${H}`, xmlns: NS, role: "img", "aria-label": `${lay.name} on ${kb.name}` });
-  svg.append(el("rect", { x: 0, y: 0, width: W, height: H, rx: 14, fill: "var(--case)", stroke: "var(--case-edge)" }));
-  svg.append(el("text", { x: PAD + 2, y: 20, "font-size": 12, class: "modl" }, `${kb.name} · ${lay.id} ${lay.name} (${lay.kind})`));
+  svg = el("svg", { viewBox: `0 0 ${W} ${H}`, xmlns: NS, role: "img", "aria-label": `${sel.name} on ${kb.name}` });
+  if (capture) { svg.setAttribute("width", W); svg.setAttribute("height", H); }
+  svg.append(el("rect", { x: 0.5, y: 0.5, width: W - 1, height: H - 1, rx: 14, fill: "var(--case)", stroke: "var(--case-edge)" }));
+  svg.append(el("text", { x: PAD + 2, y: 20, "font-size": 12, class: "modl" },
+    multi ? `${kb.name} · ${sel.name} (henkan candidates ${sel.id})` : `${kb.name} · ${lay.id} ${lay.name} (${lay.kind})`));
   const maxN = Math.max(1, ...Object.values(lay.keys).flatMap(k => [k.base?.n || 0, k.shift?.n || 0]));
   byCode = {};
   for (const [code, kx, ky, kw, kh, label, shape] of kb.keys) {
@@ -108,7 +204,8 @@ function render() {
     const g = el("g", { class: "key" + (entry ? "" : " mod") });
     const d = shape === "ENTER" ? enter(x, y) : rect(x + G, y + G, w - 2 * G, h - 2 * G);
     g.append(el("path", { d, class: "cap" }));
-    if (entry) {
+    if (entry && multi) comboKey(g, x, y, w, h, code, sel.layers, slots);
+    else if (entry) {
       if (state.heat) {
         const n = (entry.base?.n || 0) + (entry.shift?.n || 0);
         if (n) g.append(el("path", { d, class: "heat", opacity: (0.08 + 0.55 * Math.sqrt(n / maxN)).toFixed(3) }));
@@ -142,11 +239,12 @@ function render() {
     if (code) byCode[code] = g;
   }
   $("board").replaceChildren(svg);
-  $("note").textContent = lay.note || "";
+  $("note").textContent = multi ? sel.layers.map(l => `${l.id} ${l.name} (${slots[sel.layers.indexOf(l)]}): ${l.note || l.display}`).join("\n") : (lay.note || "");
+  document.title = capture ? "ready" : document.title;
 }
 
 $("kb").onchange = e => { state.kb = e.target.value; render(); };
-$("layout").onchange = e => { state.layout = +e.target.value; render(); };
+$("layout").onchange = e => { state.layout = e.target.value; render(); };
 $("jisBtn").onclick = () => { state.jis = !state.jis; render(); };
 $("heatBtn").onclick = () => { state.heat = !state.heat; render(); };
 $("svgBtn").onclick = () => {
@@ -156,7 +254,7 @@ $("svgBtn").onclick = () => {
   clone.prepend(style);
   const blob = new Blob([new XMLSerializer().serializeToString(clone)], { type: "image/svg+xml" });
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-  a.download = `${BADA_LAYOUTS[state.layout].name.replace(/[^\w]+/g, "-")}-${state.kb}.svg`; a.click();
+  a.download = `${selected().name.replace(/[^\w]+/g, "-")}-${state.kb}.svg`; a.click();
 };
 addEventListener("keydown", e => { const g = byCode[e.code]; if (g && !e.metaKey && !e.ctrlKey) { g.classList.add("on"); if (e.code === "Space" || e.code.startsWith("Arrow")) e.preventDefault(); } });
 addEventListener("keyup", e => byCode[e.code]?.classList.remove("on"));

@@ -253,8 +253,8 @@ conversion, so apps don't rely on them while a Japanese input source is on).
 | `/engine` | Platform-independent core (Rust, `bada-engine`): layouts, composition, the menu, F-key actions. Event in → output out, no I/O. C ABI in `include/bada.h` (JSON in and out) |
 | `/engine/data` | Shipped data: Korean word counts (`ko-words.tsv`, built by `engine/tools/build_ko_words.py`), English words, hanja, OECD names, with their licenses |
 | `/mac` | InputMethodKit shell (Swift, no Xcode): the two input modes (§4.1), the 英数 / かな key tap, the menu window, the settings window |
-| `/docs` | This spec, the Bada layout design, saved layout candidates |
-| `/tools/analysis`, `/tools/render`, `/tools/editor` | Corpus analysis and layout optimisation, the layout renderer, the layout editor |
+| `/docs` | This spec, the Bada layout design, a page per layout and combination examples (`docs/layouts`, images in `docs/images/layouts`), saved layout candidates |
+| `/tools/analysis`, `/tools/render`, `/tools/editor` | Corpus analysis and layout optimisation, the layout renderer (with combinations, and `export_png.py` for the docs' images), the layout editor |
 
 All behaviour lives in the engine; the shell translates keys, switches input sources and applies
 the output.
