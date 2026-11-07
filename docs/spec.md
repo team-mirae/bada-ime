@@ -293,7 +293,38 @@ Both have Control left of A. Bottom rows (1u each but the space):
   ↑ stacked over ↓ at half height; no right ⌥. The left edge is 0.5u shorter than a full board's:
   no 半角/全角 key (1 is 1.5u), tab 1u, control 1.25u, left shift 1.75u.
 
-## 8. Open questions
+## 8. 초성 diagnostics and the user dictionary
+
+초성 input is ambiguous enough that, in practice, every user who types it needs data of their own.
+Two things provide it.
+
+### 8.1 초성 diagnostics
+
+A collector in the engine (`engine/src/diag.rs`) counts, **in henkan mode only**, for each Korean
+layout that types initials on their own keys (10–13):
+
+- **typed:** each committed syllable whose initial was typed: the initial's **key and Shift** (two
+  keys that type the same jamo are two inputs: Bada's ㅅ on S and O, ㅇ on F and M, ㄷ on K and V,
+  ㅆ on W and P, ㅃ on R and `;`), the vowel, the final, and the final's key;
+- **choseong:** each 초성 prediction chosen: each typed initial's key, and the vowel and final of
+  the syllable it became.
+
+Counts only, never text. On by default (bada ime Settings → 초성 diagnostics; Clear empties it);
+saved every 30 seconds to `~/Library/Application Support/bada-ime/choseong-diagnostics.json`
+(`bada-choseong-diagnostics/1`: rows of the fields above with a `count`), and read back at launch.
+`tools/analysis/choseong_report.py` summarises it. **[decide]** whether the counts feed the
+ranking directly (a per-key syllable model for 초성 input) once there are enough.
+
+### 8.2 The user dictionary
+
+`~/Library/Application Support/bada-ime/dictionary.json`: positive words, negative words (soft or
+strong) and 초성 shortcuts, for every layout. The contract is
+[dictionary-contract.md](dictionary-contract.md), with a JSON Schema and an example; the
+interactive setup is [interactive-prompts/](interactive-prompts/README.md). Loaded at launch and on
+the next activation after the file changes; the input menu's "Open Dictionary Folder" opens its
+folder.
+
+## 9. Open questions
 
 Collected from above:
 

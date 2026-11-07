@@ -13,6 +13,7 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
     private var negativePopup = NSPopUpButton()
     private var interceptBox = NSButton()
     private var fPopups: [NSPopUpButton] = []
+    private var diagnosticsBox = NSButton()
 
     func show(catalog: [String: Any]) {
         layouts = (catalog["layouts"] as? [[String: Any]] ?? []).compactMap { l in
@@ -110,6 +111,23 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
         }
         stack.addArrangedSubview(label("⇧, ⌥ and ⌃ with an F key: up to the bound method (bada defines none, so they're swallowed)."))
 
+        stack.addArrangedSubview(label("Your dictionary", bold: true))
+        UserDictionary.refresh()
+        stack.addArrangedSubview(label(UserDictionary.status))
+        stack.addArrangedSubview(label("Positive and negative words and 초성 shortcuts: docs/dictionary-contract.md. It reloads when the file changes."))
+        stack.addArrangedSubview(NSButton(title: "Open Dictionary Folder", target: self, action: #selector(openDictionary(_:))))
+
+        stack.addArrangedSubview(label("초성 diagnostics", bold: true))
+        diagnosticsBox = NSButton(checkboxWithTitle: "Collect which vowels and finals follow each initial key (henkan mode only; counts, never text; this Mac only)",
+                                  target: self, action: #selector(changed(_:)))
+        diagnosticsBox.state = settings.collect_choseong ? .on : .off
+        stack.addArrangedSubview(diagnosticsBox)
+        let diagnosticsRow = NSStackView()
+        diagnosticsRow.orientation = .horizontal
+        diagnosticsRow.addArrangedSubview(NSButton(title: "Show the File", target: self, action: #selector(showDiagnostics(_:))))
+        diagnosticsRow.addArrangedSubview(NSButton(title: "Clear", target: self, action: #selector(clearDiagnostics(_:))))
+        stack.addArrangedSubview(diagnosticsRow)
+
         let window = self.window ?? NSWindow(contentRect: NSRect(x: 0, y: 0, width: 560, height: 600),
                                              styleMask: [.titled, .closable], backing: .buffered, defer: false)
         window.title = "bada ime Settings"
@@ -132,6 +150,19 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
             let value = popup.selectedItem?.representedObject as? String ?? "swallow"
             if value == "swallow" { settings.fkeys.removeValue(forKey: "F\(i + 6)") } else { settings.fkeys["F\(i + 6)"] = value }
         }
+        settings.collect_choseong = diagnosticsBox.state == .on
         BadaSettings.current = settings
+    }
+
+    @objc private func openDictionary(_ sender: Any?) {
+        UserDictionary.openFolder()
+    }
+
+    @objc private func showDiagnostics(_ sender: Any?) {
+        ChoseongDiagnostics.reveal()
+    }
+
+    @objc private func clearDiagnostics(_ sender: Any?) {
+        ChoseongDiagnostics.clear()
     }
 }

@@ -418,6 +418,8 @@ struct Syl {
     lit: Option<char>,
     /// The ㅇ was implied, not typed or asked for (JIS Korean §4.2): `commit-bare` drops it.
     implied: bool,
+    /// The press that typed the initial (none for an implied or asked-for ㅇ).
+    ini_from: Option<usize>,
 }
 
 impl Syl {
@@ -473,9 +475,45 @@ fn compose_with(id: u32, presses: &[Press], drop_implied: bool) -> String {
     if id == KANA_KOREAN {
         return crate::kana_korean::compose_presses(presses);
     }
-    let Some(r) = rules(id) else {
+    let Some(syls) = build(id, presses) else {
         return String::new();
     };
+    let mut out = String::new();
+    syls.iter().for_each(|s| s.text(&mut out, drop_implied));
+    out
+}
+
+/// One composed syllable and the presses behind it, for the 초성 diagnostics (spec §8).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Detail {
+    /// The press that typed the initial.
+    pub ini_press: usize,
+    pub ini: char,
+    pub vowel: char,
+    /// The final (a double final as one), and the press that typed it (the first of two).
+    pub fin: Option<char>,
+    pub fin_press: Option<usize>,
+}
+
+/// The syllables of the presses in a 2-set-family layout (10–13) whose initial was typed.
+pub fn details(id: u32, presses: &[Press]) -> Vec<Detail> {
+    let Some(syls) = build(id, presses) else { return Vec::new() };
+    syls.iter()
+        .filter(|s| s.lit.is_none())
+        .filter_map(|s| {
+            let fin = match s.fins.as_slice() {
+                [] => None,
+                [(a, _)] => Some(*a),
+                [(a, _), (b, _)] => cluster(*a, *b),
+                _ => None,
+            };
+            Some(Detail { ini_press: s.ini_from?, ini: s.ini?, vowel: s.vowel?, fin, fin_press: s.fins.first().map(|f| f.1) })
+        })
+        .collect()
+}
+
+fn build(id: u32, presses: &[Press]) -> Option<Vec<Syl>> {
+    let r = rules(id)?;
     let roles: Vec<Option<Role>> = presses.iter().map(|&p| press_role(id, p)).collect();
     let mut syls: Vec<Syl> = Vec::new();
     // The vowel press that last took a final (its index, and the final), for the double press.
@@ -535,6 +573,7 @@ fn compose_with(id: u32, presses: &[Press], drop_implied: bool) -> String {
                 match ini {
                     Some(l) => syls.push(Syl {
                         ini: Some(l),
+                        ini_from: Some(i),
                         ..Syl::default()
                     }),
                     None => syls.push(Syl {
@@ -546,6 +585,7 @@ fn compose_with(id: u32, presses: &[Press], drop_implied: bool) -> String {
             Role::ConsA(l) => syls.push(Syl {
                 ini: Some(l),
                 vowel: Some('ㅏ'),
+                ini_from: Some(i),
                 ..Syl::default()
             }),
             Role::Vowel(vw) => {
@@ -574,6 +614,7 @@ fn compose_with(id: u32, presses: &[Press], drop_implied: bool) -> String {
                                 syls.push(Syl {
                                     ini: Some(l),
                                     vowel: Some(vw),
+                                    ini_from: Some(from),
                                     ..Syl::default()
                                 });
                                 continue;
@@ -591,9 +632,7 @@ fn compose_with(id: u32, presses: &[Press], drop_implied: bool) -> String {
             }
         }
     }
-    let mut out = String::new();
-    syls.iter().for_each(|s| s.text(&mut out, drop_implied));
-    out
+    Some(syls)
 }
 
 /// A 초성 token (§15): an initial, and whether it carries ㅏ (⇧ + consonant, §15.1).
@@ -771,6 +810,22 @@ mod tests {
             keys(BADA, &[(KeyL, false), (Comma, false), (Period, true)]),
             "하."
         );
+    }
+
+    #[test]
+    fn details_name_the_keys() {
+        // 한 + 국 in Bada: ㅎ(L) ㅏ(,) ㄴ(H) ㄱ(J) ㅜ(Z) ㄱ(J)
+        let p: Vec<Press> = [KeyL, Comma, KeyH, KeyJ, KeyZ, KeyJ].iter().map(|&k| Press::new(k, false)).collect();
+        let d = details(BADA, &p);
+        assert_eq!(d.len(), 2);
+        assert_eq!((d[0].ini_press, d[0].ini, d[0].vowel, d[0].fin, d[0].fin_press), (0, 'ㅎ', 'ㅏ', Some('ㄴ'), Some(2)));
+        assert_eq!((d[1].ini_press, d[1].ini, d[1].vowel, d[1].fin), (3, 'ㄱ', 'ㅜ', Some('ㄱ')));
+        // a final moved to the next syllable is that syllable's initial, from its press: 가빠
+        let p: Vec<Press> = [KeyJ, Comma, KeyR, Comma].iter().map(|&k| Press::new(k, false)).collect();
+        let d = details(BADA, &p);
+        assert_eq!((d[1].ini_press, d[1].ini), (2, 'ㅃ'));
+        // implied ㅇ syllables have no initial key: 안 records nothing
+        assert!(details(BADA, &[Press::new(Comma, false), Press::new(KeyH, false)]).is_empty());
     }
 
     #[test]

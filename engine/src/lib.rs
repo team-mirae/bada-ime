@@ -4,6 +4,7 @@
 //! key events and host text in, and applies the [`Output`] to the text field.
 
 pub mod data;
+pub mod diag;
 pub mod engine;
 pub mod ffi;
 pub mod hangul;
@@ -16,6 +17,7 @@ pub mod korean_roman;
 pub mod key;
 pub mod layout;
 pub mod romaji;
+pub mod userdict;
 pub mod width;
 
 pub use data::Data;

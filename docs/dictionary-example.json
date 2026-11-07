@@ -1,0 +1,22 @@
+{
+  "format": "bada-dictionary",
+  "version": 1,
+  "source": { "tool": "hand-written", "created": "2026-11-07", "description": "worked example for docs/dictionary-contract.md" },
+  "positive": [
+    { "word": "데이터센터", "count": 40 },
+    { "word": "감사합니다", "confidence": "confirmed" },
+    { "word": "확인했습니다", "count": 25 },
+    { "word": "kubernetes", "language": "english" },
+    { "word": "サーバー", "language": "japanese" }
+  ],
+  "negative": [
+    { "word": "감소합니다", "strength": "strong" },
+    { "word": "검사합니다" },
+    { "word": "god", "language": "english" }
+  ],
+  "shortcuts": [
+    { "choseong": "ㄱㅅ", "word": "감사합니다" },
+    { "choseong": "ㅎㅇ", "word": "확인했습니다" },
+    { "choseong": "ㅇㅋ", "word": "오케이" }
+  ]
+}

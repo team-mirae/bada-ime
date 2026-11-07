@@ -96,6 +96,7 @@ final class BadaInputController: IMKInputController {
         engine.apply(BadaSettings.current.json)
         // Keys the engine passes on type JIS characters through ABC.
         client?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
+        UserDictionary.refresh()
         DispatchQueue.main.async { LanguageKeyTap.check() }
     }
 
@@ -179,6 +180,7 @@ final class BadaInputController: IMKInputController {
     override func menu() -> NSMenu! {
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "bada ime Settings…", action: #selector(openSettings(_:)), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Open Dictionary Folder", action: #selector(openDictionaryFolder(_:)), keyEquivalent: ""))
         if !AXIsProcessTrusted() {
             menu.addItem(NSMenuItem(title: "Allow 英数 and かな Everywhere…", action: #selector(allowKeys(_:)), keyEquivalent: ""))
         }
@@ -187,6 +189,10 @@ final class BadaInputController: IMKInputController {
 
     @objc func openSettings(_ sender: Any?) {
         SettingsWindow.shared.show(catalog: engine.catalog())
+    }
+
+    @objc func openDictionaryFolder(_ sender: Any?) {
+        UserDictionary.openFolder()
     }
 
     @objc func allowKeys(_ sender: Any?) {

@@ -207,3 +207,22 @@ fn kanji_conversion() {
     assert_eq!(out.preedit, "私は学生です");
     assert_eq!(out.notes[out.selected], "わたしはがくせいです");
 }
+
+#[test]
+fn the_example_dictionary_loads() {
+    let json = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/../docs/dictionary-example.json")).unwrap();
+    let (_, summary) = bada::userdict::UserDict::parse(&json);
+    assert!(summary.ok, "{}", summary.error);
+    assert_eq!((summary.positive, summary.negative, summary.shortcuts), (5, 3, 3));
+}
+
+#[test]
+fn choseong_knows_technical_words() {
+    // The bigger list knows them (they rank low by count: 초성 114th of 364 words for ㅊㅅ, 키로깅
+    // 61st of 105 for ㅋㄹㄱ; the user dictionary or the diagnostics bring them up).
+    let d = data();
+    let tokens = |s: &str| s.chars().map(|c| bada::layout::Token { ini: c, a: false }).collect::<Vec<_>>();
+    let words = |s: &str| d.choseong_words(&tokens(s), 1000).into_iter().map(|w| w.0).collect::<Vec<_>>();
+    assert!(words("ㅊㅅ").contains(&"초성".to_string()));
+    assert!(words("ㅋㄹㄱ").contains(&"키로깅".to_string()));
+}

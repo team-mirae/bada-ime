@@ -13,6 +13,7 @@ use crate::data::Data;
 use crate::japanese;
 use crate::key::{Key, Mods};
 use crate::layout::{self, BADA, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI};
+use crate::userdict::{Language, Strength, UserDict};
 use crate::width::{Width, convert};
 
 /// The user's settings (spec §5.3, §6.4, §6.5), as the shell stores them.
@@ -172,6 +173,18 @@ struct Entry {
     note: String,
     /// A Japanese reading: drawn in a Japanese font.
     japanese: bool,
+    /// Where it came from, for the 초성 diagnostics (spec §8).
+    origin: Origin,
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+enum Origin {
+    #[default]
+    Other,
+    /// Layout `id`'s composition of the presses.
+    Composed(u32),
+    /// A 초성 prediction of layout `id`.
+    Choseong(u32),
 }
 
 impl Entry {
@@ -182,7 +195,7 @@ impl Entry {
     /// A kana entry, its romaji as the note.
     fn kana(text: String, score: f64) -> Entry {
         let note = crate::romaji::romaji(&text).unwrap_or_default();
-        Entry { text, score, note, japanese: true }
+        Entry { text, score, note, japanese: true, origin: Origin::Other }
     }
 }
 
@@ -220,6 +233,8 @@ pub struct Engine {
     waiting: Option<String>,
     /// Muhenkan's open ⌥ + letter variants list.
     held: Option<crate::hold::Held>,
+    /// A dictionary pinned to this engine (tests); None: the process's (`userdict::current`).
+    pinned: Option<Option<std::sync::Arc<UserDict>>>,
 }
 
 impl Engine {
@@ -237,12 +252,19 @@ impl Engine {
             pick: None,
             waiting: None,
             held: None,
+            pinned: None,
         }
     }
 
     pub fn set_settings(&mut self, settings: Settings) {
         self.settings = settings;
         self.settings.enabled.retain(|&id| layout::is_known(id));
+        self.recompute();
+    }
+
+    /// Pins a user dictionary to this engine instead of the process's (None in it: no dictionary).
+    pub fn pin_dictionary(&mut self, dict: Option<std::sync::Arc<UserDict>>) {
+        self.pinned = Some(dict);
         self.recompute();
     }
 
@@ -310,11 +332,31 @@ impl Engine {
 
     fn take_shown(&mut self) -> String {
         let text = self.shown();
+        self.record();
         self.clear();
         text
     }
 
+    /// The 초성 diagnostics (spec §8) for what's about to be committed: henkan mode only, and only
+    /// when the whole text is the entry (nothing frozen before it, no override).
+    fn record(&self) {
+        if self.mode != Mode::Henkan || !self.prefix.is_empty() || self.over.is_some() || self.index < 0 {
+            return;
+        }
+        let Some(entry) = self.entries.get(self.index as usize) else { return };
+        match entry.origin {
+            Origin::Composed(id) => crate::diag::typed(id, &self.presses, &layout::details(id, &self.presses)),
+            Origin::Choseong(id) => crate::diag::choseong(id, &self.presses, &entry.text),
+            Origin::Other => {}
+        }
+    }
+
     // ---------- readings ----------
+
+    /// How often a Korean word is seen: the built-in count plus the user dictionary's.
+    fn ko_count(&self, user: &Option<std::sync::Arc<UserDict>>, word: &str) -> u32 {
+        self.data.korean_count(word) + user.as_ref().map_or(0, |u| u.count(Language::Korean, word))
+    }
 
     fn recompute(&mut self) {
         self.entries.clear();
@@ -340,17 +382,22 @@ impl Engine {
         }
         let enabled = self.settings.enabled.clone();
         let mut entries: Vec<Entry> = Vec::new();
+        let user = match &self.pinned {
+            Some(pinned) => pinned.clone(),
+            None => crate::userdict::current(),
+        };
         for (rank, &id) in enabled.iter().enumerate() {
             // Earlier in the user's order wins ties.
             let tie = -(rank as f64) * 0.001;
             if !self.presses.iter().all(|&p| layout::takes(id, p)) {
                 continue;
             }
+            let start = entries.len();
             match id {
                 QWERTY => {
                     let text = layout::qwerty(&self.presses);
                     let letters = text.chars().all(|c| c.is_ascii_alphabetic());
-                    let score = if self.data.is_english(&text) {
+                    let score = if self.data.is_english(&text) || user.as_ref().is_some_and(|u| u.count(Language::English, &text) > 0) {
                         90.0
                     } else if letters {
                         30.0
@@ -374,7 +421,7 @@ impl Engine {
                     let Some(default) = all.first().cloned() else {
                         continue;
                     };
-                    let count = self.data.korean_count(&default);
+                    let count = self.ko_count(&user, &default);
                     let loose = default
                         .chars()
                         .any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
@@ -392,7 +439,7 @@ impl Engine {
                     });
                     let mut known: Vec<(String, u32)> = all[1..]
                         .iter()
-                        .map(|r| (r.clone(), self.data.korean_count(r)))
+                        .map(|r| (r.clone(), self.ko_count(&user, r)))
                         .filter(|r| r.1 > 0)
                         .collect();
                     known.sort_by(|a, b| b.1.cmp(&a.1));
@@ -411,7 +458,7 @@ impl Engine {
                         // predictions are listed with it.
                         let literal = layout::compose_presses(id, &self.presses);
                         let attached = literal != layout::tokens_text(&tokens);
-                        let count = self.data.korean_count(&literal);
+                        let count = self.ko_count(&user, &literal);
                         let loose = literal.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
                         let score = if tokens.len() == 1 {
                             200.0
@@ -431,20 +478,44 @@ impl Engine {
                         entries.push(Entry {
                             text: literal,
                             score: score + tie,
-                        ..Entry::default()
+                            origin: Origin::Composed(id),
+                            ..Entry::default()
                     });
                         if tokens.len() >= 2 {
+                            // The user's own: 초성 shortcuts first, then positive words.
+                            if let Some(u) = &user {
+                                let typed: String = tokens.iter().map(|t| t.ini).collect();
+                                for (i, word) in u.shortcuts(&typed).iter().enumerate() {
+                                    entries.push(Entry {
+                                        text: word.clone(),
+                                        score: 160.0 - 0.01 * i as f64 + tie,
+                                        origin: Origin::Choseong(id),
+                                        ..Entry::default()
+                                    });
+                                }
+                                for (word, count) in u.choseong_words(&tokens).into_iter().take(9) {
+                                    let built = self.data.korean_count(&word);
+                                    entries.push(Entry {
+                                        text: word,
+                                        score: 97.0 + ((count + built) as f64).ln() + tie,
+                                        origin: Origin::Choseong(id),
+                                        ..Entry::default()
+                                    });
+                                }
+                            }
                             for (word, count) in self.data.choseong_words(&tokens, 9) {
+                                let count = count + user.as_ref().map_or(0, |u| u.count(Language::Korean, &word));
                                 entries.push(Entry {
                                     text: word,
                                     score: 95.0 + (count as f64).ln() + tie,
-                        ..Entry::default()
+                                    origin: Origin::Choseong(id),
+                                    ..Entry::default()
                     });
                             }
                         }
                     } else {
                         let text = layout::compose_presses(id, &self.presses);
-                        let count = self.data.korean_count(&text);
+                        let count = self.ko_count(&user, &text);
                         let loose = text.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
                         let score = if count > 0 {
                             100.0 + (count as f64).ln()
@@ -456,7 +527,8 @@ impl Engine {
                         entries.push(Entry {
                             text,
                             score: score + tie,
-                        ..Entry::default()
+                            origin: Origin::Composed(id),
+                            ..Entry::default()
                     });
                     }
                 }
@@ -465,7 +537,7 @@ impl Engine {
                     let loose = text.contains(japanese::DAKUTEN)
                         || text.contains(japanese::HANDAKUTEN)
                         || text.chars().any(|c| c.is_ascii_alphabetic());
-                    let score = if self.data.is_japanese(&text) {
+                    let score = if self.data.is_japanese(&text) || user.as_ref().is_some_and(|u| u.count(Language::Japanese, &text) > 0) {
                         92.0
                     } else if loose {
                         30.0
@@ -486,6 +558,7 @@ impl Engine {
                                     score: score + tie + 0.5 - 0.01 * i as f64,
                                     note: text.clone(),
                                     japanese: true,
+                                    origin: Origin::Other,
                                 });
                             }
                         }
@@ -493,6 +566,27 @@ impl Engine {
                     entries.push(Entry::kana(text, score + tie));
                 }
                 _ => {}
+            }
+            // The user's negative words (docs/dictionary-contract.md): soft ones far down, strong
+            // ones gone.
+            if let Some(u) = &user {
+                let language = match id {
+                    QWERTY => Language::English,
+                    KANA | ROMAJI => Language::Japanese,
+                    _ => Language::Korean,
+                };
+                let mut i = start;
+                while i < entries.len() {
+                    match u.negative(language, &entries[i].text) {
+                        Some(Strength::Strong) => {
+                            entries.remove(i);
+                            continue;
+                        }
+                        Some(Strength::Soft) => entries[i].score -= 60.0,
+                        None => {}
+                    }
+                    i += 1;
+                }
             }
         }
         // Script forms (§6.4): one method, at most two entries: −1 hiragana, −2 katakana.
@@ -1003,6 +1097,7 @@ mod tests {
     use super::*;
     use Key::*;
 
+    /// A test engine, with no user dictionary whatever the process has loaded.
     fn engine() -> Engine {
         let data = Data::parse(
             "안녕하세요\t50\n안녕\t40\n한국\t60\n항구\t5\n아니하세요\t3\n한\t30\nㅋㅋ\t90\n감사합니다\t70\n학교\t20\n",
@@ -1010,7 +1105,9 @@ mod tests {
             "학교\t學校\t\n학\t學\t배울 학\n",
             "美\t미국\n英\t영국\n",
         );
-        Engine::new(Arc::new(data))
+        let mut e = Engine::new(Arc::new(data));
+        e.pin_dictionary(None);
+        e
     }
     fn press(e: &mut Engine, k: Key) -> Output {
         e.key(k, Mods::NONE)
@@ -1276,6 +1373,61 @@ mod tests {
         let out = press(&mut e, Tab);
         assert_eq!(out.notes, ["ra-men", "ra-men", "ra-men"]);
         assert!(out.japanese.iter().all(|&j| j));
+    }
+
+    #[test]
+    fn choseong_diagnostics() {
+        crate::diag::clear();
+        crate::diag::set_enabled(true);
+        let mut e = engine();
+        // typed: 한 (ㅎ on L, ㄴ on H) then Space
+        for k in [KeyL, Comma, KeyH] {
+            press(&mut e, k);
+        }
+        press(&mut e, Space);
+        // a 초성 prediction chosen: ㅇ(F) ㄴ(H) ㅎ(L) ㅅ(S) ㅇ(M, the other ㅇ key) → 안녕하세요
+        for k in [KeyF, KeyH, KeyL, KeyS, KeyM] {
+            press(&mut e, k);
+        }
+        press(&mut e, Enter);
+        // muhenkan records nothing
+        e.set_mode(Mode::Muhenkan);
+        press(&mut e, KeyL);
+        let json = crate::diag::export();
+        let has = |frag: &str| assert!(json.contains(frag), "{frag} in {json}");
+        has(r#""source":"typed","key":"KeyL","shift":false,"initial":"ㅎ","vowel":"ㅏ","final_":"ㄴ","final_key":"KeyH""#);
+        has(r#""source":"choseong","key":"KeyM","shift":false,"initial":"ㅇ","vowel":"ㅛ","final_":"","final_key":"""#);
+        has(r#""source":"choseong","key":"KeyF","shift":false,"initial":"ㅇ","vowel":"ㅏ","final_":"ㄴ""#);
+        crate::diag::set_enabled(false);
+    }
+
+    #[test]
+    fn user_dictionary_shapes_choseong() {
+        let mut e = engine();
+        for k in [KeyF, KeyH, KeyL, KeyS, KeyF] {
+            press(&mut e, k);
+        }
+        let before = press(&mut e, Tab);
+        assert_eq!(before.menu[0], "안녕하세요");
+        let (dict, summary) = UserDict::parse(r#"{"format":"bada-dictionary","version":1,
+            "negative":[{"word":"안녕하세요","strength":"strong"}],
+            "positive":[{"word":"아니하세요","count":5000}],
+            "shortcuts":[{"choseong":"ㄱㅅ","word":"감사합니다"}]}"#);
+        assert!(summary.ok);
+        let dict = Some(std::sync::Arc::new(dict));
+        let mut e = engine();
+        e.pin_dictionary(dict.clone());
+        for k in [KeyF, KeyH, KeyL, KeyS, KeyF] {
+            press(&mut e, k);
+        }
+        let out = press(&mut e, Tab);
+        assert!(!out.menu.contains(&"안녕하세요".to_string()), "{:?}", out.menu);
+        assert_eq!(out.menu[0], "아니하세요");
+        let mut e = engine();
+        e.pin_dictionary(dict);
+        press(&mut e, KeyJ);
+        let out = press(&mut e, KeyS);
+        assert_eq!(out.preedit, "감사합니다");
     }
 
     #[test]

@@ -7,3 +7,4 @@ __pycache__/
 /engine/target/
 /mac/build/
 *.log
+/engine/tools/cache/

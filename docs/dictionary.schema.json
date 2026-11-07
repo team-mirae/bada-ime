@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/team-mirae/bada-ime/docs/dictionary.schema.json",
+  "title": "bada ime dictionary",
+  "type": "object",
+  "required": ["format", "version"],
+  "properties": {
+    "format": { "const": "bada-dictionary" },
+    "version": { "const": 1 },
+    "source": {
+      "type": "object",
+      "properties": {
+        "tool": { "type": "string" },
+        "created": { "type": "string", "format": "date" },
+        "description": { "type": "string" }
+      }
+    },
+    "positive": {
+      "type": "array",
+      "maxItems": 20000,
+      "items": {
+        "type": "object",
+        "required": ["word"],
+        "properties": {
+          "word": { "type": "string", "minLength": 1 },
+          "language": { "enum": ["korean", "english", "japanese"] },
+          "count": { "type": "integer", "minimum": 1 },
+          "confidence": { "enum": ["tentative", "likely", "confirmed"] }
+        }
+      }
+    },
+    "negative": {
+      "type": "array",
+      "maxItems": 20000,
+      "items": {
+        "type": "object",
+        "required": ["word"],
+        "properties": {
+          "word": { "type": "string", "minLength": 1 },
+          "language": { "enum": ["korean", "english", "japanese"] },
+          "strength": { "enum": ["soft", "strong"] }
+        }
+      }
+    },
+    "shortcuts": {
+      "type": "array",
+      "maxItems": 5000,
+      "items": {
+        "type": "object",
+        "required": ["choseong", "word"],
+        "properties": {
+          "choseong": { "type": "string", "pattern": "^[ㄱ-ㅎ\\s]+$" },
+          "word": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

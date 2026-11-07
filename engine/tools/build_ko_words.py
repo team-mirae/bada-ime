@@ -1,30 +1,118 @@
-"""engine/data/ko-words.tsv: Korean words (eojeol) and chat jamo runs with their counts.
+"""engine/data/ko-words.tsv: Korean words (eojeol) and chat jamo with their counts.
 
-Counts only, no sentences. From JIS Moonshot's corpora (set BADA_CORPORA): news (Leipzig, CC BY),
-petitions (MIT), NSMC reviews (CC0), korean-safe-conversation (Apache-2.0), PER syllables each.
-Usage: python3 build_ko_words.py [PER] [MIN_COUNT]
+Counts only, no sentences, from permissively licensed sources only (no share-alike), listed with
+their licences in engine/data/LICENSE-corpora.txt:
+
+- word counts JIS Moonshot already derived (`corpora/derived/<source>/ko_words.tsv`, whole corpora);
+- text counted here (`ko.txt` and two top-level files);
+- dictionary headwords (mecab-ko-dic, kiwi, open-korean-text), so a dictionary word is known even
+  when it's rare in running text;
+- optionally FineWeb-2's Korean web text (ODC-By), counted by tools/fetch_fineweb.py into
+  engine/tools/cache/fineweb-ko_words.tsv (not committed).
+
+Set BADA_CORPORA to JIS Moonshot's corpora folder (default ~/Projects/jis-moonshot/corpora).
+Usage: python3 build_ko_words.py [MIN_COUNT] [MAX_WORDS]
 """
 import collections, os, re, sys
+
 ROOT = os.path.expanduser(os.environ.get("BADA_CORPORA", "~/Projects/jis-moonshot/corpora"))
-SOURCES = ["derived/leipzig-corpora/ko.txt", "derived/korean-petitions/ko.txt", "nsmc-ratings.txt",
-           "derived/korean-safe-conversation/ko.txt"]
-PER = int(sys.argv[1]) if len(sys.argv) > 1 else 8_000_000
-MIN = int(sys.argv[2]) if len(sys.argv) > 2 else 3
+HERE = os.path.dirname(os.path.abspath(__file__))
+MIN = int(sys.argv[1]) if len(sys.argv) > 1 else 3
+MAX_WORDS = int(sys.argv[2]) if len(sys.argv) > 2 else 1_000_000
+
+# Derived word counts (whole corpora).
+COUNTED = [
+    "leipzig-corpora",            # CC BY
+    "korean-petitions",           # MIT
+    "zenodo-korean-raw-4317288",  # CC BY 4.0
+    "koreascience-summarization", # Apache-2.0
+    "bccard-finance-qna",         # Apache-2.0
+    "kiwi",                       # Apache-2.0 (its model's counts)
+    "korean-sarcasm",             # MIT
+    "question-pair",              # MIT
+    "fsc-financial-terms",        # no restriction (data.go.kr)
+    "cldr-ko",                    # Unicode License v3
+]
+# Text to count here.
+TEXT = [
+    "nsmc-ratings.txt",                              # CC0
+    "ChatbotData.csv",                               # MIT
+    "derived/korean-safe-conversation/ko.txt",       # Apache-2.0
+    "derived/common-voice-sentences-ko/ko.txt",      # CC0
+    "derived/kommongen/ko.txt",                      # MIT
+    "derived/functionchat-bench/ko.txt",             # Apache-2.0
+    "derived/hike-code-switching/ko.txt",            # Apache-2.0
+    "derived/massive/ko.txt",                        # CC BY 4.0
+    "derived/kubernetes-docs-ko/ko.txt",             # CC BY 4.0
+    "derived/react-docs-ko/ko.txt",                  # CC BY 4.0
+    "derived/vue-docs-ko/ko.txt",                    # CC BY 4.0
+    "derived/typescript-docs-ko/ko.txt",             # MIT
+    "derived/nodejs-site-ko/ko.txt",                 # MIT
+    "derived/rust-book-ko/ko.txt",                   # MIT OR Apache-2.0
+]
+# Dictionary headwords: known words, counted at least HEADWORD_FLOOR.
+HEADWORDS = ["mecab-ko-dic", "open-korean-text"]  # Apache-2.0
+HEADWORD_FLOOR = 3
+FINEWEB = os.path.join(HERE, "cache", "fineweb-ko_words.tsv")  # ODC-By, optional
+
 WORD = re.compile(r"[가-힣]+|[ㄱ-ㅣ]{2,}")
-counts = collections.Counter()
-for rel in SOURCES:
+KEEP = re.compile(r"^(?:[가-힣]+|[ㄱ-ㅣ]{2,})$")
+
+
+def read_counts(path, counts, floor=0):
     n = 0
-    with open(os.path.join(ROOT, rel), encoding="utf-8", errors="ignore") as f:
+    with open(path, encoding="utf-8", errors="ignore") as f:
         for line in f:
-            for w in WORD.findall(line):
-                counts[w] += 1
-                n += len(w)
-            if n >= PER:
-                break
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../data/ko-words.tsv")
-kept = [(w, c) for w, c in counts.most_common() if c >= MIN]
+            parts = line.rstrip("\n").split("\t")
+            if len(parts) < 2 or not KEEP.match(parts[0]):
+                continue
+            try:
+                c = int(parts[1])
+            except ValueError:
+                continue
+            counts[parts[0]] += max(c, floor)
+            n += 1
+    return n
+
+
+counts = collections.Counter()
+for d in COUNTED:
+    p = os.path.join(ROOT, "derived", d, "ko_words.tsv")
+    if os.path.exists(p):
+        print(f"{d}: {read_counts(p, counts)} words", flush=True)
+for rel in TEXT:
+    p = os.path.join(ROOT, rel)
+    if not os.path.exists(p):
+        continue
+    c = collections.Counter()
+    with open(p, encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            c.update(WORD.findall(line))
+    counts.update(c)
+    print(f"{rel}: {len(c)} words", flush=True)
+headwords = set()
+for d in HEADWORDS:
+    p = os.path.join(ROOT, "derived", d, "ko_words.tsv")
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            for line in f:
+                w = line.split("\t")[0]
+                if KEEP.match(w):
+                    headwords.add(w)
+for w in headwords:
+    counts[w] = max(counts[w], HEADWORD_FLOOR)
+print(f"headwords: {len(headwords)}")
+if os.path.exists(FINEWEB):
+    print(f"fineweb: {read_counts(FINEWEB, counts)} words")
+
+kept = [(w, c) for w, c in counts.most_common() if c >= MIN][:MAX_WORDS]
+# Sorted by UTF-8 bytes: the engine reads it straight into its packed list (data.rs).
+kept.sort(key=lambda wc: wc[0].encode("utf-8"))
+out = os.path.join(HERE, "../data/ko-words.tsv")
 with open(out, "w") as f:
     f.write("# Korean words and chat jamo with counts; see LICENSE-corpora.txt. Generated by tools/build_ko_words.py.\n")
     for w, c in kept:
         f.write(f"{w}\t{c}\n")
-print(len(kept), "words,", os.path.getsize(out) // 1024, "KiB")
+print(f"{len(kept)} words (of {len(counts)}), {os.path.getsize(out) // 1024} KiB")
+for probe in ["초성", "키로깅", "감사합니다", "데이터센터"]:
+    print(probe, counts.get(probe, 0))
