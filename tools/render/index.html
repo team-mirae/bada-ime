@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>bada layout renderer</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f4f6f8;--surface:#ffffff;--border:#d5dbe1;--text:#17202a;--muted:#5d6b78;--accent:#1f6f9f;
+  --case:#d7dadd;--case-edge:#c2c6ca;--cap:#fbfbfa;--cap-edge:#b9bec4;--mod:#e3e6e9;--legend:#1d2731;--jis:#9aa4ae;
+  --i:#2f6fb2;--f:#b5651d;--c:#2f6fb2;--v:#2e8b57;--y:#7a4fb0;--k:#8a3b5c;--l:#1d2731;--d:#6b7680;--s:#6b7680;--x:#a33;
+  --heat:31,111,159;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--bg:#12171c;--surface:#1a2128;--border:#2d3741;--text:#e6ebef;--muted:#9aa7b3;--accent:#6fb3dc;
+  --case:#262c32;--case-edge:#1a1f24;--cap:#353c44;--cap-edge:#20262c;--mod:#2b3138;--legend:#eef2f5;--jis:#77828c;
+  --i:#7fb2e8;--f:#e8a265;--c:#7fb2e8;--v:#76c79a;--y:#b896e6;--k:#e48bb0;--l:#eef2f5;--d:#9aa7b3;--s:#9aa7b3;--x:#e57373;
+  --heat:111,179,220;}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Hiragino Sans","Noto Sans KR","Noto Sans JP",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:1.4rem;margin:0 0 2px;font-weight:600}
+.sub{color:var(--muted);margin:0 0 16px}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:14px}
+label{font-size:.9rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+select,button{font:inherit;font-size:.9rem;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:6px 10px;border-radius:8px}
+button{cursor:pointer}
+button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.board{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;overflow-x:auto}
+svg{display:block;width:100%;min-width:720px;height:auto}
+.key .cap{fill:var(--cap);stroke:var(--cap-edge);stroke-width:1}
+.key.mod .cap{fill:var(--mod)}
+.key.on .cap{fill:rgba(var(--heat),.45)}
+.key .heat{fill:rgb(var(--heat))}
+.lg{font-family:inherit;fill:var(--legend)}
+.jis{fill:var(--jis);font-family:ui-monospace,Menlo,monospace}
+.modl{fill:var(--muted)}
+.c-i{fill:var(--i)}.c-f{fill:var(--f)}.c-c{fill:var(--c)}.c-v{fill:var(--v)}.c-y{fill:var(--y)}.c-k{fill:var(--k)}
+.c-l{fill:var(--l)}.c-d{fill:var(--d)}.c-s{fill:var(--s)}.c-x{fill:var(--x)}
+.under{text-decoration:underline}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:.85rem;color:var(--muted)}
+.legend span b{font-weight:700}
+.note{color:var(--muted);font-size:.85rem;margin-top:10px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<main>
+  <h1>bada layout renderer</h1>
+  <p class="sub">Any bada ime layout on a JIS keyboard. Bottom of a key: unshifted. Top: Shift. Small grey: the JIS legend.</p>
+  <div class="bar">
+    <label>Keyboard <select id="kb"></select></label>
+    <label>Layout <select id="layout"></select></label>
+    <button id="jisBtn" aria-pressed="true">JIS legends</button>
+    <button id="heatBtn" aria-pressed="false">Usage heat</button>
+    <button id="svgBtn">Download SVG</button>
+  </div>
+  <div class="board" id="board"></div>
+  <div class="legend">
+    <span><b class="c-i" style="color:var(--i)">ㄱ</b> initial</span>
+    <span><b style="color:var(--f)">ㄱ</b> final (underlined)</span>
+    <span><b style="color:var(--c)">ㄱ</b> consonant</span>
+    <span><b style="color:var(--v)">ㅏ</b> vowel</span>
+    <span><b style="color:var(--y)">가</b> syllable</span>
+    <span><b style="color:var(--k)">か</b> kana</span>
+    <span><b style="color:var(--d)">1 !</b> digit, symbol</span>
+  </div>
+  <div class="note" id="note"></div>
+</main>
+<script src="keyboards.js"></script>
+<script src="layouts.js"></script>
+<script>
+const U = 60, PAD = 14, G = 3, R = 7;
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const el = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
+const state = { kb: "hhkb", layout: 0, jis: true, heat: false };
+try { Object.assign(state, JSON.parse(localStorage.getItem("bada-render") || "{}")); } catch (e) {}
+
+for (const [id, k] of Object.entries(BADA_KEYBOARDS)) $("kb").append(new Option(k.name, id));
+BADA_LAYOUTS.forEach((l, i) => $("layout").append(new Option(`${l.id} · ${l.name}`, i)));
+
+function rect(x, y, w, h) {
+  const r = Math.min(R, w / 2, h / 2);
+  return `M${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h - r}Q${x + w},${y + h} ${x + w - r},${y + h}H${x + r}Q${x},${y + h} ${x},${y + h - r}V${y + r}Q${x},${y} ${x + r},${y}Z`;
+}
+function enter(x, y) { // 1.5u on top, 1.25u below
+  const x0 = x + G, x1 = x + 0.25 * U + G, x2 = x + 1.5 * U - G, y0 = y + G, ym = y + U - G, y2 = y + 2 * U - G;
+  return `M${x0 + R},${y0}H${x2 - R}Q${x2},${y0} ${x2},${y0 + R}V${y2 - R}Q${x2},${y2} ${x2 - R},${y2}H${x1 + R}Q${x1},${y2} ${x1},${y2 - R}V${ym}H${x0 + R}Q${x0},${ym} ${x0},${ym - R}V${y0 + R}Q${x0},${y0} ${x0 + R},${y0}Z`;
+}
+
+let svg, byCode = {};
+function render() {
+  localStorage.setItem("bada-render", JSON.stringify(state));
+  $("kb").value = state.kb; $("layout").value = state.layout;
+  $("jisBtn").setAttribute("aria-pressed", state.jis); $("heatBtn").setAttribute("aria-pressed", state.heat);
+  const kb = BADA_KEYBOARDS[state.kb], lay = BADA_LAYOUTS[state.layout] || BADA_LAYOUTS[0];
+  const W = kb.width * U + PAD * 2, H = kb.height * U + PAD * 2 + 26;
+  svg = el("svg", { viewBox: `0 0 ${W} ${H}`, xmlns: NS, role: "img", "aria-label": `${lay.name} on ${kb.name}` });
+  svg.append(el("rect", { x: 0, y: 0, width: W, height: H, rx: 14, fill: "var(--case)", stroke: "var(--case-edge)" }));
+  svg.append(el("text", { x: PAD + 2, y: 20, "font-size": 12, class: "modl" }, `${kb.name} · ${lay.id} ${lay.name} (${lay.kind})`));
+  const maxN = Math.max(1, ...Object.values(lay.keys).flatMap(k => [k.base?.n || 0, k.shift?.n || 0]));
+  byCode = {};
+  for (const [code, kx, ky, kw, kh, label, shape] of kb.keys) {
+    const x = PAD + kx * U, y = PAD + 26 + ky * U, w = kw * U, h = kh * U;
+    const entry = code && lay.keys[code];
+    const g = el("g", { class: "key" + (entry ? "" : " mod") });
+    const d = shape === "ENTER" ? enter(x, y) : rect(x + G, y + G, w - 2 * G, h - 2 * G);
+    g.append(el("path", { d, class: "cap" }));
+    if (entry) {
+      if (state.heat) {
+        const n = (entry.base?.n || 0) + (entry.shift?.n || 0);
+        if (n) g.append(el("path", { d, class: "heat", opacity: (0.08 + 0.55 * Math.sqrt(n / maxN)).toFixed(3) }));
+      }
+      const leg = (cell, lx, ly, size, anchor = "start") => {
+        if (!cell) return;
+        const t = el("text", { x: lx, y: ly, "font-size": size, "text-anchor": anchor, class: `lg c-${cell.c}` + (cell.c === "f" ? " under" : "") }, cell.t);
+        if (cell.c === "f") t.setAttribute("text-decoration", "underline");
+        g.append(t);
+      };
+      if (entry.base && entry.base.t.includes("/")) {   // token key: first member big, the rest small above it
+        const [first, ...rest] = entry.base.t.split("/");
+        leg({ ...entry.base, t: first }, x + 10, y + h - 12, 22);
+        leg({ ...entry.base, t: rest.join(" ") }, x + 10, y + h - 37, 11);
+      } else leg(entry.base, x + 12, y + h - 13, entry.base && entry.base.t.length > 2 ? 15 : 24);
+      if (!entry.base || !entry.shift || entry.shift.t !== entry.base.t) leg(entry.shift, x + 12, y + 24, entry.shift && entry.shift.t.length > 2 ? 11 : 15);
+      if (state.jis && BADA_JIS[code]) {
+        const [b, s] = BADA_JIS[code];
+        const isLetter = code.startsWith("Key");
+        g.append(el("text", { x: x + w - 10, y: y + h - 11, "font-size": 11, "text-anchor": "end", class: "jis" }, isLetter ? s : b));
+        if (!isLetter && s) g.append(el("text", { x: x + w - 10, y: y + 20, "font-size": 11, "text-anchor": "end", class: "jis" }, s));
+      }
+    } else if (label != null) {
+      const lines = label.split("/");
+      const size = h < U ? 12 : lines.length > 1 || label.length > 4 ? 11 : 14;
+      const cy = shape === "ENTER" ? y + U / 2 : y + h / 2;
+      const cx = shape === "ENTER" ? x + 0.75 * U : x + w / 2;
+      lines.forEach((ln, i) => g.append(el("text", { x: cx, y: cy + 4 + (i - (lines.length - 1) / 2) * 13, "font-size": size, "text-anchor": "middle", class: "modl" }, ln)));
+    }
+    svg.append(g);
+    if (code) byCode[code] = g;
+  }
+  $("board").replaceChildren(svg);
+  $("note").textContent = lay.note || "";
+}
+
+$("kb").onchange = e => { state.kb = e.target.value; render(); };
+$("layout").onchange = e => { state.layout = +e.target.value; render(); };
+$("jisBtn").onclick = () => { state.jis = !state.jis; render(); };
+$("heatBtn").onclick = () => { state.heat = !state.heat; render(); };
+$("svgBtn").onclick = () => {
+  const clone = svg.cloneNode(true), cs = getComputedStyle(document.documentElement);
+  const style = el("style", {}, [...document.styleSheets[0].cssRules].map(r => r.cssText).join("\n")
+    .replace(/var\(--([a-z-]+)\)/g, (_, v) => cs.getPropertyValue("--" + v).trim()));
+  clone.prepend(style);
+  const blob = new Blob([new XMLSerializer().serializeToString(clone)], { type: "image/svg+xml" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `${BADA_LAYOUTS[state.layout].name.replace(/[^\w]+/g, "-")}-${state.kb}.svg`; a.click();
+};
+addEventListener("keydown", e => { const g = byCode[e.code]; if (g && !e.metaKey && !e.ctrlKey) { g.classList.add("on"); if (e.code === "Space" || e.code.startsWith("Arrow")) e.preventDefault(); } });
+addEventListener("keyup", e => byCode[e.code]?.classList.remove("on"));
+addEventListener("blur", () => Object.values(byCode).forEach(g => g.classList.remove("on")));
+render();
+</script>
+</body>
+</html>

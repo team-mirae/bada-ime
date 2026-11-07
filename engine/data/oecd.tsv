@@ -1,0 +1,41 @@
+# OECD members' one-character hanja names, for Bada's `hanja` action with nothing to convert (bada-layout.md §16.1).
+# hanja<TAB>Korean name<TAB>note. "review": no settled one-character form in Korean usage; the longer
+# transliteration is given, for the owner to confirm or replace.
+韓	한국
+美	미국
+日	일본
+英	영국
+獨	독일
+佛	프랑스
+伊	이탈리아
+加	캐나다
+濠	호주
+西	스페인
+墨	멕시코
+和	네덜란드	review: also 蘭
+白	벨기에
+瑞	스위스	review: 瑞 is also used for Sweden
+瑞典	스웨덴	review
+墺	오스트리아
+丁	덴마크
+芬	핀란드
+諾	노르웨이
+氷	아이슬란드
+愛	아일랜드
+葡	포르투갈
+希	그리스
+土	튀르키예
+波	폴란드
+捷	체코
+洪	헝가리	review: also 匈
+以	이스라엘
+盧	룩셈부르크
+新	뉴질랜드	review
+智	칠레
+哥	콜롬비아	review
+哥斯達黎加	코스타리카	review
+愛沙尼亞	에스토니아	review
+拉脫維亞	라트비아	review
+立陶宛	리투아니아	review
+斯洛伐克	슬로바키아	review
+斯洛文尼亞	슬로베니아	review

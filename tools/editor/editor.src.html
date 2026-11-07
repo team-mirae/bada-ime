@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bada Layout Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Plan: default theme (cerulean primary, indigo structure, scarlet for alerts). Board on top, palette
+   and the selected key beside it, numbers below. Role colours: 초성 cerulean, 중성 green, 종성 amber. */
+:root{
+  color-scheme:light;
+  --bg:#f7fffc;--surface:#e9fff9;--border:#c9e6dc;--text:#1d3354;--muted:#4c6280;--accent:#467599;
+  --secondary:#9ed8b8;--alert:#d64045;
+  --case:#dfe9e6;--cap:#ffffff;--cap-edge:#b7cfc7;--mod:#edf3f1;
+  --r-i:#2f6696;--r-v:#25804f;--r-f:#b4600f;--r-c:#5a4fa8;--r-j:#7a6a58;--r-x:#1d3354;
+  --heat:70,117,153;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--bg:#0f1b2e;--surface:#1d3354;--border:#2c4a72;--text:#e9fff9;--muted:#a9c3d6;--accent:#7fa9c9;
+  --alert:#e8686c;--case:#16263f;--cap:#22395c;--cap-edge:#2f4d78;--mod:#1a2e4b;
+  --r-i:#8cc0ec;--r-v:#8fd6ac;--r-f:#f0b070;--r-c:#b9adf2;--r-j:#cdbfae;--r-x:#e9fff9;--heat:127,169,201;}}
+:root[data-theme="dark"]{
+  color-scheme:dark;--bg:#0f1b2e;--surface:#1d3354;--border:#2c4a72;--text:#e9fff9;--muted:#a9c3d6;--accent:#7fa9c9;
+  --alert:#e8686c;--case:#16263f;--cap:#22395c;--cap-edge:#2f4d78;--mod:#1a2e4b;
+  --r-i:#8cc0ec;--r-v:#8fd6ac;--r-f:#f0b070;--r-c:#b9adf2;--r-j:#cdbfae;--r-x:#e9fff9;--heat:127,169,201;}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:15px/1.5 var(--body)}
+main{max-width:1240px;margin:0 auto;padding:20px 16px 48px;display:grid;gap:16px}
+h1{font-size:1.45rem;margin:0;font-weight:600;text-wrap:balance}
+h2{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:600}
+.sub{color:var(--muted);margin:2px 0 0;max-width:75ch}
+.bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+label.f{display:flex;gap:6px;align-items:center;font-size:.88rem;color:var(--muted)}
+select,button,input[type=text],textarea{font:inherit;font-size:.9rem;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:8px}
+select,button,input[type=text]{padding:6px 10px}
+button{cursor:pointer;background:var(--surface)}
+button:hover{border-color:var(--accent)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.key:focus-visible,.jb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.seg button{border:0;border-radius:0;background:var(--bg)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px}
+.boardwrap{overflow-x:auto;background:var(--case);border:1px solid var(--cap-edge);border-radius:14px;padding:10px}
+.board{position:relative;min-width:760px;width:100%;container-type:inline-size}
+.key{position:absolute;padding:.25cqw;cursor:default}
+.key .cap{position:relative;width:100%;height:100%;border:1px solid var(--cap-edge);border-radius:.7cqw;background:var(--mod);overflow:hidden}
+.key.ed{cursor:pointer}
+.key.ed .cap{background:var(--cap)}
+.key.ed .heat{position:absolute;inset:0;background:rgb(var(--heat));pointer-events:none}
+.key.sel .cap{outline:3px solid var(--alert);outline-offset:-1px}
+.key.press .cap{transform:translateY(1px);filter:brightness(.92)}
+.key .ml{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font-size:1.05cqw;color:var(--muted);line-height:1.15}
+.key .jis{position:absolute;right:.5cqw;bottom:.35cqw;font:1cqw var(--mono);color:var(--muted)}
+.key .jis.s{bottom:auto;top:.35cqw}
+.key .tk{position:absolute;left:.5cqw;right:1.4cqw;display:flex;flex-wrap:wrap;gap:0 .25cqw;line-height:1.05}
+.key .tk.b{bottom:.45cqw;font-size:2cqw}
+.key .tk.b.n2{font-size:1.6cqw}.key .tk.b.n3{font-size:1.25cqw}
+.key .tk.s{top:.4cqw;font-size:1.2cqw}
+.key .tk span:first-child{font-weight:600}
+.layer-shift .key .tk.b{opacity:.45}
+.layer-base .key .tk.s{opacity:.6}
+.r-i{color:var(--r-i)}.r-v{color:var(--r-v)}.r-f{color:var(--r-f)}.r-c{color:var(--r-c)}.r-j{color:var(--r-j)}.r-x{color:var(--r-x)}
+.r-f.u,.key .tk .r-f{text-decoration:underline;text-underline-offset:.15em}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:6px}
+.jb{position:relative;display:grid;gap:0;justify-items:center;padding:6px 2px 5px;border:1px solid var(--border);border-radius:9px;background:var(--bg);cursor:pointer;font-family:var(--body)}
+.jb .g{font-size:1.5rem;line-height:1.1}
+.jb .p{font:.72rem var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.jb .t{font-size:.62rem;color:var(--muted)}
+.jb .n{position:absolute;top:3px;right:5px;font:600 .66rem var(--mono);color:var(--bg);background:var(--accent);border-radius:999px;padding:0 5px}
+.jb.placed{border-color:var(--accent)}
+.jb.zero .g{opacity:.55}
+.selbox{display:grid;gap:10px}
+.selhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.selhead b{font-size:1.25rem}
+.selhead span{color:var(--muted);font-size:.85rem}
+.slot{border:1px dashed var(--border);border-radius:9px;padding:8px;min-height:46px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:var(--bg)}
+.slot.on{border-style:solid;border-color:var(--accent)}
+.slot .lbl{font-size:.75rem;color:var(--muted);width:100%}
+.chip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--border);border-radius:999px;padding:1px 4px 1px 9px;background:var(--surface);font-size:1rem}
+.chip small{font-size:.66rem;color:var(--muted)}
+.chip button{border:0;background:none;padding:0 5px;font-size:.95rem;color:var(--muted);line-height:1}
+.hint{color:var(--muted);font-size:.82rem;margin:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.stat{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+.stat .v{font:500 1.35rem var(--mono);font-variant-numeric:tabular-nums}
+.stat .l{font-size:.8rem;color:var(--muted)}
+.meter{height:6px;border-radius:3px;background:var(--border);overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;background:var(--accent)}
+.unp{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.unp button{padding:2px 8px;font-size:.9rem}
+.unp button small{font:.68rem var(--mono);color:var(--muted);margin-left:4px}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{padding:4px 8px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono)}
+th{font-family:var(--body);color:var(--muted);font-weight:600;font-size:.78rem;position:sticky;top:0;background:var(--surface)}
+td:first-child,th:first-child{text-align:left;font-family:var(--body);font-size:1.05rem}
+td.note,th.note{text-align:left;font-family:var(--body);font-size:.8rem;color:var(--muted)}
+td.z{color:var(--muted);opacity:.5}
+.tblwrap{max-height:520px;overflow:auto;border:1px solid var(--border);border-radius:10px}
+.tblgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px}
+textarea{width:100%;min-height:150px;padding:10px;font:12px/1.45 var(--mono)}
+.io{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:700px){.io{grid-template-columns:1fr}}
+.msg{font-size:.85rem;color:var(--muted);min-height:1.2em}
+.msg.err{color:var(--alert)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.82rem;color:var(--muted)}
+.legend b{font-size:1rem}
+footer{color:var(--muted);font-size:.8rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Bada Layout Editor</h1>
+    <p class="sub">Place jamo on the 48 JIS kana-space keys by clicking a key, then jamo buttons. A key may hold several jamo (a token) and a jamo may sit on several keys. Copy the JSON at the bottom into the chat.</p>
+  </header>
+
+  <div class="bar">
+    <label class="f" for="kbSel">Keyboard <select id="kbSel"><option value="hhkb">HHKB JIS</option><option value="apple">Apple-style JIS</option></select></label>
+    <span class="seg" role="group" aria-label="Layer"><button id="layBase" aria-pressed="true">Base</button><button id="layShift" aria-pressed="false">⇧ Shift</button></span>
+    <label class="f" for="presetSel">Start from <select id="presetSel"><option value="draft25">Token draft, 25 keys</option><option value="kts">2-set (KTS)</option><option value="empty">Empty</option></select></label>
+    <button id="loadPreset">Load</button>
+    <label class="f" for="implied"><input type="checkbox" id="implied"> Initial ㅇ implied (needs no key)</label>
+    <label class="f" for="heatChk"><input type="checkbox" id="heatChk" checked> Load heat</label>
+    <label class="f" for="nameIn">Name <input type="text" id="nameIn" size="22"></label>
+  </div>
+
+  <div class="boardwrap"><div class="board layer-base" id="board"></div></div>
+  <div class="legend">
+    <span><b class="r-i">ㄱ</b> 초성</span><span><b class="r-v">ㅏ</b> 중성</span><span><b class="r-f u">ㄱ</b> 종성</span>
+    <span><b class="r-c">ㄱ</b> 초·종성 (one key for both, 2-set style)</span><span><b class="r-j">ㆍ</b> any role</span><span><b class="r-x">abc</b> text</span>
+    <span>Physical keys select keys too. ⌫ on the page removes the last token from the selected slot.</span>
+  </div>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Jamo</h2>
+      <div class="tabs" role="group" aria-label="Role to add as" id="tabs"></div>
+      <p class="hint" id="tabHint"></p>
+      <div class="pal" id="pal" style="margin-top:8px"></div>
+    </section>
+    <section class="card selbox" aria-live="polite">
+      <h2>Selected key</h2>
+      <div class="selhead"><b id="selName">—</b><span id="selMeta"></span></div>
+      <div class="slot" id="slotBase"></div>
+      <div class="slot" id="slotShift"></div>
+      <form id="textForm" class="bar" style="gap:6px">
+        <label class="f" for="textIn">Text token</label>
+        <input type="text" id="textIn" size="10" placeholder="했습니다">
+        <button type="submit">Add</button>
+      </form>
+      <div class="bar" style="gap:6px">
+        <button id="clearKey">Clear this key</button>
+        <button id="clearAll">Clear every key</button>
+      </div>
+      <p class="hint" id="confirmMsg"></p>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>This layout</h2>
+    <div class="stats" id="stats"></div>
+    <h2 style="margin-top:14px">Not placed yet, most frequent first</h2>
+    <div class="unp" id="unplaced"></div>
+  </section>
+
+  <section class="card">
+    <h2>Frequencies</h2>
+    <p class="hint" id="freqSrc"></p>
+    <div class="tblgrid" style="margin-top:10px">
+      <div class="tblwrap"><table id="tblCons"></table></div>
+      <div class="tblwrap"><table id="tblVow"></table></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>JSON</h2>
+    <div class="io">
+      <div>
+        <div class="bar" style="margin-bottom:6px"><button class="primary" id="copyBtn">Copy JSON</button><span class="msg" id="copyMsg"></span></div>
+        <label for="outJson" class="hint">Export (paste this into the chat)</label>
+        <textarea id="outJson" readonly></textarea>
+      </div>
+      <div>
+        <div class="bar" style="margin-bottom:6px"><button id="importBtn">Load pasted JSON</button><span class="msg" id="importMsg"></span></div>
+        <label for="inJson" class="hint">Import (paste a layout JSON)</label>
+        <textarea id="inJson" placeholder='{"format":"bada-layout/1", …}'></textarea>
+      </div>
+    </div>
+  </section>
+  <footer>bada ime · Mirae Research · frequencies from the jis-moonshot corpora</footer>
+</main>
+
+<script id="data" type="application/json">/*DATA*/</script>
+<script>
+"use strict";
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const F = DATA.freq;
+const $ = id => document.getElementById(id);
+
+// ---------- jamo inventory ----------
+const INI = [..."ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"];
+const MED = [..."ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ"];
+const FIN = [..."ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ"];
+const INI_ONLY = INI.filter(j => !FIN.includes(j));          // ㄸ ㅃ ㅉ
+const FIN_ONLY = FIN.filter(j => !INI.includes(j));          // clusters
+const BOTH = INI.filter(j => FIN.includes(j));
+const OLD = []; for (let c = 0x3165; c <= 0x318e; c++) OLD.push(String.fromCharCode(c));
+const ROLE_NAME = { i: "초성", v: "중성", f: "종성", c: "초·종성", j: "any role", x: "text" };
+const fi = j => F.initial[j] || 0, fm = j => F.medial[j] || 0, ff = j => F.final[j] || 0, fs = j => F.standalone[j] || 0;
+const TABS = [
+  { r: "i", label: "초성 19", list: INI, f: fi, hint: "Adds as 초성. Tagged: 종성이 아닌 초성 (ㄸ ㅃ ㅉ never end a syllable)." },
+  { r: "v", label: "중성 21", list: MED, f: fm, hint: "Adds as 중성. Compound vowels can also be left to sequences (ㅗ+ㅏ)." },
+  { r: "f", label: "종성 27", list: FIN, f: ff, hint: "Adds as 종성. Tagged: 초성이 아닌 종성 (the 11 double finals never start a syllable)." },
+  { r: "c", label: "초·종성", list: [...BOTH, ...INI_ONLY, ...FIN_ONLY], f: j => fi(j) + ff(j), hint: "Adds one jamo for both roles, as 2-set does. Shows 초성 + 종성 frequency." },
+  { r: "j", label: "옛한글 / any", list: [...OLD, ...MED.filter(j => fs(j))], f: fs, hint: "Archaic and standalone jamo, any role. The number is standalone use (e.g. ㆍ in chat)." },
+];
+const tag = (j, r) => r === "i" && INI_ONLY.includes(j) ? "초성만" : r === "f" && FIN_ONLY.includes(j) ? "종성만" : r === "c" && INI_ONLY.includes(j) ? "초성만" : r === "c" && FIN_ONLY.includes(j) ? "종성만" : "";
+
+// ---------- keyboards (key units; 15u x 5u) ----------
+const NUM = ["Digit1","Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0","Minus","Equal","IntlYen"];
+const QR = ["KeyQ","KeyW","KeyE","KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP","BracketLeft","BracketRight"];
+const AR = ["KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Backslash"];
+const ZR = ["KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM","Comma","Period","Slash","IntlRo"];
+const EDIT = new Set([...NUM, ...QR, ...AR, ...ZR]);
+const JIS = {Digit1:["1","!"],Digit2:["2","\""],Digit3:["3","#"],Digit4:["4","$"],Digit5:["5","%"],Digit6:["6","&"],Digit7:["7","'"],Digit8:["8","("],Digit9:["9",")"],Digit0:["0",""],Minus:["-","="],Equal:["^","~"],IntlYen:["¥","|"],BracketLeft:["@","`"],BracketRight:["[","{"],Semicolon:[";","+"],Quote:[":","*"],Backslash:["]","}"],Comma:[",","<"],Period:[".",">"],Slash:["/","?"],IntlRo:["\\","_"]};
+for (const c of "QWERTYUIOPASDFGHJKLZXCVBNM") JIS["Key" + c] = [c, ""];
+const FINGER = {}; const FN = ["L pinky","L ring","L middle","L index","L index","R index","R index","R middle","R ring","R pinky","R pinky","R pinky","R pinky"];
+const COLF = [0,1,2,3,3,4,4,5,6,7,7,7,7];
+[NUM, QR, AR, ZR].forEach((row, r) => row.forEach((c, i) => FINGER[c] = { f: COLF[i], name: FN[i], row: r }));
+const REST = new Set(["KeyA","KeyS","KeyD","KeyF","KeyJ","KeyK","KeyL","Semicolon"]);
+function rowKeys(y, x0, items) { let x = x0; const out = []; for (const it of items) { const [c, w = 1, l] = Array.isArray(it) ? it : [it]; if (c !== "GAP") out.push({ c, x, y, w, h: 1, l }); x += w; } return out; }
+const KB = {
+  hhkb: [
+    ...rowKeys(0, 0, [["Escape",1,"Esc"], ...NUM, ["Backspace",1,"Delete"]]),
+    ...rowKeys(1, 0, [["Tab",1.5,"Tab"], ...QR]),
+    ...rowKeys(2, 0, [["ControlLeft",1.75,"Control"], ...AR]),
+    ...rowKeys(3, 0, [["ShiftLeft",2,"Shift"], ...ZR, ["ArrowUp",1,"↑"], ["ShiftRight",1,"Shift"]]),
+    ...rowKeys(4, 0, [["Fn",1,"fn"],["GAP",.25],["Backquote",1,"半角<br>全角"],["AltLeft",1,"⌥"],["MetaLeft",1,"⌘"],["Lang2",1,"英数"],["Space",2.5,""],["Lang1",1,"かな"],["MetaRight",1,"⌘"],["AltRight",1,"⌥"],["Fn2",1,"fn"],["GAP",.25],["ArrowLeft",1,"←"],["ArrowDown",1,"↓"],["ArrowRight",1,"→"]]),
+    { c: "Enter", x: 13.5, y: 1, w: 1.5, h: 2, l: "Return", enter: true },
+  ],
+  apple: [
+    ...rowKeys(0, 0, [["Backquote",1,"半角<br>全角"], ...NUM, ["Backspace",1,"delete"]]),
+    ...rowKeys(1, 0, [["Tab",1.5,"tab"], ...QR]),
+    ...rowKeys(2, 0, [["ControlLeft",1.75,"control"], ...AR]),
+    ...rowKeys(3, 0, [["ShiftLeft",2.25,"shift"], ...ZR, ["ShiftRight",1.75,"shift"]]),
+    ...rowKeys(4, 0, [["CapsLock",1,"caps"],["AltLeft",1,"⌥"],["MetaLeft",1,"⌘"],["Lang2",1,"英数"],["Space",4,""],["Lang1",1,"かな"],["MetaRight",1,"⌘"],["AltRight",1,"⌥"],["Globe",1,"🌐"],["ArrowLeft",1,"←"]]),
+    { c: "ArrowUp", x: 13, y: 4, w: 1, h: .5, l: "↑" }, { c: "ArrowDown", x: 13, y: 4.5, w: 1, h: .5, l: "↓" }, { c: "ArrowRight", x: 14, y: 4, w: 1, h: 1, l: "→" },
+    { c: "Enter", x: 13.5, y: 1, w: 1.5, h: 2, l: "return", enter: true },
+  ],
+};
+
+// ---------- state ----------
+const blank = () => ({ format: "bada-layout/1", id: 300, name: "My Bada layout", implied_ieung: true, keys: {} });
+let L = blank(), kb = "hhkb", layer = "base", tab = "i", sel = "KeyA", heat = true;
+function save() { try { localStorage.setItem("bada-editor", JSON.stringify({ L, kb, layer, tab, sel, heat })); } catch (e) {} }
+function restore() {
+  try { const s = JSON.parse(localStorage.getItem("bada-editor") || "null"); if (s && s.L) { ({ L, kb, layer, tab, sel, heat } = { ...{ kb, layer, tab, sel, heat }, ...s }); return true; } } catch (e) {}
+  return false;
+}
+const slot = (code, ly) => ((L.keys[code] ||= { base: [], shift: [] })[ly] ||= []);
+function normalize(obj) {
+  if (!obj || typeof obj !== "object" || !obj.keys) throw new Error("No \"keys\" object found.");
+  const out = { format: "bada-layout/1", id: Number.isFinite(+obj.id) ? +obj.id : 300, name: String(obj.name || "Imported layout"), implied_ieung: !!obj.implied_ieung, keys: {} };
+  for (const [code, v] of Object.entries(obj.keys)) {
+    if (!EDIT.has(code)) continue;
+    const clean = arr => (Array.isArray(arr) ? arr : []).filter(t => t && typeof t.t === "string" && t.t).map(t => ({ t: t.t, r: ROLE_NAME[t.r] ? t.r : "j" }));
+    out.keys[code] = { base: clean(v.base), shift: clean(v.shift) };
+  }
+  return out;
+}
+
+// ---------- load model ----------
+function roleFreq(t) {
+  const j = t.t;
+  if (t.r === "i") return (L.implied_ieung && j === "ㅇ") ? 0 : fi(j);
+  if (t.r === "v") return fm(j);
+  if (t.r === "f") return ff(j);
+  if (t.r === "c") return ((L.implied_ieung && j === "ㅇ") ? 0 : fi(j)) + ff(j);
+  if (t.r === "j") return fi(j) + fm(j) + ff(j) + fs(j);
+  return 0;
+}
+// a jamo placed on several slots shares its load evenly between them
+function computeLoads() {
+  const places = {}; const all = [];
+  for (const [code, v] of Object.entries(L.keys)) for (const ly of ["base", "shift"]) for (const t of v[ly] || []) {
+    const k = t.r + ":" + t.t; (places[k] ||= []).push(code); all.push({ code, ly, t });
+  }
+  const load = {}; let total = 0;
+  for (const p of all) { const n = roleFreq(p.t) / places[p.t.r + ":" + p.t.t].length; load[p.code] = (load[p.code] || 0) + n; total += n; }
+  return { load, total, places };
+}
+function covered(j, role) {
+  for (const v of Object.values(L.keys)) for (const ly of ["base", "shift"]) for (const t of v[ly] || []) {
+    if (t.t !== j) continue;
+    if (t.r === role || t.r === "j" || (t.r === "c" && (role === "i" || role === "f"))) return true;
+  }
+  return false;
+}
+
+// ---------- render ----------
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+const pct = (n, d = 2) => n.toFixed(d) + "%";
+function renderBoard() {
+  const b = $("board"); b.innerHTML = ""; b.className = "board layer-" + layer;
+  b.style.aspectRatio = "15 / 5";
+  const { load } = computeLoads(); const max = Math.max(1e-9, ...Object.values(load));
+  for (const k of KB[kb]) {
+    const d = document.createElement("div");
+    d.className = "key" + (EDIT.has(k.c) ? " ed" : "") + (k.c === sel ? " sel" : "");
+    Object.assign(d.style, { left: (k.x / 15 * 100) + "%", top: (k.y / 5 * 100) + "%", width: (k.w / 15 * 100) + "%", height: (k.h / 5 * 100) + "%" });
+    d.dataset.code = k.c;
+    if (EDIT.has(k.c)) {
+      d.tabIndex = 0; d.setAttribute("role", "button");
+      const v = L.keys[k.c] || { base: [], shift: [] };
+      const toks = (arr, cls) => {
+        if (!arr || !arr.length) return "";
+        const n = arr.reduce((a, t) => a + [...t.t].length, 0);
+        return `<div class="tk ${cls} ${cls === "b" ? (n > 4 ? "n3" : n > 2 ? "n2" : "") : ""}">${arr.map(t => `<span class="r-${t.r}">${esc(t.t)}</span>`).join("")}</div>`;
+      };
+      const h = heat && load[k.c] ? `<div class="heat" style="opacity:${(0.06 + 0.5 * Math.sqrt(load[k.c] / max)).toFixed(3)}"></div>` : "";
+      const [jb, js] = JIS[k.c];
+      d.innerHTML = `<div class="cap">${h}${toks(v.shift, "s")}${toks(v.base, "b")}<span class="jis">${esc(jb)}</span>${js ? `<span class="jis s">${esc(js)}</span>` : ""}</div>`;
+      d.setAttribute("aria-label", `${jb} key: ${(v.base || []).map(t => t.t).join(" ") || "empty"}`);
+      d.addEventListener("click", () => { sel = k.c; renderAll(); });
+      d.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sel = k.c; renderAll(); } });
+    } else {
+      d.innerHTML = `<div class="cap"><div class="ml">${k.l || ""}</div></div>`;
+    }
+    if (k.enter) d.querySelector(".cap").style.clipPath = `polygon(0 0,100% 0,100% 100%,${(0.25 / 1.5 * 100).toFixed(2)}% 100%,${(0.25 / 1.5 * 100).toFixed(2)}% 50%,0 50%)`;
+    b.appendChild(d);
+  }
+}
+function renderTabs() {
+  const t = $("tabs"); t.innerHTML = "";
+  for (const T of TABS) {
+    const bt = document.createElement("button"); bt.textContent = T.label; bt.setAttribute("aria-pressed", T.r === tab);
+    bt.onclick = () => { tab = T.r; renderAll(); }; t.appendChild(bt);
+  }
+  const T = TABS.find(x => x.r === tab); $("tabHint").textContent = T.hint;
+  const { places } = computeLoads();
+  const pal = $("pal"); pal.innerHTML = "";
+  const list = tab === "j" ? T.list : [...T.list].sort((a, b) => T.f(b) - T.f(a));
+  for (const j of list) {
+    const n = (places[tab + ":" + j] || []).length;
+    const bt = document.createElement("button"); bt.className = "jb" + (n ? " placed" : "") + (T.f(j) ? "" : " zero");
+    bt.title = `${j} as ${ROLE_NAME[tab]}`;
+    const tg = tag(j, tab);
+    bt.innerHTML = `<span class="g r-${tab}">${j}</span><span class="p">${T.f(j) ? T.f(j).toFixed(T.f(j) < 0.1 ? 3 : 2) : "—"}</span>${tg ? `<span class="t">${tg}</span>` : ""}${n ? `<span class="n">${n}</span>` : ""}`;
+    bt.onclick = () => addToken({ t: j, r: tab });
+    pal.appendChild(bt);
+  }
+}
+function renderSel() {
+  const [jb, js] = JIS[sel] || ["?", ""]; const fg = FINGER[sel];
+  $("selName").textContent = `${jb} key`;
+  $("selMeta").textContent = `${sel} · ${fg.name}${REST.has(sel) ? " · resting key" : ""} · ${["number row", "Q row", "home row", "Z row"][fg.row]}`;
+  for (const ly of ["base", "shift"]) {
+    const el = $(ly === "base" ? "slotBase" : "slotShift");
+    el.className = "slot" + (ly === layer ? " on" : "");
+    const arr = (L.keys[sel] || {})[ly] || [];
+    const note = ly === "shift" && !sel.startsWith("Key") ? " (reserved for this key's digit or symbol: " + jb + ")" : "";
+    el.innerHTML = `<span class="lbl">${ly === "base" ? "Base" : "⇧ Shift"}${ly === layer ? " · jamo buttons add here" : " · click to add here"}${note}</span>` +
+      arr.map((t, i) => `<span class="chip"><span class="r-${t.r}${t.r === "f" ? " u" : ""}">${esc(t.t)}</span><small>${ROLE_NAME[t.r]}</small><button aria-label="Remove ${esc(t.t)}" data-ly="${ly}" data-i="${i}">×</button></span>`).join("");
+    el.onclick = e => {
+      const btn = e.target.closest("button[data-i]");
+      if (btn) { slot(sel, btn.dataset.ly).splice(+btn.dataset.i, 1); renderAll(); return; }
+      if (layer !== ly) { layer = ly; renderAll(); }
+    };
+  }
+}
+function renderStats() {
+  const { load, total } = computeLoads();
+  const sum = f => Object.entries(load).filter(([c]) => f(c)).reduce((a, [, v]) => a + v, 0);
+  const cov = (list, role, fn) => { let t = 0, c = 0; for (const j of list) { const v = fn(j); if (role === "i" && j === "ㅇ" && L.implied_ieung) continue; t += v; if (covered(j, role)) c += v; } return t ? 100 * c / t : 100; };
+  const keysUsed = Object.values(L.keys).filter(v => (v.base || []).length || (v.shift || []).length).length;
+  const shiftLoad = (() => { let s = 0; const { places } = computeLoads(); for (const v of Object.values(L.keys)) for (const t of v.shift || []) s += roleFreq(t) / places[t.r + ":" + t.t].length; return s; })();
+  const tiles = [
+    ["초성 covered", cov(INI, "i", fi), "of 초성 occurrences" + (L.implied_ieung ? ", ㅇ implied" : "")],
+    ["중성 covered", cov(MED, "v", fm), "of 중성 occurrences (sequences not counted)"],
+    ["종성 covered", cov(FIN, "f", ff), "of 종성 occurrences"],
+    ["Left hand", total ? 100 * sum(c => FINGER[c].f < 4) / total : 0, "of placed load"],
+    ["Resting keys", total ? 100 * sum(c => REST.has(c)) / total : 0, "A S D F J K L ;"],
+    ["Pinkies", total ? 100 * sum(c => FINGER[c].f === 0 || FINGER[c].f === 7) / total : 0, "of placed load"],
+    ["Number row", total ? 100 * sum(c => FINGER[c].row === 0) / total : 0, "of placed load"],
+    ["On Shift", total ? 100 * shiftLoad / total : 0, "of placed load"],
+  ];
+  $("stats").innerHTML = tiles.map(([l, v, s]) => `<div class="stat"><div class="l">${l}</div><div class="v">${pct(v, 1)}</div><div class="meter"><i style="width:${Math.min(100, v).toFixed(1)}%"></i></div><div class="l">${s}</div></div>`).join("") +
+    `<div class="stat"><div class="l">Keys used</div><div class="v">${keysUsed} / 48</div><div class="l">load ≈ ${(total / 100).toFixed(2)} keys per syllable</div></div>`;
+  const miss = [];
+  for (const j of INI) if (!(j === "ㅇ" && L.implied_ieung) && !covered(j, "i")) miss.push({ j, r: "i", f: fi(j) });
+  for (const j of MED) if (!covered(j, "v")) miss.push({ j, r: "v", f: fm(j) });
+  for (const j of FIN) if (!covered(j, "f")) miss.push({ j, r: "f", f: ff(j) });
+  miss.sort((a, b) => b.f - a.f);
+  $("unplaced").innerHTML = miss.length ? miss.map(m => `<button data-j="${m.j}" data-r="${m.r}" title="Add to the selected key as ${ROLE_NAME[m.r]}"><span class="r-${m.r}${m.r === "f" ? " u" : ""}">${m.j}</span><small>${ROLE_NAME[m.r]} ${m.f.toFixed(m.f < 0.1 ? 3 : 2)}</small></button>`).join("") : `<span class="hint">Every modern jamo is placed in every role it has.</span>`;
+}
+function renderTables() {
+  $("freqSrc").textContent = `${F.source}. Numbers are ${F.unit}; 단독 is standalone jamo (ㅋㅋ, ㅠㅠ) per 100 syllables. ${F.no_final}% of syllables have no 종성.`;
+  const cell = v => v ? `<td>${v.toFixed(v < 0.1 ? 4 : 2)}</td>` : `<td class="z">0</td>`;
+  const cons = [...new Set([...INI, ...FIN])].sort((a, b) => (fi(b) + ff(b)) - (fi(a) + ff(a)));
+  $("tblCons").innerHTML = `<thead><tr><th>자음</th><th>초성</th><th>종성</th><th>단독</th><th class="note">note</th></tr></thead><tbody>` +
+    cons.map(j => `<tr><td>${j}</td>${INI.includes(j) ? cell(fi(j)) : `<td class="z">—</td>`}${FIN.includes(j) ? cell(ff(j)) : `<td class="z">—</td>`}${cell(fs(j))}<td class="note">${INI_ONLY.includes(j) ? "종성이 아닌 초성" : FIN_ONLY.includes(j) ? "초성이 아닌 종성" : ""}</td></tr>`).join("") + `</tbody>`;
+  const vows = [...MED].sort((a, b) => fm(b) - fm(a));
+  $("tblVow").innerHTML = `<thead><tr><th>모음</th><th>중성</th><th>단독</th><th class="note">note</th></tr></thead><tbody>` +
+    vows.map(j => `<tr><td>${j}</td>${cell(fm(j))}${cell(fs(j))}<td class="note">${({ "ㅘ": "ㅗ+ㅏ", "ㅙ": "ㅗ+ㅐ", "ㅚ": "ㅗ+ㅣ", "ㅝ": "ㅜ+ㅓ", "ㅞ": "ㅜ+ㅔ", "ㅟ": "ㅜ+ㅣ", "ㅢ": "ㅡ+ㅣ" })[j] || ""}</td></tr>`).join("") +
+    `<tr><td>ㆍ</td><td class="z">—</td>${cell(fs("ㆍ"))}<td class="note">옛한글, standalone only</td></tr></tbody>`;
+}
+function exportJson() {
+  const keys = {};
+  for (const code of [...NUM, ...QR, ...AR, ...ZR]) {
+    const v = L.keys[code]; if (!v) continue;
+    const b = v.base || [], s = v.shift || [];
+    if (b.length || s.length) keys[code] = { base: b, shift: s };
+  }
+  return JSON.stringify({ format: "bada-layout/1", id: L.id, name: L.name, keyboard: kb, implied_ieung: L.implied_ieung, roles: { i: "초성", v: "중성", f: "종성", c: "초성+종성", j: "any", x: "text" }, keys });
+}
+function renderAll() {
+  $("kbSel").value = kb; $("implied").checked = L.implied_ieung; $("heatChk").checked = heat; $("nameIn").value = L.name;
+  $("layBase").setAttribute("aria-pressed", layer === "base"); $("layShift").setAttribute("aria-pressed", layer === "shift");
+  renderBoard(); renderTabs(); renderSel(); renderStats();
+  $("outJson").value = exportJson();
+  save();
+}
+function addToken(t) {
+  const arr = slot(sel, layer);
+  if (arr.some(x => x.t === t.t && x.r === t.r)) { $("confirmMsg").textContent = `${t.t} (${ROLE_NAME[t.r]}) is already on this key.`; return; }
+  arr.push(t); $("confirmMsg").textContent = ""; renderAll();
+}
+
+// ---------- controls ----------
+$("kbSel").onchange = e => { kb = e.target.value; renderAll(); };
+$("layBase").onclick = () => { layer = "base"; renderAll(); };
+$("layShift").onclick = () => { layer = "shift"; renderAll(); };
+$("implied").onchange = e => { L.implied_ieung = e.target.checked; renderAll(); };
+$("heatChk").onchange = e => { heat = e.target.checked; renderAll(); };
+$("nameIn").onchange = e => { L.name = e.target.value || "My Bada layout"; renderAll(); };
+$("loadPreset").onclick = () => {
+  const p = $("presetSel").value;
+  L = p === "empty" ? blank() : normalize(JSON.parse(JSON.stringify(DATA.presets[p])));
+  if (p === "empty") L.implied_ieung = true;
+  renderAll();
+};
+let armed = 0;
+$("clearKey").onclick = () => { L.keys[sel] = { base: [], shift: [] }; renderAll(); };
+$("clearAll").onclick = () => {
+  if (Date.now() - armed > 4000) { armed = Date.now(); $("confirmMsg").textContent = "Click again within 4 s to clear every key."; return; }
+  L.keys = {}; armed = 0; $("confirmMsg").textContent = "Cleared."; renderAll();
+};
+$("textForm").addEventListener("submit", e => { e.preventDefault(); const v = $("textIn").value.trim(); if (v) { addToken({ t: v, r: "x" }); $("textIn").value = ""; } });
+$("unplaced").onclick = e => { const b = e.target.closest("button[data-j]"); if (b) addToken({ t: b.dataset.j, r: b.dataset.r }); };
+$("copyBtn").onclick = async () => {
+  try { await navigator.clipboard.writeText($("outJson").value); $("copyMsg").textContent = "Copied."; }
+  catch (e) { $("outJson").select(); $("copyMsg").textContent = "Copy was blocked: the text is selected, press ⌘C."; }
+};
+$("importBtn").onclick = () => {
+  const m = $("importMsg");
+  try { L = normalize(JSON.parse($("inJson").value)); if (JSON.parse($("inJson").value).keyboard in KB) kb = JSON.parse($("inJson").value).keyboard; m.className = "msg"; m.textContent = `Loaded “${L.name}”.`; renderAll(); }
+  catch (e) { m.className = "msg err"; m.textContent = "Couldn't read that JSON: " + e.message; }
+};
+// physical keys select keys; ⌫ removes the last token of the selected slot
+const pressed = new Set();
+addEventListener("keydown", e => {
+  if (e.target.closest("input,textarea,select")) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.code === "Backspace") { const a = slot(sel, layer); if (a.length) { a.pop(); renderAll(); } e.preventDefault(); return; }
+  if (e.code === "ShiftLeft" || e.code === "ShiftRight") return;
+  if (EDIT.has(e.code)) { e.preventDefault(); if (sel !== e.code) { sel = e.code; renderAll(); } const k = document.querySelector(`.key[data-code="${e.code}"]`); if (k) { k.classList.add("press"); pressed.add(e.code); } }
+});
+addEventListener("keyup", e => { const k = document.querySelector(`.key[data-code="${e.code}"]`); if (k) k.classList.remove("press"); pressed.delete(e.code); });
+
+if (!restore()) L = normalize(JSON.parse(JSON.stringify(DATA.presets.draft25)));
+renderTables(); renderAll();
+</script>
+</body>
+</html>

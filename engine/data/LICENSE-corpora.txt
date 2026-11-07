@@ -1,0 +1,19 @@
+ko-words.tsv holds word counts only (no sentences), derived from:
+
+- Leipzig Corpora Collection, Korean news. CC BY. D. Goldhahn, T. Eckart and U. Quasthoff,
+  "Building Large Monolingual Dictionaries at the Leipzig Corpora Collection", LREC 2012.
+  https://wortschatz.uni-leipzig.de
+- korean-petitions (huggingface.co/datasets/heegyu/korean-petitions, from
+  github.com/lovit/petitions_archive). MIT License.
+- NSMC: Naver sentiment movie corpus v1.0, by Lucy Park. https://github.com/e9t/nsmc. CC0 1.0.
+- korean_safe_conversation (huggingface.co/datasets/jojo0217/korean_safe_conversation).
+  Apache License 2.0.
+
+en-words.txt is JIS Moonshot's common-en.txt (team-mirae/jis-moonshot, MIT); its generated part is
+derived from Tatoeba (https://tatoeba.org, CC BY 2.0 FR) English sentences, counts only.
+
+ja-words.txt is JIS Moonshot's common-ja.txt (team-mirae/jis-moonshot, MIT): hand-written everyday
+Japanese words in kana.
+
+hanja.tsv is JIS Korean's hanja dictionary (team-mirae/jis-korean): see LICENSE-libhangul-hanja.txt
+and LICENSE-unicode.txt.

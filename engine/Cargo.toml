@@ -1,0 +1,19 @@
+[package]
+name = "bada-engine"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license = "MIT"
+description = "Core engine of bada ime: muhenkan and henkan modes over a pool of JIS layouts"
+
+[lib]
+name = "bada"
+crate-type = ["rlib", "staticlib"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = "s"
+lto = true
