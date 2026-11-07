@@ -14,7 +14,7 @@ SOURCES    := $(wildcard Sources/*.swift)
 CARGO      := $(shell command -v cargo || echo $(HOME)/.cargo/bin/cargo)
 SIGN_IDENTITY ?= $(or $(shell security find-identity -v -p codesigning 2>/dev/null | sed -n 's/.*"\(Apple Development: [^"]*\)".*/\1/p' | head -1),-)
 LSREGISTER := /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
-DATA       := $(ENGINE)/data/ko-words.tsv $(ENGINE)/data/en-words.txt $(ENGINE)/data/hanja.tsv $(ENGINE)/data/oecd.tsv $(ENGINE)/data/ja-words.txt \
+DATA       := $(ENGINE)/data/ko-words.tsv $(ENGINE)/data/en-words.txt $(ENGINE)/data/hanja.tsv $(ENGINE)/data/oecd.tsv $(ENGINE)/data/ja-words.txt $(ENGINE)/data/kanji.bin $(ENGINE)/data/LICENSE-mozc.txt \
               $(ENGINE)/data/LICENSE-corpora.txt $(ENGINE)/data/LICENSE-libhangul-hanja.txt $(ENGINE)/data/LICENSE-unicode.txt
 ICONS      := $(BUILD)/bada.tiff $(BUILD)/muhenkan.tiff $(BUILD)/henkan.tiff
 

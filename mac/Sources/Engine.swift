@@ -9,6 +9,9 @@ struct EngineOutput: Decodable {
     var selected = 0
     var zero = 0
     var consumed = false
+    var horizontal = false
+    var notes: [String] = []
+    var japanese: [Bool] = []
     var need_selection: String?
 }
 
@@ -18,12 +21,12 @@ let sharedData: OpaquePointer? = {
         Bundle.main.url(forResource: name, withExtension: nil, subdirectory: "data").flatMap { try? Data(contentsOf: $0) } ?? Data()
     }
     let ko = file("ko-words.tsv"), en = file("en-words.txt"), hanja = file("hanja.tsv"), oecd = file("oecd.tsv")
-    let ja = file("ja-words.txt")
-    return ko.withUnsafeBytes { k in en.withUnsafeBytes { e in hanja.withUnsafeBytes { h in oecd.withUnsafeBytes { o in ja.withUnsafeBytes { j in
+    let ja = file("ja-words.txt"), kanji = file("kanji.bin")
+    return ko.withUnsafeBytes { k in en.withUnsafeBytes { e in hanja.withUnsafeBytes { h in oecd.withUnsafeBytes { o in ja.withUnsafeBytes { j in kanji.withUnsafeBytes { kj in
         bada_data_new(k.bindMemory(to: UInt8.self).baseAddress, k.count, e.bindMemory(to: UInt8.self).baseAddress, e.count,
                       h.bindMemory(to: UInt8.self).baseAddress, h.count, o.bindMemory(to: UInt8.self).baseAddress, o.count,
-                      j.bindMemory(to: UInt8.self).baseAddress, j.count)
-    } } } } }
+                      j.bindMemory(to: UInt8.self).baseAddress, j.count, kj.bindMemory(to: UInt8.self).baseAddress, kj.count)
+    } } } } } }
 }()
 
 /// One engine (one per text input client). All behaviour is in the engine.

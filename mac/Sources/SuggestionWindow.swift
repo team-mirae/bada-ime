@@ -59,10 +59,11 @@ final class SuggestionWindow {
     /// Shows `items` under the caret rectangle `caret` (screen coordinates); `selected` is the
     /// highlighted item, or nil while nothing is chosen yet. `horizontal`: one row of single letters.
     /// `japanese`: which items are Japanese readings, drawn in Hiragino Sans (missing: none).
-    func show(_ items: [String], selected: Int?, below caret: NSRect, horizontal: Bool = false, japanese: [Bool] = []) {
+    /// `notes`: per item, gray text at the row's right (romaji for kana, the reading for kanji).
+    func show(_ items: [String], selected: Int?, below caret: NSRect, horizontal: Bool = false, japanese: [Bool] = [], notes: [String] = []) {
         guard !items.isEmpty else { return hide() }
         list.horizontal = horizontal
-        list.update(items: items, selected: selected, japanese: japanese)
+        list.update(items: items, selected: selected, japanese: japanese, notes: notes)
         let size = list.preferredSize
         var origin = NSPoint(x: caret.minX - SuggestionListView.textInset, y: caret.minY - 6 - size.height)
         if let screen = NSScreen.screens.first(where: { $0.frame.contains(caret.origin) }) ?? NSScreen.main {
@@ -107,6 +108,9 @@ private final class SuggestionListView: NSView {
     private static let digitFont = NSFont.monospacedDigitSystemFont(ofSize: 10, weight: .medium)
     private var items: [String] = []
     private var japanese: [Bool] = []
+    private var notes: [String] = []
+    private static let noteFont = NSFont.systemFont(ofSize: 12)
+    private static let noteGap: CGFloat = 18
     private var selected: Int?
     private var firstVisible = 0
 
@@ -118,7 +122,12 @@ private final class SuggestionListView: NSView {
             let cell = max(Self.cellWidth, ceil(widest) + 12)
             return NSSize(width: CGFloat(items.count) * cell + 10, height: Self.cellHeight + 10)
         }
-        let widest = items.indices.map { (items[$0] as NSString).size(withAttributes: [.font: font(for: $0)]).width }.max() ?? 0
+        let widest = items.indices.map { i -> CGFloat in
+            let text = (items[i] as NSString).size(withAttributes: [.font: font(for: i)]).width
+            let note = i < notes.count && !notes[i].isEmpty
+                ? (notes[i] as NSString).size(withAttributes: [.font: Self.noteFont(for: notes[i])]).width + Self.noteGap : 0
+            return text + note
+        }.max() ?? 0
         let scroll: CGFloat = items.count > Self.visibleRows ? 14 : 0
         let width = max(180, ceil(widest) + Self.textInset * 2 + 8 + scroll)
         let rows = min(items.count, Self.visibleRows)
@@ -129,9 +138,15 @@ private final class SuggestionListView: NSView {
         index < japanese.count && japanese[index] ? Self.japaneseFont : Self.font
     }
 
-    func update(items: [String], selected: Int?, japanese: [Bool] = []) {
+    /// Kana notes in Hiragino Sans (Japanese forms), romaji in the system font.
+    private static func noteFont(for note: String) -> NSFont {
+        note.unicodeScalars.contains { $0.value >= 0x3040 } ? SuggestionWindow.japaneseFont(size: 12) : noteFont
+    }
+
+    func update(items: [String], selected: Int?, japanese: [Bool] = [], notes: [String] = []) {
         self.items = items
         self.japanese = japanese
+        self.notes = notes
         self.selected = selected
         // Keep the selected row in view.
         if let selected {
@@ -195,6 +210,17 @@ private final class SuggestionListView: NSView {
             ]
             let height = text.size(withAttributes: attributes).height
             text.draw(at: NSPoint(x: Self.textInset, y: top + (Self.rowHeight - height) / 2), withAttributes: attributes)
+            // The note, gray, right-aligned.
+            if index < notes.count, !notes[index].isEmpty {
+                let note = notes[index] as NSString
+                let noteAttributes: [NSAttributedString.Key: Any] = [
+                    .font: Self.noteFont(for: notes[index]),
+                    .foregroundColor: isSelected ? NSColor.white.withAlphaComponent(0.75) : NSColor.secondaryLabelColor,
+                ]
+                let size = note.size(withAttributes: noteAttributes)
+                note.draw(at: NSPoint(x: rightEdge - Self.textInset - size.width, y: top + (Self.rowHeight - size.height) / 2),
+                          withAttributes: noteAttributes)
+            }
             // Hairline separators between rows, as in the system list.
             if row < rows - 1 && !isSelected && index + 1 != selected {
                 NSColor.separatorColor.withAlphaComponent(0.35).setFill()

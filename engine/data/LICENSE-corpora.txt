@@ -17,3 +17,5 @@ Japanese words in kana.
 
 hanja.tsv is JIS Korean's hanja dictionary (team-mirae/jis-korean): see LICENSE-libhangul-hanja.txt
 and LICENSE-unicode.txt.
+
+kanji.bin is built from Mozc's open-source dictionary: see LICENSE-mozc.txt.

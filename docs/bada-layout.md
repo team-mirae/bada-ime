@@ -386,6 +386,10 @@ everyday short words are faster typed in full.
 - **In 초성 input it does not end 초성 input.** The token is still a 초성 token, now known to carry
   ㅏ: ㅇㄴ⇧ㅎㅅㅇ reads as ㅇ ㄴ 하 ㅅ ㅇ and still predicts 안녕하세요. Only a vowel key starts
   normal composition. The final stays **open** (owner, 2026-11-07): ⇧ㅎ matches 하, 한, 할, 합 …
+- **A consonant after a ⇧ token can be its final** (fix, 2026-11-07): the shown reading is ranked
+  with the 초성 predictions. The normal composition (⇧ㄱ ㄴ → 간) wins when it's a known word, and
+  ranks high when it's whole syllables; when it leaves loose jamo (ㅇㄴ⇧ㅎㅅㅇ composes ㅇㄴ핫ㅇ),
+  the 초성 reading (안녕하세요) shows and the composition is listed.
 - **In normal composition** it types the consonant and ㅏ as if both keys were pressed (⇧ㄱ → 가,
   ⇧ㄱ ㄴ → 간), as JIS Moonshot's Shift+consonant does (moonshot.md §9.2).
 - Shift on the number and symbol keys stays reserved for digits and symbols (§8.1): a consonant
@@ -420,6 +424,9 @@ JIS Bada (id 13) is `docs/layouts/bada-candidate-2.json` with §15 (초성 input
   phrase typed without spaces.
 - **One consonant alone** shows as itself; predictions start at two 초성 tokens (one consonant is
   how every word starts, and a guessed word there would flash on each).
+
+- **1 is ㅓ** (owner, 2026-11-07), the 중성 alone (with the implied ㅇ: 어); it was a second ㅏ.
+  ㅏ stays on 3 and `,`; ㅓ is on `:` too.
 
 ### 16.1 F-key actions (owner, 2026-11-07)
 

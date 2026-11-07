@@ -1,7 +1,6 @@
 # JIS Kana (20) and JIS Romaji (21)
 
-Status: built in v0.1, **deterministic** (owner, 2026-11-07): each reads the keys as kana, and
-nothing converts to kanji yet. Code: `engine/src/japanese.rs`; script forms and F-key actions in
+Status: built in v0.1 (owner, 2026-11-07), with **kanji conversion** since 2026-11-07. Code: `engine/src/japanese.rs`; script forms and F-key actions in
 `engine/src/engine.rs`.
 
 ## 20 JIS Kana
@@ -42,7 +41,23 @@ scores above an unknown Korean composition; an unknown one below it; one with a 
 pending Latin letters low. So with 13 and 21 enabled, `konnichiha` shows こんにちは and ㄱㅅㅎㄴㄷ
 still shows 감사합니다.
 
-## Not yet
+## Kanji conversion
 
-- Kanji conversion (JIS Moonshot's Mozc dictionary, `kanji.bin`), and so non-deterministic
-  ranking for Japanese.
+Both layouts convert their kana reading to kanji (`engine/src/kanji.rs`, ported from JIS Moonshot:
+a word lattice over the kana, word costs plus part-of-speech connection costs, at most 40 kana).
+The data is `engine/data/kanji.bin` (11 MB), built by `engine/tools/kanji/build_kanji.py` from
+**Mozc's open-source dictionary** (pinned commit); notices in `engine/data/LICENSE-mozc.txt`.
+On Mozc's evaluation set (`engine/tests/data/kanji-evaluation.tsv`): 70% exact, 79% in the top 3.
+
+- The menu (spec §6.4) is **0 and forward: the conversions, cheapest first, then the kana**;
+  **−1 hiragana, −2 katakana**. So typing shows the top conversion (わたしはがくせいです →
+  私は学生です), ⇧Tab gives the kana, Tab the other conversions.
+- Up to six conversions; one that is just the kana or its katakana isn't repeated.
+- Unknown or broken readings (a stray ゛, pending Latin letters) aren't converted.
+
+## Menu notes (owner, 2026-11-07)
+
+Each Japanese row carries a gray note at its right: **kana rows their romaji** (Hepburn as IMEs spell
+it: らーめん ra-men, がっこう gakkou, しんよう shin'you; `engine/src/romaji.rs`), **kanji rows their
+kana reading** (私は学生です わたしはがくせいです). Japanese rows are drawn in Hiragino Sans, so kanji
+take their Japanese forms.

@@ -62,6 +62,10 @@ pub const ACTIONS: &[(u32, &str, &str)] = &[
         "hanja",
         "Hanja: selection, else staged text, else OECD countries",
     ),
+    (LEGACY_KOREAN, "commit", "Commit as typed (this layout's reading, no ranking)"),
+    (LEGACY_KOREAN, "commit-bare", "Commit as typed, implied ㅇ dropped (가어 → 가ㅓ)"),
+    (LEGACY_MOONSHOT, "commit", "Commit as typed (this layout's reading, no ranking)"),
+    (LEGACY_MOONSHOT, "commit-bare", "Commit as typed, implied ㅇ dropped (가어 → 가ㅓ)"),
     (KANA, "hiragana", "Hiragana"),
     (KANA, "katakana", "Katakana"),
     (KANA, "halfwidth-katakana", "Half-width katakana"),
@@ -123,6 +127,12 @@ pub struct Output {
     pub zero: usize,
     /// The engine took the key; false: the app gets it (after the commit).
     pub consumed: bool,
+    /// The menu is one row of single letters (⌥ + letter variants); `selected` past its end: none.
+    pub horizontal: bool,
+    /// Per menu row: a note shown in gray at the right (romaji, a kana reading), and whether the
+    /// row is Japanese (a Japanese font). Empty when no row has one.
+    pub notes: Vec<String>,
+    pub japanese: Vec<bool>,
     /// The engine needs the host's selection to finish: "hanja", "full" or "half". The shell calls
     /// `host_selection` with it.
     pub need_selection: Option<String>,
@@ -154,10 +164,26 @@ fn in_script(hiragana: &str, script: KanaScript) -> String {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 struct Entry {
     text: String,
     score: f64,
+    /// Shown in gray at the row's right: romaji for kana, the kana reading for kanji.
+    note: String,
+    /// A Japanese reading: drawn in a Japanese font.
+    japanese: bool,
+}
+
+impl Entry {
+    fn new(text: String, score: f64) -> Entry {
+        Entry { text, score, ..Entry::default() }
+    }
+
+    /// A kana entry, its romaji as the note.
+    fn kana(text: String, score: f64) -> Entry {
+        let note = crate::romaji::romaji(&text).unwrap_or_default();
+        Entry { text, score, note, japanese: true }
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -192,6 +218,8 @@ pub struct Engine {
     pick: Option<Pick>,
     /// Waiting for the host's selection for this action.
     waiting: Option<String>,
+    /// Muhenkan's open ⌥ + letter variants list.
+    held: Option<crate::hold::Held>,
 }
 
 impl Engine {
@@ -208,6 +236,7 @@ impl Engine {
             index: 0,
             pick: None,
             waiting: None,
+            held: None,
         }
     }
 
@@ -225,7 +254,10 @@ impl Engine {
     pub fn set_mode(&mut self, mode: Mode) -> Output {
         let mut out = Output::default();
         if mode != self.mode {
-            out.commit = self.take_shown();
+            out.commit = match self.held.take() {
+                Some(h) => h.shown().to_string(),
+                None => self.take_shown(),
+            };
         }
         self.mode = mode;
         self.finish(out)
@@ -238,6 +270,10 @@ impl Engine {
     /// Commits whatever shows (focus lost, mode switch, a click).
     pub fn flush(&mut self) -> Output {
         let mut out = Output::default();
+        if let Some(h) = self.held.take() {
+            out.commit = h.shown().to_string();
+            return self.finish(out);
+        }
         out.commit = match self.pick.take() {
             Some(p) => match p.target {
                 PickTarget::Staged { .. } => self.take_shown(),
@@ -295,7 +331,11 @@ impl Engine {
                     in_script(&kana_reading(method, &self.presses), script)
                 }
             };
-            self.entries.push(Entry { text, score: 0.0 });
+            let entry = match over {
+                Override::Kana { .. } => Entry::kana(text, 0.0),
+                _ => Entry::new(text, 0.0),
+            };
+            self.entries.push(entry);
             return;
         }
         let enabled = self.settings.enabled.clone();
@@ -320,6 +360,7 @@ impl Engine {
                     entries.push(Entry {
                         text,
                         score: score + tie,
+                        ..Entry::default()
                     });
                 }
                 KANA_KOREAN | KOREAN_ROMAN => {
@@ -347,6 +388,7 @@ impl Engine {
                     entries.push(Entry {
                         text: default,
                         score: score + tie,
+                        ..Entry::default()
                     });
                     let mut known: Vec<(String, u32)> = all[1..]
                         .iter()
@@ -358,15 +400,29 @@ impl Engine {
                         entries.push(Entry {
                             text,
                             score: score + tie - 0.01 * (i + 1) as f64,
-                        });
+                        ..Entry::default()
+                    });
                     }
                 }
                 KTS | LEGACY_KOREAN | LEGACY_MOONSHOT | BADA => {
                     if let Some(tokens) = layout::choseong_tokens(id, &self.presses) {
-                        let literal = layout::tokens_text(&tokens);
+                        // What shows is the normal composition: a consonant after a ⇧ token is its
+                        // final (⇧ㄱ ㄴ → 간), consonants alone stay as they are (ㅇㄴ). The 초성
+                        // predictions are listed with it.
+                        let literal = layout::compose_presses(id, &self.presses);
+                        let attached = literal != layout::tokens_text(&tokens);
                         let count = self.data.korean_count(&literal);
+                        let loose = literal.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
                         let score = if tokens.len() == 1 {
                             200.0
+                        } else if attached && count > 0 {
+                            // A real word (⇧ㄱ ㄴ → 간) beats the 초성 guesses.
+                            120.0 + (count as f64).ln()
+                        } else if attached && !loose {
+                            99.0
+                        } else if attached {
+                            // Loose jamo left (ㅇㄴ핫ㅇ): the 초성 reading is likelier.
+                            45.0
                         } else if count > 0 {
                             101.0 + (count as f64).ln()
                         } else {
@@ -375,13 +431,15 @@ impl Engine {
                         entries.push(Entry {
                             text: literal,
                             score: score + tie,
-                        });
+                        ..Entry::default()
+                    });
                         if tokens.len() >= 2 {
                             for (word, count) in self.data.choseong_words(&tokens, 9) {
                                 entries.push(Entry {
                                     text: word,
                                     score: 95.0 + (count as f64).ln() + tie,
-                                });
+                        ..Entry::default()
+                    });
                             }
                         }
                     } else {
@@ -398,7 +456,8 @@ impl Engine {
                         entries.push(Entry {
                             text,
                             score: score + tie,
-                        });
+                        ..Entry::default()
+                    });
                     }
                 }
                 KANA | ROMAJI => {
@@ -413,10 +472,25 @@ impl Engine {
                     } else {
                         70.0
                     };
-                    entries.push(Entry {
-                        text,
-                        score: score + tie,
-                    });
+                    // Kanji conversions (docs/japanese.md): the cheapest above the kana itself, each
+                    // with the kana reading as its note.
+                    if !loose {
+                        if let Some(kanji) = &self.data.kanji {
+                            for (i, (conv, _)) in kanji.convert(&text, 6).into_iter().enumerate() {
+                                // The kana itself and its katakana are rows already (−1, −2).
+                                if conv == text || conv == japanese::katakana(&text) {
+                                    continue;
+                                }
+                                entries.push(Entry {
+                                    text: conv,
+                                    score: score + tie + 0.5 - 0.01 * i as f64,
+                                    note: text.clone(),
+                                    japanese: true,
+                                });
+                            }
+                        }
+                    }
+                    entries.push(Entry::kana(text, score + tie));
                 }
                 _ => {}
             }
@@ -436,16 +510,7 @@ impl Engine {
         if let Some(method) = method.filter(|&m| self.presses.iter().all(|&p| layout::takes(m, p)))
         {
             let hira = kana_reading(method, &self.presses);
-            self.negatives = vec![
-                Entry {
-                    text: hira.clone(),
-                    score: 0.0,
-                },
-                Entry {
-                    text: japanese::katakana(&hira),
-                    score: 0.0,
-                },
-            ];
+            self.negatives = vec![Entry::kana(hira.clone(), 0.0), Entry::kana(japanese::katakana(&hira), 0.0)];
         }
         // One row per text, at its best score.
         entries.sort_by(|a, b| b.score.total_cmp(&a.score));
@@ -455,6 +520,13 @@ impl Engine {
     }
 
     fn finish(&mut self, mut out: Output) -> Output {
+        if let Some(h) = &self.held {
+            out.preedit = h.shown().to_string();
+            out.menu = h.variants.iter().map(|c| c.to_string()).collect();
+            out.selected = h.selected.unwrap_or(h.variants.len());
+            out.horizontal = true;
+            return out;
+        }
         if let Some(pick) = &self.pick {
             out.preedit = match &pick.target {
                 PickTarget::Staged { before } => format!("{before}{}", pick.rows[pick.index].0),
@@ -478,13 +550,12 @@ impl Engine {
         out.preedit = self.shown();
         let rows = self.negatives.len() + self.entries.len();
         if self.staged() && rows > 1 {
-            out.menu = self
-                .negatives
-                .iter()
-                .rev()
-                .chain(self.entries.iter())
-                .map(|e| e.text.clone())
-                .collect();
+            let rows: Vec<&Entry> = self.negatives.iter().rev().chain(self.entries.iter()).collect();
+            out.menu = rows.iter().map(|e| e.text.clone()).collect();
+            if rows.iter().any(|e| !e.note.is_empty() || e.japanese) {
+                out.notes = rows.iter().map(|e| e.note.clone()).collect();
+                out.japanese = rows.iter().map(|e| e.japanese).collect();
+            }
             out.zero = self.negatives.len();
             out.selected = (out.zero as i32 + self.index) as usize;
         }
@@ -515,8 +586,23 @@ impl Engine {
 
     fn key_muhenkan(&mut self, key: Key, mods: Mods) -> Output {
         let mut out = Output::default();
+        if self.held.is_some() {
+            if let Some(done) = self.key_held(key, mods) {
+                return done;
+            }
+        }
         if mods.is_shortcut() {
             return out;
+        }
+        // ⌥ + a letter with variants: the letter, its variants beside it, none chosen.
+        if mods.alt && key.is_letter() {
+            let letter = layout::jis_char(key, false).unwrap_or('?');
+            if let Some(variants) = crate::hold::variants(letter, mods.shift) {
+                let letter = if mods.shift { letter.to_ascii_uppercase() } else { letter };
+                self.held = Some(crate::hold::Held { key, letter, variants, selected: None });
+                out.consumed = true;
+                return out;
+            }
         }
         match key {
             Key::Space if mods.alt => {
@@ -531,6 +617,56 @@ impl Engine {
             _ => {}
         }
         out
+    }
+
+    /// Keys while a variants list is open (jis-korean spec §3.6.3). None: not handled here (the
+    /// list was closed by committing what showed; the key goes on as usual).
+    fn key_held(&mut self, key: Key, mods: Mods) -> Option<Output> {
+        let h = self.held.as_mut()?;
+        let n = h.variants.len();
+        let consumed = |commit: String| Output { commit, consumed: true, ..Output::default() };
+        // The same ⌥ + letter again: the next variant, wrapping.
+        if mods.alt && !mods.is_shortcut() && key == h.key {
+            h.selected = Some(h.selected.map_or(0, |i| (i + 1) % n));
+            return Some(consumed(String::new()));
+        }
+        if !mods.alt && !mods.is_shortcut() && !mods.shift {
+            if let Some(d) = key.code().strip_prefix("Digit").and_then(|d| d.parse::<usize>().ok()) {
+                let index = if d == 0 { 9 } else { d - 1 };
+                let held = self.held.take()?;
+                if index < n {
+                    return Some(consumed(held.variants[index].to_string()));
+                }
+                // Past the list: the letter, and the digit goes on to the app.
+                return Some(Output { commit: held.letter.to_string(), ..Output::default() });
+            }
+        }
+        match key {
+            Key::ArrowRight | Key::ArrowDown => {
+                h.selected = Some(h.selected.map_or(0, |i| (i + 1) % n));
+                Some(consumed(String::new()))
+            }
+            Key::ArrowLeft | Key::ArrowUp => {
+                h.selected = Some(h.selected.map_or(n - 1, |i| (i + n - 1) % n));
+                Some(consumed(String::new()))
+            }
+            Key::Enter => {
+                let held = self.held.take()?;
+                Some(consumed(held.shown().to_string()))
+            }
+            Key::Escape | Key::Backspace => {
+                self.held = None;
+                Some(consumed(String::new()))
+            }
+            _ => {
+                // Any other key keeps what shows; then it's handled as usual (another ⌥ + letter
+                // opens its own list).
+                let held = self.held.take()?;
+                let mut rest = self.key_muhenkan(key, mods);
+                rest.commit = format!("{}{}", held.shown(), rest.commit);
+                Some(rest)
+            }
+        }
     }
 
     fn commit_then_pass(&mut self) -> Output {
@@ -722,6 +858,18 @@ impl Engine {
             consumed: true,
             ..Output::default()
         };
+        if method == LEGACY_KOREAN || method == LEGACY_MOONSHOT {
+            if !self.presses.is_empty() && (action == "commit" || action == "commit-bare") {
+                let text = if action == "commit" {
+                    layout::compose_presses(method, &self.presses)
+                } else {
+                    layout::compose_bare(method, &self.presses)
+                };
+                out.commit = format!("{}{}", self.prefix, text);
+                self.clear();
+            }
+            return out;
+        }
         if SCRIPT_FORM_METHODS.contains(&method) {
             if !self.presses.is_empty() {
                 self.over = Some(match action {
@@ -920,6 +1068,22 @@ mod tests {
     }
 
     #[test]
+    fn shift_token_takes_a_final() {
+        let mut e = engine();
+        shift(&mut e, KeyJ);
+        let out = press(&mut e, KeyH);
+        assert_eq!(out.preedit, "간");
+        // and the 초성 reading still goes on: ㅇㄴ⇧ㅎㅅㅇ → 안녕하세요
+        let mut e = engine();
+        press(&mut e, KeyF);
+        press(&mut e, KeyH);
+        shift(&mut e, KeyL);
+        press(&mut e, KeyS);
+        let out = press(&mut e, KeyF);
+        assert!(out.menu.contains(&"안녕하세요".to_string()), "{:?}", out.menu);
+    }
+
+    #[test]
     fn literal_chat_jamo_win() {
         let mut e = engine();
         press(&mut e, KeyX);
@@ -1076,6 +1240,81 @@ mod tests {
         assert_eq!(out.menu[..2], ["한구쿠", "한국"]);
         let out = press(&mut e, Tab);
         assert_eq!(out.preedit, "한국");
+    }
+
+    #[test]
+    fn legacy_commit_actions() {
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![LEGACY_KOREAN, QWERTY];
+        s.fkeys.insert("F6".into(), "11.commit-bare".into());
+        s.fkeys.insert("F7".into(), "11.commit".into());
+        e.set_settings(s);
+        for k in [KeyR, KeyK, KeyJ] {
+            press(&mut e, k);
+        }
+        let out = press(&mut e, F6);
+        assert_eq!(out.commit, "가ㅓ");
+        assert!(out.consumed);
+        assert_eq!(out.preedit, "");
+        // "commit" takes this layout's reading even when another ranks first (hello as 2-set)
+        for k in [KeyH, KeyE, KeyL, KeyL, KeyO] {
+            press(&mut e, k);
+        }
+        assert_eq!(press(&mut e, F7).commit, "옫이애");
+    }
+
+    #[test]
+    fn notes_for_kana_rows() {
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![ROMAJI];
+        e.set_settings(s);
+        for k in [KeyR, KeyA, Minus, KeyM, KeyE, KeyN] {
+            press(&mut e, k);
+        }
+        let out = press(&mut e, Tab);
+        assert_eq!(out.notes, ["ra-men", "ra-men", "ra-men"]);
+        assert!(out.japanese.iter().all(|&j| j));
+    }
+
+    #[test]
+    fn letter_variants() {
+        let alt = Mods { alt: true, ..Mods::NONE };
+        let alt_shift = Mods { alt: true, shift: true, ..Mods::NONE };
+        let mut e = engine();
+        e.set_mode(Mode::Muhenkan);
+        // ⌥u: u with its variants, none chosen; 2 → ü
+        let out = e.key(KeyU, alt);
+        assert_eq!(out.preedit, "u");
+        assert_eq!(out.menu, ["û", "ü", "ù", "ú", "ū"]);
+        assert!(out.horizontal);
+        assert_eq!(out.selected, 5);
+        assert_eq!(press(&mut e, Digit2).commit, "ü");
+        // ⇧⌥u 2 → Ü; ⌥e ⌥e ⌥e Enter → é; ⌥e ← Enter → ę
+        e.key(KeyU, alt_shift);
+        assert_eq!(press(&mut e, Digit2).commit, "Ü");
+        for _ in 0..3 {
+            e.key(KeyE, alt);
+        }
+        assert_eq!(press(&mut e, Enter).commit, "é");
+        e.key(KeyE, alt);
+        press(&mut e, ArrowLeft);
+        assert_eq!(press(&mut e, Enter).commit, "ę");
+        // ⌥a b → a, then b goes to the app; ⌥o Esc → nothing; a digit past the list
+        e.key(KeyA, alt);
+        let out = press(&mut e, KeyB);
+        assert_eq!(out.commit, "a");
+        assert!(!out.consumed);
+        e.key(KeyO, alt);
+        let out = press(&mut e, Escape);
+        assert_eq!((out.commit.as_str(), out.preedit.as_str()), ("", ""));
+        e.key(KeyY, alt);
+        let out = press(&mut e, Digit5);
+        assert_eq!(out.commit, "y");
+        assert!(!out.consumed);
+        // ⌥ on a letter without variants: macOS's ⌥ layer (passed on)
+        assert!(!e.key(KeyB, alt).consumed);
     }
 
     #[test]

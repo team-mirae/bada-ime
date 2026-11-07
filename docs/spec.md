@@ -108,8 +108,8 @@ Ids are `u32`. **Development / debug** ranges (re-numbered when merged to main):
 | 13 | JIS Bada | `Korean (bada)` | henkan, **ranked** (token keys, n-grams) | new: [bada-layout.md](bada-layout.md) |
 | 18 | JIS Korean Roman | `Korean (Roman)` | henkan, ranked (the default reading shows; other readings offered) | new: [korean-roman.md](korean-roman.md) |
 | 19 | JIS Kana Korean | `Korean (Kana)` | henkan, ranked (the table's reading shows; other pronunciations offered) | new, minor: [kana-korean.md](kana-korean.md) |
-| 20 | JIS Kana | `Japanese (Kana)` | henkan; deterministic in v0.1 (no kanji yet) | JIS Moonshot `A_KANA`: [japanese.md](japanese.md) |
-| 21 | JIS Romaji | `Japanese (Romaji)` | henkan; deterministic in v0.1 (no kanji yet) | new: [japanese.md](japanese.md) |
+| 20 | JIS Kana | `Japanese (Kana)` | henkan, non-deterministic (kanji conversion) | JIS Moonshot `A_KANA`: [japanese.md](japanese.md) |
+| 21 | JIS Romaji | `Japanese (Romaji)` | henkan, non-deterministic (kanji conversion) | new: [japanese.md](japanese.md) |
 
 Every layout declares whether it is muhenkan or henkan.
 
@@ -148,11 +148,12 @@ target, while §4.3 says henkan mode has no sub-modes. Which of these is meant?
 | Key | Action |
 |---|---|
 | ⌥Space | `_` |
+| ⌥ + letter | its **variants**, as JIS English did (jis-korean spec §3.6.3): the letter shows with a row of accented variants (⌥e: è é ê ë ē ė ę; ⇧ for capitals), none chosen. 1–9, 0 pick; the same ⌥ + letter again or the arrows choose; Enter commits; Esc / ⌫ cancel; any other key keeps what shows and goes on. A letter without variants types macOS's ⌥ character. In terminals ⌥ goes to the app untouched |
 | 半角/全角 | **full-width** applied to the selection |
 | ⇧半角/全角 | **half-width** applied to the selection |
 
-半角/全角 is the `Backquote` position (left of 1 on a full JIS board; Mac JIS boards don't have
-it). The conversion rules are JIS Moonshot's (moonshot.md §4.1). **[decide]** with no selection:
+半角/全角 is the `Backquote` position (left of 1 on a full JIS board, at the bottom left on the HHKB
+JIS; Apple JIS boards don't have it). The conversion rules are JIS Moonshot's (moonshot.md §4.1). **[decide]** with no selection:
 JIS Moonshot falls back to the word under the caret; keep that, or do nothing?
 
 ### 6.3 In henkan mode
@@ -267,11 +268,14 @@ the output.
 ### 7.0 What v0.1 builds
 
 - Layouts **0** (QWERTY), **10** (2-set), **11** (JIS Korean), **12** (JIS Moonshot), **13** (Bada, bada-layout.md §16), **18** (Korean Roman), **19** (Kana Korean),
-  **20** (Kana) and **21** (Romaji). 20 and 21 are deterministic kana (no kanji yet) and give the
-  negative entries (−1 hiragana, −2 katakana).
+  **20** (Kana) and **21** (Romaji). 20 and 21 convert to kanji (Mozc's dictionary, docs/japanese.md)
+  and give the negative entries (−1 hiragana, −2 katakana); their menu rows carry romaji / kana notes.
 - 11 and 12 are the Korean readings only, deterministic: the keys, implied ㅇ, the double press and
   ⇧ + vowel of JIS Korean §3–§4.2, and JIS Moonshot §9's slots and ⇧ + consonant. Not ported: their
-  predictions, hanja, F6–F10, and JIS Korean's ⇧Z as F10 (⇧Z is ㅋ here).
+  predictions, hanja, fixed F6–F10, and JIS Korean's ⇧Z as F10 (⇧Z is ㅋ here). Both publish two
+  F-key actions (§6.5), bound to nothing by default: `commit` (this layout's reading as typed,
+  whatever ranks first) and `commit-bare` (the same with the implied ㅇ dropped, as JIS Korean's F6:
+  ㅏ → ㅏ, 가어 → 가ㅓ, 와 → ㅘ; a typed or asked-for ㅇ and a syllable with a final stay).
 - Ranking is rules over word counts (a known word beats an unknown one; 초성 strings rank words by
   count), **not yet n-grams**.
 - HYPER+かな and MEH+かな both switch to the other mode: with one muhenkan layout and one henkan
@@ -285,8 +289,9 @@ Both have Control left of A. Bottom rows (1u each but the space):
 
 - **HHKB JIS** (15u): fn · 0.25u gap · 半角/全角 · ⌥ · ⌘ · 英数 · space (2.5u) · かな · ⌘ · ⌥ · fn ·
   0.25u gap · ← ↓ →. ↑ sits in the Shift row, left of right Shift.
-- **Apple-style JIS** (15u): caps · ⌥ · ⌘ · 英数 · space (4u) · かな · ⌘ · ⌥ · 🌐 · ← ↓ →, with ↑
-  stacked over ↓ at half height. 半角/全角 is left of 1.
+- **Apple-style JIS** (14.5u, MacBook): caps · ⌥ · ⌘ · 英数 · space (4.5u) · かな · ⌘ · 🌐 · ← ↓ →, with
+  ↑ stacked over ↓ at half height; no right ⌥. The left edge is 0.5u shorter than a full board's:
+  no 半角/全角 key (1 is 1.5u), tab 1u, control 1.25u, left shift 1.75u.
 
 ## 8. Open questions
 

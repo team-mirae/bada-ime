@@ -55,10 +55,19 @@ final class BadaInputController: IMKInputController {
             }
             return true
         }
+        // In a terminal, ⌥ in muhenkan goes to the app untouched (⌥ as Meta: readline's ⌥B, ⌥F).
+        if alt && Modes.current == .muhenkan && Self.terminals.contains(client.bundleIdentifier() ?? "") {
+            return false
+        }
         let out = engine.key(keyName(event.keyCode), shift: shift, ctrl: ctrl, alt: alt, meta: cmd)
         apply(out, to: client)
         return out.consumed
     }
+
+    private static let terminals: Set<String> = [
+        "com.apple.Terminal", "com.googlecode.iterm2", "net.kovidgoyal.kitty", "com.github.wez.wezterm",
+        "io.alacritty", "org.alacritty", "dev.warp.Warp-Stable", "com.mitchellh.ghostty",
+    ]
 
     /// かな again, or ⇧かな, in henkan mode: the next or previous menu entry.
     func cycle(back: Bool, client given: IMKTextInput? = nil) {
@@ -160,7 +169,8 @@ final class BadaInputController: IMKInputController {
             var caret = NSRect.zero
             _ = client.attributes(forCharacterIndex: 0, lineHeightRectangle: &caret)
             SuggestionWindow.shared.onPick = nil
-            SuggestionWindow.shared.show(out.menu, selected: out.selected, below: caret)
+            SuggestionWindow.shared.show(out.menu, selected: out.selected < out.menu.count ? out.selected : nil,
+                                         below: caret, horizontal: out.horizontal, japanese: out.japanese, notes: out.notes)
         }
     }
 

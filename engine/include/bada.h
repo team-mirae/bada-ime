@@ -11,7 +11,7 @@ typedef struct BadaEngine BadaEngine;
 
 const BadaData *bada_data_new(const uint8_t *ko, size_t ko_len, const uint8_t *en, size_t en_len,
                               const uint8_t *hanja, size_t hanja_len, const uint8_t *oecd, size_t oecd_len,
-                              const uint8_t *ja, size_t ja_len);
+                              const uint8_t *ja, size_t ja_len, const uint8_t *kanji, size_t kanji_len);
 void bada_data_free(const BadaData *data);
 
 BadaEngine *bada_new(const BadaData *data);

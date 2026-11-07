@@ -242,6 +242,7 @@ const COLF = [0,1,2,3,3,4,4,5,6,7,7,7,7];
 [NUM, QR, AR, ZR].forEach((row, r) => row.forEach((c, i) => FINGER[c] = { f: COLF[i], name: FN[i], row: r }));
 const REST = new Set(["KeyA","KeyS","KeyD","KeyF","KeyJ","KeyK","KeyL","Semicolon"]);
 function rowKeys(y, x0, items) { let x = x0; const out = []; for (const it of items) { const [c, w = 1, l] = Array.isArray(it) ? it : [it]; if (c !== "GAP") out.push({ c, x, y, w, h: 1, l }); x += w; } return out; }
+const KB_WIDTH = { hhkb: 15, apple: 14.5 };
 const KB = {
   hhkb: [
     ...rowKeys(0, 0, [["Escape",1,"Esc"], ...NUM, ["Backspace",1,"Delete"]]),
@@ -252,13 +253,13 @@ const KB = {
     { c: "Enter", x: 13.5, y: 1, w: 1.5, h: 2, l: "Return", enter: true },
   ],
   apple: [
-    ...rowKeys(0, 0, [["Backquote",1,"半角<br>全角"], ...NUM, ["Backspace",1,"delete"]]),
-    ...rowKeys(1, 0, [["Tab",1.5,"tab"], ...QR]),
-    ...rowKeys(2, 0, [["ControlLeft",1.75,"control"], ...AR]),
-    ...rowKeys(3, 0, [["ShiftLeft",2.25,"shift"], ...ZR, ["ShiftRight",1.75,"shift"]]),
-    ...rowKeys(4, 0, [["CapsLock",1,"caps"],["AltLeft",1,"⌥"],["MetaLeft",1,"⌘"],["Lang2",1,"英数"],["Space",4,""],["Lang1",1,"かな"],["MetaRight",1,"⌘"],["AltRight",1,"⌥"],["Globe",1,"🌐"],["ArrowLeft",1,"←"]]),
-    { c: "ArrowUp", x: 13, y: 4, w: 1, h: .5, l: "↑" }, { c: "ArrowDown", x: 13, y: 4.5, w: 1, h: .5, l: "↓" }, { c: "ArrowRight", x: 14, y: 4, w: 1, h: 1, l: "→" },
-    { c: "Enter", x: 13.5, y: 1, w: 1.5, h: 2, l: "return", enter: true },
+    ...rowKeys(0, 0, [["Digit1",1.5], ...NUM.slice(1), ["Backspace",1,"delete"]]),
+    ...rowKeys(1, 0, [["Tab",1,"tab"], ...QR]),
+    ...rowKeys(2, 0, [["ControlLeft",1.25,"control"], ...AR]),
+    ...rowKeys(3, 0, [["ShiftLeft",1.75,"shift"], ...ZR, ["ShiftRight",1.75,"shift"]]),
+    ...rowKeys(4, 0, [["CapsLock",1,"caps"],["AltLeft",1,"⌥"],["MetaLeft",1,"⌘"],["Lang2",1,"英数"],["Space",4.5,""],["Lang1",1,"かな"],["MetaRight",1,"⌘"],["Globe",1,"🌐"],["ArrowLeft",1,"←"]]),
+    { c: "ArrowUp", x: 12.5, y: 4, w: 1, h: .5, l: "↑" }, { c: "ArrowDown", x: 12.5, y: 4.5, w: 1, h: .5, l: "↓" }, { c: "ArrowRight", x: 13.5, y: 4, w: 1, h: 1, l: "→" },
+    { c: "Enter", x: 13, y: 1, w: 1.5, h: 2, l: "return", enter: true },
   ],
 };
 
@@ -315,12 +316,13 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const pct = (n, d = 2) => n.toFixed(d) + "%";
 function renderBoard() {
   const b = $("board"); b.innerHTML = ""; b.className = "board layer-" + layer;
-  b.style.aspectRatio = "15 / 5";
+  const KW = KB_WIDTH[kb];
+  b.style.aspectRatio = `${KW} / 5`;
   const { load } = computeLoads(); const max = Math.max(1e-9, ...Object.values(load));
   for (const k of KB[kb]) {
     const d = document.createElement("div");
     d.className = "key" + (EDIT.has(k.c) ? " ed" : "") + (k.c === sel ? " sel" : "");
-    Object.assign(d.style, { left: (k.x / 15 * 100) + "%", top: (k.y / 5 * 100) + "%", width: (k.w / 15 * 100) + "%", height: (k.h / 5 * 100) + "%" });
+    Object.assign(d.style, { left: (k.x / KW * 100) + "%", top: (k.y / 5 * 100) + "%", width: (k.w / KW * 100) + "%", height: (k.h / 5 * 100) + "%" });
     d.dataset.code = k.c;
     if (EDIT.has(k.c)) {
       d.tabIndex = 0; d.setAttribute("role", "button");

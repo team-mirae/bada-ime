@@ -190,7 +190,7 @@ def romaji21():
         sh = v[1] if len(v) > 1 else ""
         t[code] = (base, chr(ord(sh) + 0xFEE0) if sh and "!" <= sh <= "~" else sh)
     out = lay(21, "JIS Romaji", "Japanese (Romaji)", "henkan", t,
-              note="As built (v0.1, deterministic: no kanji). Letters spell romaji as Japanese IMEs do (ka か, shi し, tsu つ, gakkou がっこう, nn ん). "
+              note="As built: romaji with kanji conversion. Letters spell romaji as Japanese IMEs do (ka か, shi し, tsu つ, gakkou がっこう, nn ん). "
                    "⇧ + letter: the capital, full-width. - ー , 、 . 。 / ・ [ 「 ] 」; digits and symbols full-width. ⇧Tab: −1 hiragana, −2 katakana.")
     for code in ["Key"+c for c in LETTERS]:
         out["keys"][code]["base"]["c"] = "l"
@@ -210,7 +210,7 @@ if __name__ == "__main__":
         lay(12, "JIS Moonshot", "Korean (legacy-moonshot)", "henkan", legacy_moonshot(),
             note="As built: JIS Moonshot Mode A's Korean reading (no predictions). ⇧ consonant + ㅏ, ⇧ vowel on ㅇ; ㅙ ㅖ ㅒ ㅢ on − ; : , ."),
         lay(20, "JIS Kana", "Japanese (Kana)", "henkan", kana(),
-            note="As built (v0.1, deterministic: no kanji). ゛ ゜ attach to the kana before them (か゛ が, は゜ ぱ). ⇧Tab: −1 hiragana, −2 katakana."),
+            note="As built: kana with kanji conversion. ゛ ゜ attach to the kana before them (か゛ が, は゜ ぱ). ⇧Tab: −1 hiragana, −2 katakana."),
     ]
     kana20 = next(l for l in layouts if l and l["id"] == 20)
     layouts = [kana20 if l is None else l for l in layouts if l is not kana20] + bada_drafts(os.path.join(HERE, "../analysis/out_48.json")) + token_drafts(os.path.join(HERE, "../analysis/out_place_tokens.json"))

@@ -20,23 +20,24 @@
     ["Enter", 13.5, 1, 1.5, 2, "Return", "ENTER"],
   ];
 
-  // Generic Apple-style JIS: 半角/全角 left of 1, Control left of A, Caps Lock bottom left.
+  // Generic Apple-style JIS (MacBook), 14.5u: the left edge 0.5u shorter than the HHKB's rows (1 is
+  // 1.5u, no 半角/全角 key; tab 1u, control 1.25u, shift 1.75u), Caps Lock bottom left, no right ⌥.
   // ↑ and ↓ share one 1u column at half height, as on Apple boards.
   const apple = [
-    ...row(0, 0, [["Backquote", 1, "半角/全角"], ...NUM, ["Backspace", 1, "delete"]]),
-    ...row(1, 0, [["Tab", 1.5, "tab"], ...QROW]),
-    ...row(2, 0, [["ControlLeft", 1.75, "control"], ...AROW]),
-    ...row(3, 0, [["ShiftLeft", 2.25, "shift"], ...ZROW, ["ShiftRight", 1.75, "shift"]]),
-    ...row(4, 0, [["CapsLock", 1, "caps"], ["AltLeft", 1, "⌥"], ["MetaLeft", 1, "⌘"], ["Lang2", 1, "英数"], ["Space", 4, ""],
-                  ["Lang1", 1, "かな"], ["MetaRight", 1, "⌘"], ["AltRight", 1, "⌥"], [null, 1, "🌐"], ["ArrowLeft", 1, "←"]]),
-    ["ArrowUp", 13, 4, 1, 0.5, "↑"], ["ArrowDown", 13, 4.5, 1, 0.5, "↓"], ["ArrowRight", 14, 4, 1, 1, "→"],
-    ["Enter", 13.5, 1, 1.5, 2, "return", "ENTER"],
+    ...row(0, 0, [["Digit1", 1.5], ...NUM.slice(1), ["Backspace", 1, "delete"]]),
+    ...row(1, 0, [["Tab", 1, "tab"], ...QROW]),
+    ...row(2, 0, [["ControlLeft", 1.25, "control"], ...AROW]),
+    ...row(3, 0, [["ShiftLeft", 1.75, "shift"], ...ZROW, ["ShiftRight", 1.75, "shift"]]),
+    ...row(4, 0, [["CapsLock", 1, "caps"], ["AltLeft", 1, "⌥"], ["MetaLeft", 1, "⌘"], ["Lang2", 1, "英数"], ["Space", 4.5, ""],
+                  ["Lang1", 1, "かな"], ["MetaRight", 1, "⌘"], [null, 1, "🌐"], ["ArrowLeft", 1, "←"]]),
+    ["ArrowUp", 12.5, 4, 1, 0.5, "↑"], ["ArrowDown", 12.5, 4.5, 1, 0.5, "↓"], ["ArrowRight", 13.5, 4, 1, 1, "→"],
+    ["Enter", 13, 1, 1.5, 2, "return", "ENTER"],
   ];
 
   const clean = ks => ks.filter(k => k[0] !== "GAP");
   window.BADA_KEYBOARDS = {
     hhkb: { name: "HHKB JIS", width: 15, height: 5, keys: clean(hhkb) },
-    apple: { name: "Apple-style JIS", width: 15, height: 5, keys: clean(apple) },
+    apple: { name: "Apple-style JIS", width: 14.5, height: 5, keys: clean(apple) },
   };
 
   // JIS legends of the 48 kana-space keys: [unshifted, shifted]

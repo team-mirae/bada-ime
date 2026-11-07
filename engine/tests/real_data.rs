@@ -16,7 +16,8 @@ fn data() -> Arc<Data> {
             &read("hanja.tsv"),
             &read("oecd.tsv"),
         )
-        .with_japanese(&read("ja-words.txt")),
+        .with_japanese(&read("ja-words.txt"))
+        .with_kanji(&std::fs::read(format!("{}/data/kanji.bin", env!("CARGO_MANIFEST_DIR"))).unwrap()),
     )
 }
 
@@ -103,8 +104,11 @@ fn romaji_beside_bada() {
         .collect();
     let out = typed(&mut e, &keys);
     eprintln!("konnichiha → {} / {:?}", out.preedit, out.menu);
-    assert_eq!(out.preedit, "こんにちは");
+    // a Japanese reading wins; its kanji conversion and the kana are listed, with notes
+    assert!(out.menu.contains(&"こんにちは".to_string()), "{:?}", out.menu);
     assert_eq!(out.menu[..2], ["コンニチハ", "こんにちは"]);
+    let kana_row = out.menu.iter().position(|m| m == "こんにちは").unwrap();
+    assert_eq!(out.notes[kana_row], "konnichiha");
     // and Bada still wins on Korean: ㄱㅅㅎㄴㄷ
     let mut e = Engine::new(data());
     let mut s = bada::Settings::default();
@@ -169,4 +173,37 @@ fn korean_roman_on_real_words() {
     eprintln!("{} / {:?} in {:?}", out.preedit, out.menu, started.elapsed());
     assert_eq!(out.preedit, "감사함니다");
     assert!(out.menu.contains(&"감사합니다".to_string()));
+}
+
+#[test]
+fn kanji_conversion() {
+    let d = data();
+    let kanji = d.kanji.as_ref().expect("kanji.bin");
+    // Mozc's evaluation set: the floors JIS Moonshot holds
+    let text = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/tests/data/kanji-evaluation.tsv")).unwrap();
+    let (mut total, mut exact, mut listed) = (0, 0, 0);
+    for line in text.lines().filter(|l| !l.starts_with('#')) {
+        let fields: Vec<&str> = line.split('\t').collect();
+        let [_, input, expected, command, ..] = fields[..] else { continue };
+        if !command.starts_with("Conversion") {
+            continue;
+        }
+        total += 1;
+        let got = kanji.convert(input, 3);
+        exact += (got.first().map(|g| g.0.as_str()) == Some(expected)) as usize;
+        listed += got.iter().any(|g| g.0 == expected) as usize;
+    }
+    eprintln!("kanji: {exact}/{total} exact, {listed}/{total} in the top 3");
+    assert!(exact * 100 >= total * 66 && listed * 100 >= total * 75);
+
+    // in the engine: わたしはがくせいです (romaji) → 私は学生です on top, its kana as the note
+    let mut e = Engine::new(d);
+    let mut s = bada::Settings::default();
+    s.enabled = vec![21];
+    e.set_settings(s);
+    let keys: Vec<(Key, bool)> = "watashihagakuseidesu".chars().map(|c| (Key::from_code(&format!("Key{}", c.to_ascii_uppercase())), false)).collect();
+    let out = typed(&mut e, &keys);
+    eprintln!("{} / {:?} / {:?}", out.preedit, out.menu, out.notes);
+    assert_eq!(out.preedit, "私は学生です");
+    assert_eq!(out.notes[out.selected], "わたしはがくせいです");
 }

@@ -255,7 +255,7 @@ fn bada_base(key: Key) -> Option<Role> {
         fin: Some('ㅄ'),
     };
     Some(match key {
-        Digit1 => v('ㅏ'),
+        Digit1 => v('ㅓ'),
         Digit2 => v('ㅙ'),
         Digit3 => v('ㅏ'),
         Digit4 => v('ㅞ'),
@@ -416,13 +416,22 @@ struct Syl {
     /// Finals with the press index each came from; at most two.
     fins: Vec<(char, usize)>,
     lit: Option<char>,
+    /// The ㅇ was implied, not typed or asked for (JIS Korean §4.2): `commit-bare` drops it.
+    implied: bool,
 }
 
 impl Syl {
-    fn text(&self, out: &mut String) {
+    fn text(&self, out: &mut String, drop_implied: bool) {
         if let Some(l) = self.lit {
             out.push(l);
             return;
+        }
+        // The bare vowel, while the syllable has no final yet (안 stays 안).
+        if drop_implied && self.implied && self.fins.is_empty() {
+            if let Some(v) = self.vowel {
+                out.push(v);
+                return;
+            }
         }
         let fin = match self.fins.as_slice() {
             [] => None,
@@ -451,6 +460,16 @@ impl Syl {
 
 /// The composed text of staged presses in Korean layout `id` (normal composition).
 pub fn compose_presses(id: u32, presses: &[Press]) -> String {
+    compose_with(id, presses, false)
+}
+
+/// As [`compose_presses`], with the implied ㅇ dropped where JIS Korean's F6 dropped it: ㅏ → ㅏ,
+/// 가어 → 가ㅓ, 와 → ㅘ; a typed or asked-for ㅇ, and a syllable with a final, stay.
+pub fn compose_bare(id: u32, presses: &[Press]) -> String {
+    compose_with(id, presses, true)
+}
+
+fn compose_with(id: u32, presses: &[Press], drop_implied: bool) -> String {
     if id == KANA_KOREAN {
         return crate::kana_korean::compose_presses(presses);
     }
@@ -566,13 +585,14 @@ pub fn compose_presses(id: u32, presses: &[Press]) -> String {
                 syls.push(Syl {
                     ini,
                     vowel: Some(vw),
+                    implied: r.implied_ieung,
                     ..Syl::default()
                 });
             }
         }
     }
     let mut out = String::new();
-    syls.iter().for_each(|s| s.text(&mut out));
+    syls.iter().for_each(|s| s.text(&mut out, drop_implied));
     out
 }
 
@@ -698,6 +718,19 @@ mod tests {
         assert_eq!(k(&[(KeyR, false), (KeyO, true)]), "걔");
         assert_eq!(p(&[Digit5, KeyK]), "싸");
         assert_eq!(k(&[(KeyG, false), (KeyK, false), (Minus, false), (Minus, true)]), "하!?");
+    }
+
+    #[test]
+    fn bare_drops_only_the_implied_ieung() {
+        let bare = |spec: &[(Key, bool)]| compose_bare(LEGACY_KOREAN, &spec.iter().map(|&(k, s)| Press::new(k, s)).collect::<Vec<_>>());
+        assert_eq!(bare(&[(KeyK, false)]), "ㅏ");
+        assert_eq!(bare(&[(KeyR, false), (KeyK, false), (KeyJ, false)]), "가ㅓ");
+        assert_eq!(bare(&[(KeyH, false), (KeyK, false)]), "ㅘ");
+        assert_eq!(bare(&[(KeyK, false), (KeyS, false)]), "안");
+        // typed ㅇ, the double press and ⇧ + vowel stay
+        assert_eq!(bare(&[(KeyD, false), (KeyK, false)]), "아");
+        assert_eq!(bare(&[(KeyA, false), (KeyK, false), (KeyF, false), (KeyL, false), (KeyL, false)]), "말이");
+        assert_eq!(bare(&[(KeyH, false), (KeyL, true)]), "ㅗ이");
     }
 
     #[test]

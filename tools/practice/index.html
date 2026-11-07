@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>bada key drill</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f4f6f8;--surface:#ffffff;--border:#d5dbe1;--text:#17202a;--muted:#5d6b78;--accent:#1f6f9f;
+  --good:#2e8b57;--bad:#c0392b;--hint:#e8a33d;
+  --case:#d7dadd;--case-edge:#c2c6ca;--cap:#fbfbfa;--cap-edge:#b9bec4;--mod:#e3e6e9;--legend:#1d2731;--jis:#9aa4ae;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--bg:#12171c;--surface:#1a2128;--border:#2d3741;--text:#e6ebef;--muted:#9aa7b3;--accent:#6fb3dc;
+  --good:#5fc98c;--bad:#ef6b5d;--hint:#f0b45a;
+  --case:#262c32;--case-edge:#1a1f24;--cap:#353c44;--cap-edge:#20262c;--mod:#2b3138;--legend:#eef2f5;--jis:#77828c;}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Hiragino Sans","Noto Sans KR","Noto Sans JP",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 40px;display:grid;gap:14px}
+h1{font-size:1.35rem;margin:0;font-weight:600}
+.sub{color:var(--muted);margin:2px 0 0}
+.bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+label{font-size:.9rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+select,button{font:inherit;font-size:.9rem;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:6px 10px;border-radius:8px}
+button{cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.stage{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 22px}
+.target{display:flex;align-items:baseline;gap:22px;min-height:120px}
+.token{font-size:5.5rem;line-height:1;font-weight:500;min-width:1.2em;transition:color .12s}
+.token.good{color:var(--good)}.token.bad{color:var(--bad)}
+.next{color:var(--muted);font-size:1.6rem;display:flex;gap:12px}
+.next span{opacity:.75}
+.meta{color:var(--muted);font-size:.85rem;margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(110px,auto));gap:6px 18px;font-variant-numeric:tabular-nums}
+.stats div{display:flex;flex-direction:column}
+.stats b{font-size:1.4rem;font-weight:600}
+.stats small{color:var(--muted);font-size:.78rem}
+.board{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;overflow-x:auto}
+.board.hidden svg{visibility:hidden}
+.board.hidden::after{content:"Hint keyboard hidden";display:block;color:var(--muted);text-align:center;margin-top:-40px}
+svg{display:block;width:100%;min-width:720px;height:auto}
+.cap{fill:var(--cap);stroke:var(--cap-edge);stroke-width:1}
+.key.mod .cap{fill:var(--mod)}
+.key.hl .cap{fill:color-mix(in srgb,var(--hint) 45%,var(--cap));stroke:var(--hint);stroke-width:2}
+.key.hl-shift .cap{fill:color-mix(in srgb,var(--hint) 22%,var(--cap));stroke:var(--hint);stroke-width:2;stroke-dasharray:5 3}
+.key.ok .cap{fill:color-mix(in srgb,var(--good) 55%,var(--cap))}
+.key.no .cap{fill:color-mix(in srgb,var(--bad) 55%,var(--cap))}
+.shiftkey.hl .cap{fill:color-mix(in srgb,var(--hint) 30%,var(--mod));stroke:var(--hint);stroke-width:2}
+.lg{fill:var(--legend)}.jis{fill:var(--jis);font-family:ui-monospace,Menlo,monospace}.modl{fill:var(--muted)}
+.misses{display:flex;flex-wrap:wrap;gap:6px;font-size:.9rem}
+.misses span{border:1px solid var(--border);border-radius:999px;padding:1px 10px;background:var(--surface)}
+.misses b{margin-left:4px;color:var(--bad);font-weight:600}
+.note{color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>bada key drill</h1>
+    <p class="sub">Press the key that types the token shown. Shift counts: ⇧ positions are their own targets. Use a plain English input source (ABC – Extended or bada muhenkan) while drilling, so no input method composes the keys.</p>
+  </header>
+  <div class="bar">
+    <label>Layout <select id="layout"></select></label>
+    <label>Keyboard <select id="kb"></select></label>
+    <label><input type="checkbox" id="showBoard"> Hint keyboard</label>
+    <label><input type="checkbox" id="showHl"> Highlight every way to type it</label>
+    <label><input type="checkbox" id="useShift"> Include ⇧ tokens</label>
+    <label><input type="checkbox" id="useSymbols"> Include digits and symbols</label>
+    <button id="reset">Reset stats</button>
+  </div>
+
+  <section class="stage" aria-live="polite">
+    <div>
+      <div class="target"><span class="token" id="token">·</span><span class="next" id="next"></span></div>
+      <div class="meta" id="meta"></div>
+    </div>
+    <div class="stats">
+      <div><b id="sDone">0</b><small>correct</small></div>
+      <div><b id="sErr">0</b><small>misses</small></div>
+      <div><b id="sAcc">–</b><small>accuracy</small></div>
+      <div><b id="sRate">–</b><small>tokens / min</small></div>
+    </div>
+  </section>
+
+  <div class="board" id="board"></div>
+  <div>
+    <div class="note" style="margin-bottom:6px">Missed most:</div>
+    <div class="misses" id="misses"></div>
+  </div>
+  <p class="note" id="layoutNote"></p>
+</main>
+<script src="../render/keyboards.js"></script>
+<script src="../render/layouts.js"></script>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
+const U = 60, PAD = 14, G = 3, R = 7;
+
+const state = { layout: 0, kb: "hhkb", showBoard: true, showHl: true, useShift: true, useSymbols: false };
+try { Object.assign(state, JSON.parse(localStorage.getItem("bada-drill") || "{}")); } catch (e) {}
+const save = () => { try { localStorage.setItem("bada-drill", JSON.stringify(state)); } catch (e) {} };
+
+for (const [id, k] of Object.entries(BADA_KEYBOARDS)) $("kb").append(new Option(k.name, id));
+BADA_LAYOUTS.forEach((l, i) => $("layout").append(new Option(`${l.id} · ${l.name}`, i)));
+
+// ---------- tokens: every legend on the layout, with each (key, shift) that types it ----------
+let tokens = [];           // [{t, ways:[{code, shift}]}]
+function buildTokens() {
+  const lay = BADA_LAYOUTS[state.layout] || BADA_LAYOUTS[0];
+  const map = new Map();
+  for (const [code, cell] of Object.entries(lay.keys)) {
+    for (const shift of [false, true]) {
+      const c = shift ? cell.shift : cell.base;
+      if (!c || !c.t) continue;
+      if (shift && !state.useShift) continue;
+      if (!state.useSymbols && (c.c === "d" || c.c === "s")) continue;
+      for (const t of c.t.split("/")) {
+        if (!t) continue;
+        if (!map.has(t)) map.set(t, { t, ways: [] });
+        const ways = map.get(t).ways;
+        if (!ways.some(w => w.code === code && w.shift === shift)) ways.push({ code, shift });
+      }
+    }
+  }
+  tokens = [...map.values()];
+  $("layoutNote").textContent = `${tokens.length} tokens. ${lay.note || ""}`;
+}
+
+// ---------- picking: misses come back more often ----------
+const weight = {};          // token -> extra weight from misses
+const missCount = {};
+let queue = [];
+function pick(avoid) {
+  if (!tokens.length) return null;
+  let total = 0;
+  const w = tokens.map(tk => { const x = (tk.t === avoid ? 0 : 1) + (weight[tk.t] || 0); total += x; return x; });
+  if (total <= 0) return tokens[0];
+  let r = Math.random() * total;
+  for (let i = 0; i < tokens.length; i++) { r -= w[i]; if (r < 0) return tokens[i]; }
+  return tokens[tokens.length - 1];
+}
+function fill() {
+  while (queue.length < 4) queue.push(pick(queue.length ? queue[queue.length - 1].t : null));
+}
+
+// ---------- stats ----------
+let done = 0, errors = 0, started = null, missedThis = false;
+function showStats() {
+  $("sDone").textContent = done;
+  $("sErr").textContent = errors;
+  $("sAcc").textContent = done + errors ? Math.round(100 * done / (done + errors)) + "%" : "–";
+  const mins = started ? (Date.now() - started) / 60000 : 0;
+  $("sRate").textContent = mins > 0.05 ? Math.round(done / mins) : "–";
+  const top = Object.entries(missCount).sort((a, b) => b[1] - a[1]).slice(0, 14);
+  $("misses").innerHTML = top.length ? top.map(([t, n]) => `<span>${t}<b>${n}</b></span>`).join("") : `<span class="note">none yet</span>`;
+}
+
+// ---------- keyboard ----------
+let byCode = {}, shiftKeys = [];
+function rect(x, y, w, h) {
+  const r = Math.min(R, w / 2, h / 2);
+  return `M${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h - r}Q${x + w},${y + h} ${x + w - r},${y + h}H${x + r}Q${x},${y + h} ${x},${y + h - r}V${y + r}Q${x},${y} ${x + r},${y}Z`;
+}
+function enter(x, y) {
+  const x0 = x + G, x1 = x + 0.25 * U + G, x2 = x + 1.5 * U - G, y0 = y + G, ym = y + U - G, y2 = y + 2 * U - G;
+  return `M${x0},${y0}H${x2}V${y2}H${x1}V${ym}H${x0}Z`;
+}
+function drawBoard() {
+  const kb = BADA_KEYBOARDS[state.kb], lay = BADA_LAYOUTS[state.layout] || BADA_LAYOUTS[0];
+  const W = kb.width * U + PAD * 2, H = kb.height * U + PAD * 2;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${lay.name} on ${kb.name}` });
+  svg.append(el("rect", { x: 0, y: 0, width: W, height: H, rx: 14, fill: "var(--case)", stroke: "var(--case-edge)" }));
+  byCode = {}; shiftKeys = [];
+  for (const [code, kx, ky, kw, kh, label, shape] of kb.keys) {
+    const x = PAD + kx * U, y = PAD + ky * U, w = kw * U, h = kh * U;
+    const entry = code && lay.keys[code];
+    const g = el("g", { class: "key" + (entry ? "" : " mod") + (code === "ShiftLeft" || code === "ShiftRight" ? " shiftkey" : "") });
+    g.append(el("path", { d: shape === "ENTER" ? enter(x, y) : rect(x + G, y + G, w - 2 * G, h - 2 * G), class: "cap" }));
+    if (entry) {
+      const b = entry.base, s = entry.shift;
+      if (b) g.append(el("text", { x: x + 11, y: y + h - 13, "font-size": b.t.length > 2 ? 14 : 22, class: "lg" }, b.t.split("/")[0]));
+      if (s && (!b || s.t !== b.t)) g.append(el("text", { x: x + 11, y: y + 23, "font-size": 13, class: "lg", opacity: .75 }, s.t.split("/")[0]));
+      const jis = BADA_JIS[code];
+      if (jis) g.append(el("text", { x: x + w - 9, y: y + h - 10, "font-size": 10, "text-anchor": "end", class: "jis" }, code.startsWith("Key") ? jis[1] : jis[0]));
+    } else if (label != null) {
+      const lines = label.split("/");
+      lines.forEach((ln, i) => g.append(el("text", { x: x + w / 2, y: y + h / 2 + 4 + (i - (lines.length - 1) / 2) * 13, "font-size": h < U ? 11 : 12, "text-anchor": "middle", class: "modl" }, ln)));
+    }
+    svg.append(g);
+    if (code) byCode[code] = g;
+    if (code === "ShiftLeft" || code === "ShiftRight") shiftKeys.push(g);
+  }
+  $("board").replaceChildren(svg);
+  $("board").classList.toggle("hidden", !state.showBoard);
+  highlight();
+}
+function highlight() {
+  Object.values(byCode).forEach(g => g.classList.remove("hl", "hl-shift"));
+  shiftKeys.forEach(g => g.classList.remove("hl"));
+  const cur = queue[0];
+  if (!state.showHl || !cur) return;
+  let anyShift = false;
+  for (const wy of cur.ways) {
+    const g = byCode[wy.code];
+    if (!g) continue;
+    g.classList.add(wy.shift ? "hl-shift" : "hl");
+    anyShift ||= wy.shift;
+  }
+  if (anyShift) shiftKeys.forEach(g => g.classList.add("hl"));
+}
+function flash(code, ok) {
+  const g = byCode[code];
+  if (!g) return;
+  g.classList.add(ok ? "ok" : "no");
+  setTimeout(() => g.classList.remove("ok", "no"), 180);
+}
+
+// ---------- drill ----------
+function render() {
+  fill();
+  const cur = queue[0];
+  $("token").textContent = cur ? cur.t : "–";
+  $("token").className = "token";
+  $("next").innerHTML = queue.slice(1, 4).map(t => `<span>${t ? t.t : ""}</span>`).join("");
+  $("meta").textContent = cur && state.showHl
+    ? cur.ways.map(w => (w.shift ? "⇧" : "") + (BADA_JIS[w.code] ? (w.code.startsWith("Key") ? BADA_JIS[w.code][1] : BADA_JIS[w.code][0]) : w.code)).join("  ·  ")
+    : "";
+  highlight();
+  showStats();
+}
+function restart() {
+  buildTokens();
+  queue = [];
+  render();
+}
+function syncControls() {
+  $("layout").value = state.layout; $("kb").value = state.kb;
+  $("showBoard").checked = state.showBoard; $("showHl").checked = state.showHl;
+  $("useShift").checked = state.useShift; $("useSymbols").checked = state.useSymbols;
+}
+
+addEventListener("keydown", e => {
+  if (e.target.closest && e.target.closest("select")) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === "Shift" || e.code.startsWith("Shift")) return;
+  if (!BADA_JIS[e.code] && !e.code.startsWith("Key")) return;
+  e.preventDefault();
+  const cur = queue[0];
+  if (!cur) return;
+  started ??= Date.now();
+  const ok = cur.ways.some(w => w.code === e.code && w.shift === e.shiftKey);
+  flash(e.code, ok);
+  if (ok) {
+    done++;
+    if (!missedThis) weight[cur.t] = Math.max(0, (weight[cur.t] || 0) - 0.5);
+    missedThis = false;
+    $("token").className = "token good";
+    queue.shift();
+    setTimeout(render, 90);
+  } else {
+    errors++;
+    missedThis = true;
+    weight[cur.t] = (weight[cur.t] || 0) + 2;
+    missCount[cur.t] = (missCount[cur.t] || 0) + 1;
+    $("token").className = "token bad";
+    showStats();
+  }
+});
+
+$("layout").onchange = e => { state.layout = +e.target.value; save(); drawBoard(); restart(); };
+$("kb").onchange = e => { state.kb = e.target.value; save(); drawBoard(); };
+$("showBoard").onchange = e => { state.showBoard = e.target.checked; save(); $("board").classList.toggle("hidden", !state.showBoard); };
+$("showHl").onchange = e => { state.showHl = e.target.checked; save(); render(); };
+$("useShift").onchange = e => { state.useShift = e.target.checked; save(); restart(); };
+$("useSymbols").onchange = e => { state.useSymbols = e.target.checked; save(); restart(); };
+$("reset").onclick = () => {
+  done = errors = 0; started = null;
+  for (const k in weight) delete weight[k];
+  for (const k in missCount) delete missCount[k];
+  restart();
+};
+
+syncControls();
+drawBoard();
+restart();
+</script>
+</body>
+</html>

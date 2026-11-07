@@ -8,11 +8,14 @@ pub mod engine;
 pub mod ffi;
 pub mod hangul;
 pub mod hanja;
+pub mod hold;
 pub mod japanese;
+pub mod kanji;
 pub mod kana_korean;
 pub mod korean_roman;
 pub mod key;
 pub mod layout;
+pub mod romaji;
 pub mod width;
 
 pub use data::Data;

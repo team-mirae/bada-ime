@@ -17,6 +17,8 @@ pub struct Data {
     english: HashSet<String>,
     japanese: HashSet<String>,
     pub hanja: Dictionary,
+    /// Kana-kanji conversion (`kanji.bin`); None without the file.
+    pub kanji: Option<crate::kanji::Kanji>,
     /// (hanja, Korean name)
     pub oecd: Vec<(String, String)>,
 }
@@ -76,6 +78,12 @@ impl Data {
                 self.japanese.insert(w.to_string());
             }
         }
+        self
+    }
+
+    /// Adds kana-kanji conversion (`kanji.bin`). A malformed file is ignored (no kanji).
+    pub fn with_kanji(mut self, data: &[u8]) -> Data {
+        self.kanji = if data.is_empty() { None } else { crate::kanji::Kanji::parse(data).ok() };
         self
     }
 
