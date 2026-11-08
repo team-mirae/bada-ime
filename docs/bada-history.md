@@ -460,7 +460,8 @@ Layout 13 is now `docs/layouts/13-bada.json` ("bada rev2 v2"); the page is
   initial-or-final keys: a final, until a vowel takes it as its initial (2-set). Four keys on the home
   row's right (J K L ;) and ¥ are **final-only**: ㅇ ㄴ ㄹ ㄱ ㅂ, the five commonest finals; a vowel
   never takes them, so what they type never moves. F (ㅇ), 3 (ㅉ), 5 (ㄸ), Q and \ (ㅃ, final ㅄ) are
-  initial-only or keep their own final.
+  initial-only or keep their own final. (Later the same day Q became initial-only ㅃ, and ㅄ is typed on
+  `]` alone: [bada-layout.md](bada-layout.md) §2.)
 - **No implied ㅇ**: ㅇ is typed (F). A vowel with nothing before it is the bare vowel.
 - **Every vowel has a key**, compound ones too (number row, Y, [, ], ろ); two vowel keys still join as
   in 2-set (ㅗ ㅏ → ㅘ).

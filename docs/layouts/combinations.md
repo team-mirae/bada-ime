@@ -11,8 +11,8 @@ These images put every enabled layout on one keycap, as a printed multi-script k
   symbol keys, ⇧ above unshifted.
 - **Bottom left: Korean** (KTS 10, 11, 12, Bada 13, Kana Korean 19). Large: unshifted; small at its
   right: a ⇧ legend that isn't a rule (the tense consonants of 2-set) or the rest of a token key
-  (ㅃ / ㅄ). Rule-based ⇧ legends are left off: Bada's ⇧ + consonant (+ ㅏ) and ⇧ + symbol key (its
-  JIS character).
+  (ㅃ / ㅄ). Rule-based ⇧ legends are left off: Moonshot's ⇧ + consonant (+ ㅏ) and ⇧ + a number
+  or symbol key (its JIS character).
 - **Bottom right: kana** (Kana 20), small kana above. A second Latin layout takes this corner when
   top left is taken (QWERTY + romaji).
 - A legend already on the key from an earlier layout isn't repeated (romaji's ｑ and １ are
@@ -29,9 +29,9 @@ Render any enabled set with `tools/render/index.html` (Layout → Combinations) 
 </picture>
 
 Henkan candidates **0, 13, 20**. English words, Korean and Japanese from one mode, with no
-switching: the ranker decides whether `QA` was `qa`, 여오 or たち. Bada's Korean needs no Shift, so ⇧
-stays free for Bada's + ㅏ and kana's small kana. The same idea as JIS Moonshot (0, 12, 20), with
-Bada in place of the Moonshot Korean layout.
+switching: the ranker decides whether `DH` was `dh`, 가 or しく. Bada's common jamo need no Shift, so
+⇧ stays free for Bada's digits and punctuation and kana's small kana. The same idea as JIS Moonshot
+(0, 12, 20), with Bada in place of the Moonshot Korean layout.
 
 ## bada + romaji
 
@@ -42,7 +42,7 @@ Bada in place of the Moonshot Korean layout.
 
 Henkan candidates **13, 21**. Korean on Bada and Japanese in romaji, for a typist who doesn't type
 kana. A romaji word that is a known Japanese word ranks first (`konnichiha` → こんにちは), and
-Korean still comes out of the same keys (ㄱㅅㅎㄴㄷ → 감사합니다) ([japanese.md](../japanese.md#ranking)).
+Korean still comes out of the same keys (D H G R H V H B E M A H → 감사합니다) ([japanese.md](../japanese.md#ranking)).
 
 ## QWERTY + romaji
 

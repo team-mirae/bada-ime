@@ -7,6 +7,7 @@
 | **Native script** | Korean (Hangul) |
 | **Short name** | English: bada · 한국어: 바다 · 日本語: バダ |
 | **In-code name** | `bada` (id 13, `layout::BADA`) |
+| **Reliability** | Korean: **perfect** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | bada |
 | **Designer** | Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |

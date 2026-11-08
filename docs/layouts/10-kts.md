@@ -7,6 +7,7 @@
 | **Native script** | Korean (Hangul) |
 | **Short name** | English: Korean (2-set) · 한국어: 두벌식 · 日本語: 2ボル式 |
 | **In-code name** | `kts` (id 10, `layout::KTS`) |
+| **Reliability** | Korean: **perfect** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | KTS, 2-set, 2벌식 |
 | **Designer** | The Korean national standard KS X 5002 (formerly KS C 5715, 1982). Its JIS form in bada ime: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |

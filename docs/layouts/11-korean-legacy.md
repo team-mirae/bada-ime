@@ -7,6 +7,7 @@
 | **Native script** | Korean (Hangul) |
 | **Short name** | English: Korean (legacy-korean) · 한국어: JIS 코리안 · 日本語: JIS Korean |
 | **In-code name** | `legacy-korean` (id 11, `layout::LEGACY_KOREAN`) |
+| **Reliability** | Korean: **perfect** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | JIS Korean, legacy-korean |
 | **Designer** | Min Jun Sung (Mirae Research), from the JIS Korean input method (Mode A) |
 | **Maintainer** | Mirae Research (미래 리서치) |

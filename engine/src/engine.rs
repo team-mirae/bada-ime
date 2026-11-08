@@ -681,12 +681,13 @@ impl Engine {
                                 });
                                 row += 1;
                             }
-                            // The most common words of the reading (一 for いち, 死 and 詩 for し), right
-                            // under the first conversion: conversion of a lone word ranks them low.
+                            // The most common words of the reading (一 for いち, 死 and 詩 for し), under
+                            // the first conversion and a known word's kana (no lower than second):
+                            // conversion of a lone word ranks them low.
                             for (i, word) in self.data.common_japanese(&text).iter().take(COMMON_ROWS).enumerate() {
                                 entries.push(Entry {
                                     text: word.clone(),
-                                    score: score + tie + 0.5 - 0.004 - 0.0001 * i as f64,
+                                    score: score + tie + 0.5 - 0.006 - 0.0001 * i as f64,
                                     note: text.clone(),
                                     japanese: true,
                                     origin: Origin::Other,

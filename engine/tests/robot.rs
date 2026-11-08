@@ -13,7 +13,7 @@
 //!
 //!     cargo test --release --test robot -- --nocapture
 //!
-//! ROBOT_LIMIT=n caps the distinct items per language (default: all). The report, with failing
+//! ROBOT_LIMIT=n caps the distinct items per corpus (default: all). The report, with failing
 //! examples: target/robot-report.md.
 
 use std::collections::{BTreeMap, HashSet};
@@ -878,3 +878,43 @@ fn json_matches_engine() {
 
 
 
+
+// ---------- the pages say what the JSON claims ----------
+
+/// Each layout page's metadata header states the reliability its JSON claims, per language
+/// (docs/layouts/README.md), and so does the README's table.
+#[test]
+fn pages_state_the_claims() {
+    let name = |l: &str| match l {
+        "english" => "English",
+        "korean" => "Korean",
+        "japanese_kana" => "Japanese (kana)",
+        "japanese_romaji" => "Japanese (romaji)",
+        _ => "?",
+    };
+    let readme = std::fs::read_to_string(root("../docs/layouts/README.md")).unwrap();
+    let mut wrong = vec![];
+    for l in layouts() {
+        let page = l.file.replace(".json", ".md");
+        let text = std::fs::read_to_string(root(&format!("../docs/layouts/{page}"))).unwrap();
+        let Some(row) = text.lines().find(|r| r.starts_with("| **Reliability** |")) else {
+            wrong.push(format!("{page}: no Reliability row"));
+            continue;
+        };
+        let claims: Vec<(String, String)> = l.languages.iter().map(|g| (name(g).to_string(), l.reliability.get(g).cloned().unwrap_or_default())).collect();
+        for (lang, level) in &claims {
+            if !row.contains(&format!("{lang}: **{level}**")) {
+                wrong.push(format!("{page}: Reliability should say {lang}: **{level}**"));
+            }
+        }
+        if claims.is_empty() && !row.contains("none") {
+            wrong.push(format!("{page}: Reliability should say none"));
+        }
+        let line = readme.lines().find(|r| r.starts_with(&format!("| {} | [", l.id))).unwrap_or("");
+        let want = if claims.is_empty() { "—".to_string() } else { claims.iter().map(|(g, v)| format!("{g}: {v}")).collect::<Vec<_>>().join(" · ") };
+        if !line.ends_with(&format!(" {want} |")) {
+            wrong.push(format!("README.md row {}: Reliability should be {want}", l.id));
+        }
+    }
+    assert!(wrong.is_empty(), "layout pages that disagree with their JSON:\n{}", wrong.join("\n"));
+}

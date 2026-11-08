@@ -7,6 +7,7 @@
 | **Native script** | Korean (Hangul) |
 | **Short name** | English: Korean (Roman) · 한국어: 로마자 한글 · 日本語: ローマ字ハングル |
 | **In-code name** | `korean-roman` (id 18, `layout::KOREAN_ROMAN`) |
+| **Reliability** | Korean: **production** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | Korean Roman |
 | **Designer** | Spelling: the Revised Romanization of Korean (National Institute of Korean Language, 2000). The input method: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |

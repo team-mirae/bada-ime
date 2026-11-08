@@ -7,6 +7,7 @@
 | **Native script** | (none: every script) |
 | **Short name** | English: Unicode · 한국어: 유니코드 · 日本語: ユニコード |
 | **In-code name** | `unicode` (id 151, `layout::UNICODE`) |
+| **Reliability** | none: a search, it declares no language |
 | **Abbreviations** | — |
 | **Designer** | Min Jun Sung (Mirae Research). Character names: the Unicode Character Database |
 | **Maintainer** | Mirae Research (미래 리서치) |

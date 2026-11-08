@@ -7,6 +7,7 @@
 | **Native script** | Korean (Hangul) |
 | **Short name** | English: Korean (Kana) · 한국어: 가나 한글 · 日本語: かなハングル |
 | **In-code name** | `kana-korean` (id 19, `layout::KANA_KOREAN`) |
+| **Reliability** | Korean: **experimental** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | Kana Korean |
 | **Designer** | Keys: JIS kana (JIS X 6002). Kana-to-Korean readings: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |

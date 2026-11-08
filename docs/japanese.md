@@ -38,10 +38,10 @@ settings window lists them under each method. Each lasts until the commit.
 
 ## Ranking
 
-A reading that is a known word (`engine/data/ja-words.txt`, JIS Moonshot's hand-written list)
-scores above an unknown Korean composition; an unknown one below it; one with a stray ゛ ゜ or
-pending Latin letters low. So with 13 and 21 enabled, `konnichiha` shows こんにちは and ㄱㅅㅎㄴㄷ
-still shows 감사합니다.
+A reading that is a known word (`engine/data/ja-words.txt`, JIS Moonshot's hand-written list; a
+kana-native word; or a Japanese word in the user's dictionary) scores above an unknown Korean
+composition; an unknown one below it; one with a stray ゛ ゜ or pending Latin letters low. So with
+13 and 21 enabled, `konnichiha` shows こんにちは and D H G R H V H B E M A H still shows 감사합니다.
 
 ## Kanji conversion
 
@@ -55,7 +55,7 @@ On Mozc's evaluation set (`engine/tests/data/kanji-evaluation.tsv`): 69% exact, 
   them**; with script forms on, also **−1 hiragana, −2 katakana**. So typing shows the top
   conversion (わたしはがくせいです → 私は学生です), Tab the other conversions.
 - **Where the kana goes** (owner, 2026-11-08): where conversion ranks it; a known word's kana
-  (`ja-words.txt`, or kana-native) no lower than second (あなた: 貴方 may come first, あなた next); a
+  (`ja-words.txt`, or kana-native) no lower than second (ぼく: 僕 may come first, ぼく next); a
   **kana-native** word's kana first. Otherwise last.
 - **Kana-native words** (`engine/data/ja-kana-native.txt`, built into the engine): about 870 words
   written in kana at least 60% of the time in Tatoeba's Japanese sentences (この, その, こと, もの,
@@ -65,8 +65,8 @@ On Mozc's evaluation set (`engine/tests/data/kanji-evaluation.tsv`): 69% exact, 
   sentences of 613 (431 → 426).
 - **Common words** (`engine/data/ja-common-words.txt`, built into the engine): the 3,000 most common
   words of Tatoeba's Japanese sentences not written in kana (一, 死, 原因, ケン), with their readings,
-  from the same script. When the whole reading is one, its three most common words come right
-  under the first conversion: conversion of a lone short word ranks them low (いち → 1, し → し), and
+  from the same script. When the whole reading is one, its three most common words come under
+  the first conversion and a known word's kana (ひ: 日, ひ, 火): conversion of a lone short word ranks them low (いち → 1, し → し), and
   the typing robot's `production` bar needs every common word in the first 5 rows (robot.md).
   Phrases and sentences are converted as before: the lattice's costs aren't changed, so に stays
   a particle in 東京に.

@@ -5,7 +5,7 @@
 //! layouts that type initials on their own keys (10–13):
 //!
 //! - **typed**: a syllable composed from its keys: the initial's key (and Shift), the vowel, the
-//!   final and the final's key. Two keys that type the same jamo (Bada's ㅅ on S and O) are two
+//!   final and the final's key. Two keys that type the same jamo (Bada's ㅆ on 2 and on `:`) are two
 //!   inputs.
 //! - **choseong**: a 초성 prediction chosen: each typed initial's key, and the vowel and final of
 //!   the syllable it became.

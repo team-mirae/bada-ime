@@ -7,6 +7,7 @@
 | **Native script** | Korean (Hangul) |
 | **Short name** | English: Korean (3-set JIS) · 한국어: 세벌식 JIS · 日本語: 3ボル式JIS |
 | **In-code name** | `k3s-jis` (id 14, `layout::K3S_JIS`) |
+| **Reliability** | Korean: **perfect** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | K3S-J, K3S, 3-set |
 | **Designer** | 세벌식: 공병우 (Gong Byeong-u); 세벌식 순아래, the starting point: a later community design. Its JIS form: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |

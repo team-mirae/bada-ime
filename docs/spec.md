@@ -316,15 +316,17 @@ with its own set of henkan candidates:
 | Path | What |
 |---|---|
 | `/engine` | Platform-independent core (Rust, `bada-engine`): layouts, composition, the menu, F-key actions. Event in → output out, no I/O. C ABI in `include/bada.h` (JSON in and out) |
-| `/engine/data` | Shipped data: Korean word counts (`ko-words.tsv`, built by `engine/tools/build_ko_words.py`), English words, hanja, OECD names, with their licenses |
+| `/engine/data` | Shipped data: Korean word counts (`ko-words.tsv`, built by `engine/tools/build_ko_words.py`) and the typo model built from them (`ko-jamo-4gram.bin`), English words, hanja, OECD names, Japanese words and kanji conversion (`ja-words.txt`, `kanji.bin`, `ja-kana-native.txt`, `ja-common-words.txt`), the symbol, emoji and Unicode name lists of 150 and 151, with their licenses |
 | `/mac` | InputMethodKit shell (Swift, no Xcode): the two input modes (§4.1), the 英数 / かな key tap, the menu window, the settings window |
 | `/docs` | This spec, the Bada layout design, a page per layout and combination examples (`docs/layouts`, images in `docs/images/layouts`), the layout 13 design history and its saved candidates (`docs/bada-history.md`, `docs/history/`) |
-| `/tools/analysis`, `/tools/render`, `/tools/editor` | Corpus analysis and layout optimisation, the layout renderer (with combinations, and `export_png.py` for the docs' images), the layout editor |
+| `/tools/analysis`, `/tools/render`, `/tools/editor`, `/tools/practice`, `/tools/setup-page` | Corpus analysis and layout optimisation, the layout renderer (with combinations, and `export_png.py` for the docs' images), the layout editor, a key drill, a page of a setup's key legends per mode |
+| `/utils/learner-app` | A local page that logs your typing and exports it for your dictionary (§8.2) |
 
 All behaviour lives in the engine; the shell translates keys, switches input sources and applies
 the output.
 
 - Engine: `cargo test` in `/engine` (unit tests, plus `tests/real_data.rs` on the shipped data).
+  The typing robot, `tests/robot.rs`, runs in release builds only: [robot.md](robot.md).
 - macOS: `make` in `/mac` builds `build/BadaIME.app` (universal); `make install` copies it to
   `~/Library/Input Methods`, registers it (enabling both modes on a first install) and adds a login
   agent so the 英数 / かな tap runs from login. Then follow §4.1's setup.
@@ -332,8 +334,8 @@ the output.
 
 ### 7.0 What v0.1 builds
 
-- Layouts **0** (QWERTY), **10** (2-set), **11** (JIS Korean), **12** (JIS Moonshot), **13** (Bada, bada-layout.md), **18** (Korean Roman), **19** (Kana Korean),
-  **20** (Kana) and **21** (Romaji). 20 and 21 convert to kanji (Mozc's dictionary, docs/japanese.md)
+- Layouts **0** (QWERTY), **10** (2-set), **11** (JIS Korean), **12** (JIS Moonshot), **13** (Bada, bada-layout.md), **14** (3-set JIS), **18** (Korean Roman), **19** (Kana Korean),
+  **20** (Kana), **21** (Romaji), **150** (Symbols) and **151** (Unicode). 20 and 21 convert to kanji (Mozc's dictionary, docs/japanese.md)
   and give the negative entries (−1 hiragana, −2 katakana); their menu rows carry romaji / kana notes.
 - 11 and 12 are the Korean readings only, deterministic: the keys, implied ㅇ, the double press and
   ⇧ + vowel of JIS Korean §3–§4.2, and JIS Moonshot §9's slots and ⇧ + consonant. Not ported: their

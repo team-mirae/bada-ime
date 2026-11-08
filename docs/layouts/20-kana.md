@@ -7,6 +7,7 @@
 | **Native script** | Japanese (kana) |
 | **Short name** | English: Japanese (Kana) · 한국어: 가나 · 日本語: かな |
 | **In-code name** | `kana` (id 20, `layout::KANA`) |
+| **Reliability** | Japanese (kana): **production** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | JIS kana |
 | **Designer** | JIS X 6002 (formerly JIS C 6233). Its bada ime form (kanji conversion, menus): Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |

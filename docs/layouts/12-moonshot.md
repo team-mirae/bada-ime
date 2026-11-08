@@ -7,6 +7,7 @@
 | **Native script** | Korean (Hangul) |
 | **Short name** | English: Korean (legacy-moonshot) · 한국어: 문샷 · 日本語: ムーンショット |
 | **In-code name** | `legacy-moonshot` (id 12, `layout::LEGACY_MOONSHOT`) |
+| **Reliability** | Korean: **perfect** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | Moonshot, legacy-moonshot |
 | **Designer** | Min Jun Sung (Mirae Research), from the JIS Moonshot input method (Mode A) |
 | **Maintainer** | Mirae Research (미래 리서치) |

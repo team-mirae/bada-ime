@@ -282,6 +282,9 @@ fn kana_native_words_stay_kana() {
         let out = romaji(letters);
         assert!(out.menu[out.zero..].iter().take(5).any(|m| m == word), "{letters}: {:?}", out.menu);
     }
+    // ... under a known word's kana, which stays no lower than second (ひ: 日, ひ, 火).
+    let out = romaji("hi");
+    assert_eq!(&out.menu[out.zero..out.zero + 3], ["日", "ひ", "火"], "{:?}", out.menu);
     let out = romaji("toukyouni");
     assert_eq!(out.preedit, "東京に", "{:?}", out.menu);
 }

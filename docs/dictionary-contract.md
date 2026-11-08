@@ -69,7 +69,7 @@ string (데이터센터 for ㄷㅇㅌㅅㅌ) slightly above built-in words of th
 | `word` | required | What it should give |
 
 A shortcut is offered **first** whenever its exact 초성 string is typed in a layout with 초성 input
-(Bada, 13), above every other reading; several for one string keep the file's order.
+(none at present), above every other reading; several for one string keep the file's order.
 
 ### `source` (optional)
 
@@ -97,7 +97,7 @@ wouldn't want in a word list. It stays on your Mac; bada never sends it anywhere
 bada ime can also count, on this Mac, which vowel and final you attach to each initial and which
 key you typed it with (spec §8). They hold no words, only counts per key, but they show which
 syllables each of your initials really stands for, and how differently you use two keys for the
-same jamo (Bada's ㅅ on S and on O). `tools/analysis/choseong_report.py` summarises them; use it to
+same jamo (Bada's ㅆ on 2 and on `:`). `tools/analysis/choseong_report.py` summarises them; use it to
 decide which words to add, and to check later that the dictionary helped.
 
 ## For AI agents

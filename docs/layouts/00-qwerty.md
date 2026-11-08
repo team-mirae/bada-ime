@@ -7,6 +7,7 @@
 | **Native script** | English (Latin) |
 | **Short name** | English: QWERTY · 한국어: 쿼티 · 日本語: QWERTY |
 | **In-code name** | `qwerty` (id 0, `layout::QWERTY`) |
+| **Reliability** | English: **perfect** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | QWERTY |
 | **Designer** | QWERTY: Christopher Latham Sholes (1870s); its JIS keyboard form: JIS X 6002. Its bada ime form: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |

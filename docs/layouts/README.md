@@ -3,20 +3,20 @@
 Every layout bada ime builds, one page each, and [combinations](combinations.md) of them
 enabled together. Ids, kinds and names are the [spec's catalog](../spec.md) (§5).
 
-| Id | Layout | Display name | Kind |
-|---|---|---|---|
-| 0 | [JIS QWERTY](00-qwerty.md) | `QWERTY` | muhenkan |
-| 10 | [JIS KTS](10-kts.md) | `Korean (2-set)` | henkan, deterministic |
-| 11 | [JIS Korean Legacy](11-korean-legacy.md) | `Korean (legacy-korean)` | henkan, deterministic |
-| 12 | [JIS Moonshot](12-moonshot.md) | `Korean (legacy-moonshot)` | henkan, deterministic |
-| 13 | [JIS Bada](13-bada.md) | `Korean (bada)` | henkan, deterministic |
-| 14 | [JIS 3-set](14-3set-jis.md) | `Korean (3-set JIS)` | henkan, deterministic |
-| 18 | [JIS Korean Roman](18-korean-roman.md) | `Korean (Roman)` | henkan, ranked |
-| 19 | [JIS Kana Korean](19-kana-korean.md) | `Korean (Kana)` | henkan, ranked |
-| 20 | [JIS Kana](20-kana.md) | `Japanese (Kana)` | henkan, non-deterministic (kanji conversion) |
-| 21 | [JIS Romaji](21-romaji.md) | `Japanese (Romaji)` | henkan, non-deterministic (kanji conversion) |
-| 150 | [Symbols](150-symbols.md) | `Symbols` | henkan, search |
-| 151 | [Unicode](151-unicode.md) | `Unicode` | henkan, search |
+| Id | Layout | Display name | Kind | Reliability |
+|---|---|---|---|---|
+| 0 | [JIS QWERTY](00-qwerty.md) | `QWERTY` | muhenkan | English: perfect |
+| 10 | [JIS KTS](10-kts.md) | `Korean (2-set)` | henkan, deterministic | Korean: perfect |
+| 11 | [JIS Korean Legacy](11-korean-legacy.md) | `Korean (legacy-korean)` | henkan, deterministic | Korean: perfect |
+| 12 | [JIS Moonshot](12-moonshot.md) | `Korean (legacy-moonshot)` | henkan, deterministic | Korean: perfect |
+| 13 | [JIS Bada](13-bada.md) | `Korean (bada)` | henkan, deterministic | Korean: perfect |
+| 14 | [JIS 3-set](14-3set-jis.md) | `Korean (3-set JIS)` | henkan, deterministic | Korean: perfect |
+| 18 | [JIS Korean Roman](18-korean-roman.md) | `Korean (Roman)` | henkan, ranked | Korean: production |
+| 19 | [JIS Kana Korean](19-kana-korean.md) | `Korean (Kana)` | henkan, ranked | Korean: experimental |
+| 20 | [JIS Kana](20-kana.md) | `Japanese (Kana)` | henkan, non-deterministic (kanji conversion) | Japanese (kana): production |
+| 21 | [JIS Romaji](21-romaji.md) | `Japanese (Romaji)` | henkan, non-deterministic (kanji conversion) | Japanese (romaji): production |
+| 150 | [Symbols](150-symbols.md) | `Symbols` | henkan, search | — |
+| 151 | [Unicode](151-unicode.md) | `Unicode` | henkan, search | — |
 
 Examples of layouts enabled together: [QWERTY + bada + kana](combinations.md#qwerty--bada--kana),
 [bada + romaji](combinations.md#bada--romaji), [QWERTY + romaji](combinations.md#qwerty--romaji),
@@ -55,6 +55,9 @@ likes (the pages here use a table), giving:
 - **Short name:** a short human-readable name in the same languages;
 - **In-code name:** unique among all layouts (the pages here use a lowercase slug, with the id and
   the engine's constant);
+- **Reliability:** for each language the layout types, the reliability its JSON claims (`perfect`,
+  `production`, `experimental`; [robot.md](../robot.md#reliability)), the same as the JSON
+  (`cargo test --test robot` checks);
 - **Abbreviations** and shorthands (KTS for Korean 2-set);
 - **Designer:** the original designer, an organization or a person;
 - **Maintainer:** who maintains it now (may be the designer);

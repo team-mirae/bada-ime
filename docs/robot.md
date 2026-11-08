@@ -60,7 +60,9 @@ the robot fails if the layout doesn't earn it:
 | `production` | every one of the language's 1,000 most common words, and at least **80%** of each other corpus |
 | `experimental` | none: typed and reported, never fails |
 
-The report's **Claims** table gives each layout's claim and what it earns. A layout may claim less
+The report's **Claims** table gives each layout's claim and what it earns. Each layout page states
+its claims in its metadata header, and the layouts README in its table; `pages_state_the_claims`
+(a fast test, also in debug builds) checks they match the JSON. A layout may claim less
 than it earns, never more. GitHub Actions (`.github/workflows/robot.yml`) runs the robot on every
 push to main and every pull request, and puts the report in the run's summary.
 

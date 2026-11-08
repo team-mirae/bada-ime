@@ -7,6 +7,7 @@
 | **Native script** | (none: symbols and emoji) |
 | **Short name** | English: Symbols · 한국어: 기호 · 日本語: 記号 |
 | **In-code name** | `symbols` (id 150, `layout::SYMBOLS`) |
+| **Reliability** | none: a search, it declares no language |
 | **Abbreviations** | — |
 | **Designer** | Min Jun Sung (Mirae Research). Emoji names: Unicode CLDR |
 | **Maintainer** | Mirae Research (미래 리서치) |

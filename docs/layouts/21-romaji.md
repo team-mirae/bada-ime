@@ -7,6 +7,7 @@
 | **Native script** | Japanese (kana) |
 | **Short name** | English: Japanese (Romaji) · 한국어: 로마자 일본어 · 日本語: ローマ字 |
 | **In-code name** | `romaji` (id 21, `layout::ROMAJI`) |
+| **Reliability** | Japanese (romaji): **production** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | romaji |
 | **Designer** | Romaji spelling as Japanese input methods use it (Hepburn and Kunrei forms). The input method: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |
