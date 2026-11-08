@@ -26,3 +26,27 @@ Key maps in the layout editor's JSON: `13-bada.json` (layout 13; the engine and 
 it), `14-3set-jis.json` (layout 14; the engine reads it as it is) and `kana-korean.json` (layout 19).
 
 Images: `python3 tools/render/export_png.py` (HHKB JIS). Interactive: open `tools/render/index.html`.
+
+## Layout metadata and maintainers
+
+Every layout page (`NNN-name.md`) opens with a metadata header, in whatever form its maintainer
+likes (the pages here use a table), giving:
+
+- **Name:** the full canonical name in English, Korean, Japanese and the layout's native script
+  language (more languages if the maintainer wants them);
+- **Short name:** a short human-readable name in the same languages;
+- **In-code name:** unique among all layouts (the pages here use a lowercase slug, with the id and
+  the engine's constant);
+- **Abbreviations** and shorthands (KTS for Korean 2-set);
+- **Designer:** the original designer, an organization or a person;
+- **Maintainer:** who maintains it now (may be the designer);
+- **Contact:** a working email for the maintainer, and optionally more.
+
+**Ownership.** The current maintainer owns the design decisions of their layout. If they don't
+respond within **90 days** to an email from an `@sjun.me` address or a repository admin, ownership
+passes to **Mirae Research**.
+
+The layouts in this repository as of 0.1.0 are maintained by Mirae Research, designer Min Jun Sung;
+where a layout builds on an earlier design (QWERTY, KS X 5002, JIS kana, 세벌식), its page names that
+design too.
+

@@ -1,5 +1,17 @@
 # JIS Bada (layout 13)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: JIS Bada · 한국어: JIS 바다 레이아웃 · 日本語: JIS バダレイアウト |
+| **Native script** | Korean (Hangul) |
+| **Short name** | English: bada · 한국어: 바다 · 日本語: バダ |
+| **In-code name** | `bada` (id 13, `layout::BADA`) |
+| **Abbreviations** | bada |
+| **Designer** | Min Jun Sung (Mirae Research) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/13-bada-dark.png">
   <img src="../images/layouts/13-bada-light.png" alt="JIS Bada (layout 13) on an HHKB JIS keyboard">

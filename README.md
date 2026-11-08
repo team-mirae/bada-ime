@@ -40,5 +40,8 @@ In a clone, tell a coding assistant: `Read docs/interactive-prompts/start.md and
 installs bada ime and then builds your dictionary with you
 ([docs/dictionary-contract.md](docs/dictionary-contract.md)): practically required if you type 초성.
 
+An example setup, an HHKB JIS with three henkan profiles on its thumb keys:
+[docs/examples/hhkb-profiles](docs/examples/hhkb-profiles/README.md).
+
 To learn your words from your own typing, type in [utils/learner-app](utils/learner-app/README.md)
 (a local page logging a plain text field) and have an assistant merge its export into your dictionary.

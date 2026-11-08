@@ -1,5 +1,17 @@
 # JIS Korean Roman (layout 18)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: Korean (Roman) · 한국어: 로마자 한국어 입력 · 日本語: ローマ字韓国語入力 |
+| **Native script** | Korean (Hangul) |
+| **Short name** | English: Korean (Roman) · 한국어: 로마자 한글 · 日本語: ローマ字ハングル |
+| **In-code name** | `korean-roman` (id 18, `layout::KOREAN_ROMAN`) |
+| **Abbreviations** | Korean Roman |
+| **Designer** | Spelling: the Revised Romanization of Korean (National Institute of Korean Language, 2000). The input method: Min Jun Sung (Mirae Research) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/18-korean-roman-dark.png">
   <img src="../images/layouts/18-korean-roman-light.png" alt="JIS Korean Roman (layout 18) on an HHKB JIS keyboard">

@@ -1,5 +1,17 @@
 # JIS QWERTY (layout 0)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: JIS QWERTY · 한국어: JIS 쿼티 · 日本語: JIS QWERTY配列 |
+| **Native script** | English (Latin) |
+| **Short name** | English: QWERTY · 한국어: 쿼티 · 日本語: QWERTY |
+| **In-code name** | `qwerty` (id 0, `layout::QWERTY`) |
+| **Abbreviations** | QWERTY |
+| **Designer** | QWERTY: Christopher Latham Sholes (1870s); its JIS keyboard form: JIS X 6002. Its bada ime form: Min Jun Sung (Mirae Research) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/00-qwerty-dark.png">
   <img src="../images/layouts/00-qwerty-light.png" alt="JIS QWERTY (layout 0) on an HHKB JIS keyboard">

@@ -230,3 +230,20 @@ fn symbols_and_unicode_on_real_data() {
     assert_eq!(d.search.unicode("u+ac00", 3)[0].0, "가");
 }
 
+
+#[test]
+fn colloquial_unicode_on_real_data() {
+    let d = data();
+    let texts = |q: &str| d.search.unicode(q, 6).into_iter().map(|x| x.0).collect::<Vec<_>>();
+    eprintln!("ju {:?} · joo {:?} · corporation {:?} · pyeong {:?} · pyung {:?} · kabu {:?} · yuubin {:?}",
+        texts("ju"), texts("joo"), texts("corporation"), texts("pyeong"), texts("pyung"), texts("kabu"), texts("yuubin"));
+    assert_eq!(texts("joo")[0], "㈜");
+    assert_eq!(texts("ju")[0], "㈜");
+    assert_eq!(texts("pyeong")[..2], ["평", "坪"]);
+    assert_eq!(texts("pyung")[..2], ["평", "坪"]);
+    assert_eq!(texts("kabu")[0], "㈱");
+    assert_eq!(texts("yuubin")[0], "〒");
+    // Symbols (150) doesn't offer them, so a profile with both lists each once
+    let all: Vec<String> = bada::search::TONES.iter().map(|t| t.to_string()).collect();
+    assert!(!d.search.symbols("joo", &all, 10).iter().any(|x| x.0 == "㈜"));
+}

@@ -1,0 +1,83 @@
+{
+  "format": "bada-settings/1",
+  "settings": {
+    "collect_choseong": true,
+    "default_muhenkan": 0,
+    "enabled": [
+      0,
+      13
+    ],
+    "fkeys": {
+      "F10": "13.qwerty-halfwidth",
+      "F6": "13.prediction-1",
+      "F7": "13.raw",
+      "F8": "13.hanja",
+      "F9": "13.qwerty-fullwidth"
+    },
+    "intercept_f": true,
+    "kana_in_profile": {
+      "henkan": "next-or-mac-kana",
+      "katakana": "next-or-mac-kana"
+    },
+    "profile_keys": {
+      "henkan": 458890,
+      "katakana": 458888
+    },
+    "profile_order": [
+      "mac-kana",
+      "henkan",
+      "katakana"
+    ],
+    "profiles": {
+      "henkan": {
+        "enabled": [
+          0,
+          20
+        ],
+        "f_keys": {
+          "intercept": true,
+          "keys": {
+            "F10": "20.halfwidth-latin",
+            "F6": "20.hiragana",
+            "F7": "20.katakana",
+            "F8": "20.halfwidth-katakana",
+            "F9": "20.fullwidth-latin"
+          }
+        }
+      },
+      "katakana": {
+        "enabled": [
+          150,
+          151
+        ],
+        "f_keys": {
+          "intercept": false,
+          "keys": {
+            "F10": "13.qwerty-halfwidth",
+            "F6": "21.hiragana",
+            "F7": "21.katakana",
+            "F8": "13.hanja",
+            "F9": "13.qwerty-fullwidth"
+          }
+        }
+      },
+      "mac-kana": {
+        "enabled": []
+      }
+    },
+    "script_forms": true,
+    "skin_tones": [
+      "none",
+      "light",
+      "medium-light",
+      "medium",
+      "medium-dark",
+      "dark"
+    ],
+    "use_profiles": true,
+    "weights": {
+      "13": 2,
+      "20": 2
+    }
+  }
+}

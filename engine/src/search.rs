@@ -31,6 +31,10 @@ pub struct Search {
     emoji: Vec<Item>,
     /// (code point, name lowercase) for every named character.
     unicode: Vec<(u32, String)>,
+    /// Colloquial names (unicode-aliases.tsv): code point, canonical name, its words and tags; in
+    /// the hand-written file's order.
+    aliases: Vec<(u32, String, Vec<String>)>,
+    alias_order: Vec<usize>,
 }
 
 fn words(s: &str) -> Vec<String> {
@@ -67,10 +71,15 @@ impl Search {
             s.emoji.push(Item { text: text.into(), name: name.into(), words: words(&format!("{name} {keys}")), tones });
         }
         for line in unicode.lines().filter(|l| !l.starts_with('#') && !l.is_empty()) {
-            if let Some((hex, name)) = line.split_once('\t') {
-                if let Ok(cp) = u32::from_str_radix(hex, 16) {
-                    s.unicode.push((cp, name.to_lowercase()));
-                }
+            let f: Vec<&str> = line.split('\t').collect();
+            let (Some(hex), Some(name)) = (f.first(), f.get(1)) else { continue };
+            let Ok(cp) = u32::from_str_radix(hex, 16) else { continue };
+            s.unicode.push((cp, name.to_lowercase()));
+            if let Some(canonical) = f.get(2).filter(|c| !c.is_empty()) {
+                let tags = f.get(3).copied().unwrap_or("");
+                let order: usize = f.get(4).and_then(|o| o.parse().ok()).unwrap_or(s.aliases.len());
+                s.aliases.push((cp, canonical.to_string(), words(&format!("{canonical} {tags}"))));
+                s.alias_order.push(order);
             }
         }
         s.unicode.sort_by_key(|u| u.0);   // `note` looks names up by code point
@@ -157,6 +166,14 @@ impl Search {
             return out;
         }
         let mut found: Vec<(u8, usize, u32)> = Vec::new();
+        // Colloquial names first (ju, joo → ㈜; pyeong → 평 坪), an exact one before the rest.
+        // Ranked: the canonical name typed, a tag typed whole, the rest; ties in the file's order.
+        for (i, (cp, canonical, w)) in self.aliases.iter().enumerate() {
+            if matches(&query, w) {
+                let rank = if *canonical == q { 0 } else if query.len() == 1 && w.iter().any(|x| x == query[0]) { 1 } else { 2 };
+                found.push((rank, self.alias_order[i], *cp));
+            }
+        }
         for (cp, name) in &self.unicode {
             // Cheap first: every query word must occur somewhere in the name.
             if !query.iter().all(|q| name.contains(q)) {
@@ -166,7 +183,7 @@ impl Search {
             if !matches(&query, &w) {
                 continue;
             }
-            let rank = if *name == q { 0 } else { 1 };
+            let rank = if *name == q { 0 } else { 3 };
             found.push((rank, name.len(), *cp));
         }
         found.sort();
@@ -189,7 +206,10 @@ impl Search {
             .binary_search_by_key(&cp, |u| u.0)
             .map(|i| self.unicode[i].1.as_str())
             .unwrap_or("");
-        format!("U+{cp:04X} {name}").trim_end().to_string()
+        match self.aliases.iter().find(|a| a.0 == cp) {
+            Some((_, canonical, _)) => format!("U+{cp:04X} {canonical} ({name})"),
+            None => format!("U+{cp:04X} {name}").trim_end().to_string(),
+        }
     }
 }
 
@@ -264,5 +284,19 @@ mod tests {
         assert_eq!(s.unicode("u+41", 5)[0].0, "A");
         assert_eq!(s.unicode("middle dot", 5)[0].0, "·");
         assert_eq!(s.unicode("face", 5)[0].0, "😀");   // `face` is hex too, but starts with a letter: a name
+    }
+
+    #[test]
+    fn colloquial_names_in_unicode_only() {
+        let s = Search::parse("", "", "321C\tPARENTHESIZED HANGUL CIEUC U\tjusikhoesa\tju joo jusik corporation\n3231\tPARENTHESIZED IDEOGRAPH STOCK\tkabushikigaisha\tkabu corporation\nD3C9\tHANGUL SYLLABLE PYEONG\tpyeong\tpyung tsubo area\n576A\tCJK UNIFIED IDEOGRAPH-576A\ttsubo\tpyeong pyung area\n");
+        let texts = |q: &str| s.unicode(q, 5).into_iter().map(|x| x.0).collect::<Vec<_>>();
+        assert_eq!(texts("ju")[0], "㈜");
+        assert_eq!(texts("joo"), ["㈜"]);
+        assert_eq!(texts("corporation"), ["㈜", "㈱"]);
+        assert_eq!(texts("pyeong"), ["평", "坪"]);
+        assert_eq!(texts("pyung"), ["평", "坪"]);
+        assert_eq!(s.unicode("ju", 1)[0].1, "U+321C jusikhoesa (parenthesized hangul cieuc u)");
+        // not a symbol: Symbols (150) doesn't offer them
+        assert!(s.symbols("joo", &[], 5).is_empty());
     }
 }

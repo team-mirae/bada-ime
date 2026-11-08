@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My bada Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one column; the three thumb keys → three profiles first, then the board, then F keys and details. */
+:root{
+  --bg:#f7fffc; --surface:#e9fff9; --border:#c9e6dc; --text:#1d3354; --muted:#4c6280;
+  --accent:#467599; --secondary:#9ed8b8; --alert:#d64045;
+  --cap:#ffffff; --cap-edge:#c9e6dc; --mod:#e2f4ee; --case:#d6ebe4;
+  --p1:#467599; --p2:#d64045; --p3:#3b8f6a;
+  --l-i:#2f6fb2; --l-f:#b5651d; --l-v:#2e7d52; --l-y:#7a4fb0; --l-k:#8a3b5c; --l-s:#5d6b78;
+  --body:"IBM Plex Sans","IBM Plex Sans KR","IBM Plex Sans JP",-apple-system,"Apple SD Gothic Neo","Hiragino Sans",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1b2e; --surface:#1d3354; --border:#2c4a72; --text:#e9fff9; --muted:#a9c3d6;
+  --accent:#7fa9c9; --secondary:#9ed8b8; --alert:#e8686c;
+  --cap:#22395c; --cap-edge:#2c4a72; --mod:#1a2e4b; --case:#132440;
+  --p1:#7fa9c9; --p2:#e8686c; --p3:#8fd1ae; --l-i:#8fbdf0; --l-f:#f0a868; --l-v:#7fd1a1; --l-y:#c4a3f0; --l-k:#ec97bb; --l-s:#a9b8c6; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0f1b2e; --surface:#1d3354; --border:#2c4a72; --text:#e9fff9; --muted:#a9c3d6;
+  --accent:#7fa9c9; --secondary:#9ed8b8; --alert:#e8686c;
+  --cap:#22395c; --cap-edge:#2c4a72; --mod:#1a2e4b; --case:#132440;
+  --p1:#7fa9c9; --p2:#e8686c; --p3:#8fd1ae; --l-i:#8fbdf0; --l-f:#f0a868; --l-v:#7fd1a1; --l-y:#c4a3f0; --l-k:#ec97bb; --l-s:#a9b8c6; color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 var(--body)}
+main{max-width:1040px;margin:0 auto;padding:32px 16px 48px;display:grid;gap:36px}
+h1{font-size:1.9rem;line-height:1.2;margin:0;font-weight:600;text-wrap:balance}
+h2{font-size:1.2rem;margin:0 0 4px;font-weight:600;text-wrap:balance}
+p{margin:0;max-width:68ch}
+.lede{color:var(--muted);margin-top:6px}
+.sub{color:var(--muted);font-size:.92rem}
+code,.mono{font-family:var(--mono);font-size:.88em}
+section{display:grid;gap:14px}
+.profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;display:grid;gap:10px;border-top:4px solid var(--pc)}
+.keys{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+kbd{font-family:var(--body);font-size:.95rem;background:var(--cap);border:1px solid var(--cap-edge);border-bottom-width:3px;border-radius:7px;padding:2px 8px;min-width:2em;text-align:center}
+.arrow{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--border);border-radius:999px;padding:2px 10px;font-size:.88rem;background:var(--bg)}
+.chip b{font-weight:600}
+.chip.w{border-color:var(--accent);color:var(--accent)}
+.pname{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+.label{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.board{background:var(--case);border:1px solid var(--border);border-radius:14px;padding:10px;overflow-x:auto}
+.board svg{display:block;width:100%;min-width:760px;height:auto}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-size:.9rem;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem;color:var(--muted)}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px}
+.tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem}
+th,td{padding:9px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+thead th{background:var(--surface);font-weight:600}
+tbody tr:last-child td{border-bottom:0}
+td.k{font-family:var(--mono);font-weight:500;width:56px}
+.off{color:var(--muted)}
+.warn{display:inline-block;margin-top:3px;font-size:.8rem;color:var(--alert)}
+.notes{display:grid;gap:10px}
+.note{border-left:4px solid var(--alert);background:var(--surface);border-radius:0 10px 10px 0;padding:10px 14px}
+.note.ok{border-left-color:var(--secondary)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.fact{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+.fact .v{font-weight:500}
+footer{color:var(--muted);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>My bada Setup</h1>
+    <p class="lede" id="lede"></p>
+  </header>
+
+  <section aria-labelledby="h-profiles">
+    <div>
+      <h2 id="h-profiles">Three thumb keys, three henkan profiles</h2>
+      <p class="sub">The HHKB's Fn layer turns かな and 英数 into a PC keyboard's 変換 and カタカナ; bada ime reads those at the HID level and gives each its own layouts.</p>
+    </div>
+    <div class="profiles" id="profiles"></div>
+  </section>
+
+  <section aria-labelledby="h-board">
+    <div>
+      <h2 id="h-board">The keyboard</h2>
+      <p class="sub" id="boardsub"></p>
+    </div>
+    <div class="bar" role="group" aria-label="What the keys type" id="modes"></div>
+    <p class="sub" id="modesub"></p>
+    <div class="board" id="board"></div>
+    <div class="legend">
+      <span><span class="sw" style="background:var(--p1)"></span>mac-kana (かな)</span>
+      <span><span class="sw" style="background:var(--p2)"></span>henkan (Fn + かな → 変換)</span>
+      <span><span class="sw" style="background:var(--p3)"></span>katakana (Fn + 英数 → カタカナ)</span>
+      <span><b style="color:var(--l-i)">ㄱ</b> initial · <b style="color:var(--l-f)">ㄱ</b> final · <b style="color:var(--l-v)">ㅏ</b> vowel · <b style="color:var(--l-k)">か</b> kana</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-fkeys">
+    <div>
+      <h2 id="h-fkeys">F6–F10 by profile</h2>
+      <p class="sub">On the HHKB, Fn + 6 … Fn + 0. An action only runs when its layout is among the profile's candidates.</p>
+    </div>
+    <div class="tablewrap"><table id="ftable"></table></div>
+  </section>
+
+  <section aria-labelledby="h-notes">
+    <h2 id="h-notes">Worth fixing</h2>
+    <div class="notes" id="notes"></div>
+  </section>
+
+  <section aria-labelledby="h-rest">
+    <h2 id="h-rest">Everything else</h2>
+    <div class="grid2" id="facts"></div>
+  </section>
+
+  <footer>From an HHKB Keymap Tool file (.hks) and a bada ime settings export (Settings → Backup → Export), rendered by <code>tools/setup-page/build.py</code>.</footer>
+</main>
+<script id="data" type="application/json">{"hhkb": {"DipSwitch": [true, false, false, false, true, false], "SettingFileVersion": "1.0.0.0", "SleepSetting": 0, "KeyboardLayout": 0, "ToolVersion": "2.0.1.0", "TypeNumber": "PD-KB820BS"}, "layers": {"Normal": {"ArrowRight": 79, "ArrowDown": 81, "ArrowLeft": 80, "FnR": 1, "AltRight": 230, "MetaRight": 231, "Lang1": 144, "Space": 44, "Lang2": 145, "MetaLeft": 227, "AltLeft": 226, "Backquote": 53, "FnL": 2, "ShiftRight": 229, "ArrowUp": 82, "IntlRo": 135, "Slash": 56, "Period": 55, "Comma": 54, "KeyM": 16, "KeyN": 17, "KeyB": 5, "KeyV": 25, "KeyC": 6, "KeyX": 27, "KeyZ": 29, "ShiftLeft": 225, "Backslash": 50, "Quote": 52, "Semicolon": 51, "KeyL": 15, "KeyK": 14, "KeyJ": 13, "KeyH": 11, "KeyG": 10, "KeyF": 9, "KeyD": 7, "KeyS": 22, "KeyA": 4, "ControlLeft": 224, "Enter": 40, "BracketRight": 48, "BracketLeft": 47, "KeyP": 19, "KeyO": 18, "KeyI": 12, "KeyU": 24, "KeyY": 28, "KeyT": 23, "KeyR": 21, "KeyE": 8, "KeyW": 26, "KeyQ": 20, "Tab": 43, "Backspace": 42, "IntlYen": 137, "Equal": 46, "Minus": 45, "Digit0": 39, "Digit9": 38, "Digit8": 37, "Digit7": 36, "Digit6": 35, "Digit5": 34, "Digit4": 33, "Digit3": 32, "Digit2": 31, "Digit1": 30, "Escape": 41}, "WithFn": {"ArrowRight": 228, "ArrowDown": 231, "ArrowLeft": 76, "FnR": 1, "AltRight": 230, "MetaRight": 231, "Lang1": 138, "Space": 44, "Lang2": 136, "MetaLeft": 227, "AltLeft": 226, "Backquote": 57, "FnL": 2, "ShiftRight": 0, "ArrowUp": 229, "IntlRo": 135, "Slash": 81, "Period": 78, "Comma": 77, "KeyM": 86, "KeyN": 87, "KeyB": 5, "KeyV": 25, "KeyC": 6, "KeyX": 27, "KeyZ": 29, "ShiftLeft": 225, "Backslash": 50, "Quote": 79, "Semicolon": 80, "KeyL": 75, "KeyK": 74, "KeyJ": 84, "KeyH": 85, "KeyG": 10, "KeyF": 235, "KeyD": 234, "KeyS": 233, "KeyA": 232, "ControlLeft": 0, "Enter": 88, "BracketRight": 48, "BracketLeft": 82, "KeyP": 72, "KeyO": 71, "KeyI": 70, "KeyU": 24, "KeyY": 28, "KeyT": 23, "KeyR": 21, "KeyE": 8, "KeyW": 26, "KeyQ": 0, "Tab": 57, "Backspace": 76, "IntlYen": 73, "Equal": 69, "Minus": 68, "Digit0": 67, "Digit9": 66, "Digit8": 65, "Digit7": 64, "Digit6": 63, "Digit5": 62, "Digit4": 61, "Digit3": 60, "Digit2": 59, "Digit1": 58, "Escape": 102}}, "bada": {"collect_choseong": true, "default_muhenkan": 0, "enabled": [0, 13], "fkeys": {"F10": "13.qwerty-halfwidth", "F6": "13.prediction-1", "F7": "13.raw", "F8": "13.hanja", "F9": "13.qwerty-fullwidth"}, "intercept_f": true, "kana_in_profile": {"henkan": "next-or-mac-kana", "katakana": "next-or-mac-kana"}, "profile_keys": {"henkan": 458890, "katakana": 458888}, "profile_order": ["mac-kana", "henkan", "katakana"], "profiles": {"henkan": {"enabled": [0, 20], "f_keys": {"intercept": true, "keys": {"F10": "20.halfwidth-latin", "F6": "20.hiragana", "F7": "20.katakana", "F8": "20.halfwidth-katakana", "F9": "20.fullwidth-latin"}}}, "katakana": {"enabled": [150, 151], "f_keys": {"intercept": false, "keys": {"F10": "13.qwerty-halfwidth", "F6": "21.hiragana", "F7": "21.katakana", "F8": "13.hanja", "F9": "13.qwerty-fullwidth"}}}, "mac-kana": {"enabled": []}}, "script_forms": true, "skin_tones": ["none", "light", "medium-light", "medium", "medium-dark", "dark"], "use_profiles": true, "weights": {"13": 2, "20": 2}}, "layouts": {"13": {"name": "Korean (bada)", "keys": {"Digit1": {"base": {"t": "ㅒ", "c": "v"}, "shift": {"t": "1", "c": "d"}}, "Digit2": {"base": {"t": "ㅆ", "c": "c"}, "shift": {"t": "2", "c": "d"}}, "Digit3": {"base": {"t": "ㅉ", "c": "i"}, "shift": {"t": "3", "c": "d"}}, "Digit4": {"base": {"t": "ㄲ", "c": "c"}, "shift": {"t": "4", "c": "d"}}, "Digit5": {"base": {"t": "ㄸ", "c": "i"}, "shift": {"t": "5", "c": "d"}}, "Digit6": {"base": {"t": "ㅟ", "c": "v"}, "shift": {"t": "6", "c": "d"}}, "Digit7": {"base": {"t": "ㅝ", "c": "v"}, "shift": {"t": "7", "c": "d"}}, "Digit8": {"base": {"t": "ㅠ", "c": "v"}, "shift": {"t": "8", "c": "d"}}, "Digit9": {"base": {"t": "ㅛ", "c": "v"}, "shift": {"t": "9", "c": "d"}}, "Digit0": {"base": {"t": "ㅘ", "c": "v"}, "shift": {"t": "0", "c": "d"}}, "Minus": {"base": {"t": "ㅙ", "c": "v"}, "shift": {"t": "-", "c": "s"}}, "Equal": {"base": {"t": "ㅞ", "c": "v"}, "shift": {"t": "^", "c": "s"}}, "IntlYen": {"base": {"t": "ㅂ", "c": "f"}, "shift": {"t": "ㄼ", "c": "f"}}, "BracketLeft": {"base": {"t": "ㅖ", "c": "v"}, "shift": {"t": "@", "c": "s"}}, "BracketRight": {"base": {"t": "ㅒ", "c": "v"}, "shift": {"t": "[", "c": "s"}}, "Semicolon": {"base": {"t": "ㄱ", "c": "f"}, "shift": {"t": "ㄲ", "c": "f"}}, "Quote": {"base": {"t": "ㅆ", "c": "c"}, "shift": {"t": ":", "c": "s"}}, "Backslash": {"base": {"t": "ㅃ/ㅄ", "c": "c", "r": ["i", "f"]}, "shift": {"t": "]", "c": "s"}}, "Comma": {"base": {"t": "ㅡ", "c": "v"}, "shift": {"t": ",", "c": "s"}}, "Period": {"base": {"t": "ㅗ", "c": "v"}, "shift": {"t": ".", "c": "s"}}, "Slash": {"base": {"t": "ㅜ", "c": "v"}, "shift": {"t": "/", "c": "s"}}, "IntlRo": {"base": {"t": "ㅢ", "c": "v"}, "shift": {"t": "\\", "c": "s"}}, "KeyQ": {"base": {"t": "ㅃ/ㅄ", "c": "c", "r": ["i", "f"]}, "shift": null}, "KeyW": {"base": {"t": "ㅌ", "c": "c"}, "shift": null}, "KeyE": {"base": {"t": "ㄴ", "c": "c"}, "shift": null}, "KeyR": {"base": {"t": "ㅅ", "c": "c"}, "shift": null}, "KeyT": {"base": {"t": "ㅍ", "c": "c"}, "shift": null}, "KeyY": {"base": {"t": "ㅚ", "c": "v"}, "shift": null}, "KeyU": {"base": {"t": "ㅕ", "c": "v"}, "shift": null}, "KeyI": {"base": {"t": "ㅑ", "c": "v"}, "shift": null}, "KeyO": {"base": {"t": "ㅔ", "c": "v"}, "shift": null}, "KeyP": {"base": {"t": "ㅐ", "c": "v"}, "shift": null}, "KeyA": {"base": {"t": "ㄷ", "c": "c"}, "shift": null}, "KeyS": {"base": {"t": "ㅈ", "c": "c"}, "shift": null}, "KeyD": {"base": {"t": "ㄱ", "c": "c"}, "shift": null}, "KeyF": {"base": {"t": "ㅇ", "c": "i"}, "shift": null}, "KeyG": {"base": {"t": "ㅁ", "c": "c"}, "shift": null}, "KeyH": {"base": {"t": "ㅏ", "c": "v"}, "shift": null}, "KeyJ": {"base": {"t": "ㅇ", "c": "f"}, "shift": {"t": "ㅁ", "c": "f"}}, "KeyK": {"base": {"t": "ㄴ", "c": "f"}, "shift": {"t": "ㄶ", "c": "f"}}, "KeyL": {"base": {"t": "ㄹ", "c": "f"}, "shift": {"t": "ㄺ", "c": "f"}}, "KeyZ": {"base": {"t": "ㅊ", "c": "c"}, "shift": null}, "KeyX": {"base": {"t": "ㅋ", "c": "c"}, "shift": null}, "KeyC": {"base": {"t": "ㄹ", "c": "c"}, "shift": null}, "KeyV": {"base": {"t": "ㅎ", "c": "c"}, "shift": null}, "KeyB": {"base": {"t": "ㅂ", "c": "c"}, "shift": null}, "KeyN": {"base": {"t": "ㅓ", "c": "v"}, "shift": null}, "KeyM": {"base": {"t": "ㅣ", "c": "v"}, "shift": null}}}, "20": {"name": "Japanese (Kana)", "keys": {"Digit1": {"base": {"t": "ぬ", "c": "k"}, "shift": null}, "Digit2": {"base": {"t": "ふ", "c": "k"}, "shift": null}, "Digit3": {"base": {"t": "あ", "c": "k"}, "shift": {"t": "ぁ", "c": "k"}}, "Digit4": {"base": {"t": "う", "c": "k"}, "shift": {"t": "ぅ", "c": "k"}}, "Digit5": {"base": {"t": "え", "c": "k"}, "shift": {"t": "ぇ", "c": "k"}}, "Digit6": {"base": {"t": "お", "c": "k"}, "shift": {"t": "ぉ", "c": "k"}}, "Digit7": {"base": {"t": "や", "c": "k"}, "shift": {"t": "ゃ", "c": "k"}}, "Digit8": {"base": {"t": "ゆ", "c": "k"}, "shift": {"t": "ゅ", "c": "k"}}, "Digit9": {"base": {"t": "よ", "c": "k"}, "shift": {"t": "ょ", "c": "k"}}, "Digit0": {"base": {"t": "わ", "c": "k"}, "shift": {"t": "を", "c": "k"}}, "Minus": {"base": {"t": "ほ", "c": "k"}, "shift": null}, "Equal": {"base": {"t": "へ", "c": "k"}, "shift": null}, "IntlYen": {"base": {"t": "ー", "c": "k"}, "shift": null}, "KeyQ": {"base": {"t": "た", "c": "k"}, "shift": null}, "KeyW": {"base": {"t": "て", "c": "k"}, "shift": null}, "KeyE": {"base": {"t": "い", "c": "k"}, "shift": {"t": "ぃ", "c": "k"}}, "KeyR": {"base": {"t": "す", "c": "k"}, "shift": null}, "KeyT": {"base": {"t": "か", "c": "k"}, "shift": null}, "KeyY": {"base": {"t": "ん", "c": "k"}, "shift": null}, "KeyU": {"base": {"t": "な", "c": "k"}, "shift": null}, "KeyI": {"base": {"t": "に", "c": "k"}, "shift": null}, "KeyO": {"base": {"t": "ら", "c": "k"}, "shift": null}, "KeyP": {"base": {"t": "せ", "c": "k"}, "shift": null}, "BracketLeft": {"base": {"t": "゛", "c": "k"}, "shift": null}, "BracketRight": {"base": {"t": "゜", "c": "k"}, "shift": {"t": "「", "c": "s"}}, "KeyA": {"base": {"t": "ち", "c": "k"}, "shift": null}, "KeyS": {"base": {"t": "と", "c": "k"}, "shift": null}, "KeyD": {"base": {"t": "し", "c": "k"}, "shift": null}, "KeyF": {"base": {"t": "は", "c": "k"}, "shift": null}, "KeyG": {"base": {"t": "き", "c": "k"}, "shift": null}, "KeyH": {"base": {"t": "く", "c": "k"}, "shift": null}, "KeyJ": {"base": {"t": "ま", "c": "k"}, "shift": null}, "KeyK": {"base": {"t": "の", "c": "k"}, "shift": null}, "KeyL": {"base": {"t": "り", "c": "k"}, "shift": null}, "Semicolon": {"base": {"t": "れ", "c": "k"}, "shift": null}, "Quote": {"base": {"t": "け", "c": "k"}, "shift": null}, "Backslash": {"base": {"t": "む", "c": "k"}, "shift": {"t": "」", "c": "s"}}, "KeyZ": {"base": {"t": "つ", "c": "k"}, "shift": {"t": "っ", "c": "k"}}, "KeyX": {"base": {"t": "さ", "c": "k"}, "shift": null}, "KeyC": {"base": {"t": "そ", "c": "k"}, "shift": null}, "KeyV": {"base": {"t": "ひ", "c": "k"}, "shift": null}, "KeyB": {"base": {"t": "こ", "c": "k"}, "shift": null}, "KeyN": {"base": {"t": "み", "c": "k"}, "shift": null}, "KeyM": {"base": {"t": "も", "c": "k"}, "shift": null}, "Comma": {"base": {"t": "ね", "c": "k"}, "shift": {"t": "、", "c": "s"}}, "Period": {"base": {"t": "る", "c": "k"}, "shift": {"t": "。", "c": "s"}}, "Slash": {"base": {"t": "め", "c": "k"}, "shift": {"t": "・", "c": "k"}}, "IntlRo": {"base": {"t": "ろ", "c": "k"}, "shift": null}}}, "0": {"name": "QWERTY", "keys": {"Digit1": {"base": {"t": "1", "c": "d"}, "shift": {"t": "!", "c": "s"}}, "Digit2": {"base": {"t": "2", "c": "d"}, "shift": {"t": "\"", "c": "s"}}, "Digit3": {"base": {"t": "3", "c": "d"}, "shift": {"t": "#", "c": "s"}}, "Digit4": {"base": {"t": "4", "c": "d"}, "shift": {"t": "$", "c": "s"}}, "Digit5": {"base": {"t": "5", "c": "d"}, "shift": {"t": "%", "c": "s"}}, "Digit6": {"base": {"t": "6", "c": "d"}, "shift": {"t": "&", "c": "s"}}, "Digit7": {"base": {"t": "7", "c": "d"}, "shift": {"t": "'", "c": "s"}}, "Digit8": {"base": {"t": "8", "c": "d"}, "shift": {"t": "(", "c": "s"}}, "Digit9": {"base": {"t": "9", "c": "d"}, "shift": {"t": ")", "c": "s"}}, "Digit0": {"base": {"t": "0", "c": "d"}, "shift": null}, "Minus": {"base": {"t": "-", "c": "s"}, "shift": {"t": "=", "c": "s"}}, "Equal": {"base": {"t": "^", "c": "s"}, "shift": {"t": "~", "c": "s"}}, "IntlYen": {"base": {"t": "¥", "c": "s"}, "shift": {"t": "|", "c": "s"}}, "BracketLeft": {"base": {"t": "@", "c": "s"}, "shift": {"t": "`", "c": "s"}}, "BracketRight": {"base": {"t": "[", "c": "s"}, "shift": {"t": "{", "c": "s"}}, "Semicolon": {"base": {"t": ";", "c": "s"}, "shift": {"t": "+", "c": "s"}}, "Quote": {"base": {"t": ":", "c": "s"}, "shift": {"t": "*", "c": "s"}}, "Backslash": {"base": {"t": "]", "c": "s"}, "shift": {"t": "}", "c": "s"}}, "Comma": {"base": {"t": ",", "c": "s"}, "shift": {"t": "<", "c": "s"}}, "Period": {"base": {"t": ".", "c": "s"}, "shift": {"t": ">", "c": "s"}}, "Slash": {"base": {"t": "/", "c": "s"}, "shift": {"t": "?", "c": "s"}}, "IntlRo": {"base": {"t": "\\", "c": "s"}, "shift": {"t": "_", "c": "s"}}, "KeyQ": {"base": {"t": "q", "c": "l"}, "shift": {"t": "Q", "c": "l"}}, "KeyW": {"base": {"t": "w", "c": "l"}, "shift": {"t": "W", "c": "l"}}, "KeyE": {"base": {"t": "e", "c": "l"}, "shift": {"t": "E", "c": "l"}}, "KeyR": {"base": {"t": "r", "c": "l"}, "shift": {"t": "R", "c": "l"}}, "KeyT": {"base": {"t": "t", "c": "l"}, "shift": {"t": "T", "c": "l"}}, "KeyY": {"base": {"t": "y", "c": "l"}, "shift": {"t": "Y", "c": "l"}}, "KeyU": {"base": {"t": "u", "c": "l"}, "shift": {"t": "U", "c": "l"}}, "KeyI": {"base": {"t": "i", "c": "l"}, "shift": {"t": "I", "c": "l"}}, "KeyO": {"base": {"t": "o", "c": "l"}, "shift": {"t": "O", "c": "l"}}, "KeyP": {"base": {"t": "p", "c": "l"}, "shift": {"t": "P", "c": "l"}}, "KeyA": {"base": {"t": "a", "c": "l"}, "shift": {"t": "A", "c": "l"}}, "KeyS": {"base": {"t": "s", "c": "l"}, "shift": {"t": "S", "c": "l"}}, "KeyD": {"base": {"t": "d", "c": "l"}, "shift": {"t": "D", "c": "l"}}, "KeyF": {"base": {"t": "f", "c": "l"}, "shift": {"t": "F", "c": "l"}}, "KeyG": {"base": {"t": "g", "c": "l"}, "shift": {"t": "G", "c": "l"}}, "KeyH": {"base": {"t": "h", "c": "l"}, "shift": {"t": "H", "c": "l"}}, "KeyJ": {"base": {"t": "j", "c": "l"}, "shift": {"t": "J", "c": "l"}}, "KeyK": {"base": {"t": "k", "c": "l"}, "shift": {"t": "K", "c": "l"}}, "KeyL": {"base": {"t": "l", "c": "l"}, "shift": {"t": "L", "c": "l"}}, "KeyZ": {"base": {"t": "z", "c": "l"}, "shift": {"t": "Z", "c": "l"}}, "KeyX": {"base": {"t": "x", "c": "l"}, "shift": {"t": "X", "c": "l"}}, "KeyC": {"base": {"t": "c", "c": "l"}, "shift": {"t": "C", "c": "l"}}, "KeyV": {"base": {"t": "v", "c": "l"}, "shift": {"t": "V", "c": "l"}}, "KeyB": {"base": {"t": "b", "c": "l"}, "shift": {"t": "B", "c": "l"}}, "KeyN": {"base": {"t": "n", "c": "l"}, "shift": {"t": "N", "c": "l"}}, "KeyM": {"base": {"t": "m", "c": "l"}, "shift": {"t": "M", "c": "l"}}}}, "150": {"name": "Symbols", "keys": {"Digit1": {"base": {"t": "1", "c": "d"}, "shift": {"t": "!", "c": "s"}}, "Digit2": {"base": {"t": "2", "c": "d"}, "shift": {"t": "\"", "c": "s"}}, "Digit3": {"base": {"t": "3", "c": "d"}, "shift": {"t": "#", "c": "s"}}, "Digit4": {"base": {"t": "4", "c": "d"}, "shift": {"t": "$", "c": "s"}}, "Digit5": {"base": {"t": "5", "c": "d"}, "shift": {"t": "%", "c": "s"}}, "Digit6": {"base": {"t": "6", "c": "d"}, "shift": {"t": "&", "c": "s"}}, "Digit7": {"base": {"t": "7", "c": "d"}, "shift": {"t": "'", "c": "s"}}, "Digit8": {"base": {"t": "8", "c": "d"}, "shift": {"t": "(", "c": "s"}}, "Digit9": {"base": {"t": "9", "c": "d"}, "shift": {"t": ")", "c": "s"}}, "Digit0": {"base": {"t": "0", "c": "d"}, "shift": null}, "Minus": {"base": {"t": "-", "c": "s"}, "shift": {"t": "=", "c": "s"}}, "Equal": {"base": {"t": "^", "c": "s"}, "shift": {"t": "~", "c": "s"}}, "IntlYen": {"base": {"t": "¥", "c": "s"}, "shift": {"t": "|", "c": "s"}}, "BracketLeft": {"base": {"t": "@", "c": "s"}, "shift": {"t": "`", "c": "s"}}, "BracketRight": {"base": {"t": "[", "c": "s"}, "shift": {"t": "{", "c": "s"}}, "Semicolon": {"base": {"t": ";", "c": "s"}, "shift": {"t": "+", "c": "s"}}, "Quote": {"base": {"t": ":", "c": "s"}, "shift": {"t": "*", "c": "s"}}, "Backslash": {"base": {"t": "]", "c": "s"}, "shift": {"t": "}", "c": "s"}}, "Comma": {"base": {"t": ",", "c": "s"}, "shift": {"t": "<", "c": "s"}}, "Period": {"base": {"t": ".", "c": "s"}, "shift": {"t": ">", "c": "s"}}, "Slash": {"base": {"t": "/", "c": "s"}, "shift": {"t": "?", "c": "s"}}, "IntlRo": {"base": {"t": "\\", "c": "s"}, "shift": {"t": "_", "c": "s"}}, "KeyQ": {"base": {"t": "q", "c": "l"}, "shift": null}, "KeyW": {"base": {"t": "w", "c": "l"}, "shift": null}, "KeyE": {"base": {"t": "e", "c": "l"}, "shift": null}, "KeyR": {"base": {"t": "r", "c": "l"}, "shift": null}, "KeyT": {"base": {"t": "t", "c": "l"}, "shift": null}, "KeyY": {"base": {"t": "y", "c": "l"}, "shift": null}, "KeyU": {"base": {"t": "u", "c": "l"}, "shift": null}, "KeyI": {"base": {"t": "i", "c": "l"}, "shift": null}, "KeyO": {"base": {"t": "o", "c": "l"}, "shift": null}, "KeyP": {"base": {"t": "p", "c": "l"}, "shift": null}, "KeyA": {"base": {"t": "a", "c": "l"}, "shift": null}, "KeyS": {"base": {"t": "s", "c": "l"}, "shift": null}, "KeyD": {"base": {"t": "d", "c": "l"}, "shift": null}, "KeyF": {"base": {"t": "f", "c": "l"}, "shift": null}, "KeyG": {"base": {"t": "g", "c": "l"}, "shift": null}, "KeyH": {"base": {"t": "h", "c": "l"}, "shift": null}, "KeyJ": {"base": {"t": "j", "c": "l"}, "shift": null}, "KeyK": {"base": {"t": "k", "c": "l"}, "shift": null}, "KeyL": {"base": {"t": "l", "c": "l"}, "shift": null}, "KeyZ": {"base": {"t": "z", "c": "l"}, "shift": null}, "KeyX": {"base": {"t": "x", "c": "l"}, "shift": null}, "KeyC": {"base": {"t": "c", "c": "l"}, "shift": null}, "KeyV": {"base": {"t": "v", "c": "l"}, "shift": null}, "KeyB": {"base": {"t": "b", "c": "l"}, "shift": null}, "KeyN": {"base": {"t": "n", "c": "l"}, "shift": null}, "KeyM": {"base": {"t": "m", "c": "l"}, "shift": null}}}, "151": {"name": "Unicode", "keys": {"Digit1": {"base": {"t": "1", "c": "d"}, "shift": {"t": "!", "c": "s"}}, "Digit2": {"base": {"t": "2", "c": "d"}, "shift": {"t": "\"", "c": "s"}}, "Digit3": {"base": {"t": "3", "c": "d"}, "shift": {"t": "#", "c": "s"}}, "Digit4": {"base": {"t": "4", "c": "d"}, "shift": {"t": "$", "c": "s"}}, "Digit5": {"base": {"t": "5", "c": "d"}, "shift": {"t": "%", "c": "s"}}, "Digit6": {"base": {"t": "6", "c": "d"}, "shift": {"t": "&", "c": "s"}}, "Digit7": {"base": {"t": "7", "c": "d"}, "shift": {"t": "'", "c": "s"}}, "Digit8": {"base": {"t": "8", "c": "d"}, "shift": {"t": "(", "c": "s"}}, "Digit9": {"base": {"t": "9", "c": "d"}, "shift": {"t": ")", "c": "s"}}, "Digit0": {"base": {"t": "0", "c": "d"}, "shift": null}, "Minus": {"base": {"t": "-", "c": "s"}, "shift": {"t": "=", "c": "s"}}, "Equal": {"base": {"t": "^", "c": "s"}, "shift": {"t": "~", "c": "s"}}, "IntlYen": {"base": {"t": "¥", "c": "s"}, "shift": {"t": "|", "c": "s"}}, "BracketLeft": {"base": {"t": "@", "c": "s"}, "shift": {"t": "`", "c": "s"}}, "BracketRight": {"base": {"t": "[", "c": "s"}, "shift": {"t": "{", "c": "s"}}, "Semicolon": {"base": {"t": ";", "c": "s"}, "shift": {"t": "+", "c": "s"}}, "Quote": {"base": {"t": ":", "c": "s"}, "shift": {"t": "*", "c": "s"}}, "Backslash": {"base": {"t": "]", "c": "s"}, "shift": {"t": "}", "c": "s"}}, "Comma": {"base": {"t": ",", "c": "s"}, "shift": {"t": "<", "c": "s"}}, "Period": {"base": {"t": ".", "c": "s"}, "shift": {"t": ">", "c": "s"}}, "Slash": {"base": {"t": "/", "c": "s"}, "shift": {"t": "?", "c": "s"}}, "IntlRo": {"base": {"t": "\\", "c": "s"}, "shift": {"t": "_", "c": "s"}}, "KeyQ": {"base": {"t": "q", "c": "l"}, "shift": null}, "KeyW": {"base": {"t": "w", "c": "l"}, "shift": null}, "KeyE": {"base": {"t": "e", "c": "l"}, "shift": null}, "KeyR": {"base": {"t": "r", "c": "l"}, "shift": null}, "KeyT": {"base": {"t": "t", "c": "l"}, "shift": null}, "KeyY": {"base": {"t": "y", "c": "l"}, "shift": null}, "KeyU": {"base": {"t": "u", "c": "l"}, "shift": null}, "KeyI": {"base": {"t": "i", "c": "l"}, "shift": null}, "KeyO": {"base": {"t": "o", "c": "l"}, "shift": null}, "KeyP": {"base": {"t": "p", "c": "l"}, "shift": null}, "KeyA": {"base": {"t": "a", "c": "l"}, "shift": null}, "KeyS": {"base": {"t": "s", "c": "l"}, "shift": null}, "KeyD": {"base": {"t": "d", "c": "l"}, "shift": null}, "KeyF": {"base": {"t": "f", "c": "l"}, "shift": null}, "KeyG": {"base": {"t": "g", "c": "l"}, "shift": null}, "KeyH": {"base": {"t": "h", "c": "l"}, "shift": null}, "KeyJ": {"base": {"t": "j", "c": "l"}, "shift": null}, "KeyK": {"base": {"t": "k", "c": "l"}, "shift": null}, "KeyL": {"base": {"t": "l", "c": "l"}, "shift": null}, "KeyZ": {"base": {"t": "z", "c": "l"}, "shift": null}, "KeyX": {"base": {"t": "x", "c": "l"}, "shift": null}, "KeyC": {"base": {"t": "c", "c": "l"}, "shift": null}, "KeyV": {"base": {"t": "v", "c": "l"}, "shift": null}, "KeyB": {"base": {"t": "b", "c": "l"}, "shift": null}, "KeyN": {"base": {"t": "n", "c": "l"}, "shift": null}, "KeyM": {"base": {"t": "m", "c": "l"}, "shift": null}}}}}</script>
+<script>
+"use strict";
+const D = JSON.parse(document.getElementById("data").textContent);
+const B = D.bada;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+const LAYOUTS = { 0: "QWERTY", 10: "Korean (2-set)", 11: "Korean (legacy-korean)", 12: "Korean (legacy-moonshot)", 13: "Korean (bada)",
+  14: "Korean (3-set JIS)", 18: "Korean (Roman)", 19: "Korean (Kana)", 20: "Japanese (Kana)", 21: "Japanese (Romaji)", 150: "Symbols", 151: "Unicode" };
+const ACTIONS = { "prediction-1": "1st prediction", raw: "Raw jamo", hanja: "Hanja", "qwerty-fullwidth": "QWERTY, full-width",
+  "qwerty-halfwidth": "QWERTY, half-width", hiragana: "Hiragana", katakana: "Katakana", "halfwidth-katakana": "Half-width katakana",
+  "fullwidth-latin": "Full-width Latin", "halfwidth-latin": "Half-width Latin" };
+const PROFILES = [
+  { name: "mac-kana", key: "かな", keys: ["かな"], color: "var(--p1)" },
+  { name: "henkan", key: "変換", keys: ["Fn", "+", "かな"], color: "var(--p2)" },
+  { name: "katakana", key: "カタカナ", keys: ["Fn", "+", "英数"], color: "var(--p3)" },
+];
+const HID = { 0x8A: "変換 (HID 0x8A)", 0x88: "カタカナ (HID 0x88)" };
+
+// a profile's candidates and F keys, links followed as the engine does
+function candidates(name) {
+  let at = name;
+  for (let i = 0; i < 3; i++) {
+    const p = (B.profiles || {})[at];
+    if (p && p.link) { at = p.link; continue; }
+    if (at === "mac-kana" || !p) return at === "mac-kana" || !p && name === "mac-kana" ? B.enabled : B.enabled;
+    return p.enabled || [];
+  }
+  return B.enabled;
+}
+function fkeys(name) {
+  const own = name !== "mac-kana" && B.profiles && B.profiles[name] && B.profiles[name].f_keys;
+  return own ? { own: true, intercept: own.intercept, keys: own.keys || {} } : { own: false, intercept: B.intercept_f, keys: B.fkeys || {} };
+}
+
+$("lede").textContent = `${D.hhkb.TypeNumber} (HHKB Professional HYBRID Type-S, JIS) with bada ime 0.1.0. Henkan profiles ${B.use_profiles ? "on" : "off"}; muhenkan is ${LAYOUTS[B.default_muhenkan]} on 英数.`;
+
+// ---- profile cards
+$("profiles").innerHTML = PROFILES.map(p => {
+  const c = candidates(p.name), f = fkeys(p.name);
+  const recorded = p.name === "mac-kana" ? "the かな key" : HID[(B.profile_keys || {})[p.name] - 0x70000] || "not recorded";
+  const kana = p.name === "mac-kana" ? "next menu entry (⇧: previous)" : ({ "next-or-mac-kana": "next entry if there's a menu, else back to かな's profile", "mac-kana": "back to かな's profile", cycle: "cycle profiles", henkan: "to 変換's profile", katakana: "to カタカナ's profile", muhenkan: "leave henkan" }[(B.kana_in_profile || {})[p.name] || "next-or-mac-kana"]);
+  return `<article class="card" style="--pc:${p.color}" aria-label="${esc(p.key)} profile">
+    <div class="keys">${p.keys.map(k => k === "+" ? `<span class="arrow">+</span>` : `<kbd>${esc(k)}</kbd>`).join("")}
+      ${p.name === "mac-kana" ? "" : `<span class="arrow">→</span><kbd>${esc(p.key)}</kbd>`}</div>
+    <div class="pname">profile-${p.name} · bada reads ${esc(recorded)}</div>
+    <div><div class="label">Candidates</div><div class="chips">${c.map(id => {
+      const w = (B.weights || {})[id];
+      return `<span class="chip${w ? " w" : ""}"><b>${esc(LAYOUTS[id] || id)}</b> <span class="mono">${id}</span>${w ? ` ×${w}` : ""}</span>`;
+    }).join("")}</div></div>
+    <div><div class="label">F keys</div><div>${f.own ? "Its own" : "かな's"}: ${f.intercept ? "intercepted" : "passed to the app"}</div></div>
+    <div><div class="label">かな here</div><div>${esc(kana)}</div></div>
+  </article>`;
+}).join("");
+
+// ---- keyboard (HHKB JIS geometry, tools/render/keyboards.js)
+const NAME = { 0: "", 1: "Fn", 2: "Fn", 40: "Return", 41: "Esc", 42: "Delete", 43: "Tab", 44: "", 45: "-", 46: "^", 47: "@", 48: "[", 50: "]", 51: ";", 52: ":",
+  53: "半角/全角", 54: ",", 55: ".", 56: "/", 57: "Caps", 70: "PrtSc", 71: "ScrLk", 72: "Pause", 73: "Ins", 74: "Home", 75: "PgUp", 76: "Del ⌦", 77: "End",
+  78: "PgDn", 79: "→", 80: "←", 81: "↓", 82: "↑", 84: "÷", 85: "×", 86: "−", 87: "+", 88: "Enter", 102: "Power", 135: "\\", 136: "カタカナ", 137: "¥",
+  138: "変換", 139: "無変換", 144: "かな", 145: "英数", 224: "Control", 225: "Shift", 226: "⌥", 227: "⌘", 228: "R Ctrl", 229: "Shift", 230: "⌥", 231: "⌘",
+  232: "Vol −", 233: "Vol +", 234: "Mute", 235: "Eject" };
+for (let i = 4; i <= 29; i++) NAME[i] = String.fromCharCode(61 + i);
+for (let i = 30; i <= 39; i++) NAME[i] = String((i - 29) % 10);
+for (let i = 58; i <= 69; i++) NAME[i] = "F" + (i - 57);
+const nm = c => NAME[c] ?? `0x${c.toString(16)}`;
+const row = (y, x0, keys) => { let x = x0; return keys.map(([c, w = 1]) => { const k = [c, x, y, w, 1]; x += w; return k; }); };
+const NUM = ["Digit1","Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0","Minus","Equal","IntlYen"].map(c => [c]);
+const Q = ["KeyQ","KeyW","KeyE","KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP","BracketLeft","BracketRight"].map(c => [c]);
+const A = ["KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Backslash"].map(c => [c]);
+const Z = ["KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM","Comma","Period","Slash","IntlRo"].map(c => [c]);
+const KEYS = [
+  ...row(0, 0, [["Escape"], ...NUM, ["Backspace"]]),
+  ...row(1, 0, [["Tab", 1.5], ...Q]),
+  ...row(2, 0, [["ControlLeft", 1.75], ...A]),
+  ...row(3, 0, [["ShiftLeft", 2], ...Z, ["ArrowUp"], ["ShiftRight"]]),
+  ...row(4, 0, [["FnL"], [null, 0.25], ["Backquote"], ["AltLeft"], ["MetaLeft"], ["Lang2"], ["Space", 2.5], ["Lang1"], ["MetaRight"], ["AltRight"], ["FnR"], [null, 0.25], ["ArrowLeft"], ["ArrowDown"], ["ArrowRight"]]),
+  ["Enter", 13.5, 1, 1.5, 2],
+].filter(k => k[0]);
+const PROFILE_KEY = { Lang1: { n: "var(--p1)", f: "var(--p2)" }, Lang2: { f: "var(--p3)" } };
+const MODES = [
+  { id: "eisu", label: "英数", what: "muhenkan", ids: () => [B.default_muhenkan] },
+  { id: "mac-kana", label: "かな", what: "profile-mac-kana", ids: () => candidates("mac-kana") },
+  { id: "henkan", label: "Fn + かな → 変換", what: "profile-henkan", ids: () => candidates("henkan") },
+  { id: "katakana", label: "Fn + 英数 → カタカナ", what: "profile-katakana", ids: () => candidates("katakana") },
+  { id: "fn", label: "Fn layer", what: "the HHKB's own Fn layer" },
+];
+// The view to open: #eisu, #mac-kana, #henkan, #katakana or #fn in the link, else かな's.
+let mode = MODES.some(x => "#" + x.id === location.hash) ? location.hash.slice(1) : "mac-kana";
+addEventListener("hashchange", () => { const h = location.hash.slice(1); if (MODES.some(x => x.id === h)) { mode = h; draw(); } });
+const CLS = { i: "--l-i", c: "--l-i", f: "--l-f", v: "--l-v", y: "--l-y", k: "--l-k", l: "--text", d: "--l-s", s: "--l-s", x: "--alert" };
+const col = c => `var(${CLS[c] || "--text"})`;
+// Corners by script, as the renderer's combination boards: Latin top left, Korean bottom left, kana bottom right.
+const slotOf = id => id === 20 ? "BR" : (id < 10 || id === 18 || id === 21 || id >= 150) ? "TL" : "BL";
+function enterPath(x, y, U, G) {   // ISO Return: 1.5u on the Q row, 1.25u on the A row
+  const r = 7, x0 = x + G, x1 = x + 0.25 * U + G, x2 = x + 1.5 * U - G, y0 = y + G, ym = y + U - G, y2 = y + 2 * U - G;
+  return `M${x0 + r},${y0}H${x2 - r}Q${x2},${y0} ${x2},${y0 + r}V${y2 - r}Q${x2},${y2} ${x2 - r},${y2}H${x1 + r}Q${x1},${y2} ${x1},${y2 - r}V${ym}H${x0 + r}Q${x0},${ym} ${x0},${ym - r}V${y0 + r}Q${x0},${y0} ${x0 + r},${y0}Z`;
+}
+function draw() {
+  const U = 66, P = 12, G = 3, W = 15 * U + P * 2, H = 5 * U + P * 2;
+  const L = D.layers.Normal, F = D.layers.WithFn, m = MODES.find(x => x.id === mode);
+  const ids = m.ids ? m.ids().filter(id => D.layouts[id]) : [];
+  // one layout per corner (Symbols and Unicode share the Latin one)
+  const slots = {};
+  for (const id of ids) { const sl = slotOf(id); if (!slots[sl]) slots[sl] = id; }
+  const single = Object.keys(slots).length === 1;
+  const font = 'font-family="IBM Plex Sans, IBM Plex Sans KR, IBM Plex Sans JP, sans-serif"';
+  const T = (x, y, t, size, c, anchor = "start", extra = "") => `<text x="${x}" y="${y}" font-size="${size}" fill="${c}" text-anchor="${anchor}" ${font} ${extra}>${esc(t)}</text>`;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="HHKB JIS, ${esc(m.label)}"><title>HHKB JIS: ${esc(m.label)}</title>`;
+  for (const [code, kx, ky, kw, kh] of KEYS) {
+    const x = P + kx * U, y = P + ky * U, w = kw * U, h = kh * U;
+    const xi = x + G, yi = y + G, wi = w - 2 * G, hi = h - 2 * G;
+    const pk = PROFILE_KEY[code];
+    const stroke = pk ? (mode === "henkan" ? pk.f && code === "Lang1" ? pk.f : pk.n || pk.f : mode === "katakana" ? (code === "Lang2" ? pk.f : pk.n || pk.f) : pk.n || pk.f) : "var(--cap-edge)";
+    const layoutKey = ids.length && D.layouts[ids[0]].keys[code] !== undefined;
+    const fill = /Shift|Control|Alt|Meta|Fn|Tab|Escape|Backspace|Enter|Backquote|Lang|Arrow|Space/.test(code) ? "var(--mod)" : "var(--cap)";
+    s += code === "Enter"
+      ? `<path d="${enterPath(x, y, U, G)}" fill="${fill}" stroke="var(--cap-edge)"/>`
+      : `<rect x="${xi}" y="${yi}" width="${wi}" height="${hi}" rx="7" fill="${fill}" stroke="${stroke}" stroke-width="${pk ? 3 : 1}"/>`;
+    if (mode === "fn") {
+      const fn = F[code] || L[code], changed = F[code] !== undefined && F[code] !== L[code] && F[code] !== 0;
+      const label = code === "Enter" ? nm(F.Enter || 40) : nm(fn ?? 0);
+      s += T(code === "Enter" ? x + 0.75 * U : xi + wi / 2, code === "Enter" ? y + U / 2 + 4 : yi + hi - 12, label, label.length <= 2 ? 19 : 11.5,
+        changed ? (pk ? pk.f : "var(--accent)") : "var(--muted)", "middle", changed ? 'font-weight="600"' : "");
+      continue;
+    }
+    if (!layoutKey) {   // keys no layout reads: what the keymap sends
+      const label = code === "Enter" ? "Return" : nm(L[code] ?? 0);
+      s += T(code === "Enter" ? x + 0.75 * U : xi + wi / 2, code === "Enter" ? y + U / 2 + 4 : yi + hi - 12, label, label.length <= 2 ? 17 : 11.5, "var(--muted)", "middle");
+      continue;
+    }
+    const shown = new Set();
+    for (const [slot, id] of Object.entries(slots)) {
+      const k = D.layouts[id].keys[code]; if (!k) continue;
+      let b = k.base, sh = k.shift;
+      if (b && sh && b.t === sh.t) sh = null;
+      const letter = b && b.c === "l" && /^[a-z]$/i.test(b.t);
+      if (single || slot === "TL") {
+        if (letter) { s += T(xi + 9, yi + (single ? hi - 12 : 22), b.t.toUpperCase(), single ? 20 : 15, col("l")); continue; }
+        if (sh && !(single && sh.c === "y")) s += T(xi + 9, yi + 18, sh.t, 12, col(sh.c));
+        if (b) s += T(xi + 9, yi + (single ? hi - 12 : 34), b.t.split("/")[0], single && b.t.length < 3 ? 20 : 12, col(b.r ? b.r[0] : b.c));
+        if (b && b.r) s += T(xi + wi - 8, yi + hi / 2 + 5, b.t.split("/")[1], 12, col(b.r[1]), "end", 'text-decoration="underline"');
+      } else if (slot === "BL") {
+        if (b && !shown.has(b.t)) s += T(xi + 9, yi + hi - 11, b.t.split("/")[0], b.t.length > 3 ? 13 : 19, col(b.r ? b.r[0] : b.c));
+        if (b && b.r) s += T(xi + 32, yi + hi - 11, b.t.split("/")[1], 11, col(b.r[1]), "start", 'text-decoration="underline"');
+        else if (sh && ["f", "v", "i", "c"].includes(sh.c)) s += T(xi + 32, yi + hi - 27, sh.t, 11, col(sh.c));
+      } else {   // BR: kana
+        if (b) s += T(xi + wi - 8, yi + hi - 11, b.t, 15, col(b.c), "end");
+        if (sh && sh.c === "k") s += T(xi + wi - 8, yi + hi - 30, sh.t, 10.5, col(sh.c), "end");
+      }
+      if (b) shown.add(b.t);
+    }
+  }
+  $("board").innerHTML = s + "</svg>";
+  $("modes").innerHTML = MODES.map(x => `<button data-mode="${x.id}" aria-pressed="${x.id === mode}">${esc(x.label)}</button>`).join("");
+  $("modesub").textContent = mode === "fn" ? "What each key sends with Fn held (HHKB Keymap Tool); the changed keys are coloured." :
+    `${m.what}: ${ids.map(id => D.layouts[id].name).join(" + ")}${ids.some(id => id >= 150) ? " (the keys spell a search)" : ""}. ⇧ legends at the top; ⇧ on a number or symbol key types its JIS character.`;
+}
+$("modes").addEventListener("click", e => { const b = e.target.closest("button[data-mode]"); if (b) { mode = b.dataset.mode; try { history.replaceState(null, "", "#" + mode); } catch (_) {} draw(); } });
+const dip = (D.hhkb.DipSwitch || []).map((on, i) => on ? i + 1 : null).filter(Boolean);
+$("boardsub").textContent = `HHKB Keymap Tool ${D.hhkb.ToolVersion}, DIP switches ${dip.join(" and ")} on (1 on, 2 off: Mac mode). Pick what to show; the outlined keys are the three profile keys.`;
+draw();
+
+// ---- F keys
+const fcell = (p, k) => {
+  const f = fkeys(p.name);
+  if (!f.intercept) return `<span class="off">to the app</span>`;
+  const b = f.keys[k];
+  if (!b || b === "swallow") return `<span class="off">nothing</span>`;
+  if (b === "pass") return `<span class="off">to the app</span>`;
+  const [m, a] = b.split(".");
+  const active = candidates(p.name).includes(Number(m));
+  return `${esc(ACTIONS[a] || a)} <span class="mono off">${esc(LAYOUTS[m] || m)}</span>${active ? "" : `<br><span class="warn">does nothing here: ${esc(LAYOUTS[m] || m)} isn't a candidate</span>`}`;
+};
+$("ftable").innerHTML = `<thead><tr><th scope="col">Key</th>${PROFILES.map(p => `<th scope="col">${esc(p.key)} <span class="pname">${p.name}</span>${fkeys(p.name).own ? "" : ""}</th>`).join("")}</tr></thead><tbody>` +
+  ["F6", "F7", "F8", "F9", "F10"].map(k => `<tr><td class="k">${k}</td>${PROFILES.map(p => `<td>${fcell(p, k)}</td>`).join("")}</tr>`).join("") + "</tbody>";
+
+// ---- notes: what doesn't take effect
+const notes = [];
+for (const p of PROFILES) {
+  const f = fkeys(p.name);
+  if (!f.intercept) continue;
+  for (const [k, b] of Object.entries(f.keys)) {
+    const m = Number(b.split(".")[0]);
+    if (!Number.isNaN(m) && !candidates(p.name).includes(m))
+      notes.push(`<strong>${esc(p.key)}'s ${k}</strong> is bound to <code>${esc(b)}</code>, but ${esc(LAYOUTS[m])} isn't among ${esc(p.key)}'s candidates, so it does nothing. ${m === 21 && candidates(p.name).includes(20) ? `<code>20.${esc(b.split(".")[1])}</code> would work.` : ""}`);
+  }
+}
+const used = new Set(PROFILES.flatMap(p => candidates(p.name)));
+for (const [id, w] of Object.entries(B.weights || {}))
+  if (!used.has(Number(id))) notes.push(`The <strong>×${w}</strong> weight on ${esc(LAYOUTS[id])} (${id}) has no effect: no profile uses it.`);
+const kata = fkeys("katakana");
+if (kata.own && !kata.intercept) notes.push(`カタカナ's own F keys are <strong>not intercepted</strong>, so F6–F10 go to the app there; its bindings are kept for when you turn it on.`);
+$("notes").innerHTML = notes.length ? notes.map((n, i) => `<div class="note${n.includes("not intercepted") ? " ok" : ""}">${n}</div>`).join("") : `<div class="note ok">Everything set here takes effect.</div>`;
+
+// ---- the rest
+const facts = [
+  ["Muhenkan (英数)", LAYOUTS[B.default_muhenkan]],
+  ["Script forms", B.script_forms ? "On: ⇧Tab gives −1 hiragana, −2 katakana" : "Off"],
+  ["Emoji skin tones", (B.skin_tones || []).join(", ")],
+  ["かな in other profiles", "Next entry if there's a menu, else back to かな's (both)"],
+  ["Cycle order", (B.profile_order || []).join(" → ")],
+  ["초성 diagnostics", B.collect_choseong ? "Collecting (counts only)" : "Off"],
+];
+$("facts").innerHTML = facts.map(([k, v]) => `<div class="fact"><div class="label">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join("");
+</script>
+</body>
+</html>

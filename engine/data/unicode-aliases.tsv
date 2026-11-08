@@ -1,0 +1,124 @@
+# Colloquial names for layout 151 Unicode (docs/layouts/151-unicode.md): character, canonical name, tags (spaces).
+# Hand-written; Korean and Japanese names romanized (several spellings), English glosses. Merged into
+# unicode-names.tsv by tools/build_unicode_data.py.
+㈜	jusikhoesa	ju joo jusik corporation corp inc company kk
+㈔	sadanbeobin	sa sadan beobin association incorporated
+㈝	ojeon	am morning ojeon
+㈞	ohu	pm afternoon ohu
+㉿	kseu pyosi	ks korean standard kspyosi
+평	pyeong	pyung tsubo area unit
+坪	tsubo	pyeong pyung tsubo area unit
+㎡	jegopmiteo	square meter m2 jegop heibei
+℃	seopssi	celsius degree doo do sesshi
+※	chamgopyo	chamgo note komejirushi kome
+·	gaundetjeom	gaunde gaundetjeom middle dot
+〈	hothwasalgwalho	angle bracket hwasal
+《	gyeophwasalgwalho	double angle bracket book title gyeop
+「	natpyo	nat kagikakko kakko quote
+『	gyeopnatpyo	gyeop nat nijuukagi quote
+…	maljurimpyo	maljurim ellipsis
+～	mulgyeolpyo	mulgyeol wave nami tilde
+㉠	circled giyeok	giyeok dongeuramimeun circled
+㈀	parenthesized giyeok	giyeok gwalho parenthesized
+㉡	circled nieun	nieun dongeuramimeun circled
+㈁	parenthesized nieun	nieun gwalho parenthesized
+㉢	circled digeut	digeut dongeuramimeun circled
+㈂	parenthesized digeut	digeut gwalho parenthesized
+㉣	circled rieul	rieul dongeuramimeun circled
+㈃	parenthesized rieul	rieul gwalho parenthesized
+㉤	circled mieum	mieum dongeuramimeun circled
+㈄	parenthesized mieum	mieum gwalho parenthesized
+㉥	circled bieup	bieup dongeuramimeun circled
+㈅	parenthesized bieup	bieup gwalho parenthesized
+㉦	circled siot	siot dongeuramimeun circled
+㈆	parenthesized siot	siot gwalho parenthesized
+㉧	circled ieung	ieung dongeuramimeun circled
+㈇	parenthesized ieung	ieung gwalho parenthesized
+㉨	circled jieut	jieut dongeuramimeun circled
+㈈	parenthesized jieut	jieut gwalho parenthesized
+㉩	circled chieut	chieut dongeuramimeun circled
+㈉	parenthesized chieut	chieut gwalho parenthesized
+㉪	circled kieuk	kieuk dongeuramimeun circled
+㈊	parenthesized kieuk	kieuk gwalho parenthesized
+㉫	circled tieut	tieut dongeuramimeun circled
+㈋	parenthesized tieut	tieut gwalho parenthesized
+㉬	circled pieup	pieup dongeuramimeun circled
+㈌	parenthesized pieup	pieup gwalho parenthesized
+㉭	circled hieut	hieut dongeuramimeun circled
+㈍	parenthesized hieut	hieut gwalho parenthesized
+㉮	circled ga	ga circled
+㈎	parenthesized ga	ga gwalho parenthesized
+㉯	circled na	na circled
+㈏	parenthesized na	na gwalho parenthesized
+㉰	circled da	da circled
+㈐	parenthesized da	da gwalho parenthesized
+㉱	circled ra	ra circled
+㈑	parenthesized ra	ra gwalho parenthesized
+㉲	circled ma	ma circled
+㈒	parenthesized ma	ma gwalho parenthesized
+㉳	circled ba	ba circled
+㈓	parenthesized ba	ba gwalho parenthesized
+㉴	circled sa	sa circled
+㈔	parenthesized sa	sa gwalho parenthesized
+㉵	circled a	a circled
+㉶	circled ja	ja circled
+㈖	parenthesized ja	ja gwalho parenthesized
+㉷	circled cha	cha circled
+㈗	parenthesized cha	cha gwalho parenthesized
+㉸	circled ka	ka circled
+㈘	parenthesized ka	ka gwalho parenthesized
+㉹	circled ta	ta circled
+㈙	parenthesized ta	ta gwalho parenthesized
+㉺	circled pa	pa circled
+㈚	parenthesized pa	pa gwalho parenthesized
+㉻	circled ha	ha circled
+㈛	parenthesized ha	ha gwalho parenthesized
+㈱	kabushikigaisha	kabu kabushiki kk corporation corp inc company
+㈲	yuugengaisha	yuugen yugen yuuguen limited ltd
+㈶	zaidanhoujin	zaidan jaedan jaedanbeobin foundation
+㈳	shadanhoujin	shadan sadan sadanbeobin association society
+㍿	kabushikigaisha	kabushiki kk corporation
+〒	yuubin	yubin yuubin post postal zip
+〶	yuubin	yubin yuubin postal circled
+〃	onajiku	onaji ditto nonoten
+々	noma	kurikaeshi odoriji repeat dou
+ゝ	odoriji	kurikaeshi repeat hiragana
+ゞ	odoriji dakuten	kurikaeshi repeat voiced
+ヽ	odoriji	kurikaeshi repeat katakana
+ヾ	odoriji dakuten	kurikaeshi repeat voiced katakana
+ー	chouon	chouonpu bou long vowel
+〜	nami	namidasshu kara wave
+【	sumitsuki	sumikakko sumi bracket
+・	nakaguro	naka nakaten dot
+。	kuten	maru period
+、	touten	ten comma
+㊤	ue	ue top upper
+㊥	naka	naka middle
+㊦	shita	shita bottom lower
+㊧	hidari	hidari left
+㊨	migi	migi right
+㊙	maruhi	himitsu secret hi
+㊗	iwai	shuku congratulations celebration
+㋿	reiwa	era gengou
+㍻	heisei	era gengou
+㍼	shouwa	showa era gengou
+㍽	taishou	taisho era gengou
+㍾	meiji	era gengou
+㌔	kiro	kilo
+㌢	senchi	centi
+㍍	meetoru	metoru meter
+㌘	guramu	gram
+㌧	ton	ton
+㌦	doru	dollar
+㌣	sento	cent
+㍑	rittoru	litre liter
+㌫	paasento	pasento percent
+㍉	miri	milli
+㌻	peeji	page
+℡	denwa	tel telephone
+♨	onsen	hot spring spa
+〆	shime	close shime
+〼	masu	masu
+ゟ	yori	yori ligature
+ヿ	koto	koto ligature
+円	en	yen

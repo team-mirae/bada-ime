@@ -1,5 +1,17 @@
 # JIS Kana Korean (layout 19)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: Korean (Kana) · 한국어: 가나 한국어 입력 · 日本語: かな韓国語入力 |
+| **Native script** | Korean (Hangul) |
+| **Short name** | English: Korean (Kana) · 한국어: 가나 한글 · 日本語: かなハングル |
+| **In-code name** | `kana-korean` (id 19, `layout::KANA_KOREAN`) |
+| **Abbreviations** | Kana Korean |
+| **Designer** | Keys: JIS kana (JIS X 6002). Kana-to-Korean readings: Min Jun Sung (Mirae Research) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/19-kana-korean-dark.png">
   <img src="../images/layouts/19-kana-korean-light.png" alt="JIS Kana Korean (layout 19) on an HHKB JIS keyboard">

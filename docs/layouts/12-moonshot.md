@@ -1,5 +1,17 @@
 # JIS Moonshot (layout 12)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: JIS Moonshot · 한국어: JIS 문샷 · 日本語: JIS ムーンショット |
+| **Native script** | Korean (Hangul) |
+| **Short name** | English: Korean (legacy-moonshot) · 한국어: 문샷 · 日本語: ムーンショット |
+| **In-code name** | `legacy-moonshot` (id 12, `layout::LEGACY_MOONSHOT`) |
+| **Abbreviations** | Moonshot, legacy-moonshot |
+| **Designer** | Min Jun Sung (Mirae Research), from the JIS Moonshot input method (Mode A) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/12-moonshot-dark.png">
   <img src="../images/layouts/12-moonshot-light.png" alt="JIS Moonshot (layout 12) on an HHKB JIS keyboard">

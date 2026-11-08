@@ -1,5 +1,17 @@
 # JIS 3-set (layout 14)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: JIS 3-set (Sebeolsik JIS) · 한국어: 세벌식 JIS · 日本語: セボルシクJIS (JIS 3ボル式) |
+| **Native script** | Korean (Hangul) |
+| **Short name** | English: Korean (3-set JIS) · 한국어: 세벌식 JIS · 日本語: 3ボル式JIS |
+| **In-code name** | `k3s-jis` (id 14, `layout::K3S_JIS`) |
+| **Abbreviations** | K3S-J, K3S, 3-set |
+| **Designer** | 세벌식: 공병우 (Gong Byeong-u); 세벌식 순아래, the starting point: a later community design. Its JIS form: Min Jun Sung (Mirae Research) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/14-3set-jis-dark.png">
   <img src="../images/layouts/14-3set-jis-light.png" alt="JIS 3-set (layout 14) on an HHKB JIS keyboard">

@@ -1,5 +1,17 @@
 # JIS Romaji (layout 21)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: Japanese (Romaji) · 한국어: 일본어 로마자 입력 · 日本語: ローマ字入力 |
+| **Native script** | Japanese (kana) |
+| **Short name** | English: Japanese (Romaji) · 한국어: 로마자 일본어 · 日本語: ローマ字 |
+| **In-code name** | `romaji` (id 21, `layout::ROMAJI`) |
+| **Abbreviations** | romaji |
+| **Designer** | Romaji spelling as Japanese input methods use it (Hepburn and Kunrei forms). The input method: Min Jun Sung (Mirae Research) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/21-romaji-dark.png">
   <img src="../images/layouts/21-romaji-light.png" alt="JIS Romaji (layout 21) on an HHKB JIS keyboard">

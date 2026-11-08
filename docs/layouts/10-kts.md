@@ -1,5 +1,17 @@
 # JIS KTS (layout 10)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: Korean 2-set (KS X 5002), on JIS · 한국어: 두벌식 표준 자판 (KS X 5002), JIS 배열 · 日本語: 韓国語2ボル式 (KS X 5002)、JIS配列 |
+| **Native script** | Korean (Hangul) |
+| **Short name** | English: Korean (2-set) · 한국어: 두벌식 · 日本語: 2ボル式 |
+| **In-code name** | `kts` (id 10, `layout::KTS`) |
+| **Abbreviations** | KTS, 2-set, 2벌식 |
+| **Designer** | The Korean national standard KS X 5002 (formerly KS C 5715, 1982). Its JIS form in bada ime: Min Jun Sung (Mirae Research) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/10-kts-dark.png">
   <img src="../images/layouts/10-kts-light.png" alt="JIS KTS (layout 10) on an HHKB JIS keyboard">

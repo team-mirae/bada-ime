@@ -1,5 +1,17 @@
 # JIS Kana (layout 20)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: JIS Kana · 한국어: JIS 가나 자판 · 日本語: JISかな配列 |
+| **Native script** | Japanese (kana) |
+| **Short name** | English: Japanese (Kana) · 한국어: 가나 · 日本語: かな |
+| **In-code name** | `kana` (id 20, `layout::KANA`) |
+| **Abbreviations** | JIS kana |
+| **Designer** | JIS X 6002 (formerly JIS C 6233). Its bada ime form (kanji conversion, menus): Min Jun Sung (Mirae Research) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/20-kana-dark.png">
   <img src="../images/layouts/20-kana-light.png" alt="JIS Kana (layout 20) on an HHKB JIS keyboard">

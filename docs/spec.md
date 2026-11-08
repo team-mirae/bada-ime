@@ -99,6 +99,10 @@ Ids are `u32`. **Development / debug** ranges (re-numbered when merged to main):
 
 ### 5.2 Catalog
 
+Every layout's page in [layouts/](layouts/README.md) opens with its metadata (names in English,
+Korean, Japanese and its native script, short names, a unique in-code name, abbreviations, designer,
+maintainer, contact) and is governed by the maintainer rules there.
+
 | Id | Name | Display name | Kind | From |
 |---|---|---|---|---|
 | 0 | JIS QWERTY | `QWERTY` | muhenkan | JIS Korean / JIS Moonshot `A_QWERTY` (JIS English) |

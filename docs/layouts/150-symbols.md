@@ -1,5 +1,17 @@
 # Symbols (layout 150)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: Symbols · 한국어: 기호 · 日本語: 記号 |
+| **Native script** | (none: symbols and emoji) |
+| **Short name** | English: Symbols · 한국어: 기호 · 日本語: 記号 |
+| **In-code name** | `symbols` (id 150, `layout::SYMBOLS`) |
+| **Abbreviations** | — |
+| **Designer** | Min Jun Sung (Mirae Research). Emoji names: Unicode CLDR |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 | Id | Display name | Kind |
 |---|---|---|
 | 150 | `Symbols` | henkan, search (Mirae Research range 150–199) |

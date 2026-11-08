@@ -1,5 +1,17 @@
 # JIS Korean Legacy (layout 11)
 
+<!-- layout metadata -->
+| | |
+|---|---|
+| **Name** | English: JIS Korean Legacy · 한국어: JIS 코리안 레거시 · 日本語: JIS Korean レガシー |
+| **Native script** | Korean (Hangul) |
+| **Short name** | English: Korean (legacy-korean) · 한국어: JIS 코리안 · 日本語: JIS Korean |
+| **In-code name** | `legacy-korean` (id 11, `layout::LEGACY_KOREAN`) |
+| **Abbreviations** | JIS Korean, legacy-korean |
+| **Designer** | Min Jun Sung (Mirae Research), from the JIS Korean input method (Mode A) |
+| **Maintainer** | Mirae Research (미래 리서치) |
+| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/11-korean-legacy-dark.png">
   <img src="../images/layouts/11-korean-legacy-light.png" alt="JIS Korean Legacy (layout 11) on an HHKB JIS keyboard">
