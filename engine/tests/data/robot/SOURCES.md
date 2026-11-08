@@ -1,7 +1,7 @@
 # Robot corpora: sources
 
 Built by `engine/tools/build_robot_corpus.py` (download commands in the script); each file is an even
-sample of 400 sentences.
+sample of 400 sentences, except the `*-common.*` files: each language's 1,000 most common words.
 
 | File | Source | Terms |
 |---|---|---|
@@ -12,5 +12,8 @@ sample of 400 sentences.
 | `ko-common-voice.txt` | Common Voice Korean sentences (Mozilla) | CC0 1.0 |
 | `ja-law.tsv` | 日本国憲法, 民法 (明治二十九年法律第八十九号), e-Gov 法令API | 法令: 著作権法第13条, 権利の目的とならない著作物 |
 | `ja-tatoeba.tsv` | Tatoeba Japanese sentences (tatoeba.org) | CC BY 2.0 FR |
+| `en-common.txt` | The most common words of Tatoeba's English sentences | CC BY 2.0 FR |
+| `ko-common.txt` | The most common words in `engine/data/ko-words.tsv` | as `engine/data/LICENSE-corpora.txt` |
+| `ja-common.tsv` | The most common words of Tatoeba's Japanese sentences | CC BY 2.0 FR |
 
 Japanese readings: SudachiPy with SudachiDict core (Apache-2.0); only the readings, as text.

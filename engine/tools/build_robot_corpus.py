@@ -21,14 +21,19 @@ after it) per line: surface, tab, hiragana. Readings come from SudachiPy with Su
   tools/analysis/.venv/bin/python engine/tools/build_robot_corpus.py
 
 Each source is sampled evenly (fixed, no randomness) down to SENTENCES sentences.
+
+Each language also gets its COMMON most common words (`*-common.*`), which a layout claiming
+`production` must type every one of (docs/robot.md): English and Japanese counted on Tatoeba,
+Korean taken from engine/data/ko-words.tsv's counts.
 """
-import bz2, html, os, re, xml.etree.ElementTree as ET
+import bz2, collections, html, os, re, xml.etree.ElementTree as ET
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HERE, "cache", "robot")
 MOONSHOT = os.path.expanduser("~/Projects/jis-moonshot/corpora")
 OUT = os.path.join(HERE, "..", "tests", "data", "robot")
 SENTENCES = 400
+COMMON = 1000
 
 
 def sample(lines, n=SENTENCES):
@@ -76,13 +81,24 @@ def uk_law():
     return sample(sentences("\n".join(paras)))
 
 
-def tatoeba(lang):
+def tatoeba(lang, n=SENTENCES):
     out = []
     for line in bz2.open(os.path.join(MOONSHOT, f"{lang}_sentences.tsv.bz2"), "rt", encoding="utf-8"):
         parts = line.rstrip("\n").split("\t")
         if len(parts) == 3:
             out.append(parts[2])
-    return sample(out)
+    return sample(out, n) if n else out
+
+
+def en_common():
+    """The most common English words on Tatoeba, each in its most common spelling (I, not i)."""
+    counts, forms = collections.Counter(), collections.defaultdict(collections.Counter)
+    for s in tatoeba("eng", None):
+        for w in re.findall(r"[A-Za-z][A-Za-z']*", s):
+            w = w.strip("'")
+            counts[w.lower()] += 1
+            forms[w.lower()][w] += 1
+    return [forms[w].most_common(1)[0][0] for w, _ in counts.most_common(COMMON)]
 
 
 # ---------- Korean ----------
@@ -105,6 +121,17 @@ def ko_law():
 def ko_common_voice():
     lines = open(os.path.join(MOONSHOT, "derived", "common-voice-sentences-ko", "ko.txt"), encoding="utf-8").read().split("\n")
     return sample([l.strip() for l in lines if re.search(r"[가-힣]", l)])
+
+
+def ko_common():
+    """The most common Korean words (Hangul only) in engine/data/ko-words.tsv."""
+    words = []
+    for line in open(os.path.join(HERE, "..", "data", "ko-words.tsv"), encoding="utf-8"):
+        parts = line.rstrip("\n").split("\t")
+        if len(parts) == 2 and re.fullmatch(r"[가-힣]+", parts[0]):
+            words.append((int(parts[1]), parts[0]))
+    words.sort(key=lambda w: (-w[0], w[1]))
+    return [w for _, w in words[:COMMON]]
 
 
 # ---------- Japanese ----------
@@ -155,7 +182,28 @@ def phrases(lines):
     return [f"{s}\t{r}" for s, r, _ in out]
 
 
+def ja_common():
+    """The most common Japanese words on Tatoeba (content words in their dictionary form) with their
+    readings: surface, tab, hiragana."""
+    from sudachipy import Dictionary, SplitMode
+    tok = Dictionary(dict="core").tokenizer()
+    # Readings SudachiDict gets wrong for everyday typing (it reads 私 as わたくし).
+    fix = {"私": "わたし"}
+    counts = collections.Counter()
+    for line in tatoeba("jpn", None):
+        for m in tok.tokenize(line, SplitMode.C):
+            pos = m.part_of_speech()
+            reading = hira(m.reading_form())
+            if pos[0] in INDEPENDENT and pos[0] != "接頭辞" and m.surface() == m.dictionary_form() \
+                    and re.fullmatch(r"[ぁ-んー]+", reading) and not re.search(r"[0-9０-９]", m.surface()):
+                counts[(m.surface(), fix.get(m.surface(), reading))] += 1
+    return [f"{s}\t{r}" for (s, r), _ in counts.most_common(COMMON)]
+
+
 if __name__ == "__main__":
+    write("en-common.txt", en_common(), f"The {COMMON} most common words of Tatoeba's English sentences (tatoeba.org). CC BY 2.0 FR.")
+    write("ko-common.txt", ko_common(), f"The {COMMON} most common Korean words in engine/data/ko-words.tsv (see LICENSE-corpora.txt).")
+    write("ja-common.tsv", ja_common(), f"The {COMMON} most common words of Tatoeba's Japanese sentences (tatoeba.org). CC BY 2.0 FR. Readings: SudachiDict core (Apache-2.0).")
     write("en-us-law.txt", us_law(), "17 U.S.C. (Copyright), US Code 2023 (govinfo.gov). Public domain.")
     write("en-uk-law.txt", uk_law(), "Human Rights Act 1998 (legislation.gov.uk). Open Government Licence v3.0.")
     write("en-tatoeba.txt", tatoeba("eng"), "Tatoeba English sentences (tatoeba.org). CC BY 2.0 FR.")

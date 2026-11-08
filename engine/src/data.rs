@@ -1,7 +1,7 @@
 //! The engine's data, loaded once by the shell and shared by every engine: the Korean word list
 //! (with its 초성 index), the English word list, the hanja dictionary and the OECD menu.
 
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 use crate::hangul::{decompose, is_syllable};
 use crate::hanja::Dictionary;
@@ -119,6 +119,8 @@ impl KoreanWords {
 /// Japanese words usually written in kana (tools/build_kana_native.py), built in: small, and the
 /// shell needn't ship another file.
 const KANA_NATIVE: &str = include_str!("../data/ja-kana-native.txt");
+/// The most common Japanese words not written in kana (tools/build_kana_native.py), built in.
+const JA_COMMON: &str = include_str!("../data/ja-common-words.txt");
 
 #[derive(Default)]
 pub struct Data {
@@ -127,6 +129,8 @@ pub struct Data {
     japanese: HashSet<String>,
     /// Japanese words usually written in kana (`ja-kana-native.txt`, built in).
     kana_native: HashSet<String>,
+    /// Reading → the common words spelled with it, most common first (`ja-common-words.txt`).
+    ja_common: HashMap<String, Vec<String>>,
     pub hanja: Dictionary,
     /// Kana-kanji conversion (`kanji.bin`); None without the file.
     pub kanji: Option<crate::kanji::Kanji>,
@@ -153,6 +157,13 @@ impl Data {
             .filter_map(|l| l.split('\t').next())
             .map(String::from)
             .collect();
+        for line in JA_COMMON.lines().filter(|l| !l.starts_with('#')) {
+            let mut f = line.split('\t');
+            if let (Some(word), Some(reading)) = (f.next(), f.next()) {
+                // The file is most common first, so each reading's list is too.
+                data.ja_common.entry(reading.to_string()).or_default().push(word.to_string());
+            }
+        }
         for line in english.lines().filter(|l| !l.starts_with('#')) {
             let w = line.trim();
             if !w.is_empty() {
@@ -207,6 +218,11 @@ impl Data {
     /// Whether a kana string is a Japanese word usually written in kana (この, あなた).
     pub fn is_kana_native(&self, kana: &str) -> bool {
         self.kana_native.contains(kana)
+    }
+
+    /// The common Japanese words read `kana` (written in kanji or katakana), most common first.
+    pub fn common_japanese(&self, kana: &str) -> &[String] {
+        self.ja_common.get(kana).map_or(&[], Vec::as_slice)
     }
 
     /// Whether a kana string is a known Japanese word or ends in a known word (Japanese has no spaces).

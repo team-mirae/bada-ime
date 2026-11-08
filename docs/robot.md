@@ -33,7 +33,8 @@ robot's plans are the layouts' real keys.
   break character if that fails.
 - **kana** (20): each kana on its key; a voiced kana as its plain kana and ゛ (゜).
 - **romaji** (21): the reading in the spelling table, two kana at once where the table has them;
-  っ doubles the next consonant, ん is nn.
+  っ doubles the next consonant, ん is nn, or `n'` before a vowel, y or n (`zen'in` ぜんいん: after
+  `nn` a vowel starts the next kana, japanese.md).
 - **transcription** (19): from the file's `transcription` map. Each syllable starts from a kana
   key's syllable (た 타); its initial is moved along the **tenseness series** (ㄱ/ㅋ/ㄲ, ㄷ/ㅌ/ㄸ,
   ㅂ/ㅍ/ㅃ, ㅈ/ㅊ/ㅉ, ㅅ/ㅆ) by the modifiers: っ before the kana raises it to tense, ゛ after it lowers
@@ -45,9 +46,31 @@ robot's plans are the layouts' real keys.
   reading only when it spells a known word). At most 80 screen checks per word.
 
 For converting layouts (18, 19, 20, 21) the wanted text must show, or be among the first **5** rows
-of the menu; at least **80%** of the items must be (`MIN_RATE` in the test), 19 at least **65%**
-(its gaps are open questions in [kana-korean.md](kana-korean.md)). The report lists, per layout and
-corpus, the syllables it couldn't type, most frequent first.
+of the menu. The report lists, per layout and corpus, the syllables it couldn't type, most frequent
+first.
+
+## Reliability
+
+Each layout claims a **reliability** for each language it declares (`reliability` in its JSON), and
+the robot fails if the layout doesn't earn it:
+
+| Reliability | Bar |
+|---|---|
+| `perfect` | every item of every corpus of the language |
+| `production` | every one of the language's 1,000 most common words, and at least **80%** of each other corpus |
+| `experimental` | none: typed and reported, never fails |
+
+The report's **Claims** table gives each layout's claim and what it earns. A layout may claim less
+than it earns, never more. GitHub Actions (`.github/workflows/robot.yml`) runs the robot on every
+push to main and every pull request, and puts the report in the run's summary.
+
+| Layout | Language | Claims |
+|---|---|---|
+| 00 | english | perfect |
+| 10–14 | korean | perfect |
+| 18 | korean | production |
+| 19 | korean | experimental (69% on Common Voice; the gaps are open questions in [kana-korean.md](kana-korean.md)) |
+| 20, 21 | japanese_kana, japanese_romaji | production (every common word; 87% of the law texts, 93% of Tatoeba) |
 
 ## How a word fails
 
@@ -65,6 +88,10 @@ corpus, the syllables it couldn't type, most frequent first.
 | English | `en-us-law.txt` (17 U.S.C.), `en-uk-law.txt` (Human Rights Act 1998), `en-tatoeba.txt` |
 | Korean | `ko-law.txt` (대한민국헌법, 민법), `ko-common-voice.txt` |
 | Japanese | `ja-law.tsv` (日本国憲法, 民法), `ja-tatoeba.tsv`: one phrase per line with its reading |
+
+and each language's 1,000 most common words, for `production`: `en-common.txt` (Tatoeba),
+`ko-common.txt` (the counts in `engine/data/ko-words.tsv`), `ja-common.tsv` (Tatoeba, content words
+in their dictionary form, with readings; 私 read わたし, words with digits left out).
 
 English is typed word by word (letters, digits, apostrophes), Korean by runs of Hangul, Japanese by
 phrase (a content word and the particles and auxiliaries after it, read by SudachiPy). Everything

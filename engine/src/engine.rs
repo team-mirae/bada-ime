@@ -64,6 +64,8 @@ const SEARCH_RESULTS: usize = 40;
 
 /// Typo suggestions listed under layout 13's reading, at most.
 const TYPO_SUGGESTIONS: usize = 3;
+/// Japanese: rows given to a reading's most common words (`ja-common-words.txt`).
+const COMMON_ROWS: usize = 3;
 
 /// A henkan profile (§6.6): its own candidates, or a link to another profile.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
@@ -678,6 +680,17 @@ impl Engine {
                                     origin: Origin::Other,
                                 });
                                 row += 1;
+                            }
+                            // The most common words of the reading (一 for いち, 死 and 詩 for し), right
+                            // under the first conversion: conversion of a lone word ranks them low.
+                            for (i, word) in self.data.common_japanese(&text).iter().take(COMMON_ROWS).enumerate() {
+                                entries.push(Entry {
+                                    text: word.clone(),
+                                    score: score + tie + 0.5 - 0.004 - 0.0001 * i as f64,
+                                    note: text.clone(),
+                                    japanese: true,
+                                    origin: Origin::Other,
+                                });
                             }
                             if known {
                                 kana_score = kana_score.max(score + tie + 0.5 - 0.005);

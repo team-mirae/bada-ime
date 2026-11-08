@@ -258,7 +258,11 @@ fn kana_native_words_stay_kana() {
         let mut s = bada::Settings::default();
         s.enabled = vec![21];
         e.set_settings(s);
-        let keys: Vec<(Key, bool)> = letters.chars().map(|c| (Key::from_code(&format!("Key{}", c.to_ascii_uppercase())), false)).collect();
+        // ' is ⇧7 on JIS.
+        let keys: Vec<(Key, bool)> = letters
+            .chars()
+            .map(|c| if c == '\'' { (Key::Digit7, true) } else { (Key::from_code(&format!("Key{}", c.to_ascii_uppercase())), false) })
+            .collect();
         typed(&mut e, &keys)
     };
     let out = romaji("kono");
@@ -272,4 +276,12 @@ fn kana_native_words_stay_kana() {
     // kanji words stay kanji
     let out = romaji("nihongo");
     assert_eq!(out.preedit, "日本語", "{:?}", out.menu);
+    // Common words (ja-common-words.txt) are in the first rows when their reading is typed alone,
+    // and phrases are converted as before.
+    for (letters, word) in [("ichi", "一"), ("shi", "死"), ("shi", "詩"), ("ki", "木"), ("gen'in", "原因")] {
+        let out = romaji(letters);
+        assert!(out.menu[out.zero..].iter().take(5).any(|m| m == word), "{letters}: {:?}", out.menu);
+    }
+    let out = romaji("toukyouni");
+    assert_eq!(out.preedit, "東京に", "{:?}", out.menu);
 }

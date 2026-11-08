@@ -63,6 +63,13 @@ On Mozc's evaluation set (`engine/tests/data/kanji-evaluation.tsv`): 69% exact, 
   sentences left out. Conversion treats their kana as one below their cheapest kanji, so phrases
   keep them in kana too (このほん → この本, not 個の本). The cost: Mozc's evaluation set lost 5 exact
   sentences of 613 (431 → 426).
+- **Common words** (`engine/data/ja-common-words.txt`, built into the engine): the 3,000 most common
+  words of Tatoeba's Japanese sentences not written in kana (一, 死, 原因, ケン), with their readings,
+  from the same script. When the whole reading is one, its three most common words come right
+  under the first conversion: conversion of a lone short word ranks them low (いち → 1, し → し), and
+  the typing robot's `production` bar needs every common word in the first 5 rows (robot.md).
+  Phrases and sentences are converted as before: the lattice's costs aren't changed, so に stays
+  a particle in 東京に.
 - Up to six conversions; one that is just the kana isn't repeated, nor its katakana with script
   forms on.
 - Unknown or broken readings (a stray ゛, pending Latin letters) aren't converted.

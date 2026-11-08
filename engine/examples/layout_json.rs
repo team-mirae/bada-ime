@@ -47,10 +47,13 @@ fn keys(f: impl Fn(Key, bool) -> Vec<Value>) -> Value {
 
 const ROLES: &str = r#"{"i":"초성","v":"중성","f":"종성","c":"초성+종성","a":"초성+ㅏ","n":"ㅇ+중성","x":"text","k":"kana","l":"letter"}"#;
 
-fn layout(id: u32, name: &str, languages: &[&str], input: &str, keys: Value) -> Value {
+/// `languages`: each language the layout types, with the reliability it claims for it
+/// (perfect, production, experimental; docs/robot.md). The robot test holds it to the claim.
+fn layout(id: u32, name: &str, languages: &[(&str, &str)], input: &str, keys: Value) -> Value {
+    let reliability: serde_json::Map<String, Value> = languages.iter().map(|(l, r)| (l.to_string(), json!(r))).collect();
     json!({
         "format": "bada-layout/1", "id": id, "name": name, "keyboard": "hhkb",
-        "languages": languages, "input": input,
+        "languages": languages.iter().map(|l| l.0).collect::<Vec<_>>(), "reliability": reliability, "input": input,
         "roles": serde_json::from_str::<Value>(ROLES).unwrap(),
         "keys": keys,
     })
@@ -58,7 +61,7 @@ fn layout(id: u32, name: &str, languages: &[&str], input: &str, keys: Value) -> 
 
 fn korean(id: u32, name: &str) -> Value {
     let r = layout::rules(id).unwrap();
-    let mut v = layout(id, name, &["korean"], "compose", keys(|k, s| layout::role(id, k, s).map(role_tokens).unwrap_or_default()));
+    let mut v = layout(id, name, &[("korean", "perfect")], "compose", keys(|k, s| layout::role(id, k, s).map(role_tokens).unwrap_or_default()));
     v["implied_ieung"] = json!(r.implied_ieung);
     v["rules"] = json!({"join_vowels": r.join_vowels, "implied_ieung": r.implied_ieung, "double_toggle": r.double_toggle,
                         "held_shift": r.held_shift, "double_tense": r.double_tense});
@@ -109,6 +112,8 @@ fn romaji_table() -> Value {
         ok
     });
     m.insert("ん".into(), json!("nn"));
+    // ん before a vowel, y or n (ぜんいん zen'in): after `nn` a vowel starts the next kana.
+    m.insert("ん'".into(), json!("n'"));
     m.insert("っ".into(), json!("xtu"));
     Value::Object(m)
 }
@@ -142,12 +147,12 @@ fn write(name: &str, v: &Value) {
 }
 
 fn main() {
-    write("00-qwerty.json", &layout(0, "JIS QWERTY", &["english"], "direct", keys(|k, s| jis(k, s, "l"))));
+    write("00-qwerty.json", &layout(0, "JIS QWERTY", &[("english", "perfect")], "direct", keys(|k, s| jis(k, s, "l"))));
     write("10-kts.json", &korean(layout::KTS, "JIS KTS"));
     write("11-korean-legacy.json", &korean(layout::LEGACY_KOREAN, "JIS Korean Legacy"));
     write("12-moonshot.json", &korean(layout::LEGACY_MOONSHOT, "JIS Moonshot"));
 
-    let mut roman = layout(18, "JIS Korean Roman", &["korean"], "roman", keys(|k, s| jis(k, s, "l")));
+    let mut roman = layout(18, "JIS Korean Roman", &[("korean", "production")], "roman", keys(|k, s| jis(k, s, "l")));
     roman["spelling"] = roman_table();
     write("18-korean-roman.json", &roman);
 
@@ -156,11 +161,11 @@ fn main() {
         Some(c) => vec![tok(c, "x")],
         None => vec![],
     };
-    let mut kana20 = layout(20, "JIS Kana", &["japanese_kana"], "kana", keys(kana));
+    let mut kana20 = layout(20, "JIS Kana", &[("japanese_kana", "production")], "kana", keys(kana));
     kana20["marks"] = json!({"゛": "voiced", "゜": "semi-voiced"});
     write("20-kana.json", &kana20);
 
-    let mut romaji = layout(21, "JIS Romaji", &["japanese_romaji"], "romaji", keys(|k, s| jis(k, s, "l")));
+    let mut romaji = layout(21, "JIS Romaji", &[("japanese_romaji", "production")], "romaji", keys(|k, s| jis(k, s, "l")));
     romaji["spelling"] = romaji_table();
     write("21-romaji.json", &romaji);
 

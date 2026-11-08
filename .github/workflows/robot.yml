@@ -1,0 +1,36 @@
+# The typing robot (docs/robot.md): every layout must earn the reliability its JSON claims for
+# each language (docs/layouts/*.json, `reliability`), and every JSON must match the engine.
+name: robot
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  robot:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: engine
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: engine
+      - name: Layout claims
+        run: cargo test --release --test robot -- --nocapture
+      - name: Report
+        if: always()
+        run: |
+          if [ -f target/robot-report.md ]; then
+            cat target/robot-report.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: robot-report
+          path: engine/target/robot-report.md
+          if-no-files-found: ignore

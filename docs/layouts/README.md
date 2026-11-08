@@ -29,10 +29,13 @@ references the engine and the renderer follow; the others are written from the e
 
 - `languages`: what the layout types, from `english`, `korean`, `japanese_kana`, `japanese_romaji`
   (usually one; none for the searches 150 and 151);
+- `reliability`: for each language in `languages`, what the layout claims: `perfect`, `production`
+  or `experimental`. The typing robot holds it to the claim, in CI ([robot.md](../robot.md#reliability));
 - `input`: how: `direct` (a key, a character), `compose` (jamo into syllables), `roman`, `kana`,
   `romaji` (spelled, then converted), `transcription` (19), `search`;
 - `rules` (compose): `join_vowels`, `implied_ieung`, `double_toggle`, `held_shift`, `double_tense`;
-- `spelling` (`roman`, `romaji`): the spelling the robot types for each jamo or kana;
+- `spelling` (`roman`, `romaji`): the spelling the robot types for each jamo or kana (21: `ん'` is ん
+  before a vowel, y or n, `n'`);
 - `transcription` (19): the tenseness series, what ゛ ゜ っ do to an initial, small vowels, ー, and
   the readings the menu offers (vowels, finals).
 

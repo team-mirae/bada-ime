@@ -21,6 +21,8 @@
 - Typing robot (`docs/robot.md`): `cargo test --release --test robot`. Corpora: `engine/tests/data/robot/`,
   from `tools/analysis/.venv/bin/python engine/tools/build_robot_corpus.py` (sources in `engine/tools/cache/robot/`).
   Layout JSONs for the layouts defined in code: `cargo run --example layout_json`.
-- `engine/data/ja-kana-native.txt`: `tools/analysis/.venv/bin/python engine/tools/build_kana_native.py`.
+  Each JSON claims a reliability per language (perfect / production / experimental); CI
+  (`.github/workflows/robot.yml`) fails a layout that doesn't earn its claim.
+- `engine/data/ja-kana-native.txt` and `ja-common-words.txt`: `tools/analysis/.venv/bin/python engine/tools/build_kana_native.py`.
 - `utils/learner-app`: `npm start` / `npm test` (Node 20+, no packages).
 - Analysis tools need `tools/analysis/.venv` with numpy (see docs/bada-history.md §9).
