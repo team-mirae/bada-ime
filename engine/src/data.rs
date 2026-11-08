@@ -116,11 +116,17 @@ impl KoreanWords {
     }
 }
 
+/// Japanese words usually written in kana (tools/build_kana_native.py), built in: small, and the
+/// shell needn't ship another file.
+const KANA_NATIVE: &str = include_str!("../data/ja-kana-native.txt");
+
 #[derive(Default)]
 pub struct Data {
     korean: KoreanWords,
     english: HashSet<String>,
     japanese: HashSet<String>,
+    /// Japanese words usually written in kana (`ja-kana-native.txt`, built in).
+    kana_native: HashSet<String>,
     pub hanja: Dictionary,
     /// Kana-kanji conversion (`kanji.bin`); None without the file.
     pub kanji: Option<crate::kanji::Kanji>,
@@ -141,6 +147,12 @@ impl Data {
             ..Data::default()
         };
         data.korean = KoreanWords::build(korean);
+        data.kana_native = KANA_NATIVE
+            .lines()
+            .filter(|l| !l.starts_with('#'))
+            .filter_map(|l| l.split('\t').next())
+            .map(String::from)
+            .collect();
         for line in english.lines().filter(|l| !l.starts_with('#')) {
             let w = line.trim();
             if !w.is_empty() {
@@ -186,7 +198,15 @@ impl Data {
     /// Adds kana-kanji conversion (`kanji.bin`). A malformed file is ignored (no kanji).
     pub fn with_kanji(mut self, data: &[u8]) -> Data {
         self.kanji = if data.is_empty() { None } else { crate::kanji::Kanji::parse(data).ok() };
+        if let Some(k) = &mut self.kanji {
+            k.prefer_kana(self.kana_native.iter().map(String::as_str));
+        }
         self
+    }
+
+    /// Whether a kana string is a Japanese word usually written in kana (この, あなた).
+    pub fn is_kana_native(&self, kana: &str) -> bool {
+        self.kana_native.contains(kana)
     }
 
     /// Whether a kana string is a known Japanese word or ends in a known word (Japanese has no spaces).

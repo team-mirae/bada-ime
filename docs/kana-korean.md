@@ -1,6 +1,6 @@
 # JIS Kana Korean (layout 19)
 
-Status: built in v0.1, minor layout (owner, 2026-11-07). Ranked since 2026-11-07: see Readings. Layout: `docs/layouts/kana-korean.json`;
+Status: built in v0.1, minor layout (owner, 2026-11-07). Ranked since 2026-11-07: see Readings. Layout: `docs/layouts/19-kana-korean.json`;
 code: `engine/src/kana_korean.rs`.
 
 Korean typed on the JIS kana layout: each kana key types that kana's Korean approximation
@@ -49,6 +49,15 @@ offered in the menu under the default, most frequent first (Tab / ↓ / かな t
 
 Readings are searched depth-first, the default choice first at each kana, up to 4,096 per
 segment; a long segment of ambiguous kana may not reach every combination.
+
+## For the robot
+
+`19-kana-korean.json` carries a `transcription` map (the tenseness series ㄱ/ㅋ/ㄲ, ㄷ/ㅌ/ㄸ,
+ㅂ/ㅍ/ㅃ, ㅈ/ㅊ/ㅉ, ㅅ/ㅆ; っ raises an initial to tense, ゛ lowers aspirated to lax, ゜ makes ㅎ ㅍ;
+the readings above) from which the [typing robot](robot.md) plans Korean words; the test checks
+the map against this code. On the robot's corpora about 69% of words come out (in the first 5
+rows); most of the rest need what has no key: ㅚ ㅟ ㅝ ㅖ (회, 위, 권, 계), finals other than ㄴ ㅇ ㅁ ㅋ
+and the readings (있, 없, 같, 받), ㄷ/ㅌ with ㅣ (디, 티).
 
 ## Open
 

@@ -247,3 +247,29 @@ fn colloquial_unicode_on_real_data() {
     let all: Vec<String> = bada::search::TONES.iter().map(|t| t.to_string()).collect();
     assert!(!d.search.symbols("joo", &all, 10).iter().any(|x| x.0 == "㈜"));
 }
+
+/// Kana-native words (docs/japanese.md, "Where the kana goes"): their kana first, also inside a
+/// phrase; a known word's kana no lower than second.
+#[test]
+fn kana_native_words_stay_kana() {
+    let romaji = |letters: &str| {
+        let mut e = Engine::new(data());
+        e.pin_dictionary(None);
+        let mut s = bada::Settings::default();
+        s.enabled = vec![21];
+        e.set_settings(s);
+        let keys: Vec<(Key, bool)> = letters.chars().map(|c| (Key::from_code(&format!("Key{}", c.to_ascii_uppercase())), false)).collect();
+        typed(&mut e, &keys)
+    };
+    let out = romaji("kono");
+    assert_eq!(out.preedit, "この", "{:?}", out.menu);
+    let out = romaji("chotto");
+    assert_eq!(out.preedit, "ちょっと", "{:?}", out.menu);
+    let out = romaji("konohon");
+    assert_eq!(out.preedit, "この本", "{:?}", out.menu);
+    let out = romaji("anata");
+    assert!(out.menu[out.zero..].iter().take(2).any(|m| m == "あなた"), "{:?}", out.menu);
+    // kanji words stay kanji
+    let out = romaji("nihongo");
+    assert_eq!(out.preedit, "日本語", "{:?}", out.menu);
+}

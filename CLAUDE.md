@@ -18,5 +18,9 @@
   Then `python3 engine/tools/build_jamo_lm.py` (the typo model, `ko-jamo-4gram.bin`, from ko-words.tsv).
 - `engine/data/emoji.tsv`, `unicode-names.tsv`: `python3 engine/tools/build_unicode_data.py` (Unicode files in
   `engine/tools/cache/unicode/`, URLs in the script). `symbols.tsv` and `unicode-aliases.tsv` are hand-written.
+- Typing robot (`docs/robot.md`): `cargo test --release --test robot`. Corpora: `engine/tests/data/robot/`,
+  from `tools/analysis/.venv/bin/python engine/tools/build_robot_corpus.py` (sources in `engine/tools/cache/robot/`).
+  Layout JSONs for the layouts defined in code: `cargo run --example layout_json`.
+- `engine/data/ja-kana-native.txt`: `tools/analysis/.venv/bin/python engine/tools/build_kana_native.py`.
 - `utils/learner-app`: `npm start` / `npm test` (Node 20+, no packages).
 - Analysis tools need `tools/analysis/.venv` with numpy (see docs/bada-history.md §9).

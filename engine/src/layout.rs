@@ -276,7 +276,7 @@ fn bada_base(key: Key) -> Option<Role> {
         Minus => v('ㅙ'),
         Equal => v('ㅞ'),
         IntlYen => fin('ㅂ'),
-        KeyQ => ppa,
+        KeyQ => ini('ㅃ'),   // initial only: ㅄ as a final is on `]`
         KeyW => c('ㅌ'),
         KeyE => c('ㄴ'),
         KeyR => c('ㅅ'),
@@ -1011,6 +1011,11 @@ mod tests {
         assert_eq!(keys(BADA, &[(KeyB, false), (KeyH, false), (IntlYen, true)]), "밟");
         assert_eq!(keys(BADA, &[(KeyR, false), (KeyH, false), (KeyJ, true)]), "삼");
         assert_eq!(keys(BADA, &[(KeyD, false), (KeyH, false), (Semicolon, true)]), "갂");
+        // Q is ㅃ only, even after a vowel (아빠, 오빠); `]` is interlaced: ㅄ after a vowel (값)
+        assert_eq!(plain(BADA, &[KeyF, KeyH, KeyQ, KeyH]), "아빠");
+        assert_eq!(plain(BADA, &[KeyF, KeyH, KeyQ]), "아ㅃ");
+        assert_eq!(plain(BADA, &[KeyD, KeyH, Backslash]), "값");
+        assert_eq!(plain(BADA, &[KeyD, KeyH, Backslash, KeyH]), "가빠");
         // ⇧. and ⇧/ are punctuation (ㅛ ㅠ are on 9 and 8)
         assert_eq!(keys(BADA, &[(KeyD, false), (KeyH, false), (Period, true)]), "가.");
         assert_eq!(keys(BADA, &[(KeyD, false), (KeyH, false), (Slash, true)]), "가/");

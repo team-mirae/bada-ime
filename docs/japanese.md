@@ -28,7 +28,7 @@ The common Japanese IME spellings (`ka` か, `shi` / `si` し, `chi` / `ti` ち,
 Both can offer the negative menu entries: **−1 hiragana, −2 katakana** of their reading.
 **Off by default**: Settings → "Script forms below the top entry" turns them on. Only one method
 contributes (settings: "Negative menu entries"); by default the lowest enabled of 20 and 21. Off,
-katakana is an ordinary ranked entry and the kana is the last conversion row.
+katakana is an ordinary ranked entry and the kana a conversion row (see Kanji conversion).
 
 ## F-key actions (spec §6.5)
 
@@ -49,12 +49,20 @@ Both layouts convert their kana reading to kanji (`engine/src/kanji.rs`, ported 
 a word lattice over the kana, word costs plus part-of-speech connection costs, at most 40 kana).
 The data is `engine/data/kanji.bin` (11 MB), built by `engine/tools/kanji/build_kanji.py` from
 **Mozc's open-source dictionary** (pinned commit); notices in `engine/data/LICENSE-mozc.txt`.
-On Mozc's evaluation set (`engine/tests/data/kanji-evaluation.tsv`): 70% exact, 79% in the top 3.
+On Mozc's evaluation set (`engine/tests/data/kanji-evaluation.tsv`): 69% exact, 79% in the top 3.
 
-- The menu (spec §6.4) is **0 and forward: the conversions, cheapest first, then the kana**; with
-  script forms on, also **−1 hiragana, −2 katakana**. So typing shows the top conversion
-  (わたしはがくせいです → 私は学生です), Tab the other conversions (and ⇧Tab the kana, with script
-  forms on).
+- The menu (spec §6.4) is **0 and forward: the conversions, cheapest first, with the kana among
+  them**; with script forms on, also **−1 hiragana, −2 katakana**. So typing shows the top
+  conversion (わたしはがくせいです → 私は学生です), Tab the other conversions.
+- **Where the kana goes** (owner, 2026-11-08): where conversion ranks it; a known word's kana
+  (`ja-words.txt`, or kana-native) no lower than second (あなた: 貴方 may come first, あなた next); a
+  **kana-native** word's kana first. Otherwise last.
+- **Kana-native words** (`engine/data/ja-kana-native.txt`, built into the engine): about 870 words
+  written in kana at least 60% of the time in Tatoeba's Japanese sentences (この, その, こと, もの,
+  あなた, ちょっと, ありがとう), counted by `engine/tools/build_kana_native.py` with the robot's test
+  sentences left out. Conversion treats their kana as one below their cheapest kanji, so phrases
+  keep them in kana too (このほん → この本, not 個の本). The cost: Mozc's evaluation set lost 5 exact
+  sentences of 613 (431 → 426).
 - Up to six conversions; one that is just the kana isn't repeated, nor its katakana with script
   forms on.
 - Unknown or broken readings (a stray ゛, pending Latin letters) aren't converted.

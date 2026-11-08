@@ -152,7 +152,7 @@ def roman18():
 
 def kana19():
     """Layout 19 as the engine types it (engine/src/kana_korean.rs, docs/kana-korean.md)."""
-    d = json.load(open(os.path.join(DOCS, "kana-korean.json")))
+    d = json.load(open(os.path.join(DOCS, "19-kana-korean.json")))
     keys = {}
     for code in list(JIS) + ["Key"+c for c in LETTERS]:
         v = d["keys"].get(code, {"base": [], "shift": []})

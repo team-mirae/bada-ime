@@ -22,7 +22,7 @@
 | 13 | `Korean (bada)` | henkan, deterministic |
 
 Legends: bottom of a key unshifted, top with Shift; small grey, the JIS legend. Colours: blue initial or
-initial-or-final, orange (underlined) final only, green vowel. Q and `]` are interlaced keys: ㅃ as
+initial-or-final, orange (underlined) final only, green vowel. Q is ㅃ, initial only. `]` is an interlaced key: ㅃ as
 an initial, ㅄ (small, orange, at the right) as a final, chosen by where the key falls in the
 syllable, not by Shift.
 

@@ -34,7 +34,7 @@ final-only key; a consonant without it is an initial, or a final until a vowel t
 
 | | `Q` | `W` | `E` | `R` | `T` | `Y` | `U` | `I` | `O` | `P` | `@` | `[` |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| key | ㅃ ㅄᶠ | ㅌ | ㄴ | ㅅ | ㅍ | ㅚ | ㅕ | ㅑ | ㅔ | ㅐ | ㅖ | ㅒ |
+| key | ㅃ | ㅌ | ㄴ | ㅅ | ㅍ | ㅚ | ㅕ | ㅑ | ㅔ | ㅐ | ㅖ | ㅒ |
 | ⇧ |  |  |  |  |  |  |  |  |  |  | @ | [ |
 
 | | `A` | `S` | `D` | `F` | `G` | `H` | `J` | `K` | `L` | `;` | `:` | `]` |
@@ -47,8 +47,9 @@ final-only key; a consonant without it is an initial, or a final until a vowel t
 | key | ㅊ | ㅋ | ㄹ | ㅎ | ㅂ | ㅓ | ㅣ | ㅡ | ㅗ | ㅜ | ㅢ |
 | ⇧ |  |  |  |  |  |  |  | , | . | / | \ |
 
-- **Initial-only:** F ㅇ, 3 ㅉ, 5 ㄸ (ㅉ and ㄸ are never finals).
-- **Interlaced:** Q and `]` type ㅃ as an initial and ㅄ as a final, by the composer's state (after a
+- **Initial-only:** F ㅇ, Q ㅃ, 3 ㅉ, 5 ㄸ (ㅉ and ㄸ are never finals; Q is ㅃ even after a vowel:
+  아 Q ㅏ → 아빠).
+- **Interlaced:** `]` types ㅃ as an initial and ㅄ as a final, by the composer's state (after a
   vowel: ㅄ, 값; otherwise ㅃ), not by Shift. A vowel after ㅄ takes ㅃ: 값 ㅏ → 가빠.
 - **Initial-or-final:** W E R T, A S D G, Z X C V B, 2 4 and `:`.
 - **Final-only:** J ㅇ, K ㄴ, L ㄹ, `;` ㄱ, ¥ ㅂ, the five commonest finals; with ⇧, ㅁ ㄶ ㄺ ㄲ ㄼ.

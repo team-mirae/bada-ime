@@ -298,7 +298,7 @@ pub fn bada_keys(word: &str) -> Option<Vec<Press>> {
             'ㅂ' => vec![p(IntlYen)], 'ㅁ' => vec![s(KeyJ)], 'ㄶ' => vec![s(KeyK)], 'ㄺ' => vec![s(KeyL)],
             'ㄲ' => vec![s(Semicolon)], 'ㄼ' => vec![s(IntlYen)], 'ㅅ' => vec![p(KeyR)], 'ㅆ' => vec![p(Quote)],
             'ㄷ' => vec![p(KeyA)], 'ㅈ' => vec![p(KeyS)], 'ㅊ' => vec![p(KeyZ)], 'ㅋ' => vec![p(KeyX)],
-            'ㅌ' => vec![p(KeyW)], 'ㅍ' => vec![p(KeyT)], 'ㅎ' => vec![p(KeyV)], 'ㅄ' => vec![p(KeyQ)],
+            'ㅌ' => vec![p(KeyW)], 'ㅍ' => vec![p(KeyT)], 'ㅎ' => vec![p(KeyV)], 'ㅄ' => vec![p(Backslash)],
             'ㄳ' => vec![p(Semicolon), p(KeyR)], 'ㄵ' => vec![p(KeyK), p(KeyS)], 'ㄻ' => vec![p(KeyL), p(KeyG)],
             'ㄽ' => vec![p(KeyL), p(KeyR)], 'ㄾ' => vec![p(KeyL), p(KeyW)], 'ㄿ' => vec![p(KeyL), p(KeyT)],
             'ㅀ' => vec![p(KeyL), p(KeyV)], _ => return None,

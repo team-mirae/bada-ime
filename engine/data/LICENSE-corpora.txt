@@ -41,3 +41,7 @@ hanja.tsv is JIS Korean's hanja dictionary (team-mirae/jis-korean): see LICENSE-
 and LICENSE-unicode.txt.
 
 kanji.bin is built from Mozc's open-source dictionary: see LICENSE-mozc.txt.
+
+ja-kana-native.txt (Japanese words usually written in kana; built into the engine) holds counts only,
+from Tatoeba (https://tatoeba.org, CC BY 2.0 FR) Japanese sentences, read with SudachiPy and
+SudachiDict core (Apache-2.0), by tools/build_kana_native.py.

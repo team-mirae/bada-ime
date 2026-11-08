@@ -53,6 +53,8 @@ pub struct Kanji {
     first: Vec<u32>,
     entries: Vec<Entry>,
     surfaces: Vec<u8>,
+    /// Readings whose entries [`Kanji::prefer_kana`] changed: looked up before the table.
+    overlay: std::collections::HashMap<String, Vec<Entry>>,
 }
 
 impl std::fmt::Debug for Kanji {
@@ -175,7 +177,7 @@ impl Kanji {
             sum += *c as u32;
         }
         first.push(sum);
-        let kanji = Kanji { ids, unknown: unknown as u16, matrix, readings, at, first, entries, surfaces };
+        let kanji = Kanji { ids, unknown: unknown as u16, matrix, readings, at, first, entries, surfaces, overlay: Default::default() };
         if kanji.entries.iter().any(|e| e.surface < KATAKANA && kanji.surface_at(e.surface).is_none()) {
             return Err(BadModel);
         }
@@ -207,8 +209,33 @@ impl Kanji {
         self.lookup(hiragana).iter().map(|e| e.cost).min()
     }
 
+    /// Makes the kana spelling the cheapest word of each reading given (kana-native words, written
+    /// in kana far more than in kanji: この, あなた, ちょっと), so conversion keeps them as kana.
+    /// Its kana entries move down to one below the reading's cheapest entry, keeping their order;
+    /// a reading with no kana entry gets one, with the cheapest entry's parts of speech. Readings
+    /// that aren't words here are left alone.
+    pub fn prefer_kana<'a>(&mut self, readings: impl IntoIterator<Item = &'a str>) {
+        for r in readings {
+            let found = self.lookup(r);
+            let Some(cheapest) = found.iter().min_by_key(|e| e.cost).copied() else { continue };
+            let target = cheapest.cost.saturating_sub(1);
+            let mut entries = found.to_vec();
+            match entries.iter().filter(|e| e.surface == SAME).map(|e| e.cost).min() {
+                Some(kana) => {
+                    let shift = kana.saturating_sub(target);
+                    entries.iter_mut().filter(|e| e.surface == SAME).for_each(|e| e.cost -= shift.min(e.cost));
+                }
+                None => entries.push(Entry { surface: SAME, cost: target, ..cheapest }),
+            }
+            self.overlay.insert(r.to_string(), entries);
+        }
+    }
+
     /// The entries of `reading`, if it's a word.
     fn lookup(&self, reading: &str) -> &[Entry] {
+        if let Some(e) = self.overlay.get(reading) {
+            return e;
+        }
         let key = reading.as_bytes();
         let n = self.at.len() - 1;
         let (mut lo, mut hi) = (0, n);

@@ -1,7 +1,7 @@
 //! Layout 19, JIS Kana Korean (docs/kana-korean.md): Korean typed on the JIS kana layout, each kana
 //! key its Korean approximation (た → 타, し → 시). ゛ ゜ voice the previous syllable's initial,
 //! small vowels (⇧ 3–0) change its vowel, ん / ⇧ん / ⇧む add a final, and ⇧Z (っ) makes the next
-//! initial tense. Layout from docs/layouts/kana-korean.json.
+//! initial tense. Layout from docs/layouts/19-kana-korean.json.
 
 use crate::hangul::{compose, compound, decompose};
 use crate::key::Key;

@@ -22,8 +22,23 @@ Examples of layouts enabled together: [QWERTY + bada + kana](combinations.md#qwe
 [bada + romaji](combinations.md#bada--romaji), [QWERTY + romaji](combinations.md#qwerty--romaji),
 [QWERTY + KTS](combinations.md#qwerty--kts).
 
-Key maps in the layout editor's JSON: `13-bada.json` (layout 13; the engine and the renderer follow
-it), `14-3set-jis.json` (layout 14; the engine reads it as it is) and `kana-korean.json` (layout 19).
+Every layout has a key map, `NN-name.json`, in the layout editor's format (`bada-layout/1`). The
+engine reads `14-3set-jis.json` as it is; `13-bada.json` and `19-kana-korean.json` are the
+references the engine and the renderer follow; the others are written from the engine by
+`cargo run --example layout_json` (in `engine/`). Each file also says what the [typing robot](../robot.md) needs:
+
+- `languages`: what the layout types, from `english`, `korean`, `japanese_kana`, `japanese_romaji`
+  (usually one; none for the searches 150 and 151);
+- `input`: how: `direct` (a key, a character), `compose` (jamo into syllables), `roman`, `kana`,
+  `romaji` (spelled, then converted), `transcription` (19), `search`;
+- `rules` (compose): `join_vowels`, `implied_ieung`, `double_toggle`, `held_shift`, `double_tense`;
+- `spelling` (`roman`, `romaji`): the spelling the robot types for each jamo or kana;
+- `transcription` (19): the tenseness series, what ゛ ゜ っ do to an initial, small vowels, ー, and
+  the readings the menu offers (vowels, finals).
+
+Token roles: `i` initial, `f` final, `c` initial or final, `v` vowel, `a` initial with ㅏ, `n` vowel
+on ㅇ, `k` kana, `l` letter, `x` text. Two tokens on one key are alternatives, chosen by the
+composer's state (13's `]`: ㅃ or ㅄ). `cargo test --test robot` checks every file against the engine.
 
 Images: `python3 tools/render/export_png.py` (HHKB JIS). Interactive: open `tools/render/index.html`.
 

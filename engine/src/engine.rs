@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use crate::data::Data;
 use crate::japanese;
 use crate::key::{Key, Mods};
-use crate::layout::{self, BADA, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI, SYMBOLS, UNICODE};
+use crate::layout::{self, BADA, K3S_JIS, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI, SYMBOLS, UNICODE};
 use crate::userdict::{Language, Strength, UserDict};
 use crate::width::{Width, convert};
 
@@ -542,7 +542,7 @@ impl Engine {
                     });
                     }
                 }
-                KTS | LEGACY_KOREAN | LEGACY_MOONSHOT | BADA => {
+                KTS | LEGACY_KOREAN | LEGACY_MOONSHOT | BADA | K3S_JIS => {
                     if let Some(tokens) = layout::choseong_tokens(id, &self.presses) {
                         // What shows is the normal composition: a consonant after a ⇧ token is its
                         // final (⇧ㄱ ㄴ → 간), consonants alone stay as they are (ㅇㄴ). The 초성
@@ -642,34 +642,52 @@ impl Engine {
                     let loose = text.contains(japanese::DAKUTEN)
                         || text.contains(japanese::HANDAKUTEN)
                         || text.chars().any(|c| c.is_ascii_alphabetic());
-                    let score = if self.data.is_japanese(&text) || user.as_ref().is_some_and(|u| u.count(Language::Japanese, &text) > 0) {
+                    let known = self.data.is_japanese(&text)
+                        || self.data.is_kana_native(&text)
+                        || user.as_ref().is_some_and(|u| u.count(Language::Japanese, &text) > 0);
+                    let score = if known {
                         92.0
                     } else if loose {
                         30.0
                     } else {
                         70.0
                     };
-                    // Kanji conversions (docs/japanese.md): the cheapest above the kana itself, each
-                    // with the kana reading as its note.
+                    // Kanji conversions (docs/japanese.md), each with the kana reading as its note,
+                    // above the kana itself. The kana goes where conversion ranks it (kana-native
+                    // words convert to kana: この, ちょっと), a known word's no lower than second
+                    // (あなた under 貴方), a kana-native word first.
+                    let mut kana_score = score + tie;
                     if !loose {
                         if let Some(kanji) = &self.data.kanji {
-                            for (i, (conv, _)) in kanji.convert(&text, 6).into_iter().enumerate() {
-                                // The kana itself is a row already; so is its katakana when script
-                                // forms are on (−2).
-                                if conv == text || (self.settings.script_forms && conv == japanese::katakana(&text)) {
+                            let mut row = 0;
+                            for (conv, _) in kanji.convert(&text, 6) {
+                                let at = score + tie + 0.5 - 0.01 * row as f64;
+                                if conv == text {
+                                    kana_score = kana_score.max(at + 0.001);
+                                    continue;
+                                }
+                                // Its katakana is a row already when script forms are on (−2).
+                                if self.settings.script_forms && conv == japanese::katakana(&text) {
                                     continue;
                                 }
                                 entries.push(Entry {
                                     text: conv,
-                                    score: score + tie + 0.5 - 0.01 * i as f64,
+                                    score: at,
                                     note: text.clone(),
                                     japanese: true,
                                     origin: Origin::Other,
                                 });
+                                row += 1;
+                            }
+                            if known {
+                                kana_score = kana_score.max(score + tie + 0.5 - 0.005);
+                            }
+                            if self.data.is_kana_native(&text) {
+                                kana_score = kana_score.max(score + tie + 0.6);
                             }
                         }
                     }
-                    entries.push(Entry::kana(text, score + tie));
+                    entries.push(Entry::kana(text, kana_score));
                 }
                 _ => {}
             }

@@ -1,0 +1,71 @@
+# The typing robot
+
+`engine/tests/robot.rs` types real text on every layout, as a person would, and fails when a layout
+can't type its own language well. It is the test for "can this layout type Korean (English,
+Japanese)?", on law texts and everyday sentences.
+
+    cd engine && cargo test --release --test robot -- --nocapture
+
+About 25 s; release builds only (`#[cfg_attr(debug_assertions, ignore)]`: in debug it takes minutes). The report, with failing examples:
+`engine/target/robot-report.md`. `ROBOT_LIMIT=n` types only the first n distinct items of each corpus.
+
+## What it knows
+
+Only the layout's JSON (`docs/layouts/NN-name.json`, see [layouts/README.md](layouts/README.md)):
+which language it declares, how it's typed (`input`), what each key's tokens are, its rules and
+spelling tables. It plans the keys from that alone, presses them on a fresh engine with only that
+layout enabled, and reads the screen: what was committed and the marked text, and the menu.
+
+A second test, `json_matches_engine`, checks every key of every file against the engine, so the
+robot's plans are the layouts' real keys.
+
+## How it types
+
+- **direct** (QWERTY, English): every character needs a key. Muhenkan sends keys to the app as
+  they are, so nothing more is checked.
+- **compose** (10–14, Korean): syllable by syllable. For each syllable it lists the ways to type it
+  from the tokens: the initial (`i`/`c`, or nothing where ㅇ is implied), the vowel (`v`, or two that
+  join: ㅗ ㅏ), the final (`f`/`c`, or two that cluster: ㄹ ㄱ; the same key twice where the layout
+  doubles), and whole-syllable keys (`a`, `n`). Fewest presses first, unshifted first. It keeps up to
+  four plans whose screen shows the word so far, exactly; a person checks each syllable as it
+  appears. A layout must type **every** word.
+- **roman** (18): the word in the file's spelling table, syllables run together, then split by the
+  break character if that fails.
+- **kana** (20): each kana on its key; a voiced kana as its plain kana and ゛ (゜).
+- **romaji** (21): the reading in the spelling table, two kana at once where the table has them;
+  っ doubles the next consonant, ん is nn.
+- **transcription** (19): from the file's `transcription` map. Each syllable starts from a kana
+  key's syllable (た 타); its initial is moved along the **tenseness series** (ㄱ/ㅋ/ㄲ, ㄷ/ㅌ/ㄸ,
+  ㅂ/ㅍ/ㅃ, ㅈ/ㅊ/ㅉ, ㅅ/ㅆ) by the modifiers: っ before the kana raises it to tense, ゛ after it lowers
+  aspirated to lax (and ㅅ ㅈ, ㅎ ㅂ, ㅇ ㅂ), ゜ makes ㅎ ㅍ; its vowel changed by a small vowel
+  (replacing, or joining: う ⇧ぇ 웨) or by ー (ㅔ ㅐ); its final from a final key (ん ⇧ん ⇧む つ). Plans
+  that need a **reading** the menu offers rather than shows (ㅜ as ㅡ, ㅗ as ㅓ, ク as a final ㄱ,
+  plain ん as ㅇ, っ as a final ㅅ) cost more. Plans that need none are checked syllable by syllable
+  against the preedit; the whole word must show or be in the first 5 rows (the menu offers a
+  reading only when it spells a known word). At most 80 screen checks per word.
+
+For converting layouts (18, 19, 20, 21) the wanted text must show, or be among the first **5** rows
+of the menu; at least **80%** of the items must be (`MIN_RATE` in the test), 19 at least **65%**
+(its gaps are open questions in [kana-korean.md](kana-korean.md)). The report lists, per layout and
+corpus, the syllables it couldn't type, most frequent first.
+
+## How a word fails
+
+- **Untypeable:** no plan shows it (the report gives the syllable and what showed instead).
+- **Commit mid-word:** it only comes out right typed as two pieces, a commit between them.
+- **Not in the first 5 rows** (converting layouts): what row 0 showed.
+
+## Corpora
+
+`engine/tests/data/robot/`, sampled to 400 sentences each by `engine/tools/build_robot_corpus.py`
+(sources and licences in [SOURCES.md](../engine/tests/data/robot/SOURCES.md)):
+
+| Language | Files |
+|---|---|
+| English | `en-us-law.txt` (17 U.S.C.), `en-uk-law.txt` (Human Rights Act 1998), `en-tatoeba.txt` |
+| Korean | `ko-law.txt` (대한민국헌법, 민법), `ko-common-voice.txt` |
+| Japanese | `ja-law.tsv` (日本国憲法, 民法), `ja-tatoeba.tsv`: one phrase per line with its reading |
+
+English is typed word by word (letters, digits, apostrophes), Korean by runs of Hangul, Japanese by
+phrase (a content word and the particles and auxiliaries after it, read by SudachiPy). Everything
+else in a line (punctuation, Latin and digits in Korean) is counted and left out.
