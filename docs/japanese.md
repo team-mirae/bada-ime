@@ -25,8 +25,10 @@ The common Japanese IME spellings (`ka` か, `shi` / `si` し, `chi` / `ti` ち,
 
 ## Script forms (spec §6.4)
 
-Both offer the negative menu entries: **−1 hiragana, −2 katakana** of their reading. Only one method
-contributes (settings: "Negative menu entries"); by default the lowest enabled of 20 and 21.
+Both can offer the negative menu entries: **−1 hiragana, −2 katakana** of their reading.
+**Off by default**: Settings → "Script forms below the top entry" turns them on. Only one method
+contributes (settings: "Negative menu entries"); by default the lowest enabled of 20 and 21. Off,
+katakana is an ordinary ranked entry and the kana is the last conversion row.
 
 ## F-key actions (spec §6.5)
 
@@ -49,10 +51,12 @@ The data is `engine/data/kanji.bin` (11 MB), built by `engine/tools/kanji/build_
 **Mozc's open-source dictionary** (pinned commit); notices in `engine/data/LICENSE-mozc.txt`.
 On Mozc's evaluation set (`engine/tests/data/kanji-evaluation.tsv`): 70% exact, 79% in the top 3.
 
-- The menu (spec §6.4) is **0 and forward: the conversions, cheapest first, then the kana**;
-  **−1 hiragana, −2 katakana**. So typing shows the top conversion (わたしはがくせいです →
-  私は学生です), ⇧Tab gives the kana, Tab the other conversions.
-- Up to six conversions; one that is just the kana or its katakana isn't repeated.
+- The menu (spec §6.4) is **0 and forward: the conversions, cheapest first, then the kana**; with
+  script forms on, also **−1 hiragana, −2 katakana**. So typing shows the top conversion
+  (わたしはがくせいです → 私は学生です), Tab the other conversions (and ⇧Tab the kana, with script
+  forms on).
+- Up to six conversions; one that is just the kana isn't repeated, nor its katakana with script
+  forms on.
 - Unknown or broken readings (a stray ゛, pending Latin letters) aren't converted.
 
 ## Menu notes (owner, 2026-11-07)

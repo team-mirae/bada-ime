@@ -17,7 +17,9 @@ fn data() -> Arc<Data> {
             &read("oecd.tsv"),
         )
         .with_japanese(&read("ja-words.txt"))
-        .with_kanji(&std::fs::read(format!("{}/data/kanji.bin", env!("CARGO_MANIFEST_DIR"))).unwrap()),
+        .with_kanji(&std::fs::read(format!("{}/data/kanji.bin", env!("CARGO_MANIFEST_DIR"))).unwrap())
+        .with_lm(&std::fs::read(format!("{}/data/ko-jamo-4gram.bin", env!("CARGO_MANIFEST_DIR"))).unwrap())
+        .with_search(&read("symbols.tsv"), &read("emoji.tsv"), &read("unicode-names.tsv")),
     )
 }
 
@@ -29,70 +31,36 @@ fn typed(e: &mut Engine, keys: &[(Key, bool)]) -> bada::Output {
     out
 }
 
+/// 감사합니다 on layout 13: ㄱ(D) ㅏ(H) ㅁ(G) ㅅ(R) ㅏ ㅎ(V) ㅏ ㅂ(B) ㄴ(E) ㅣ(M) ㄷ(A) ㅏ
+const GAMSAHAMNIDA: [Key; 12] = {
+    use Key::*;
+    [KeyD, KeyH, KeyG, KeyR, KeyH, KeyV, KeyH, KeyB, KeyE, KeyM, KeyA, KeyH]
+};
+
 #[test]
-fn choseong_on_real_words() {
+fn bada_on_real_words() {
     use Key::*;
     let d = data();
-    let mut e = Engine::new(d.clone());
-    e.set_mode(Mode::Henkan);
-    // ㄱㅅㅎㄴㄷ → 감사합니다
-    let out = typed(
-        &mut e,
-        &[
-            (KeyJ, false),
-            (KeyS, false),
-            (KeyL, false),
-            (KeyH, false),
-            (KeyK, false),
-        ],
-    );
-    eprintln!("ㄱㅅㅎㄴㄷ → {} / {:?}", out.preedit, out.menu);
-    assert_eq!(out.preedit, "감사합니다");
-    let mut e = Engine::new(d.clone());
-    // ㅇㄴ⇧ㅎㅅㅇ → 안녕하세요
-    let out = typed(
-        &mut e,
-        &[
-            (KeyF, false),
-            (KeyH, false),
-            (KeyL, true),
-            (KeyS, false),
-            (KeyF, false),
-        ],
-    );
-    eprintln!("ㅇㄴ⇧ㅎㅅㅇ → {} / {:?}", out.preedit, out.menu);
-    assert_eq!(out.preedit, "안녕하세요");
-    // ㅋㅋㅋ stays
-    let mut e = Engine::new(d.clone());
-    let out = typed(&mut e, &[(KeyX, false), (KeyX, false), (KeyX, false)]);
-    assert_eq!(out.preedit, "ㅋㅋㅋ");
-    // full typing: 있습니다 = ㅣ ㅆ ㅅ ㅡ ㅂ ㄴ ㅣ ㄷ ㅏ
-    let mut e = Engine::new(d);
-    let out = typed(
-        &mut e,
-        &[
-            (Period, false),
-            (KeyP, false),
-            (KeyS, false),
-            (Slash, false),
-            (KeyT, false),
-            (KeyH, false),
-            (Period, false),
-            (KeyK, false),
-            (Comma, false),
-        ],
-    );
-    assert_eq!(out.preedit, "있습니다");
+    let plain = |keys: &[Key]| {
+        let mut e = Engine::new(d.clone());
+        e.set_mode(Mode::Henkan);
+        typed(&mut e, &keys.iter().map(|&k| (k, false)).collect::<Vec<_>>())
+    };
+    assert_eq!(plain(&GAMSAHAMNIDA).preedit, "감사합니다");
+    // 있습니다: ㅇ(F) ㅣ(M) ㅆ(') ㅅ(R) ㅡ(,) ㅂ(B) ㄴ(E) ㅣ ㄷ(A) ㅏ
+    assert_eq!(plain(&[KeyF, KeyM, Quote, KeyR, Comma, KeyB, KeyE, KeyM, KeyA, KeyH]).preedit, "있습니다");
+    // consonants alone stay as typed: no 초성 guessing
+    assert_eq!(plain(&[KeyX, KeyX, KeyX]).preedit, "ㅋㅋㅋ");
+    assert_eq!(plain(&[KeyD, KeyR]).preedit, "ㄱㅅ");
 }
 
 #[test]
 fn romaji_beside_bada() {
-    use Key::*;
     let mut e = Engine::new(data());
     let mut s = bada::Settings::default();
     s.enabled = vec![13, 21];
     e.set_settings(s);
-    // konnichiha: a known Japanese word beats Bada's reading of the same keys
+    // konnichiha: a known Japanese word beats bada's reading of the same keys
     let keys: Vec<(Key, bool)> = "konnichiha"
         .chars()
         .map(|c| {
@@ -105,27 +73,19 @@ fn romaji_beside_bada() {
     let out = typed(&mut e, &keys);
     eprintln!("konnichiha → {} / {:?}", out.preedit, out.menu);
     // a Japanese reading wins; its kanji conversion and the kana are listed, with notes
+    // (script forms off, the default: katakana is a ranked entry, not −2)
     assert!(out.menu.contains(&"こんにちは".to_string()), "{:?}", out.menu);
-    assert_eq!(out.menu[..2], ["コンニチハ", "こんにちは"]);
+    assert!(out.menu.contains(&"コンニチハ".to_string()), "{:?}", out.menu);
+    assert_eq!(out.zero, 0);
     let kana_row = out.menu.iter().position(|m| m == "こんにちは").unwrap();
     assert_eq!(out.notes[kana_row], "konnichiha");
-    // and Bada still wins on Korean: ㄱㅅㅎㄴㄷ
+    // and bada still wins on Korean
     let mut e = Engine::new(data());
     let mut s = bada::Settings::default();
     s.enabled = vec![13, 21];
     e.set_settings(s);
-    let out = typed(
-        &mut e,
-        &[
-            (KeyJ, false),
-            (KeyS, false),
-            (KeyL, false),
-            (KeyH, false),
-            (KeyK, false),
-        ],
-    );
+    let out = typed(&mut e, &GAMSAHAMNIDA.iter().map(|&k| (k, false)).collect::<Vec<_>>());
     assert_eq!(out.preedit, "감사합니다");
-    let _ = KeyA;
 }
 
 #[test]
@@ -226,3 +186,47 @@ fn choseong_knows_technical_words() {
     assert!(words("ㅊㅅ").contains(&"초성".to_string()));
     assert!(words("ㅋㄹㄱ").contains(&"키로깅".to_string()));
 }
+
+#[test]
+fn typo_suggestions_stay_under_the_typed_reading() {
+    use Key::*;
+    let d = data();
+    let run = |keys: &[(Key, bool)]| {
+        let mut e = Engine::new(d.clone());
+        e.set_mode(Mode::Henkan);
+        typed(&mut e, keys)
+    };
+    let plain = |ks: &[Key]| ks.iter().map(|&k| (k, false)).collect::<Vec<_>>();
+    // 감사합니다 with the final-only K (ㄴ) where E (initial ㄴ) was meant: 감사합ㄴㅣ다 shows first,
+    // 감사합니다 is suggested under it
+    let out = run(&plain(&[KeyD, KeyH, KeyG, KeyR, KeyH, KeyV, KeyH, KeyB, KeyK, KeyM, KeyA, KeyH]));
+    eprintln!("{} / {:?} / {:?}", out.preedit, out.menu, out.notes);
+    assert_ne!(out.preedit, "감사합니다");
+    assert_eq!(out.menu[0], out.preedit);
+    assert!(out.menu[1..].contains(&"감사합니다".to_string()), "{:?}", out.menu);
+    // typed right: nothing to suggest
+    let out = run(&plain(&GAMSAHAMNIDA));
+    assert_eq!(out.preedit, "감사합니다");
+    assert!(out.menu.is_empty(), "{:?}", out.menu);
+}
+
+#[test]
+fn symbols_and_unicode_on_real_data() {
+    let d = data();
+    let all: Vec<String> = bada::search::TONES.iter().map(|t| t.to_string()).collect();
+    let texts = |q: &str| d.search.symbols(q, &all, 12).into_iter().map(|x| x.0).collect::<Vec<_>>();
+    eprintln!("happy face → {:?}", texts("happy face"));
+    eprintln!("¥ → {:?}", texts("¥"));
+    eprintln!(". → {:?}", texts("."));
+    eprintln!("thumbs → {:?}", texts("thumbs"));
+    assert!(texts("happy face").contains(&"😀".to_string()));
+    assert_eq!(texts("usd")[0], "$");
+    assert_eq!(texts("¥")[..5], ["$", "€", "₩", "¥", "£"]);
+    assert!(texts("dollar").contains(&"$".to_string()));
+    let t = std::time::Instant::now();
+    let snow = d.search.unicode("snowman", 10);
+    eprintln!("snowman → {:?} in {:?}", snow.iter().map(|x| &x.0).collect::<Vec<_>>(), t.elapsed());
+    assert!(snow.iter().any(|x| x.0 == "☃"));
+    assert_eq!(d.search.unicode("u+ac00", 3)[0].0, "가");
+}
+

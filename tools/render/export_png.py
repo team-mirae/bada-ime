@@ -13,7 +13,7 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 # name → layout ids (one id: a layout on its own; several: enabled together in henkan mode)
 IMAGES = {
-    "00-qwerty": [0], "10-kts": [10], "11-korean-legacy": [11], "12-moonshot": [12], "13-bada": [13],
+    "00-qwerty": [0], "10-kts": [10], "11-korean-legacy": [11], "12-moonshot": [12], "13-bada": [13], "14-3set-jis": [14],
     "18-korean-roman": [18], "19-kana-korean": [19], "20-kana": [20], "21-romaji": [21],
     "qwerty-bada-kana": [0, 13, 20], "bada-romaji": [13, 21], "qwerty-romaji": [0, 21], "qwerty-kts": [0, 10],
 }

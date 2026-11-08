@@ -13,4 +13,8 @@
 
 - Engine: `cargo test` in `engine/`. macOS: `make` / `make install` in `mac/`.
 - `engine/data/ko-words.tsv`: `python3 engine/tools/build_ko_words.py` (reads the jis-moonshot corpora).
-- Analysis tools need `tools/analysis/.venv` with numpy (see docs/bada-layout.md §9).
+  Then `python3 engine/tools/build_jamo_lm.py` (the typo model, `ko-jamo-4gram.bin`, from ko-words.tsv).
+- `engine/data/emoji.tsv`, `unicode-names.tsv`: `python3 engine/tools/build_unicode_data.py` (Unicode files in
+  `engine/tools/cache/unicode/`, URLs in the script). `symbols.tsv` is hand-written.
+- `utils/learner-app`: `npm start` / `npm test` (Node 20+, no packages).
+- Analysis tools need `tools/analysis/.venv` with numpy (see docs/bada-history.md §9).

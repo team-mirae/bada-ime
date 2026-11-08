@@ -2,7 +2,9 @@
 //!
 //! - 0 JIS QWERTY (muhenkan): every key types its JIS character.
 //! - 10 JIS KTS (henkan): standard 2-set on the letter keys, JIS symbols elsewhere.
-//! - 13 JIS Bada (henkan): `docs/layouts/bada-candidate-2.json` with bada-layout.md §15–§16.
+//! - 13 JIS Bada (henkan): `docs/layouts/13-bada.json`, deterministic (docs/bada-layout.md).
+//! - 14 JIS 3-set (henkan): `docs/layouts/14-3set-jis.json`, read as it is (docs/layouts/14-3set-jis.md).
+//! - 150 Symbols and 151 Unicode (henkan): searches (`search.rs`).
 //! - 18 JIS Korean Roman (henkan): `korean_roman.rs`.
 //! - 19 JIS Kana Korean (henkan): `kana_korean.rs`.
 //! - 20 JIS Kana and 21 JIS Romaji (henkan, deterministic for now): `japanese.rs`.
@@ -15,6 +17,9 @@ pub const KTS: u32 = 10;
 pub const LEGACY_KOREAN: u32 = 11;
 pub const LEGACY_MOONSHOT: u32 = 12;
 pub const BADA: u32 = 13;
+pub const K3S_JIS: u32 = 14;
+pub const SYMBOLS: u32 = 150;
+pub const UNICODE: u32 = 151;
 pub const KOREAN_ROMAN: u32 = 18;
 pub const KANA_KOREAN: u32 = 19;
 pub const KANA: u32 = 20;
@@ -27,11 +32,19 @@ pub const CATALOG: &[(u32, &str, bool)] = &[
     (LEGACY_KOREAN, "Korean (legacy-korean)", true),
     (LEGACY_MOONSHOT, "Korean (legacy-moonshot)", true),
     (BADA, "Korean (bada)", true),
+    (K3S_JIS, "Korean (3-set JIS)", true),
     (KOREAN_ROMAN, "Korean (Roman)", true),
     (KANA_KOREAN, "Korean (Kana)", true),
     (KANA, "Japanese (Kana)", true),
     (ROMAJI, "Japanese (Romaji)", true),
+    (SYMBOLS, "Symbols", true),
+    (UNICODE, "Unicode", true),
 ];
+
+/// Layouts whose keys spell a search (150, 151): with only these in use, Space is part of it.
+pub fn is_search(id: u32) -> bool {
+    id == SYMBOLS || id == UNICODE
+}
 
 pub fn is_known(id: u32) -> bool {
     CATALOG.iter().any(|c| c.0 == id)
@@ -85,7 +98,7 @@ pub enum Role {
         ini: Option<char>,
         fin: Option<char>,
     },
-    /// A consonant typed with its 중성 ㅏ (Bada's ⇧ + consonant, §15.1).
+    /// A consonant typed with its 중성 ㅏ (JIS Moonshot's ⇧ + consonant).
     ConsA(char),
     Vowel(char),
     /// ⇧ + a vowel (JIS Korean §4.2): starts a syllable on ㅇ, unless an initial waits for it.
@@ -243,97 +256,142 @@ fn legacy_moonshot(key: Key, shift: bool) -> Option<Role> {
     })
 }
 
-/// Layout 13, unshifted (docs/layouts/bada-candidate-2.json).
+/// Layout 13, unshifted (docs/layouts/13-bada.json, docs/bada-layout.md §2).
 fn bada_base(key: Key) -> Option<Role> {
     use Key::*;
-    let ini_only = |j| Role::Cons {
-        ini: Some(j),
-        fin: None,
-    };
-    let ppa = Role::Cons {
-        ini: Some('ㅃ'),
-        fin: Some('ㅄ'),
-    };
+    let ini = |j| Role::Cons { ini: Some(j), fin: None };
+    let fin = |j| Role::Cons { ini: None, fin: Some(j) };
+    let ppa = Role::Cons { ini: Some('ㅃ'), fin: Some('ㅄ') };
     Some(match key {
-        Digit1 => v('ㅓ'),
-        Digit2 => v('ㅙ'),
-        Digit3 => v('ㅏ'),
-        Digit4 => v('ㅞ'),
-        Digit5 => v('ㅖ'),
-        Digit6 => v('ㅒ'),
-        Digit7 => v('ㅑ'),
+        Digit1 => v('ㅒ'),
+        Digit2 => c('ㅆ'),
+        Digit3 => ini('ㅉ'),
+        Digit4 => c('ㄲ'),
+        Digit5 => ini('ㄸ'),
+        Digit6 => v('ㅟ'),
+        Digit7 => v('ㅝ'),
         Digit8 => v('ㅠ'),
         Digit9 => v('ㅛ'),
         Digit0 => v('ㅘ'),
-        Minus => v('ㅝ'),
-        Equal => v('ㅟ'),
-        IntlYen => v('ㅡ'),
-        KeyQ => v('ㅕ'),
-        KeyW => c('ㅆ'),
-        KeyE => ini_only('ㅉ'),
-        KeyR => ppa,
-        KeyT => c('ㅂ'),
-        KeyY => c('ㅁ'),
-        KeyU => c('ㄲ'),
-        KeyI => ini_only('ㄸ'),
-        KeyO => c('ㅅ'),
-        KeyP => c('ㅆ'),
-        BracketLeft => v('ㅔ'),
-        BracketRight => v('ㅐ'),
-        KeyA => v('ㅗ'),
-        KeyS => c('ㅅ'),
-        KeyD => c('ㅈ'),
-        KeyF => c('ㅇ'),
-        KeyG => c('ㄹ'),
-        KeyH => c('ㄴ'),
-        KeyJ => c('ㄱ'),
-        KeyK => c('ㄷ'),
-        KeyL => c('ㅎ'),
-        Semicolon => ppa,
-        Quote => v('ㅓ'),
-        Backslash => v('ㅚ'),
-        KeyZ => v('ㅜ'),
+        Minus => v('ㅙ'),
+        Equal => v('ㅞ'),
+        IntlYen => fin('ㅂ'),
+        KeyQ => ppa,
+        KeyW => c('ㅌ'),
+        KeyE => c('ㄴ'),
+        KeyR => c('ㅅ'),
+        KeyT => c('ㅍ'),
+        KeyY => v('ㅚ'),
+        KeyU => v('ㅕ'),
+        KeyI => v('ㅑ'),
+        KeyO => v('ㅔ'),
+        KeyP => v('ㅐ'),
+        BracketLeft => v('ㅖ'),
+        BracketRight => v('ㅒ'),
+        KeyA => c('ㄷ'),
+        KeyS => c('ㅈ'),
+        KeyD => c('ㄱ'),
+        KeyF => ini('ㅇ'),
+        KeyG => c('ㅁ'),
+        KeyH => v('ㅏ'),
+        KeyJ => fin('ㅇ'),
+        KeyK => fin('ㄴ'),
+        KeyL => fin('ㄹ'),
+        Semicolon => fin('ㄱ'),
+        Quote => c('ㅆ'),
+        Backslash => ppa,
+        KeyZ => c('ㅊ'),
         KeyX => c('ㅋ'),
-        KeyC => c('ㅌ'),
-        KeyV => c('ㄷ'),
-        KeyB => c('ㅍ'),
-        KeyN => c('ㅊ'),
-        KeyM => c('ㅇ'),
-        Comma => v('ㅏ'),
-        Period => v('ㅣ'),
-        Slash => v('ㅡ'),
+        KeyC => c('ㄹ'),
+        KeyV => c('ㅎ'),
+        KeyB => c('ㅂ'),
+        KeyN => v('ㅓ'),
+        KeyM => v('ㅣ'),
+        Comma => v('ㅡ'),
+        Period => v('ㅗ'),
+        Slash => v('ㅜ'),
         IntlRo => v('ㅢ'),
         _ => return None,
     })
 }
 
+/// Layout 13 with Shift: its shift layer where it has one; else a letter key types as unshifted
+/// and a number or symbol key types its JIS character (bada-layout.md §4).
 fn bada(key: Key, shift: bool) -> Option<Role> {
+    use Key::*;
     if !shift {
         return bada_base(key);
     }
-    if !key.is_letter() {
-        // Shift on a number or symbol key is reserved for its digit or symbol (bada-layout.md §8.1).
-        return jis_char(key, false).map(Role::Lit);
+    let fin = |j| Some(Role::Cons { ini: None, fin: Some(j) });
+    match key {
+        IntlYen => fin('ㄼ'),
+        KeyJ => fin('ㅁ'),
+        KeyK => fin('ㄶ'),
+        KeyL => fin('ㄺ'),
+        Semicolon => fin('ㄲ'),
+        _ if key.is_letter() => bada_base(key),
+        _ => jis_char(key, false).map(Role::Lit),
     }
-    Some(match bada_base(key)? {
-        Role::Cons { ini: Some(j), .. } => Role::ConsA(j),
-        other => other,
+}
+
+/// Layout 14, from its editor JSON (`docs/layouts/14-3set-jis.json`): 초성 / 중성 / 종성 keys
+/// unshifted; ⇧ types what the file says (the key's JIS character).
+fn k3s(key: Key, shift: bool) -> Option<Role> {
+    use std::collections::HashMap;
+    use std::sync::OnceLock;
+    static TABLE: OnceLock<HashMap<(Key, bool), Role>> = OnceLock::new();
+    let table = TABLE.get_or_init(|| {
+        let json: serde_json::Value =
+            serde_json::from_str(include_str!("../../docs/layouts/14-3set-jis.json")).unwrap_or_default();
+        let mut t = HashMap::new();
+        for (code, k) in json["keys"].as_object().into_iter().flatten() {
+            for (layer, shift) in [("base", false), ("shift", true)] {
+                let Some(tok) = k[layer].as_array().and_then(|a| a.first()) else { continue };
+                let (Some(text), Some(r)) = (tok["t"].as_str(), tok["r"].as_str()) else { continue };
+                let mut chars = text.chars();
+                let (Some(c), None) = (chars.next(), chars.next()) else { continue };
+                let role = match r {
+                    "i" => Role::Cons { ini: Some(c), fin: None },
+                    "f" => Role::Cons { ini: None, fin: Some(c) },
+                    "c" => Role::Cons { ini: Some(c), fin: Some(c) },
+                    "v" => Role::Vowel(c),
+                    _ => Role::Lit(c),
+                };
+                t.insert((Key::from_code(code), shift), role);
+            }
+        }
+        t
+    });
+    table.get(&(key, shift)).copied()
+}
+
+/// A tense initial or final made by doubling (3-set: ㄱ ㄱ → ㄲ).
+fn doubled(j: char) -> Option<char> {
+    Some(match j {
+        'ㄱ' => 'ㄲ',
+        'ㄷ' => 'ㄸ',
+        'ㅂ' => 'ㅃ',
+        'ㅅ' => 'ㅆ',
+        'ㅈ' => 'ㅉ',
+        _ => return None,
     })
 }
 
 /// A Korean layout's rules.
 #[derive(Clone, Copy, Debug)]
 pub struct Rules {
-    /// ㅗ + ㅏ joins into ㅘ (2-set). Bada keys every compound vowel and never joins (§16).
+    /// ㅗ + ㅏ joins into ㅘ (2-set).
     pub join_vowels: bool,
     /// A vowel at the start, after a vowel or after an open syllable starts a syllable on ㅇ.
     pub implied_ieung: bool,
-    /// Consonants alone read as 초성 abbreviations (§15).
+    /// Consonants alone read as 초성 abbreviations (no layout at present, bada-layout.md §8).
     pub choseong: bool,
     /// The same vowel key again right after it took a final puts the final back (JIS Korean §4.2).
     pub double_toggle: bool,
     /// A ⇧ + vowel right after ⇧ㄲ / ⇧ㅆ may be Shift held over: a plain vowel (JIS Korean §4.2).
     pub held_shift: bool,
+    /// The same initial twice is its tense form, the same final twice too (3-set: ㄱ ㄱ → ㄲ).
+    pub double_tense: bool,
 }
 
 pub fn rules(id: u32) -> Option<Rules> {
@@ -344,6 +402,7 @@ pub fn rules(id: u32) -> Option<Rules> {
             choseong: false,
             double_toggle: false,
             held_shift: false,
+            double_tense: false,
         }),
         LEGACY_KOREAN => Some(Rules {
             join_vowels: true,
@@ -351,6 +410,7 @@ pub fn rules(id: u32) -> Option<Rules> {
             choseong: false,
             double_toggle: true,
             held_shift: true,
+            double_tense: false,
         }),
         LEGACY_MOONSHOT => Some(Rules {
             join_vowels: true,
@@ -358,13 +418,23 @@ pub fn rules(id: u32) -> Option<Rules> {
             choseong: false,
             double_toggle: true,
             held_shift: false,
+            double_tense: false,
         }),
         BADA => Some(Rules {
-            join_vowels: false,
-            implied_ieung: true,
-            choseong: true,
+            join_vowels: true,
+            implied_ieung: false,
+            choseong: false,
             double_toggle: false,
             held_shift: false,
+            double_tense: false,
+        }),
+        K3S_JIS => Some(Rules {
+            join_vowels: true,
+            implied_ieung: false,
+            choseong: false,
+            double_toggle: false,
+            held_shift: false,
+            double_tense: true,
         }),
         _ => None,
     }
@@ -377,6 +447,7 @@ pub fn role(id: u32, key: Key, shift: bool) -> Option<Role> {
         LEGACY_KOREAN => legacy_korean(key, shift),
         LEGACY_MOONSHOT => legacy_moonshot(key, shift),
         BADA => bada(key, shift),
+        K3S_JIS => k3s(key, shift),
         _ => None,
     }
 }
@@ -475,6 +546,9 @@ fn compose_with(id: u32, presses: &[Press], drop_implied: bool) -> String {
     if id == KANA_KOREAN {
         return crate::kana_korean::compose_presses(presses);
     }
+    if id == K3S_JIS {
+        return compose_moa(id, presses);
+    }
     let Some(syls) = build(id, presses) else {
         return String::new();
     };
@@ -495,8 +569,102 @@ pub struct Detail {
     pub fin_press: Option<usize>,
 }
 
+/// 모아쓰기 (3-set, layout 14): initial, vowel and final have keys of their own, so a syllable is
+/// assembled whatever order its jamo come in (ㅏ ㅎ ㄴ, ㅎ ㄴ ㅏ, ㅎ ㅏ ㄴ: 한), keys pressed together
+/// included. A jamo whose slot is taken, and that can't join what's there (ㄱ ㄱ → ㄲ, ㅗ ㅏ → ㅘ,
+/// ㄹ ㄱ → ㄺ), starts the next syllable.
+fn compose_moa(id: u32, presses: &[Press]) -> String {
+    #[derive(Default)]
+    struct Moa {
+        ini: Option<char>,
+        vowel: Option<char>,
+        fin: Option<char>,
+        /// The final was built from two keys (a cluster or a doubling): nothing more joins it.
+        fin_full: bool,
+    }
+    impl Moa {
+        fn is_empty(&self) -> bool {
+            self.ini.is_none() && self.vowel.is_none() && self.fin.is_none()
+        }
+        fn text(&self, out: &mut String) {
+            match (self.ini, self.vowel) {
+                (Some(l), Some(v)) => match compose(l, v, self.fin) {
+                    Some(c) => out.push(c),
+                    None => out.extend([Some(l), Some(v), self.fin].into_iter().flatten()),
+                },
+                _ => out.extend([self.ini, self.vowel, self.fin].into_iter().flatten()),
+            }
+        }
+    }
+    let r = rules(id).unwrap_or(Rules {
+        join_vowels: true, implied_ieung: false, choseong: false, double_toggle: false, held_shift: false, double_tense: true,
+    });
+    let mut out = String::new();
+    let mut cur = Moa::default();
+    for &p in presses {
+        let Some(role) = press_role(id, p) else { continue };
+        match role {
+            Role::Cons { ini: Some(l), .. } => {
+                match cur.ini {
+                    None => cur.ini = Some(l),   // a syllable is never done without its initial
+                    Some(have) if have == l && r.double_tense && cur.vowel.is_none() && cur.fin.is_none() && doubled(l).is_some() => {
+                        cur.ini = doubled(l)
+                    }
+                    _ => {
+                        cur.text(&mut out);
+                        cur = Moa { ini: Some(l), ..Moa::default() };
+                    }
+                }
+            }
+            Role::Vowel(v) | Role::VowelNew(v) => match cur.vowel {
+                None => cur.vowel = Some(v),
+                Some(have) if r.join_vowels && cur.fin.is_none() && compound(have, v).is_some() => cur.vowel = compound(have, v),
+                _ => {
+                    cur.text(&mut out);
+                    cur = Moa { vowel: Some(v), ..Moa::default() };
+                }
+            },
+            Role::Cons { ini: None, fin: Some(f) } => match cur.fin {
+                None => cur.fin = Some(f),
+                Some(have) if !cur.fin_full => {
+                    let joined = cluster(have, f)
+                        .or_else(|| if r.double_tense && have == f { doubled(f).filter(|t| matches!(t, 'ㄲ' | 'ㅆ')) } else { None });
+                    if let Some(j) = joined {
+                        cur.fin = Some(j);
+                        cur.fin_full = true;
+                    } else {
+                        cur.text(&mut out);
+                        cur = Moa { fin: Some(f), ..Moa::default() };
+                    }
+                }
+                _ => {
+                    cur.text(&mut out);
+                    cur = Moa { fin: Some(f), ..Moa::default() };
+                }
+            },
+            Role::Cons { ini: None, fin: None } => {}
+            Role::ConsA(l) => {
+                cur.text(&mut out);
+                cur = Moa { ini: Some(l), vowel: Some('ㅏ'), ..Moa::default() };
+            }
+            Role::Lit(c) => {
+                cur.text(&mut out);
+                cur = Moa::default();
+                out.push(c);
+            }
+        }
+    }
+    if !cur.is_empty() {
+        cur.text(&mut out);
+    }
+    out
+}
+
 /// The syllables of the presses in a 2-set-family layout (10–13) whose initial was typed.
 pub fn details(id: u32, presses: &[Press]) -> Vec<Detail> {
+    if id == K3S_JIS {
+        return Vec::new();   // 모아쓰기: no key-by-key syllables to report
+    }
     let Some(syls) = build(id, presses) else { return Vec::new() };
     syls.iter()
         .filter(|s| s.lit.is_none())
@@ -559,6 +727,15 @@ fn build(id: u32, presses: &[Press]) -> Option<Vec<Syl>> {
                         && cur.vowel.is_some()
                         && (cur.ini.is_some() || r.implied_ieung)
                     {
+                        // 3-set: the same final twice is its tense form (ㄱ ㄱ → ㄲ).
+                        if let ([(a, at)], true) = (cur.fins.as_slice(), r.double_tense) {
+                            if *a == f && ini.is_none() {
+                                if let Some(t) = doubled(f).filter(|t| matches!(t, 'ㄲ' | 'ㅆ')) {
+                                    cur.fins = vec![(t, *at)];
+                                    continue;
+                                }
+                            }
+                        }
                         let joins = match cur.fins.as_slice() {
                             [] => true,
                             [(a, _)] => cluster(*a, f).is_some(),
@@ -566,6 +743,15 @@ fn build(id: u32, presses: &[Press]) -> Option<Vec<Syl>> {
                         };
                         if joins && cur.ini.is_some() {
                             cur.fins.push((f, i));
+                            continue;
+                        }
+                    }
+                }
+                // 3-set: the same initial twice, before a vowel, is its tense form (ㄱ ㄱ → ㄲ).
+                if let (true, Some(l), Some(cur)) = (r.double_tense, ini, syls.last_mut()) {
+                    if cur.lit.is_none() && cur.vowel.is_none() && cur.ini == Some(l) {
+                        if let Some(t) = doubled(l) {
+                            cur.ini = Some(t);
                             continue;
                         }
                     }
@@ -635,7 +821,7 @@ fn build(id: u32, presses: &[Press]) -> Option<Vec<Syl>> {
     Some(syls)
 }
 
-/// A 초성 token (§15): an initial, and whether it carries ㅏ (⇧ + consonant, §15.1).
+/// A 초성 token: an initial, and whether it carries ㅏ (⇧ + consonant).
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Token {
     pub ini: char,
@@ -673,7 +859,7 @@ pub fn tokens_text(tokens: &[Token]) -> String {
         .collect()
 }
 
-/// Bada's `raw` action (§16.1): every key as its 초성 or vowel, nothing implied, nothing composed.
+/// Bada's `raw` action (bada-layout.md §6): every key as its jamo, nothing composed.
 pub fn raw(id: u32, presses: &[Press]) -> String {
     presses
         .iter()
@@ -683,6 +869,16 @@ pub fn raw(id: u32, presses: &[Press]) -> String {
             Role::Vowel(v) | Role::VowelNew(v) => Some(v),
             Role::Lit(ch) => Some(ch),
         })
+        .collect()
+}
+
+/// A search layout's query (150, 151): letters lowercase (a token is the letter, either case),
+/// digits and symbols as their JIS characters, Space a space.
+pub fn query(presses: &[Press]) -> String {
+    presses
+        .iter()
+        .filter_map(|p| if p.key == Key::Space { Some(' ') } else { jis_char(p.key, p.shift) })
+        .map(|c| c.to_ascii_lowercase())
         .collect()
 }
 
@@ -702,6 +898,7 @@ pub fn takes(id: u32, p: Press) -> bool {
         KOREAN_ROMAN => crate::korean_roman::takes(p),
         KANA => crate::japanese::kana_takes(p),
         ROMAJI => crate::japanese::romaji_takes(p),
+        SYMBOLS | UNICODE => !p.alt && (p.key == Key::Space || jis_char(p.key, p.shift).is_some()),
         _ => press_role(id, p).is_some(),
     }
 }
@@ -790,61 +987,86 @@ mod tests {
 
     #[test]
     fn bada_composes() {
-        // 한 = ㅎ(L) ㅏ(,) ㄴ(H)
-        assert_eq!(plain(BADA, &[KeyL, Comma, KeyH]), "한");
-        // implied ㅇ: ㅏ ㄴ → 안; 안녕: ㅏ ㄴ ㄴ ㅕ ㅇ
-        assert_eq!(plain(BADA, &[Comma, KeyH, KeyH, KeyQ, KeyF]), "안녕");
-        // vowels never join: ㅂ ㅗ ㅏ → 보아
-        assert_eq!(plain(BADA, &[KeyT, KeyA, Comma]), "보아");
-        // a final moves as its key's initial: R after 가 is ㅄ, then ㅏ → 가빠
-        assert_eq!(plain(BADA, &[KeyJ, Comma, KeyR]), "값");
-        assert_eq!(plain(BADA, &[KeyJ, Comma, KeyR, Comma]), "가빠");
-        // two keys make a double final; a vowel takes the second: ㅇ ㅏ ㄴ ㅎ → 않, + ㅏ → 안하
-        assert_eq!(plain(BADA, &[Comma, KeyH, KeyL]), "않");
-        assert_eq!(plain(BADA, &[Comma, KeyH, KeyL, Comma]), "안하");
-        // ⇧ consonant = consonant + ㅏ
-        assert_eq!(keys(BADA, &[(KeyL, true)]), "하");
-        assert_eq!(keys(BADA, &[(KeyJ, true), (KeyH, false)]), "간");
-        // ⇧ on a symbol key is its JIS character
-        assert_eq!(
-            keys(BADA, &[(KeyL, false), (Comma, false), (Period, true)]),
-            "하."
-        );
+        // 한: ㅎ(V) ㅏ(H) ㄴ(K, final only)
+        assert_eq!(plain(BADA, &[KeyV, KeyH, KeyK]), "한");
+        // 안녕: ㅇ is typed (no implied ㅇ)
+        assert_eq!(plain(BADA, &[KeyF, KeyH, KeyK, KeyE, KeyU, KeyJ]), "안녕");
+        assert_eq!(plain(BADA, &[KeyH, KeyK]), "ㅏㄴ");
+        // an initial-or-final key: the final, until a vowel takes it (2-set): 간, 가나
+        assert_eq!(plain(BADA, &[KeyD, KeyH, KeyE]), "간");
+        assert_eq!(plain(BADA, &[KeyD, KeyH, KeyE, KeyH]), "가나");
+        // a final-only key never moves: 간 + ㅏ stays 간ㅏ
+        assert_eq!(plain(BADA, &[KeyD, KeyH, KeyK, KeyH]), "간ㅏ");
+        // 것, 것이, 거시
+        assert_eq!(plain(BADA, &[KeyD, KeyN, KeyR]), "것");
+        assert_eq!(plain(BADA, &[KeyD, KeyN, KeyR, KeyF, KeyM]), "것이");
+        assert_eq!(plain(BADA, &[KeyD, KeyN, KeyR, KeyM]), "거시");
+        // vowels join as in 2-set; compound vowels have keys too
+        assert_eq!(plain(BADA, &[KeyB, Period, KeyH]), "봐");
+        assert_eq!(plain(BADA, &[KeyB, Digit0]), "봐");
+        // double finals: two keys, or one ⇧ key
+        assert_eq!(plain(BADA, &[KeyR, KeyH, KeyL, KeyG]), "삶");
+        assert_eq!(keys(BADA, &[(KeyG, false), (KeyH, false), (KeyK, true)]), "많");
+        assert_eq!(keys(BADA, &[(KeyA, false), (KeyH, false), (KeyL, true)]), "닭");
+        assert_eq!(keys(BADA, &[(KeyB, false), (KeyH, false), (IntlYen, true)]), "밟");
+        assert_eq!(keys(BADA, &[(KeyR, false), (KeyH, false), (KeyJ, true)]), "삼");
+        assert_eq!(keys(BADA, &[(KeyD, false), (KeyH, false), (Semicolon, true)]), "갂");
+        // ⇧. and ⇧/ are punctuation (ㅛ ㅠ are on 9 and 8)
+        assert_eq!(keys(BADA, &[(KeyD, false), (KeyH, false), (Period, true)]), "가.");
+        assert_eq!(keys(BADA, &[(KeyD, false), (KeyH, false), (Slash, true)]), "가/");
+        // ⇧ elsewhere: a letter types as unshifted, a number or symbol key its JIS character
+        assert_eq!(keys(BADA, &[(KeyV, true), (KeyH, false)]), "하");
+        assert_eq!(keys(BADA, &[(KeyD, false), (KeyH, false), (Digit1, true)]), "가1");
+        assert_eq!(keys(BADA, &[(KeyD, false), (KeyH, false), (Quote, true)]), "가:");
     }
 
     #[test]
     fn details_name_the_keys() {
-        // 한 + 국 in Bada: ㅎ(L) ㅏ(,) ㄴ(H) ㄱ(J) ㅜ(Z) ㄱ(J)
-        let p: Vec<Press> = [KeyL, Comma, KeyH, KeyJ, KeyZ, KeyJ].iter().map(|&k| Press::new(k, false)).collect();
+        // 한국: ㅎ(V) ㅏ(H) ㄴ(K) ㄱ(D) ㅜ(/) ㄱ(;)
+        let p: Vec<Press> = [KeyV, KeyH, KeyK, KeyD, Slash, Semicolon].iter().map(|&k| Press::new(k, false)).collect();
         let d = details(BADA, &p);
         assert_eq!(d.len(), 2);
         assert_eq!((d[0].ini_press, d[0].ini, d[0].vowel, d[0].fin, d[0].fin_press), (0, 'ㅎ', 'ㅏ', Some('ㄴ'), Some(2)));
         assert_eq!((d[1].ini_press, d[1].ini, d[1].vowel, d[1].fin), (3, 'ㄱ', 'ㅜ', Some('ㄱ')));
-        // a final moved to the next syllable is that syllable's initial, from its press: 가빠
-        let p: Vec<Press> = [KeyJ, Comma, KeyR, Comma].iter().map(|&k| Press::new(k, false)).collect();
-        let d = details(BADA, &p);
-        assert_eq!((d[1].ini_press, d[1].ini), (2, 'ㅃ'));
-        // implied ㅇ syllables have no initial key: 안 records nothing
-        assert!(details(BADA, &[Press::new(Comma, false), Press::new(KeyH, false)]).is_empty());
+        // a final moved to the next syllable is that syllable's initial, from its press: 가나
+        let p: Vec<Press> = [KeyD, KeyH, KeyE, KeyH].iter().map(|&k| Press::new(k, false)).collect();
+        assert_eq!((details(BADA, &p)[1].ini_press, details(BADA, &p)[1].ini), (2, 'ㄴ'));
+        // a vowel alone has no initial: nothing recorded
+        assert!(details(BADA, &[Press::new(KeyH, false)]).is_empty());
     }
 
     #[test]
-    fn bada_choseong() {
-        let p = |k, s| Press::new(k, s);
-        let t = choseong_tokens(BADA, &[p(KeyF, false), p(KeyH, false), p(KeyL, true)]).unwrap();
-        assert_eq!(tokens_text(&t), "ㅇㄴ하");
-        assert!(choseong_tokens(BADA, &[p(KeyF, false), p(Comma, false)]).is_none());
-        assert_eq!(
-            raw(
-                BADA,
-                &[
-                    p(KeyL, false),
-                    p(Comma, false),
-                    p(KeyR, false),
-                    p(KeyL, true)
-                ]
-            ),
-            "ㅎㅏㅃㅎ"
-        );
+    fn three_set_jis_composes() {
+        let p = |k| Press::new(k, false);
+        let t = |ks: &[Key]| compose_presses(K3S_JIS, &ks.iter().map(|&k| p(k)).collect::<Vec<_>>());
+        // 한: ㅎ(M) ㅏ(F) ㄴ(S, final)
+        assert_eq!(t(&[KeyM, KeyF, KeyS]), "한");
+        // a final never moves: 한 + ㅏ → 한ㅏ; 하나 needs ㄴ's initial key (H)
+        assert_eq!(t(&[KeyM, KeyF, KeyS, KeyF]), "한ㅏ");
+        assert_eq!(t(&[KeyM, KeyF, KeyH, KeyF]), "하나");
+        // doubling: ㄱ ㄱ ㅏ → 까; final ㄱ ㄱ → ㄲ (밖)
+        assert_eq!(t(&[KeyK, KeyK, KeyF]), "까");
+        assert_eq!(t(&[Semicolon, KeyF, KeyX, KeyX]), "밖");
+        // compound vowels join: ㄱ ㅗ ㅏ → 과; double finals cluster: ㄷ ㅏ ㄹ ㄱ → 닭
+        assert_eq!(t(&[KeyK, KeyV, KeyF]), "과");
+        assert_eq!(t(&[KeyU, KeyF, KeyW, KeyX]), "닭");
+        // 모아쓰기: any order within a syllable
+        assert_eq!(t(&[KeyF, KeyM, KeyS]), "한");   // ㅏ ㅎ ㄴ
+        assert_eq!(t(&[KeyM, KeyS, KeyF]), "한");   // ㅎ ㄴ ㅏ
+        assert_eq!(t(&[KeyS, KeyF, KeyM]), "한");   // ㄴ ㅏ ㅎ
+        assert_eq!(t(&[KeyF, KeyM, KeyS, KeyK, KeyB, KeyX]), "한국");
+        assert_eq!(t(&[KeyM, KeyF, KeyH, KeyF, KeyM]), "하나ㅎ");   // a filled slot starts the next syllable
+        // ⇧: the JIS character
+        assert_eq!(keys(K3S_JIS, &[(KeyM, false), (KeyF, false), (Digit1, true)]), "하!");
+        assert_eq!(keys(K3S_JIS, &[(KeyQ, true)]), "Q");
+    }
+
+    #[test]
+    fn bada_is_deterministic() {
+        let p = |k| Press::new(k, false);
+        // no 초성 input: consonants alone are jamo
+        assert!(choseong_tokens(BADA, &[p(KeyD), p(KeyR)]).is_none());
+        assert_eq!(compose_presses(BADA, &[p(KeyD), p(KeyR)]), "ㄱㅅ");
+        assert_eq!(raw(BADA, &[p(KeyV), p(KeyH), p(KeyK)]), "ㅎㅏㄴ");
     }
 }

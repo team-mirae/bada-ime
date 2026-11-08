@@ -10,11 +10,27 @@ import InputMethodKit
 /// - かな: henkan mode; already in henkan, the next menu entry (⇧かな: the previous).
 /// - HYPER+かな (⌘⌃⌥⇧) and MEH+かな (⌃⌥⇧): the other mode (this build has one muhenkan layout and
 ///   one henkan, so going back to the last used one and cycling both land there).
+/// - With henkan profiles on (spec §6.6): the keys recorded for 変換 and カタカナ select their profile.
 enum LanguageKeyTap {
     private static var tap: CFMachPort?
     private static var polling = false
+    /// Key code → profile, for the recorded 変換 / カタカナ keys (only with profiles on).
+    private(set) static var profileKeys: [Int: String] = [:]
+    /// Set while Settings records a key: the next key pressed anywhere goes here, and nowhere else.
+    static var recorder: ((Int) -> Void)?
+    static var isOn: Bool { tap != nil }
+
+    static func refreshProfileKeys(_ settings: BadaSettings = BadaSettings.current) {
+        profileKeys = [:]
+        guard settings.use_profiles else { return }
+        for (name, code) in settings.profile_keys where code != kVK_JIS_Kana && code != kVK_JIS_Eisu {
+            profileKeys[code] = name
+        }
+    }
 
     static func check() {
+        refreshProfileKeys()
+        HIDKeys.check()
         if Modes.isEnabled(.henkan) || Modes.isEnabled(.muhenkan) {
             start(ask: false)
         }
@@ -56,15 +72,32 @@ enum LanguageKeyTap {
             return Unmanaged.passUnretained(event)
         }
         let code = Int(event.getIntegerValueField(.keyboardEventKeycode))
-        guard code == kVK_JIS_Kana || code == kVK_JIS_Eisu else { return Unmanaged.passUnretained(event) }
+        if let recorder {
+            if type == .keyDown {
+                Self.recorder = nil
+                DispatchQueue.main.async { recorder(code) }
+            }
+            return nil
+        }
+        let profileKey = profileKeys[code]
+        guard code == kVK_JIS_Kana || code == kVK_JIS_Eisu || profileKey != nil else { return Unmanaged.passUnretained(event) }
         guard Modes.isEnabled(.henkan) || Modes.isEnabled(.muhenkan) else { return Unmanaged.passUnretained(event) }
         let flags = event.flags
         let press = type == .keyDown && event.getIntegerValueField(.keyboardEventAutorepeat) == 0
         if press {
             let shift = flags.contains(.maskShift), ctrl = flags.contains(.maskControl)
             let alt = flags.contains(.maskAlternate), cmd = flags.contains(.maskCommand)
-            DispatchQueue.main.async {
-                if code == kVK_JIS_Eisu {
+            // A moment's wait: カタカナ arrives as かな, and the HID key that says so may come just after
+            // (HIDKeys, whose own window is longer).
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
+                var profileKey = profileKey
+                if code == kVK_JIS_Kana || code == kVK_JIS_Eisu, let hid = HIDKeys.claim() {
+                    if hid.recorded { return }
+                    if let name = profileKeys[hid.code] { profileKey = name }
+                }
+                if let profileKey {
+                    if !ctrl && !alt && !cmd { LanguageKeys.profile(profileKey, shift: shift) }
+                } else if code == kVK_JIS_Eisu {
                     LanguageKeys.eisu()
                 } else if ctrl && alt && shift {
                     LanguageKeys.toggle()  // HYPER (with ⌘) or MEH (without)
@@ -84,9 +117,17 @@ enum LanguageKeys {
     }
 
     static func kana(shift: Bool) {
+        profile(BadaProfiles.macKana, shift: shift)
+    }
+
+    /// かな, or a profile key (spec §6.6): henkan mode in that profile; already there, the next
+    /// menu entry (⇧: the previous).
+    static func profile(_ name: String, shift: Bool) {
+        let name = BadaSettings.current.use_profiles ? name : BadaProfiles.macKana
         if Modes.selectedNow() == .henkan, let controller = BadaInputController.typing {
-            controller.cycle(back: shift)
+            controller.languageKey(name, shift: shift)
         } else {
+            Modes.profile = name
             go(to: .henkan)
         }
     }

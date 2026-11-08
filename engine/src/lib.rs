@@ -17,6 +17,8 @@ pub mod korean_roman;
 pub mod key;
 pub mod layout;
 pub mod romaji;
+pub mod search;
+pub mod typo;
 pub mod userdict;
 pub mod width;
 

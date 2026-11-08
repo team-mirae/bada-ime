@@ -8,3 +8,4 @@ __pycache__/
 /mac/build/
 *.log
 /engine/tools/cache/
+/utils/learner-app/data/

@@ -21,12 +21,17 @@ let sharedData: OpaquePointer? = {
         Bundle.main.url(forResource: name, withExtension: nil, subdirectory: "data").flatMap { try? Data(contentsOf: $0) } ?? Data()
     }
     let ko = file("ko-words.tsv"), en = file("en-words.txt"), hanja = file("hanja.tsv"), oecd = file("oecd.tsv")
-    let ja = file("ja-words.txt"), kanji = file("kanji.bin")
-    return ko.withUnsafeBytes { k in en.withUnsafeBytes { e in hanja.withUnsafeBytes { h in oecd.withUnsafeBytes { o in ja.withUnsafeBytes { j in kanji.withUnsafeBytes { kj in
+    let ja = file("ja-words.txt"), kanji = file("kanji.bin"), lm = file("ko-jamo-4gram.bin")
+    let symbols = file("symbols.tsv"), emoji = file("emoji.tsv"), unicode = file("unicode-names.tsv")
+    return ko.withUnsafeBytes { k in en.withUnsafeBytes { e in hanja.withUnsafeBytes { h in oecd.withUnsafeBytes { o in ja.withUnsafeBytes { j in kanji.withUnsafeBytes { kj in lm.withUnsafeBytes { m in
+           symbols.withUnsafeBytes { sy in emoji.withUnsafeBytes { em in unicode.withUnsafeBytes { un in
         bada_data_new(k.bindMemory(to: UInt8.self).baseAddress, k.count, e.bindMemory(to: UInt8.self).baseAddress, e.count,
                       h.bindMemory(to: UInt8.self).baseAddress, h.count, o.bindMemory(to: UInt8.self).baseAddress, o.count,
-                      j.bindMemory(to: UInt8.self).baseAddress, j.count, kj.bindMemory(to: UInt8.self).baseAddress, kj.count)
-    } } } } } }
+                      j.bindMemory(to: UInt8.self).baseAddress, j.count, kj.bindMemory(to: UInt8.self).baseAddress, kj.count,
+                      m.bindMemory(to: UInt8.self).baseAddress, m.count,
+                      sy.bindMemory(to: UInt8.self).baseAddress, sy.count, em.bindMemory(to: UInt8.self).baseAddress, em.count,
+                      un.bindMemory(to: UInt8.self).baseAddress, un.count)
+    } } } } } } } } } }
 }()
 
 /// One engine (one per text input client). All behaviour is in the engine.
@@ -54,6 +59,10 @@ final class Engine {
 
     func setMode(_ mode: BadaMode) -> EngineOutput {
         decode(bada_set_mode(handle, mode == .muhenkan ? 0 : 1))
+    }
+
+    func setProfile(_ name: String) -> EngineOutput {
+        decode(bada_set_profile(handle, name))
     }
 
     func flush() -> EngineOutput {

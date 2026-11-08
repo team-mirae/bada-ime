@@ -1,6 +1,9 @@
 ko-words.tsv holds word counts only (no sentences), built by tools/build_ko_words.py from these
 sources (permissive licences only; share-alike sources are left out):
 
+ko-jamo-4gram.bin (typo suggestions) is derived from ko-words.tsv alone (tools/build_jamo_lm.py), under the
+same sources and terms.
+
 Running text and word counts
 - Leipzig Corpora Collection, Korean news. CC BY. D. Goldhahn, T. Eckart and U. Quasthoff,
   "Building Large Monolingual Dictionaries at the Leipzig Corpora Collection", LREC 2012.

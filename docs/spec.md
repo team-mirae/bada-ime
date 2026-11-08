@@ -105,11 +105,14 @@ Ids are `u32`. **Development / debug** ranges (re-numbered when merged to main):
 | 10 | JIS KTS | `Korean (2-set)` | henkan, deterministic | standard KS X 5002 2-set on the JIS letter keys, JIS symbols untouched |
 | 11 | JIS Korean Legacy | `Korean (legacy-korean)` | henkan, deterministic | JIS Korean Mode A |
 | 12 | JIS Moonshot | `Korean (legacy-moonshot)` | henkan, deterministic | JIS Moonshot Mode A's Korean reading (moonshot.md §9) |
-| 13 | JIS Bada | `Korean (bada)` | henkan, **ranked** (token keys, n-grams) | new: [bada-layout.md](bada-layout.md) |
+| 13 | JIS Bada | `Korean (bada)` | henkan, deterministic | new: [bada-layout.md](bada-layout.md) |
+| 14 | JIS 3-set (세벌식 JIS, K3S-J) | `Korean (3-set JIS)` | henkan, deterministic | new: [layouts/14-3set-jis.md](layouts/14-3set-jis.md), designed by the owner from 세벌식 순아래; 모아쓰기 (jamo of a syllable in any order) |
 | 18 | JIS Korean Roman | `Korean (Roman)` | henkan, ranked (the default reading shows; other readings offered) | new: [korean-roman.md](korean-roman.md) |
 | 19 | JIS Kana Korean | `Korean (Kana)` | henkan, ranked (the table's reading shows; other pronunciations offered) | new, minor: [kana-korean.md](kana-korean.md) |
 | 20 | JIS Kana | `Japanese (Kana)` | henkan, non-deterministic (kanji conversion) | JIS Moonshot `A_KANA`: [japanese.md](japanese.md) |
 | 21 | JIS Romaji | `Japanese (Romaji)` | henkan, non-deterministic (kanji conversion) | new: [japanese.md](japanese.md) |
+| 150 | Symbols | `Symbols` | henkan, search | Mirae Research: [layouts/150-symbols.md](layouts/150-symbols.md) |
+| 151 | Unicode | `Unicode` | henkan, search | Mirae Research: [layouts/151-unicode.md](layouts/151-unicode.md) |
 
 Every layout declares whether it is muhenkan or henkan.
 
@@ -119,6 +122,14 @@ Every layout declares whether it is muhenkan or henkan.
 - the **default muhenkan layout** (英数 enters it);
 - the **default henkan target** for HYPER+かな (§6.1), and the **cycle order** for MEH+かな.
   Without a user order: integer id ascending.
+- a **weight** per layout (0–10, default 1): a multiplier on the score of every entry that layout
+  raises, in every profile (before the user's negative words and the typo suggestions);
+- **henkan profiles** (§6.6), off by default: candidates per profile key, links, recorded keys;
+- **script forms** (§6.4), off by default;
+- the **emoji skin-tone order** for layout 150.
+
+Settings → Export Settings… writes all of them to a file (`{"format": "bada-settings/1", "settings":
+{…}}`); Import Settings… replaces them all from one (fields a file lacks take their defaults).
 
 ## 6. Keys
 
@@ -195,6 +206,9 @@ The interpretations of the staged keys form one menu with **signed indexes**:
   goes down, and **below 0 into the negative entries**.
 - Japanese methods (20 Kana, 21 Romaji) define **−1 hiragana** and **−2 katakana**: from a fresh
   reading, ⇧Tab once is hiragana, twice katakana.
+- **Optional, off by default** (owner, 2026-11-08): Settings → "Script forms below the top entry"
+  (`script_forms`). Off, there are no negative entries: ⇧Tab stops at 0, and katakana is an ordinary
+  ranked entry among the kanji conversions. Hiragana and katakana are also F-key actions (§6.5).
 - This **replaces F6 / F7** as the way to get hiragana and katakana. JIS Moonshot's F6–F10 (hiragana,
   katakana, kanji, full-width, half-width) are **not** ported as fixed keys; the F keys are reserved
   for §6.5.
@@ -246,6 +260,53 @@ conversion, so apps don't rely on them while a Japanese input source is on).
 - With nothing staged, an action applies to nothing and the key is swallowed (a method may define
   otherwise, e.g. act on the selection).
 
+### 6.6 Henkan profiles (owner, 2026-11-08)
+
+Optional, **off by default**: Settings → Henkan profiles. Three keys can each bring up henkan mode
+with its own set of henkan candidates:
+
+| Key | Profile | Default |
+|---|---|---|
+| かな | `mac-kana` | its own candidates (the enabled set of §5.3) |
+| 変換 | `henkan` | linked to `mac-kana` |
+| カタカナ | `katakana` | linked to `mac-kana` |
+
+- Each profile has **its own candidates** (an ordered enabled set, e.g. QWERTY + KTS + kana for かな
+  and QWERTY + KTS + romaji for 変換) **or links to another profile** and uses its set; any profile
+  can link to any other, `mac-kana` included. A loop or a dead end falls back to `mac-kana`'s own set.
+- The default setup is `mac-kana` only, the other two linked to it: with profiles off, or on but not
+  set up, every key gives the same henkan.
+- A profile key in muhenkan mode enters henkan in that profile. In henkan mode, a different profile's
+  key commits what's staged and switches profile; the same profile's key is the next menu entry
+  (⇧: previous), as かな is (§6.3).
+- **かな in another profile** (in henkan mode with `henkan` or `katakana` in use) is a setting **per
+  profile** (`kana_in_profile`: `henkan` → …, `katakana` → …), e.g. 変換's profile on the default
+  and カタカナ's sending かな straight to muhenkan:
+
+  | Setting | かな does |
+  |---|---|
+  | `next-or-mac-kana` (**default**) | The next menu entry (⇧かな: previous) when there's a menu to move in (something staged with more than one reading); else back to `mac-kana` |
+  | `mac-kana` | Always back to `mac-kana` |
+  | `cycle` | The next profile in the cycle order (⇧かな: the previous); the order is a setting, `mac-kana` → `henkan` → `katakana` by default |
+  | `henkan` | To `henkan`'s profile (already there: the next menu entry) |
+  | `katakana` | To `katakana`'s profile (already there: the next menu entry) |
+  | `muhenkan` | Leaves henkan mode, as 英数 |
+
+  Going to another profile commits what's staged.
+- **PC keyboards' 変換 and カタカナ** never become key events of their own in macOS: 変換 (HID usage
+  0x8A, International4) becomes nothing and カタカナ (0x88, International2) becomes かな. bada ime
+  reads them at the HID level (`mac/Sources/HIDKeys.swift`, **needs Input Monitoring**): a recorded
+  HID key is stored as `0x70000 | usage`; a かな event right after カタカナ's HID report is taken as
+  カタカナ, and 変換, with no event, acts from its HID report.
+- 変換 and カタカナ are caught by the same key tap as 英数 and かな, so they **need Accessibility**.
+  macOS may not pass a PC keyboard's 変換 and カタカナ on (and some keyboards send かな for
+  カタカナ), so Settings **records** which key code each profile key is (through the key tap, so
+  any key works wherever focus is; Esc or the button again cancels; Clear forgets it); かな and 英数 can't be recorded. Unrecorded: the profile is only reachable through links.
+- **F keys per profile:** each profile but `mac-kana` can have **its own F6–F10** (intercepted or
+  not, and each key's binding), or use `mac-kana`'s (the default). F-key actions only act for a
+  method among the profile's candidates.
+- This settles §6.1's (b) for keys; what HYPER+かな and MEH+かな do with profiles is still open.
+
 ## 7. Build and layout of the repo
 
 | Path | What |
@@ -253,7 +314,7 @@ conversion, so apps don't rely on them while a Japanese input source is on).
 | `/engine` | Platform-independent core (Rust, `bada-engine`): layouts, composition, the menu, F-key actions. Event in → output out, no I/O. C ABI in `include/bada.h` (JSON in and out) |
 | `/engine/data` | Shipped data: Korean word counts (`ko-words.tsv`, built by `engine/tools/build_ko_words.py`), English words, hanja, OECD names, with their licenses |
 | `/mac` | InputMethodKit shell (Swift, no Xcode): the two input modes (§4.1), the 英数 / かな key tap, the menu window, the settings window |
-| `/docs` | This spec, the Bada layout design, a page per layout and combination examples (`docs/layouts`, images in `docs/images/layouts`), saved layout candidates |
+| `/docs` | This spec, the Bada layout design, a page per layout and combination examples (`docs/layouts`, images in `docs/images/layouts`), the layout 13 design history and its saved candidates (`docs/bada-history.md`, `docs/history/`) |
 | `/tools/analysis`, `/tools/render`, `/tools/editor` | Corpus analysis and layout optimisation, the layout renderer (with combinations, and `export_png.py` for the docs' images), the layout editor |
 
 All behaviour lives in the engine; the shell translates keys, switches input sources and applies
@@ -267,7 +328,7 @@ the output.
 
 ### 7.0 What v0.1 builds
 
-- Layouts **0** (QWERTY), **10** (2-set), **11** (JIS Korean), **12** (JIS Moonshot), **13** (Bada, bada-layout.md §16), **18** (Korean Roman), **19** (Kana Korean),
+- Layouts **0** (QWERTY), **10** (2-set), **11** (JIS Korean), **12** (JIS Moonshot), **13** (Bada, bada-layout.md), **18** (Korean Roman), **19** (Kana Korean),
   **20** (Kana) and **21** (Romaji). 20 and 21 convert to kanji (Mozc's dictionary, docs/japanese.md)
   and give the negative entries (−1 hiragana, −2 katakana); their menu rows carry romaji / kana notes.
 - 11 and 12 are the Korean readings only, deterministic: the keys, implied ㅇ, the double press and
@@ -276,8 +337,10 @@ the output.
   F-key actions (§6.5), bound to nothing by default: `commit` (this layout's reading as typed,
   whatever ranks first) and `commit-bare` (the same with the implied ㅇ dropped, as JIS Korean's F6:
   ㅏ → ㅏ, 가어 → 가ㅓ, 와 → ㅘ; a typed or asked-for ㅇ and a syllable with a final stay).
-- Ranking is rules over word counts (a known word beats an unknown one; 초성 strings rank words by
-  count), **not yet n-grams**.
+- Ranking is rules over word counts (a known word beats an unknown one), **not yet n-grams**.
+  Layout 13 adds typo suggestions under its reading from a jamo 4-gram model (bada-layout.md §5). It
+  orders the readings of the enabled layouts; layout 13 itself reads its keys one way only. 초성
+  prediction is in the engine but no layout uses it (bada-layout.md §8).
 - HYPER+かな and MEH+かな both switch to the other mode: with one muhenkan layout and one henkan
   there is nothing else to go back to or cycle through. The user cycle order (§5.3) isn't in the
   settings window yet.
@@ -296,7 +359,8 @@ Both have Control left of A. Bottom rows (1u each but the space):
 ## 8. 초성 diagnostics and the user dictionary
 
 초성 input is ambiguous enough that, in practice, every user who types it needs data of their own.
-Two things provide it.
+Two things provide it. (No layout types 초성 input at present; the dictionary's positive and
+negative words apply to every layout, and the 초성 parts wait for its return: bada-layout.md §8.)
 
 ### 8.1 초성 diagnostics
 
@@ -304,8 +368,8 @@ A collector in the engine (`engine/src/diag.rs`) counts, **in henkan mode only**
 layout that types initials on their own keys (10–13):
 
 - **typed:** each committed syllable whose initial was typed: the initial's **key and Shift** (two
-  keys that type the same jamo are two inputs: Bada's ㅅ on S and O, ㅇ on F and M, ㄷ on K and V,
-  ㅆ on W and P, ㅃ on R and `;`), the vowel, the final, and the final's key;
+  keys that type the same jamo are two inputs: Bada's ㅆ on 2 and `:`, ㅃ on Q and `]`, final ㄴ on
+  E and K), the vowel, the final, and the final's key;
 - **choseong:** each 초성 prediction chosen: each typed initial's key, and the vowel and final of
   the syllable it became.
 
@@ -329,7 +393,7 @@ folder.
 Collected from above:
 
 1. §4.3 scoring of candidates without a trained model.
-2. ~~§5.2 whether Bada is deterministic~~: ranked (owner, 2026-11-07).
+2. ~~§5.2 whether Bada is deterministic~~: deterministic (owner, 2026-11-08).
 3. §6.1 what "most recently used henkan" and MEH+かな's sources are: (a), (b) or (c).
 4. §6.2 半角/全角 with no selection in muhenkan.
 5. §6.3 Tab: cycle versus commit-then-tab; keys with nothing staged.

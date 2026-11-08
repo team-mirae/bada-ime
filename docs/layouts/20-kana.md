@@ -19,7 +19,7 @@ dictionary. Full rules in [japanese.md](../japanese.md).
   ⇧[ 「 ⇧] 」.
 - ゛ (@) and ゜ ([) attach to the kana before them (か゛ → が, は゜ → ぱ).
 - Typing shows the top conversion (わたしはがくせいです → 私は学生です); Tab gives the other
-  conversions, ⇧Tab **−1 hiragana**, **−2 katakana**.
+  conversions; with script forms on (Settings, off by default), ⇧Tab **−1 hiragana**, **−2 katakana**.
 - F-key actions: `hiragana`, `katakana`, `halfwidth-katakana`, `fullwidth-latin`, `halfwidth-latin`.
 
 Images: `python3 tools/render/export_png.py` (HHKB JIS). Interactive: open `tools/render/index.html`.

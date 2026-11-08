@@ -161,7 +161,7 @@ function comboKey(g, x, y, w, h, code, layers, slots) {
       if (base) {
         const [first, ...rest] = base.t.split("/");
         text(first, x + 11, y + h - 13, first.length > 2 ? 15 : 23, base.c);
-        if (rest.length) text(rest.join(" "), x + 38, y + h - 27, 12, base.c);
+        if (rest.length) text(rest.join(" "), x + 38, y + h - 27, 12, base.r ? base.r[1] : base.c);
       }
       // ⇧ legends that follow a rule (+ ㅏ syllables, the JIS character) stay off the cap; tense pairs show.
       if (shift && !["y", "d", "s"].includes(shift.c) && !(base && base.t.includes("/"))) text(shift.t, x + 38, y + h - 27, 12, shift.c);
@@ -216,7 +216,11 @@ function render() {
         if (cell.c === "f") t.setAttribute("text-decoration", "underline");
         g.append(t);
       };
-      if (entry.base && entry.base.t.includes("/")) {   // token key: first member big, the rest small above it
+      if (entry.base && entry.base.r) {   // interlaced key: the initial big, the final small at the right, by role
+        const [ini, fin] = entry.base.t.split("/");
+        leg({ t: ini, c: entry.base.r[0] }, x + 10, y + h - 12, 22);
+        leg({ t: fin, c: entry.base.r[1] }, x + w - 10, y + h / 2 + 4, 15, "end");
+      } else if (entry.base && entry.base.t.includes("/")) {   // token key: first member big, the rest small above it
         const [first, ...rest] = entry.base.t.split("/");
         leg({ ...entry.base, t: first }, x + 10, y + h - 12, 22);
         leg({ ...entry.base, t: rest.join(" ") }, x + 10, y + h - 37, 11);

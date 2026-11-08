@@ -17,6 +17,8 @@ enum Modes {
 
     /// The mode bada ime is in, as last selected or reported.
     static var current: BadaMode = selectedNow() ?? .henkan
+    /// The henkan profile in use (spec §6.6): which language key brought henkan mode up.
+    static var profile = BadaProfiles.macKana
 
     static func mode(sourceID: String) -> BadaMode? {
         [BadaMode.muhenkan, .henkan].first { $0.sourceID == sourceID }

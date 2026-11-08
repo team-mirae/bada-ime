@@ -1,10 +1,10 @@
 //! The engine: muhenkan and henkan modes (spec §4), the signed suggestion menu (§6.4), the keys
-//! (§6), F-key actions (§6.5) and Bada's actions (bada-layout.md §16.1).
+//! (§6), F-key actions (§6.5) and Bada's actions (bada-layout.md §6).
 //!
 //! Event in → output out. The shell owns input-source switching (英数, かな, HYPER/MEH+かな) and
 //! the host text; the engine says what to commit, what to show and whether it took the key.
 
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 use std::sync::Arc;
 
 use serde::{Deserialize, Serialize};
@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use crate::data::Data;
 use crate::japanese;
 use crate::key::{Key, Mods};
-use crate::layout::{self, BADA, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI};
+use crate::layout::{self, BADA, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI, SYMBOLS, UNICODE};
 use crate::userdict::{Language, Strength, UserDict};
 use crate::width::{Width, convert};
 
@@ -20,9 +20,20 @@ use crate::width::{Width, convert};
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(default)]
 pub struct Settings {
-    /// Henkan candidates, in the user's order (earlier wins ties).
+    /// Henkan candidates, in the user's order (earlier wins ties): profile `mac-kana`'s own list.
     pub enabled: Vec<u32>,
+    /// Henkan profiles (§6.6): `mac-kana` (かな), `henkan` (変換), `katakana` (カタカナ). A profile
+    /// missing here: `mac-kana` uses `enabled`, the others link to `mac-kana`.
+    pub profiles: BTreeMap<String, Profile>,
+    /// Layout id → weight (§5.3): every entry that layout raises has its score multiplied by it.
+    /// Missing: 1. Clamped to 0–10.
+    pub weights: HashMap<u32, f64>,
     pub default_muhenkan: u32,
+    /// Negative menu entries (§6.4: −1 hiragana, −2 katakana for 20 and 21). Off by default.
+    pub script_forms: bool,
+    /// Emoji skin tones in the order layout 150 offers them ("none", "light", "medium-light",
+    /// "medium", "medium-dark", "dark"); a tone left out isn't offered.
+    pub skin_tones: Vec<String>,
     /// The one method that contributes negative menu entries (§6.4). None: the lowest enabled id
     /// that offers them.
     pub negative_method: Option<u32>,
@@ -36,7 +47,11 @@ impl Default for Settings {
     fn default() -> Settings {
         Settings {
             enabled: vec![BADA],
+            profiles: BTreeMap::new(),
+            weights: HashMap::new(),
             default_muhenkan: QWERTY,
+            script_forms: false,
+            skin_tones: crate::search::TONES.iter().map(|t| t.to_string()).collect(),
             negative_method: None,
             intercept_f: true,
             fkeys: HashMap::new(),
@@ -44,12 +59,42 @@ impl Default for Settings {
     }
 }
 
+/// Results a search layout (150, 151) lists, at most.
+const SEARCH_RESULTS: usize = 40;
+
+/// Typo suggestions listed under layout 13's reading, at most.
+const TYPO_SUGGESTIONS: usize = 3;
+
+/// A henkan profile (§6.6): its own candidates, or a link to another profile.
+#[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(default)]
+pub struct Profile {
+    /// Another profile whose candidates this one uses ("mac-kana", "henkan", "katakana").
+    pub link: Option<String>,
+    /// This profile's own candidates, in order (unused while it links).
+    pub enabled: Vec<u32>,
+    /// This profile's own F keys (§6.5); None: `mac-kana`'s (the settings' `intercept_f`, `fkeys`).
+    pub f_keys: Option<FKeys>,
+}
+
+/// F6–F10 for one profile (§6.5): intercepted or not, and each key's binding.
+#[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(default)]
+pub struct FKeys {
+    pub intercept: bool,
+    /// "F6" … "F10" → "swallow" | "pass" | "<method>.<action>". Missing: swallow.
+    pub keys: HashMap<String, String>,
+}
+
+/// The henkan profiles (§6.6), in the order the settings show them.
+pub const PROFILES: [&str; 3] = ["mac-kana", "henkan", "katakana"];
+
 /// The F-key actions each method publishes (§6.5): (method id, action id, label).
 pub const ACTIONS: &[(u32, &str, &str)] = &[
     (
         BADA,
         "raw",
-        "Raw jamo: no implied ㅇ or ㅏ, no 종성, no predictions",
+        "Raw jamo: every key as its jamo, nothing composed",
     ),
     (BADA, "prediction-1", "Use the 1st prediction"),
     (BADA, "prediction-2", "Use the 2nd prediction"),
@@ -235,6 +280,8 @@ pub struct Engine {
     held: Option<crate::hold::Held>,
     /// A dictionary pinned to this engine (tests); None: the process's (`userdict::current`).
     pinned: Option<Option<std::sync::Arc<UserDict>>>,
+    /// The henkan profile in use (§6.6).
+    profile: String,
 }
 
 impl Engine {
@@ -253,13 +300,57 @@ impl Engine {
             waiting: None,
             held: None,
             pinned: None,
+            profile: PROFILES[0].to_string(),
         }
     }
 
     pub fn set_settings(&mut self, settings: Settings) {
         self.settings = settings;
         self.settings.enabled.retain(|&id| layout::is_known(id));
+        for p in self.settings.profiles.values_mut() {
+            p.enabled.retain(|&id| layout::is_known(id));
+        }
         self.recompute();
+    }
+
+    /// Switches henkan profile (§6.6): what's staged is committed first. Unknown names: `mac-kana`.
+    pub fn set_profile(&mut self, name: &str) -> Output {
+        let name = if PROFILES.contains(&name) { name } else { PROFILES[0] };
+        let mut out = Output::default();
+        if name != self.profile {
+            out.commit = self.take_shown();
+            self.profile = name.to_string();
+            self.recompute();
+        }
+        self.finish(out)
+    }
+
+    pub fn profile(&self) -> &str {
+        &self.profile
+    }
+
+    /// Whether every candidate in use is a search layout (150, 151): Space then searches.
+    fn searching(&self) -> bool {
+        let c = self.candidates(&self.profile);
+        !c.is_empty() && c.iter().all(|&id| layout::is_search(id))
+    }
+
+    /// The candidates of a profile, links followed (a loop or a dead end: `mac-kana`'s own list).
+    pub fn candidates(&self, name: &str) -> Vec<u32> {
+        let mut at = name.to_string();
+        for _ in 0..PROFILES.len() {
+            let link = match self.settings.profiles.get(&at) {
+                Some(Profile { link: Some(l), .. }) => l.clone(),
+                Some(Profile { link: None, enabled, .. }) if at != PROFILES[0] => return enabled.clone(),
+                None if at != PROFILES[0] => PROFILES[0].to_string(),
+                _ => return self.settings.enabled.clone(),
+            };
+            if !PROFILES.contains(&link.as_str()) {
+                break;
+            }
+            at = link;
+        }
+        self.settings.enabled.clone()
     }
 
     /// Pins a user dictionary to this engine instead of the process's (None in it: no dictionary).
@@ -380,7 +471,7 @@ impl Engine {
             self.entries.push(entry);
             return;
         }
-        let enabled = self.settings.enabled.clone();
+        let enabled = self.candidates(&self.profile);
         let mut entries: Vec<Entry> = Vec::new();
         let user = match &self.pinned {
             Some(pinned) => pinned.clone(),
@@ -532,6 +623,20 @@ impl Engine {
                     });
                     }
                 }
+                SYMBOLS | UNICODE => {
+                    // The search as typed first; what it finds under it, with names as notes.
+                    let query = layout::query(&self.presses);
+                    let found = if id == SYMBOLS {
+                        self.data.search.symbols(&query, &self.settings.skin_tones, SEARCH_RESULTS)
+                    } else {
+                        self.data.search.unicode(&query, SEARCH_RESULTS)
+                    };
+                    let own = found.iter().find(|f| f.0 == query).map(|f| f.1.clone()).unwrap_or_default();
+                    entries.push(Entry { text: query, score: 60.0 + tie, note: own, ..Entry::default() });
+                    for (i, (text, note)) in found.into_iter().enumerate() {
+                        entries.push(Entry { text, score: 59.0 + tie - 0.01 * i as f64, note, ..Entry::default() });
+                    }
+                }
                 KANA | ROMAJI => {
                     let text = kana_reading(id, &self.presses);
                     let loose = text.contains(japanese::DAKUTEN)
@@ -549,8 +654,9 @@ impl Engine {
                     if !loose {
                         if let Some(kanji) = &self.data.kanji {
                             for (i, (conv, _)) in kanji.convert(&text, 6).into_iter().enumerate() {
-                                // The kana itself and its katakana are rows already (−1, −2).
-                                if conv == text || conv == japanese::katakana(&text) {
+                                // The kana itself is a row already; so is its katakana when script
+                                // forms are on (−2).
+                                if conv == text || (self.settings.script_forms && conv == japanese::katakana(&text)) {
                                     continue;
                                 }
                                 entries.push(Entry {
@@ -566,6 +672,11 @@ impl Engine {
                     entries.push(Entry::kana(text, score + tie));
                 }
                 _ => {}
+            }
+            // The layout's weight (§5.3), on everything it raised.
+            let weight = self.settings.weights.get(&id).copied().filter(|w| w.is_finite()).map_or(1.0, |w| w.clamp(0.0, 10.0));
+            if weight != 1.0 {
+                entries[start..].iter_mut().for_each(|e| e.score *= weight);
             }
             // The user's negative words (docs/dictionary-contract.md): soft ones far down, strong
             // ones gone.
@@ -589,12 +700,16 @@ impl Engine {
                 }
             }
         }
-        // Script forms (§6.4): one method, at most two entries: −1 hiragana, −2 katakana.
+        // Script forms (§6.4), when on: one method, at most two entries: −1 hiragana, −2 katakana.
         let method = self
             .settings
             .negative_method
+            .filter(|_| self.settings.script_forms)
             .filter(|m| enabled.contains(m) && SCRIPT_FORM_METHODS.contains(m))
             .or_else(|| {
+                if !self.settings.script_forms {
+                    return None;
+                }
                 enabled
                     .iter()
                     .copied()
@@ -610,6 +725,22 @@ impl Engine {
         entries.sort_by(|a, b| b.score.total_cmp(&a.score));
         let mut seen = std::collections::HashSet::new();
         entries.retain(|e| seen.insert(e.text.clone()));
+        // Typo suggestions (bada-layout.md §5): right under layout 13's reading, never above it
+        // and never first.
+        if let Some(lm) = self.data.lm.as_ref().filter(|_| enabled.contains(&BADA)) {
+            if let Some(at) = entries.iter().position(|e| e.origin == Origin::Composed(BADA)) {
+                let mut n = 0;
+                for (text, _) in crate::typo::suggest(lm, &self.presses, TYPO_SUGGESTIONS) {
+                    let unwanted = user.as_ref().is_some_and(|u| u.negative(Language::Korean, &text) == Some(Strength::Strong));
+                    if unwanted || entries.iter().any(|e| e.text == text) {
+                        continue;
+                    }
+                    n += 1;
+                    let score = entries[at].score - 0.001 * n as f64;
+                    entries.insert(at + n, Entry { text, score, note: "typo?".into(), ..Entry::default() });
+                }
+            }
+        }
         self.entries = entries;
     }
 
@@ -801,6 +932,15 @@ impl Engine {
                 return consumed(String::new());
             }
             Key::Enter if mods.shift && staged => return consumed(self.take_shown()),
+            // Only search layouts (150, 151) in use: Space is part of the search, ⇧Space a space.
+            Key::Space if !mods.alt && self.searching() => {
+                if mods.shift {
+                    return consumed(format!("{} ", self.take_shown()));
+                }
+                self.presses.push(Press { key, shift: false, alt: false });
+                self.recompute();
+                return consumed(String::new());
+            }
             Key::Space if mods.alt => {
                 let text = format!("{}\u{3000}", self.take_shown());
                 return consumed(text);
@@ -837,12 +977,7 @@ impl Engine {
                 shift: mods.shift,
                 alt: mods.alt,
             };
-            let any = self.over.is_some()
-                || self
-                    .settings
-                    .enabled
-                    .iter()
-                    .any(|&id| layout::takes(id, press));
+            let any = self.over.is_some() || self.candidates(&self.profile).iter().any(|&id| layout::takes(id, press));
             if any {
                 self.presses.push(press);
                 self.recompute();
@@ -914,15 +1049,16 @@ impl Engine {
             consumed: true,
             ..Output::default()
         };
-        if !self.settings.intercept_f {
+        // The profile's own F keys, else mac-kana's (§6.6).
+        let own = self.settings.profiles.get(&self.profile).and_then(|p| p.f_keys.as_ref());
+        let (intercept, keys) = match own {
+            Some(f) if self.profile != PROFILES[0] => (f.intercept, &f.keys),
+            _ => (self.settings.intercept_f, &self.settings.fkeys),
+        };
+        if !intercept {
             return pass;
         }
-        let binding = self
-            .settings
-            .fkeys
-            .get(&format!("F{f}"))
-            .cloned()
-            .unwrap_or_else(|| "swallow".into());
+        let binding = keys.get(&format!("F{f}")).cloned().unwrap_or_else(|| "swallow".into());
         match binding.as_str() {
             "pass" => return pass,
             "swallow" => return swallow,
@@ -938,7 +1074,7 @@ impl Engine {
         let Ok(method) = method.parse::<u32>() else {
             return swallow;
         };
-        if !self.settings.enabled.contains(&method)
+        if !self.candidates(&self.profile).contains(&method)
             || !ACTIONS.iter().any(|a| a.0 == method && a.1 == action)
         {
             return swallow;
@@ -946,7 +1082,7 @@ impl Engine {
         self.action(method, action)
     }
 
-    /// A method's action (bada-layout.md §16.1; Japanese: docs/japanese.md).
+    /// A method's action (bada-layout.md §6; Japanese: docs/japanese.md).
     pub fn action(&mut self, method: u32, action: &str) -> Output {
         let mut out = Output {
             consumed: true,
@@ -1119,9 +1255,10 @@ mod tests {
     #[test]
     fn composes_and_commits_on_space() {
         let mut e = engine();
-        press(&mut e, KeyL);
-        press(&mut e, Comma);
-        let out = press(&mut e, KeyH);
+        // 한: ㅎ(V) ㅏ(H) ㄴ(K)
+        press(&mut e, KeyV);
+        press(&mut e, KeyH);
+        let out = press(&mut e, KeyK);
         assert_eq!(out.preedit, "한");
         assert!(out.consumed);
         let out = press(&mut e, Space);
@@ -1133,51 +1270,13 @@ mod tests {
     #[test]
     fn shift_enter_commits_and_swallows() {
         let mut e = engine();
-        press(&mut e, KeyL);
-        press(&mut e, Comma);
+        press(&mut e, KeyV);
+        press(&mut e, KeyH);
         let out = e.key(Enter, Mods::SHIFT);
         assert_eq!(out.commit, "하");
         assert!(out.consumed);
         // nothing staged: the app's
         assert!(!e.key(Enter, Mods::SHIFT).consumed);
-    }
-
-    #[test]
-    fn choseong_predicts_and_shift_narrows() {
-        let mut e = engine();
-        for k in [KeyF, KeyH, KeyL, KeyS, KeyF] {
-            press(&mut e, k);
-        }
-        let out = press(&mut e, Tab);
-        assert!(out.menu.contains(&"안녕하세요".to_string()));
-        assert_eq!(out.menu[0], "안녕하세요");
-        let mut e = engine();
-        // one consonant shows itself
-        assert_eq!(press(&mut e, KeyF).preedit, "ㅇ");
-        // ㅇㄴ⇧ㅎㅅㅇ: ⇧ㅎ = 하, still 초성 input
-        let mut e = engine();
-        press(&mut e, KeyF);
-        press(&mut e, KeyH);
-        shift(&mut e, KeyL);
-        press(&mut e, KeyS);
-        let out = press(&mut e, KeyF);
-        assert_eq!(out.preedit, "안녕하세요");
-    }
-
-    #[test]
-    fn shift_token_takes_a_final() {
-        let mut e = engine();
-        shift(&mut e, KeyJ);
-        let out = press(&mut e, KeyH);
-        assert_eq!(out.preedit, "간");
-        // and the 초성 reading still goes on: ㅇㄴ⇧ㅎㅅㅇ → 안녕하세요
-        let mut e = engine();
-        press(&mut e, KeyF);
-        press(&mut e, KeyH);
-        shift(&mut e, KeyL);
-        press(&mut e, KeyS);
-        let out = press(&mut e, KeyF);
-        assert!(out.menu.contains(&"안녕하세요".to_string()), "{:?}", out.menu);
     }
 
     #[test]
@@ -1191,10 +1290,14 @@ mod tests {
     #[test]
     fn menu_stops_at_the_ends() {
         let mut e = engine();
-        for k in [KeyF, KeyH, KeyL, KeyS, KeyF] {
+        let mut s = Settings::default();
+        s.enabled = vec![BADA, QWERTY];
+        e.set_settings(s);
+        for k in [KeyV, KeyH, KeyK] {
             press(&mut e, k);
         }
         let n = e.entries.len();
+        assert!(n > 1);
         for _ in 0..n + 3 {
             press(&mut e, ArrowDown);
         }
@@ -1208,7 +1311,7 @@ mod tests {
     #[test]
     fn f_keys_swallowed_by_default_and_bindable() {
         let mut e = engine();
-        press(&mut e, KeyL);
+        press(&mut e, KeyV);
         let out = press(&mut e, F6);
         assert!(out.consumed);
         assert_eq!(out.preedit, "ㅎ");
@@ -1221,16 +1324,16 @@ mod tests {
         // raw: ㅎ ㅏ ㄴ stays as jamo
         let mut e2 = engine();
         e2.set_settings(e.settings().clone());
-        for k in [KeyL, Comma, KeyH] {
+        for k in [KeyV, KeyH, KeyK] {
             press(&mut e2, k);
         }
         assert_eq!(press(&mut e2, F8).preedit, "ㅎㅏㄴ");
         let mut e3 = engine();
         e3.set_settings(e.settings().clone());
-        for k in [KeyL, Comma, KeyH] {
+        for k in [KeyV, KeyH, KeyK] {
             press(&mut e3, k);
         }
-        assert_eq!(press(&mut e3, F9).preedit, "l,h");
+        assert_eq!(press(&mut e3, F9).preedit, "vhk");
         let mut s = Settings::default();
         s.intercept_f = false;
         e3.set_settings(s);
@@ -1243,7 +1346,8 @@ mod tests {
         let mut s = Settings::default();
         s.fkeys.insert("F6".into(), "13.prediction-1".into());
         e.set_settings(s);
-        for k in [KeyF, KeyH, KeyL, KeyS, KeyF] {
+        // 안녕하세요: ㅇㅏㄴ ㄴㅕㅇ ㅎㅏ ㅅㅔ ㅇㅛ
+        for k in [KeyF, KeyH, KeyK, KeyE, KeyU, KeyJ, KeyV, KeyH, KeyR, KeyO, KeyF, Digit9] {
             press(&mut e, k);
         }
         let out = press(&mut e, F6);
@@ -1257,7 +1361,7 @@ mod tests {
         s.fkeys.insert("F7".into(), "13.hanja".into());
         e.set_settings(s);
         // 학교: ㅎ ㅏ ㄱ ㄱ ㅛ
-        for k in [KeyL, Comma, KeyJ, KeyJ, Digit9] {
+        for k in [KeyV, KeyH, KeyD, KeyD, Digit9] {
             press(&mut e, k);
         }
         let out = press(&mut e, F7);
@@ -1285,6 +1389,7 @@ mod tests {
         let mut e = engine();
         let mut s = Settings::default();
         s.enabled = vec![ROMAJI];
+        s.script_forms = true;
         s.fkeys.insert("F7".into(), "21.katakana".into());
         s.fkeys.insert("F8".into(), "21.halfwidth-katakana".into());
         e.set_settings(s);
@@ -1320,6 +1425,147 @@ mod tests {
         e4.set_settings(s);
         press(&mut e4, KeyT);
         assert_eq!(press(&mut e4, BracketLeft).preedit, "が");
+    }
+
+    #[test]
+    fn henkan_profiles_link_and_switch() {
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![QWERTY, KTS, KANA];
+        s.profiles.insert("henkan".into(), Profile { link: None, enabled: vec![QWERTY, KTS, ROMAJI], f_keys: None });
+        // katakana: not set, so linked to mac-kana
+        e.set_settings(s.clone());
+        assert_eq!(e.candidates("mac-kana"), [QWERTY, KTS, KANA]);
+        assert_eq!(e.candidates("henkan"), [QWERTY, KTS, ROMAJI]);
+        assert_eq!(e.candidates("katakana"), [QWERTY, KTS, KANA]);
+        // a link to a link; a loop falls back to mac-kana's own list
+        s.profiles.insert("katakana".into(), Profile { link: Some("henkan".into()), enabled: vec![], f_keys: None });
+        e.set_settings(s.clone());
+        assert_eq!(e.candidates("katakana"), [QWERTY, KTS, ROMAJI]);
+        s.profiles.insert("henkan".into(), Profile { link: Some("katakana".into()), enabled: vec![], f_keys: None });
+        e.set_settings(s.clone());
+        assert_eq!(e.candidates("henkan"), [QWERTY, KTS, KANA]);
+        // mac-kana itself can link
+        s.profiles.insert("henkan".into(), Profile { link: None, enabled: vec![ROMAJI], f_keys: None });
+        s.profiles.insert("mac-kana".into(), Profile { link: Some("henkan".into()), enabled: vec![], f_keys: None });
+        e.set_settings(s);
+        assert_eq!(e.candidates("mac-kana"), [ROMAJI]);
+        // switching commits what's staged and reads with the new profile's layouts
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![KANA];
+        s.profiles.insert("henkan".into(), Profile { link: None, enabled: vec![ROMAJI], f_keys: None });
+        e.set_settings(s);
+        press(&mut e, KeyT);
+        assert_eq!(e.set_profile("henkan").commit, "か");
+        assert_eq!(e.profile(), "henkan");
+        press(&mut e, KeyK);
+        assert_eq!(press(&mut e, KeyA).preedit, "か");
+        assert_eq!(e.set_profile("nonsense").commit, "か");
+        assert_eq!(e.profile(), "mac-kana");
+    }
+
+    #[test]
+    fn layout_weights_scale_their_entries() {
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![QWERTY, BADA];
+        e.set_settings(s.clone());
+        // "han" in QWERTY is a known English word: it ranks above bada's reading of the same keys
+        for k in [KeyH, KeyA, KeyN] {
+            press(&mut e, k);
+        }
+        assert_eq!(e.entries[0].text, "han");
+        // bada weighted up past it
+        s.weights.insert(BADA, 3.0);   // its loose-jamo reading scores 40; ×3 beats the word's 90
+        e.set_settings(s.clone());
+        assert_ne!(e.entries[0].text, "han");
+        // and QWERTY weighted to nothing ranks last
+        s.weights.clear();
+        s.weights.insert(QWERTY, 0.0);
+        e.set_settings(s);
+        assert_eq!(e.entries.last().unwrap().text, "han");
+    }
+
+    #[test]
+    fn search_layouts_take_space_as_part_of_the_search() {
+        let data = Data::parse("", "", "", "").with_search(
+            "$\tusd\tdollar money cash currency bill\t¥ $\n",
+            "😀\tgrinning face\tface|grin|happy|smile\t\n",
+            "1F600\tGRINNING FACE\n",
+        );
+        let mut e = Engine::new(Arc::new(data));
+        e.pin_dictionary(None);
+        let mut s = Settings::default();
+        s.enabled = vec![SYMBOLS];
+        e.set_settings(s.clone());
+        for k in [KeyH, KeyA, KeyP, KeyP, KeyY, Space, KeyF, KeyA, KeyC, KeyE] {
+            press(&mut e, k);
+        }
+        let out = press(&mut e, Tab);
+        assert_eq!(out.menu, ["happy face", "😀"]);
+        assert_eq!(out.preedit, "😀");
+        assert_eq!(out.notes[1], "grinning face");
+        // ⇧Space: what shows, then a space
+        assert_eq!(e.key(Space, Mods::SHIFT).commit, "😀 ");
+        // usd → $; ¥ → its currencies
+        for k in [KeyU, KeyS, KeyD] {
+            press(&mut e, k);
+        }
+        assert_eq!(press(&mut e, Tab).preedit, "$");
+        press(&mut e, Escape);
+        // Unicode: a code
+        s.enabled = vec![UNICODE];
+        e.set_settings(s);
+        for k in [Digit1, KeyF, Digit6, Digit0, Digit0] {
+            press(&mut e, k);
+        }
+        assert_eq!(press(&mut e, Tab).preedit, "😀");
+        // with another layout in use, Space commits as usual
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![SYMBOLS, QWERTY];
+        e.set_settings(s);
+        press(&mut e, KeyA);
+        assert_eq!(press(&mut e, Space).commit, "a");
+    }
+
+    #[test]
+    fn f_keys_per_profile() {
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.fkeys.insert("F8".into(), "13.raw".into());
+        s.profiles.insert("henkan".into(), Profile { link: Some("mac-kana".into()), enabled: vec![], f_keys: Some(FKeys { intercept: false, keys: HashMap::new() }) });
+        s.profiles.insert("katakana".into(), Profile { link: Some("mac-kana".into()), enabled: vec![], f_keys: None });
+        e.set_settings(s);
+        // mac-kana: F8 is raw
+        for k in [KeyV, KeyH, KeyK] {
+            press(&mut e, k);
+        }
+        assert_eq!(press(&mut e, F8).preedit, "ㅎㅏㄴ");
+        // henkan: its own F keys, off: F8 goes to the app
+        e.set_profile("henkan");
+        press(&mut e, KeyV);
+        assert!(!press(&mut e, F8).consumed);
+        // katakana: none of its own, so mac-kana's
+        e.set_profile("katakana");
+        press(&mut e, KeyV);
+        assert_eq!(press(&mut e, F8).preedit, "ㅎ");
+    }
+
+    #[test]
+    fn script_forms_are_off_by_default() {
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![ROMAJI];
+        e.set_settings(s);
+        for k in [KeyR, KeyA, Minus, KeyM, KeyE, KeyN] {
+            press(&mut e, k);
+        }
+        let out = e.key(Tab, Mods::SHIFT);
+        assert_eq!(out.preedit, "らーめん");
+        assert_eq!(out.zero, 0);
+        assert!(e.negatives.is_empty());
     }
 
     #[test]
@@ -1366,6 +1612,7 @@ mod tests {
         let mut e = engine();
         let mut s = Settings::default();
         s.enabled = vec![ROMAJI];
+        s.script_forms = true;
         e.set_settings(s);
         for k in [KeyR, KeyA, Minus, KeyM, KeyE, KeyN] {
             press(&mut e, k);
@@ -1380,54 +1627,19 @@ mod tests {
         crate::diag::clear();
         crate::diag::set_enabled(true);
         let mut e = engine();
-        // typed: 한 (ㅎ on L, ㄴ on H) then Space
-        for k in [KeyL, Comma, KeyH] {
+        // typed: 한 (ㅎ on V, ㄴ on K) then Space
+        for k in [KeyV, KeyH, KeyK] {
             press(&mut e, k);
         }
         press(&mut e, Space);
-        // a 초성 prediction chosen: ㅇ(F) ㄴ(H) ㅎ(L) ㅅ(S) ㅇ(M, the other ㅇ key) → 안녕하세요
-        for k in [KeyF, KeyH, KeyL, KeyS, KeyM] {
-            press(&mut e, k);
-        }
-        press(&mut e, Enter);
         // muhenkan records nothing
         e.set_mode(Mode::Muhenkan);
-        press(&mut e, KeyL);
+        press(&mut e, KeyV);
         let json = crate::diag::export();
         let has = |frag: &str| assert!(json.contains(frag), "{frag} in {json}");
-        has(r#""source":"typed","key":"KeyL","shift":false,"initial":"ㅎ","vowel":"ㅏ","final_":"ㄴ","final_key":"KeyH""#);
-        has(r#""source":"choseong","key":"KeyM","shift":false,"initial":"ㅇ","vowel":"ㅛ","final_":"","final_key":"""#);
-        has(r#""source":"choseong","key":"KeyF","shift":false,"initial":"ㅇ","vowel":"ㅏ","final_":"ㄴ""#);
+        has(r#""source":"typed","key":"KeyV","shift":false,"initial":"ㅎ","vowel":"ㅏ","final_":"ㄴ","final_key":"KeyK""#);
+        assert!(!json.contains(r#""source":"choseong""#), "{json}");
         crate::diag::set_enabled(false);
-    }
-
-    #[test]
-    fn user_dictionary_shapes_choseong() {
-        let mut e = engine();
-        for k in [KeyF, KeyH, KeyL, KeyS, KeyF] {
-            press(&mut e, k);
-        }
-        let before = press(&mut e, Tab);
-        assert_eq!(before.menu[0], "안녕하세요");
-        let (dict, summary) = UserDict::parse(r#"{"format":"bada-dictionary","version":1,
-            "negative":[{"word":"안녕하세요","strength":"strong"}],
-            "positive":[{"word":"아니하세요","count":5000}],
-            "shortcuts":[{"choseong":"ㄱㅅ","word":"감사합니다"}]}"#);
-        assert!(summary.ok);
-        let dict = Some(std::sync::Arc::new(dict));
-        let mut e = engine();
-        e.pin_dictionary(dict.clone());
-        for k in [KeyF, KeyH, KeyL, KeyS, KeyF] {
-            press(&mut e, k);
-        }
-        let out = press(&mut e, Tab);
-        assert!(!out.menu.contains(&"안녕하세요".to_string()), "{:?}", out.menu);
-        assert_eq!(out.menu[0], "아니하세요");
-        let mut e = engine();
-        e.pin_dictionary(dict);
-        press(&mut e, KeyJ);
-        let out = press(&mut e, KeyS);
-        assert_eq!(out.preedit, "감사합니다");
     }
 
     #[test]
@@ -1488,7 +1700,7 @@ mod tests {
     #[test]
     fn option_space_full_width_and_hz() {
         let mut e = engine();
-        press(&mut e, KeyL);
+        press(&mut e, KeyV);
         let out = e.key(
             Space,
             Mods {

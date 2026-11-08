@@ -1,0 +1,136 @@
+# Symbols for layout 150 (docs/layouts/150-symbols.md): text, canonical name, search tags (spaces), the typed keys
+# that offer it as a variant (spaces; in this file's order). Hand-written: names are bada ime's own, for review.
+# Currencies: the top 30 economies by GDP per capita (World Bank, 2023), duplicates merged, plus KRW and JPY.
+$	usd	dollar money cash currency bill us united states	¥ $
+€	eur	euro money cash currency bill europe	¥ $
+₩	krw	won money cash currency bill korea	¥ $
+¥	jpy	yen money cash currency bill japan	¥ $
+£	gbp	pound sterling money cash currency bill uk britain	¥ $
+CHF	chf	swiss franc money currency switzerland liechtenstein	¥
+S$	sgd	singapore dollar money currency	¥ $
+A$	aud	australian dollar money currency	¥ $
+C$	cad	canadian dollar money currency	¥ $
+HK$	hkd	hong kong dollar money currency	¥ $
+₪	ils	israeli new shekel money currency	¥
+NOK	nok	norwegian krone kr money currency norway	¥
+SEK	sek	swedish krona kr money currency sweden	¥
+DKK	dkk	danish krone kr money currency denmark faroe greenland	¥
+ISK	isk	icelandic krona kr money currency iceland	¥
+QAR	qar	qatari riyal money currency qatar	¥
+MOP$	mop	macanese pataca money currency macao	¥ $
+BD$	bmd	bermudian dollar money currency bermuda	¥ $
+CI$	kyd	cayman islands dollar money currency	¥ $
+¢	cent	cent money coin	$
+＄	fullwidth dollar	dollar money	$
+￥	fullwidth yen	yen money	¥
+。	ideographic full stop	period kuten maru japanese chinese	.
+…	ellipsis	dots three periods	.
+‥	two dot leader	dots	.
+·	middle dot	interpunct dot	.
+•	bullet	dot list	.
+・	katakana middle dot	nakaguro dot	.
+．	fullwidth full stop	period	.
+、	ideographic comma	touten comma japanese	,
+，	fullwidth comma	comma	,
+‚	low single quote	quote comma	,
+／	fullwidth solidus	slash	/
+÷	division sign	divide	/
+⁄	fraction slash	slash	/
+・	katakana middle dot	nakaguro dot	/
+–	en dash	dash range	-
+—	em dash	dash	-
+−	minus sign	minus math	-
+‐	hyphen	dash	-
+ー	katakana long vowel mark	chouon long	-
+～	fullwidth tilde	wave dash	-
+ˆ	modifier circumflex	caret hat	^
+↑	upwards arrow	up arrow	^
+∧	logical and	and wedge	^
+＠	fullwidth at	at	@
+ⓐ	circled a	at	@
+「	left corner bracket	kagikakko quote japanese	[
+『	left white corner bracket	quote	[
+【	left black lenticular bracket	sumitsuki	[
+〔	left tortoise shell bracket	bracket	[
+［	fullwidth left bracket	bracket	[
+〈	left angle bracket	bracket	[
+《	left double angle bracket	bracket	[
+」	right corner bracket	kagikakko quote japanese	]
+』	right white corner bracket	quote	]
+】	right black lenticular bracket	sumitsuki	]
+〕	right tortoise shell bracket	bracket	]
+］	fullwidth right bracket	bracket	]
+〉	right angle bracket	bracket	]
+》	right double angle bracket	bracket	]
+：	fullwidth colon	colon	:
+∶	ratio	colon	:
+；	fullwidth semicolon	semicolon	;
+＼	fullwidth reverse solidus	backslash	\
+∖	set minus	backslash	\
+！	fullwidth exclamation	exclamation bang	!
+‼	double exclamation	bang	!
+¡	inverted exclamation	spanish	!
+❗	exclamation mark emoji	bang	!
+“	left double quote	quote	"
+”	right double quote	quote	"
+„	low double quote	quote	"
+＂	fullwidth quote	quote	"
+＃	fullwidth number sign	hash	#
+♯	sharp	music	#
+№	numero sign	number	#
+％	fullwidth percent	percent	%
+‰	per mille	permille	%
+‱	per ten thousand	basis point	%
+＆	fullwidth ampersand	and	&
+⅋	turned ampersand	par	&
+‘	left single quote	quote apostrophe	'
+’	right single quote	quote apostrophe	'
+′	prime	minutes feet	'
+＇	fullwidth apostrophe	quote	'
+（	fullwidth left parenthesis	paren	(
+⦅	left white parenthesis	paren	(
+）	fullwidth right parenthesis	paren	)
+⦆	right white parenthesis	paren	)
+≠	not equal	unequal	=
+≈	almost equal	approximately	=
+≡	identical	equivalent	=
+≒	approximately equal or image	nearly	=
+＝	fullwidth equals	equals	=
+〜	wave dash	nami tilde japanese	~
+～	fullwidth tilde	wave	~
+∼	tilde operator	similar	~
+｜	fullwidth vertical line	pipe bar	|
+¦	broken bar	pipe	|
+‖	double vertical line	parallel	|
+｀	fullwidth grave	backtick	`
+´	acute accent	accent	`
+｛	fullwidth left brace	curly	{
+❴	medium left brace	curly	{
+｝	fullwidth right brace	curly	}
+❵	medium right brace	curly	}
+＋	fullwidth plus	plus	+
+±	plus minus	plusminus	+
+∓	minus plus	minusplus	+
+⊕	circled plus	xor	+
+＊	fullwidth asterisk	star	*
+×	multiplication sign	times	*
+※	reference mark	komejirushi note	*
+★	black star	star	*
+☆	white star	star	*
+⁂	asterism	stars	*
+＜	fullwidth less than	less	<
+≤	less than or equal	less	<
+≪	much less than	less	<
+«	left guillemet	quote	<
+←	leftwards arrow	left arrow	<
+＞	fullwidth greater than	greater	>
+≥	greater than or equal	greater	>
+≫	much greater than	greater	>
+»	right guillemet	quote	>
+→	rightwards arrow	right arrow	>
+？	fullwidth question	question	?
+¿	inverted question	spanish	?
+⁇	double question	question	?
+‽	interrobang	question exclamation	?
+＿	fullwidth low line	underscore	_
+‗	double low line	underscore	_

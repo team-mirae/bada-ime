@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bada learner</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f4f6f8;--surface:#ffffff;--border:#d5dbe1;--text:#17202a;--muted:#5d6b78;--accent:#1f6f9f;--warn:#b5651d;
+  --case:#d7dadd;--case-edge:#c2c6ca;--cap:#fbfbfa;--cap-edge:#b9bec4;--mod:#e3e6e9;--legend:#1d2731;--jis:#9aa4ae;
+  --i:#2f6fb2;--f:#b5651d;--c:#2f6fb2;--v:#2e8b57;--y:#7a4fb0;--k:#8a3b5c;--l:#1d2731;--d:#6b7680;--s:#6b7680;--x:#a33;
+  --heat:31,111,159;
+}
+@media (prefers-color-scheme:dark){:root{
+  color-scheme:dark;--bg:#12171c;--surface:#1a2128;--border:#2d3741;--text:#e6ebef;--muted:#9aa7b3;--accent:#6fb3dc;--warn:#e8a265;
+  --case:#262c32;--case-edge:#1a1f24;--cap:#353c44;--cap-edge:#20262c;--mod:#2b3138;--legend:#eef2f5;--jis:#77828c;
+  --i:#7fb2e8;--f:#e8a265;--c:#7fb2e8;--v:#76c79a;--y:#b896e6;--k:#e48bb0;--l:#eef2f5;--d:#9aa7b3;--s:#9aa7b3;--x:#e57373;
+  --heat:111,179,220;}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Hiragino Sans",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:1.4rem;margin:0 0 2px;font-weight:600}
+h2{font-size:1rem;margin:0 0 8px;font-weight:600}
+.sub,.note{color:var(--muted)}
+.sub{margin:0 0 16px}
+.note{font-size:.85rem}
+.bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:12px}
+label{font-size:.9rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+select,button{font:inherit;font-size:.9rem;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:6px 10px;border-radius:8px}
+button{cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+button.danger{border-color:var(--warn);color:var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:3px 10px;color:var(--text)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.boards{display:grid;gap:10px;margin-bottom:14px}
+.board{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;overflow-x:auto}
+.board svg{display:block;width:100%;min-width:640px;height:auto}
+.key .cap{fill:var(--cap);stroke:var(--cap-edge);stroke-width:1}
+.key.mod .cap{fill:var(--mod)}
+.key.home .cap{fill:color-mix(in srgb,var(--accent) 12%,var(--cap));stroke:var(--accent);stroke-width:1.5}
+.homebar{fill:var(--accent);opacity:.7}
+.key.on .cap{fill:rgba(var(--heat),.5)}
+.lg{fill:var(--legend)}.jis{fill:var(--jis);font-family:ui-monospace,Menlo,monospace}.modl{fill:var(--muted)}
+.c-i{fill:var(--i)}.c-f{fill:var(--f)}.c-c{fill:var(--c)}.c-v{fill:var(--v)}.c-y{fill:var(--y)}.c-k{fill:var(--k)}
+.c-l{fill:var(--l)}.c-d{fill:var(--d)}.c-s{fill:var(--s)}.c-x{fill:var(--x)}
+textarea{width:100%;min-height:220px;font:18px/1.6 -apple-system,"Apple SD Gothic Neo","Hiragino Sans",sans-serif;padding:12px 14px;
+  border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--text);resize:vertical}
+textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.9rem}
+.stats b{font-variant-numeric:tabular-nums}
+.list{font-size:.88rem;display:flex;flex-wrap:wrap;gap:4px 12px}
+.list span b{color:var(--muted);font-weight:400;margin-left:3px}
+.log{font:13px/1.5 ui-monospace,Menlo,monospace;max-height:9.5em;overflow:auto;color:var(--muted)}
+.log div b{color:var(--text);font-weight:400}
+.status{font-size:.85rem;color:var(--muted)}
+.confirm{display:none;margin-top:8px;padding:10px;border:1px solid var(--warn);border-radius:8px}
+.confirm.open{display:block}
+code{font:13px ui-monospace,Menlo,monospace}
+</style>
+</head>
+<body>
+<main>
+  <h1>bada learner</h1>
+  <p class="sub">Type anything below with bada ime (or any input method). Every key, composition and commit is logged to
+    <code>utils/learner-app/data/</code> on this Mac, then exported as training data. Nothing leaves this computer.</p>
+
+  <div class="bar">
+    <label>Keyboard <select id="kb"></select></label>
+    <span class="note">Show:</span>
+    <div class="chips" id="layouts"></div>
+  </div>
+  <div class="boards" id="boards"></div>
+
+  <div class="bar">
+    <span class="status" id="status">Not logging yet: start typing.</span>
+    <button id="newPage">New page</button>
+    <button id="newSession">New session</button>
+  </div>
+  <textarea id="pad" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+    placeholder="Type here. Switch to bada's henkan mode (かな) and write whatever you'd normally write."></textarea>
+
+  <div class="grid" style="margin-top:14px">
+    <div class="card">
+      <h2>This session</h2>
+      <div class="stats"><span>keys <b id="sKeys">0</b></span><span>commits <b id="sCommits">0</b></span><span>page <b id="sPage">1</b></span></div>
+      <div class="log" id="log"></div>
+    </div>
+    <div class="card">
+      <h2>Everything logged</h2>
+      <div class="stats" id="allStats"></div>
+      <p class="note" style="margin:8px 0 4px">Most used Korean words</p><div class="list" id="topWords"></div>
+      <p class="note" style="margin:8px 0 4px">초성 you typed → word</p><div class="list" id="topCho"></div>
+      <p class="note" style="margin:8px 0 4px">Committed, then deleted</p><div class="list" id="rejected"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Export</h2>
+    <div class="bar">
+      <label>Minimum uses <select id="min"><option>1</option><option selected>2</option><option>3</option><option>5</option></select></label>
+      <label><input type="checkbox" id="texts"> include page texts (for n-gram training; your writing, verbatim)</label>
+    </div>
+    <div class="bar">
+      <button class="primary" id="exportTraining">Export training file</button>
+      <span class="note">Recommended: have an AI agent merge it into your dictionary. In a clone, say
+        <code>Read docs/interactive-prompts/learner-merge.md and follow it.</code></span>
+    </div>
+    <div class="bar">
+      <button id="exportDict">Export as dictionary.json</button>
+      <button class="danger" id="install">Replace my dictionary… (not recommended)</button>
+    </div>
+    <div class="confirm" id="confirm">
+      <p style="margin:0 0 8px">This replaces <code>~/Library/Application Support/bada-ime/dictionary.json</code> with words and 초성 from
+        these logs only, with no review: typos you didn't delete become words, and entries you wrote by hand are dropped. The old file is
+        kept beside it as <code>dictionary.backup-….json</code>; to undo, rename it back.</p>
+      <button class="danger" id="installYes">Replace it</button> <button id="installNo">Cancel</button>
+    </div>
+    <p class="status" id="exportStatus"></p>
+  </div>
+</main>
+<script src="/keyboards.js"></script>
+<script src="/layouts.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

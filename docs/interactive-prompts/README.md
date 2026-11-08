@@ -28,6 +28,7 @@ It can't run anything, so it tells you what to check and type yourself.
 | [rules.md](rules.md) | Rules for every prompt: ask before reading anything, before installing, before changing settings |
 | [start.md](start.md) | Check the clone, build, install, set up the input sources and layouts. Ends with dictionary.md |
 | [dictionary.md](dictionary.md) | Build `dictionary.json` with the user: positive and negative words, 초성 shortcuts |
+| [learner-merge.md](learner-merge.md) | Merge a [learner-app](../../utils/learner-app/README.md) export into `dictionary.json` |
 
 ## Writing a prompt
 

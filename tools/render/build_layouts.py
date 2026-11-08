@@ -1,4 +1,4 @@
-"""Write layouts.js for the renderer: the catalog's layouts plus Bada drafts from the optimizer.
+"""Write layouts.js for the renderer: the catalog's layouts.
 
 Classes: i initial, f final, c consonant (initial or final), v vowel, y syllable, k kana,
 l latin, d digit, s symbol, x function.
@@ -71,44 +71,6 @@ def kana():
              KeyV="ひ",KeyB="こ",KeyN="み",KeyM="も",Comma="ね、",Period="る。",Slash="め・",IntlRo="ろ")
     return {c: (v[0], v[1] if len(v) > 1 else "") for c, v in k.items()}
 
-def bada_drafts(path):
-    """Optimizer output → layouts. Shift on a non-letter key is its JIS character (proposal)."""
-    if not os.path.exists(path): return []
-    out = []
-    for n, r in enumerate(json.load(open(path))):
-        keys = {}
-        for code in list(JIS) + ["Key"+c for c in LETTERS]:
-            slot = r["layout"].get(code, {})
-            def cell(which):
-                u = slot.get(which)
-                return {"t": u["t"], "c": {"i":"i","f":"f","v":"v","c":"c"}[u["c"]], "n": u["f"]} if u else None
-            base, shift = cell("base"), cell("shift")
-            if not code.startswith("Key"):
-                ch = JIS[code][0]
-                shift = {"t": ch, "c": cls(ch)}
-            keys[code] = {"base": base, "shift": shift}
-        out.append(dict(id=300+n, name="JIS Bada draft: " + r["name"], display="Korean (bada) draft", kind="henkan",
-                        note="Optimizer output, not a design. " + json.dumps(r["stats"], ensure_ascii=False), keys=keys))
-    return out
-
-def token_drafts(path):
-    """Token-key drafts: one key per jamo slot, several jamo per key, ranked (bada-layout.md §10)."""
-    if not os.path.exists(path): return []
-    out = []
-    for n, r in enumerate(json.load(open(path))):
-        keys = {}
-        for code in list(JIS) + ["Key"+c for c in LETTERS]:
-            u = r["layout"].get(code, {}).get("base")
-            base = {"t": "/".join(u["t"]) if len(u["t"]) > 1 else u["t"], "c": u["c"], "n": u["f"]} if u else None
-            shift = None
-            if not code.startswith("Key"):
-                ch = JIS[code][0]; shift = {"t": ch, "c": cls(ch)}
-                if base is None: base = {"t": ch, "c": cls(ch)}
-            keys[code] = {"base": base, "shift": shift}
-        out.append(dict(id=310+n, name="JIS Bada tokens: " + r["name"], display="Korean (bada) draft", kind="henkan",
-                        note="Token keys, ranked. Optimizer output, not a design. " + json.dumps(r["stats"], ensure_ascii=False), keys=keys))
-    return out
-
 DOCS = os.path.join(HERE, "../../docs/layouts")
 
 def syl(ini, vowel):
@@ -124,25 +86,51 @@ def cell_of(tokens):
         if t["t"] not in texts:
             texts.append(t["t"])
     roles = {t["r"] for t in tokens}
+    if len(texts) == 2 and [t["r"] for t in tokens] == ["i", "f"]:
+        # Interlaced: one key, an initial or a final by the composer's state (ㅃ / ㅄ). Not a ⇧ legend.
+        return {"t": "/".join(texts), "c": "c", "r": ["i", "f"]}
     c = "c" if roles >= {"i", "f"} or "c" in roles else ("v" if roles == {"v"} else ("i" if roles == {"i"} else ("f" if roles == {"f"} else ("y" if all(len(x) == 1 and "\uac00" <= x <= "\ud7a3" for x in texts) else cls(texts[0])))))
     return {"t": "/".join(texts), "c": c}
 
 def bada13():
-    """Layout 13 as the engine types it (engine/src/layout.rs, bada-layout.md §15.1, §16)."""
-    d = json.load(open(os.path.join(DOCS, "bada-candidate-2.json")))
+    """Layout 13 as the engine types it (engine/src/layout.rs, docs/bada-layout.md)."""
+    d = json.load(open(os.path.join(DOCS, "13-bada.json")))
     keys = {}
     for code in list(JIS) + ["Key"+c for c in LETTERS]:
         v = d["keys"].get(code, {"base": [], "shift": []})
         base = cell_of(v["base"])
-        if not code.startswith("Key"):
+        shift = cell_of(v["shift"])
+        if shift is None and not code.startswith("Key"):
             shift = {"t": JIS[code][0], "c": cls(JIS[code][0])}        # ⇧ = the key's JIS character
-        else:
-            ini = next((t["t"] for t in v["base"] if t["r"] in ("i", "c")), None)
-            shift = {"t": syl(ini, "ㅏ"), "c": "y"} if ini else base     # ⇧ consonant = consonant + ㅏ
         keys[code] = {"base": base, "shift": shift}
     return dict(id=13, name="JIS Bada", display="Korean (bada)", kind="henkan",
-                note="As built (v0.1). ⇧ on a consonant: + ㅏ. ⇧ on a number or symbol key: its JIS character; ⇧⌥: its shifted JIS character (⇧⌥/ ?, ⇧⌥1 !). "
-                     "Consonants alone: 초성 input (ㄱㅅㅎㄴㄷ → 감사합니다). Initial ㅇ is implied; compound vowels never join.", keys=keys)
+                note="Deterministic: the same keys always give the same text. Blue: initial or final (a final until a vowel takes it); "
+                     "orange: final only (never moves); green: vowel. ㅇ is typed (F). Vowels join as in 2-set (ㅗ ㅏ → ㅘ). "
+                     "⇧ on a letter without a ⇧ legend types as unshifted; ⇧ on a number or symbol key: its JIS character; ⇧⌥: its shifted JIS character.", keys=keys)
+
+def k3s14():
+    """Layout 14 as the engine reads it (docs/layouts/14-3set-jis.json): ⇧ is the key's JIS character."""
+    d = json.load(open(os.path.join(DOCS, "14-3set-jis.json")))
+    keys = {}
+    for code in list(JIS) + ["Key"+c for c in LETTERS]:
+        v = d["keys"].get(code, {"base": [], "shift": []})
+        base = cell_of(v["base"])
+        shift = cell_of(v["shift"])
+        if code.startswith("Key"):
+            shift = None                      # ⇧ letter: the capital, as on JIS
+        keys[code] = {"base": base, "shift": shift}
+    return dict(id=14, name="JIS 3-set", display="Korean (3-set JIS)", kind="henkan",
+                note="세벌식 JIS (K3S-J), deterministic: initials on the right, vowels in the middle, finals on the left and the number row. "
+                     "No jamo on ⇧: ⇧ types the key's JIS character. The same initial twice is its tense form (ㄱ ㄱ → ㄲ), so is ㄱ or ㅅ twice as a final; "
+                     "vowels join (ㅗ ㅏ → ㅘ), finals cluster (ㄹ ㄱ → ㄺ).", keys=keys)
+
+def search(id_, name, note):
+    """Layouts 150 and 151: the keys spell a search."""
+    out = lay(id_, "JIS " + name, name, "henkan", qwerty(), note=note)
+    for code in ["Key"+c for c in LETTERS]:
+        out["keys"][code]["base"]["c"] = "l"
+        out["keys"][code]["shift"] = None
+    return out
 
 def roman18():
     """Layout 18: Korean romanization (docs/korean-roman.md)."""
@@ -191,7 +179,7 @@ def romaji21():
         t[code] = (base, chr(ord(sh) + 0xFEE0) if sh and "!" <= sh <= "~" else sh)
     out = lay(21, "JIS Romaji", "Japanese (Romaji)", "henkan", t,
               note="As built: romaji with kanji conversion. Letters spell romaji as Japanese IMEs do (ka か, shi し, tsu つ, gakkou がっこう, nn ん). "
-                   "⇧ + letter: the capital, full-width. - ー , 、 . 。 / ・ [ 「 ] 」; digits and symbols full-width. ⇧Tab: −1 hiragana, −2 katakana.")
+                   "⇧ + letter: the capital, full-width. - ー , 、 . 。 / ・ [ 「 ] 」; digits and symbols full-width. ⇧Tab: −1 hiragana, −2 katakana (script forms, off by default).")
     for code in ["Key"+c for c in LETTERS]:
         out["keys"][code]["base"]["c"] = "l"
     return out
@@ -199,6 +187,7 @@ def romaji21():
 if __name__ == "__main__":
     layouts = [
         bada13(),
+        k3s14(),
         roman18(),
         kana19(),
         None,
@@ -209,11 +198,14 @@ if __name__ == "__main__":
             note="As built: JIS Korean Mode A's Korean reading. Implied ㅇ; the same vowel twice keeps the final (마리 → 말이); ⇧ + vowel starts a syllable on ㅇ. ⇧Z is ㅋ here (F10 in JIS Korean)."),
         lay(12, "JIS Moonshot", "Korean (legacy-moonshot)", "henkan", legacy_moonshot(),
             note="As built: JIS Moonshot Mode A's Korean reading (no predictions). ⇧ consonant + ㅏ, ⇧ vowel on ㅇ; ㅙ ㅖ ㅒ ㅢ on − ; : , ."),
+        search(150, "Symbols", "A search: letters and digits spell names (either case), Space adds a word (⇧Space: a space), a symbol offers its richer forms "
+               "(. 。 …, ¥ the currencies). Names and tags (usd → $, money), emoji names and keywords (happy face → 😀)."),
+        search(151, "Unicode", "A search of character names (snowman → ☃); a code gives its character (1f600, u+ac00). Space adds a word (⇧Space: a space)."),
         lay(20, "JIS Kana", "Japanese (Kana)", "henkan", kana(),
-            note="As built: kana with kanji conversion. ゛ ゜ attach to the kana before them (か゛ が, は゜ ぱ). ⇧Tab: −1 hiragana, −2 katakana."),
+            note="As built: kana with kanji conversion. ゛ ゜ attach to the kana before them (か゛ が, は゜ ぱ). ⇧Tab: −1 hiragana, −2 katakana (script forms, off by default)."),
     ]
     kana20 = next(l for l in layouts if l and l["id"] == 20)
-    layouts = [kana20 if l is None else l for l in layouts if l is not kana20] + bada_drafts(os.path.join(HERE, "../analysis/out_48.json")) + token_drafts(os.path.join(HERE, "../analysis/out_place_tokens.json"))
+    layouts = [kana20 if l is None else l for l in layouts if l is not kana20]
     with open(os.path.join(HERE, "layouts.js"), "w") as f:
         f.write("// Generated by build_layouts.py. Do not edit.\nwindow.BADA_LAYOUTS = ")
         json.dump(layouts, f, ensure_ascii=False)

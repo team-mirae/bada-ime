@@ -1,3 +1,6 @@
+emoji.tsv (emoji-test.txt and CLDR English annotations) and unicode-names.tsv (UnicodeData.txt) are built from
+Unicode data by tools/build_unicode_data.py, under the same terms as below.
+
 hanja.tsv includes readings from the Unicode Unihan database (Unihan_Readings.txt), distributed under these terms:
 
 UNICODE LICENSE V3

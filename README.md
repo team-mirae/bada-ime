@@ -9,10 +9,15 @@
 (QWERTY passthrough) and **henkan** (every enabled Korean, Japanese and Latin layout read at once,
 ranked as you type).
 
-Status: v0.1, layouts 0, 10, 11, 12, 13 (bada), 18 (Korean Roman), 19 (Korean Kana), 20 (kana) and 21 (romaji). Build: `make` in `mac/` (needs Rust and the Command Line
+Status: **0.1.0**, layouts 0, 10, 11, 12, 13 (bada), 14 (3-set JIS), 18 (Korean Roman), 19 (Korean Kana), 20 (kana),
+21 (romaji), 150 (Symbols) and 151 (Unicode); henkan profiles for かな, 変換 and カタカナ. Build: `make` in `mac/` (needs Rust and the Command Line
 Tools), `make install` to install. See [docs/spec.md](docs/spec.md) and [docs/bada-layout.md](docs/bada-layout.md).
 
 ## Layouts
+
+**bada** (layout 13) types like 2-set, keeps finals like 3-set, and uses the whole key space like JIS
+kana: digits and punctuation are on ⇧, so Korean typing never needs a prediction or a mode switch for them.
+How it compares: [docs/layouts/13-bada.md](docs/layouts/13-bada.md).
 
 Henkan mode has no sub-modes: every enabled layout reads the keys at once, and the readings are
 ranked as you type. The keyboard above is **QWERTY + bada + kana** (layouts 0, 13, 20): English,
@@ -34,3 +39,6 @@ MIT © Mirae Research
 In a clone, tell a coding assistant: `Read docs/interactive-prompts/start.md and follow it.` It
 installs bada ime and then builds your dictionary with you
 ([docs/dictionary-contract.md](docs/dictionary-contract.md)): practically required if you type 초성.
+
+To learn your words from your own typing, type in [utils/learner-app](utils/learner-app/README.md)
+(a local page logging a plain text field) and have an assistant merge its export into your dictionary.

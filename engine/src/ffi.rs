@@ -46,14 +46,34 @@ pub extern "C" fn bada_data_new(
     oecd_len: usize,
     ja: *const u8,
     ja_len: usize,
+    kanji: *const u8,
+    kanji_len: usize,
+    lm: *const u8,
+    lm_len: usize,
+    symbols: *const u8,
+    symbols_len: usize,
+    emoji: *const u8,
+    emoji_len: usize,
+    unicode: *const u8,
+    unicode_len: usize,
 ) -> *const Data {
+    let raw = |ptr: *const u8, len: usize| -> &[u8] {
+        if ptr.is_null() || len == 0 {
+            return &[];
+        }
+        // SAFETY: the shell passes a buffer of `len` bytes that outlives the call.
+        unsafe { std::slice::from_raw_parts(ptr, len) }
+    };
     let data = Data::parse(
         bytes(ko, ko_len),
         bytes(en, en_len),
         bytes(hanja, hanja_len),
         bytes(oecd, oecd_len),
     )
-    .with_japanese(bytes(ja, ja_len));
+    .with_japanese(bytes(ja, ja_len))
+    .with_kanji(raw(kanji, kanji_len))
+    .with_lm(raw(lm, lm_len))
+    .with_search(bytes(symbols, symbols_len), bytes(emoji, emoji_len), bytes(unicode, unicode_len));
     Arc::into_raw(Arc::new(data))
 }
 
@@ -141,6 +161,15 @@ pub extern "C" fn bada_set_mode(handle: *mut Handle, mode: u32) -> *const c_char
         Mode::Henkan
     };
     let out = with(handle, |e| e.set_mode(mode)).unwrap_or_default();
+    reply(handle, out)
+}
+
+/// Switches henkan profile ("mac-kana", "henkan", "katakana"; spec §6.6). Returns an Output (what
+/// was staged is committed).
+#[unsafe(no_mangle)]
+pub extern "C" fn bada_set_profile(handle: *mut Handle, name: *const c_char) -> *const c_char {
+    let name = cstr(name).to_string();
+    let out = with(handle, |e| e.set_profile(&name)).unwrap_or_default();
     reply(handle, out)
 }
 

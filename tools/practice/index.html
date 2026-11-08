@@ -43,6 +43,8 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 svg{display:block;width:100%;min-width:720px;height:auto}
 .cap{fill:var(--cap);stroke:var(--cap-edge);stroke-width:1}
 .key.mod .cap{fill:var(--mod)}
+.key.home .cap{fill:color-mix(in srgb,var(--accent) 12%,var(--cap));stroke:var(--accent);stroke-width:1.5}
+.homebar{fill:var(--accent);opacity:.7}
 .key.hl .cap{fill:color-mix(in srgb,var(--hint) 45%,var(--cap));stroke:var(--hint);stroke-width:2}
 .key.hl-shift .cap{fill:color-mix(in srgb,var(--hint) 22%,var(--cap));stroke:var(--hint);stroke-width:2;stroke-dasharray:5 3}
 .key.ok .cap{fill:color-mix(in srgb,var(--good) 55%,var(--cap))}
@@ -178,11 +180,14 @@ function drawBoard() {
   for (const [code, kx, ky, kw, kh, label, shape] of kb.keys) {
     const x = PAD + kx * U, y = PAD + ky * U, w = kw * U, h = kh * U;
     const entry = code && lay.keys[code];
-    const g = el("g", { class: "key" + (entry ? "" : " mod") + (code === "ShiftLeft" || code === "ShiftRight" ? " shiftkey" : "") });
+    const home = code === "KeyF" || code === "KeyJ";   // the homing keys
+    const g = el("g", { class: "key" + (entry ? "" : " mod") + (home ? " home" : "") + (code === "ShiftLeft" || code === "ShiftRight" ? " shiftkey" : "") });
     g.append(el("path", { d: shape === "ENTER" ? enter(x, y) : rect(x + G, y + G, w - 2 * G, h - 2 * G), class: "cap" }));
+    if (home) g.append(el("rect", { x: x + w / 2 - 9, y: y + h - 9, width: 18, height: 3, rx: 1.5, class: "homebar" }));
     if (entry) {
       const b = entry.base, s = entry.shift;
-      if (b) g.append(el("text", { x: x + 11, y: y + h - 13, "font-size": b.t.length > 2 ? 14 : 22, class: "lg" }, b.t.split("/")[0]));
+      if (b) g.append(el("text", { x: x + 11, y: y + h - 13, "font-size": b.t.split("/")[0].length > 2 ? 14 : 22, class: "lg" }, b.t.split("/")[0]));
+      if (b && b.r) g.append(el("text", { x: x + w - 9, y: y + h / 2 + 4, "font-size": 14, "text-anchor": "end", class: "lg", style: "fill:var(--f, #b5651d)", "text-decoration": "underline" }, b.t.split("/")[1]));
       if (s && (!b || s.t !== b.t)) g.append(el("text", { x: x + 11, y: y + 23, "font-size": 13, class: "lg", opacity: .75 }, s.t.split("/")[0]));
       const jis = BADA_JIS[code];
       if (jis) g.append(el("text", { x: x + w - 9, y: y + h - 10, "font-size": 10, "text-anchor": "end", class: "jis" }, code.startsWith("Key") ? jis[1] : jis[0]));

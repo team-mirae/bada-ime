@@ -6,8 +6,12 @@ dictionary of their own**: the words they mean, the words they never mean, and t
 shortcuts. This file is that dictionary. It applies to every layout, not only 초성 input.
 
 `docs/dictionary.schema.json` is its JSON Schema; `docs/dictionary-example.json` is a worked
-example. The interactive setup ([interactive-prompts/dictionary.md](interactive-prompts/dictionary.md))
+example. [utils/learner-app](../utils/learner-app/README.md) learns entries from your typing. The interactive setup ([interactive-prompts/dictionary.md](interactive-prompts/dictionary.md))
 builds one with you.
+
+> Layout 13 is deterministic and no layout types 초성 input at present, so `shortcuts` and the 초성
+> matching of positive words are kept but unused for now ([bada-layout.md §8](bada-layout.md)).
+> Positive and negative words still rank every layout's readings.
 
 ## The file
 

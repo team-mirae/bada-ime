@@ -8,6 +8,8 @@ import InputMethodKit
 final class BadaInputController: IMKInputController {
     private let engine = Engine()
     private var hasMarkedText = false
+    /// Rows of the menu shown last: かな moves in it only when there's one (spec §6.6).
+    private var menuRows = 0
     private var settingsObserver: NSObjectProtocol?
 
     /// The controller that got the last key, else the last activated one: where 英数 / かな act.
@@ -17,9 +19,9 @@ final class BadaInputController: IMKInputController {
 
     override init!(server: IMKServer!, delegate: Any!, client inputClient: Any!) {
         super.init(server: server, delegate: delegate, client: inputClient)
-        engine.apply(BadaSettings.current.json)
+        engine.apply(BadaSettings.current.engineJSON)
         settingsObserver = NotificationCenter.default.addObserver(forName: BadaSettings.changed, object: nil, queue: .main) { [weak self] _ in
-            self?.engine.apply(BadaSettings.current.json)
+            self?.engine.apply(BadaSettings.current.engineJSON)
         }
     }
 
@@ -43,13 +45,19 @@ final class BadaInputController: IMKInputController {
             if !event.isARepeat { switchMode(to: .muhenkan, client: client) }
             return true
         }
-        if code == kVK_JIS_Kana {
+        var profileKey = LanguageKeyTap.profileKeys[code]
+        if (code == kVK_JIS_Kana || code == kVK_JIS_Eisu) && !event.isARepeat, let hid = HIDKeys.claim() {
+            if hid.recorded { return true }
+            if let name = LanguageKeyTap.profileKeys[hid.code] { profileKey = name }   // カタカナ, as かな
+        }
+        if code == kVK_JIS_Kana || (profileKey != nil && !ctrl && !alt && !cmd) {
             if !event.isARepeat {
-                if ctrl && alt && shift {
+                if code == kVK_JIS_Kana && ctrl && alt && shift {
                     switchMode(to: Modes.current.other, client: client)
                 } else if Modes.current == .henkan {
-                    cycle(back: shift, client: client)
+                    languageKey(profileKey ?? BadaProfiles.macKana, shift: shift, client: client)
                 } else {
+                    Modes.profile = BadaSettings.current.use_profiles ? profileKey ?? BadaProfiles.macKana : BadaProfiles.macKana
                     switchMode(to: .henkan, client: client)
                 }
             }
@@ -75,6 +83,27 @@ final class BadaInputController: IMKInputController {
         apply(engine.key("Lang1", shift: back, ctrl: false, alt: false, meta: false), to: client)
     }
 
+    /// かな or a profile key pressed in henkan mode (spec §6.6). The same profile's key moves in the
+    /// menu; another's switches profile. かな in another profile than mac-kana does what the
+    /// setting says.
+    func languageKey(_ key: String, shift: Bool, client given: IMKTextInput? = nil) {
+        let settings = BadaSettings.current
+        switch ProfileKeyLogic.action(key: key, current: Modes.profile, shift: shift, menu: menuRows > 1,
+                                      profilesOn: settings.use_profiles, kanaIn: settings.kana_in_profile,
+                                      order: settings.profile_order) {
+        case .step(let back): cycle(back: back, client: given)
+        case .profile(let name): switchProfile(to: name, client: given)
+        case .muhenkan: switchMode(to: .muhenkan, client: given)
+        }
+    }
+
+    /// To henkan profile `name` (spec §6.6): commits what's staged.
+    func switchProfile(to name: String, client given: IMKTextInput? = nil) {
+        Modes.profile = name
+        guard let client = given ?? (client() as IMKTextInput?) else { return }
+        apply(engine.setProfile(name), to: client)
+    }
+
     /// To `mode`, in place: commits what's staged, then tells macOS.
     func switchMode(to mode: BadaMode, client given: IMKTextInput? = nil) {
         guard let client = given ?? (client() as IMKTextInput?) else {
@@ -82,6 +111,7 @@ final class BadaInputController: IMKInputController {
             return
         }
         apply(engine.setMode(mode), to: client)
+        _ = engine.setProfile(Modes.profile)
         Modes.current = mode
         DispatchQueue.main.async { Modes.select(mode, in: client) }
     }
@@ -93,7 +123,8 @@ final class BadaInputController: IMKInputController {
         let mode = Modes.selectedNow() ?? Modes.current
         Modes.current = mode
         _ = engine.setMode(mode)
-        engine.apply(BadaSettings.current.json)
+        engine.apply(BadaSettings.current.engineJSON)
+        _ = engine.setProfile(Modes.profile)
         // Keys the engine passes on type JIS characters through ABC.
         client?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
         UserDictionary.refresh()
@@ -145,6 +176,7 @@ final class BadaInputController: IMKInputController {
             hasMarkedText = false
         }
         showMenu(out, client)
+        menuRows = out.menu.count
         // The engine needs the selection (hanja, 半角/全角 with nothing staged).
         if out.need_selection != nil && depth == 0 {
             let selection = client.selectedRange()

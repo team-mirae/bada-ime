@@ -124,6 +124,10 @@ pub struct Data {
     pub hanja: Dictionary,
     /// Kana-kanji conversion (`kanji.bin`); None without the file.
     pub kanji: Option<crate::kanji::Kanji>,
+    /// The jamo 4-gram model for typo suggestions (`ko-jamo-4gram.bin`); None without the file.
+    pub lm: Option<crate::typo::JamoLm>,
+    /// Symbols, emoji and character names for layouts 150 and 151.
+    pub search: crate::search::Search,
     /// (hanja, Korean name)
     pub oecd: Vec<(String, String)>,
 }
@@ -167,6 +171,18 @@ impl Data {
         self
     }
 
+    /// Adds the searches of layouts 150 and 151 (`symbols.tsv`, `emoji.tsv`, `unicode-names.tsv`).
+    pub fn with_search(mut self, symbols: &str, emoji: &str, unicode: &str) -> Data {
+        self.search = crate::search::Search::parse(symbols, emoji, unicode);
+        self
+    }
+
+    /// Adds the typo model (`ko-jamo-4gram.bin`). A malformed or missing file means no typo suggestions.
+    pub fn with_lm(mut self, data: &[u8]) -> Data {
+        self.lm = crate::typo::JamoLm::parse(data);
+        self
+    }
+
     /// Adds kana-kanji conversion (`kanji.bin`). A malformed file is ignored (no kanji).
     pub fn with_kanji(mut self, data: &[u8]) -> Data {
         self.kanji = if data.is_empty() { None } else { crate::kanji::Kanji::parse(data).ok() };
@@ -187,8 +203,9 @@ impl Data {
         self.english.contains(&word.to_lowercase())
     }
 
-    /// Words for 초성 tokens (§15): same syllable count, each syllable's initial matching, and ㅏ
-    /// where a token carries it (the final left open, §15.1). Most frequent first.
+    /// Words for 초성 tokens (unused at present, bada-layout.md §8): same syllable count, each
+    /// syllable's initial matching, and ㅏ where a token carries it (the final left open). Most
+    /// frequent first.
     pub fn choseong_words(&self, tokens: &[Token], limit: usize) -> Vec<(String, u32)> {
         let key: String = tokens.iter().map(|t| t.ini).collect();
         self.korean

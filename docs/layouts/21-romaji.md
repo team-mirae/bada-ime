@@ -18,7 +18,8 @@ Japanese typed in romaji, as Japanese IMEs spell it (ka か, shi / si し, tsu /
 
 - `-` ー, `,` 、, `.` 。, `/` ・, `[` 「, `]` 」; digits and other symbols full-width.
 - ⇧ + a letter is that capital, full-width.
-- The same menu as Kana: conversions first, ⇧Tab for −1 hiragana and −2 katakana; the same F-key
+- The same menu as Kana: conversions first, ⇧Tab for −1 hiragana and −2 katakana when script forms
+  are on (off by default); the same F-key
   actions.
 
 Images: `python3 tools/render/export_png.py` (HHKB JIS). Interactive: open `tools/render/index.html`.
