@@ -9,7 +9,7 @@
 (QWERTY passthrough) and **henkan** (every enabled Korean, Japanese and Latin layout read at once,
 ranked as you type).
 
-Status: **0.1.1**, layouts 0, 10, 11, 12, 13 (bada), 14 (3-set JIS), 18 (Korean Roman), 19 (Korean Kana), 20 (kana),
+Status: **0.1.2**, layouts 0, 10, 11, 12, 13 (bada), 14 (3-set JIS), 18 (Korean Roman), 19 (Korean Kana), 20 (kana),
 21 (romaji), 150 (Symbols) and 151 (Unicode); henkan profiles for かな, 変換 and カタカナ. Build: `make` in `mac/` (needs Rust and the Command Line
 Tools), `make install` to install. See [docs/spec.md](docs/spec.md) and [docs/bada-layout.md](docs/bada-layout.md).
 
