@@ -163,6 +163,7 @@ target, while §4.3 says henkan mode has no sub-modes. Which of these is meant?
 | Key | Action |
 |---|---|
 | ⌥Space | `_` |
+| ろ (`_` key, IntlRo) | `\`; ⇧ `_` (as on every JIS keyboard; macOS's ABC layout would give `_` for both). The engine types it, in muhenkan and wherever henkan passes the key on |
 | ⌥ + letter | its **variants**, as JIS English did (jis-korean spec §3.6.3): the letter shows with a row of accented variants (⌥e: è é ê ë ē ė ę; ⇧ for capitals), none chosen. 1–9, 0 pick; the same ⌥ + letter again or the arrows choose; Enter commits; Esc / ⌫ cancel; any other key keeps what shows and goes on. A letter without variants types macOS's ⌥ character. In terminals ⌥ goes to the app untouched |
 | 半角/全角 | **full-width** applied to the selection |
 | ⇧半角/全角 | **half-width** applied to the selection |

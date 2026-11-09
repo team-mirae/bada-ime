@@ -834,10 +834,16 @@ impl Engine {
 
     /// One key event.
     pub fn key(&mut self, key: Key, mods: Mods) -> Output {
-        let out = match self.mode {
+        let mut out = match self.mode {
             Mode::Muhenkan => self.key_muhenkan(key, mods),
             Mode::Henkan => self.key_henkan(key, mods),
         };
+        // The ろ key (IntlRo) is `\` and ⇧ `_`, as on every JIS keyboard (spec §6.2). A key passed
+        // on is typed by macOS's ABC layout, which gives `_` for both: type it here instead.
+        if key == Key::IntlRo && !out.consumed && !mods.ctrl && !mods.alt && !mods.meta {
+            out.commit.push(layout::jis_char(key, mods.shift).unwrap_or('_'));
+            out.consumed = true;
+        }
         self.finish(out)
     }
 
@@ -1309,6 +1315,26 @@ mod tests {
         assert!(out.consumed);
         // nothing staged: the app's
         assert!(!e.key(Enter, Mods::SHIFT).consumed);
+    }
+
+    #[test]
+    fn ro_key_is_backslash_and_shift_underscore() {
+        // Muhenkan passes keys on; the ろ key is typed here, not by ABC (which gives `_` for both).
+        let mut e = engine();
+        e.set_mode(Mode::Muhenkan);
+        let out = press(&mut e, IntlRo);
+        assert_eq!((out.commit.as_str(), out.consumed), ("\\", true));
+        assert_eq!(shift(&mut e, IntlRo).commit, "_");
+        // With ⌘ or ⌃ it is the app's shortcut.
+        assert!(!e.key(IntlRo, Mods { meta: true, ..Mods::NONE }).consumed);
+        // Henkan: 13 types ㅢ on it; its ⇧ is the unshifted JIS character `\` and ⇧⌥ the shifted
+        // one `_` (bada-layout.md §4).
+        let mut e = engine();
+        e.set_mode(Mode::Henkan);
+        assert_eq!(press(&mut e, IntlRo).preedit, "ㅢ");
+        assert!(shift(&mut e, IntlRo).preedit.ends_with('\\'));
+        let out = e.key(IntlRo, Mods { shift: true, alt: true, ..Mods::NONE });
+        assert!(format!("{}{}", out.commit, out.preedit).ends_with('_'), "{out:?}");
     }
 
     #[test]
