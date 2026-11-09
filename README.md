@@ -13,6 +13,9 @@ Status: **0.1.2**, layouts 0, 10, 11, 12, 13 (bada), 14 (3-set JIS), 18 (Korean 
 21 (romaji), 150 (Symbols) and 151 (Unicode); henkan profiles for かな, 変換 and カタカナ. Build: `make` in `mac/` (needs Rust and the Command Line
 Tools), `make install` to install. See [docs/spec.md](docs/spec.md) and [docs/bada-layout.md](docs/bada-layout.md).
 
+**Try it in a browser:** [bada.sjun.me](https://bada.sjun.me) runs the same engine (WebAssembly) with the same
+settings, on an HHKB or Apple-style JIS keyboard drawn on screen ([web/](web/README.md)).
+
 ## Layouts
 
 **bada** (layout 13) types like 2-set, keeps finals like 3-set, and uses the whole key space like JIS

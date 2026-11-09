@@ -9,3 +9,6 @@ __pycache__/
 *.log
 /engine/tools/cache/
 /utils/learner-app/data/
+/web/dist/
+/web/.vercel/
+/web/wasm/target/

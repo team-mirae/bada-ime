@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>bada ime · web</title>
+<meta name="description" content="bada ime in the browser: the Mac input method's engine, its settings and its JIS layouts, on an HHKB or Apple keyboard.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f6f9f'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle' fill='white' font-family='sans-serif'%3E바%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand"><b>bada ime</b> <span class="muted">web</span></div>
+  <div class="mode" id="mode" aria-live="polite">
+    <button id="muhenkanBtn" title="英数: muhenkan mode">英数 <span>Muhenkan</span></button>
+    <button id="henkanBtn" title="かな: henkan mode">かな <span>Henkan</span></button>
+  </div>
+  <div class="spacer"></div>
+  <a class="link" href="https://github.com/team-mirae/bada-ime" target="_blank" rel="noopener">GitHub</a>
+  <button id="settingsBtn" class="primary">Settings</button>
+</header>
+
+<main>
+  <div id="warning" class="warning" hidden></div>
+  <div class="editor" id="editor">
+    <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+    <textarea id="text" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off"
+      placeholder="Loading the engine…" disabled aria-label="Text"></textarea>
+    <div class="menu" id="menu" hidden></div>
+  </div>
+  <div class="status" id="status"></div>
+
+  <div class="board-wrap">
+    <div class="board" id="board"></div>
+  </div>
+  <p class="help" id="help"></p>
+</main>
+
+<div class="loading" id="loading">
+  <div class="loading-box">
+    <b>Loading bada ime</b>
+    <div class="bar"><div id="progress"></div></div>
+    <div class="muted" id="progressText">The engine and its dictionaries (about 15 MB, once)</div>
+  </div>
+</div>
+
+<dialog id="settings" aria-label="bada ime Settings">
+  <form method="dialog" class="dialog-head">
+    <b>bada ime Settings</b>
+    <button class="close" aria-label="Close">×</button>
+  </form>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  <div class="pages" id="pages"></div>
+</dialog>
+
+<script src="keyboards.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

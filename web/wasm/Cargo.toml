@@ -1,0 +1,21 @@
+[package]
+name = "bada-web"
+version = "0.1.2"
+edition = "2024"
+publish = false
+license = "MIT"
+description = "bada ime's engine for the web simulator (web/): one engine, JSON in, JSON out"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+bada-engine = { path = "../../engine" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"

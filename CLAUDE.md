@@ -24,5 +24,8 @@
   Each JSON claims a reliability per language (perfect / production / experimental); CI
   (`.github/workflows/robot.yml`) fails a layout that doesn't earn its claim.
 - `engine/data/ja-kana-native.txt` and `ja-common-words.txt`: `tools/analysis/.venv/bin/python engine/tools/build_kana_native.py`.
+- Web simulator (`web/`, bada.sjun.me): `node web/build.mjs` → `web/dist`; `node web/test/smoke.mjs`. Deployed to Vercel
+  by `.github/workflows/deploy-web.yml` on push to main. It ports the Mac shell's behaviour (InputController,
+  ProfileKeys, Settings, SettingsWindow): a change there needs the same change in `web/src`.
 - `utils/learner-app`: `npm start` / `npm test` (Node 20+, no packages).
 - Analysis tools need `tools/analysis/.venv` with numpy (see docs/bada-history.md §9).
