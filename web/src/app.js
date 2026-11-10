@@ -13,7 +13,7 @@ const DICT_STORE = "bada-dictionary";
 const MODIFIERS = new Set(["ShiftLeft", "ShiftRight", "ControlLeft", "ControlRight", "AltLeft", "AltRight", "MetaLeft", "MetaRight", "CapsLock", "Fn", "FnLock"]);
 const coarse = matchMedia("(pointer: coarse)").matches;
 
-let engine = null, catalog = { layouts: [], actions: [] };
+let engine = null, catalog = { layouts: [], actions: [] }, version = "";
 const layouts = {};   // id → layout JSON (docs/layouts)
 let settings = S.load(), web = S.loadWeb();
 const state = {
@@ -46,6 +46,7 @@ async function fetchBytes(url, gz, onBytes) {
 
 async function start() {
   const manifest = await (await fetch("manifest.json", { cache: "no-cache" })).json();
+  version = manifest.version || "";
   await Promise.all(manifest.layouts.map(async path => {
     const l = await (await fetch(path)).json();
     layouts[l.id] = l;
@@ -113,6 +114,7 @@ const api = {
     refresh();
   },
   get catalog() { return catalog; },
+  get version() { return version; },
   get dictionary() { return localStorage.getItem(DICT_STORE) || ""; },
   set dictionary(text) {
     try { text ? localStorage.setItem(DICT_STORE, text) : localStorage.removeItem(DICT_STORE); } catch {}

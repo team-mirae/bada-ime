@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>bada ime</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4faff"/>
+      <stop offset="1" stop-color="#a6d5f2"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1273bf"/>
+      <stop offset="0.35" stop-color="#0a4f92"/>
+      <stop offset="0.75" stop-color="#062e62"/>
+      <stop offset="1" stop-color="#03183a"/>
+    </linearGradient>
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2774f"/>
+      <stop offset="1" stop-color="#b8432a"/>
+    </linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb089"/>
+      <stop offset="1" stop-color="#ff8a5c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#3fa2e8" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#3fa2e8" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="water"><path d="M0 300C90 262 180 258 270 288S450 334 540 300S720 250 810 282S960 318 1024 296V1024H0Z"/></clipPath>
+    <clipPath id="tile"><rect width="1024" height="1024" rx="228"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#tile)">
+    <rect width="1024" height="1024" fill="url(#sky)"/>
+
+    <!-- the sea: deep, from a wavy surface down -->
+    <path d="M0 300C90 262 180 258 270 288S450 334 540 300S720 250 810 282S960 318 1024 296V1024H0Z" fill="url(#sea)"/>
+
+    <!-- light from the surface: begun above it and clipped to the water, so each starts at the wave -->
+    <g clip-path="url(#water)">
+      <path d="M160 200L260 200L120 1024L-60 1024Z" fill="url(#ray)"/>
+      <path d="M432 200L502 200L460 1024L300 1024Z" fill="url(#ray)" opacity="0.8"/>
+      <path d="M745 200L815 200L960 1024L800 1024Z" fill="url(#ray)" opacity="0.7"/>
+    </g>
+    <path d="M0 300C90 262 180 258 270 288S450 334 540 300S720 250 810 282S960 318 1024 296" fill="none"
+          stroke="#ffffff" stroke-width="22" stroke-linecap="round"/>
+
+    <!-- the spacebar: JIS, 2.5u × 1u (u = 200), cruising right just under the surface -->
+    <g transform="rotate(-3 560 560)">
+      <ellipse cx="560" cy="580" rx="380" ry="200" fill="url(#glow)"/>
+      <!-- wake -->
+      <path d="M262 520H160M274 570H112M262 620H180" stroke="#ffffff" stroke-width="12" stroke-linecap="round" opacity="0.35"/>
+      <!-- periscope, out through the surface, looking ahead -->
+      <path d="M622 410V232H668" fill="none" stroke="#b8432a" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M622 410V232H668" fill="none" stroke="#f2774f" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- conning tower -->
+      <rect x="560" y="388" width="130" height="110" rx="26" fill="url(#side)"/>
+      <rect x="574" y="394" width="102" height="70" rx="18" fill="url(#top)"/>
+      <!-- the cap's sides, then its top -->
+      <rect x="310" y="470" width="500" height="200" rx="40" fill="url(#side)"/>
+      <rect x="336" y="478" width="448" height="150" rx="30" fill="url(#top)"/>
+    </g>
+
+    <!-- bubbles rising behind it -->
+    <g fill="none" stroke="#ffffff" stroke-width="7" opacity="0.7">
+      <circle cx="250" cy="470" r="16"/>
+      <circle cx="206" cy="420" r="11"/>
+      <circle cx="236" cy="372" r="8"/>
+      <circle cx="196" cy="336" r="6"/>
+    </g>
+    <g fill="#ffffff" opacity="0.5">
+      <circle cx="286" cy="430" r="5"/>
+      <circle cx="160" cy="470" r="4"/>
+    </g>
+
+    <!-- the deep -->
+    <path d="M0 880C140 860 280 866 420 882S700 900 840 880S980 864 1024 870" fill="none"
+          stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.12"/>
+  </g>
+</svg>

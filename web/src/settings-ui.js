@@ -4,7 +4,7 @@
 import * as S from "./settings.js";
 
 const $ = id => document.getElementById(id);
-const PAGES = ["Layouts", "Profiles", "Menu", "F Keys", "Dictionary", "Backup", "Keyboard"];
+const PAGES = ["Layouts", "Profiles", "Menu", "F Keys", "Dictionary", "Backup", "Keyboard", "About"];
 /** Every order of the three profiles, for the cycle order. */
 const ORDERS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]].map(o => o.map(i => S.PROFILES[i][0]));
 
@@ -61,7 +61,7 @@ function draw() {
     role: "tab", "aria-selected": String(p === ui.tab), onclick: () => { ui.tab = p; ui.note = ""; draw(); },
   }, p)));
   const page = { Layouts: layoutsPage, Profiles: profilesPage, Menu: menuPage, "F Keys": fKeysPage,
-    Dictionary: dictionaryPage, Backup: backupPage, Keyboard: keyboardPage }[ui.tab](s);
+    Dictionary: dictionaryPage, Backup: backupPage, Keyboard: keyboardPage, About: aboutPage }[ui.tab](s);
   $("pages").replaceChildren(h("div", { class: "page", role: "tabpanel" }, ...page));
 }
 
@@ -250,6 +250,19 @@ function dictionaryPage(s) {
       h("button", { onclick: () => pickFile(t => { api.dictionary = t.trim(); draw(); }) }, "Open File…"),
       h("button", { onclick: () => { api.dictionary = ""; draw(); } }, "Clear"),
       h("a", { href: "https://github.com/team-mirae/bada-ime/blob/main/docs/dictionary-contract.md", target: "_blank", rel: "noopener" }, "The contract")),
+  ];
+}
+
+function aboutPage() {
+  return [
+    h("div", { class: "about" },
+      h("img", { src: "icon.svg", alt: "", width: 128, height: 128 }),
+      h("h2", {}, "bada ime"),
+      h("p", {}, "바다 입력기 · バダIME"),
+      h("p", {}, `Version ${api.version || "?"}`)),
+    row(h("a", { href: "https://github.com/team-mirae/bada-ime", target: "_blank", rel: "noopener" }, "GitHub"),
+      h("a", { href: "https://bada.sjun.me" }, "bada.sjun.me")),
+    hint("MIT © Mirae Research"),
   ];
 }
 

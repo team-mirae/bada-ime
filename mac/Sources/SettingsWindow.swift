@@ -91,7 +91,7 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
 
     /// Pages of the window, in the order they were made; shown as tabs in `order`.
     private var pages: [String: NSStackView] = [:]
-    private static let order = ["Layouts", "Profiles", "Menu", "F Keys", "Dictionary", "Backup"]
+    private static let order = ["Layouts", "Profiles", "Menu", "F Keys", "Dictionary", "Backup", "About"]
 
     private func page(_ title: String) -> NSStackView {
         let s = NSStackView()
@@ -350,6 +350,28 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
         fileRow.addArrangedSubview(NSButton(title: "Import Settings…", target: self, action: #selector(importSettings(_:))))
         stack.addArrangedSubview(fileRow)
         stack.addArrangedSubview(help("Everything on this page, as JSON (bada-settings/1). Importing replaces it all."))
+
+        stack = page("About")
+        let icon = NSImageView()
+        if let url = Bundle.main.url(forResource: "bada-icon", withExtension: "png") {
+            icon.image = NSImage(contentsOf: url)
+        }
+        icon.imageScaling = .scaleProportionallyUpOrDown
+        icon.setAccessibilityElement(false)   // decorative: the name follows
+        NSLayoutConstraint.activate([icon.widthAnchor.constraint(equalToConstant: 128), icon.heightAnchor.constraint(equalToConstant: 128)])
+        stack.addArrangedSubview(icon)
+        let title = label("bada ime", bold: true)
+        title.font = .boldSystemFont(ofSize: 24)
+        stack.addArrangedSubview(title)
+        stack.addArrangedSubview(label("바다 입력기 · バダIME"))
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
+        stack.addArrangedSubview(label("Version \(version)"))
+        let linkRow = NSStackView()
+        linkRow.orientation = .horizontal
+        linkRow.addArrangedSubview(NSButton(title: "GitHub", target: self, action: #selector(openGitHub(_:))))
+        linkRow.addArrangedSubview(NSButton(title: "bada.sjun.me", target: self, action: #selector(openWebsite(_:))))
+        stack.addArrangedSubview(linkRow)
+        stack.addArrangedSubview(help("MIT © Mirae Research"))
 
         let tabs = NSTabView()
         for title in Self.order where pages[title] != nil {
@@ -651,6 +673,14 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
 
     @objc private func openDictionary(_ sender: Any?) {
         UserDictionary.openFolder()
+    }
+
+    @objc private func openGitHub(_ sender: Any?) {
+        NSWorkspace.shared.open(URL(string: "https://github.com/team-mirae/bada-ime")!)
+    }
+
+    @objc private func openWebsite(_ sender: Any?) {
+        NSWorkspace.shared.open(URL(string: "https://bada.sjun.me")!)
     }
 }
 

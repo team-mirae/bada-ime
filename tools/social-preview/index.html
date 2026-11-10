@@ -13,8 +13,9 @@
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Hiragino Sans", sans-serif;
   }
   header { display: flex; align-items: baseline; justify-content: space-between; padding: 0 14px; }
-  h1 { margin: 0; font-size: 68px; font-weight: 700; letter-spacing: -2px; line-height: 1; }
+  h1 { display: flex; align-items: center; gap: 22px; margin: 0; font-size: 68px; font-weight: 700; letter-spacing: -2px; line-height: 1; }
   h1 .ime { color: #6cb6ff; font-weight: 600; }
+  h1 img { width: 76px; height: 76px; }
   .names { font-size: 30px; color: #b9c4cf; font-weight: 500; }
   p { margin: 18px 14px 0; font-size: 25px; color: #9aa8b5; line-height: 1.35; }
   p b { color: #e8edf2; font-weight: 600; }
@@ -28,7 +29,7 @@
 </head>
 <body>
   <header>
-    <h1>bada <span class="ime">ime</span></h1>
+    <h1><img src="../../docs/images/icon/bada-icon.svg" alt=""><span>bada <span class="ime">ime</span></span></h1>
     <div class="names">바다 입력기 · バダIME</div>
   </header>
   <p>A macOS input method for JIS keyboards: <b>Korean, Japanese and English</b> from one mode.</p>

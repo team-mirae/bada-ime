@@ -17,6 +17,8 @@ LSREGISTER := /System/Library/Frameworks/CoreServices.framework/Frameworks/Launc
 DATA       := $(ENGINE)/data/ko-words.tsv $(ENGINE)/data/en-words.txt $(ENGINE)/data/hanja.tsv $(ENGINE)/data/oecd.tsv $(ENGINE)/data/ja-words.txt $(ENGINE)/data/kanji.bin $(ENGINE)/data/ko-jamo-4gram.bin $(ENGINE)/data/symbols.tsv $(ENGINE)/data/emoji.tsv $(ENGINE)/data/unicode-names.tsv $(ENGINE)/data/LICENSE-mozc.txt \
               $(ENGINE)/data/LICENSE-corpora.txt $(ENGINE)/data/LICENSE-libhangul-hanja.txt $(ENGINE)/data/LICENSE-unicode.txt
 ICONS      := $(BUILD)/bada.tiff $(BUILD)/muhenkan.tiff $(BUILD)/henkan.tiff
+# The app's icon, for Settings → About only (the input menu keeps 바: Resources/icons).
+ABOUT_ICON := ../docs/images/icon/bada-icon-512.png
 
 export MACOSX_DEPLOYMENT_TARGET := $(MIN_MACOS)
 
@@ -40,12 +42,13 @@ $(BUILD)/BadaIME: $(BUILD)/arm64/BadaIME $(BUILD)/x86_64/BadaIME
 $(BUILD)/%.tiff: Resources/icons/%.png Resources/icons/%@2x.png
 	tiffutil -cathidpicheck Resources/icons/$*.png Resources/icons/$*@2x.png -out $@
 
-$(APP): $(BUILD)/BadaIME $(ICONS) Info.plist $(DATA) $(wildcard Resources/*.lproj/*)
+$(APP): $(BUILD)/BadaIME $(ICONS) $(ABOUT_ICON) Info.plist $(DATA) $(wildcard Resources/*.lproj/*)
 	rm -rf $@
 	mkdir -p $@/Contents/MacOS $@/Contents/Resources/data
 	cp Info.plist $@/Contents/Info.plist
 	cp $(BUILD)/BadaIME $@/Contents/MacOS/BadaIME
 	cp $(ICONS) $@/Contents/Resources/
+	cp $(ABOUT_ICON) $@/Contents/Resources/bada-icon.png
 	cp -R Resources/en.lproj Resources/ko.lproj Resources/ja.lproj $@/Contents/Resources/
 	cp $(DATA) $@/Contents/Resources/data/
 	cp ../LICENSE $@/Contents/Resources/LICENSE.txt

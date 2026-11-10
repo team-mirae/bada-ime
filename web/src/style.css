@@ -21,7 +21,10 @@ button:disabled,select:disabled,input:disabled{opacity:.5;cursor:default}
 button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-text)}
 .muted{color:var(--muted)}
 header{display:flex;align-items:center;gap:14px;padding:12px 20px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:5}
-.brand{font-size:1.1rem}
+.brand{font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.brand img{display:block}
+.about img{display:block;margin-bottom:8px}
+.about h2{margin:0;font-size:1.6rem}
 .spacer{flex:1}
 .link{color:var(--muted);text-decoration:none;font-size:.9rem}
 .mode{display:flex;border:1px solid var(--border);border-radius:9px;overflow:hidden}

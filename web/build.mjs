@@ -30,9 +30,11 @@ rmSync(out, { recursive: true, force: true });
 for (const dir of ["data", "layouts", "licenses"]) mkdirSync(out + dir, { recursive: true });
 for (const f of readdirSync(web + "src")) copyFileSync(web + "src/" + f, out + f);
 copyFileSync(root + "tools/render/keyboards.js", out + "keyboards.js");
+copyFileSync(root + "docs/images/icon/bada-icon.svg", out + "icon.svg");
 
 const wasm = readFileSync(web + "wasm/target/wasm32-unknown-unknown/release/bada_web.wasm");
-const manifest = { wasm: { path: `bada.${hash(wasm)}.wasm`, size: wasm.length }, data: {}, layouts: [] };
+const version = readFileSync(root + "engine/Cargo.toml", "utf8").match(/^version = "(.+)"/m)[1];
+const manifest = { version, wasm: { path: `bada.${hash(wasm)}.wasm`, size: wasm.length }, data: {}, layouts: [] };
 writeFileSync(out + manifest.wasm.path, wasm);
 
 for (const f of DATA_FILES) {

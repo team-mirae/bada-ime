@@ -1,3 +1,5 @@
+<img src="docs/images/icon/bada-icon.svg" width="96" align="right" alt="">
+
 # bada ime
 
 <picture>
@@ -141,7 +143,7 @@ dictionary.
 | `mac/` | The InputMethodKit shell, in Swift: input modes, the 英数 / かな key tap, the menu, settings |
 | `web/` | The simulator at bada.sjun.me: `node web/build.mjs`, `node web/test/smoke.mjs` |
 | `docs/` | The spec, the bada layout and its history, one page per layout |
-| `tools/` | Corpus analysis, the layout renderer and editor, a key drill, the setup page, the social preview |
+| `tools/` | Corpus analysis, the layout renderer and editor, a key drill, the setup page, the icon and the social preview |
 | `utils/learner-app/` | Logs your typing for your dictionary: `npm start` |
 
 All behaviour lives in the engine; the shell translates keys, switches input sources and applies
