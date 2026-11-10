@@ -56,6 +56,14 @@ bada ime registers exactly two macOS input modes, and never more:
 macOS routes 英数 to the current English/Roman source and かな to the Japanese one. Layout
 switching inside a mode is bada ime's own state, not a macOS input source.
 
+**Mode changes are macOS's own switch.** The key tap (§6.1) catches 英数, かな and the profile keys,
+but never selects an input source itself: a key that changes mode (英数 from henkan, かな or a
+profile key from muhenkan, HYPER/MEH+かな) is reposted as a plain 英数 or かな, and macOS switches.
+The input method then acts on the key when its mode is selected (`activateServer` / the input-mode
+`setValue`): e.g. which henkan profile the key asked for. If macOS hasn't switched within 0.3 s, bada
+ime selects the mode itself. Keys that don't change mode (かな in henkan, a profile key in henkan)
+act in the input method directly.
+
 **Setup after install** (from JIS Moonshot's `mac/README.md`): add **ABC – Extended**, then remove
 **ABC**, and remove every other Japanese input method. Then 英数 always lands in Bada Muhenkan and
 かな in Bada Henkan. (ABC – Extended stays installed because macOS keeps one plain keyboard; it

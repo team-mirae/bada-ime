@@ -40,6 +40,11 @@ final class BadaInputController: IMKInputController {
         let shift = flags.contains(.shift), ctrl = flags.contains(.control)
         let alt = flags.contains(.option), cmd = flags.contains(.command)
         let code = Int(event.keyCode)
+        // The 英数 / かな the key tap posted for macOS's switch (LanguageKeys.go): acted on when the
+        // mode is selected, not here.
+        if (code == kVK_JIS_Eisu || code == kVK_JIS_Kana) && Date().timeIntervalSince(LanguageKeyTap.lastPosted) < 1 {
+            return true
+        }
         // 英数 and かな, when they reach the input method (without the key tap).
         if code == kVK_JIS_Eisu {
             if !event.isARepeat { switchMode(to: .muhenkan, client: client) }
@@ -122,6 +127,7 @@ final class BadaInputController: IMKInputController {
         let client = sender as? IMKTextInput
         let mode = Modes.selectedNow() ?? Modes.current
         Modes.current = mode
+        if let profile = LanguageKeys.selected(mode) { Modes.profile = profile }
         _ = engine.setMode(mode)
         engine.apply(BadaSettings.current.engineJSON)
         _ = engine.setProfile(Modes.profile)
@@ -137,6 +143,9 @@ final class BadaInputController: IMKInputController {
                 apply(engine.setMode(mode), to: client)
             }
             Modes.current = mode
+            // macOS switched mode: if a language key asked for it, that key's profile.
+            if let profile = LanguageKeys.selected(mode) { Modes.profile = profile }
+            _ = engine.setProfile(Modes.profile)
         }
         super.setValue(value, forTag: tag, client: sender)
     }

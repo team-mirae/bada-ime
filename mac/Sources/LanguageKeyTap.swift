@@ -11,6 +11,10 @@ import InputMethodKit
 /// - HYPER+かな (⌘⌃⌥⇧) and MEH+かな (⌃⌥⇧): the other mode (this build has one muhenkan layout and
 ///   one henkan, so going back to the last used one and cycling both land there).
 /// - With henkan profiles on (spec §6.6): the keys recorded for 変換 and カタカナ select their profile.
+///
+/// The tap never selects an input source itself. A key that changes mode is handed to macOS as a
+/// plain 英数 or かな (`post`), so macOS's own switch does it; the input method acts on the key when
+/// its mode is selected (`LanguageKeys.selected`, from activateServer / setValue).
 enum LanguageKeyTap {
     private static var tap: CFMachPort?
     private static var polling = false
@@ -19,6 +23,23 @@ enum LanguageKeyTap {
     /// Set while Settings records a key: the next key pressed anywhere goes here, and nowhere else.
     static var recorder: ((Int) -> Void)?
     static var isOn: Bool { tap != nil }
+    /// Marks the 英数 / かな events bada ime posts, so the tap lets them through.
+    private static let marker: Int64 = 0x6261_6461   // "bada"
+    /// When the last one was posted: it may reach the input method as well as macOS's switch.
+    private(set) static var lastPosted = Date.distantPast
+
+    /// A plain 英数 or かな (no modifiers), for macOS to switch input source with.
+    static func post(_ code: Int) {
+        let source = CGEventSource(stateID: .privateState)
+        source?.userData = marker
+        for down in [true, false] {
+            guard let event = CGEvent(keyboardEventSource: source, virtualKey: CGKeyCode(code), keyDown: down) else { continue }
+            event.flags = []
+            event.setIntegerValueField(.eventSourceUserData, value: marker)
+            event.post(tap: .cgSessionEventTap)
+        }
+        lastPosted = Date()
+    }
 
     static func refreshProfileKeys(_ settings: BadaSettings = BadaSettings.current) {
         profileKeys = [:]
@@ -71,6 +92,7 @@ enum LanguageKeyTap {
             if let tap { CGEvent.tapEnable(tap: tap, enable: true) }
             return Unmanaged.passUnretained(event)
         }
+        if event.getIntegerValueField(.eventSourceUserData) == marker { return Unmanaged.passUnretained(event) }
         let code = Int(event.getIntegerValueField(.keyboardEventKeycode))
         if let recorder {
             if type == .keyDown {
@@ -112,6 +134,16 @@ enum LanguageKeyTap {
 
 /// What 英数, かな, HYPER+かな and MEH+かな do, from the tap or from a key that reached the input method.
 enum LanguageKeys {
+    /// A language key whose mode change was handed to macOS, waiting for that mode to be selected.
+    private struct Press {
+        let mode: BadaMode
+        let profile: String?
+        let at: Date
+    }
+    private static var pending: Press?
+    /// How long macOS gets to switch before bada ime selects the mode itself.
+    private static let fallback = 0.3
+
     static func eisu() {
         go(to: .muhenkan)
     }
@@ -127,8 +159,7 @@ enum LanguageKeys {
         if Modes.selectedNow() == .henkan, let controller = BadaInputController.typing {
             controller.languageKey(name, shift: shift)
         } else {
-            Modes.profile = name
-            go(to: .henkan)
+            go(to: .henkan, profile: name)
         }
     }
 
@@ -136,8 +167,43 @@ enum LanguageKeys {
         go(to: (Modes.selectedNow() ?? Modes.current).other)
     }
 
-    static func go(to mode: BadaMode) {
+    /// To `mode` (`profile`: in henkan, the profile to use). A change of mode is macOS's own switch,
+    /// triggered by a plain 英数 / かな; if macOS hasn't switched within `fallback`, bada ime does.
+    static func go(to mode: BadaMode, profile: String? = nil) {
         guard Modes.isEnabled(mode) else { return }
+        guard LanguageKeyTap.isOn, Modes.selectedNow() != mode else {
+            direct(mode, profile: profile)
+            return
+        }
+        let press = Press(mode: mode, profile: profile, at: Date())
+        pending = press
+        LanguageKeyTap.post(mode == .muhenkan ? kVK_JIS_Eisu : kVK_JIS_Kana)
+        DispatchQueue.main.asyncAfter(deadline: .now() + fallback) {
+            guard let p = pending, p.at == press.at else { return }
+            pending = nil
+            if Modes.selectedNow() == mode {
+                // Switched, but no session told us (no focused text field): note the profile.
+                DiagnosticLog.note("switched to \(mode.rawValue) without a session")
+                Modes.current = mode
+                if let profile { Modes.profile = profile; BadaInputController.typing?.switchProfile(to: profile) }
+            } else {
+                DiagnosticLog.note("macOS didn't switch to \(mode.rawValue); selecting it directly")
+                direct(mode, profile: profile)
+            }
+        }
+    }
+
+    /// Called when macOS has selected `mode` (activateServer / setValue): the henkan profile the
+    /// language key that asked for it wants, if a key did.
+    static func selected(_ mode: BadaMode) -> String? {
+        guard let p = pending, p.mode == mode, Date().timeIntervalSince(p.at) < 1 else { return nil }
+        pending = nil
+        return p.profile
+    }
+
+    /// bada ime selecting the mode itself: without the tap, already in the mode, or as the fallback.
+    private static func direct(_ mode: BadaMode, profile: String?) {
+        if let profile { Modes.profile = profile }
         if Modes.selectedNow() != nil, let controller = BadaInputController.typing {
             controller.switchMode(to: mode)
         } else {
