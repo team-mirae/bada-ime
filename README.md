@@ -9,7 +9,7 @@
 types QWERTY. **Henkan** (かな) reads every key with all the Korean, Japanese and Latin layouts you
 enable, at once, and ranks the readings as you type. There are no sub-modes to switch.
 
-Status: **0.1.2**. 12 layouts, henkan profiles on かな, 変換 and カタカナ, kanji conversion, typo
+Status: **0.1.3**. 12 layouts, henkan profiles on かな, 変換 and カタカナ, kanji conversion, typo
 suggestions for bada, symbol and Unicode search, and a user dictionary. Spec:
 [docs/spec.md](docs/spec.md); the bada layout: [docs/bada-layout.md](docs/bada-layout.md).
 
