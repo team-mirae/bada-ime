@@ -1,13 +1,15 @@
-# <img src="docs/images/icon/bada-icon.svg" width="40" height="40" alt=""> bada ime
+# bada ime
+
+<img src="docs/images/icon/bada-icon.svg" width="96" height="96" alt="bada ime icon">
+
+바다 입력기 · バダIME: a macOS input method for JIS keyboards with two modes. **Muhenkan** (英数)
+types QWERTY. **Henkan** (かな) reads every key with all the Korean, Japanese and Latin layouts you
+enable, at once, and ranks the readings as you type. There are no sub-modes to switch.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-bada-kana-dark.png">
   <img src="docs/images/layouts/qwerty-bada-kana-light.png" alt="QWERTY, bada and kana on one HHKB JIS keyboard">
 </picture>
-
-바다 입력기 · バダIME: a macOS input method for JIS keyboards with two modes. **Muhenkan** (英数)
-types QWERTY. **Henkan** (かな) reads every key with all the Korean, Japanese and Latin layouts you
-enable, at once, and ranks the readings as you type. There are no sub-modes to switch.
 
 Status: **0.1.3**. 12 layouts, henkan profiles on かな, 変換 and カタカナ, kanji conversion, typo
 suggestions for bada, symbol and Unicode search, and a user dictionary. Spec:
