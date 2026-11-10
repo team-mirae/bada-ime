@@ -1,6 +1,4 @@
-<img src="docs/images/icon/bada-icon.svg" width="96" align="right" alt="">
-
-# bada ime
+# <img src="docs/images/icon/bada-icon.svg" width="40" height="40" alt=""> bada ime
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-bada-kana-dark.png">
