@@ -87,13 +87,6 @@ pub fn decompose(c: char) -> Option<(char, char, Option<char>)> {
     ))
 }
 
-/// The initial of each syllable of `word` (non-syllables as they are): 안녕 → ㅇㄴ.
-pub fn choseong(word: &str) -> String {
-    word.chars()
-        .map(|c| decompose(c).map_or(c, |d| d.0))
-        .collect()
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -104,6 +97,5 @@ mod tests {
         assert_eq!(decompose('한'), Some(('ㅎ', 'ㅏ', Some('ㄴ'))));
         assert_eq!(compose('ㄱ', 'ㅏ', Some('ㅄ')), Some('값'));
         assert_eq!(compose('ㄸ', 'ㅏ', Some('ㄸ')), None);
-        assert_eq!(choseong("안녕하세요"), "ㅇㄴㅎㅅㅇ");
     }
 }

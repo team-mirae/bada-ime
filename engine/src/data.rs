@@ -1,36 +1,18 @@
-//! The engine's data, loaded once by the shell and shared by every engine: the Korean word list
-//! (with its 초성 index), the English word list, the hanja dictionary and the OECD menu.
+//! The engine's data, loaded once by the shell and shared by every engine: the Korean word list,
+//! the English word list, the hanja dictionary and the OECD menu.
 
 use std::collections::{HashMap, HashSet};
 
-use crate::hangul::{decompose, is_syllable};
 use crate::hanja::Dictionary;
-use crate::layout::Token;
 
-/// The Korean word list, packed: words sorted by bytes in one string, with offsets and counts,
-/// and the word ids again in 초성 order (most frequent first within one 초성 string). About 30 bytes
-/// a word, against ~300 in hash maps: a million words fit in some 30 MB.
+/// The Korean word list, packed: words sorted by bytes in one string, with offsets and counts.
+/// Under 30 bytes a word, against ~300 in hash maps: a million words fit in some 30 MB.
 #[derive(Default)]
 struct KoreanWords {
     text: String,
     /// Word `i` is `text[starts[i]..starts[i + 1]]`.
     starts: Vec<u32>,
     counts: Vec<u32>,
-    /// Ids of the all-syllable words, sorted by their 초성 string, then by count (descending).
-    by_choseong: Vec<u32>,
-}
-
-/// A 초성 string as one number: its length (up to 24) in the top bits, then 5 bits per initial, so
-/// equal strings get equal keys and keys sort by length, then initials.
-fn pack(initials: impl Iterator<Item = char>) -> u128 {
-    let mut key: u128 = 0;
-    let mut len: u128 = 0;
-    for c in initials.take(24) {
-        let i = crate::hangul::INITIALS.iter().position(|&x| x == c).map_or(31, |i| i as u128 + 1);
-        key = (key << 5) | i;
-        len += 1;
-    }
-    (len << 120) | key
 }
 
 impl KoreanWords {
@@ -74,16 +56,6 @@ impl KoreanWords {
         }
         k.starts.push(k.text.len() as u32);
         k.text.shrink_to_fit();
-        // The 초성 order: ids only, keys computed while sorting (no string or key per word kept).
-        let keys: Vec<u128> = (0..k.counts.len() as u32)
-            .map(|i| if k.word(i).chars().all(is_syllable) { pack(k.word(i).chars().map(|c| decompose(c).map_or('ㅇ', |d| d.0))) } else { 0 })
-            .collect();
-        let mut ids: Vec<u32> = (0..k.counts.len() as u32).filter(|&i| keys[i as usize] != 0).collect();
-        ids.sort_unstable_by(|&a, &b| {
-            keys[a as usize].cmp(&keys[b as usize]).then(k.counts[b as usize].cmp(&k.counts[a as usize])).then(a.cmp(&b))
-        });
-        drop(keys);
-        k.by_choseong = ids;
         k
     }
 
@@ -103,16 +75,6 @@ impl KoreanWords {
             }
         }
         0
-    }
-
-    /// The ids whose 초성 string is `key`, most frequent first. (Words over 24 syllables share keys
-    /// by their first 24; the caller checks the length.)
-    fn with_choseong(&self, key: &str) -> &[u32] {
-        let want = pack(key.chars());
-        let packed = |i: &u32| pack(self.word(*i).chars().map(|c| decompose(c).map_or('ㅇ', |d| d.0)));
-        let start = self.by_choseong.partition_point(|i| packed(i) < want);
-        let end = start + self.by_choseong[start..].partition_point(|i| packed(i) == want);
-        &self.by_choseong[start..end]
     }
 }
 
@@ -238,22 +200,6 @@ impl Data {
     pub fn is_english(&self, word: &str) -> bool {
         self.english.contains(&word.to_lowercase())
     }
-
-    /// Words for 초성 tokens (unused at present, bada-layout.md §8): same syllable count, each
-    /// syllable's initial matching, and ㅏ where a token carries it (the final left open). Most
-    /// frequent first.
-    pub fn choseong_words(&self, tokens: &[Token], limit: usize) -> Vec<(String, u32)> {
-        let key: String = tokens.iter().map(|t| t.ini).collect();
-        self.korean
-            .with_choseong(&key)
-            .iter()
-            .map(|&i| (self.korean.word(i), self.korean.counts[i as usize]))
-            .filter(|(w, _)| w.chars().count() == tokens.len())
-            .filter(|(w, _)| w.chars().zip(tokens).all(|(c, t)| !t.a || decompose(c).is_some_and(|d| d.1 == 'ㅏ')))
-            .take(limit)
-            .map(|(w, c)| (w.to_string(), c))
-            .collect()
-    }
 }
 
 #[cfg(test)]
@@ -261,27 +207,14 @@ mod tests {
     use super::*;
 
     #[test]
-    fn choseong_lookup() {
+    fn parses_the_lists() {
         let d = Data::parse(
-            "안녕하세요\t50\n안녕히세요\t1\n아니하세요\t3\nㅋㅋ\t9\n",
+            "안녕하세요\t50\nㅋㅋ\t9\n",
             "hello\n",
             "",
             "美\t미국\n",
         );
-        let t = |s: &str, a: &[bool]| {
-            s.chars()
-                .zip(a)
-                .map(|(c, &a)| Token { ini: c, a })
-                .collect::<Vec<_>>()
-        };
-        let all = d.choseong_words(&t("ㅇㄴㅎㅅㅇ", &[false; 5]), 9);
-        assert_eq!(all[0].0, "안녕하세요");
-        assert_eq!(all.len(), 3);
-        let with_a = d.choseong_words(&t("ㅇㄴㅎㅅㅇ", &[false, false, true, false, false]), 9);
-        assert_eq!(
-            with_a.iter().map(|w| w.0.as_str()).collect::<Vec<_>>(),
-            ["안녕하세요", "아니하세요"]
-        );
+        assert_eq!(d.korean_count("안녕하세요"), 50);
         assert!(d.is_english("Hello"));
         assert_eq!(d.korean_count("ㅋㅋ"), 9);
         assert_eq!(d.oecd[0].0, "美");

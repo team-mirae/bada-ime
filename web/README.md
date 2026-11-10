@@ -9,7 +9,7 @@ WebAssembly runs behind a text field, with the macOS shell's behaviour ported to
   layout 0's JIS legends, as the ABC layout does on the Mac.
 - **Settings**: every page of the Mac's settings window, kept in the browser's local storage, in the
   same JSON. A `bada-settings/1` file exported from the Mac imports here and back. The user
-  dictionary and the 초성 diagnostics are kept in local storage too.
+  dictionary is kept in local storage too.
 - **The keyboard** on screen: HHKB JIS by default, Apple-style JIS as an option (Settings →
   Keyboard), drawn as `tools/render` draws it, with the legends of the layouts in use (from
   `docs/layouts/*.json`). Keys can be clicked; ⇧ ⌃ ⌥ ⌘ latch for the next key.

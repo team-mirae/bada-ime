@@ -34,4 +34,4 @@ with open(OUT, "w") as out:
         if c < 2:
             break
         out.write(f"{w}\t{c}\n")
-print(f"done: {docs} docs, {len(counts)} words, {time.time() - started:.0f}s; 키로깅 {counts.get('키로깅', 0)}, 초성 {counts.get('초성', 0)}")
+print(f"done: {docs} docs, {len(counts)} words, {time.time() - started:.0f}s; 키로깅 {counts.get('키로깅', 0)}")

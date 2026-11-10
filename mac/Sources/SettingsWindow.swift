@@ -29,7 +29,6 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
     /// The profile whose F keys the F Keys page shows and edits.
     private var fEditing = BadaProfiles.macKana
     private var fPopups: [NSPopUpButton] = []
-    private var diagnosticsBox = NSButton()
     private var profilesBox = NSButton()
     private var linkPopups: [String: NSPopUpButton] = [:]
     private var keyLabels: [String: NSTextField] = [:]
@@ -340,19 +339,8 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
         stack.addArrangedSubview(label("Your dictionary", bold: true))
         UserDictionary.refresh()
         stack.addArrangedSubview(label(UserDictionary.status))
-        stack.addArrangedSubview(help("Positive and negative words and 초성 shortcuts: docs/dictionary-contract.md. It reloads when the file changes."))
+        stack.addArrangedSubview(help("Positive and negative words: docs/dictionary-contract.md. It reloads when the file changes."))
         stack.addArrangedSubview(NSButton(title: "Open Dictionary Folder", target: self, action: #selector(openDictionary(_:))))
-
-        stack.addArrangedSubview(label("초성 diagnostics", bold: true))
-        diagnosticsBox = NSButton(checkboxWithTitle: "Collect which vowels and finals follow each initial key (henkan mode only; counts, never text; this Mac only)",
-                                  target: self, action: #selector(changed(_:)))
-        diagnosticsBox.state = settings.collect_choseong ? .on : .off
-        stack.addArrangedSubview(diagnosticsBox)
-        let diagnosticsRow = NSStackView()
-        diagnosticsRow.orientation = .horizontal
-        diagnosticsRow.addArrangedSubview(NSButton(title: "Show the File", target: self, action: #selector(showDiagnostics(_:))))
-        diagnosticsRow.addArrangedSubview(NSButton(title: "Clear", target: self, action: #selector(clearDiagnostics(_:))))
-        stack.addArrangedSubview(diagnosticsRow)
 
         stack = page("Backup")
         stack.addArrangedSubview(label("Settings file", bold: true))
@@ -656,7 +644,6 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
         } else if settings.profiles[fEditing]?.f_keys != nil {
             settings.profiles[fEditing]?.f_keys = f
         }
-        settings.collect_choseong = diagnosticsBox.state == .on
         BadaSettings.current = settings
         refreshProfiles(settings)
         refreshFKeys(settings)
@@ -664,14 +651,6 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
 
     @objc private func openDictionary(_ sender: Any?) {
         UserDictionary.openFolder()
-    }
-
-    @objc private func showDiagnostics(_ sender: Any?) {
-        ChoseongDiagnostics.reveal()
-    }
-
-    @objc private func clearDiagnostics(_ sender: Any?) {
-        ChoseongDiagnostics.clear()
     }
 }
 

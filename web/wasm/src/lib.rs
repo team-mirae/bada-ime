@@ -99,8 +99,7 @@ fn with<T: serde::Serialize + Default>(f: impl FnOnce(&mut Engine) -> T) -> Stri
 ///
 /// 0 key (event JSON) · 1 set settings (JSON; replies with the settings in effect) · 2 set mode
 /// ("0" muhenkan, "1" henkan) · 3 set henkan profile · 4 flush · 5 the host's selection ·
-/// 6 catalog · 7 load the user dictionary · 8 초성 diagnostics on ("1") or off · 9 export them ·
-/// 10 import them · 11 clear them · 12 changes since the last export.
+/// 6 catalog · 7 load the user dictionary.
 #[unsafe(no_mangle)]
 pub extern "C" fn call(op: u32, ptr: *mut u8, len: usize) {
     let arg = if ptr.is_null() {
@@ -141,20 +140,6 @@ pub extern "C" fn call(op: u32, ptr: *mut u8, len: usize) {
             json(serde_json::json!({"layouts": layouts, "actions": actions}))
         }
         7 => json(bada::userdict::load(&arg)),
-        8 => {
-            bada::diag::set_enabled(arg == "1");
-            "null".into()
-        }
-        9 => bada::diag::export(),
-        10 => {
-            bada::diag::import(&arg);
-            "null".into()
-        }
-        11 => {
-            bada::diag::clear();
-            "null".into()
-        }
-        12 => bada::diag::changes().to_string(),
         _ => "null".into(),
     };
     REPLY.with(|r| *r.borrow_mut() = out.into_bytes());

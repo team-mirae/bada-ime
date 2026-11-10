@@ -9,7 +9,7 @@ import { openSettings } from "./settings-ui.js";
 
 const $ = id => document.getElementById(id);
 const ta = $("text"), backdrop = $("backdrop"), menuEl = $("menu"), board = $("board");
-const DICT_STORE = "bada-dictionary", DIAG_STORE = "bada-choseong-diagnostics";
+const DICT_STORE = "bada-dictionary";
 const MODIFIERS = new Set(["ShiftLeft", "ShiftRight", "ControlLeft", "ControlRight", "AltLeft", "AltRight", "MetaLeft", "MetaRight", "CapsLock", "Fn", "FnLock"]);
 const coarse = matchMedia("(pointer: coarse)").matches;
 
@@ -67,7 +67,6 @@ async function start() {
   files.forEach((bytes, i) => engine.put(i, bytes));
   engine.init();
   catalog = engine.catalog();
-  try { const d = localStorage.getItem(DIAG_STORE); if (d) engine.diagImport(d); } catch {}
   loadDictionary(localStorage.getItem(DICT_STORE) || "");
   applySettings();
   engine.setMode(state.mode);
@@ -78,20 +77,12 @@ async function start() {
   if (coarse) ta.inputMode = "none";   // the keyboard below is the keyboard
   ta.focus();
   refresh();
-  setInterval(saveDiagnostics, 30_000);
-  addEventListener("pagehide", saveDiagnostics);
-}
-
-function saveDiagnostics() {
-  if (!engine || engine.diagChanges() === 0) return;
-  try { localStorage.setItem(DIAG_STORE, engine.diagExport()); } catch {}
 }
 
 // ── Settings ───────────────────────────────────────────────────────────────────────────────────
 
 function applySettings() {
   engine.applySettings(S.engineJSON(settings));
-  engine.diagEnabled(settings.collect_choseong);
   if (!settings.use_profiles && state.profile !== S.MAC_KANA) {
     state.profile = S.MAC_KANA;
     apply(engine.setProfile(state.profile));
@@ -101,7 +92,7 @@ function applySettings() {
 function loadDictionary(text) {
   const summary = engine.loadDictionary(text);
   if (!text) state.dictStatus = "No dictionary yet.";
-  else if (summary.ok) state.dictStatus = `Loaded: ${summary.positive ?? 0} positive, ${summary.negative ?? 0} negative, ${summary.shortcuts ?? 0} shortcuts.`;
+  else if (summary.ok) state.dictStatus = `Loaded: ${summary.positive ?? 0} positive, ${summary.negative ?? 0} negative.`;
   else state.dictStatus = `The dictionary wasn't loaded: ${summary.error ?? "unknown error"}`;
   return summary;
 }
@@ -128,8 +119,6 @@ const api = {
     loadDictionary(text);
   },
   get dictStatus() { return state.dictStatus; },
-  diagnostics() { saveDiagnostics(); return engine.diagExport(); },
-  clearDiagnostics() { engine.diagClear(); try { localStorage.removeItem(DIAG_STORE); } catch {} },
 };
 
 $("settingsBtn").onclick = () => engine && openSettings(api);

@@ -220,7 +220,7 @@ struct Entry {
     note: String,
     /// A Japanese reading: drawn in a Japanese font.
     japanese: bool,
-    /// Where it came from, for the 초성 diagnostics (spec §8).
+    /// Where it came from: typo suggestions go under layout 13's reading.
     origin: Origin,
 }
 
@@ -230,8 +230,6 @@ enum Origin {
     Other,
     /// Layout `id`'s composition of the presses.
     Composed(u32),
-    /// A 초성 prediction of layout `id`.
-    Choseong(u32),
 }
 
 impl Entry {
@@ -425,23 +423,8 @@ impl Engine {
 
     fn take_shown(&mut self) -> String {
         let text = self.shown();
-        self.record();
         self.clear();
         text
-    }
-
-    /// The 초성 diagnostics (spec §8) for what's about to be committed: henkan mode only, and only
-    /// when the whole text is the entry (nothing frozen before it, no override).
-    fn record(&self) {
-        if self.mode != Mode::Henkan || !self.prefix.is_empty() || self.over.is_some() || self.index < 0 {
-            return;
-        }
-        let Some(entry) = self.entries.get(self.index as usize) else { return };
-        match entry.origin {
-            Origin::Composed(id) => crate::diag::typed(id, &self.presses, &layout::details(id, &self.presses)),
-            Origin::Choseong(id) => crate::diag::choseong(id, &self.presses, &entry.text),
-            Origin::Other => {}
-        }
     }
 
     // ---------- readings ----------
@@ -545,85 +528,22 @@ impl Engine {
                     }
                 }
                 KTS | LEGACY_KOREAN | LEGACY_MOONSHOT | BADA | K3S_JIS => {
-                    if let Some(tokens) = layout::choseong_tokens(id, &self.presses) {
-                        // What shows is the normal composition: a consonant after a ⇧ token is its
-                        // final (⇧ㄱ ㄴ → 간), consonants alone stay as they are (ㅇㄴ). The 초성
-                        // predictions are listed with it.
-                        let literal = layout::compose_presses(id, &self.presses);
-                        let attached = literal != layout::tokens_text(&tokens);
-                        let count = self.ko_count(&user, &literal);
-                        let loose = literal.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
-                        let score = if tokens.len() == 1 {
-                            200.0
-                        } else if attached && count > 0 {
-                            // A real word (⇧ㄱ ㄴ → 간) beats the 초성 guesses.
-                            120.0 + (count as f64).ln()
-                        } else if attached && !loose {
-                            99.0
-                        } else if attached {
-                            // Loose jamo left (ㅇㄴ핫ㅇ): the 초성 reading is likelier.
-                            45.0
-                        } else if count > 0 {
-                            101.0 + (count as f64).ln()
-                        } else {
-                            50.0
-                        };
-                        entries.push(Entry {
-                            text: literal,
-                            score: score + tie,
-                            origin: Origin::Composed(id),
-                            ..Entry::default()
-                    });
-                        if tokens.len() >= 2 {
-                            // The user's own: 초성 shortcuts first, then positive words.
-                            if let Some(u) = &user {
-                                let typed: String = tokens.iter().map(|t| t.ini).collect();
-                                for (i, word) in u.shortcuts(&typed).iter().enumerate() {
-                                    entries.push(Entry {
-                                        text: word.clone(),
-                                        score: 160.0 - 0.01 * i as f64 + tie,
-                                        origin: Origin::Choseong(id),
-                                        ..Entry::default()
-                                    });
-                                }
-                                for (word, count) in u.choseong_words(&tokens).into_iter().take(9) {
-                                    let built = self.data.korean_count(&word);
-                                    entries.push(Entry {
-                                        text: word,
-                                        score: 97.0 + ((count + built) as f64).ln() + tie,
-                                        origin: Origin::Choseong(id),
-                                        ..Entry::default()
-                                    });
-                                }
-                            }
-                            for (word, count) in self.data.choseong_words(&tokens, 9) {
-                                let count = count + user.as_ref().map_or(0, |u| u.count(Language::Korean, &word));
-                                entries.push(Entry {
-                                    text: word,
-                                    score: 95.0 + (count as f64).ln() + tie,
-                                    origin: Origin::Choseong(id),
-                                    ..Entry::default()
-                    });
-                            }
-                        }
+                    let text = layout::compose_presses(id, &self.presses);
+                    let count = self.ko_count(&user, &text);
+                    let loose = text.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
+                    let score = if count > 0 {
+                        100.0 + (count as f64).ln()
+                    } else if loose {
+                        40.0
                     } else {
-                        let text = layout::compose_presses(id, &self.presses);
-                        let count = self.ko_count(&user, &text);
-                        let loose = text.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
-                        let score = if count > 0 {
-                            100.0 + (count as f64).ln()
-                        } else if loose {
-                            40.0
-                        } else {
-                            80.0
-                        };
-                        entries.push(Entry {
-                            text,
-                            score: score + tie,
-                            origin: Origin::Composed(id),
-                            ..Entry::default()
+                        80.0
+                    };
+                    entries.push(Entry {
+                        text,
+                        score: score + tie,
+                        origin: Origin::Composed(id),
+                        ..Entry::default()
                     });
-                    }
                 }
                 SYMBOLS | UNICODE => {
                     // The search as typed first; what it finds under it, with names as notes.
@@ -1678,26 +1598,6 @@ mod tests {
         let out = press(&mut e, Tab);
         assert_eq!(out.notes, ["ra-men", "ra-men", "ra-men"]);
         assert!(out.japanese.iter().all(|&j| j));
-    }
-
-    #[test]
-    fn choseong_diagnostics() {
-        crate::diag::clear();
-        crate::diag::set_enabled(true);
-        let mut e = engine();
-        // typed: 한 (ㅎ on V, ㄴ on K) then Space
-        for k in [KeyV, KeyH, KeyK] {
-            press(&mut e, k);
-        }
-        press(&mut e, Space);
-        // muhenkan records nothing
-        e.set_mode(Mode::Muhenkan);
-        press(&mut e, KeyV);
-        let json = crate::diag::export();
-        let has = |frag: &str| assert!(json.contains(frag), "{frag} in {json}");
-        has(r#""source":"typed","key":"KeyV","shift":false,"initial":"ㅎ","vowel":"ㅏ","final_":"ㄴ","final_key":"KeyK""#);
-        assert!(!json.contains(r#""source":"choseong""#), "{json}");
-        crate::diag::set_enabled(false);
     }
 
     #[test]

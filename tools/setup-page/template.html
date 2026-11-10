@@ -329,7 +329,6 @@ const facts = [
   ["Emoji skin tones", (B.skin_tones || []).join(", ")],
   ["かな in other profiles", "Next entry if there's a menu, else back to かな's (both)"],
   ["Cycle order", (B.profile_order || []).join(" → ")],
-  ["초성 diagnostics", B.collect_choseong ? "Collecting (counts only)" : "Off"],
 ];
 $("facts").innerHTML = facts.map(([k, v]) => `<div class="fact"><div class="label">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join("");
 </script>

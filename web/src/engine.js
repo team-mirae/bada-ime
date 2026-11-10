@@ -9,7 +9,7 @@ export const DATA_FILES = [
 
 const OP = {
   key: 0, settings: 1, mode: 2, profile: 3, flush: 4, selection: 5, catalog: 6,
-  dictionary: 7, diagEnabled: 8, diagExport: 9, diagImport: 10, diagClear: 11, diagChanges: 12,
+  dictionary: 7,
 };
 
 const encoder = new TextEncoder();
@@ -64,11 +64,6 @@ export class Engine {
   catalog() { return this.json(OP.catalog); }
   /** The user dictionary (docs/dictionary-contract.md); "" clears it. */
   loadDictionary(json) { return this.json(OP.dictionary, json); }
-  diagEnabled(on) { this.call(OP.diagEnabled, on ? "1" : "0"); }
-  diagExport() { return this.call(OP.diagExport); }
-  diagImport(json) { this.call(OP.diagImport, json); }
-  diagClear() { this.call(OP.diagClear); }
-  diagChanges() { return Number(this.call(OP.diagChanges)) || 0; }
 }
 
 /** An Output with every field present (engine/src/engine.rs `Output`). */

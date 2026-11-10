@@ -13,10 +13,5 @@
     { "word": "감소합니다", "strength": "strong" },
     { "word": "검사합니다" },
     { "word": "god", "language": "english" }
-  ],
-  "shortcuts": [
-    { "choseong": "ㄱㅅ", "word": "감사합니다" },
-    { "choseong": "ㅎㅇ", "word": "확인했습니다" },
-    { "choseong": "ㅇㅋ", "word": "오케이" }
   ]
 }

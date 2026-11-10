@@ -114,5 +114,5 @@ with open(out, "w") as f:
     for w, c in kept:
         f.write(f"{w}\t{c}\n")
 print(f"{len(kept)} words (of {len(counts)}), {os.path.getsize(out) // 1024} KiB")
-for probe in ["초성", "키로깅", "감사합니다", "데이터센터"]:
+for probe in ["키로깅", "감사합니다", "데이터센터"]:
     print(probe, counts.get(probe, 0))

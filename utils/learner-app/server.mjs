@@ -7,7 +7,7 @@ import { homedir } from "node:os";
 import { extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { learn, parseSession, toDictionary } from "./lib/learn.mjs";
-import { RENDER_DIR, loadLayouts } from "./lib/layouts.mjs";
+import { RENDER_DIR } from "./lib/layouts.mjs";
 
 const HERE = fileURLToPath(new URL(".", import.meta.url));
 const DATA = join(HERE, "data"), SESSIONS = join(DATA, "sessions"), EXPORTS = join(DATA, "exports");
@@ -47,7 +47,7 @@ function allSessions(only) {
 
 function build(url) {
   const sessions = allSessions(url.searchParams.get("session"));
-  const exp = learn(sessions, loadLayouts(), { texts: url.searchParams.get("texts") === "1" });
+  const exp = learn(sessions, { texts: url.searchParams.get("texts") === "1" });
   return { exp, min: Math.max(1, Number(url.searchParams.get("min")) || 2) };
 }
 
@@ -74,7 +74,7 @@ const server = createServer(async (req, res) => {
       return send(res, 200, {
         sessions: exp.sessions, totals: exp.totals,
         words: Object.fromEntries(Object.entries(exp.words).map(([k, v]) => [k, v.length])),
-        top: exp.words.korean.slice(0, 12), choseong: exp.choseong.slice(0, 12), rejected: exp.rejected.slice(0, 8),
+        top: exp.words.korean.slice(0, 12), rejected: exp.rejected.slice(0, 8),
       });
     }
     if (req.method === "GET" && (url.pathname === "/api/export/training" || url.pathname === "/api/export/dictionary")) {
@@ -89,7 +89,7 @@ const server = createServer(async (req, res) => {
       // Plug in directly (not recommended): replaces dictionary.json, keeping the old one beside it.
       const { confirm, min } = JSON.parse(await readBody(req) || "{}");
       if (confirm !== "replace") return send(res, 400, { error: "confirm must be \"replace\"" });
-      const exp = learn(allSessions(), loadLayouts());
+      const exp = learn(allSessions());
       const dict = toDictionary(exp, { min: Math.max(1, Number(min) || 2) });
       mkdirSync(BADA_DIR, { recursive: true });
       const target = join(BADA_DIR, "dictionary.json");
@@ -101,7 +101,7 @@ const server = createServer(async (req, res) => {
       const tmp = target + ".tmp";
       writeFileSync(tmp, JSON.stringify(dict, null, 2) + "\n");
       renameSync(tmp, target);
-      return send(res, 200, { ok: true, path: target, backup, positive: dict.positive.length, shortcuts: dict.shortcuts.length });
+      return send(res, 200, { ok: true, path: target, backup, positive: dict.positive.length });
     }
     send(res, 404, { error: "not found" });
   } catch (e) {

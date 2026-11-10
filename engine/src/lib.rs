@@ -4,7 +4,6 @@
 //! key events and host text in, and applies the [`Output`] to the text field.
 
 pub mod data;
-pub mod diag;
 pub mod engine;
 pub mod ffi;
 pub mod hangul;

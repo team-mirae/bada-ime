@@ -244,18 +244,12 @@ function dictionaryPage(s) {
   return [
     heading("Your dictionary"),
     h("div", { class: status.startsWith("Loaded") ? "ok" : status.startsWith("No") ? "muted" : "err" }, status),
-    hint("Positive and negative words and 초성 shortcuts, as JSON: docs/dictionary-contract.md. Kept in this browser."),
+    hint("Positive and negative words, as JSON: docs/dictionary-contract.md. Kept in this browser."),
     text,
     row(h("button", { class: "primary", onclick: () => { api.dictionary = text.value.trim(); draw(); } }, "Load"),
       h("button", { onclick: () => pickFile(t => { api.dictionary = t.trim(); draw(); }) }, "Open File…"),
       h("button", { onclick: () => { api.dictionary = ""; draw(); } }, "Clear"),
       h("a", { href: "https://github.com/team-mirae/bada-ime/blob/main/docs/dictionary-contract.md", target: "_blank", rel: "noopener" }, "The contract")),
-    heading("초성 diagnostics"),
-    check("Collect which vowels and finals follow each initial key (henkan mode only; counts, never text; this browser only)",
-      s.collect_choseong, v => change(s => { s.collect_choseong = v; })),
-    row(h("button", { onclick: () => download("choseong-diagnostics.json", api.diagnostics()) }, "Download the File"),
-      h("button", { onclick: () => { api.clearDiagnostics(); ui.note = "Cleared."; draw(); } }, "Clear"),
-      ui.tab === "Dictionary" && ui.note ? h("span", { class: "muted" }, ui.note) : null),
   ];
 }
 

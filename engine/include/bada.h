@@ -28,12 +28,6 @@ const char *bada_flush(BadaEngine *engine);
 const char *bada_host_selection(BadaEngine *engine, const char *text);
 const char *bada_catalog(BadaEngine *engine);
 
-// 초성 diagnostics (spec §8): counts of what follows each initial, per key; henkan mode only.
-void bada_diag_set_enabled(uint32_t on);
-uint64_t bada_diag_changes(void);
-char *bada_diag_export(void);
-void bada_diag_import(const char *json);
-void bada_diag_clear(void);
 void bada_string_free(char *text);
 
 // The user dictionary (docs/dictionary-contract.md); "" clears it. Returns a JSON summary.

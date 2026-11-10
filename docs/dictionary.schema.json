@@ -41,18 +41,6 @@
           "strength": { "enum": ["soft", "strong"] }
         }
       }
-    },
-    "shortcuts": {
-      "type": "array",
-      "maxItems": 5000,
-      "items": {
-        "type": "object",
-        "required": ["choseong", "word"],
-        "properties": {
-          "choseong": { "type": "string", "pattern": "^[ㄱ-ㅎ\\s]+$" },
-          "word": { "type": "string", "minLength": 1 }
-        }
-      }
     }
   }
 }

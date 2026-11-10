@@ -1,7 +1,6 @@
 {
   "format": "bada-settings/1",
   "settings": {
-    "collect_choseong": true,
     "default_muhenkan": 0,
     "enabled": [
       0,

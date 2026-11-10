@@ -321,7 +321,7 @@ with its own set of henkan candidates:
 | `/mac` | InputMethodKit shell (Swift, no Xcode): the two input modes (§4.1), the 英数 / かな key tap, the menu window, the settings window |
 | `/docs` | This spec, the Bada layout design, a page per layout and combination examples (`docs/layouts`, images in `docs/images/layouts`), the layout 13 design history and its saved candidates (`docs/bada-history.md`, `docs/history/`) |
 | `/tools/analysis`, `/tools/render`, `/tools/editor`, `/tools/practice`, `/tools/setup-page` | Corpus analysis and layout optimisation, the layout renderer (with combinations, and `export_png.py` for the docs' images), the layout editor, a key drill, a page of a setup's key legends per mode |
-| `/utils/learner-app` | A local page that logs your typing and exports it for your dictionary (§8.2) |
+| `/utils/learner-app` | A local page that logs your typing and exports it for your dictionary (§8) |
 | `/web` | The web simulator ([bada.sjun.me](https://bada.sjun.me)): the engine compiled to WebAssembly behind a text field, the Mac shell's key handling, menu and settings window ported to the page (settings in the browser's local storage, the same `bada-settings/1` file), and the keyboard drawn by §7.1's renderer. Deployed by `.github/workflows/deploy-web.yml` |
 
 All behaviour lives in the engine; the shell translates keys, switches input sources and applies
@@ -347,8 +347,7 @@ the output.
   ㅏ → ㅏ, 가어 → 가ㅓ, 와 → ㅘ; a typed or asked-for ㅇ and a syllable with a final stay).
 - Ranking is rules over word counts (a known word beats an unknown one), **not yet n-grams**.
   Layout 13 adds typo suggestions under its reading from a jamo 4-gram model (bada-layout.md §5). It
-  orders the readings of the enabled layouts; layout 13 itself reads its keys one way only. 초성
-  prediction is in the engine but no layout uses it (bada-layout.md §8).
+  orders the readings of the enabled layouts; layout 13 itself reads its keys one way only.
 - HYPER+かな and MEH+かな both switch to the other mode: with one muhenkan layout and one henkan
   there is nothing else to go back to or cycle through. The user cycle order (§5.3) isn't in the
   settings window yet.
@@ -364,34 +363,10 @@ Both have Control left of A. Bottom rows (1u each but the space):
   ↑ stacked over ↓ at half height; no right ⌥. The left edge is 0.5u shorter than a full board's:
   no 半角/全角 key (1 is 1.5u), tab 1u, control 1.25u, left shift 1.75u.
 
-## 8. 초성 diagnostics and the user dictionary
+## 8. The user dictionary
 
-초성 input is ambiguous enough that, in practice, every user who types it needs data of their own.
-Two things provide it. (No layout types 초성 input at present; the dictionary's positive and
-negative words apply to every layout, and the 초성 parts wait for its return: bada-layout.md §8.)
-
-### 8.1 초성 diagnostics
-
-A collector in the engine (`engine/src/diag.rs`) counts, **in henkan mode only**, for each Korean
-layout that types initials on their own keys (10–13):
-
-- **typed:** each committed syllable whose initial was typed: the initial's **key and Shift** (two
-  keys that type the same jamo are two inputs: Bada's ㅆ on 2 and `:`, ㅃ on Q and `]`, final ㄴ on
-  E and K), the vowel, the final, and the final's key;
-- **choseong:** each 초성 prediction chosen: each typed initial's key, and the vowel and final of
-  the syllable it became.
-
-Counts only, never text. On by default (bada ime Settings → 초성 diagnostics; Clear empties it);
-saved every 30 seconds to `~/Library/Application Support/bada-ime/choseong-diagnostics.json`
-(`bada-choseong-diagnostics/1`: rows of the fields above with a `count`), and read back at launch.
-`tools/analysis/choseong_report.py` summarises it. **[decide]** whether the counts feed the
-ranking directly (a per-key syllable model for 초성 input) once there are enough.
-
-### 8.2 The user dictionary
-
-`~/Library/Application Support/bada-ime/dictionary.json`: positive words, negative words (soft or
-strong) and 초성 shortcuts, for every layout. The contract is
-[dictionary-contract.md](dictionary-contract.md), with a JSON Schema and an example; the
+`~/Library/Application Support/bada-ime/dictionary.json`: positive words and negative words (soft or
+strong), for every layout. The contract is [dictionary-contract.md](dictionary-contract.md), with a JSON Schema and an example; the
 interactive setup is [interactive-prompts/](interactive-prompts/README.md). Loaded at launch and on
 the next activation after the file changes; the input menu's "Open Dictionary Folder" opens its
 folder.

@@ -37,22 +37,17 @@ Exports are also saved in `data/exports/`.
 **Training file** (`bada-learner-export/1`):
 
 - `words`: Korean (eojeol), English (lowercased) and Japanese words from the pages' final text, with counts.
-- `choseong`: compositions typed with consonant keys only (초성 input) on the first Korean layout
-  shown, as `{choseong, word, layout, count, scrolled}`; `scrolled` counts the times you had to move
-  through the menu (Tab, ↓, かな) to reach it: the words bada ranks too low.
-- `rejected`: committed, then gone from the page: likely wrong readings (`choseong` counts how many
-  came from 초성 input).
+- `rejected`: committed, then gone from the page: likely wrong readings.
 - `keys`: keystroke counts by key (`⇧`, `⌥` prefixes).
 - `texts` (only with "include page texts"): the pages verbatim, for n-gram training.
 
 **Dictionary** (`bada-dictionary` v1): every word used at least *minimum uses* times as a
-positive word with its count, and every 초성 → word typed at least that often as a shortcut. No
-negative words: deciding what you never mean needs you.
+positive word with its count. No negative words: deciding what you never mean needs you.
 
 ### Why not plug it in directly
 
-It replaces your dictionary with these logs alone: typos you didn't delete become words, hand-made
-entries and negatives are dropped, and every shortcut is taken as-is. The old file is kept as
+It replaces your dictionary with these logs alone: typos you didn't delete become words, and hand-made
+entries and negatives are dropped. The old file is kept as
 `dictionary.backup-<time>.json` beside it; rename it back to undo.
 
 ### Merging with an AI agent (recommended)
@@ -64,12 +59,12 @@ Read docs/interactive-prompts/learner-merge.md and follow it.
 ```
 
 It reads the export and your current dictionary (asking first), adds the counts, asks you about
-doubtful words, proposes shortcuts and negative words from what you scrolled to and deleted, and
+doubtful words, proposes negative words from what you deleted, and
 writes the file only when you agree.
 
 ## Tips
 
 - Use bada's henkan mode (かな) for Korean, and type as you normally would: the point is your own
-  words and your own 초성.
+  words.
 - If keys aren't highlighted or nothing is counted, the browser isn't getting composition events
   from the input method; Safari and Chrome both do.

@@ -217,37 +217,8 @@ pub extern "C" fn bada_string_free(text: *mut c_char) {
     }
 }
 
-/// 초성 diagnostics (spec §8): on or off for the whole process.
-#[unsafe(no_mangle)]
-pub extern "C" fn bada_diag_set_enabled(on: u32) {
-    crate::diag::set_enabled(on != 0);
-}
-
-/// Changes since the last export.
-#[unsafe(no_mangle)]
-pub extern "C" fn bada_diag_changes() -> u64 {
-    crate::diag::changes()
-}
-
-/// Everything collected, as JSON; free with `bada_string_free`.
-#[unsafe(no_mangle)]
-pub extern "C" fn bada_diag_export() -> *mut c_char {
-    owned(crate::diag::export())
-}
-
-/// Adds saved counts.
-#[unsafe(no_mangle)]
-pub extern "C" fn bada_diag_import(json: *const c_char) {
-    crate::diag::import(cstr(json));
-}
-
-#[unsafe(no_mangle)]
-pub extern "C" fn bada_diag_clear() {
-    crate::diag::clear();
-}
-
 /// Loads the user dictionary (docs/dictionary-contract.md) for the whole process; an empty string
-/// clears it. Returns a summary, `{"ok":…,"error":…,"positive":…,"negative":…,"shortcuts":…}`;
+/// clears it. Returns a summary, `{"ok":…,"error":…,"positive":…,"negative":…}`;
 /// free with `bada_string_free`.
 #[unsafe(no_mangle)]
 pub extern "C" fn bada_dictionary_load(json: *const c_char) -> *mut c_char {

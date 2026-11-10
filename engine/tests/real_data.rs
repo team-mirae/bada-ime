@@ -49,7 +49,7 @@ fn bada_on_real_words() {
     assert_eq!(plain(&GAMSAHAMNIDA).preedit, "감사합니다");
     // 있습니다: ㅇ(F) ㅣ(M) ㅆ(') ㅅ(R) ㅡ(,) ㅂ(B) ㄴ(E) ㅣ ㄷ(A) ㅏ
     assert_eq!(plain(&[KeyF, KeyM, Quote, KeyR, Comma, KeyB, KeyE, KeyM, KeyA, KeyH]).preedit, "있습니다");
-    // consonants alone stay as typed: no 초성 guessing
+    // consonants alone stay as typed
     assert_eq!(plain(&[KeyX, KeyX, KeyX]).preedit, "ㅋㅋㅋ");
     assert_eq!(plain(&[KeyD, KeyR]).preedit, "ㄱㅅ");
 }
@@ -173,18 +173,7 @@ fn the_example_dictionary_loads() {
     let json = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/../docs/dictionary-example.json")).unwrap();
     let (_, summary) = bada::userdict::UserDict::parse(&json);
     assert!(summary.ok, "{}", summary.error);
-    assert_eq!((summary.positive, summary.negative, summary.shortcuts), (5, 3, 3));
-}
-
-#[test]
-fn choseong_knows_technical_words() {
-    // The bigger list knows them (they rank low by count: 초성 114th of 364 words for ㅊㅅ, 키로깅
-    // 61st of 105 for ㅋㄹㄱ; the user dictionary or the diagnostics bring them up).
-    let d = data();
-    let tokens = |s: &str| s.chars().map(|c| bada::layout::Token { ini: c, a: false }).collect::<Vec<_>>();
-    let words = |s: &str| d.choseong_words(&tokens(s), 1000).into_iter().map(|w| w.0).collect::<Vec<_>>();
-    assert!(words("ㅊㅅ").contains(&"초성".to_string()));
-    assert!(words("ㅋㄹㄱ").contains(&"키로깅".to_string()));
+    assert_eq!((summary.positive, summary.negative), (5, 3));
 }
 
 #[test]

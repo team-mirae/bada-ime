@@ -12,7 +12,7 @@ enum UserDictionary {
     static var url: URL { folder.appendingPathComponent("dictionary.json") }
 
     private static var loadedStamp: Date?
-    /// What the last load found, for the settings window: "123 positive, 4 negative, 5 shortcuts".
+    /// What the last load found, for the settings window: "123 positive, 4 negative".
     private(set) static var status = "No dictionary.json yet."
 
     /// Loads the file if it changed since the last load (or was removed).
@@ -27,7 +27,7 @@ enum UserDictionary {
         if stamp == nil {
             status = "No dictionary.json yet."
         } else if summary["ok"] as? Bool == true {
-            status = "Loaded: \(summary["positive"] ?? 0) positive, \(summary["negative"] ?? 0) negative, \(summary["shortcuts"] ?? 0) shortcuts."
+            status = "Loaded: \(summary["positive"] ?? 0) positive, \(summary["negative"] ?? 0) negative."
         } else {
             status = "dictionary.json wasn't loaded: \(summary["error"] ?? "unknown error")"
         }

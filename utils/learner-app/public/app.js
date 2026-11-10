@@ -166,7 +166,6 @@ async function refreshStats() {
       `<span>commits <b>${s.totals.commits}</b></span><span>Korean words <b>${s.words.korean}</b></span>` +
       `<span>English <b>${s.words.english}</b></span><span>Japanese <b>${s.words.japanese}</b></span>`;
     $("topWords").innerHTML = chips(s.top, w => `<span>${esc(w.word)}<b>${w.count}</b></span>`);
-    $("topCho").innerHTML = chips(s.choseong, c => `<span>${esc(c.choseong)} → ${esc(c.word)}<b>${c.count}</b></span>`);
     $("rejected").innerHTML = chips(s.rejected, r => `<span>${esc(r.word)}<b>${r.count}</b></span>`);
   } catch (e) {}
 }
@@ -197,7 +196,7 @@ $("installYes").onclick = async () => {
   const j = await r.json();
   $("confirm").classList.remove("open");
   $("exportStatus").textContent = r.ok
-    ? `Wrote ${j.path}: ${j.positive} words, ${j.shortcuts} shortcuts.${j.backup ? ` Old file kept as ${j.backup}.` : ""} bada loads it the next time it's activated.`
+    ? `Wrote ${j.path}: ${j.positive} words.${j.backup ? ` Old file kept as ${j.backup}.` : ""} bada loads it the next time it's activated.`
     : `Not written: ${j.error}`;
 };
 pad.focus();

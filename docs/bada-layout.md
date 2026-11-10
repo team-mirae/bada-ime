@@ -66,7 +66,7 @@ final-only key; a consonant without it is an initial, or a final until a vowel t
   then takes the second as its initial if its key can be one. Or one ⇧ key: ⇧J ㅁ, ⇧K ㄶ, ⇧L ㄺ,
   ⇧; ㄲ, ⇧¥ ㄼ.
 - **Vowels join as in 2-set** (ㅗ ㅏ → ㅘ, ㅡ ㅣ → ㅢ), though every compound vowel has its key too.
-- **Consonants alone stay as typed** (ㄱㅅ, ㅋㅋ): there is no 초성 input.
+- **Consonants alone stay as typed** (ㄱㅅ, ㅋㅋ).
 
 Examples: 한 V H K · 안녕 F H K E U J · 것이 D N R F M · 많다 G H ⇧K A H ·
 감사합니다 D H G R H V H B E M A H.
@@ -144,6 +144,4 @@ the longer transliterations for them, marked for review.
 ## 8. Open questions
 
 1. **[decide]** ⌥¥ and ⌥; (no Shift) typing ¥ and ;, so that every JIS character can be typed in henkan.
-2. **[decide]** 초성 input on request: a key that turns typed consonants into a word menu. The engine
-   still has the machinery (prediction, the dictionary's shortcuts, `choseong` diagnostics), unused.
-3. **[decide]** learning the slips' costs (§5) from real typing (the learner-app logs backspaced keys).
+2. **[decide]** learning the slips' costs (§5) from real typing (the learner-app logs backspaced keys).

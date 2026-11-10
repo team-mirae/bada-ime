@@ -92,7 +92,6 @@ code{font:13px ui-monospace,Menlo,monospace}
       <h2>Everything logged</h2>
       <div class="stats" id="allStats"></div>
       <p class="note" style="margin:8px 0 4px">Most used Korean words</p><div class="list" id="topWords"></div>
-      <p class="note" style="margin:8px 0 4px">초성 you typed → word</p><div class="list" id="topCho"></div>
       <p class="note" style="margin:8px 0 4px">Committed, then deleted</p><div class="list" id="rejected"></div>
     </div>
   </div>
@@ -113,7 +112,7 @@ code{font:13px ui-monospace,Menlo,monospace}
       <button class="danger" id="install">Replace my dictionary… (not recommended)</button>
     </div>
     <div class="confirm" id="confirm">
-      <p style="margin:0 0 8px">This replaces <code>~/Library/Application Support/bada-ime/dictionary.json</code> with words and 초성 from
+      <p style="margin:0 0 8px">This replaces <code>~/Library/Application Support/bada-ime/dictionary.json</code> with words from
         these logs only, with no review: typos you didn't delete become words, and entries you wrote by hand are dropped. The old file is
         kept beside it as <code>dictionary.backup-….json</code>; to undo, rename it back.</p>
       <button class="danger" id="installYes">Replace it</button> <button id="installNo">Cancel</button>

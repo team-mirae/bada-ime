@@ -47,9 +47,7 @@ change per step:
 3. Remove other Japanese input methods, so かな lands in bada (henkan).
 4. In the input menu, **Allow 英数 and かな Everywhere…** grants Accessibility, so かな can move through
    suggestions while already in henkan mode.
-5. In **bada ime Settings…**, turn on the henkan candidates from step 1.2, and leave **초성
-   diagnostics** on if they'll type 초성 (it counts, on this Mac only, which syllables their initials
-   stand for; never text).
+5. In **bada ime Settings…**, turn on the henkan candidates from step 1.2.
 
 ## 5. Try it
 
@@ -57,8 +55,7 @@ Ask them to type a sentence in each language they chose, and say what came out. 
 
 ## 6. The dictionary
 
-Then go to [dictionary.md](dictionary.md). If they type 초성 at all, tell them it's practically
-required.
+Then go to [dictionary.md](dictionary.md).
 
 ## 7. Wrap up
 

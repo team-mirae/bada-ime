@@ -1,7 +1,7 @@
 # Interactive setup prompts
 
 Prompts for an AI assistant that walk someone through installing **bada ime** and then building
-their **dictionary** (strongly recommended: 초성 input is too ambiguous to work well without one).
+their **dictionary** (recommended: your own words, ranked first).
 
 ## Start
 
@@ -27,7 +27,7 @@ It can't run anything, so it tells you what to check and type yourself.
 |---|---|
 | [rules.md](rules.md) | Rules for every prompt: ask before reading anything, before installing, before changing settings |
 | [start.md](start.md) | Check the clone, build, install, set up the input sources and layouts. Ends with dictionary.md |
-| [dictionary.md](dictionary.md) | Build `dictionary.json` with the user: positive and negative words, 초성 shortcuts |
+| [dictionary.md](dictionary.md) | Build `dictionary.json` with the user: positive and negative words |
 | [learner-merge.md](learner-merge.md) | Merge a [learner-app](../../utils/learner-app/README.md) export into `dictionary.json` |
 
 ## Writing a prompt
