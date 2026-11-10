@@ -64,7 +64,7 @@ likes (the pages here use a table), giving:
 - **Contact:** a working email for the maintainer, and optionally more.
 
 **Ownership.** The current maintainer owns the design decisions of their layout. If they don't
-respond within **90 days** to an email from an `@sjun.me` address or a repository admin, ownership
+respond within **90 days** to an email from an `@teammirae.com` address or a repository admin, ownership
 passes to **Mirae Research**.
 
 The layouts in this repository as of 0.1.0 are maintained by Mirae Research, designer Min Jun Sung;

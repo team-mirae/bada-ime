@@ -1,0 +1,37 @@
+<!doctype html>
+<!-- GitHub social preview (1280×640). Render: python3 tools/social-preview/export.py -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; }
+  body {
+    width: 1280px; height: 640px; overflow: hidden; box-sizing: border-box;
+    padding: 44px 50px 0;
+    background: radial-gradient(120% 90% at 85% 0%, #1d3a52 0%, #161b21 55%, #111418 100%);
+    color: #e8edf2;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Hiragino Sans", sans-serif;
+  }
+  header { display: flex; align-items: baseline; justify-content: space-between; padding: 0 14px; }
+  h1 { margin: 0; font-size: 68px; font-weight: 700; letter-spacing: -2px; line-height: 1; }
+  h1 .ime { color: #6cb6ff; font-weight: 600; }
+  .names { font-size: 30px; color: #b9c4cf; font-weight: 500; }
+  p { margin: 18px 14px 0; font-size: 25px; color: #9aa8b5; line-height: 1.35; }
+  p b { color: #e8edf2; font-weight: 600; }
+  .board {
+    margin-top: 30px; height: 396px; overflow: hidden; border-radius: 18px;
+    background: #262c32; box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+  }
+  /* the renderer's PNG, its caption row cropped off */
+  .board img { display: block; width: 1180px; margin-top: -38px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>bada <span class="ime">ime</span></h1>
+    <div class="names">바다 입력기 · バダIME</div>
+  </header>
+  <p>A macOS input method for JIS keyboards: <b>Korean, Japanese and English</b> from one mode.</p>
+  <div class="board"><img src="../../docs/images/layouts/qwerty-bada-kana-dark.png" alt=""></div>
+</body>
+</html>
