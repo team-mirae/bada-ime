@@ -69,10 +69,18 @@ final class BadaInputController: IMKInputController {
             return true
         }
         // Caps Lock's UPPER_SNAKE rule (spec §6.2): Space types _, ⌥Space a space.
-        if Modes.current == .muhenkan && code == kVK_Space && !cmd && !ctrl && flags.contains(.capsLock)
+        if Modes.current == .muhenkan && code == kVK_Space && !cmd && !ctrl && CapsLock.isOn(flags)
             && CapsLock.rule == .uppersnake {
             apply(engine.flush(), to: client)
             client.insertText(alt ? " " : "_", replacementRange: NSRange(location: NSNotFound, length: 0))
+            return true
+        }
+        // Caps Lock in muhenkan (spec §6.7): the capitals typed here, as the Caps Lock bada ime holds
+        // isn't on macOS's key events.
+        if Modes.current == .muhenkan && CapsLock.isHandled && CapsLock.isOn(flags) && !cmd && !ctrl && !alt,
+           let capital = Keyboards.capital(code: code) {
+            apply(engine.flush(), to: client)
+            client.insertText(capital, replacementRange: NSRange(location: NSNotFound, length: 0))
             return true
         }
         // In a terminal, ⌥ in muhenkan goes to the app untouched (⌥ as Meta: readline's ⌥B, ⌥F).

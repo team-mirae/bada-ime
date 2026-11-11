@@ -32,6 +32,14 @@ enum Keyboards {
         return translate(abc, code, shift ? UInt32(shiftKey >> 8) : 0)
     }
 
+    /// A letter key's capital, as ABC types it with Caps Lock; nil for other keys. In muhenkan the
+    /// input method types it itself while Caps Lock is on (spec §6.7): the Caps Lock bada ime sets
+    /// lights the LED but isn't on macOS's key events.
+    static func capital(code: Int) -> String? {
+        guard let name = keyNames[code], name.count == 4, name.hasPrefix("Key") else { return nil }
+        return translate(abc, code, UInt32(alphaLock >> 8))
+    }
+
     private static let badaKeys: Set<String> = Set(
         ["Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal",
          "IntlYen", "BracketLeft", "BracketRight", "Semicolon", "Quote", "Backslash", "Comma", "Period", "Slash", "IntlRo"]
