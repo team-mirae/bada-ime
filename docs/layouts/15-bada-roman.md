@@ -7,7 +7,7 @@
 | **Native script** | Korean (Hangul) |
 | **Short name** | English: bada roman · 한국어: 바다 Roman · 日本語: バダRomaji |
 | **In-code name** | `bada-roman` (id 15, `layout::BADA_ROMAN`) |
-| **Reliability** | Korean: **experimental** ([typing robot](../robot.md#reliability)) |
+| **Reliability** | Korean: **production** ([typing robot](../robot.md#reliability)) |
 | **Abbreviations** | bada roman |
 | **Designer** | Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |

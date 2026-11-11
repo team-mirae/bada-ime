@@ -9,7 +9,7 @@
 - Names: bada (lowercase), バダ (katakana), 바다.
 - A new layout page `docs/layouts/NNN-name.md` needs the metadata header and follows the maintainer
   rules in `docs/layouts/README.md`; its in-code name must be unique.
-- macOS only, JIS only. Caps Lock is out of scope.
+- macOS only, JIS only. Caps Lock is bada's (spec §6.7): no remapping; it needs Accessibility and Input Monitoring.
 
 ## Building
 

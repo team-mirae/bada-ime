@@ -45,9 +45,13 @@ struct BadaSettings: Codable, Equatable {
     var fkeys: [String: String] = [:]
     /// Layout 15 (bada roman): Japanese romaji readings as shortcuts (mei 명). On by default.
     var ja_shortcuts = true
+    /// Caps Lock (spec §6.7): "toggle" (default), "transient" or "respect" (CapsLock.Setting).
+    var caps_lock = "toggle"
+    /// What Caps Lock does in muhenkan (spec §6.2): "allcaps" (default) or "uppersnake".
+    var caps_rule = "allcaps"
 
     enum CodingKeys: String, CodingKey {
-        case enabled, default_muhenkan, weights, skin_tones, use_profiles, profiles, profile_keys, kana_in_profile, profile_order, script_forms, negative_method, intercept_f, fkeys, ja_shortcuts
+        case enabled, default_muhenkan, weights, skin_tones, use_profiles, profiles, profile_keys, kana_in_profile, profile_order, script_forms, negative_method, intercept_f, fkeys, ja_shortcuts, caps_lock, caps_rule
     }
 
     init() {}
@@ -72,6 +76,8 @@ struct BadaSettings: Codable, Equatable {
         intercept_f = try c.decodeIfPresent(Bool.self, forKey: .intercept_f) ?? true
         fkeys = try c.decodeIfPresent([String: String].self, forKey: .fkeys) ?? [:]
         ja_shortcuts = try c.decodeIfPresent(Bool.self, forKey: .ja_shortcuts) ?? true
+        caps_lock = try c.decodeIfPresent(String.self, forKey: .caps_lock).flatMap { CapsLock.Setting(rawValue: $0)?.rawValue } ?? "toggle"
+        caps_rule = try c.decodeIfPresent(String.self, forKey: .caps_rule).flatMap { CapsLock.Rule(rawValue: $0)?.rawValue } ?? "allcaps"
     }
 
     static let key = "Settings"

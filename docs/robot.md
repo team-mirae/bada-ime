@@ -71,7 +71,7 @@ push to main and every pull request, and puts the report in the run's summary.
 |---|---|---|
 | 00 | english | perfect |
 | 10–14 | korean | perfect |
-| 15 | korean | experimental (the English dictionary and romaji shortcuts aren't typed) |
+| 15 | korean | production (the English dictionary and romaji shortcuts aren't typed) |
 | 18 | korean | production |
 | 19 | korean | experimental (69% on Common Voice; the gaps are open questions in [kana-korean.md](kana-korean.md)) |
 | 20, 21 | japanese_kana, japanese_romaji | production (every common word; 87% of the law texts, 93% of Tatoeba) |

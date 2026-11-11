@@ -24,8 +24,8 @@ reorganises them around two modes (muhenkan, henkan) and a pool of layouts.
 - **macOS only.** No Windows, no web playground as a product (a design playground is fine).
 - **JIS keyboards only** (日本語配列). Keys are physical positions with JIS legends; on any other
   keyboard layout the symbol keys type the wrong symbols. No ANSI/ISO modes.
-- **Caps Lock is out of scope.** bada ime never handles it. If the user has set macOS to use Caps
-  Lock for switching input sources, macOS turns it into 英数 / かな itself.
+- **Caps Lock is bada ime's** (owner, 2026-11-11; §6.7), once Accessibility and Input Monitoring
+  are allowed; without them it's macOS's.
 
 ## 3. Vocabulary
 
@@ -146,7 +146,9 @@ Every layout declares whether it is muhenkan or henkan.
   raises, in every profile (before the user's negative words and the typo suggestions);
 - **henkan profiles** (§6.6), off by default: candidates per profile key, links, recorded keys;
 - **script forms** (§6.4), off by default;
-- the **emoji skin-tone order** for layout 150.
+- the **emoji skin-tone order** for layout 150;
+- **Caps Lock** (§6.7): toggle (default), transient or respect, and its muhenkan rule: ALL CAPS
+  (default) or UPPER_SNAKE (§6.2).
 
 Settings → Export Settings… writes all of them to a file (`{"format": "bada-settings/1", "settings":
 {…}}`); Import Settings… replaces them all from one (fields a file lacks take their defaults).
@@ -179,6 +181,7 @@ target, while §4.3 says henkan mode has no sub-modes. Which of these is meant?
 | Key | Action |
 |---|---|
 | ⌥Space | `_` |
+| Caps Lock on | The **muhenkan rule** (§6.7): **ALL CAPS** (default), letters in capitals, as Caps Lock always types; or **UPPER_SNAKE**, capitals with Space typing `_` and ⌥Space a space |
 | ろ (`_` key, IntlRo) | `\`; ⇧ `_` (as on every JIS keyboard; macOS's ABC layout would give `_` for both). The engine types it, in muhenkan and wherever henkan passes the key on |
 | ⌥ + letter | its **variants**, as JIS English did (jis-korean spec §3.6.3): the letter shows with a row of accented variants (⌥e: è é ê ë ē ė ę; ⇧ for capitals), none chosen. 1–9, 0 pick; the same ⌥ + letter again or the arrows choose; Enter commits; Esc / ⌫ cancel; any other key keeps what shows and goes on. A letter without variants types macOS's ⌥ character. In terminals ⌥ goes to the app untouched |
 | 半角/全角 | **full-width** applied to the selection |
@@ -336,6 +339,27 @@ with its own set of henkan candidates:
   not, and each key's binding), or use `mac-kana`'s (the default). F-key actions only act for a
   method among the profile's candidates.
 - This settles §6.1's (b) for keys; what HYPER+かな and MEH+かな do with profiles is still open.
+
+### 6.7 Caps Lock (owner, 2026-11-11)
+
+bada ime handles Caps Lock itself, without remapping the key: it reads each press at the HID level
+(Input Monitoring), decides what Caps Lock should be and sets it (the system's Caps Lock state, so
+its LED and every app follow), and undoes the toggle macOS makes on its own; the key tap
+(Accessibility) swallows macOS's own toggle so apps don't see it. Without both permissions Caps Lock
+is macOS's. In another input source than bada ime's (ABC in a password field) it's plain Caps Lock.
+macOS's "Use Caps Lock to switch to and from ABC" must be off.
+
+One setting, three behaviours:
+
+| Setting | Caps Lock | ⇧ ⌃ ⌥ ⌘ + Caps Lock |
+|---|---|---|
+| **toggle** (default) | The other mode, as MEH+かな (§6.1). The LED shows the Caps Lock state, and blinks once when Caps Lock switched mode | Caps Lock, in muhenkan only, **muhenkan-transient** (below); in henkan nothing |
+| **transient** | Caps Lock, **muhenkan-transient**: on in muhenkan, forgotten (off) when muhenkan is left. In henkan it stays off: pressed there it does nothing, and if another app turns it on, bada ime turns it back off | as Caps Lock |
+| **respect** | Caps Lock, **login-transient**: henkan mode doesn't turn it off, and it's forgotten only at logout. Henkan layouts compose as usual with it on | as Caps Lock |
+
+What Caps Lock types in muhenkan is the **muhenkan rule** (§6.2): ALL CAPS or UPPER_SNAKE.
+
+When it misbehaves on a keyboard: [troubleshooting.md](troubleshooting.md#caps-lock-spec-67).
 
 ## 7. Build and layout of the repo
 

@@ -16,7 +16,9 @@ enum Modes {
     static let bundleID = Bundle.main.bundleIdentifier ?? "me.sjun.inputmethod.Bada"
 
     /// The mode bada ime is in, as last selected or reported.
-    static var current: BadaMode = selectedNow() ?? .henkan
+    static var current: BadaMode = selectedNow() ?? .henkan {
+        didSet { if current != oldValue { CapsLock.modeChanged(to: current) } }
+    }
     /// The henkan profile in use (spec §6.6): which language key brought henkan mode up.
     static var profile = BadaProfiles.macKana
 

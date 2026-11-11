@@ -11,6 +11,7 @@ import InputMethodKit
 /// - HYPER+かな (⌘⌃⌥⇧) and MEH+かな (⌃⌥⇧): the other mode (this build has one muhenkan layout and
 ///   one henkan, so going back to the last used one and cycling both land there).
 /// - With henkan profiles on (spec §6.6): the keys recorded for 変換 and カタカナ select their profile.
+/// - Caps Lock (spec §6.7): the changes macOS makes on its own are swallowed (CapsLock).
 ///
 /// The tap never selects an input source itself. A key that changes mode is handed to macOS as a
 /// plain 英数 or かな (`post`), so macOS's own switch does it; the input method acts on the key when
@@ -67,7 +68,7 @@ enum LanguageKeyTap {
             }
             return
         }
-        let mask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.keyUp.rawValue)
+        let mask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.keyUp.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
         guard let port = CGEvent.tapCreate(tap: .cgSessionEventTap, place: .headInsertEventTap, options: .defaultTap,
                                            eventsOfInterest: CGEventMask(mask), callback: callback, userInfo: nil)
         else {
@@ -78,6 +79,7 @@ enum LanguageKeyTap {
         CFRunLoopAddSource(CFRunLoopGetMain(), CFMachPortCreateRunLoopSource(nil, port, 0), .commonModes)
         CGEvent.tapEnable(tap: port, enable: true)
         DiagnosticLog.note("language key tap: on")
+        HIDKeys.check()   // Caps Lock needs the HID keys too
     }
 
     private static func poll() {
@@ -94,6 +96,10 @@ enum LanguageKeyTap {
         }
         if event.getIntegerValueField(.eventSourceUserData) == marker { return Unmanaged.passUnretained(event) }
         let code = Int(event.getIntegerValueField(.keyboardEventKeycode))
+        if type == .flagsChanged {
+            guard code == kVK_CapsLock else { return Unmanaged.passUnretained(event) }
+            return CapsLock.changed(to: event.flags.contains(.maskAlphaShift)) ? Unmanaged.passUnretained(event) : nil
+        }
         if let recorder {
             if type == .keyDown {
                 Self.recorder = nil

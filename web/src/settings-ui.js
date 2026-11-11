@@ -97,6 +97,10 @@ function layoutsPage(s) {
     heading("Default muhenkan layout (英数)"),
     select(api.catalog.layouts.filter(l => !l.henkan).map(l => [l.id, `${l.name}  (${l.id})`]), s.default_muhenkan,
       v => change(s => { s.default_muhenkan = Number(v); })),
+    heading("Caps Lock"),
+    select(S.CAPS_LOCK, s.caps_lock, v => change(s => { s.caps_lock = v; }), { "aria-label": "What Caps Lock does" }),
+    select(S.CAPS_RULE, s.caps_rule, v => change(s => { s.caps_rule = v; }), { "aria-label": "What Caps Lock types in muhenkan" }),
+    hint("On the Mac this needs Allow 英数 and かな Everywhere (Accessibility) and Input Monitoring. Here, Caps Lock is the page's own: its light is the key below."),
   ];
 }
 

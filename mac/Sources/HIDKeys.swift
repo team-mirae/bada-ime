@@ -23,6 +23,8 @@ enum HIDKeys {
     /// A special key just pressed, not yet claimed by a key event.
     private static var pending: (code: Int, at: Date, recorded: Bool)?
 
+    static var isListening: Bool { manager != nil }
+
     static func isHID(_ code: Int) -> Bool { code >= base }
 
     static func name(_ code: Int) -> String? {
@@ -52,20 +54,52 @@ enum HIDKeys {
         }
         manager = m
         DiagnosticLog.note(result == kIOReturnSuccess ? "HID keys: on" : "HID keys: on (some keyboards are seized by another app)")
+        CapsLock.start()
     }
 
-    /// On when profiles are and a profile key is a HID key.
+    /// On when the key tap is (Caps Lock, spec §6.7), or profiles are and a profile key is a HID key.
     static func check(_ settings: BadaSettings = BadaSettings.current) {
-        if settings.use_profiles && settings.profile_keys.values.contains(where: isHID) {
+        if LanguageKeyTap.isOn || (settings.use_profiles && settings.profile_keys.values.contains(where: isHID)) {
             start(ask: false)
         }
     }
 
+    /// Lights or darkens the Caps Lock LED of every keyboard, directly (CapsLock.blink).
+    static func setCapsLED(_ lit: Bool) {
+        guard let manager, let devices = IOHIDManagerCopyDevices(manager) as? Set<IOHIDDevice> else { return }
+        for device in devices {
+            let match = [kIOHIDElementUsagePageKey: kHIDPage_LEDs, kIOHIDElementUsageKey: kHIDUsage_LED_CapsLock] as CFDictionary
+            guard let elements = IOHIDDeviceCopyMatchingElements(device, match, IOOptionBits(kIOHIDOptionsTypeNone)) as? [IOHIDElement] else { continue }
+            for element in elements {
+                IOHIDDeviceSetValue(device, element, IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, element, 0, lit ? 1 : 0))
+            }
+        }
+    }
+
+    /// Each keyboard's Caps Lock LED as last set (for the diagnostic log).
+    static func capsLEDs() -> String {
+        guard let manager, let devices = IOHIDManagerCopyDevices(manager) as? Set<IOHIDDevice> else { return "none" }
+        var out: [String] = []
+        for device in devices {
+            let match = [kIOHIDElementUsagePageKey: kHIDPage_LEDs, kIOHIDElementUsageKey: kHIDUsage_LED_CapsLock] as CFDictionary
+            guard let elements = IOHIDDeviceCopyMatchingElements(device, match, IOOptionBits(kIOHIDOptionsTypeNone)) as? [IOHIDElement], let element = elements.first else { continue }
+            let name = IOHIDDeviceGetProperty(device, kIOHIDProductKey as CFString) as? String ?? "?"
+            var value = Unmanaged.passUnretained(IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, element, 0, -1))
+            let r = IOHIDDeviceGetValue(device, element, &value)
+            out.append("\(name)=\(r == kIOReturnSuccess ? String(IOHIDValueGetIntegerValue(value.takeUnretainedValue())) : "?")")
+        }
+        return out.joined(separator: ", ")
+    }
+
     private static func value(_ value: IOHIDValue) {
         let element = IOHIDValueGetElement(value)
-        guard IOHIDElementGetUsagePage(element) == kHIDPage_KeyboardOrKeypad,
-              IOHIDValueGetIntegerValue(value) == 1 else { return }
+        guard IOHIDElementGetUsagePage(element) == kHIDPage_KeyboardOrKeypad else { return }
         let usage = Int(IOHIDElementGetUsage(element))
+        if usage == kHIDUsage_KeyboardCapsLock {
+            CapsLock.key(down: IOHIDValueGetIntegerValue(value) == 1)
+            return
+        }
+        guard IOHIDValueGetIntegerValue(value) == 1 else { return }
         guard names[usage] != nil else { return }
         DiagnosticLog.note(String(format: "HID keys: usage 0x%02X", usage))
         let code = base | usage

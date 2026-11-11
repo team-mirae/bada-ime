@@ -22,6 +22,8 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
     private var tonesField = NSTextField()
     private var muhenkanPopup = NSPopUpButton()
     private var negativePopup = NSPopUpButton()
+    private var capsPopup = NSPopUpButton()
+    private var capsRulePopup = NSPopUpButton()
     private var scriptFormsBox = NSButton()
     private var jaShortcutsBox = NSButton()
     private var interceptBox = NSButton()
@@ -253,6 +255,29 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
         muhenkanPopup.target = self
         muhenkanPopup.action = #selector(changed(_:))
         stack.addArrangedSubview(muhenkanPopup)
+
+        stack.addArrangedSubview(label("Caps Lock", bold: true))
+        capsPopup = NSPopUpButton(frame: .zero, pullsDown: false)
+        for setting in CapsLock.Setting.allCases {
+            capsPopup.addItem(withTitle: setting.title)
+            capsPopup.lastItem?.representedObject = setting.rawValue
+        }
+        capsPopup.selectItem(at: CapsLock.Setting.allCases.firstIndex { $0.rawValue == settings.caps_lock } ?? 0)
+        capsPopup.target = self
+        capsPopup.action = #selector(changed(_:))
+        capsPopup.setAccessibilityLabel("What Caps Lock does")
+        stack.addArrangedSubview(capsPopup)
+        capsRulePopup = NSPopUpButton(frame: .zero, pullsDown: false)
+        for rule in CapsLock.Rule.allCases {
+            capsRulePopup.addItem(withTitle: rule.title)
+            capsRulePopup.lastItem?.representedObject = rule.rawValue
+        }
+        capsRulePopup.selectItem(at: CapsLock.Rule.allCases.firstIndex { $0.rawValue == settings.caps_rule } ?? 0)
+        capsRulePopup.target = self
+        capsRulePopup.action = #selector(changed(_:))
+        capsRulePopup.setAccessibilityLabel("What Caps Lock types in muhenkan")
+        stack.addArrangedSubview(capsRulePopup)
+        stack.addArrangedSubview(help("Needs Allow 英数 and かな Everywhere (Accessibility) and Input Monitoring; without them Caps Lock is macOS's. Turn off \"Use Caps Lock to switch to and from ABC\" in System Settings → Keyboard → Input Sources."))
 
         stack = page("Menu")
         stack.addArrangedSubview(label("Emoji skin tones (Symbols, 150)", bold: true))
@@ -659,6 +684,8 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
         if let tag = muhenkanPopup.selectedItem?.tag { settings.default_muhenkan = UInt32(tag) }
         settings.script_forms = scriptFormsBox.state == .on
         settings.ja_shortcuts = jaShortcutsBox.state == .on
+        settings.caps_lock = capsPopup.selectedItem?.representedObject as? String ?? "toggle"
+        settings.caps_rule = capsRulePopup.selectedItem?.representedObject as? String ?? "allcaps"
         negativePopup.isEnabled = settings.script_forms
         let negative = negativePopup.selectedItem?.tag ?? -1
         settings.negative_method = negative < 0 ? nil : UInt32(negative)
