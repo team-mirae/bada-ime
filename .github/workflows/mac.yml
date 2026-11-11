@@ -1,0 +1,68 @@
+# Builds bada ime for macOS on GitHub (no Mac needed to build): the engine's tests, the profile-key
+# test, then BadaIME.app (universal, ad-hoc signed), uploaded as the artifact "BadaIME" (a zip).
+# Install a run's app with mac/tools/install-ci.sh. A v* tag also attaches the zip to its release
+# (a draft is created if there is none yet).
+
+name: mac
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+    paths:
+      - "engine/**"
+      - "mac/**"
+      - "docs/layouts/*.json"
+      - ".github/workflows/mac.yml"
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: mac-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Test and build BadaIME.app
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin, x86_64-apple-darwin
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            engine
+            engine -> target/mac
+      - name: Engine tests
+        working-directory: engine
+        run: cargo test
+      - name: Profile keys test
+        run: mac/tools/test_profile_keys.sh
+      - name: Build BadaIME.app
+        working-directory: mac
+        run: make dist
+      - name: Version
+        id: v
+        run: echo "version=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' mac/Info.plist)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BadaIME
+          path: mac/build/BadaIME-${{ steps.v.outputs.version }}.zip
+          if-no-files-found: error
+      - name: Attach to the release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+          zip="mac/build/BadaIME-${{ steps.v.outputs.version }}.zip"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" "$zip" --clobber
+          else
+            gh release create "$tag" "$zip" --draft --title "bada ime ${{ steps.v.outputs.version }}" --generate-notes
+          fi
