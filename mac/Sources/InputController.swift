@@ -68,6 +68,13 @@ final class BadaInputController: IMKInputController {
             }
             return true
         }
+        // Caps Lock's UPPER_SNAKE rule (spec §6.2): Space types _, ⌥Space a space.
+        if Modes.current == .muhenkan && code == kVK_Space && !cmd && !ctrl && flags.contains(.capsLock)
+            && CapsLock.rule == .uppersnake {
+            apply(engine.flush(), to: client)
+            client.insertText(alt ? " " : "_", replacementRange: NSRange(location: NSNotFound, length: 0))
+            return true
+        }
         // In a terminal, ⌥ in muhenkan goes to the app untouched (⌥ as Meta: readline's ⌥B, ⌥F).
         if alt && Modes.current == .muhenkan && Self.terminals.contains(client.bundleIdentifier() ?? "") {
             return false
@@ -249,5 +256,6 @@ final class BadaInputController: IMKInputController {
 
     @objc func allowKeys(_ sender: Any?) {
         LanguageKeyTap.start(ask: true)
+        HIDKeys.start(ask: true)   // Caps Lock (spec §6.7) and the PC keyboard's 変換 / カタカナ
     }
 }

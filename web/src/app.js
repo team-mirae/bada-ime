@@ -10,6 +10,7 @@ import { openSettings } from "./settings-ui.js";
 const $ = id => document.getElementById(id);
 const ta = $("text"), backdrop = $("backdrop"), menuEl = $("menu"), board = $("board");
 const DICT_STORE = "bada-dictionary";
+const MAC = /Mac/.test(navigator.platform || navigator.userAgent);
 const MODIFIERS = new Set(["ShiftLeft", "ShiftRight", "ControlLeft", "ControlRight", "AltLeft", "AltRight", "MetaLeft", "MetaRight", "CapsLock", "Fn", "FnLock"]);
 const coarse = matchMedia("(pointer: coarse)").matches;
 
@@ -21,6 +22,7 @@ const state = {
   mark: null,            // the marked text in the field: {start, len}
   menuRows: 0, out: null,
   latched: { shift: false, ctrl: false, alt: false, meta: false },
+  caps: false,           // Caps Lock as bada ime holds it (spec §6.7)
   tap: null,             // a ⌘ pressed alone so far (⌘ taps as 英数 / かな)
   dictStatus: "No dictionary yet.",
 };
@@ -214,7 +216,34 @@ function switchMode(mode) {
   apply(engine.setMode(mode));
   engine.setProfile(state.profile);
   state.mode = mode;
+  // Leaving muhenkan forgets Caps Lock, unless it's respected (spec §6.7).
+  if (mode !== "muhenkan" && settings.caps_lock !== "respect") state.caps = false;
+  drawCaps();
   refresh();
+}
+
+/** Caps Lock pressed (spec §6.7), as CapsLock.key in mac/Sources/CapsLock.swift. */
+function capsLock(mods) {
+  const modified = mods.shift || mods.ctrl || mods.alt || mods.meta;
+  if (settings.caps_lock === "toggle" && !modified) {
+    state.caps = false;
+    switchMode(state.mode === "henkan" ? "muhenkan" : "henkan");
+    blinkCaps();
+    return;
+  }
+  if (settings.caps_lock === "respect") state.caps = !state.caps;
+  else state.caps = state.mode === "muhenkan" ? !state.caps : false;
+  drawCaps();
+}
+
+/** The Caps Lock light: the key below, lit while Caps Lock is on. */
+function drawCaps(lit = state.caps) {
+  keys.CapsLock?.classList.toggle("latched", lit);
+}
+
+function blinkCaps() {
+  drawCaps(!state.caps);
+  setTimeout(() => drawCaps(), 150);
 }
 
 function switchProfile(name) {
@@ -276,6 +305,12 @@ function press(code, mods, { repeat = false, key = "", synthetic = false } = {})
     }
     return true;
   }
+  // Caps Lock's UPPER_SNAKE rule (spec §6.2): Space types _, ⌥Space a space.
+  if (state.caps && state.mode === "muhenkan" && code === "Space" && !mods.ctrl && !mods.meta && settings.caps_rule === "uppersnake") {
+    apply(engine.flush());
+    insert(mods.alt ? " " : "_");
+    return true;
+  }
   const out = engine.key(code, mods);
   apply(out);
   if (out.consumed) return true;
@@ -285,7 +320,8 @@ function press(code, mods, { repeat = false, key = "", synthetic = false } = {})
 /** A key the engine passed on: what the app (a text field, through macOS's ABC layout) does. */
 function passOn(code, mods, synthetic) {
   if (mods.meta || mods.ctrl) return !synthetic ? false : true;
-  const ch = passChar(code, mods.shift);
+  let ch = passChar(code, mods.shift);
+  if (ch && state.caps) ch = ch.toUpperCase();   // Caps Lock: capitals, ⇧ or not (as macOS has it)
   if (ch && (!mods.alt || synthetic)) { insert(ch); return true; }
   switch (code) {
     case "Space": insert(" "); return true;
@@ -321,6 +357,11 @@ function keyDown(e) {
   }
   if (target !== ta) ta.focus();
   if (e.code === "MetaLeft" || e.code === "MetaRight") { state.tap = e.repeat ? null : e.code; return; }
+  if (e.code === "CapsLock") {
+    if (!e.repeat) capsLock({ shift: e.shiftKey, ctrl: e.ctrlKey, alt: e.altKey, meta: e.metaKey });
+    e.preventDefault();
+    return;
+  }
   if (MODIFIERS.has(e.code)) return;
   state.tap = null;
   const code = e.code === "NumpadEnter" ? "Enter" : e.code;
@@ -330,6 +371,8 @@ function keyDown(e) {
 
 function keyUp(e) {
   keys[e.code]?.classList.remove("on");
+  // A Mac browser reports Caps Lock going off as a keyup alone: that's a press too.
+  if (e.code === "CapsLock" && MAC && engine && !$("settings").open) capsLock({ shift: e.shiftKey, ctrl: e.ctrlKey, alt: e.altKey, meta: e.metaKey });
   if (e.code.startsWith("Shift") && !state.latched.shift) board.classList.remove("shift");
   // ⌘ alone, as the ⌘英かな convention has it: left ⌘ 英数, right ⌘ かな.
   if (web.cmdTaps && state.tap === e.code && engine && !$("settings").open) {
@@ -364,7 +407,12 @@ board.addEventListener("pointerdown", e => {
     drawLatched();
     return;
   }
-  if (code === "CapsLock") return;
+  if (code === "CapsLock") {
+    capsLock(state.latched);
+    state.latched = { shift: false, ctrl: false, alt: false, meta: false };
+    drawLatched();
+    return;
+  }
   if (document.activeElement !== ta && !coarse) ta.focus();
   g.classList.add("on");
   setTimeout(() => g.classList.remove("on"), 120);
@@ -376,6 +424,7 @@ board.addEventListener("pointerdown", e => {
 function drawLatched() {
   for (const [code, mod] of Object.entries(LATCH)) keys[code]?.classList.toggle("latched", state.latched[mod]);
   board.classList.toggle("shift", state.latched.shift);
+  drawCaps();
 }
 
 // ── What's shown around the field ──────────────────────────────────────────────────────────────
@@ -397,6 +446,7 @@ function refresh() {
   if (henkan && settings.use_profiles) item("Profile", `${S.PROFILE_KEY[state.profile]} (profile-${state.profile})`);
   item(henkan ? "Candidates" : "Layout", ids.length ? ids.map(layoutName).join(" + ") : "none (Settings → Layouts)");
   $("help").innerHTML = "<kbd>英数</kbd> muhenkan · <kbd>かな</kbd> henkan, again: next entry (<kbd>⇧</kbd> previous) · "
+    + (settings.caps_lock === "toggle" ? "<kbd>Caps Lock</kbd> the other mode · " : "")
     + "<kbd>Tab</kbd> <kbd>↓</kbd> / <kbd>⇧Tab</kbd> <kbd>↑</kbd> move in the menu · <kbd>Space</kbd> <kbd>Enter</kbd> <kbd>Esc</kbd> commit"
     + (web.cmdTaps ? " · No 英数 / かな keys? Tap left <kbd>⌘</kbd> / right <kbd>⌘</kbd>, or click them below." : " · Click 英数 / かな below.");
   drawField();

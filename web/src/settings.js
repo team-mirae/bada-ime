@@ -17,6 +17,18 @@ export const KANA_IN_PROFILE = [
   ["muhenkan", "Leave henkan mode (as 英数)"],
 ];
 
+/** What Caps Lock does (spec §6.7; CapsLock.Setting in mac/Sources/CapsLock.swift). */
+export const CAPS_LOCK = [
+  ["toggle", "Switch mode (⇧ ⌃ ⌥ ⌘ + Caps Lock: Caps Lock, in muhenkan)"],
+  ["transient", "Caps Lock in muhenkan only, forgotten when you leave it"],
+  ["respect", "Caps Lock everywhere, until you log out"],
+];
+/** What Caps Lock types in muhenkan (spec §6.2; CapsLock.Rule). */
+export const CAPS_RULE = [
+  ["allcaps", "ALL CAPS: letters in capitals"],
+  ["uppersnake", "UPPER_SNAKE: capitals, Space types _ (⌥Space a space)"],
+];
+
 const STORE = "bada-settings";
 const WEB_STORE = "bada-web";
 
@@ -25,6 +37,7 @@ export function defaults() {
     enabled: [13], default_muhenkan: 0, use_profiles: false, profiles: {}, weights: {}, profile_keys: {},
     kana_in_profile: {}, profile_order: ["mac-kana", "henkan", "katakana"], skin_tones: [...ALL_TONES],
     script_forms: false, negative_method: null, intercept_f: true, fkeys: {}, ja_shortcuts: true,
+    caps_lock: "toggle", caps_rule: "allcaps",
   };
 }
 
@@ -57,6 +70,8 @@ export function normalize(raw) {
   if (typeof raw.intercept_f === "boolean") s.intercept_f = raw.intercept_f;
   if (isObj(raw.fkeys)) s.fkeys = strings(raw.fkeys);
   if (typeof raw.ja_shortcuts === "boolean") s.ja_shortcuts = raw.ja_shortcuts;
+  if (CAPS_LOCK.some(([v]) => v === raw.caps_lock)) s.caps_lock = raw.caps_lock;
+  if (CAPS_RULE.some(([v]) => v === raw.caps_rule)) s.caps_rule = raw.caps_rule;
   return s;
 }
 
