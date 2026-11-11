@@ -21,7 +21,7 @@ const LONG: u8 = b'L';
 /// Onsets: (spelling, jamo, the default first).
 const ONSETS: &[(&str, &[char])] = &[
     ("kk", &['ㄲ']), ("gg", &['ㄲ']), ("tt", &['ㄸ']), ("dd", &['ㄸ']), ("pp", &['ㅃ']), ("bb", &['ㅃ']),
-    ("ss", &['ㅆ']), ("jj", &['ㅉ']), ("ch", &['ㅊ', 'ㅈ']), ("sh", &['ㅅ']),
+    ("ss", &['ㅆ']), ("jj", &['ㅉ']), ("zz", &['ㅉ']), ("ch", &['ㅊ', 'ㅈ']), ("sh", &['ㅅ']),
     ("k", &['ㅋ', 'ㄱ']), ("g", &['ㄱ']), ("n", &['ㄴ']), ("t", &['ㅌ', 'ㄷ']), ("d", &['ㄷ']),
     ("r", &['ㄹ']), ("l", &['ㄹ']), ("m", &['ㅁ']), ("p", &['ㅍ', 'ㅂ']), ("b", &['ㅂ']),
     ("s", &['ㅅ', 'ㅆ']), ("j", &['ㅈ']), ("c", &['ㅊ']), ("h", &['ㅎ']), ("f", &['ㅍ']), ("v", &['ㅂ']), ("z", &['ㅈ']),
@@ -434,6 +434,12 @@ mod tests {
         assert_eq!(default("hats"), "핬");
         assert!(all("itseo").contains(&"있어".to_string()));
         assert_eq!(default("zoh"), "좋");
+        // zz is ㅉ, as jj is (z is ㅈ, as j is)
+        assert_eq!(default("zza"), "짜");
+        assert_eq!(default("jja"), "짜");
+        assert_eq!(default("zzigae"), "찌개");
+        assert_eq!(default("azza"), "아짜");
+        assert_eq!(default("zz"), default("jj"));
         assert!(all("joha").contains(&"좋아".to_string()));
         assert_eq!(default("joha"), "조하");
         // ⇧⌥: the shifted character; ⌥ alone isn't taken

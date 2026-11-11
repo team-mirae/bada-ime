@@ -51,6 +51,7 @@ Built (`engine/src/bada_roman.rs`; key map `15-bada-roman.json`, written by
   out of builds; `make SENSITIVE=1` (in `mac/`) builds them in.
 
 - **`q` is `ch` (ㅊ)**: `qa` 차, `qeong` 청.
+- **`zz` is ㅉ**, as `jj` is (`z` is ㅈ, as `j` is): `zza` 짜, `zzigae` 찌개 (owner, 2026-11-11).
 - **`woo` is ㅜ** (as Woori writes it): `woori` 우리.
 - **`you` is ㅠ, and ㅕ before a final** (as names write it: Young 영): `you` 유, `young` 영.
 - **`eui` is ㅢ** too (as names and older romanizations write it): `eui` 의, `gaeui` 개의.
