@@ -70,6 +70,10 @@ Built (`engine/src/bada_roman.rs`; key map `15-bada-roman.json`, written by
   gives `s` to the next syllable (`itseo` 잇서) and 있어, a known word, ranks first.
 - **`h` is a final ㅎ** too: `joh` 좋. Before a vowel the default gives `h` to the next syllable
   (`joha` 조하), and 좋아 is offered as another reading.
+- **`l` before `t` implies a ㅎ** between them (owner, 2026-11-11): `lt` also reads ㅀ + ㄷ, as
+  it's said (ㅎ + ㄷ sounds like ㅌ): `daltorok` 닳도록, `silta` 싫다, `ilta` 잃다. The ranking
+  takes ㅀ + ㄷ for the same letters as ㄹ + ㅌ, so the known word comes first. `lh` before a
+  vowel stays as it was (`ilheo` 잃어).
 - **`j` and `z` are a final ㅈ** too, as `t` is (owner, 2026-11-11): `naj` 낮, `jaj` 잦. Before a
   vowel the default gives them to the next syllable (`naja` 나자), and 낮아 is offered as another
   reading. `nj` is still ㄵ (`anj` 앉).

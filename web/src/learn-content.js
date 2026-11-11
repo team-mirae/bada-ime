@@ -41,12 +41,12 @@ export const ANTHEM = {
   title: "애국가 (Aegukga), verse 1 and the refrain",
   lines: [
     { words: [w("동해", "Donghae", "donghae"), w("물과", "mulgwa", "mulgwa"), w("백두산이", "Baekdusani", "baekdusan;i", "baekdusani"),
-              w("마르고", "mareugo", "mareugo"), w("닳도록", "daltorok", "dalhdorok")],
+              w("마르고", "mareugo", "mareugo"), w("닳도록", "daltorok", "dalhdorok", "daltorok")],
       en: "With the East Sea and Mount Baekdu, to their last breath," },
     { words: [w("하느님이", "haneunimi", "haneunim;i", "haneunimi"), w("보우하사", "bouhasa", "bouhasa"),
               w("우리나라", "urinara", "urinara"), w("만세", "manse", "manse")],
       en: "Let God bless our great country, Manse!" },
-    { words: [w("무궁화", "mugunghwa", "mugunghwa"), w("삼천리", "samcheolli", "samcheonri", "samqeonri"),
+    { words: [w("무궁화", "mugunghwa", "mugunghwa"), w("삼천리", "samcheolli", "samchunri", "samqunri"),
               w("화려", "hwaryeo", "hwaryeo", "hwaryo"), w("강산", "gangsan", "gangsan")],
       en: "Mugunghwa thousand-mile rocks and water," },
     { words: [w("대한", "Daehan", "daehan"), w("사람", "saram", "saram"), w("대한으로", "Daehaneuro", "daehan;euro", "daehaneuro"),
@@ -224,9 +224,13 @@ export const LEVELS = [
         body: `<p><code>ts</code> is a final <b>ㅆ</b>: <code>its</code> 있, <code>itseo</code> 있어.
           <code>h</code> is a final <b>ㅎ</b>: <code>joh</code> 좋, <code>johayo</code> 좋아요.
           <code>j</code> and <code>z</code> are a final <b>ㅈ</b>: <code>naj</code> 낮. And
-          <code>zz</code> is ㅉ, as <code>jj</code> is: <code>zzigae</code> 찌개.</p>`,
+          <code>zz</code> is ㅉ, as <code>jj</code> is: <code>zzigae</code> 찌개.</p>
+          <p><code>l</code> before <code>t</code> implies a <b>ㅎ</b> between them, as it's said
+          (ㅎ and ㄷ together sound like ㅌ): <code>daltorok</code> 닳도록, <code>silta</code> 싫다,
+          <code>ilta</code> 잃다.</p>`,
         items: [i("있", "it", "its"), i("있어", "isseo", "itseo"), i("좋", "jot", "joh"), i("좋아", "joa", "joha"),
-          i("좋아요", "joayo", "johayo"), i("낮", "nat", "naj"), i("짜", "jja", "zza"), i("찌개", "jjigae", "zzigae")],
+          i("좋아요", "joayo", "johayo"), i("낮", "nat", "naj"), i("짜", "jja", "zza"), i("찌개", "jjigae", "zzigae"),
+          i("닳도록", "daltorok", "daltorok"), i("싫다", "silta", "silta"), i("잃다", "ilta", "ilta")],
       },
       {
         id: "2.4", title: "Japanese romaji shortcuts",
@@ -244,7 +248,7 @@ export const LEVELS = [
           even without <code>;</code> or <code>x</code>: <code>baekdusani</code> gives 백두산이. Keep
           <code>;</code> for words it doesn't know.</p>`,
         items: [i("백두산이", "Baekdusani", "baekdusani"), i("하느님이", "haneunimi", "haneunimi"), i("대한으로", "Daehaneuro", "daehaneuro"),
-          i("길이", "giri", "giri"), i("삼천리", "samcheolli", "samqeonri"), i("보전하세", "bojeonhase", "bojunhase"), i("화려", "hwaryeo", "hwaryo")],
+          i("길이", "giri", "giri"), i("삼천리", "samcheolli", "samqunri"), i("보전하세", "bojeonhase", "bojunhase"), i("화려", "hwaryeo", "hwaryo")],
       },
       { id: "2.6", title: "The anthem, shorter", anthem: "short" },
     ],

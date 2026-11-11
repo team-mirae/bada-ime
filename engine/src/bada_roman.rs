@@ -200,6 +200,10 @@ fn syllables_at(run: &[u8], i: usize, with_shortcuts: bool) -> Vec<Opt> {
             let run_end = (k..run.len()).find(|&x| is_vowel_byte(run[x])).unwrap_or(run.len());
             let cons = &run[k..run_end];
             let mut codas: Vec<(&str, &[char])> = matches(CODAS, cons);
+            // ㄹ before t: a ㅎ is implied between them, as it's said (닳도록 daltorok: ㅀ + ㄷ)
+            if cons.starts_with(b"lt") {
+                codas.push(("l", &['ㅀ'][..]));
+            }
             codas.push(("", &[][..]));
             let at_end = run_end == run.len();
             let preferred = |len: usize| -> bool {
@@ -440,6 +444,11 @@ mod tests {
         assert_eq!(default("zzigae"), "찌개");
         assert_eq!(default("azza"), "아짜");
         assert_eq!(default("zz"), default("jj"));
+        // l before t: a ㅎ implied between them (ㅀ + ㄷ), as another reading
+        assert_eq!(default("daltorok"), "달토록");
+        assert!(all("daltorok").contains(&"닳도록".to_string()));
+        assert!(all("silta").contains(&"싫다".to_string()));
+        assert!(!all("salda").contains(&"삻다".to_string()));
         // j and z are a final ㅈ too, as t is
         assert_eq!(default("naj"), "낮");
         assert_eq!(default("naz"), "낮");

@@ -164,17 +164,24 @@ const BADA_ROMAN_LM_MARGIN: f64 = 2.0;
 /// letter as another jamo does (종 / 정: 1).
 fn syllable_distance(a: &str, b: &str) -> usize {
     let jamo = |s: &str| -> Vec<char> {
+        let syls: Vec<Result<(char, char, Option<char>), char>> =
+            s.chars().map(|c| crate::hangul::decompose(c).ok_or(c)).collect();
         let mut out = Vec::new();
-        for c in s.chars() {
-            match crate::hangul::decompose(c) {
-                Some((l, v, f)) => {
+        for (n, syl) in syls.iter().enumerate() {
+            match *syl {
+                Ok((l, v, f)) => {
+                    // ㅀ + ㄷ is how `lt` reads with its implied ㅎ (bada_roman.rs): the same
+                    // letters as ㄹ + ㅌ
+                    let implied = |at: usize| matches!(syls.get(at), Some(Ok((_, _, Some('ㅀ')))));
+                    let next_d = matches!(syls.get(n + 1), Some(Ok(('ㄷ', _, _))));
+                    let l = if l == 'ㄷ' && n > 0 && implied(n - 1) { 'ㅌ' } else { l };
                     if l != 'ㅇ' {
                         out.push(l);
                     }
                     out.push(v);
-                    out.extend(f);
+                    out.extend(if f == Some('ㅀ') && next_d { Some('ㄹ') } else { f });
                 }
-                None => out.push(c),
+                Err(c) => out.push(c),
             }
         }
         out
@@ -2017,6 +2024,20 @@ mod tests {
             out = if c.is_ascii_uppercase() { shift(e, k) } else { press(e, k) };
         }
         out
+    }
+
+    #[test]
+    fn bada_roman_implied_h() {
+        // lt reads ㅀ + ㄷ too, at no cost: the word that's known shows first
+        assert_eq!(syllable_distance("달토록", "닳도록"), 0);
+        assert_eq!(syllable_distance("일어", "잃어"), 1);   // ㅀ before a vowel is still a change
+        let data = Data::parse("닳도록\t40\n달도록\t30\n", "", "", "");
+        let mut e = Engine::new(Arc::new(data));
+        e.pin_dictionary(None);
+        let mut s = Settings::default();
+        s.enabled = vec![BADA_ROMAN];
+        e.set_settings(s);
+        assert_eq!(letters(&mut e, "daltorok").preedit, "닳도록");
     }
 
     #[test]
