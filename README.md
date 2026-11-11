@@ -70,7 +70,7 @@ Seriously, even if you know Korean, give it a try.
 If you type primarily in English (i.e. a developer) and very rarely in Korean,
 even if you are a fluent Korean speaker, this is a very good setup.
 
-It also does not mess with your Korean 2-set (KTS) muscle memory, as aren't memorizing
+It also does not mess with your Korean 2-set (KTS) muscle memory, as you aren't memorizing
 key positions. You instead memorize which roman letters map to which Korean jamo, and
 keep your typing in QWERTY, separate from your existing memory of KTS.
 
