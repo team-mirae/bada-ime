@@ -11,7 +11,7 @@
 | **Abbreviations** | — |
 | **Designer** | Min Jun Sung (Mirae Research). Emoji names: Unicode CLDR |
 | **Maintainer** | Mirae Research (미래 리서치) |
-| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+| **Contact** | mj@teammirae.com (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
 
 | Id | Display name | Kind |
 |---|---|---|

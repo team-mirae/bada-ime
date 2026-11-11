@@ -11,7 +11,7 @@
 | **Abbreviations** | Korean Roman |
 | **Designer** | Spelling: the Revised Romanization of Korean (National Institute of Korean Language, 2000). The input method: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |
-| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+| **Contact** | mj@teammirae.com (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/18-korean-roman-dark.png">

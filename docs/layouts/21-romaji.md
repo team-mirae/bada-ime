@@ -11,7 +11,7 @@
 | **Abbreviations** | romaji |
 | **Designer** | Romaji spelling as Japanese input methods use it (Hepburn and Kunrei forms). The input method: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |
-| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+| **Contact** | mj@teammirae.com (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/21-romaji-dark.png">

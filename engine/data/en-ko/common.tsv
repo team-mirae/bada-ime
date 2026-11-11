@@ -1,0 +1,7575 @@
+# bada ime: English -> Korean dictionary of common English words (layout 15, bada hybrid).
+# Typing a lowercase English word offers the Korean word(s), then the English word written in Hangul.
+# Built from engine/data/en-words.txt (filtered, lemmatized, frequency order), then common words it
+# lacks (verbs/adjectives/abstract nouns, then concrete nouns), translated by hand (Claude, 2026-11).
+# Function words, pronouns, auxiliaries, number words and proper nouns are left out. US spelling.
+# Vulgar, slur, sexual and drug words live in sensitive.tsv (built only with make SENSITIVE=1).
+# Nouns only, with one exception. A row is either:
+#   - a noun (pos = noun): korean holds noun glosses only (red -> 빨강, not 빨간/빨갛다);
+#   - a non-noun Koreans borrow as it is (pos = verb/adj/adv; smart 스마트, cool 쿨, agile 에자일):
+#     korean is EMPTY and only the Hangul spelling is offered, never nominalized (no -하다).
+#   Other verbs, adjectives and adverbs are set aside in non-nouns.tsv (not built).
+# Columns (tab-separated): english<TAB>korean<TAB>hangul<TAB>pos
+#   english  lowercase base form (headword), most common first
+#   korean   noun glosses, most common sense first, ", "-separated, at most 4 (empty for non-nouns)
+#   hangul   the English word in Hangul: the established spelling Koreans actually use first
+#            (colloquial beats 외래어 표기법: foil 호일, shop 샵, python 파이썬; app 앱, family 패밀리);
+#            otherwise written as it sounds, with English short a /æ/ as ㅔ (agile 에자일)
+#   pos      noun | verb | adj | adv
+back	뒤, 등	백	noun
+old		올드	adj
+part	부분, 일부, 부품, 역할	파트	noun
+guy	남자, 녀석, 사람	가이	noun
+case	경우, 사건, 케이스, 상자	케이스	noun
+price	가격, 값	프라이스	noun
+space	공간, 우주, 자리, 띄어쓰기	스페이스	noun
+art	예술, 미술	아트	noun
+page	페이지, 쪽	페이지	noun
+bite	한입	바이트	noun
+call	전화, 통화	콜	noun
+day	날, 하루, 낮	데이	noun
+down		다운	adv
+end	끝	엔드	noun
+free		프리	adj
+help	도움	헬프	noun
+home	집, 가정, 고향	홈	noun
+kind	종류	카인드	noun
+leave	휴가	리브	noun
+look	모습, 외모	룩	noun
+need	필요	니드	noun
+nice		나이스	adj
+open		오픈	verb,adj
+people	사람들, 국민	피플	noun
+place	장소, 곳	플레이스	noun
+play	연극, 놀이, 경기	플레이	noun
+right	권리, 오른쪽	라이트	noun
+show	쇼, 공연	쇼	noun
+side	쪽, 옆, 편	사이드	noun
+sorry		쏘리	adj
+start	시작, 출발	스타트	noun
+stop	정류장, 정지	스톱	noun
+talk	이야기, 대화, 강연	토크	noun
+thing	것, 물건, 일	싱	noun
+time	시간, 때, 번	타임	noun
+today	오늘	투데이	noun
+try	시도	트라이	noun
+turn	차례, 순서	턴	noun
+use	사용, 용도	유스	noun
+wait	기다림	웨이트	noun
+way	길, 방법, 방식	웨이	noun
+well	우물	웰	noun
+word	단어, 말	워드	noun
+work	일, 작품, 직장	워크	noun
+world	세계, 세상	월드	noun
+year	해, 년, 연도	이어	noun
+serve	서브	서브	noun
+block	블록, 구역	블록	noun
+craft	공예, 제작	크래프트	noun
+build	빌드, 체격	빌드	noun
+base	기지, 기초, 바탕	베이스	noun
+house	집, 주택	하우스	noun
+farm	농장	팜	noun
+diamond	다이아몬드	다이아몬드	noun
+iron	철, 다리미	아이언	noun
+gold	금, 금색	골드	noun
+emerald	에메랄드	에메랄드	noun
+coal	석탄	콜	noun
+copper	구리	코퍼	noun
+stone	돌	스톤	noun
+wood	나무, 목재	우드	noun
+log	통나무, 기록, 로그	로그	noun
+plank	판자, 널빤지	플랭크	noun
+sword	검, 칼	소드	noun
+pickaxe	곡괭이	픽엑스	noun
+ax	도끼	액스	noun
+shovel	삽	셔블	noun
+hoe	괭이	호	noun
+bow	활, 절, 리본	보우	noun
+arrow	화살, 화살표	애로우	noun
+shield	방패	쉴드	noun
+armor	갑옷	아머	noun
+helmet	헬멧	헬멧	noun
+boot	부츠, 장화	부트	noun
+chest	가슴, 상자	체스트	noun
+trident	삼지창	트라이던트	noun
+portal	포털, 입구	포털	noun
+village	마을	빌리지	noun
+trade	무역, 거래	트레이드	noun
+spawn	스폰	스폰	noun
+zombie	좀비	좀비	noun
+skeleton	해골, 뼈대	스켈레톤	noun
+spider	거미	스파이더	noun
+dragon	용	드래곤	noun
+warp	워프	워프	noun
+claim	주장, 청구, 클레임	클레임	noun
+admin	관리자	어드민	noun
+lag	렉, 지연	렉	noun
+seed	씨앗, 씨	시드	noun
+cave	동굴	케이브	noun
+ocean	바다, 대양	오션	noun
+river	강	리버	noun
+desert	사막	데저트	noun
+food	음식	푸드	noun
+bread	빵	브레드	noun
+steak	스테이크	스테이크	noun
+potion	물약	포션	noun
+level	레벨, 수준, 단계	레벨	noun
+hardcore		하드코어	adj
+survival	생존	서바이벌	noun
+creative		크리에이티브	adj
+chunk	덩어리	청크	noun
+piston	피스톤	피스톤	noun
+car	자동차, 차	카	noun
+life	삶, 인생, 생명	라이프	noun
+money	돈	머니	noun
+love	사랑	러브	noun
+school	학교	스쿨	noun
+order	주문, 순서, 명령	오더	noun
+tomorrow	내일	투모로우	noun
+room	방	룸	noun
+book	책	북	noun
+man	남자, 사람	맨	noun
+night	밤	나이트	noun
+stay	체류, 숙박	스테이	noun
+live		라이브	verb,adj
+problem	문제	프로블럼	noun
+child	아이, 어린이, 자식	차일드	noun
+hope	희망	호프	noun
+dog	개, 강아지	도그	noun
+pizza	피자	피자	noun
+name	이름	네임	noun
+feel	느낌	필	noun
+job	직업, 일, 일자리	잡	noun
+friend	친구	프렌드	noun
+father	아버지, 아빠	파더	noun
+phone	전화, 휴대폰, 전화기	폰	noun
+door	문	도어	noun
+water	물	워터	noun
+morning	아침	모닝	noun
+person	사람	퍼슨	noun
+yesterday	어제	예스터데이	noun
+party	파티, 정당	파티	noun
+week	주, 일주일	위크	noun
+mother	어머니, 엄마	마더	noun
+wonder	놀라움, 경이	원더	noun
+language	언어, 말	랭귀지	noun
+drink	음료, 술	드링크	noun
+care	돌봄, 관심, 보살핌	케어	noun
+minute	분	미닛	noun
+family	가족	패밀리	noun
+tonight	오늘밤	투나이트	noun
+mind	마음, 정신	마인드	noun
+movie	영화	무비	noun
+change	변화, 잔돈, 변경	체인지	noun
+idea	생각, 아이디어	아이디어	noun
+parent	부모	페어런트	noun
+coffee	커피	커피	noun
+table	탁자, 테이블, 표	테이블	noun
+ticket	표, 티켓	티켓	noun
+plan	계획	플랜	noun
+milk	우유	밀크	noun
+city	도시	시티	noun
+country	나라, 국가, 시골	컨트리	noun
+wish	소원, 바람	위시	noun
+number	숫자, 번호, 수	넘버	noun
+cold	감기, 추위	콜드	noun
+hand	손	핸드	noun
+pay	급여, 페이	페이	noun
+bed	침대	베드	noun
+wife	아내, 부인	와이프	noun
+dinner	저녁, 저녁식사	디너	noun
+girl	소녀, 여자아이	걸	noun
+fine	벌금	파인	noun
+police	경찰	폴리스	noun
+study	공부, 연구	스터디	noun
+sleep	잠, 수면	슬립	noun
+face	얼굴	페이스	noun
+eye	눈	아이	noun
+truth	진실, 사실	트루스	noun
+restaurant	식당, 레스토랑	레스토랑	noun
+pick	선택	픽	noun
+woman	여자, 여성	우먼	noun
+fun	재미	펀	noun
+check	확인, 수표, 계산서	체크	noun
+watch	시계	워치	noun
+set	세트	세트	noun
+black	검정, 검은색	블랙	noun
+sound	소리	사운드	noun
+office	사무실	오피스	noun
+hour	시간	아워	noun
+street	거리, 길	스트리트	noun
+light	빛, 불, 조명	라이트	noun
+ride	탑승, 놀이기구	라이드	noun
+run	달리기	런	noun
+chance	기회	찬스	noun
+train	기차, 열차	트레인	noun
+drive	드라이브, 운전	드라이브	noun
+god	신, 하느님	갓	noun
+bus	버스	버스	noun
+appointment	약속, 예약	어포인트먼트	noun
+answer	대답, 답	엔서	noun
+head	머리, 우두머리	헤드	noun
+cat	고양이	캣	noun
+question	질문, 문제	퀘스천	noun
+surprise	놀라움, 깜짝선물	서프라이즈	noun
+visit	방문	비짓	noun
+music	음악	뮤직	noun
+park	공원	파크	noun
+class	수업, 반, 계급	클래스	noun
+interest	관심, 흥미, 이자	인터레스트	noun
+hair	머리카락, 털, 머리	헤어	noun
+town	마을, 도시	타운	noun
+front	앞, 정면	프론트	noun
+boy	소년, 남자아이	보이	noun
+doctor	의사, 박사	닥터	noun
+afternoon	오후	애프터눈	noun
+fall	가을	폴	noun
+reason	이유, 까닭	리즌	noun
+death	죽음	데스	noun
+finish	마무리	피니시	noun
+hot		핫	adj
+story	이야기	스토리	noun
+window	창문, 창	윈도우	noun
+company	회사, 동행	컴퍼니	noun
+sister	언니, 누나, 여동생, 자매	시스터	noun
+heart	심장, 마음	하트	noun
+summer	여름	서머	noun
+lunch	점심	런치	noun
+half	반, 절반	하프	noun
+white	흰색, 하양	화이트	noun
+red	빨강, 빨간색	레드	noun
+moment	순간, 잠깐	모먼트	noun
+fire	불, 화재	파이어	noun
+welcome	환영	웰컴	noun
+game	게임, 경기	게임	noun
+trouble	문제, 곤란	트러블	noun
+month	달, 월, 개월	먼스	noun
+store	가게, 상점	스토어	noun
+tree	나무	트리	noun
+rain	비	레인	noun
+break	휴식, 쉬는시간	브레이크	noun
+business	사업, 비즈니스, 일	비즈니스	noun
+cost	비용	코스트	noun
+earth	지구, 땅, 흙	어스	noun
+road	길, 도로	로드	noun
+hate	증오, 혐오	헤이트	noun
+reservation	예약	레저베이션	noun
+kill	킬	킬	noun
+station	역, 정거장	스테이션	noun
+war	전쟁	워	noun
+team	팀	팀	noun
+move	움직임	무브	noun
+student	학생	스튜던트	noun
+text	문자, 글, 텍스트	텍스트	noun
+promise	약속	프로미스	noun
+trust	신뢰, 믿음	트러스트	noun
+safe	금고	세이프	noun
+computer	컴퓨터	컴퓨터	noun
+cut	상처, 삭감, 컷	컷	noun
+daughter	딸	도터	noun
+picture	사진, 그림	픽처	noun
+favorite	즐겨찾기, 최애	페이버릿	noun
+course	과정, 강좌, 코스	코스	noun
+area	지역, 분야, 면적	에어리어	noun
+hospital	병원	호스피털	noun
+swim	수영	스윔	noun
+dress	드레스, 원피스	드레스	noun
+dark	어둠	다크	noun
+rest	휴식, 나머지	레스트	noun
+cream	크림	크림	noun
+size	크기, 사이즈	사이즈	noun
+clothes	옷	클로즈	noun
+accident	사고	엑시던트	noun
+trip	여행	트립	noun
+age	나이, 시대	에이지	noun
+weather	날씨	웨더	noun
+baby	아기	베이비	noun
+wine	와인, 포도주	와인	noun
+sun	해, 태양	선	noun
+extra	엑스트라, 여분	엑스트라	noun
+hit	히트, 타격	히트	noun
+human	인간, 사람	휴먼	noun
+air	공기	에어	noun
+fish	물고기, 생선	피시	noun
+message	메시지	메시지	noun
+garden	정원	가든	noun
+mistake	실수	미스테이크	noun
+worry	걱정	워리	noun
+body	몸, 신체	바디	noun
+health	건강	헬스	noun
+information	정보	인포메이션	noun
+situation	상황	시추에이션	noun
+point	점, 요점, 포인트	포인트	noun
+future	미래	퓨처	noun
+birthday	생일	버스데이	noun
+doubt	의심	다우트	noun
+guess	추측	게스	noun
+clear		클리어	adj,verb
+tea	차	티	noun
+mom	엄마	맘	noun
+husband	남편	허즈번드	noun
+dollar	달러	달러	noun
+hotel	호텔	호텔	noun
+blue	파랑, 파란색	블루	noun
+sentence	문장, 형	센텐스	noun
+green	초록, 초록색, 녹색	그린	noun
+type	종류, 유형, 타입	타입	noun
+weekend	주말	위켄드	noun
+song	노래	송	noun
+deal	거래, 딜	딜	noun
+girlfriend	여자친구	걸프렌드	noun
+attention	주의, 관심	어텐션	noun
+stand	스탠드, 가판대	스탠드	noun
+floor	바닥, 층	플로어	noun
+location	위치, 장소	로케이션	noun
+cheese	치즈	치즈	noun
+snow	눈	스노우	noun
+box	상자, 박스	박스	noun
+homework	숙제	홈워크	noun
+fight	싸움	파이트	noun
+special		스페셜	adj
+test	시험, 테스트	테스트	noun
+apartment	아파트	아파트먼트	noun
+date	날짜, 데이트	데이트	noun
+couple	커플, 부부, 두어	커플	noun
+sense	감각, 느낌, 의미	센스	noun
+ice	얼음	아이스	noun
+voice	목소리	보이스	noun
+pass	패스, 통행증, 합격	패스	noun
+kitchen	부엌, 주방	키친	noun
+college	대학	칼리지	noun
+theater	극장	시어터	noun
+flower	꽃	플라워	noun
+sea	바다	시	noun
+present	선물, 현재	프레젠트	noun
+breakfast	아침, 아침식사	브렉퍼스트	noun
+top	위, 꼭대기	탑	noun
+lie	거짓말	라이	noun
+dad	아빠	데드	noun
+government	정부	거버먼트	noun
+clock	시계	클락	noun
+beach	해변, 바닷가	비치	noun
+suspect	용의자	서스펙트	noun
+boss	상사, 사장, 보스	보스	noun
+card	카드	카드	noun
+dream	꿈	드림	noun
+receipt	영수증	리시트	noun
+shop	가게	샵	noun
+state	상태, 주, 국가	스테이트	noun
+power	힘, 전력, 권력	파워	noun
+law	법, 법률	로	noun
+auto	자동, 자동차	오토	noun
+choice	선택	초이스	noun
+unit	단위, 단원	유닛	noun
+pain	고통, 통증	페인	noun
+writer	작가	라이터	noun
+middle	중간, 가운데	미들	noun
+meat	고기	미트	noun
+truck	트럭	트럭	noun
+kiss	키스, 뽀뽀	키스	noun
+glass	유리, 유리잔, 잔	글라스	noun
+single		싱글	adj
+beer	맥주	비어	noun
+video	동영상, 비디오, 영상	비디오	noun
+decision	결정	디시전	noun
+oil	기름	오일	noun
+cake	케이크	케이크	noun
+president	대통령, 회장	프레지던트	noun
+key	열쇠, 키	키	noun
+experience	경험	익스피리언스	noun
+public	대중, 공공	퍼블릭	noun
+system	시스템, 체계	시스템	noun
+account	계좌, 계정	어카운트	noun
+animal	동물	애니멀	noun
+noise	소음	노이즈	noun
+winter	겨울	윈터	noun
+return	반품, 귀환, 수익	리턴	noun
+paper	종이	페이퍼	noun
+secret	비밀	시크릿	noun
+blood	피	블러드	noun
+kid	아이, 애	키드	noun
+address	주소	어드레스	noun
+bag	가방	백	noun
+bicycle	자전거	바이시클	noun
+shirt	셔츠	셔츠	noun
+university	대학교	유니버시티	noun
+airport	공항	에어포트	noun
+cook	요리사	쿡	noun
+solution	해결책, 해법	솔루션	noun
+worth	가치	워스	noun
+land	땅, 육지	랜드	noun
+cup	컵, 잔	컵	noun
+notice	공지, 통지	노티스	noun
+wall	벽	월	noun
+group	그룹, 집단	그룹	noun
+advice	조언, 충고	어드바이스	noun
+dance	춤	댄스	noun
+tennis	테니스	테니스	noun
+history	역사	히스토리	noun
+pepperoni	페퍼로니	페퍼로니	noun
+report	보고서, 보도, 리포트	리포트	noun
+hat	모자	햇	noun
+horse	말	호스	noun
+control	통제, 조절, 제어	컨트롤	noun
+opinion	의견	오피니언	noun
+smoke	연기	스모크	noun
+line	선, 줄	라인	noun
+follow		팔로우	verb
+stuff	것, 물건	스터프	noun
+native	원어민, 토박이, 원주민	네이티브	noun
+seat	자리, 좌석	시트	noun
+travel	여행	트래블	noun
+bank	은행	뱅크	noun
+figure	숫자, 인물, 몸매	피겨	noun
+prison	감옥, 교도소	프리즌	noun
+crust	껍질, 빵껍질	크러스트	noun
+total	합계, 총계	토탈	noun
+support	지원, 지지, 응원	서포트	noun
+fear	두려움, 공포	피어	noun
+sky	하늘	스카이	noun
+sugar	설탕	슈거	noun
+arrest	체포	어레스트	noun
+peace	평화	피스	noun
+foot	발	풋	noun
+difference	차이	디퍼런스	noun
+ground	땅, 지면	그라운드	noun
+bar	술집, 막대	바	noun
+library	도서관	라이브러리	noun
+cool		쿨	adj
+touch	터치, 손길	터치	noun
+weight	무게, 체중	웨이트	noun
+north	북쪽, 북	노스	noun
+service	서비스	서비스	noun
+gun	총	건	noun
+sign	표지판, 징후, 사인	사인	noun
+schedule	일정, 스케줄	스케줄	noun
+wind	바람	윈드	noun
+main		메인	adj
+pickup	픽업	픽업	noun
+boyfriend	남자친구	보이프렌드	noun
+leaf	잎, 나뭇잎	리프	noun
+exam	시험	이그젬	noun
+fact	사실	팩트	noun
+island	섬	아일랜드	noun
+chocolate	초콜릿	초콜릿	noun
+capital	수도, 자본, 대문자	캐피털	noun
+self	자기, 자아	셀프	noun
+speech	연설, 말	스피치	noun
+relationship	관계	릴레이션십	noun
+chicken	닭, 치킨	치킨	noun
+detail	세부, 자세한내용	디테일	noun
+desk	책상	데스크	noun
+mobile	모바일, 휴대폰	모바일	noun
+project	프로젝트, 계획	프로젝트	noun
+drop	방울, 하락	드롭	noun
+pool	수영장	풀	noun
+rule	규칙	룰	noun
+church	교회	처치	noun
+piece	조각	피스	noun
+plane	비행기	플레인	noun
+smile	미소	스마일	noun
+mountain	산	마운틴	noun
+film	영화, 필름	필름	noun
+gift	선물	기프트	noun
+goodbye	작별인사, 안녕	굿바이	noun
+laugh	웃음	레프	noun
+ship	배, 선박	십	noun
+respect	존중, 존경	리스펙트	noun
+umbrella	우산	엄브렐라	noun
+traffic	교통, 차량	트래픽	noun
+science	과학	사이언스	noun
+mouth	입	마우스	noun
+apple	사과	애플	noun
+charge	요금, 책임, 혐의	차지	noun
+view	경치, 견해, 보기	뷰	noun
+contact	연락	콘택트	noun
+south	남쪽, 남	사우스	noun
+economy	경제	이코노미	noun
+coat	코트, 외투	코트	noun
+act	행동, 막, 법	액트	noun
+natural		내추럴	adj
+bathroom	화장실, 욕실	베스룸	noun
+vacation	방학, 휴가	베이케이션	noun
+ring	반지	링	noun
+piano	피아노	피아노	noun
+bird	새	버드	noun
+lake	호수	레이크	noun
+ball	공	볼	noun
+nature	자연, 본성	네이처	noun
+wedding	결혼식	웨딩	noun
+bottle	병	보틀	noun
+moon	달	문	noun
+egg	계란, 달걀, 알	에그	noun
+medicine	약, 의학	메디신	noun
+concert	콘서트, 음악회	콘서트	noun
+simple		심플	adj
+guitar	기타	기타	noun
+chair	의자	체어	noun
+success	성공	석세스	noun
+local		로컬	adj
+offer	제안	오퍼	noun
+online		온라인	adj
+social		소셜	adj
+option	선택, 옵션	옵션	noun
+gas	가스, 기름	가스	noun
+mosque	모스크	모스크	noun
+smart		스마트	adj
+model	모델, 모형	모델	noun
+knife	칼	나이프	noun
+lock	자물쇠	락	noun
+blame	비난, 탓	블레임	noun
+energy	에너지	에너지	noun
+spring	봄, 용수철	스프링	noun
+sweet		스위트	adj
+cover	표지, 덮개, 커버	커버	noun
+feeling	느낌, 감정	필링	noun
+cause	원인	코즈	noun
+bike	자전거	바이크	noun
+smell	냄새	스멜	noun
+latte	라떼	라떼	noun
+share	몫, 지분, 주식	셰어	noun
+market	시장	마켓	noun
+machine	기계	머신	noun
+color	색, 색깔	컬러	noun
+lawyer	변호사	로이어	noun
+fat	지방	펫	noun
+form	양식, 형태	폼	noun
+cute		큐트	adj
+star	별, 스타	스타	noun
+fit		핏	verb,adj
+planet	행성	플래닛	noun
+step	걸음, 단계	스텝	noun
+handle	손잡이, 핸들	핸들	noun
+arm	팔	암	noun
+practice	연습	프랙티스	noun
+whip	채찍, 휘핑	휩	noun
+football	축구, 미식축구	풋볼	noun
+beat	박자, 비트	비트	noun
+fruit	과일	프루트	noun
+bear	곰	베어	noun
+field	들판, 분야	필드	noun
+sauce	소스	소스	noun
+camera	카메라	카메라	noun
+patient	환자	페이션트	noun
+tooth	이, 치아	투스	noun
+sausage	소시지	소시지	noun
+dictionary	사전	딕셔너리	noun
+tear	눈물	티어	noun
+waste	낭비, 쓰레기	웨이스트	noun
+chess	체스	체스	noun
+fly	파리	플라이	noun
+club	동아리, 클럽	클럽	noun
+round	라운드, 회	라운드	noun
+sight	시력, 광경	사이트	noun
+cent	센트	센트	noun
+uncle	삼촌, 아저씨	엉클	noun
+baseball	야구	베이스볼	noun
+email	이메일	이메일	noun
+escape	탈출	이스케이프	noun
+concern	걱정, 관심사	컨선	noun
+grandfather	할아버지	그랜드파더	noun
+west	서쪽, 서	웨스트	noun
+taste	맛, 취향	테이스트	noun
+internet	인터넷	인터넷	noun
+issue	문제, 쟁점, 발행	이슈	noun
+risk	위험	리스크	noun
+corn	옥수수	콘	noun
+boat	배, 보트	보트	noun
+credit	신용, 학점	크레딧	noun
+post	우편, 게시물, 기둥	포스트	noun
+dish	접시, 요리	디시	noun
+fault	잘못, 결점	폴트	noun
+excuse	변명, 핑계	익스큐즈	noun
+danger	위험	데인저	noun
+beauty	아름다움, 미인	뷰티	noun
+knowledge	지식	놀리지	noun
+stick	막대기, 스틱	스틱	noun
+fair	박람회	페어	noun
+cross	십자가, 크로스	크로스	noun
+subject	주제, 과목	서브젝트	noun
+crime	범죄	크라임	noun
+tent	텐트	텐트	noun
+religion	종교	릴리전	noun
+lead	납, 선두	리드	noun
+paint	페인트	페인트	noun
+mood	기분, 분위기	무드	noun
+conversation	대화	컨버세이션	noun
+leg	다리	레그	noun
+regret	후회	리그렛	noun
+letter	편지, 글자	레터	noun
+luck	운, 행운	럭	noun
+bridge	다리	브릿지	noun
+sport	스포츠, 운동	스포츠	noun
+joke	농담	조크	noun
+flat	아파트, 펑크	플랫	noun
+marriage	결혼	메리지	noun
+attack	공격	어택	noun
+distance	거리	디스턴스	noun
+flight	비행, 항공편	플라이트	noun
+meal	식사, 끼니	밀	noun
+mocha	모카	모카	noun
+opportunity	기회	오퍼튜니티	noun
+jail	감옥	제일	noun
+result	결과	리절트	noun
+force	힘, 군대, 무력	포스	noun
+murder	살인	머더	noun
+rock	바위, 돌	락	noun
+soccer	축구	사커	noun
+pleasure	기쁨, 즐거움	플레저	noun
+skin	피부	스킨	noun
+tie	넥타이, 무승부	타이	noun
+purpose	목적	퍼퍼스	noun
+topping	토핑	토핑	noun
+sort	종류	소트	noun
+century	세기	센추리	noun
+hell	지옥	헬	noun
+private		프라이빗	adj
+storm	폭풍	스톰	noun
+jump	점프, 도약	점프	noun
+grandmother	할머니	그랜드마더	noun
+lady	숙녀, 여성	레이디	noun
+bedroom	침실	베드룸	noun
+brother	형, 오빠, 남동생, 형제	브러더	noun
+ivy	담쟁이	아이비	noun
+almond	아몬드	아몬드	noun
+tough		터프	adj
+suit	정장, 수트, 소송	수트	noun
+request	요청	리퀘스트	noun
+newspaper	신문	뉴스페이퍼	noun
+path	길	페스	noun
+soup	스프, 국	스프	noun
+taxi	택시	택시	noun
+radio	라디오	라디오	noun
+match	경기, 성냥	매치	noun
+rice	쌀, 밥	라이스	noun
+cash	현금	캐시	noun
+race	경주, 인종	레이스	noun
+website	웹사이트	웹사이트	noun
+mall	쇼핑몰	몰	noun
+rent	집세, 임대료, 렌트	렌트	noun
+happiness	행복	해피니스	noun
+vehicle	차량, 탈것	비히클	noun
+bath	목욕, 욕조	베스	noun
+nose	코	노즈	noun
+heat	열, 더위	히트	noun
+novel	소설	노블	noun
+worker	노동자, 직원	워커	noun
+brown	갈색	브라운	noun
+permit	허가증	퍼밋	noun
+example	예, 예시	이그젬플	noun
+mess	엉망	메스	noun
+camp	캠프, 야영지	캠프	noun
+television	텔레비전	텔레비전	noun
+disease	병, 질병	디지즈	noun
+museum	박물관	뮤지엄	noun
+jacket	재킷, 자켓	자켓	noun
+caramel	카라멜	카라멜	noun
+dry		드라이	adj,verb
+silence	침묵	사일런스	noun
+spot	장소, 점	스팟	noun
+spread	확산, 스프레드	스프레드	noun
+engine	엔진	엔진	noun
+mushroom	버섯	머쉬룸	noun
+population	인구	파퓰레이션	noun
+garage	차고	개라지	noun
+holiday	휴일, 공휴일	홀리데이	noun
+device	기기, 장치	디바이스	noun
+society	사회	소사이어티	noun
+teacher	선생님, 교사	티처	noun
+sandwich	샌드위치	샌드위치	noun
+medium	매체, 중간, 미디엄	미디엄	noun
+freedom	자유	프리덤	noun
+neighborhood	동네, 이웃	네이버후드	noun
+pen	펜	펜	noun
+repair	수리	리페어	noun
+modern		모던	adj
+region	지역	리전	noun
+feed	먹이, 피드	피드	noun
+position	위치, 자리	포지션	noun
+soul	영혼	소울	noun
+behavior	행동	비헤이비어	noun
+research	연구	리서치	noun
+salt	소금	솔트	noun
+bacon	베이컨	베이컨	noun
+reality	현실	리얼리티	noun
+fool	바보	풀	noun
+culture	문화	컬처	noun
+pair	쌍, 켤레	페어	noun
+east	동쪽, 동	이스트	noun
+evil	악	이블	noun
+permission	허락, 허가	퍼미션	noun
+plant	식물, 공장	플랜트	noun
+percent	퍼센트	퍼센트	noun
+security	보안, 안보	시큐리티	noun
+amount	양, 금액	어마운트	noun
+search	검색	서치	noun
+band	밴드, 띠	밴드	noun
+community	공동체, 커뮤니티	커뮤니티	noun
+education	교육	에듀케이션	noun
+enemy	적	에너미	noun
+raise	임금인상	레이즈	noun
+roof	지붕	루프	noun
+scientist	과학자	사이언티스트	noun
+file	파일	파일	noun
+pepper	후추, 고추	페퍼	noun
+vegetable	채소, 야채	베지터블	noun
+bet	내기	벳	noun
+fee	요금, 수수료	피	noun
+nation	국가, 나라	네이션	noun
+goal	목표, 골	골	noun
+yellow	노랑, 노란색	옐로우	noun
+basketball	농구	바스켓볼	noun
+standard	기준, 표준	스탠다드	noun
+cell	세포, 감방	셀	noun
+evidence	증거	에비던스	noun
+board	판, 게시판, 이사회	보드	noun
+progress	진행, 진보	프로그레스	noun
+towel	수건	타월	noun
+lack	부족	렉	noun
+duty	의무	듀티	noun
+note	메모, 노트, 음	노트	noun
+member	회원, 멤버	멤버	noun
+master	주인, 대가, 석사	마스터	noun
+universe	우주	유니버스	noun
+assistant	조수, 비서	어시스턴트	noun
+climate	기후	클라이밋	noun
+brain	뇌	브레인	noun
+effort	노력	에퍼트	noun
+guest	손님	게스트	noun
+pocket	주머니	포켓	noun
+double	두배, 더블	더블	noun
+confirmation	확인	컨퍼메이션	noun
+wild		와일드	adj
+strength	힘	스트렝스	noun
+booth	부스	부스	noun
+current	흐름, 전류, 해류	커런트	noun
+button	버튼, 단추	버튼	noun
+anger	분노, 화	엥거	noun
+memory	기억, 메모리	메모리	noun
+telephone	전화	텔레폰	noun
+kick	킥	킥	noun
+species	종	스피시스	noun
+crowd	군중, 사람들	크라우드	noun
+blind	블라인드	블라인드	noun
+march	행진	마치	noun
+wallet	지갑	월렛	noun
+thought	생각	소트	noun
+courage	용기	커리지	noun
+plenty	많음, 충분	플렌티	noun
+value	가치	밸류	noun
+onion	양파	어니언	noun
+upstairs	위층	업스테어스	noun
+season	계절, 시즌	시즌	noun
+general	장군	제너럴	noun
+juice	주스	주스	noun
+salad	샐러드	샐러드	noun
+treat	간식, 대접	트리트	noun
+basement	지하실	베이스먼트	noun
+favor	부탁, 호의	페이버	noun
+sheep	양	시프	noun
+square	정사각형, 광장	스퀘어	noun
+push		푸시	verb
+photo	사진	포토	noun
+pressure	압력, 스트레스	프레셔	noun
+hall	홀, 복도	홀	noun
+record	기록, 음반, 레코드	레코드	noun
+vote	투표, 표	보트	noun
+captain	선장, 주장	캡틴	noun
+mail	우편	메일	noun
+action	행동, 액션	액션	noun
+army	군대, 육군	아미	noun
+cinema	영화관	시네마	noun
+cookie	쿠키	쿠키	noun
+flow	흐름	플로우	noun
+rise	상승, 증가	라이즈	noun
+style	스타일, 방식	스타일	noun
+noon	정오, 낮	눈	noun
+orange	오렌지, 주황색	오렌지	noun
+media	미디어, 매체, 언론	미디어	noun
+suitcase	여행가방, 캐리어	수트케이스	noun
+breath	숨, 호흡	브레스	noun
+math	수학	메스	noun
+downtown	시내, 도심	다운타운	noun
+toilet	화장실, 변기	토일렛	noun
+alcohol	술, 알코올	알코올	noun
+neighbor	이웃	네이버	noun
+drug	약, 마약	드러그	noun
+lift	리프트	리프트	noun
+burn	화상	번	noun
+windshield	앞유리	윈드쉴드	noun
+shock	충격	쇼크	noun
+exercise	운동, 연습	엑서사이즈	noun
+joy	기쁨	조이	noun
+map	지도	맵	noun
+article	기사, 조항	아티클	noun
+honey	꿀, 자기	허니	noun
+hill	언덕	힐	noun
+ability	능력	어빌리티	noun
+delivery	배달, 배송	딜리버리	noun
+artist	예술가, 화가	아티스트	noun
+olive	올리브	올리브	noun
+direction	방향	디렉션	noun
+stomach	배, 위	스터머크	noun
+event	행사, 사건	이벤트	noun
+positive		포지티브	adj
+affair	일, 사건, 불륜	어페어	noun
+stairs	계단	스테어스	noun
+license	면허, 면허증, 라이센스	라이센스	noun
+menu	메뉴	메뉴	noun
+quality	품질, 질	퀄리티	noun
+birth	출생, 탄생	버스	noun
+cancer	암	켄서	noun
+speed	속도	스피드	noun
+translation	번역	트렌슬레이션	noun
+zoo	동물원	주	noun
+ear	귀	이어	noun
+adult	어른, 성인	어덜트	noun
+final	결승, 기말고사	파이널	noun
+character	성격, 등장인물, 캐릭터, 글자	캐릭터	noun
+wide		와이드	adj
+soldier	군인	솔저	noun
+tongue	혀	텅	noun
+couch	소파	카우치	noun
+shape	모양	쉐이프	noun
+rate	비율, 요금	레이트	noun
+diet	다이어트, 식단	다이어트	noun
+hole	구멍	홀	noun
+grass	풀, 잔디	그래스	noun
+military	군대, 군	밀리터리	noun
+process	과정, 절차, 프로세스	프로세스	noun
+app	앱	앱	noun
+site	사이트, 현장, 부지	사이트	noun
+data	데이터, 자료	데이터	noun
+program	프로그램	프로그램	noun
+gate	문, 게이트	게이트	noun
+global		글로벌	adj
+environment	환경	인바이런먼트	noun
+crisis	위기	크라이시스	noun
+confidence	자신감	컨피던스	noun
+neck	목	넥	noun
+damage	피해, 손상	데미지	noun
+mirror	거울	미러	noun
+supermarket	슈퍼마켓, 마트	슈퍼마켓	noun
+lovely		러블리	adj
+argument	논쟁, 말다툼	아규먼트	noun
+explanation	설명	익스플러네이션	noun
+inspection	검사, 점검	인스펙션	noun
+golf	골프	골프	noun
+condition	상태, 조건	컨디션	noun
+outdoor		아웃도어	adj
+politics	정치	폴리틱스	noun
+battle	전투	배틀	noun
+journey	여행, 여정	저니	noun
+guard	경비원, 가드	가드	noun
+childhood	어린시절	차일드후드	noun
+soft		소프트	adj
+queen	여왕	퀸	noun
+desire	욕망, 바람	디자이어	noun
+temperature	온도, 체온	템퍼러처	noun
+original	원본, 오리지널	오리지널	noun
+midnight	자정	미드나이트	noun
+pie	파이	파이	noun
+theory	이론	시어리	noun
+scene	장면	씬	noun
+closet	옷장	클로젯	noun
+lesson	수업, 교훈	레슨	noun
+pet	애완동물, 반려동물	펫	noun
+faith	믿음, 신앙	페이스	noun
+finger	손가락	핑거	noun
+average	평균	애버리지	noun
+classroom	교실	클래스룸	noun
+professional	전문가, 프로	프로페셔널	noun
+term	용어, 기간, 학기	텀	noun
+reserve	예비, 비축	리저브	noun
+cafe	카페	카페	noun
+soy	콩, 간장	소이	noun
+source	출처, 원천	소스	noun
+press	언론, 프레스	프레스	noun
+fan	팬, 선풍기	팬	noun
+safety	안전	세이프티	noun
+product	제품, 상품	프로덕트	noun
+union	노조, 연합	유니언	noun
+patience	인내, 참을성	페이션스	noun
+court	법원, 코트	코트	noun
+growth	성장	그로스	noun
+matter	문제, 물질	메터	noun
+idiot	바보	이디엇	noun
+pineapple	파인애플	파인애플	noun
+property	재산, 부동산, 속성	프로퍼티	noun
+focus	초점, 집중	포커스	noun
+potato	감자	포테이토	noun
+daily		데일리	adj,adv
+illness	병	일니스	noun
+female	여성, 암컷	피메일	noun
+speaker	스피커, 연설자	스피커	noun
+contract	계약, 계약서	컨트랙트	noun
+pants	바지	팬츠	noun
+period	기간, 시대, 생리	피리어드	noun
+advantage	장점, 이점	어드밴티지	noun
+scream	비명	스크림	noun
+coconut	코코넛	코코넛	noun
+emergency	비상, 응급	이머전시	noun
+professor	교수	프로페서	noun
+pencil	연필	펜슬	noun
+possibility	가능성	파서빌리티	noun
+task	일, 과제, 작업	태스크	noun
+aunt	이모, 고모, 숙모	엔트	noun
+habit	습관	헤빗	noun
+role	역할	롤	noun
+loss	손실, 상실	로스	noun
+access	접근, 접속	액세스	noun
+ski	스키	스키	noun
+mission	임무, 미션	미션	noun
+sharp		샤프	adj
+cousin	사촌	커즌	noun
+downstairs	아래층	다운스테어스	noun
+track	트랙, 자국	트랙	noun
+ham	햄	햄	noun
+romantic		로맨틱	adj
+opposite	반대	오퍼짓	noun
+pack	팩, 묶음, 무리	팩	noun
+development	개발, 발전	디벨롭먼트	noun
+surface	표면	서피스	noun
+cabin	오두막, 객실	캐빈	noun
+reply	답장, 답변	리플라이	noun
+purchase	구매	퍼체이스	noun
+mental		멘탈	adj
+tax	세금	택스	noun
+fence	울타리	펜스	noun
+hike	하이킹, 등산	하이크	noun
+release	출시, 석방, 릴리스	릴리스	noun
+sock	양말	삭스	noun
+technology	기술	테크놀로지	noun
+vanilla	바닐라	바닐라	noun
+divorce	이혼	디보스	noun
+passport	여권	패스포트	noun
+castle	성	캐슬	noun
+atmosphere	분위기, 대기	에트머스피어	noun
+bell	종, 벨	벨	noun
+rush	서두름, 러시	러시	noun
+department	부서, 학과	디파트먼트	noun
+degree	도, 학위, 정도	디그리	noun
+row	줄, 열	로	noun
+accent	억양, 사투리, 강세	악센트	noun
+creature	생물, 동물, 피조물	크리처	noun
+gay	게이, 동성애자	게이	noun
+candy	사탕, 캔디	캔디	noun
+fridge	냉장고	프리지	noun
+friendship	우정	프렌드십	noun
+status	상태, 지위, 신분	스테이터스	noun
+bottom	바닥, 밑, 아래	바텀	noun
+garlic	마늘	갈릭	noun
+hug	포옹, 허그	허그	noun
+picnic	소풍, 피크닉	피크닉	noun
+spirit	정신, 영혼, 기운	스피릿	noun
+flag	깃발, 국기	플래그	noun
+passenger	승객	페신저	noun
+industry	산업, 업계	인더스트리	noun
+challenge	도전, 과제, 챌린지	챌린지	noun
+cloud	구름, 클라우드	클라우드	noun
+complex	단지, 콤플렉스	콤플렉스	noun
+official	공무원, 관리	오피셜	noun
+stage	무대, 단계	스테이지	noun
+plate	접시, 판	플레이트	noun
+suicide	자살	수이사이드	noun
+prize	상, 상품, 상금	프라이즈	noun
+fake	가짜	페이크	noun
+male	남성, 수컷	메일	noun
+proposal	제안, 청혼, 제의	프로포절	noun
+failure	실패	페일러	noun
+justice	정의, 공정	저스티스	noun
+knock	노크	노크	noun
+audience	관객, 청중, 시청자	오디언스	noun
+switch	스위치, 전환	스위치	noun
+skill	기술, 능력, 실력	스킬	noun
+coronavirus	코로나바이러스, 코로나	코로나바이러스	noun
+ruin	폐허, 파멸	루인	noun
+trash	쓰레기	트레시	noun
+coach	코치, 감독	코치	noun
+unique		유니크	adj
+conference	회의, 학회, 컨퍼런스	컨퍼런스	noun
+violence	폭력	바이올런스	noun
+comment	댓글, 논평, 코멘트	코멘트	noun
+edge	가장자리, 모서리, 끝	엣지	noun
+factory	공장	팩토리	noun
+glove	장갑, 글러브	글러브	noun
+gym	체육관, 헬스장	짐	noun
+harm	해, 피해	함	noun
+physical		피지컬	adj
+salary	월급, 급여, 연봉	샐러리	noun
+thief	도둑	시프	noun
+strike	파업, 스트라이크	스트라이크	noun
+fortune	운, 행운, 재산	포춘	noun
+prime		프라임	adj
+headache	두통	헤드에이크	noun
+heaven	천국, 하늘	헤븐	noun
+author	저자, 작가	오서	noun
+rare		레어	adj
+wisdom	지혜	위즈덤	noun
+youth	젊음, 청춘, 청소년	유스	noun
+customer	고객, 손님	커스터머	noun
+goat	염소	고트	noun
+minister	장관, 목사	미니스터	noun
+copy	사본, 복사, 카피	카피	noun
+code	코드, 암호, 규범	코드	noun
+cinnamon	계피, 시나몬	시나몬	noun
+yard	마당, 야드	야드	noun
+poem	시	포엠	noun
+sale	판매, 세일	세일	noun
+presence	존재, 참석, 존재감	프레즌스	noun
+sand	모래	샌드	noun
+toy	장난감	토이	noun
+election	선거	일렉션	noun
+lip	입술	립	noun
+sweat	땀	스웻	noun
+bunch	다발, 송이, 무리	번치	noun
+increase	증가	인크리스	noun
+turkey	칠면조	터키	noun
+garbage	쓰레기	가비지	noun
+humanity	인류, 인간성, 인간애	휴머니티	noun
+wealth	부, 재산	웰스	noun
+backyard	뒷마당	백야드	noun
+graduate	졸업생	그레주에이트	noun
+hut	오두막	헛	noun
+pot	냄비, 화분, 단지	포트	noun
+kilometer	킬로미터	킬로미터	noun
+tight		타이트	adj
+blow	타격, 강타	블로우	noun
+criminal	범죄자, 범인	크리미널	noun
+policy	정책, 방침	폴리시	noun
+giraffe	기린	지라프	noun
+bench	벤치	벤치	noun
+ghost	유령, 귀신	고스트	noun
+effect	효과, 영향, 결과	이펙트	noun
+magazine	잡지	매거진	noun
+pan	팬, 프라이팬	팬	noun
+entrance	입구, 입장	엔트런스	noun
+essential		에센셜	adj
+rose	장미	로즈	noun
+surgery	수술	서저리	noun
+approach	접근, 접근법	어프로치	noun
+responsibility	책임	리스펀서빌리티	noun
+alarm	알람, 경보, 경보기	알람	noun
+package	소포, 포장, 패키지	패키지	noun
+porch	현관	포치	noun
+estimate	추정, 견적	에스티메이트	noun
+mouse	쥐, 마우스	마우스	noun
+poverty	가난, 빈곤	파버티	noun
+tourist	관광객	투어리스트	noun
+wing	날개	윙	noun
+dessert	디저트, 후식	디저트	noun
+spare	예비품, 스페어	스페어	noun
+policeman	경찰관, 경찰	폴리스맨	noun
+motorcycle	오토바이	모터사이클	noun
+democracy	민주주의	데모크라시	noun
+competition	경쟁, 대회, 시합	컴피티션	noun
+shadow	그림자, 그늘	쉐도우	noun
+dentist	치과의사, 치과	덴티스트	noun
+earthquake	지진	어스퀘이크	noun
+insurance	보험	인슈어런스	noun
+nurse	간호사	너스	noun
+agreement	합의, 동의, 계약, 협정	어그리먼트	noun
+organization	조직, 단체, 기구	오거니제이션	noun
+shake	쉐이크	쉐이크	noun
+examination	시험, 검사, 조사	이그제미네이션	noun
+talent	재능, 탤런트	탤런트	noun
+treatment	치료, 대우, 처리	트리트먼트	noun
+partner	파트너, 동반자, 짝	파트너	noun
+intelligence	지능, 정보, 지성	인텔리전스	noun
+jam	잼, 교통체증	잼	noun
+alien	외계인, 외국인	에일리언	noun
+elevator	엘리베이터	엘리베이터	noun
+income	소득, 수입	인컴	noun
+honor	명예, 영광	아너	noun
+debt	빚, 부채	데트	noun
+dust	먼지	더스트	noun
+fig	무화과	피그	noun
+tip	팁, 끝, 조언	팁	noun
+fashion	패션, 유행	패션	noun
+macchiato	마끼아또	마끼아또	noun
+monster	괴물, 몬스터	몬스터	noun
+advance	발전, 진보	어드밴스	noun
+belt	벨트, 허리띠	벨트	noun
+influence	영향, 영향력	인플루언스	noun
+autumn	가을	오텀	noun
+cheat	치트, 사기꾼	치트	noun
+sofa	소파	소파	noun
+split	분열	스플릿	noun
+magic	마법, 마술, 매직	매직	noun
+difficulty	어려움, 곤란, 난이도	디피컬티	noun
+expression	표현, 표정	익스프레션	noun
+fare	요금, 운임	페어	noun
+hunt	사냥	헌트	noun
+virus	바이러스	바이러스	noun
+attic	다락방	에틱	noun
+plain	평야, 평원	플레인	noun
+wave	파도, 물결, 웨이브	웨이브	noun
+performance	공연, 성능, 실적, 성과	퍼포먼스	noun
+covid	코로나	코비드	noun
+expert	전문가	엑스퍼트	noun
+independence	독립	인디펜던스	noun
+incident	사건, 사고	인시던트	noun
+weapon	무기	웨펀	noun
+appearance	외모, 출현, 등장	어피어런스	noun
+construction	건설, 공사, 구조	컨스트럭션	noun
+mechanic	정비사, 기계공	메카닉	noun
+series	시리즈, 연속	시리즈	noun
+destination	목적지	데스티네이션	noun
+furniture	가구	퍼니처	noun
+giant	거인	자이언트	noun
+player	선수, 플레이어	플레이어	noun
+rope	밧줄, 로프	로프	noun
+screen	화면, 스크린	스크린	noun
+spinach	시금치	스피니치	noun
+topic	주제, 화제	토픽	noun
+collection	수집, 모음, 컬렉션	컬렉션	noun
+rough		러프	adj
+electricity	전기	일렉트리시티	noun
+homeless	노숙자	홈리스	noun
+literature	문학	리터러처	noun
+principal	교장	프린시펄	noun
+method	방법	메소드	noun
+resource	자원, 자료, 리소스	리소스	noun
+pink	분홍, 분홍색, 핑크	핑크	noun
+shame	부끄러움, 수치, 아쉬움	셰임	noun
+beard	수염, 턱수염	비어드	noun
+refrigerator	냉장고	리프리저레이터	noun
+preference	선호, 취향	프레퍼런스	noun
+object	물체, 대상, 목적	오브젝트	noun
+nut	견과, 너트	너트	noun
+hero	영웅, 히어로	히어로	noun
+material	재료, 자료, 물질	머티리얼	noun
+existence	존재	이그지스턴스	noun
+wheel	바퀴, 핸들	휠	noun
+darkness	어둠	다크니스	noun
+rescue	구조	레스큐	noun
+silver	은, 은색	실버	noun
+airplane	비행기	에어플레인	noun
+center	중심, 센터, 중앙	센터	noun
+demand	요구, 수요	디멘드	noun
+fever	열, 발열	피버	noun
+sink	싱크대	싱크	noun
+negative		네거티브	adj
+personality	성격, 인격, 개성	퍼스넬리티	noun
+threat	위협, 협박	스레트	noun
+beef	소고기	비프	noun
+content	내용, 콘텐츠	콘텐츠	noun
+grandparent	조부모	그랜드페어런트	noun
+lion	사자	라이언	noun
+majority	대다수, 과반수	머조리티	noun
+trick	속임수, 묘기, 트릭	트릭	noun
+couscous	쿠스쿠스	쿠스쿠스	noun
+director	감독, 이사, 책임자	디렉터	noun
+document	문서, 서류	도큐먼트	noun
+nap	낮잠	넵	noun
+building	건물, 빌딩	빌딩	noun
+employee	직원, 종업원	임플로이	noun
+pity	동정, 연민, 유감	피티	noun
+researcher	연구원, 연구자	리서처	noun
+response	응답, 반응, 대답	리스폰스	noun
+tomato	토마토	토마토	noun
+instruction	지시, 설명, 교육	인스트럭션	noun
+liar	거짓말쟁이	라이어	noun
+channel	채널, 경로	채널	noun
+link	링크, 연결	링크	noun
+potential	잠재력, 가능성	포텐셜	noun
+stock	주식, 재고	스톡	noun
+trail	오솔길, 흔적	트레일	noun
+weed	잡초	위드	noun
+constant	상수	컨스턴트	noun
+victim	피해자, 희생자	빅팀	noun
+fate	운명	페이트	noun
+custom	관습, 풍습	커스텀	noun
+espresso	에스프레소	에스프레소	noun
+crack	금, 균열	크랙	noun
+flashlight	손전등	플래시라이트	noun
+attitude	태도	애티튜드	noun
+passion	열정	패션	noun
+princess	공주	프린세스	noun
+range	범위, 거리, 산맥	레인지	noun
+funeral	장례식	퓨너럴	noun
+item	항목, 물건, 아이템	아이템	noun
+laundry	빨래, 세탁, 세탁물	런드리	noun
+brush	솔, 붓	브러쉬	noun
+insect	곤충, 벌레	인섹트	noun
+banana	바나나	바나나	noun
+grammar	문법	그레머	noun
+laptop	노트북	랩탑	noun
+tail	꼬리	테일	noun
+throat	목, 목구멍	스로트	noun
+tune	곡조, 선율	튠	noun
+grade	학년, 성적, 등급	그레이드	noun
+bark	나무껍질	바크	noun
+guide	안내, 가이드, 안내서	가이드	noun
+oven	오븐	오븐	noun
+tool	도구, 연장, 툴	툴	noun
+meter	미터, 계량기	미터	noun
+sunglasses	선글라스	선글라스	noun
+coast	해안	코스트	noun
+devil	악마	데빌	noun
+metal	금속	메탈	noun
+musician	음악가, 뮤지션	뮤지션	noun
+prince	왕자	프린스	noun
+proof	증거, 증명	프루프	noun
+reputation	평판, 명성	레퓨테이션	noun
+secretary	비서, 장관	세크러터리	noun
+vegetarian	채식주의자	베지테리언	noun
+victory	승리	빅토리	noun
+cow	소, 암소	카우	noun
+gain	이익, 증가	게인	noun
+mass	대량, 덩어리, 질량, 미사	매스	noun
+attempt	시도	어템프트	noun
+exchange	교환, 환전	익스체인지	noun
+discussion	토론, 논의	디스커션	noun
+impression	인상, 감명	임프레션	noun
+mansion	대저택, 맨션	맨션	noun
+basic		베이직	adj
+image	이미지, 영상, 모습	이미지	noun
+interview	면접, 인터뷰	인터뷰	noun
+purse	지갑, 핸드백	퍼스	noun
+crush	짝사랑	크러쉬	noun
+fancy		팬시	adj
+identity	정체성, 신원, 신분	아이덴티티	noun
+cherry	체리, 벚나무	체리	noun
+horror	공포, 호러	호러	noun
+mathematics	수학	메스메틱스	noun
+production	생산, 제작	프로덕션	noun
+aid	원조, 지원	에이드	noun
+mask	마스크, 가면	마스크	noun
+mystery	미스터리, 수수께끼	미스터리	noun
+snake	뱀	스네이크	noun
+importance	중요성	임포턴스	noun
+payment	지불, 결제, 납부	페이먼트	noun
+puppy	강아지	퍼피	noun
+syrup	시럽	시럽	noun
+diary	일기, 다이어리	다이어리	noun
+shelf	선반, 책꽂이	쉘프	noun
+intention	의도	인텐션	noun
+movement	운동, 움직임	무브먼트	noun
+operation	수술, 작전, 운영	오퍼레이션	noun
+shift	교대, 이동	시프트	noun
+assistance	도움, 지원	어시스턴스	noun
+crash	충돌, 사고	크래쉬	noun
+pond	연못	폰드	noun
+direct		다이렉트	adj,verb
+firm	회사	펌	noun
+pupil	학생, 동공	퓨필	noun
+assist	어시스트	어시스트	noun
+soap	비누	소프	noun
+variety	다양성, 여러가지	버라이어티	noun
+battery	배터리, 건전지	배터리	noun
+bomb	폭탄	밤	noun
+classmate	반친구, 동창	클래스메이트	noun
+kindness	친절	카인드니스	noun
+cigarette	담배	시가렛	noun
+pride	자부심, 자존심	프라이드	noun
+stress	스트레스, 강조	스트레스	noun
+roll	롤, 두루마리	롤	noun
+balance	균형, 잔고, 밸런스	밸런스	noun
+branch	가지, 지점, 분야	브랜치	noun
+depression	우울증, 우울, 불황	디프레션	noun
+flavor	맛, 풍미	플레이버	noun
+imagination	상상력, 상상	이메지네이션	noun
+impact	영향, 충격, 임팩트	임팩트	noun
+labor	노동	레이버	noun
+limit	한계, 제한	리밋	noun
+mix	혼합, 믹스	믹스	noun
+notebook	공책, 노트	노트북	noun
+politician	정치인	폴리티션	noun
+festival	축제, 페스티벌	페스티벌	noun
+individual	개인	인디비주얼	noun
+pound	파운드	파운드	noun
+cast	출연진, 깁스	캐스트	noun
+fellow	동료, 녀석	펠로우	noun
+laughter	웃음	레프터	noun
+sake	위함, 이유	세이크	noun
+authority	권위, 권한, 당국	오소리티	noun
+grave	무덤	그레이브	noun
+poet	시인	포엣	noun
+citizen	시민	시티즌	noun
+mayor	시장	메이어	noun
+shepherd	양치기	셰퍼드	noun
+hobby	취미	하비	noun
+lean		린	verb,adj
+invitation	초대, 초대장	인비테이션	noun
+rabbit	토끼	래빗	noun
+grandma	할머니	그랜드마	noun
+nonsense	헛소리	난센스	noun
+availability	가용성, 이용가능성	어베일러빌리티	noun
+bowl	그릇, 사발, 볼	볼	noun
+sushi	초밥, 스시	스시	noun
+shoulder	어깨	숄더	noun
+luggage	짐, 수하물	러기지	noun
+medication	약, 약물, 투약	메디케이션	noun
+statement	성명, 진술, 명세서	스테이트먼트	noun
+trial	재판, 시험, 시도	트라이얼	noun
+consequence	결과, 영향	컨시퀀스	noun
+blanket	담요	블랭킷	noun
+communication	의사소통, 소통, 통신	커뮤니케이션	noun
+design	디자인, 설계	디자인	noun
+footstep	발소리, 발자국	풋스텝	noun
+initial	이니셜, 머리글자	이니셜	noun
+password	비밀번호, 암호, 패스워드	패스워드	noun
+software	소프트웨어	소프트웨어	noun
+error	오류, 실수, 에러	에러	noun
+staff	직원, 스태프	스태프	noun
+circumstance	상황, 사정, 환경	서컴스턴스	noun
+genius	천재	지니어스	noun
+balcony	발코니	발코니	noun
+suggestion	제안	서제스천	noun
+gray	회색	그레이	noun
+makeup	화장, 메이크업	메이크업	noun
+tense	시제, 긴장	텐스	noun
+web	웹, 거미줄	웹	noun
+wheat	밀	휘트	noun
+disaster	재난, 재해, 참사	디제스터	noun
+generation	세대	제너레이션	noun
+marvel	경이, 마블	마블	noun
+section	부분, 구역, 섹션	섹션	noun
+visitor	방문객, 손님	비지터	noun
+detective	형사, 탐정	디텍티브	noun
+info	정보	인포	noun
+knee	무릎	니	noun
+wrap	랩, 포장	랩	noun
+basket	바구니	바스켓	noun
+doll	인형	돌	noun
+shore	해안, 물가	쇼어	noun
+temple	절, 사원, 신전	템플	noun
+activity	활동	액티비티	noun
+committee	위원회	커미티	noun
+avenue	거리, 대로	애비뉴	noun
+supply	공급, 보급품	서플라이	noun
+trap	덫, 함정	트랩	noun
+poetry	시	포에트리	noun
+route	경로, 노선, 길	루트	noun
+shelter	피난처, 대피소, 보호소	쉘터	noun
+violin	바이올린	바이올린	noun
+cap	모자, 뚜껑	캡	noun
+farmer	농부	파머	noun
+valley	계곡, 골짜기	밸리	noun
+album	앨범	앨범	noun
+bean	콩	빈	noun
+defense	방어, 수비, 국방	디펜스	noun
+fiction	소설, 허구	픽션	noun
+pig	돼지	피그	noun
+shot	주사, 발사, 샷	샷	noun
+vocabulary	어휘, 단어	보케뷸러리	noun
+deer	사슴	디어	noun
+pandemic	팬데믹, 대유행	팬데믹	noun
+sunset	일몰, 노을, 해넘이	선셋	noun
+connection	연결, 관계, 인맥	커넥션	noun
+charm	매력, 부적	참	noun
+comfort	위로, 편안함	컴포트	noun
+conservative	보수	컨서버티브	noun
+specialty	전문, 특산물, 특기	스페셜티	noun
+brake	브레이크	브레이크	noun
+bush	덤불, 관목	부시	noun
+republic	공화국	리퍼블릭	noun
+bat	박쥐, 방망이, 배트	배트	noun
+decade	십년	디케이드	noun
+fog	안개	포그	noun
+pillow	베개	필로우	noun
+remote	리모컨	리모트	noun
+blonde	금발	블론드	noun
+conflict	갈등, 충돌, 분쟁	콘플릭트	noun
+gender	성별, 젠더	젠더	noun
+highway	고속도로	하이웨이	noun
+luxury	사치, 명품, 고급	럭셔리	noun
+relative	친척	렐러티브	noun
+gentleman	신사	젠틀맨	noun
+spicy		스파이시	adj
+humor	유머	유머	noun
+mile	마일	마일	noun
+slot	구멍, 자리, 슬롯	슬롯	noun
+version	버전, 판	버전	noun
+envelope	봉투	엔벌로프	noun
+emotion	감정	이모션	noun
+lightning	번개	라이트닝	noun
+measure	조치, 측정	메저	noun
+belly	배	벨리	noun
+discount	할인	디스카운트	noun
+jazz	재즈	재즈	noun
+experiment	실험	익스페리먼트	noun
+soil	흙, 토양	소일	noun
+revenge	복수	리벤지	noun
+senior	선배, 연장자, 시니어	시니어	noun
+extreme		익스트림	adj
+lad	청년, 젊은이	레드	noun
+stadium	경기장	스타디움	noun
+arrival	도착	어라이벌	noun
+ceremony	의식, 식	세리머니	noun
+elephant	코끼리	엘리펀트	noun
+lecture	강의, 강연	렉처	noun
+prop	소품, 받침대	프롭	noun
+backpack	배낭, 백팩	백팩	noun
+capture	캡처, 포착	캡처	noun
+classical		클래시컬	adj
+spaghetti	스파게티	스파게티	noun
+struggle	투쟁, 몸부림	스트러글	noun
+tour	여행, 관광, 투어	투어	noun
+wound	상처, 부상	운드	noun
+bone	뼈	본	noun
+herd	떼, 무리	허드	noun
+vase	꽃병	베이스	noun
+ambulance	구급차	앰뷸런스	noun
+ease	쉬움, 편안함	이즈	noun
+loan	대출, 융자	론	noun
+painting	그림, 회화	페인팅	noun
+panic	공황, 당황, 패닉	패닉	noun
+pork	돼지고기	포크	noun
+subway	지하철	서브웨이	noun
+chat	채팅, 수다	챗	noun
+driver	운전자, 기사, 드라이버	드라이버	noun
+cab	택시	캡	noun
+candle	초, 양초	캔들	noun
+fox	여우	폭스	noun
+height	키, 높이	하이트	noun
+poison	독, 독약	포이즌	noun
+trunk	트렁크, 줄기, 몸통	트렁크	noun
+investigation	조사, 수사	인베스티게이션	noun
+application	신청, 지원서, 응용, 앱	어플리케이션	noun
+lawn	잔디밭	론	noun
+quart	쿼트	쿼트	noun
+skirt	치마, 스커트	스커트	noun
+defeat	패배	디피트	noun
+polish	광택	폴리쉬	noun
+pollution	오염, 공해	폴루션	noun
+twin	쌍둥이	트윈	noun
+actress	여배우	엑트리스	noun
+disgust	혐오, 역겨움	디스거스트	noun
+equipment	장비, 설비	이큅먼트	noun
+gentle		젠틀	adj
+necklace	목걸이	네클리스	noun
+patio	테라스	파티오	noun
+tattoo	문신, 타투	타투	noun
+angel	천사	엔젤	noun
+lover	연인, 애인	러버	noun
+protection	보호	프로텍션	noun
+roommate	룸메이트	룸메이트	noun
+squirrel	다람쥐	스쿼럴	noun
+barn	헛간	반	noun
+palace	궁전, 궁	팰리스	noun
+relation	관계	릴레이션	noun
+target	목표, 표적, 타겟	타겟	noun
+uniform	유니폼, 제복, 교복	유니폼	noun
+chain	사슬, 체인	체인	noun
+debate	토론, 논쟁	디베이트	noun
+length	길이	렝스	noun
+pop	팝	팝	noun
+anxiety	불안, 걱정	엥자이어티	noun
+philosophy	철학	필로소피	noun
+rumor	소문	루머	noun
+stove	난로, 스토브	스토브	noun
+hallway	복도	홀웨이	noun
+popcorn	팝콘	팝콘	noun
+spell	주문, 철자	스펠	noun
+classic	고전, 클래식	클래식	noun
+critical		크리티컬	adj
+volunteer	자원봉사자, 봉사	볼런티어	noun
+explosion	폭발	익스플로전	noun
+pasta	파스타	파스타	noun
+slice	조각	슬라이스	noun
+junk	잡동사니, 쓰레기	정크	noun
+minimum	최소, 최저	미니멈	noun
+physics	물리학, 물리	피직스	noun
+scratch	스크래치, 긁힌자국	스크래치	noun
+statue	동상, 조각상	스테추	noun
+treasure	보물	트레저	noun
+crew	승무원, 선원	크루	noun
+empire	제국	엠파이어	noun
+chase	추격	체이스	noun
+privacy	사생활, 프라이버시	프라이버시	noun
+circle	원, 동그라미, 서클	서클	noun
+fuel	연료	퓨얼	noun
+shoe	신발, 구두	슈	noun
+skinny		스키니	adj
+symbol	상징, 기호	심볼	noun
+lamp	램프, 등	램프	noun
+reaction	반응	리액션	noun
+costume	의상, 코스튬	코스튬	noun
+ceiling	천장	실링	noun
+collapse	붕괴	컬렙스	noun
+digital		디지털	adj
+exit	출구	엑시트	noun
+kingdom	왕국	킹덤	noun
+recipe	요리법, 레시피	레시피	noun
+toast	토스트, 건배	토스트	noun
+campus	캠퍼스, 교정	캠퍼스	noun
+dozen	다스, 십여개	더즌	noun
+feature	특징, 기능, 특색	피처	noun
+stranger	낯선사람	스트레인저	noun
+carbon	탄소	카본	noun
+purple	보라색, 보라	퍼플	noun
+visa	비자	비자	noun
+vision	시력, 비전, 전망	비전	noun
+discovery	발견	디스커버리	noun
+mud	진흙	머드	noun
+budget	예산	버짓	noun
+consciousness	의식	컨셔스니스	noun
+pitch	투구, 음높이, 피치	피치	noun
+tank	탱크, 수조	탱크	noun
+aim	목표	에임	noun
+liberty	자유	리버티	noun
+chief	우두머리, 장	치프	noun
+expectation	기대	익스펙테이션	noun
+lobby	로비	로비	noun
+agency	대리점, 기관, 에이전시	에이전시	noun
+ideal	이상	아이디얼	noun
+sector	부문, 분야	섹터	noun
+stream	개울, 시내, 스트리밍	스트림	noun
+sunlight	햇빛, 햇볕	선라이트	noun
+witness	목격자, 증인	위트니스	noun
+absence	부재, 결석	엡선스	noun
+puzzle	퍼즐, 수수께끼	퍼즐	noun
+racist	인종차별주의자	레이시스트	noun
+vegan	비건, 채식주의자	비건	noun
+cellphone	휴대폰, 핸드폰	셀폰	noun
+review	검토, 리뷰, 복습, 후기	리뷰	noun
+strawberry	딸기	스트로베리	noun
+tunnel	터널	터널	noun
+brand	상표, 브랜드	브랜드	noun
+carpet	카펫, 양탄자	카펫	noun
+essay	에세이, 수필, 과제	에세이	noun
+jewelry	보석, 장신구, 주얼리	주얼리	noun
+papa	아빠	파파	noun
+solid	고체	솔리드	noun
+structure	구조, 구조물	스트럭처	noun
+chef	요리사, 셰프	셰프	noun
+alphabet	알파벳	알파벳	noun
+bucket	양동이, 버킷	버킷	noun
+cure	치료	큐어	noun
+minor	미성년자	마이너	noun
+cheek	뺨, 볼	치크	noun
+cooperative	협동조합	코오퍼러티브	noun
+euro	유로	유로	noun
+robot	로봇	로봇	noun
+dirt	흙, 먼지	더트	noun
+dung	똥, 거름	덩	noun
+eve	전날, 이브	이브	noun
+biology	생물학	바이올로지	noun
+buffalo	물소, 들소	버팔로	noun
+coin	동전, 코인	코인	noun
+investment	투자	인베스트먼트	noun
+relief	안도, 안심, 구호	릴리프	noun
+background	배경	백그라운드	noun
+chemical	화학물질	케미컬	noun
+musical	뮤지컬	뮤지컬	noun
+nightmare	악몽	나이트메어	noun
+pill	알약, 약	필	noun
+shin	정강이	신	noun
+destiny	운명	데스티니	noun
+score	점수, 스코어	스코어	noun
+user	사용자, 이용자, 유저	유저	noun
+excitement	흥분, 신남	익사이트먼트	noun
+flu	독감	플루	noun
+manner	방식, 태도, 예의	매너	noun
+pipe	파이프, 관	파이프	noun
+scale	규모, 저울, 비늘	스케일	noun
+addict	중독자	에딕트	noun
+chemistry	화학, 케미	케미스트리	noun
+cage	우리, 새장	케이지	noun
+anniversary	기념일	애니버서리	noun
+nail	손톱, 못	네일	noun
+substitute	대체물, 대리	서브스티튜트	noun
+tap	탭, 수도꼭지	탭	noun
+territory	영토, 영역	테리토리	noun
+tone	어조, 톤, 음색	톤	noun
+grocery	식료품	그로서리	noun
+spite	악의, 앙심	스파이트	noun
+steakhouse	스테이크하우스	스테이크하우스	noun
+border	국경, 경계, 테두리	보더	noun
+cuisine	요리	퀴진	noun
+seafood	해산물	시푸드	noun
+skate	스케이트	스케이트	noun
+addition	추가, 덧셈	어디션	noun
+era	시대	에라	noun
+ewe	암양	유	noun
+ban	금지	밴	noun
+concept	개념, 컨셉	컨셉	noun
+leader	지도자, 리더	리더	noun
+nerve	신경	너브	noun
+revolution	혁명	레볼루션	noun
+criticism	비판, 비난	크리티시즘	noun
+envy	부러움, 질투	엔비	noun
+gluten	글루텐	글루텐	noun
+origin	기원, 출신	오리진	noun
+ankle	발목	앵클	noun
+coincidence	우연	코인시던스	noun
+conscience	양심	컨션스	noun
+jungle	정글, 밀림	정글	noun
+mercury	수은	머큐리	noun
+promotion	승진, 홍보, 판촉	프로모션	noun
+sail	돛, 항해	세일	noun
+benefit	이익, 혜택	베네핏	noun
+inch	인치	인치	noun
+monkey	원숭이	멍키	noun
+title	제목, 타이틀, 칭호	타이틀	noun
+trousers	바지	트라우저	noun
+corruption	부패, 부정부패	커럽션	noun
+peanut	땅콩	피넛	noun
+shade	그늘, 음영	셰이드	noun
+fairy	요정	페어리	noun
+helicopter	헬리콥터, 헬기	헬리콥터	noun
+pace	속도, 페이스	페이스	noun
+railway	철도	레일웨이	noun
+shed	헛간	셰드	noun
+adventure	모험	어드벤처	noun
+orbit	궤도	오빗	noun
+oxygen	산소	옥시전	noun
+toxic		톡식	adj
+agent	요원, 대리인, 에이전트	에이전트	noun
+forehead	이마	포헤드	noun
+occasion	경우, 행사	어케이전	noun
+alternative	대안	올터너티브	noun
+curtain	커튼	커튼	noun
+hyena	하이에나	하이에나	noun
+palm	손바닥, 야자나무	팜	noun
+sibling	형제자매	시블링	noun
+insult	모욕	인설트	noun
+breeze	산들바람, 미풍	브리즈	noun
+delight	기쁨, 즐거움	딜라이트	noun
+junior	후배, 주니어	주니어	noun
+parrot	앵무새	페럿	noun
+stable	마구간	스테이블	noun
+command	명령, 커맨드	커맨드	noun
+drama	드라마, 연극	드라마	noun
+horizon	수평선, 지평선	허라이즌	noun
+injury	부상	인저리	noun
+management	경영, 관리	매니지먼트	noun
+rage	분노, 격노	레이지	noun
+abuse	학대, 남용	어뷰스	noun
+leather	가죽	레더	noun
+maid	하녀, 가정부, 메이드	메이드	noun
+port	항구, 포트	포트	noun
+sheet	시트, 장, 종이	시트	noun
+basis	기초, 근거	베이시스	noun
+convict	죄수	컨빅트	noun
+countryside	시골	컨트리사이드	noun
+forest	숲, 삼림	포레스트	noun
+moral	교훈, 도덕	모럴	noun
+punishment	벌, 처벌	퍼니시먼트	noun
+rat	쥐	렛	noun
+stamp	우표, 도장	스탬프	noun
+translator	번역가, 통역사, 번역기	트렌슬레이터	noun
+butterfly	나비	버터플라이	noun
+flood	홍수	플러드	noun
+launch	출시, 발사	론치	noun
+liquid	액체	리퀴드	noun
+symptom	증상	심프텀	noun
+therapy	치료, 요법, 테라피	테라피	noun
+agriculture	농업	에그리컬처	noun
+calendar	달력, 캘린더	캘린더	noun
+crop	작물, 농작물	크롭	noun
+tradition	전통	트레디션	noun
+bay	만	베이	noun
+carpenter	목수	카펜터	noun
+client	고객, 의뢰인, 클라이언트	클라이언트	noun
+comic	만화, 코미디	코믹	noun
+load	짐, 부하	로드	noun
+ranch	목장	랜치	noun
+textbook	교과서	텍스트북	noun
+clinic	병원, 진료소, 클리닉	클리닉	noun
+delay	지연	딜레이	noun
+duck	오리	덕	noun
+estate	재산, 토지	이스테이트	noun
+ignorance	무지	이그너런스	noun
+snack	간식, 과자	스낵	noun
+volleyball	배구	발리볼	noun
+cafeteria	구내식당, 카페테리아	카페테리아	noun
+conduct	행동, 지휘	컨덕트	noun
+industrial		인더스트리얼	adj
+officer	경찰관, 장교, 임원	오피서	noun
+opera	오페라	오페라	noun
+tape	테이프	테이프	noun
+therapist	치료사, 상담사	테라피스트	noun
+burden	부담, 짐	버든	noun
+carrot	당근	케럿	noun
+foreigner	외국인	포리너	noun
+rifle	소총	라이플	noun
+strategy	전략	스트레티지	noun
+troop	군대, 부대	트루프	noun
+belief	믿음, 신념	빌리프	noun
+random		랜덤	adj
+register	기록부, 레지스터	레지스터	noun
+telescope	망원경	텔레스코프	noun
+witch	마녀	위치	noun
+harvest	수확	하비스트	noun
+keyboard	키보드, 자판	키보드	noun
+kitten	새끼고양이	키튼	noun
+lab	실험실, 연구실	랩	noun
+principle	원칙, 원리	프린시플	noun
+superior	상관	슈페리어	noun
+teenager	십대, 청소년	틴에이저	noun
+cattle	소, 소떼	케틀	noun
+foundation	재단, 기초, 파운데이션	파운데이션	noun
+fountain	분수	파운틴	noun
+platform	플랫폼, 승강장	플랫폼	noun
+pub	술집, 펍	펍	noun
+robbery	강도, 강도질	로버리	noun
+curiosity	호기심	큐리오시티	noun
+fork	포크, 갈림길	포크	noun
+pizzeria	피자가게	피제리아	noun
+apology	사과	어폴로지	noun
+marine	해병	머린	noun
+soda	탄산음료, 소다	소다	noun
+steel	강철	스틸	noun
+bee	벌	비	noun
+mount	산	마운트	noun
+colleague	동료	콜리그	noun
+conclusion	결론	컨클루전	noun
+function	기능, 함수	펑션	noun
+infrastructure	인프라, 기반시설	인프라스트럭처	noun
+instant	인스턴트, 순간	인스턴트	noun
+lemon	레몬	레몬	noun
+remark	말, 발언, 언급	리마크	noun
+resident	주민, 거주자, 레지던트	레지던트	noun
+upside	위쪽, 장점	업사이드	noun
+urban		어반	adj
+gang	갱, 패거리, 조직폭력배	갱	noun
+meeting	회의, 만남, 미팅	미팅	noun
+sin	죄	신	noun
+thrill	스릴, 전율	스릴	noun
+appetite	식욕	에피타이트	noun
+bug	벌레, 버그	버그	noun
+coward	겁쟁이	카워드	noun
+fireplace	벽난로	파이어플레이스	noun
+freak	괴짜	프릭	noun
+frog	개구리	프로그	noun
+scarf	스카프, 목도리	스카프	noun
+spoon	숟가락, 스푼	스푼	noun
+sunshine	햇빛, 햇살	선샤인	noun
+zone	지역, 구역, 존	존	noun
+dialect	방언, 사투리	다이얼렉트	noun
+handwriting	글씨, 필체	핸드라이팅	noun
+punch	주먹, 펀치	펀치	noun
+saint	성인, 성자	세인트	noun
+scissors	가위	시저스	noun
+flour	밀가루	플라워	noun
+jar	병, 단지	자	noun
+lottery	복권	로터리	noun
+mercy	자비	머시	noun
+profit	이익, 수익	프로핏	noun
+campaign	캠페인, 운동	캠페인	noun
+grape	포도	그레이프	noun
+royal		로얄	adj
+stew	스튜, 찌개	스튜	noun
+affection	애정	어펙션	noun
+civilization	문명	시빌리제이션	noun
+guarantee	보증, 보장	개런티	noun
+parliament	의회, 국회	팔러먼트	noun
+barbecue	바비큐	바비큐	noun
+description	설명, 묘사	디스크립션	noun
+hatred	증오	헤이트리드	noun
+phrase	구, 구절, 표현	프레이즈	noun
+transportation	교통, 운송	트랜스포테이션	noun
+award	상	어워드	noun
+click	클릭	클릭	noun
+compromise	타협	컴프로마이즈	noun
+convenience	편의, 편리	컨비니언스	noun
+studio	스튜디오, 작업실	스튜디오	noun
+acid	산	애시드	noun
+concrete	콘크리트	콘크리트	noun
+instrument	악기, 도구, 기구	인스트루먼트	noun
+opponent	상대, 적수	어포넌트	noun
+brief		브리프	adj
+complaint	불평, 불만, 민원	컴플레인트	noun
+driveway	진입로	드라이브웨이	noun
+flame	불꽃, 화염	플레임	noun
+grill	그릴	그릴	noun
+ingredient	재료, 성분	인그리디언트	noun
+custody	양육권, 구금	커스터디	noun
+district	지역, 구역, 지구	디스트릭트	noun
+romance	로맨스, 연애	로맨스	noun
+routine	일과, 루틴	루틴	noun
+charity	자선, 자선단체	체리티	noun
+drain	배수구	드레인	noun
+element	요소, 원소	엘리먼트	noun
+exception	예외	익셉션	noun
+frame	틀, 액자, 프레임	프레임	noun
+honesty	정직	어니스티	noun
+miracle	기적	미러클	noun
+profile	프로필, 옆모습	프로필	noun
+recovery	회복	리커버리	noun
+sour		사워	adj
+virtue	미덕, 덕	버추	noun
+whisper	속삭임	위스퍼	noun
+grandchild	손주, 손자	그랜드차일드	noun
+shark	상어	샤크	noun
+faucet	수도꼭지	포셋	noun
+leak	누출	리크	noun
+lifestyle	생활방식, 라이프스타일	라이프스타일	noun
+worship	숭배, 예배	워십	noun
+champagne	샴페인	샴페인	noun
+combination	조합, 결합	콤비네이션	noun
+commercial	광고	커머셜	noun
+salesman	판매원, 영업사원	세일즈맨	noun
+vaccine	백신	백신	noun
+alert	경보	얼러트	noun
+balloon	풍선	벌룬	noun
+bookstore	서점	북스토어	noun
+bullet	총알	불릿	noun
+bully	불량배	불리	noun
+haircut	이발, 머리깎기	헤어컷	noun
+inn	여관	인	noun
+praise	칭찬	프레이즈	noun
+rack	선반, 거치대	랙	noun
+wildlife	야생동물	와일드라이프	noun
+analysis	분석	에널리시스	noun
+continent	대륙	콘티넌트	noun
+council	의회, 위원회	카운슬	noun
+galaxy	은하, 은하계	갤럭시	noun
+hood	후드, 두건	후드	noun
+sacrifice	희생	세크리파이스	noun
+signal	신호, 시그널	시그널	noun
+congratulation	축하	콩그레츄레이션	noun
+decline	감소	디클라인	noun
+expense	비용, 지출	익스펜스	noun
+fantasy	판타지, 공상	판타지	noun
+lifetime	평생, 일생	라이프타임	noun
+pole	막대기, 극	폴	noun
+pope	교황	포프	noun
+wool	양모, 울	울	noun
+host	주인, 진행자, 호스트	호스트	noun
+jerk	얼간이	저크	noun
+nationality	국적	네셔널리티	noun
+pronunciation	발음	프로넌시에이션	noun
+tale	이야기, 동화	테일	noun
+underground	지하	언더그라운드	noun
+belonging	소유물, 소지품	빌롱잉	noun
+centipede	지네	센티피드	noun
+dump	쓰레기장	덤프	noun
+flesh	살, 육체	플레시	noun
+fort	요새	포트	noun
+print	프린트, 인쇄	프린트	noun
+pump	펌프	펌프	noun
+valentine	발렌타인	발렌타인	noun
+fame	명성	페임	noun
+presentation	발표, 프레젠테이션	프레젠테이션	noun
+resort	리조트, 휴양지	리조트	noun
+spacecraft	우주선	스페이스크래프트	noun
+wig	가발	위그	noun
+constitution	헌법	컨스티튜션	noun
+cough	기침	코프	noun
+gear	기어, 장비	기어	noun
+oak	참나무, 오크	오크	noun
+servant	하인	서번트	noun
+sorrow	슬픔	소로	noun
+congress	의회	콩그레스	noun
+donkey	당나귀	동키	noun
+embassy	대사관	엠버시	noun
+flirt	플러팅	플러트	noun
+landscape	풍경, 경치, 조경	랜드스케이프	noun
+perspective	관점, 시각, 원근법	퍼스펙티브	noun
+scandal	스캔들, 추문	스캔들	noun
+slave	노예	슬레이브	noun
+veggie	채소, 야채	베지	noun
+alcoholic	알코올중독자, 술꾼	알코올릭	noun
+cappuccino	카푸치노	카푸치노	noun
+engagement	약혼, 참여, 교전	인게이지먼트	noun
+grandpa	할아버지	그랜드파	noun
+infection	감염, 전염	인펙션	noun
+opposition	반대, 야당, 저항	오포지션	noun
+pile	더미	파일	noun
+bore	따분한사람	보어	noun
+collar	칼라, 옷깃, 목걸이	칼라	noun
+departure	출발, 떠남	디파처	noun
+household	가정, 가구, 가사	하우스홀드	noun
+innocence	무죄, 순수, 결백	이노센스	noun
+judgment	판단, 판결, 심판	저지먼트	noun
+bloom	꽃, 개화	블룸	noun
+currency	통화, 화폐	커런시	noun
+disorder	장애, 무질서, 혼란	디스오더	noun
+retirement	은퇴, 퇴직	리타이어먼트	noun
+reward	보상, 상	리워드	noun
+ton	톤	톤	noun
+volume	볼륨, 음량, 부피, 권	볼륨	noun
+campfire	캠프파이어, 모닥불	캠프파이어	noun
+candidate	후보, 후보자, 지원자	켄디데이트	noun
+journalist	기자, 언론인	저널리스트	noun
+network	네트워크, 망, 인맥	네트워크	noun
+pancake	팬케이크	팬케이크	noun
+recall	리콜	리콜	noun
+silk	비단, 실크	실크	noun
+demon	악마, 귀신	데몬	noun
+nest	둥지, 보금자리	네스트	noun
+saving	절약, 저축	세이빙	noun
+transfer	이체, 환승, 이전	트랜스퍼	noun
+transport	운송, 수송, 교통	트랜스포트	noun
+clue	단서, 실마리, 힌트	클루	noun
+jury	배심원, 배심원단, 심사위원	주리	noun
+nephew	조카	네퓨	noun
+organic		오가닉	adj
+queue	줄, 대기열, 큐	큐	noun
+reflection	반사, 반영, 성찰	리플렉션	noun
+urge	충동	어지	noun
+dough	반죽	도	noun
+formal		포멀	adj
+inflation	인플레이션, 물가상승	인플레이션	noun
+ink	잉크	잉크	noun
+install	설치	인스톨	noun
+motion	동작, 움직임, 운동, 동의	모션	noun
+prisoner	죄수, 포로	프리즈너	noun
+saxophone	색소폰	색소폰	noun
+straw	빨대, 짚, 밀짚	스트로	noun
+bathtub	욕조	베스텁	noun
+contrary	반대	컨트레리	noun
+priority	우선순위, 우선, 우선권	프라이오리티	noun
+tourism	관광, 관광업	투어리즘	noun
+worldwide		월드와이드	adj
+attorney	변호사, 대리인	어토니	noun
+mild		마일드	adj
+theft	절도, 도둑질	세프트	noun
+ancestor	조상, 선조	엔세스터	noun
+fur	털, 모피	퍼	noun
+grief	슬픔, 비탄	그리프	noun
+guilt	죄책감, 죄, 유죄	길트	noun
+refuge	피난처, 피난	레퓨지	noun
+terrorist	테러리스트	테러리스트	noun
+trumpet	트럼펫	트럼펫	noun
+verb	동사	버브	noun
+export	수출	엑스포트	noun
+extent	정도, 범위	익스텐트	noun
+forecast	예보, 예측	포캐스트	noun
+horn	뿔, 경적, 호른	혼	noun
+improvement	개선, 향상, 발전	임프루브먼트	noun
+resistance	저항, 저항력	레지스턴스	noun
+aircraft	항공기, 비행기	에어크래프트	noun
+manual	매뉴얼, 설명서	매뉴얼	noun
+rubbish	쓰레기, 헛소리	러비시	noun
+shave	면도	셰이브	noun
+sip	한모금	십	noun
+wire	전선, 철사, 와이어	와이어	noun
+bacteria	박테리아, 세균	박테리아	noun
+net	그물, 망, 네트	네트	noun
+pajama	파자마, 잠옷	파자마	noun
+prey	먹이, 사냥감, 희생자	프레이	noun
+swallow	제비	스왈로	noun
+approval	승인, 허가, 찬성	어프루벌	noun
+breast	가슴, 유방	브레스트	noun
+smash	스메시	스메시	noun
+stretch	스트레칭	스트레치	noun
+tag	태그, 꼬리표, 술래잡기	태그	noun
+vampire	뱀파이어, 흡혈귀	뱀파이어	noun
+appeal	매력, 항소, 어필	어필	noun
+diversity	다양성	다이버시티	noun
+terror	공포, 테러	테러	noun
+tragedy	비극, 참사	트레지디	noun
+typhoon	태풍	타이푼	noun
+administration	행정, 관리, 행정부	어드미니스트레이션	noun
+alibi	알리바이	알리바이	noun
+architect	건축가	아키텍트	noun
+bride	신부	브라이드	noun
+consideration	고려, 배려, 숙고	컨시더레이션	noun
+despair	절망	디스페어	noun
+destruction	파괴, 파멸	디스트럭션	noun
+display	디스플레이, 전시, 화면	디스플레이	noun
+grain	곡물, 곡식, 알갱이, 결	그레인	noun
+immigrant	이민자, 이주민	이미그런트	noun
+journal	일지, 저널, 학술지, 일기	저널	noun
+laboratory	실험실, 연구소	레버러토리	noun
+sociopath	소시오패스	소시오패스	noun
+unemployment	실업, 실업률	언임플로이먼트	noun
+astronomy	천문학	에스트로노미	noun
+capacity	용량, 능력, 수용력	커패시티	noun
+champion	챔피언, 우승자	챔피언	noun
+composition	구성, 작곡, 작문	컴포지션	noun
+gamble	도박	겜블	noun
+heel	뒤꿈치, 굽, 힐	힐	noun
+heritage	유산, 문화유산	헤리티지	noun
+sidewalk	인도, 보도	사이드워크	noun
+sunrise	일출, 해돋이	선라이즈	noun
+tropical		트로피컬	adj
+beast	짐승, 야수	비스트	noun
+camel	낙타	카멜	noun
+campsite	야영지, 캠핑장	캠프사이트	noun
+cooperation	협력, 협조	코오퍼레이션	noun
+joint	관절	조인트	noun
+microwave	전자레인지, 마이크로파	마이크로웨이브	noun
+noble	귀족	노블	noun
+opening	개막, 오프닝, 구멍, 개장	오프닝	noun
+petrol	휘발유	페트롤	noun
+rear	뒤, 후방	리어	noun
+wheelchair	휠체어	휠체어	noun
+bond	유대, 채권, 결합	본드	noun
+chapter	장, 챕터	챕터	noun
+commitment	약속, 헌신, 전념	커밋먼트	noun
+foam	거품, 폼	폼	noun
+hockey	하키	하키	noun
+photograph	사진	포토그래프	noun
+resin	수지, 레진	레진	noun
+americano	아메리카노	아메리카노	noun
+blog	블로그	블로그	noun
+coma	혼수상태, 코마	코마	noun
+determination	결심, 결단력, 결정	디터미네이션	noun
+enthusiasm	열정, 열의	인수지에즘	noun
+grandson	손자	그랜드선	noun
+hometown	고향	홈타운	noun
+lane	차선, 길, 레인	레인	noun
+objective	목표, 목적	오브젝티브	noun
+pardon	용서, 사면	파든	noun
+sadness	슬픔	세드니스	noun
+communist	공산주의자	코뮤니스트	noun
+dairy	유제품, 낙농	데어리	noun
+gazelle	가젤	가젤	noun
+gravity	중력, 심각성	그래비티	noun
+penalty	벌, 처벌, 벌금, 페널티	페널티	noun
+summit	정상, 정상회담	서밋	noun
+thunder	천둥	선더	noun
+turtle	거북이, 거북	터틀	noun
+cabinet	캐비닛, 수납장, 내각	캐비닛	noun
+context	맥락, 문맥, 상황	컨텍스트	noun
+jet	제트기, 제트	제트	noun
+surgeon	외과의사, 외과의	서전	noun
+whistle	휘파람, 호루라기, 휘슬	휘슬	noun
+athlete	운동선수, 선수	에슬리트	noun
+bakery	빵집, 제과점, 베이커리	베이커리	noun
+cemetery	묘지, 공동묘지	세머테리	noun
+cycle	주기, 순환, 사이클	사이클	noun
+eagle	독수리	이글	noun
+gaze	시선	게이즈	noun
+astronaut	우주비행사	에스트로넛	noun
+briefcase	서류가방	브리프케이스	noun
+footprint	발자국	풋프린트	noun
+paradise	천국, 낙원	파라다이스	noun
+steam	증기, 김, 스팀	스팀	noun
+beetle	딱정벌레	비틀	noun
+massage	마사지, 안마	마사지	noun
+neglect	방치	니글렉트	noun
+prom	졸업무도회, 프롬	프롬	noun
+quarrel	말다툼, 싸움	쿼럴	noun
+tendency	경향, 성향	텐던시	noun
+businessman	사업가, 비즈니스맨	비즈니스맨	noun
+chairman	회장, 의장	체어맨	noun
+cotton	면, 솜, 목화	코튼	noun
+disappointment	실망	디서포인트먼트	noun
+logic	논리	로직	noun
+mankind	인류	맨카인드	noun
+mosquito	모기	모스키토	noun
+whale	고래	웨일	noun
+ant	개미	앤트	noun
+colony	식민지, 군집, 집단	콜로니	noun
+cult	사이비종교, 컬트, 숭배	컬트	noun
+domino	도미노	도미노	noun
+gossip	소문, 험담, 가십	가십	noun
+inspiration	영감, 고무	인스피레이션	noun
+pumpkin	호박	펌킨	noun
+quote	인용, 견적	쿼트	noun
+watermelon	수박	워터멜론	noun
+aisle	통로	아일	noun
+broccoli	브로콜리	브로콜리	noun
+bump	혹, 범프	범프	noun
+chore	집안일, 잡일	초어	noun
+clarinet	클라리넷	클라리넷	noun
+deadline	마감, 마감일, 기한	데드라인	noun
+fist	주먹	피스트	noun
+invention	발명, 발명품	인벤션	noun
+kilogram	킬로그램	킬로그램	noun
+navy	해군, 남색, 네이비	네이비	noun
+needle	바늘, 주삿바늘	니들	noun
+pine	소나무	파인	noun
+rocket	로켓	로켓	noun
+strand	가닥	스트렌드	noun
+torture	고문	토처	noun
+treaty	조약	트리티	noun
+association	협회, 연관, 연합	어소시에이션	noun
+bull	황소	불	noun
+encounter	조우, 만남	인카운터	noun
+episode	에피소드, 회	에피소드	noun
+ethnic		에스닉	adj
+inhabitant	주민, 거주자	인헤비턴트	noun
+lid	뚜껑	리드	noun
+lung	폐, 허파	렁	noun
+muscle	근육	머슬	noun
+pianist	피아니스트	피아니스트	noun
+pin	핀	핀	noun
+pistol	권총	피스톨	noun
+plot	줄거리, 음모, 플롯	플롯	noun
+scent	향기, 냄새	센트	noun
+screw	나사	스크루	noun
+sleeve	소매	슬리브	noun
+associate	동료	어소시에이트	noun
+calorie	칼로리	칼로리	noun
+casual		캐주얼	adj
+hook	갈고리, 고리, 훅	훅	noun
+legend	전설, 범례	레전드	noun
+perfume	향수	퍼퓸	noun
+poop	똥, 응가	푸프	noun
+rainbow	무지개	레인보우	noun
+twist	반전, 트위스트	트위스트	noun
+yoga	요가	요가	noun
+dinosaur	공룡	다이노소어	noun
+lap	무릎, 바퀴, 랩	랩	noun
+scenery	경치, 풍경	시너리	noun
+temptation	유혹	템프테이션	noun
+waitress	웨이트리스, 여종업원	웨이트리스	noun
+warmth	따뜻함, 온기	웜스	noun
+bartender	바텐더	바텐더	noun
+celebration	축하, 기념, 축하행사	셀레브레이션	noun
+curse	저주, 욕	커스	noun
+illusion	환상, 착각, 환각	일루전	noun
+mug	머그잔, 머그	머그	noun
+sympathy	동정, 공감, 연민	심퍼시	noun
+technique	기술, 기법, 테크닉	테크닉	noun
+capitalism	자본주의	캐피탈리즘	noun
+conspiracy	음모	컨스피러시	noun
+depth	깊이	뎁스	noun
+drum	드럼, 북	드럼	noun
+embrace	포옹	임브레이스	noun
+glory	영광	글로리	noun
+intrigue	음모	인트리그	noun
+mammal	포유류, 포유동물	메멀	noun
+outfit	옷, 복장, 의상	아웃핏	noun
+specialist	전문가	스페셜리스트	noun
+wage	임금, 급여	웨이지	noun
+arctic	북극	아크틱	noun
+bass	베이스, 농어	베이스	noun
+companion	동반자, 동료, 친구	컴패니언	noun
+deck	갑판, 덱	덱	noun
+firework	불꽃놀이, 폭죽	파이어워크	noun
+mate	친구, 짝, 메이트	메이트	noun
+peak	정상, 절정, 최고조	피크	noun
+selection	선택, 선발, 셀렉션	셀렉션	noun
+confusion	혼란, 혼동	컨퓨전	noun
+daddy	아빠	대디	noun
+factor	요인, 요소, 인수	팩터	noun
+kindergarten	유치원	킨더가튼	noun
+lemonade	레모네이드	레모네이드	noun
+metro	지하철, 메트로	메트로	noun
+roast	로스트	로스트	noun
+session	세션, 회기, 기간	세션	noun
+slavery	노예제도, 노예	슬레이버리	noun
+toe	발가락	토	noun
+crown	왕관	크라운	noun
+flute	플루트, 피리	플루트	noun
+lamb	양고기, 새끼양	램	noun
+sexy		섹시	adj
+stroke	뇌졸중, 획, 스트로크	스트로크	noun
+bin	쓰레기통, 통	빈	noun
+dignity	존엄, 품위	디그니티	noun
+elegant		엘레강스	adj
+emperor	황제	엠퍼러	noun
+misery	고통, 비참	미저리	noun
+phenomenon	현상	페노메논	noun
+creation	창조, 창작, 창작물	크리에이션	noun
+engineer	엔지니어, 기술자	엔지니어	noun
+governor	주지사, 총독	거버너	noun
+jealousy	질투	젤러시	noun
+pee	오줌, 쉬	피	noun
+plaza	광장, 플라자	플라자	noun
+colorful		컬러풀	adj
+core	핵심, 중심, 코어	코어	noun
+creek	개울, 시내	크릭	noun
+guitarist	기타리스트	기타리스트	noun
+moonlight	달빛	문라이트	noun
+particle	입자, 조사, 미립자	파티클	noun
+racism	인종차별, 인종주의	레이시즘	noun
+regulation	규정, 규제, 조절	레귤레이션	noun
+survey	설문조사, 조사, 측량	서베이	noun
+architecture	건축, 건축학, 구조	아키텍처	noun
+bracelet	팔찌	브레이슬릿	noun
+cane	지팡이, 줄기	케인	noun
+dye	염료, 염색	다이	noun
+gasoline	휘발유, 가솔린	가솔린	noun
+intellectual	지식인	인텔렉츄얼	noun
+medal	메달	메달	noun
+owner	주인, 소유자, 오너	오너	noun
+semester	학기	세메스터	noun
+substance	물질, 실체, 본질	서브스턴스	noun
+announcement	발표, 공지, 안내	어나운스먼트	noun
+assignment	과제, 숙제, 임무	어사인먼트	noun
+championship	선수권대회, 챔피언십	챔피언십	noun
+communism	공산주의	코뮤니즘	noun
+debris	잔해, 파편	데브리	noun
+gum	껌, 잇몸	검	noun
+headphone	헤드폰	헤드폰	noun
+mozzarella	모차렐라	모차렐라	noun
+oat	귀리	오트	noun
+reception	접수처, 리셉션, 환영회, 수신	리셉션	noun
+terrorism	테러, 테러리즘	테러리즘	noun
+vacuum	진공, 청소기, 진공청소기	베큠	noun
+waist	허리	웨이스트	noun
+bias	편견, 편향, 바이어스	바이어스	noun
+cable	케이블, 전선	케이블	noun
+dude	녀석, 친구	듀드	noun
+farewell	작별, 이별, 송별	페어웰	noun
+greenhouse	온실	그린하우스	noun
+grip	그립, 손잡이	그립	noun
+hint	힌트, 암시	힌트	noun
+nickname	별명, 닉네임	닉네임	noun
+plumber	배관공	플러머	noun
+pregnancy	임신	프레그넌시	noun
+sack	자루	섹	noun
+shortage	부족, 결핍	쇼티지	noun
+surf	파도, 서핑	서프	noun
+theme	주제, 테마	테마	noun
+trace	흔적	트레이스	noun
+buddy	친구, 단짝, 버디	버디	noun
+chill	냉기, 오한	칠	noun
+comedy	코미디, 희극	코미디	noun
+fin	지느러미	핀	noun
+marathon	마라톤	마라톤	noun
+rug	러그, 깔개	러그	noun
+satellite	위성, 인공위성	세틀라이트	noun
+spa	스파, 온천	스파	noun
+stake	말뚝, 지분, 이해관계	스테이크	noun
+tide	조수, 밀물, 흐름	타이드	noun
+vital		바이탈	adj
+anchovy	멸치, 안초비	앤초비	noun
+banjo	밴조	밴조	noun
+bouquet	꽃다발, 부케	부케	noun
+feast	잔치, 축제, 연회	피스트	noun
+folk	사람들, 민속, 포크	포크	noun
+fund	기금, 자금, 펀드	펀드	noun
+headlight	전조등, 헤드라이트	헤드라이트	noun
+patch	패치, 부분, 조각	패치	noun
+powder	가루, 분말, 파우더	파우더	noun
+shell	껍데기, 조개껍데기, 포탄, 껍질	셸	noun
+surrounding	환경, 주변	서라운딩	noun
+swing	그네, 스윙	스윙	noun
+baggage	짐, 수하물	베기지	noun
+harmony	조화, 화음, 하모니	하모니	noun
+league	리그, 연맹	리그	noun
+outcome	결과	아웃컴	noun
+peel	껍질	필	noun
+portion	부분, 몫, 일인분	포션	noun
+racket	라켓, 소음	라켓	noun
+reform	개혁	리폼	noun
+restroom	화장실	레스트룸	noun
+smartphone	스마트폰	스마트폰	noun
+stupidity	어리석음	스튜피디티	noun
+surrender	항복	서렌더	noun
+crystal	수정, 결정, 크리스탈	크리스탈	noun
+exhibition	전시회, 전시, 박람회	엑시비션	noun
+scholar	학자	스칼러	noun
+shuttle	셔틀, 왕복	셔틀	noun
+thirst	갈증, 목마름	서스트	noun
+tobacco	담배	타바코	noun
+update	업데이트, 갱신	업데이트	noun
+astronomer	천문학자	에스트로노머	noun
+bargain	흥정, 특가품	바겐	noun
+behalf	대신, 대표	비헤프	noun
+boundary	경계, 한계	바운더리	noun
+breadstick	브레드스틱	브레드스틱	noun
+cellar	지하실, 지하저장고	셀러	noun
+entertainment	엔터테인먼트, 오락, 연예	엔터테인먼트	noun
+fraud	사기, 사기꾼	프로드	noun
+homeland	고국, 조국	홈랜드	noun
+jeep	지프	지프	noun
+stability	안정, 안정성	스테빌리티	noun
+tortoise	거북이, 거북	토터스	noun
+villager	주민	빌리저	noun
+biscuit	비스킷	비스킷	noun
+curry	카레	커리	noun
+dishwasher	식기세척기	디시워셔	noun
+exhibit	전시품	이그지빗	noun
+gunshot	총성, 총상	건샷	noun
+honeymoon	신혼여행, 허니문	허니문	noun
+mustache	콧수염	머스테시	noun
+occupation	직업, 점령	오큐페이션	noun
+offensive	공격	오펜시브	noun
+sigh	한숨	사이	noun
+storage	저장, 보관, 저장소, 스토리지	스토리지	noun
+strip	띠, 조각	스트립	noun
+tournament	토너먼트, 대회	토너먼트	noun
+admission	입장, 입학, 인정	어드미션	noun
+aspect	측면, 양상	에스펙트	noun
+attraction	명소, 매력, 끌림	어트랙션	noun
+clown	광대, 어릿광대	클라운	noun
+cola	콜라	콜라	noun
+creativity	창의력, 창의성	크리에이티비티	noun
+cruise	크루즈	크루즈	noun
+documentary	다큐멘터리	다큐멘터리	noun
+dramatic		드라마틱	adj
+evolution	진화, 발전	에볼루션	noun
+leadership	리더십, 지도력	리더십	noun
+pause	일시정지, 멈춤	포즈	noun
+pigeon	비둘기	피전	noun
+protein	단백질	프로틴	noun
+thanksgiving	추수감사절	땡스기빙	noun
+workplace	직장, 일터	워크플레이스	noun
+academy	학원, 아카데미, 학회	아카데미	noun
+bachelor	학사, 미혼남, 총각	배첼러	noun
+drizzle	이슬비, 보슬비	드리즐	noun
+drought	가뭄	드라우트	noun
+flash	플래시, 번쩍임	플래시	noun
+fossil	화석	포실	noun
+hurricane	허리케인	허리케인	noun
+maintenance	유지보수, 정비, 관리	메인터넌스	noun
+marinara	마리나라	마리나라	noun
+mill	방앗간, 제분소, 공장	밀	noun
+passage	통로, 구절, 통과	페시지	noun
+sickness	병, 질병, 멀미	식니스	noun
+stain	얼룩	스테인	noun
+tube	튜브, 관	튜브	noun
+anime	애니메이션, 애니	아니메	noun
+celebrity	유명인, 연예인, 셀럽	셀러브리티	noun
+compassion	연민, 동정심	컴패션	noun
+diabetes	당뇨병, 당뇨	다이어비티스	noun
+forgiveness	용서	포기브니스	noun
+graduation	졸업, 졸업식	그레듀에이션	noun
+motivation	동기, 동기부여	모티베이션	noun
+overtime	야근, 초과근무, 연장전	오버타임	noun
+pattern	패턴, 무늬, 양식	패턴	noun
+suspicion	의심, 혐의	서스피션	noun
+broom	빗자루	브룸	noun
+chopstick	젓가락	찹스틱	noun
+consent	동의	컨센트	noun
+definition	정의, 선명도	데피니션	noun
+download	다운로드	다운로드	noun
+electronic		일렉트로닉	adj
+fad	유행	페드	noun
+foul	파울, 반칙	파울	noun
+handy		핸디	adj
+microphone	마이크, 마이크로폰	마이크로폰	noun
+millionaire	백만장자	밀리어네어	noun
+minority	소수, 소수자, 소수민족	마이너리티	noun
+pit	구덩이, 씨	피트	noun
+tech	기술, 테크	테크	noun
+ballet	발레	발레	noun
+bold		볼드	adj
+handcuff	수갑	핸드커프	noun
+import	수입, 가져오기	임포트	noun
+leftover	남은음식, 나머지	레프트오버	noun
+loyalty	충성, 충성심, 의리	로열티	noun
+resolution	해결, 결의, 해상도, 다짐	레졸루션	noun
+signature	서명, 사인, 시그니처	시그니처	noun
+cottage	오두막, 시골집, 별장	코티지	noun
+earring	귀걸이	이어링	noun
+flock	떼, 무리	플록	noun
+goddess	여신	가디스	noun
+guidance	지도, 안내, 가이드	가이던스	noun
+investor	투자자	인베스터	noun
+jackal	자칼	자칼	noun
+liquor	술, 독주	리커	noun
+neutral	중립, 중성	뉴트럴	noun
+outbreak	발생, 발발	아웃브레이크	noun
+parcel	소포, 택배	파슬	noun
+prayer	기도	프레이어	noun
+psychology	심리학, 심리	사이콜로지	noun
+reference	참고, 참조, 언급, 추천서	레퍼런스	noun
+stink	악취	스팅크	noun
+verge	가장자리, 직전	버지	noun
+ambition	야망, 포부	엠비션	noun
+blush	블러셔	블러시	noun
+circus	서커스	서커스	noun
+dolphin	돌고래	돌핀	noun
+doorbell	초인종	도어벨	noun
+entry	입장, 출입, 항목, 참가	엔트리	noun
+negotiation	협상, 교섭	네고시에이션	noun
+regime	정권, 체제	레짐	noun
+sample	샘플, 표본, 견본	샘플	noun
+script	대본, 스크립트, 원고	스크립트	noun
+slide	미끄럼틀, 슬라이드	슬라이드	noun
+sting	침	스팅	noun
+warehouse	창고	웨어하우스	noun
+weakness	약점, 약함	위크니스	noun
+berry	베리, 산딸기	베리	noun
+blank	빈칸, 공백	블랭크	noun
+breed	품종	브리드	noun
+cathedral	대성당	커시드럴	noun
+cowboy	카우보이	카우보이	noun
+elbow	팔꿈치	엘보우	noun
+institute	연구소, 협회, 기관	인스티튜트	noun
+leopard	표범	레오파드	noun
+lyric	가사	리릭	noun
+mixture	혼합물, 혼합	믹스처	noun
+province	지방, 주, 도	프로빈스	noun
+pursuit	추구, 추격	퍼수트	noun
+radiation	방사선, 방사능, 복사	레이디에이션	noun
+reverse	반대	리버스	noun
+vodka	보드카	보드카	noun
+addiction	중독	어딕션	noun
+amusement	놀이, 즐거움, 오락	어뮤즈먼트	noun
+assembly	의회, 조립, 집회	어셈블리	noun
+fabric	천, 직물, 원단	패브릭	noun
+gratitude	감사, 고마움	그레티튜드	noun
+kilo	킬로	킬로	noun
+motor	모터, 엔진	모터	noun
+postcard	엽서	포스트카드	noun
+prophet	예언자, 선지자	프로핏	noun
+referee	심판	레퍼리	noun
+resignation	사임, 사직, 체념	레지그네이션	noun
+spit	침	스핏	noun
+terminal	터미널	터미널	noun
+thread	실, 스레드	스레드	noun
+unity	통합, 단결, 통일	유니티	noun
+wrist	손목	리스트	noun
+assault	폭행, 공격	어솔트	noun
+compliment	칭찬	컴플리먼트	noun
+feather	깃털	페더	noun
+feedback	피드백, 반응	피드백	noun
+gap	틈, 차이, 격차	갭	noun
+hen	암탉	헨	noun
+homemade		홈메이드	adj
+lobster	랍스터, 바닷가재	랍스터	noun
+prank	장난	프렝크	noun
+salmon	연어	세먼	noun
+tub	통, 욕조	텁	noun
+atheist	무신론자	에이시스트	noun
+chin	턱	친	noun
+corridor	복도	코리더	noun
+geography	지리, 지리학	지오그래피	noun
+globe	지구, 지구본	글로브	noun
+owl	부엉이, 올빼미	아울	noun
+tension	긴장, 갈등	텐션	noun
+tissue	휴지, 티슈, 조직	티슈	noun
+ultimate		얼티밋	adj
+dictator	독재자	딕테이터	noun
+ditch	도랑	디치	noun
+manufacture	제조	메뉴팩처	noun
+peach	복숭아	피치	noun
+playground	놀이터, 운동장	플레이그라운드	noun
+possession	소유, 소지품	포제션	noun
+profession	직업, 전문직	프로페션	noun
+singer	가수	싱어	noun
+statistic	통계	스테티스틱	noun
+alley	골목, 골목길	엘리	noun
+asylum	망명, 보호시설	어사일럼	noun
+executive	임원, 경영진	이그제큐티브	noun
+handkerchief	손수건	헹커치프	noun
+hedgehog	고슴도치	헤지호그	noun
+necessity	필요, 필수품	네세시티	noun
+paperwork	서류작업, 서류	페이퍼워크	noun
+pear	배	페어	noun
+rap	랩	랩	noun
+spin	회전, 스핀	스핀	noun
+virgin	처녀	버진	noun
+chimney	굴뚝	침니	noun
+consumption	소비, 섭취	컨섬프션	noun
+convention	대회, 관습, 협약	컨벤션	noun
+deed	행위, 증서	디드	noun
+discrimination	차별	디스크리미네이션	noun
+eyesight	시력	아이사이트	noun
+goodness	선량함, 선	굿니스	noun
+harbor	항구	하버	noun
+lettuce	상추, 양상추	레터스	noun
+maximum	최대, 최고	맥시멈	noun
+perfection	완벽, 완성	퍼펙션	noun
+shotgun	산탄총, 엽총	샷건	noun
+transition	전환, 변화, 이행	트랜지션	noun
+agenda	의제, 안건, 일정	어젠다	noun
+aspirin	아스피린	아스피린	noun
+blueberry	블루베리	블루베리	noun
+clerk	점원, 직원, 사무원	클러크	noun
+descent	하강, 혈통	디센트	noun
+liberal	자유주의자	리버럴	noun
+motel	모텔	모텔	noun
+niece	조카딸	니스	noun
+objection	이의, 반대	오브젝션	noun
+participant	참가자	파티시펀트	noun
+psychologist	심리학자	사이콜로지스트	noun
+taro	토란	타로	noun
+wand	지팡이, 마법봉	완드	noun
+automobile	자동차	오토모빌	noun
+bedtime	잘시간, 취침시간	베드타임	noun
+brick	벽돌	브릭	noun
+confession	고백, 자백	컨페션	noun
+dioxide	이산화물	다이옥사이드	noun
+dove	비둘기	도브	noun
+equality	평등	이퀄리티	noun
+feminine		페미닌	adj
+filter	필터	필터	noun
+label	라벨, 상표, 딱지	라벨	noun
+lipstick	립스틱	립스틱	noun
+meditation	명상	메디테이션	noun
+monitor	모니터	모니터	noun
+organ	장기, 기관, 오르간	오르간	noun
+premium	프리미엄, 보험료	프리미엄	noun
+salon	미용실, 살롱	살롱	noun
+slim		슬림	adj
+tray	쟁반	트레이	noun
+vet	수의사	벳	noun
+ally	동맹, 동맹국, 협력자	엘라이	noun
+ash	재	애시	noun
+combat	전투	컴뱃	noun
+county	군, 카운티	카운티	noun
+crocodile	악어	크로커다일	noun
+dorm	기숙사	돔	noun
+emission	배출, 방출	이미션	noun
+initiative	주도권, 계획, 이니셔티브	이니셔티브	noun
+obstacle	장애물	옵스터클	noun
+protest	시위, 항의	프로테스트	noun
+recognition	인정, 인식, 인지	레코그니션	noun
+snowman	눈사람	스노맨	noun
+transgender	트랜스젠더	트랜스젠더	noun
+virtual		버추얼	adj
+volcano	화산	볼케이노	noun
+cereal	시리얼, 곡물	시리얼	noun
+choir	합창단, 성가대	콰이어	noun
+conceit	자만, 자부심	컨시트	noun
+deposit	예금, 보증금	디포짓	noun
+edition	판, 에디션	에디션	noun
+firewood	장작	파이어우드	noun
+genocide	집단학살, 대량학살	제노사이드	noun
+hesitation	망설임, 주저	헤지테이션	noun
+knight	기사	나이트	noun
+mineral	광물, 미네랄	미네랄	noun
+orchestra	오케스트라, 관현악단	오케스트라	noun
+parallel	평행, 병렬	패럴렐	noun
+resume	이력서	레주메	noun
+rival	라이벌, 경쟁자	라이벌	noun
+underwear	속옷	언더웨어	noun
+zip	지퍼, 압축	집	noun
+backup	백업, 예비	백업	noun
+blend	블렌드	블렌드	noun
+bulb	전구, 구근	벌브	noun
+burglar	도둑, 강도	버글러	noun
+comet	혜성	코밋	noun
+dwarf	난쟁이, 드워프	드워프	noun
+gulf	만, 격차	걸프	noun
+haste	서두름, 급함	헤이스트	noun
+institution	기관, 제도, 협회	인스티튜션	noun
+madness	광기, 미친짓	메드니스	noun
+meadow	초원, 목초지	메도우	noun
+restriction	제한, 규제	리스트릭션	noun
+vinegar	식초	비네거	noun
+wardrobe	옷장	워드로브	noun
+antique	골동품, 앤티크	앤티크	noun
+crow	까마귀	크로	noun
+donut	도넛	도넛	noun
+hail	우박	헤일	noun
+handbag	핸드백	핸드백	noun
+interior	인테리어, 내부, 실내	인테리어	noun
+ketchup	케첩	케첩	noun
+parade	퍼레이드, 행진	퍼레이드	noun
+prejudice	편견	프레주디스	noun
+seal	물개, 도장	실	noun
+sprain	염좌	스프레인	noun
+survivor	생존자	서바이버	noun
+tribe	부족, 종족	트라이브	noun
+warrior	전사	워리어	noun
+yogurt	요구르트	요구르트	noun
+cart	카트, 수레	카트	noun
+conversion	전환, 변환	컨버전	noun
+cupboard	찬장	커버드	noun
+esteem	존경, 존중	이스팀	noun
+facility	시설	퍼실리티	noun
+gut	내장, 직감, 배	거트	noun
+invasion	침략, 침입	인베이전	noun
+passive		패시브	adj
+pony	조랑말, 포니	포니	noun
+torch	횃불, 손전등	토치	noun
+vow	맹세, 서약	바우	noun
+abstract	초록, 요약	엡스트렉트	noun
+blond	금발	블론드	noun
+boost	부스트	부스트	noun
+broadcast	방송	브로드캐스트	noun
+instinct	본능	인스팅트	noun
+knit	니트	니트	noun
+pearl	진주	펄	noun
+popularity	인기	포퓰레리티	noun
+prosperity	번영, 번창	프로스페리티	noun
+shortbread	쇼트브레드	쇼트브레드	noun
+spray	스프레이	스프레이	noun
+stepfather	새아버지, 계부	스텝파더	noun
+tequila	데킬라	데킬라	noun
+tin	주석, 깡통	틴	noun
+whiskey	위스키	위스키	noun
+blouse	블라우스	블라우스	noun
+dive	다이빙	다이브	noun
+exploration	탐험, 탐사	익스플로레이션	noun
+fluid	액체, 유체	플루이드	noun
+instructor	강사, 교관	인스트럭터	noun
+jalapeno	할라피뇨	할라피뇨	noun
+portrait	초상화, 인물사진	포트레이트	noun
+procedure	절차, 수술	프러시저	noun
+psychiatrist	정신과의사	사이키아트리스트	noun
+quarter	사분의일, 분기, 쿼터	쿼터	noun
+recession	불황, 경기침체	리세션	noun
+residence	거주지, 주택, 거주	레지던스	noun
+spouse	배우자	스파우스	noun
+strain	긴장, 부담, 변종	스트레인	noun
+sweetheart	애인, 자기	스위트하트	noun
+widow	과부, 미망인	위도	noun
+caffeine	카페인	카페인	noun
+comparison	비교	컴페리슨	noun
+console	콘솔	콘솔	noun
+discipline	규율, 훈육, 징계	디서플린	noun
+evening	저녁	이브닝	noun
+injustice	불의, 부당함	인저스티스	noun
+kite	연	카이트	noun
+mistress	정부, 여주인	미스트리스	noun
+probe	탐사선, 조사	프로브	noun
+quantity	양, 수량	퀀티티	noun
+sailor	선원, 뱃사람	세일러	noun
+scam	사기	스캠	noun
+scheme	계획, 음모	스킴	noun
+transmission	전송, 전염, 변속기	트랜스미션	noun
+tire	타이어	타이어	noun
+voter	유권자, 투표자	보터	noun
+wilderness	황야, 황무지	윌더니스	noun
+amateur	아마추어	아마추어	noun
+bluff	허세	블러프	noun
+ecosystem	생태계	에코시스템	noun
+excess	초과, 과잉	익세스	noun
+intersection	교차로, 교차점	인터섹션	noun
+kidney	신장, 콩팥	키드니	noun
+misfortune	불운, 불행	미스포천	noun
+orphanage	고아원	오퍼니지	noun
+pharmacy	약국	파머시	noun
+prescription	처방, 처방전	프리스크립션	noun
+propaganda	선전, 프로파간다	프로파간다	noun
+remorse	후회, 양심의가책	리모스	noun
+shower	샤워, 소나기	샤워	noun
+slipper	슬리퍼	슬리퍼	noun
+socialist	사회주의자	소셜리스트	noun
+toothbrush	칫솔	투스브러시	noun
+triple		트리플	adj
+vine	덩굴, 포도나무	바인	noun
+acquaintance	지인, 아는사람	어퀘인턴스	noun
+bubble	거품, 버블, 방울	버블	noun
+canal	운하	커넬	noun
+dialogue	대화, 대사	다이얼로그	noun
+eternity	영원	이터니티	noun
+genre	장르	장르	noun
+gesture	몸짓, 제스처	제스처	noun
+ideology	이념, 이데올로기	이데올로기	noun
+kettle	주전자	케틀	noun
+landlord	집주인	랜드로드	noun
+loneliness	외로움	론리니스	noun
+maiden	처녀	메이든	noun
+rental	임대, 대여, 렌탈	렌탈	noun
+shampoo	샴푸	샴푸	noun
+tavern	선술집	테번	noun
+cheer	환호, 응원	치어	noun
+critic	비평가, 평론가	크리틱	noun
+extinction	멸종	익스팅션	noun
+jelly	젤리	젤리	noun
+physician	의사, 내과의사	피지션	noun
+psychic	초능력자, 심령술사	사이킥	noun
+rhythm	리듬	리듬	noun
+serial	연재물	시리얼	noun
+suburb	교외	서버브	noun
+supervisor	감독자, 상사	슈퍼바이저	noun
+thumb	엄지, 엄지손가락	섬	noun
+vest	조끼	베스트	noun
+canoe	카누	카누	noun
+certificate	증명서, 자격증, 인증서	서티피케이트	noun
+coral	산호	코럴	noun
+darling	자기, 여보, 달링	달링	noun
+disposal	처리, 처분	디스포절	noun
+empathy	공감, 감정이입	엠퍼시	noun
+frost	서리	프로스트	noun
+frustration	좌절, 불만	프러스트레이션	noun
+glow	불빛, 빛	글로	noun
+hamster	햄스터	햄스터	noun
+hostage	인질	호스티지	noun
+immigration	이민, 출입국	이미그레이션	noun
+incline	경사	인클라인	noun
+inconvenience	불편	인컨비니언스	noun
+melody	멜로디, 선율	멜로디	noun
+merchant	상인	머천트	noun
+monthly		먼슬리	adj
+plug	플러그, 마개	플러그	noun
+pulse	맥박, 펄스	펄스	noun
+reporter	기자, 리포터	리포터	noun
+toll	통행료, 희생자수	톨	noun
+traitor	배신자, 반역자	트레이터	noun
+worm	벌레, 지렁이, 웜	웜	noun
+arrogance	오만, 거만	에러건스	noun
+bun	빵, 번, 쪽머리	번	noun
+carriage	마차, 객차, 유모차	케리지	noun
+caution	주의, 조심, 경고	코션	noun
+compass	나침반, 컴퍼스	컴퍼스	noun
+dedication	헌신, 전념	데디케이션	noun
+dictatorship	독재, 독재정권	딕테이터십	noun
+granddaughter	손녀	그랜드도터	noun
+hydrogen	수소	하이드로젠	noun
+mortal	인간	모털	noun
+noodle	국수, 면, 라면	누들	noun
+perception	인식, 지각	퍼셉션	noun
+phase	단계, 국면, 위상	페이즈	noun
+pirate	해적	파이럿	noun
+snap	스냅	스냅	noun
+spark	불꽃, 불똥, 스파크	스파크	noun
+admiration	감탄, 존경	에드미레이션	noun
+ambassador	대사, 홍보대사	앰배서더	noun
+barrel	통, 배럴	배럴	noun
+bolt	볼트, 빗장, 번개	볼트	noun
+cardboard	판지, 골판지	카드보드	noun
+corner	구석, 모퉁이, 코너	코너	noun
+crab	게	크랩	noun
+diagnosis	진단	다이어그노시스	noun
+knot	매듭	노트	noun
+rank	순위, 계급, 등급	랭크	noun
+representative	대표, 대표자	리프레젠터티브	noun
+seatbelt	안전벨트	시트벨트	noun
+spice	향신료, 양념	스파이스	noun
+tram	트램, 노면전차	트램	noun
+trombone	트롬본	트롬본	noun
+antibiotic	항생제	안티바이오틱	noun
+awareness	인식, 의식, 자각	어웨어니스	noun
+beginner	초보자, 초보, 초심자	비기너	noun
+binocular	쌍안경	바이노큘러	noun
+cockroach	바퀴벌레	코크로치	noun
+corpus	말뭉치, 코퍼스	코퍼스	noun
+creator	창작자, 창조자, 제작자, 크리에이터	크리에이터	noun
+dispute	분쟁, 논쟁, 다툼	디스퓨트	noun
+employment	고용, 취업, 일자리	임플로이먼트	noun
+hay	건초	헤이	noun
+hazelnut	헤이즐넛	헤이즐넛	noun
+intent	의도, 목적	인텐트	noun
+jersey	저지, 운동복	저지	noun
+madam	부인, 마담	마담	noun
+napkin	냅킨	냅킨	noun
+overhead	간접비, 오버헤드	오버헤드	noun
+pier	부두, 잔교	피어	noun
+scholarship	장학금	스칼러십	noun
+triangle	삼각형, 트라이앵글	트라이앵글	noun
+wink	윙크	윙크	noun
+angle	각도, 각, 관점	앵글	noun
+blossom	꽃	블로섬	noun
+casino	카지노	카지노	noun
+chamber	방, 실, 회의소	챔버	noun
+corpse	시체, 시신	콥스	noun
+firefighter	소방관	파이어파이터	noun
+janitor	경비원, 관리인, 청소부	제니터	noun
+learner	학습자, 배우는사람	러너	noun
+mailbox	우편함, 메일함	메일박스	noun
+organism	생물, 유기체	오거니즘	noun
+refrain	후렴	리프레인	noun
+replacement	교체, 대체, 후임	리플레이스먼트	noun
+salami	살라미	살라미	noun
+senate	상원	세닛	noun
+tailor	재단사	테일러	noun
+teen	십대	틴	noun
+tiger	호랑이	타이거	noun
+accusation	비난, 고발, 혐의	에큐제이션	noun
+arrangement	배치, 준비, 편곡, 합의	어레인지먼트	noun
+blackboard	칠판	블랙보드	noun
+calculator	계산기	켈큘레이터	noun
+cocktail	칵테일	칵테일	noun
+dam	댐	댐	noun
+drill	드릴, 훈련	드릴	noun
+feta	페타치즈	페타	noun
+finding	발견, 결과, 조사결과	파인딩	noun
+grove	숲, 작은숲	그로브	noun
+lounge	라운지, 휴게실	라운지	noun
+majesty	폐하, 위엄	마제스티	noun
+mode	모드, 방식, 형태	모드	noun
+pavement	인도, 포장도로	페이브먼트	noun
+rail	레일, 철도, 난간	레일	noun
+carelessness	부주의	케어리스니스	noun
+conservation	보존, 보호, 절약	컨서베이션	noun
+disguise	변장, 위장	디스가이즈	noun
+division	분할, 나눗셈, 부서, 부문	디비전	noun
+ferry	페리, 여객선, 나룻배	페리	noun
+jaw	턱	조	noun
+leash	목줄, 가죽끈	리시	noun
+loaf	덩어리, 빵한덩이	로프	noun
+meatball	미트볼	미트볼	noun
+railroad	철도	레일로드	noun
+remedy	치료법, 해결책, 처방	레미디	noun
+republican	공화당원, 공화주의자	리퍼블리칸	noun
+satisfaction	만족, 만족감	새티스팩션	noun
+shrimp	새우	슈림프	noun
+tolerance	관용, 내성, 허용오차	톨러런스	noun
+achievement	성취, 업적, 달성	어치브먼트	noun
+aging	노화, 고령화	에이징	noun
+asteroid	소행성	에스터로이드	noun
+buzz	소문, 버즈	버즈	noun
+contemporary		컨템퍼러리	adj
+contribution	기여, 공헌, 기부	컨트리뷰션	noun
+draft	초안, 원고, 징병, 드래프트	드래프트	noun
+hare	산토끼, 토끼	헤어	noun
+orphan	고아	오펀	noun
+predator	포식자, 약탈자	프레데터	noun
+preparation	준비, 대비	프레퍼레이션	noun
+requirement	요구사항, 필요조건, 자격	리콰이어먼트	noun
+rib	갈비, 갈비뼈	리브	noun
+thesis	논문, 학위논문, 논지	시시스	noun
+billionaire	억만장자	빌리어네어	noun
+centimeter	센티미터, 센티	센티미터	noun
+ego	자아, 에고	에고	noun
+essence	본질, 정수, 에센스	에센스	noun
+footage	영상, 장면	푸티지	noun
+handful	한줌, 소수	핸드풀	noun
+observation	관찰, 관측, 의견	옵저베이션	noun
+pose	포즈, 자세	포즈	noun
+protester	시위자, 시위대	프로테스터	noun
+string	끈, 줄, 문자열	스트링	noun
+sunscreen	선크림, 자외선차단제	선스크린	noun
+trend	추세, 경향, 유행, 트렌드	트렌드	noun
+welfare	복지	웰페어	noun
+wreck	난파선, 잔해	렉	noun
+yacht	요트	요트	noun
+armchair	안락의자	암체어	noun
+atom	원자	아톰	noun
+beggar	거지	베거	noun
+bishop	주교, 비숍	비숍	noun
+elder	어르신, 연장자, 장로	엘더	noun
+famine	기근	페민	noun
+fascist	파시스트	파시스트	noun
+flaw	결함, 흠, 결점	플로	noun
+jewel	보석	주얼	noun
+marble	대리석, 구슬	마블	noun
+oyster	굴	오이스터	noun
+refresh		리프레시	verb
+reptile	파충류	렙타일	noun
+skull	두개골, 해골	스컬	noun
+yield	수확량, 수익률	일드	noun
+beverage	음료, 음료수	베버리지	noun
+burger	버거, 햄버거	버거	noun
+cashier	계산원, 출납원	캐셔	noun
+comb	빗	콤	noun
+doom	파멸, 운명	둠	noun
+efficiency	효율, 능률	이피션시	noun
+elite	엘리트	엘리트	noun
+finance	금융, 재정, 재무	파이낸스	noun
+hemisphere	반구	헤미스피어	noun
+pad	패드, 받침	패드	noun
+pastry	페이스트리, 과자	페이스트리	noun
+proportion	비율, 부분, 균형	프로포션	noun
+tomb	무덤	툼	noun
+workshop	워크숍, 작업장	워크숍	noun
+aquarium	수족관, 아쿠아리움	아쿠아리움	noun
+blade	칼날, 날	블레이드	noun
+bra	브래지어, 브라	브라	noun
+calf	송아지, 종아리	카프	noun
+disappearance	실종, 사라짐, 소멸	디서피어런스	noun
+hospitality	환대, 접대	호스피텔리티	noun
+introduction	소개, 도입, 서론	인트로덕션	noun
+messenger	전달자, 메신저	메신저	noun
+nightclub	나이트클럽	나이트클럽	noun
+recommendation	추천, 권고, 추천서	레코멘데이션	noun
+screwdriver	드라이버, 나사돌리개	스크루드라이버	noun
+sheriff	보안관	셰리프	noun
+violet	보라색, 제비꽃, 바이올렛	바이올렛	noun
+voyage	항해, 여행	보이지	noun
+ward	병동, 구	워드	noun
+westerner	서양인	웨스터너	noun
+cabbage	양배추	케비지	noun
+citizenship	시민권, 국적	시티즌십	noun
+daylight	햇빛, 낮	데이라이트	noun
+domain	도메인, 영역, 분야	도메인	noun
+doorway	출입구, 문간	도어웨이	noun
+eclipse	일식, 월식	이클립스	noun
+habitat	서식지	해비타트	noun
+healthcare	의료, 보건	헬스케어	noun
+leisure	여가, 레저	레저	noun
+midst	한가운데, 와중	미드스트	noun
+notion	개념, 생각	노션	noun
+novelist	소설가	노벨리스트	noun
+parole	가석방	퍼롤	noun
+punctuation	구두점, 문장부호	펑추에이션	noun
+reign	통치, 재위	레인	noun
+rotation	회전, 순환, 교대	로테이션	noun
+sole	밑창, 발바닥	솔	noun
+throne	왕좌, 왕위	스론	noun
+vitamin	비타민	비타민	noun
+weekly		위클리	adj
+attendant	승무원, 안내원	어텐던트	noun
+bait	미끼	베이트	noun
+breakdown	고장, 붕괴, 분석	브레이크다운	noun
+dancer	무용수, 댄서	댄서	noun
+diarrhea	설사	다이어리아	noun
+fart	방귀	파트	noun
+fortnight	이주일	포트나이트	noun
+gallery	미술관, 갤러리	갤러리	noun
+legacy	유산, 레거시	레거시	noun
+malaria	말라리아	말라리아	noun
+membership	회원, 회원권, 멤버십	멤버십	noun
+monument	기념물, 기념비	모뉴먼트	noun
+motorbike	오토바이	모터바이크	noun
+muffin	머핀	머핀	noun
+nerd	너드, 공부벌레, 괴짜	너드	noun
+nursery	어린이집, 보육원, 묘목장	너서리	noun
+pawn	폰, 졸	폰	noun
+pronoun	대명사	프로나운	noun
+raft	뗏목, 래프트	래프트	noun
+registration	등록, 접수	레지스트레이션	noun
+rust	녹	러스트	noun
+slope	경사, 비탈, 슬로프	슬로프	noun
+stalk	줄기	스토크	noun
+surname	성	서네임	noun
+vessel	선박, 그릇, 혈관	베설	noun
+applause	박수, 박수갈채	어플로즈	noun
+bamboo	대나무	벰부	noun
+blast	폭발, 폭파	블라스트	noun
+comma	쉼표, 콤마	콤마	noun
+commission	수수료, 위원회, 커미션	커미션	noun
+conviction	확신, 신념, 유죄판결	컨빅션	noun
+embarrassment	당황, 창피, 난처함	임베러스먼트	noun
+fingerprint	지문	핑거프린트	noun
+fitness	건강, 피트니스	피트니스	noun
+hairstyle	머리모양, 헤어스타일	헤어스타일	noun
+plague	전염병, 역병	플레이그	noun
+ramen	라면	라멘	noun
+seaside	바닷가, 해변	시사이드	noun
+sperm	정자	스펌	noun
+trauma	트라우마, 정신적외상	트라우마	noun
+ache	통증	에이크	noun
+brace	버팀대, 치아교정기	브레이스	noun
+cheesecake	치즈케이크	치즈케이크	noun
+chili	고추, 칠리	칠리	noun
+cord	코드, 끈, 줄	코드	noun
+discharge	퇴원, 방출, 해고, 제대	디스차지	noun
+editor	편집자, 에디터	에디터	noun
+follower	추종자, 팔로워	팔로워	noun
+glue	풀, 접착제	글루	noun
+granddad	할아버지	그랜데드	noun
+investigator	수사관, 조사관	인베스티게이터	noun
+lizard	도마뱀	리저드	noun
+mattress	매트리스	매트리스	noun
+mist	안개, 미스트	미스트	noun
+obligation	의무, 책임	오블리게이션	noun
+perseverance	인내, 끈기	퍼서비어런스	noun
+rash	발진, 두드러기	레시	noun
+reader	독자, 리더	리더	noun
+refund	환불	리펀드	noun
+robber	강도	로버	noun
+separation	분리, 이별, 별거	세퍼레이션	noun
+songwriter	작곡가, 작사가, 송라이터	송라이터	noun
+urine	소변, 오줌	유린	noun
+allergy	알레르기	알레르기	noun
+anthem	국가, 찬가	엔섬	noun
+audio	오디오, 음성	오디오	noun
+basil	바질	바질	noun
+characteristic	특징, 특성	캐릭터리스틱	noun
+checker	검사기, 체커	체커	noun
+cigar	시가, 여송연	시가	noun
+compound	화합물	컴파운드	noun
+consumer	소비자	컨슈머	noun
+cricket	귀뚜라미, 크리켓	크리켓	noun
+dash	대시	대시	noun
+forum	포럼, 토론회	포럼	noun
+innovation	혁신	이노베이션	noun
+isolation	고립, 격리	아이솔레이션	noun
+magician	마술사, 마법사	메지션	noun
+mama	엄마	마마	noun
+masterpiece	걸작, 명작	마스터피스	noun
+meantime	그동안	민타임	noun
+mini		미니	adj
+motive	동기, 이유	모티브	noun
+pastor	목사	페스터	noun
+plural	복수, 복수형	플루럴	noun
+settler	정착민	세틀러	noun
+simplicity	단순함, 간단함, 소박함	심플리시티	noun
+solo	솔로	솔로	noun
+southeast	남동, 동남	사우스이스트	noun
+supporter	지지자, 후원자, 서포터	서포터	noun
+surveillance	감시	서베일런스	noun
+traveler	여행자, 여행객	트래블러	noun
+venture	모험, 벤처, 사업	벤처	noun
+verse	구절, 절, 운문	버스	noun
+abandonment	포기, 유기	어벤던먼트	noun
+asthma	천식	에즈머	noun
+bail	보석, 보석금	베일	noun
+bruise	멍, 타박상	브루즈	noun
+canteen	구내식당, 매점, 수통	켄틴	noun
+chalk	분필	초크	noun
+colonel	대령	커널	noun
+dip	딥	딥	noun
+goose	거위	구스	noun
+limitation	한계, 제한	리미테이션	noun
+noun	명사	나운	noun
+odor	냄새, 악취	오더	noun
+percentage	비율, 퍼센트	퍼센티지	noun
+settlement	합의, 정착, 정착지	세틀먼트	noun
+testimony	증언	테스티모니	noun
+veterinarian	수의사	베터리네리언	noun
+atlas	지도책	아틀라스	noun
+category	범주, 분류, 카테고리	카테고리	noun
+concentration	집중, 농도	콘센트레이션	noun
+detention	구금, 방과후남기	디텐션	noun
+format	형식, 포맷	포맷	noun
+fuss	야단법석, 소란	퍼스	noun
+inspector	검사관, 감독관, 형사	인스펙터	noun
+lockdown	봉쇄, 락다운	락다운	noun
+meteor	유성, 별똥별	미티어	noun
+packet	꾸러미, 봉지, 패킷	패킷	noun
+scorpion	전갈	스코피언	noun
+spaceship	우주선	스페이스십	noun
+sprint	전력질주, 단거리경주, 스프린트	스프린트	noun
+tackle	태클	태클	noun
+telegram	전보	텔레그램	noun
+triumph	승리, 대성공	트라이엄프	noun
+vivid		비비드	adj
+wax	왁스, 밀랍	왁스	noun
+abundance	풍부, 풍요	어번던스	noun
+binary	이진법, 바이너리	바이너리	noun
+civilian	민간인	시빌리언	noun
+counselor	상담사, 상담원, 카운슬러	카운슬러	noun
+decrease	감소	디크리스	noun
+disk	디스크, 원반	디스크	noun
+electrician	전기기사	일렉트리션	noun
+expedition	탐험, 원정	익스페디션	noun
+freshman	신입생	프레시먼	noun
+housework	집안일, 가사	하우스워크	noun
+midday	정오, 한낮	미드데이	noun
+offense	범죄, 위반, 공격	오펜스	noun
+pasture	목초지, 초원	페스처	noun
+penguin	펭귄	펭귄	noun
+rejection	거절, 거부	리젝션	noun
+reunion	재회, 동창회	리유니언	noun
+shrine	사당, 성지	슈라인	noun
+solitude	고독	솔리튜드	noun
+stomachache	복통, 배앓이	스터먹에이크	noun
+surge	급증, 급등	서지	noun
+upload	업로드	업로드	noun
+accountant	회계사	어카운턴트	noun
+ancestry	혈통, 가계	엔세스트리	noun
+audition	오디션	오디션	noun
+automatic		오토매틱	adj
+banquet	연회, 만찬	뱅큇	noun
+bribe	뇌물	브라이브	noun
+bronze	동, 청동, 브론즈	브론즈	noun
+colonization	식민지화	컬러니제이션	noun
+errand	심부름	에런드	noun
+gown	가운, 드레스	가운	noun
+greeting	인사	그리팅	noun
+hypothesis	가설	하이파서시스	noun
+peninsula	반도	페닌슐라	noun
+punk	펑크	펑크	noun
+usage	사용, 용법, 사용량	유시지	noun
+warrant	영장, 보증	워런트	noun
+abortion	낙태	어보션	noun
+altar	제단	올터	noun
+avocado	아보카도	아보카도	noun
+bid	입찰	비드	noun
+cement	시멘트	시멘트	noun
+clarity	명확성, 선명도	클레리티	noun
+compartment	칸, 객실, 구획	컴파트먼트	noun
+coupon	쿠폰	쿠폰	noun
+diabetic	당뇨병환자	다이어베틱	noun
+epidemic	유행병, 전염병	에피데믹	noun
+goggles	고글	고글	noun
+meaning	의미, 뜻	미닝	noun
+ministry	부, 부처, 성직	미니스트리	noun
+obsession	집착, 강박	옵세션	noun
+pint	파인트	파인트	noun
+prevention	예방, 방지	프리벤션	noun
+productivity	생산성	프로덕티비티	noun
+razor	면도기, 면도칼	레이저	noun
+spine	척추, 등뼈	스파인	noun
+splash	첨벙	스플래시	noun
+barley	보리	발리	noun
+cello	첼로	첼로	noun
+courtesy	예의, 공손	커티시	noun
+database	데이터베이스	데이터베이스	noun
+diplomat	외교관	디플로멧	noun
+formation	형성, 구성, 대형	포메이션	noun
+headquarters	본부, 본사	헤드쿼터스	noun
+integrity	진실성, 무결성, 청렴	인테그리티	noun
+karate	가라테	가라테	noun
+lens	렌즈	렌즈	noun
+marshmallow	마시멜로	마시멜로	noun
+minus	마이너스, 빼기	마이너스	noun
+optimism	낙관주의, 낙관론	옵티미즘	noun
+quest	탐구, 퀘스트, 모험	퀘스트	noun
+rating	평가, 등급, 시청률	레이팅	noun
+revolutionary	혁명가	레벌루셔너리	noun
+sneaker	운동화, 스니커즈	스니커	noun
+stall	가판대, 노점	스톨	noun
+stem	줄기, 줄기세포	스템	noun
+syndrome	증후군, 신드롬	신드롬	noun
+thermometer	온도계, 체온계	서모미터	noun
+tulip	튤립	튤립	noun
+visual	비주얼, 시각자료	비주얼	noun
+boredom	지루함, 권태	보어덤	noun
+cape	망토, 곶	케이프	noun
+coup	쿠데타	쿠	noun
+dew	이슬	듀	noun
+donation	기부, 기증	도네이션	noun
+drawing	그림, 소묘, 도면	드로잉	noun
+fatigue	피로, 피곤	퍼티그	noun
+hardware	하드웨어, 철물	하드웨어	noun
+hybrid	하이브리드, 잡종, 혼종	하이브리드	noun
+inheritance	유산, 상속	인헤리턴스	noun
+operator	운영자, 조작자, 교환원	오퍼레이터	noun
+panel	패널, 판	패널	noun
+paragraph	단락, 문단	페러그래프	noun
+pharmacist	약사	파머시스트	noun
+rebel	반역자, 반란군	레블	noun
+shoelace	신발끈	슈레이스	noun
+uncertainty	불확실성	언서튼티	noun
+zodiac	황도대, 별자리	조디악	noun
+airline	항공사	에어라인	noun
+bandage	붕대, 반창고	벤디지	noun
+beam	빛줄기, 광선, 빔	빔	noun
+bodyguard	경호원, 보디가드	보디가드	noun
+bunk	이층침대, 침상	벙크	noun
+chick	병아리	칙	noun
+cupcake	컵케이크	컵케이크	noun
+cynical		시니컬	adj
+debit	직불, 차변	데빗	noun
+dental		덴탈	adj
+dice	주사위	다이스	noun
+epic	서사시, 에픽	에픽	noun
+extension	연장, 확장, 내선	익스텐션	noun
+glimpse	흘끗봄, 일별	글림프스	noun
+hack	해킹, 핵	핵	noun
+hedge	울타리, 생울타리, 헤지	헤지	noun
+infant	유아, 영아	인펀트	noun
+lease	임대, 리스, 임차	리스	noun
+limo	리무진	리모	noun
+liter	리터	리터	noun
+lump	덩어리, 혹	럼프	noun
+machinery	기계, 기계류	머시너리	noun
+mentor	멘토, 스승	멘토	noun
+outskirts	교외, 변두리	아웃스커츠	noun
+quantum	양자, 퀀텀	퀀텀	noun
+revenue	수익, 매출, 세입	레비뉴	noun
+robe	가운, 예복	로브	noun
+shiver	오한, 떨림	시버	noun
+sneeze	재채기	스니즈	noun
+toothpaste	치약	투스페이스트	noun
+alpha	알파	알파	noun
+blessing	축복	블레싱	noun
+bookshop	서점, 책방	북샵	noun
+clog	클로그, 나막신	클로그	noun
+corporation	기업, 회사, 법인	코퍼레이션	noun
+crude	원유	크루드	noun
+crumb	부스러기	크럼	noun
+distress	고통, 괴로움, 조난	디스트레스	noun
+doghouse	개집	도그하우스	noun
+drift	드리프트, 표류	드리프트	noun
+drip	방울, 드립	드립	noun
+dusk	황혼, 해질녘	더스크	noun
+escort	호위, 에스코트	에스코트	noun
+exposure	노출, 폭로	익스포저	noun
+hamburger	햄버거	햄버거	noun
+hip	엉덩이, 힙	힙	noun
+instance	사례, 경우, 인스턴스	인스턴스	noun
+loop	고리, 루프	루프	noun
+mute		뮤트	verb
+refugee	난민	레퓨지	noun
+sanction	제재, 승인	셍크션	noun
+scenario	시나리오, 각본	시나리오	noun
+shortcut	지름길, 단축키, 바로가기	숏컷	noun
+tango	탱고	탱고	noun
+testament	유언, 증거, 성서	테스터먼트	noun
+appreciation	감사, 감상, 평가	어프리시에이션	noun
+auditorium	강당, 객석	오디토리엄	noun
+canyon	협곡	캐니언	noun
+chauffeur	운전기사	쇼퍼	noun
+fisherman	어부	피셔먼	noun
+fluency	유창함	플루언시	noun
+hygiene	위생	하이진	noun
+icon	아이콘, 우상	아이콘	noun
+injection	주사, 주입	인젝션	noun
+limb	팔다리, 사지, 큰가지	림	noun
+mango	망고	망고	noun
+marina	마리나, 정박지	마리나	noun
+mustard	겨자, 머스터드	머스터드	noun
+oath	맹세, 선서	오스	noun
+pantry	식료품저장실	팬트리	noun
+prodigy	신동, 천재	프로디지	noun
+proverb	속담, 격언	프로버브	noun
+raincoat	비옷, 우비	레인코트	noun
+setting	설정, 배경, 환경	세팅	noun
+wizard	마법사	위저드	noun
+yawn	하품	욘	noun
+alliance	동맹, 연합	얼라이언스	noun
+allowance	용돈, 수당, 허용량	얼라우언스	noun
+aroma	향기, 아로마	아로마	noun
+auction	경매, 옥션	옥션	noun
+boulevard	대로, 큰길	불러바드	noun
+cartoon	만화, 애니메이션	카툰	noun
+clap	박수	클렙	noun
+contrast	대조, 대비, 콘트라스트	콘트라스트	noun
+cruelty	잔인함, 학대	크루얼티	noun
+dimension	차원, 치수	디멘션	noun
+forge	대장간	포지	noun
+index	색인, 지수, 인덱스	인덱스	noun
+infidelity	불륜, 부정	인피델리티	noun
+interface	인터페이스	인터페이스	noun
+mathematician	수학자	메스메티션	noun
+physicist	물리학자	피지시스트	noun
+pollen	꽃가루	폴런	noun
+reef	암초	리프	noun
+ridge	산등성이, 능선	리지	noun
+ritual	의식, 의례	리추얼	noun
+saddle	안장	세들	noun
+sedan	세단	세단	noun
+staircase	계단	스테어케이스	noun
+taco	타코	타코	noun
+violinist	바이올리니스트	바이올리니스트	noun
+whereabouts	행방, 소재	웨어러바우츠	noun
+activist	활동가, 운동가	엑티비스트	noun
+altitude	고도, 높이	엘티튜드	noun
+astrology	점성술	에스트롤로지	noun
+attendance	출석, 참석	어텐던스	noun
+bankruptcy	파산	뱅크럽시	noun
+chai	차이	차이	noun
+eggplant	가지	에그플랜트	noun
+eyebrow	눈썹	아이브로우	noun
+facial	페이셜	페이셜	noun
+flea	벼룩	플리	noun
+fuse	퓨즈	퓨즈	noun
+horseback	말등, 승마	호스백	noun
+input	입력, 투입, 인풋	인풋	noun
+insight	통찰, 통찰력, 인사이트	인사이트	noun
+interpretation	해석, 통역	인터프리테이션	noun
+liberation	해방	리버레이션	noun
+maple	단풍나무, 메이플	메이플	noun
+moderation	절제, 중용	모더레이션	noun
+narrative	이야기, 서사, 내러티브	내러티브	noun
+oboe	오보에	오보에	noun
+panda	판다	판다	noun
+photography	사진, 사진술	포토그래피	noun
+scrap	조각, 스크랩	스크랩	noun
+stack	더미, 스택	스택	noun
+swamp	늪, 습지	스웜프	noun
+tablet	알약, 태블릿	태블릿	noun
+tofu	두부	토푸	noun
+trophy	트로피	트로피	noun
+vein	정맥, 혈관	베인	noun
+veteran	베테랑, 참전용사	베테랑	noun
+agony	고통, 괴로움	에거니	noun
+badminton	배드민턴	배드민턴	noun
+barrier	장벽, 장애물	배리어	noun
+brass	놋쇠, 황동, 금관악기	브라스	noun
+comedian	코미디언, 희극인	코미디언	noun
+container	용기, 그릇, 컨테이너	컨테이너	noun
+deficit	적자, 부족	데피싯	noun
+demonstration	시위, 시연, 증명	데먼스트레이션	noun
+dial	다이얼	다이얼	noun
+dose	복용량, 투여량	도스	noun
+fingernail	손톱	핑거네일	noun
+fright	공포, 놀람	프라이트	noun
+grudge	원한, 앙심	그루지	noun
+lava	용암	라바	noun
+monk	수도승, 스님	몽크	noun
+orchard	과수원	오처드	noun
+paycheck	급여, 월급	페이첵	noun
+pea	완두콩	피	noun
+quarantine	격리, 검역	쿼런틴	noun
+recycle		리사이클	verb
+roost	보금자리, 횃대	루스트	noun
+senator	상원의원	세너터	noun
+sexuality	성, 성적취향	섹슈얼리티	noun
+sponge	스펀지	스펀지	noun
+tornado	토네이도, 회오리바람	토네이도	noun
+transaction	거래, 처리	트랜잭션	noun
+verdict	평결, 판결	버딕트	noun
+void	공허, 보이드	보이드	noun
+warning	경고, 주의	워닝	noun
+winner	승자, 우승자, 당첨자	위너	noun
+buffet	뷔페	뷔페	noun
+conductor	지휘자, 차장, 도체	컨덕터	noun
+copyright	저작권	카피라이트	noun
+coworker	동료, 직장동료	코워커	noun
+cube	정육면체, 큐브, 각	큐브	noun
+echo	메아리, 울림, 에코	에코	noun
+establishment	설립, 시설, 기관	이스테블리시먼트	noun
+formula	공식, 분유, 포뮬러	포뮬러	noun
+fusion	융합, 퓨전	퓨전	noun
+gram	그램	그램	noun
+handicap	핸디캡, 장애	핸디캡	noun
+iconic		아이코닉	adj
+jellyfish	해파리	젤리피시	noun
+kidnapper	납치범, 유괴범	키드네퍼	noun
+lily	백합, 나리	릴리	noun
+livestock	가축	라이브스톡	noun
+manuscript	원고, 필사본	메뉴스크립트	noun
+meow	야옹	미아우	noun
+myth	신화, 근거없는믿음	미스	noun
+participation	참여, 참가	파티시페이션	noun
+renaissance	르네상스, 부흥	르네상스	noun
+resilience	회복력, 탄력성	리질리언스	noun
+stroll	산책	스트롤	noun
+suite	스위트룸, 모음곡	스위트	noun
+trek	트레킹, 여정	트렉	noun
+vanity	허영심, 화장대	베니티	noun
+viral		바이럴	adj
+vomit	구토	보밋	noun
+wit	재치, 기지	위트	noun
+autism	자폐증	오티즘	noun
+betrayal	배신	비트레이얼	noun
+decaf	디카페인	디카프	noun
+deceased	고인	디시스트	noun
+guardian	보호자, 후견인, 수호자	가디언	noun
+hairdresser	미용사	헤어드레서	noun
+halt	정지	홀트	noun
+harmonica	하모니카	하모니카	noun
+mafia	마피아	마피아	noun
+measles	홍역	미즐스	noun
+proposition	제안, 명제	프로포지션	noun
+prospect	전망, 가능성	프로스펙트	noun
+ranger	레인저, 산림감시원	레인저	noun
+raspberry	라즈베리, 산딸기	라즈베리	noun
+rooftop	옥상	루프탑	noun
+significance	중요성, 의미	시그니피컨스	noun
+tan	선탠, 황갈색	탠	noun
+tumor	종양	튜머	noun
+utensil	도구, 기구, 식기	유텐실	noun
+valet	대리주차, 발레파킹	발레	noun
+woe	비애, 고통	워	noun
+workout	운동, 연습	워크아웃	noun
+abyss	심연, 나락	어비스	noun
+acceptance	수용, 받아들임, 승인	억셉턴스	noun
+competitor	경쟁자, 경쟁사	컴페티터	noun
+curb	연석	커브	noun
+disgrace	불명예, 수치	디스그레이스	noun
+drawer	서랍	드로어	noun
+elf	요정, 엘프	엘프	noun
+enterprise	기업, 사업	엔터프라이즈	noun
+exclusive		익스클루시브	adj
+exile	망명, 추방	엑사일	noun
+expertise	전문지식, 전문성	엑스퍼티즈	noun
+extremist	극단주의자	익스트리미스트	noun
+itch	가려움	이치	noun
+lunchtime	점심시간	런치타임	noun
+magnet	자석	마그넷	noun
+mermaid	인어	머메이드	noun
+microscope	현미경	마이크로스코프	noun
+nymph	요정, 님프	님프	noun
+parlor	응접실, 가게	팔러	noun
+plum	자두	플럼	noun
+probability	확률, 가능성	프로바빌리티	noun
+rattle	딸랑이	레틀	noun
+riot	폭동	라이엇	noun
+roar	포효	로어	noun
+rum	럼주	럼	noun
+shack	판잣집, 오두막	쉑	noun
+swimmer	수영선수, 수영하는사람	스위머	noun
+adoption	입양, 채택	어돕션	noun
+algorithm	알고리즘	알고리즘	noun
+assumption	가정, 추정	어섬션	noun
+awe	경외감	오	noun
+capitalist	자본주의자, 자본가	캐피탈리스트	noun
+chapel	예배당, 채플	채플	noun
+contempt	경멸, 멸시	컨템프트	noun
+courtyard	안뜰, 마당	코트야드	noun
+curl	곱슬머리, 컬	컬	noun
+decay	부패, 쇠퇴	디케이	noun
+distinction	구별, 차이, 특징	디스팅크션	noun
+expansion	확장, 팽창	익스팬션	noun
+extract	추출물, 발췌	익스트랙트	noun
+fleet	함대, 선단	플리트	noun
+fortress	요새	포트리스	noun
+homosexual	동성애자	호모섹슈얼	noun
+junction	교차로, 분기점	정크션	noun
+laziness	게으름	레이지니스	noun
+memorial	기념비, 기념관, 추모	메모리얼	noun
+mint	민트, 박하	민트	noun
+ozone	오존	오존	noun
+pickle	피클, 절임	피클	noun
+priest	신부, 사제, 성직자	프리스트	noun
+privilege	특권, 특혜	프리빌리지	noun
+quiz	퀴즈	퀴즈	noun
+rag	걸레, 넝마	레그	noun
+retreat	후퇴, 휴양	리트리트	noun
+spectator	관중, 구경꾼	스펙테이터	noun
+terrace	테라스	테라스	noun
+tractor	트랙터	트랙터	noun
+trout	송어	트라우트	noun
+wasp	말벌	와스프	noun
+badge	배지, 휘장	뱃지	noun
+bonus	보너스, 상여금	보너스	noun
+brink	직전, 벼랑	브링크	noun
+collector	수집가, 징수원	컬렉터	noun
+crane	크레인, 학, 두루미	크레인	noun
+decoration	장식, 장식품	데코레이션	noun
+detergent	세제	디터전트	noun
+disbelief	불신	디스빌리프	noun
+distribution	분배, 배포, 유통, 분포	디스트리뷰션	noun
+generosity	관대함, 너그러움	제너로시티	noun
+greatness	위대함	그레이트니스	noun
+hardship	고난, 어려움	하드십	noun
+hypocrisy	위선	히포크리시	noun
+landmark	랜드마크, 획기적인사건	랜드마크	noun
+layer	층, 레이어	레이어	noun
+lord	군주, 영주, 주님	로드	noun
+penny	페니, 푼돈	페니	noun
+ray	광선, 빛	레이	noun
+kit	키트, 세트, 도구	키트	noun
+rod	막대, 낚싯대	로드	noun
+ram	숫양	램	noun
+duke	공작	듀크	noun
+gene	유전자	진	noun
+earl	백작	얼	noun
+carol	캐럴	캐럴	noun
+rogue	악당, 불량배	로그	noun
+spike	스파이크, 못, 급증	스파이크	noun
+sergeant	병장, 경사	서전트	noun
+missile	미사일	미사일	noun
+moron	바보, 멍청이	모론	noun
+parasite	기생충	패러사이트	noun
+processor	프로세서, 처리기	프로세서	noun
+receptionist	접수원, 안내원	리셉셔니스트	noun
+rehearsal	리허설, 예행연습	리허설	noun
+snail	달팽이	스네일	noun
+sparkle	반짝임	스파클	noun
+stereotype	고정관념, 스테레오타입	스테레오타입	noun
+swimsuit	수영복	스윔수트	noun
+tablecloth	식탁보	테이블클로스	noun
+transplant	이식	트랜스플랜트	noun
+bisexual	양성애자	바이섹슈얼	noun
+bravery	용기, 용감함	브레이버리	noun
+catastrophe	재앙, 대참사	카타스트로피	noun
+commotion	소동, 동요	커모션	noun
+criteria	기준, 척도	크라이티리어	noun
+cucumber	오이	큐컴버	noun
+curve	곡선, 커브	커브	noun
+equator	적도	이퀘이터	noun
+hangover	숙취	행오버	noun
+homicide	살인, 살인죄	호미사이드	noun
+interaction	상호작용, 교류	인터랙션	noun
+leap	도약	리프	noun
+maniac	미치광이, 광	매니악	noun
+octopus	문어	옥토퍼스	noun
+optimist	낙관주의자, 낙천주의자	옵티미스트	noun
+outlook	전망, 견해	아웃룩	noun
+puberty	사춘기	퓨버티	noun
+raccoon	너구리, 미국너구리	라쿤	noun
+radar	레이더	레이더	noun
+ribbon	리본	리본	noun
+riddle	수수께끼	리들	noun
+rudeness	무례함	루드니스	noun
+sandal	샌들	샌들	noun
+savage	야만인	세비지	noun
+scan	스캔	스캔	noun
+stool	의자, 걸상, 대변	스툴	noun
+teammate	팀원, 동료	팀메이트	noun
+terrain	지형, 지역	터레인	noun
+thigh	허벅지	사이	noun
+thrust	추진력, 추력	스러스트	noun
+transformation	변화, 변신, 변형	트랜스포메이션	noun
+transparency	투명성	트랜스페런시	noun
+vintage	빈티지	빈티지	noun
+waterfall	폭포	워터폴	noun
+writing	글쓰기, 글, 작문	라이팅	noun
+adjective	형용사	에직티브	noun
+advocate	옹호자	에드버킷	noun
+ape	유인원	에이프	noun
+biologist	생물학자	바이올로지스트	noun
+bookcase	책장	북케이스	noun
+cancellation	취소	캔슬레이션	noun
+chancellor	총리, 총장	첸슬러	noun
+clip	클립	클립	noun
+collision	충돌	컬리전	noun
+comprehension	이해, 이해력	컴프리헨션	noun
+crispy		크리스피	adj
+crowbar	쇠지렛대, 빠루	크로우바	noun
+downhill	내리막	다운힐	noun
+execution	실행, 처형	엑시큐션	noun
+franchise	프랜차이즈, 가맹점	프랜차이즈	noun
+graveyard	묘지	그레이브야드	noun
+groom	신랑	그룸	noun
+implement	도구	임플리먼트	noun
+karaoke	노래방, 가라오케	가라오케	noun
+moose	무스, 말코손바닥사슴	무스	noun
+notification	알림, 통지	노티피케이션	noun
+obesity	비만	오비시티	noun
+outrage	격분, 분노	아웃레이지	noun
+pension	연금	펜션	noun
+relaxation	휴식, 완화	릴렉세이션	noun
+sanctuary	보호구역, 성역, 피난처	셍크추어리	noun
+sensation	감각, 센세이션, 돌풍	센세이션	noun
+sophomore	이학년	소포모어	noun
+spectrum	스펙트럼, 범위	스펙트럼	noun
+sphere	구, 구체, 영역	스피어	noun
+superhero	슈퍼히어로	슈퍼히어로	noun
+tsunami	쓰나미, 해일	쓰나미	noun
+vegetation	식물, 초목	베지테이션	noun
+vengeance	복수	벤전스	noun
+villa	빌라, 별장	빌라	noun
+adversity	역경	에드버시티	noun
+anchor	닻, 앵커	앵커	noun
+axis	축	엑시스	noun
+booze	술	부즈	noun
+brat	버릇없는아이, 녀석	브렛	noun
+bundle	묶음, 다발, 번들	번들	noun
+canary	카나리아	카나리아	noun
+circulation	순환, 유통, 발행부수	서큘레이션	noun
+condo	콘도, 아파트	콘도	noun
+crook	사기꾼, 악당	크룩	noun
+diligence	근면, 성실	딜리전스	noun
+disability	장애	디서빌리티	noun
+dock	부두, 독	도크	noun
+glacier	빙하	글레이셔	noun
+heir	상속인, 후계자	에어	noun
+humidity	습도, 습기	휴미디티	noun
+legislation	법률, 입법	레지슬레이션	noun
+lifeguard	인명구조원	라이프가드	noun
+molecule	분자	몰레큘	noun
+mommy	엄마	마미	noun
+morality	도덕, 도덕성	모럴리티	noun
+narcissist	나르시시스트	나르시시스트	noun
+newborn	신생아	뉴본	noun
+patrol	순찰	패트롤	noun
+peppermint	페퍼민트, 박하	페퍼민트	noun
+protocol	프로토콜, 규약, 의례	프로토콜	noun
+snowstorm	눈보라	스노스톰	noun
+spam	스팸	스팸	noun
+spear	창	스피어	noun
+submarine	잠수함	서브마린	noun
+subtitle	자막	서브타이틀	noun
+tower	탑, 타워	타워	noun
+trigger	방아쇠, 계기, 트리거	트리거	noun
+unicycle	외발자전거	유니사이클	noun
+vibe	분위기, 느낌, 바이브	바이브	noun
+wagon	마차, 왜건	왜건	noun
+willow	버드나무	윌로우	noun
+astonishment	놀람, 경악	어스토니시먼트	noun
+bunny	토끼	버니	noun
+captive	포로	켑티브	noun
+cargo	화물	카고	noun
+composure	침착, 평정	컴포저	noun
+cracker	크래커	크래커	noun
+dot	점	도트	noun
+enclosure	울타리, 동봉물	인클로저	noun
+explosive	폭발물	익스플로시브	noun
+fib	거짓말	피브	noun
+freckle	주근깨	프레클	noun
+graphic	그래픽	그래픽	noun
+humility	겸손	휴밀리티	noun
+journalism	저널리즘, 언론	저널리즘	noun
+koala	코알라	코알라	noun
+manager	매니저, 관리자, 부장	매니저	noun
+mayonnaise	마요네즈	마요네즈	noun
+nightstand	협탁	나이트스탠드	noun
+oatmeal	오트밀	오트밀	noun
+offspring	자손, 새끼	오프스프링	noun
+partnership	파트너십, 협력	파트너십	noun
+paste	반죽, 풀, 페이스트	페이스트	noun
+philosopher	철학자	필로소퍼	noun
+puppet	꼭두각시, 인형	퍼펫	noun
+sculpture	조각, 조각상	스컬프처	noun
+similarity	유사성, 유사점	시밀레리티	noun
+sketch	스케치, 밑그림	스케치	noun
+sovereign	주권자	소버린	noun
+span	기간, 범위	스펜	noun
+spook	유령	스푸크	noun
+stocking	스타킹	스타킹	noun
+superiority	우월성, 우위	슈피리오리티	noun
+swap	교환, 스왑	스왑	noun
+teaching	가르침, 교육	티칭	noun
+temper	성질, 화	템퍼	noun
+toothache	치통	투스에이크	noun
+tuberculosis	결핵	튜버큘로시스	noun
+tutor	가정교사, 과외선생, 튜터	튜터	noun
+ukulele	우쿨렐레	우쿨렐레	noun
+username	사용자이름, 아이디	유저네임	noun
+validation	검증, 확인	벨리데이션	noun
+vendor	판매자, 상인, 벤더	벤더	noun
+accomplishment	업적, 성취	어컴플리시먼트	noun
+accuracy	정확도, 정확성	에큐러시	noun
+analyst	분석가, 애널리스트	애널리스트	noun
+android	안드로이드	안드로이드	noun
+apron	앞치마	에이프런	noun
+asset	자산	에셋	noun
+attribute	속성	애트리뷰트	noun
+basin	대야, 분지	베이슨	noun
+birch	자작나무	버치	noun
+brim	가장자리, 챙	브림	noun
+chemist	화학자	케미스트	noun
+chestnut	밤	체스트넛	noun
+classy		클래시	adj
+commerce	상업, 무역	커머스	noun
+crutch	목발	크러치	noun
+daybreak	새벽	데이브레이크	noun
+defendant	피고	디펜던트	noun
+delta	삼각주, 델타	델타	noun
+democrat	민주주의자, 민주당원	데모크렛	noun
+diploma	졸업장, 학위	디플로마	noun
+discontent	불만	디스컨텐트	noun
+frequency	빈도, 주파수	프리퀀시	noun
+gathering	모임	게더링	noun
+housewife	주부	하우스와이프	noun
+hub	중심, 허브	허브	noun
+magnitude	규모, 크기	메그니튜드	noun
+melancholy	우울, 멜랑콜리	멜랑콜리	noun
+merchandise	상품, 굿즈	머천다이즈	noun
+northeast	북동, 북동쪽	노스이스트	noun
+parkway	공원도로	파크웨이	noun
+representation	표현, 대표	레프레젠테이션	noun
+smoker	흡연자	스모커	noun
+statesman	정치가	스테이츠먼	noun
+syllable	음절	실러블	noun
+texture	질감, 식감	텍스처	noun
+tiptoe	발끝, 까치발	팁토	noun
+upgrade	업그레이드	업그레이드	noun
+velvet	벨벳	벨벳	noun
+villain	악당, 빌런	빌런	noun
+accordion	아코디언	아코디언	noun
+amazement	놀라움	어메이즈먼트	noun
+arena	경기장, 아레나	아레나	noun
+arithmetic	산수, 연산	어리스메틱	noun
+attachment	첨부파일, 애착	어테치먼트	noun
+bistro	비스트로	비스트로	noun
+blaze	불길, 화염	블레이즈	noun
+bleach	표백제, 탈색	블리치	noun
+brook	시내, 개울	브룩	noun
+calculation	계산	켈큘레이션	noun
+drone	드론	드론	noun
+gravel	자갈	그레블	noun
+hiccup	딸꾹질	히컵	noun
+insanity	광기, 정신이상	인세니티	noun
+kangaroo	캥거루	캥거루	noun
+moss	이끼	모스	noun
+nostalgia	향수, 노스탤지어	노스탤지어	noun
+pal	친구	팔	noun
+peasant	농민, 소작농	페전트	noun
+pedestrian	보행자	퍼데스트리언	noun
+peer	또래, 동료	피어	noun
+pledge	서약, 맹세	플레지	noun
+pod	꼬투리	포드	noun
+riverside	강변	리버사이드	noun
+socialism	사회주의	소셜리즘	noun
+southwest	남서, 남서쪽	사우스웨스트	noun
+sovereignty	주권	소버린티	noun
+spade	삽, 스페이드	스페이드	noun
+spiral	나선, 소용돌이	스파이럴	noun
+sprite	요정, 스프라이트	스프라이트	noun
+stitch	바늘땀	스티치	noun
+toolbox	공구함	툴박스	noun
+aggression	공격성	어그레션	noun
+alignment	정렬, 정렬상태	얼라인먼트	noun
+assessment	평가	어세스먼트	noun
+bagel	베이글	베이글	noun
+binge	폭식, 몰아보기	빈지	noun
+boulder	바위	볼더	noun
+bureaucracy	관료주의, 관료제	뷰로크라시	noun
+cheddar	체다치즈	체다	noun
+cocoa	코코아	코코아	noun
+compact		컴팩트	adj
+controversy	논란	컨트로버시	noun
+cradle	요람	크레이들	noun
+crossroad	교차로, 갈림길	크로스로드	noun
+dealership	대리점	딜러십	noun
+desertification	사막화	데저티피케이션	noun
+emphasis	강조	엠퍼시스	noun
+encyclopedia	백과사전	엔사이클로피디아	noun
+fireman	소방관	파이어맨	noun
+freeway	고속도로	프리웨이	noun
+harassment	괴롭힘	헤러스먼트	noun
+hiker	등산객	하이커	noun
+historian	역사가	히스토리언	noun
+humankind	인류	휴먼카인드	noun
+identification	신분증, 신원확인	아이덴티피케이션	noun
+indifference	무관심	인디퍼런스	noun
+lighthouse	등대	라이트하우스	noun
+methane	메탄	메테인	noun
+migration	이주, 이동	마이그레이션	noun
+observatory	천문대, 관측소	옵저버토리	noun
+pillar	기둥	필러	noun
+precision	정밀, 정확성	프리시전	noun
+prediction	예측	프리딕션	noun
+rainforest	열대우림	레인포레스트	noun
+silverware	은식기	실버웨어	noun
+solidarity	연대	솔리데리티	noun
+stance	입장, 자세	스탠스	noun
+technician	기술자	테크니션	noun
+token	토큰, 표시	토큰	noun
+troll	트롤, 악플러	트롤	noun
+vertical		버티컬	adj
+violation	위반	바이얼레이션	noun
+warranty	보증, 품질보증	워런티	noun
+annoyance	짜증	어노이언스	noun
+arcade	오락실, 아케이드	아케이드	noun
+blizzard	눈보라	블리자드	noun
+canvas	캔버스	캔버스	noun
+chart	차트, 도표	차트	noun
+checkout	계산대, 체크아웃	체크아웃	noun
+circuit	회로, 서킷	서킷	noun
+claw	발톱	클로	noun
+collaboration	협력, 협업, 콜라보	콜라보레이션	noun
+declaration	선언	데클러레이션	noun
+den	굴, 소굴	덴	noun
+doorknob	문손잡이	도어노브	noun
+fax	팩스	팩스	noun
+halal		할랄	adj
+harp	하프	하프	noun
+lantern	랜턴, 등불	랜턴	noun
+mischief	장난	미스치프	noun
+mop	대걸레	몹	noun
+overcoat	외투	오버코트	noun
+pesto	페스토	페스토	noun
+poster	포스터	포스터	noun
+postman	우체부, 집배원	포스트맨	noun
+rabbi	랍비	랍비	noun
+sincerity	진심, 성실	신세리티	noun
+souvenir	기념품	수비니어	noun
+stillness	고요함	스틸니스	noun
+symphony	교향곡, 심포니	심포니	noun
+venue	장소	베뉴	noun
+amber	호박색, 호박	앰버	noun
+artichoke	아티초크	아티초크	noun
+avenger	복수자	어벤져	noun
+bedside	침대옆, 머리맡	베드사이드	noun
+blackberry	블랙베리	블랙베리	noun
+brunch	브런치	브런치	noun
+butter	버터	버터	noun
+courtroom	법정	코트룸	noun
+credibility	신뢰성	크레더빌리티	noun
+curfew	통금, 통행금지	커퓨	noun
+deluxe		디럭스	adj
+disc	디스크, 원반	디스크	noun
+donor	기증자, 기부자	도너	noun
+doorstep	문간	도어스텝	noun
+folly	어리석음	폴리	noun
+goldfish	금붕어	골드피시	noun
+homosexuality	동성애	호모섹슈얼리티	noun
+intellect	지성	인텔렉트	noun
+intuition	직감, 직관	인튜이션	noun
+lime	라임	라임	noun
+malice	악의	멜리스	noun
+mold	곰팡이, 틀	몰드	noun
+mummy	미라	머미	noun
+oppression	억압	오프레션	noun
+output	출력, 산출	아웃풋	noun
+petal	꽃잎	페탈	noun
+prosecutor	검사	프로시큐터	noun
+publication	출판, 출판물	퍼블리케이션	noun
+ransom	몸값	랜섬	noun
+rebellion	반란	리벨리언	noun
+recess	휴회, 쉬는시간	리세스	noun
+salvation	구원	셀베이션	noun
+sequence	순서, 연속	시퀀스	noun
+singular	단수	싱귤러	noun
+snowfall	강설, 강설량	스노폴	noun
+squash	호박, 스쿼시	스쿼시	noun
+sunbathing	일광욕	선베이딩	noun
+tactic	전술, 전략	텍틱	noun
+tick	체크표시, 진드기	틱	noun
+twilight	황혼	트와일라이트	noun
+womb	자궁	움	noun
+allegation	혐의, 주장	엘리게이션	noun
+ark	방주	아크	noun
+bulk	대량, 대부분	벌크	noun
+camper	캠핑카, 야영객	캠퍼	noun
+column	기둥, 칼럼, 열	칼럼	noun
+decency	예의, 품위	디슨시	noun
+default	기본값, 디폴트	디폴트	noun
+doughnut	도넛	도넛	noun
+employer	고용주	임플로이어	noun
+enjoyment	즐거움	엔조이먼트	noun
+geometry	기하학	지오메트리	noun
+grease	기름, 그리스	그리스	noun
+hatch	해치	해치	noun
+irony	아이러니, 역설	아이러니	noun
+linguist	언어학자	링귀스트	noun
+lodge	오두막, 산장	로지	noun
+mare	암말	메어	noun
+minivan	미니밴	미니밴	noun
+mitten	벙어리장갑	미튼	noun
+moor	황야	무어	noun
+motto	좌우명, 모토	모토	noun
+omen	징조	오멘	noun
+ox	소, 황소	옥스	noun
+piggy	돼지, 아기돼지	피기	noun
+prompt	프롬프트	프롬프트	noun
+snob	속물	스놉	noun
+squid	오징어	스퀴드	noun
+stylish		스타일리쉬	adj
+subscription	구독	서브스크립션	noun
+treehouse	나무집	트리하우스	noun
+typewriter	타자기	타이프라이터	noun
+tyrant	폭군	타이런트	noun
+undercover		언더커버	adj
+vent	환기구, 통풍구	벤트	noun
+wrath	분노, 진노	레스	noun
+wrench	렌치, 스패너	렌치	noun
+wrinkle	주름	링클	noun
+advisor	고문, 조언자	어드바이저	noun
+autograph	사인, 서명	오토그래프	noun
+ballpoint	볼펜	볼포인트	noun
+birdhouse	새집	버드하우스	noun
+bosom	가슴, 품	부점	noun
+carryout	테이크아웃	캐리아웃	noun
+chainsaw	전기톱	체인쏘	noun
+cheeseburger	치즈버거	치즈버거	noun
+compensation	보상	컴펜세이션	noun
+culprit	범인	컬프릿	noun
+daydream	백일몽, 공상	데이드림	noun
+diameter	지름	다이에미터	noun
+dormitory	기숙사	도미토리	noun
+enforcement	집행, 시행	인포스먼트	noun
+font	폰트, 글꼴	폰트	noun
+fracture	골절	프렉처	noun
+generator	발전기	제너레이터	noun
+goalkeeper	골키퍼	골키퍼	noun
+hive	벌집	하이브	noun
+intensity	강도, 세기	인텐시티	noun
+interrogation	심문	인테러게이션	noun
+involvement	관여, 개입	인볼브먼트	noun
+knob	손잡이	노브	noun
+loser	패자, 루저	루저	noun
+manga	만화	망가	noun
+migrant	이주자, 이민자	마이그런트	noun
+millennial	밀레니얼	밀레니얼	noun
+nonstop		논스톱	adj
+patriotism	애국심	페이트리어티즘	noun
+personnel	인원, 직원	퍼스널	noun
+podcast	팟캐스트	팟캐스트	noun
+producer	프로듀서, 생산자	프로듀서	noun
+reduction	감소, 축소	리덕션	noun
+reindeer	순록	레인디어	noun
+shaft	축, 수직갱	샤프트	noun
+slang	속어	슬랭	noun
+superpower	초능력, 초강대국	슈퍼파워	noun
+timetable	시간표	타임테이블	noun
+tyranny	폭정	티러니	noun
+ultraviolet	자외선	울트라바이올렛	noun
+vowel	모음	바우얼	noun
+walnut	호두	월넛	noun
+accommodation	숙소, 숙박	어코모데이션	noun
+accordance	일치	어코던스	noun
+acre	에이커	에이커	noun
+aluminum	알루미늄	알루미늄	noun
+calculus	미적분	켈큘러스	noun
+chorus	합창, 후렴	코러스	noun
+coffin	관	코핀	noun
+complexion	안색, 피부색	컴플렉션	noun
+consonant	자음	콘서넌트	noun
+consultant	컨설턴트, 상담가	컨설턴트	noun
+cosmos	우주, 코스모스	코스모스	noun
+croissant	크로와상	크로와상	noun
+density	밀도	덴시티	noun
+disadvantage	불리, 단점	디스어드밴티지	noun
+disco	디스코	디스코	noun
+discourse	담론	디스코스	noun
+encouragement	격려	인커리지먼트	noun
+equation	방정식	이퀘이션	noun
+flint	부싯돌	플린트	noun
+fury	분노	퓨리	noun
+garment	의복	가먼트	noun
+hoodie	후드티	후디	noun
+hose	호스	호스	noun
+introvert	내향적인사람, 내향인	인트로버트	noun
+killer	살인자, 킬러	킬러	noun
+marketplace	시장, 장터	마켓플레이스	noun
+massacre	학살	메서커	noun
+monarchy	군주제	모나키	noun
+nitrogen	질소	나이트로전	noun
+northwest	북서, 북서쪽	노스웨스트	noun
+nuisance	골칫거리	뉴선스	noun
+occurrence	발생	어커런스	noun
+photogenic		포토제닉	adj
+poll	여론조사	폴	noun
+raven	까마귀	레이븐	noun
+seawater	바닷물	시워터	noun
+setup	설정, 셋업	셋업	noun
+sparrow	참새	스패로우	noun
+summary	요약	서머리	noun
+thorn	가시	손	noun
+thunderstorm	뇌우	선더스톰	noun
+trafficking	밀매	트레피킹	noun
+ace	에이스	에이스	noun
+applicant	지원자	에플리컨트	noun
+asparagus	아스파라거스	아스파라거스	noun
+aspiration	열망	에스퍼레이션	noun
+barista	바리스타	바리스타	noun
+blindfold	눈가리개	블라인드폴드	noun
+brow	이마, 눈썹	브라우	noun
+caviar	캐비아	캐비아	noun
+clan	씨족, 클랜	클랜	noun
+clone	복제, 클론	클론	noun
+coalition	연합	코얼리션	noun
+component	구성요소, 부품	컴포넌트	noun
+comrade	동지	콤레이드	noun
+coyote	코요테	코요테	noun
+edit	편집, 수정	에딧	noun
+ethic	윤리	에식	noun
+flask	플라스크, 휴대용술병	플라스크	noun
+highlight	하이라이트, 강조	하이라이트	noun
+hunch	예감, 직감	헌치	noun
+impulse	충동	임펄스	noun
+inventor	발명가	인벤터	noun
+kayak	카약	카약	noun
+librarian	사서	라이브레리언	noun
+lieutenant	중위	루테넌트	noun
+metric	지표, 미터법	메트릭	noun
+misunderstanding	오해	미스언더스탠딩	noun
+nationalism	민족주의, 국가주의	내셔널리즘	noun
+nutrient	영양소	뉴트리언트	noun
+overdose	과다복용	오버도스	noun
+painter	화가	페인터	noun
+pyramid	피라미드	피라미드	noun
+radius	반지름	레이디어스	noun
+ravine	협곡	러빈	noun
+realm	영역, 왕국	렐름	noun
+resentment	분개, 원한	리젠트먼트	noun
+ruler	자, 통치자	룰러	noun
+sardine	정어리	사딘	noun
+seagull	갈매기	시걸	noun
+selfie	셀카	셀피	noun
+shoplifting	좀도둑질	샵리프팅	noun
+skunk	스컹크	스컹크	noun
+superstition	미신	슈퍼스티션	noun
+tab	탭	탭	noun
+teapot	찻주전자	티팟	noun
+unrest	불안, 소요	언레스트	noun
+waltz	왈츠	왈츠	noun
+warfare	전쟁, 전투	워페어	noun
+wrongdoing	비행, 부정행위	롱두잉	noun
+algae	조류, 해조류	엘지	noun
+ambiance	분위기	앰비언스	noun
+attire	복장	어타이어	noun
+autopsy	부검	오톱시	noun
+burrito	부리토	부리토	noun
+caravan	카라반	카라반	noun
+carp	잉어	카프	noun
+casualty	사상자	케주얼티	noun
+commute	통근, 출퇴근	커뮤트	noun
+constellation	별자리	콘스털레이션	noun
+drugstore	약국	드러그스토어	noun
+economist	경제학자	이코노미스트	noun
+freshwater	민물, 담수	프레시워터	noun
+germ	세균	점	noun
+hammer	망치	해머	noun
+hectare	헥타르	헥타르	noun
+hypocrite	위선자	히포크리트	noun
+idol	아이돌, 우상	아이돌	noun
+inexperience	미숙, 경험부족	인익스피리언스	noun
+infrared	적외선	인프라레드	noun
+ivory	상아	아이보리	noun
+lasagna	라자냐	라자냐	noun
+logo	로고	로고	noun
+mandolin	만돌린	만돌린	noun
+margin	여백, 마진	마진	noun
+nightfall	해질녘	나이트폴	noun
+paw	발	포	noun
+petition	청원	퍼티션	noun
+pneumonia	폐렴	뉴모니아	noun
+posture	자세	포스처	noun
+scout	스카우트, 정찰병	스카우트	noun
+serenity	평온	서레니티	noun
+shortcoming	단점	쇼트커밍	noun
+snowball	눈덩이	스노볼	noun
+starvation	굶주림, 기아	스타베이션	noun
+trait	특성	트레이트	noun
+tribute	헌사, 공물	트리뷰트	noun
+vault	금고	볼트	noun
+veil	베일, 면사포	베일	noun
+advertisement	광고	에드버타이즈먼트	noun
+agnostic	불가지론자	에그노스틱	noun
+atrocity	잔학행위	어트로시티	noun
+autobiography	자서전	오토바이오그래피	noun
+avalanche	눈사태	에벌렌치	noun
+bassoon	바순	바순	noun
+bikini	비키니	비키니	noun
+boar	멧돼지	보어	noun
+cassette	카세트	카세트	noun
+checkup	건강검진, 검사	체크업	noun
+clam	조개	클램	noun
+condolence	애도, 조의	컨돌런스	noun
+correctness	정확성	코렉트니스	noun
+cub	새끼	컵	noun
+deputy	부관, 대리	데퓨티	noun
+developer	개발자	디벨로퍼	noun
+diaper	기저귀	다이퍼	noun
+diplomacy	외교	디플로머시	noun
+espionage	첩보활동	에스피어니지	noun
+faculty	교수진, 능력	페컬티	noun
+fascism	파시즘	파시즘	noun
+feminist	페미니스트	페미니스트	noun
+flattery	아첨	플레터리	noun
+gauge	게이지, 계기	게이지	noun
+gin	진	진	noun
+gorilla	고릴라	고릴라	noun
+grenade	수류탄	그러네이드	noun
+hammock	해먹	해먹	noun
+hawk	매	호크	noun
+honk	경적	홍크	noun
+insomnia	불면증	인솜니아	noun
+intolerance	불관용, 과민증	인톨러런스	noun
+karma	업보, 카르마	카르마	noun
+kimono	기모노	기모노	noun
+matcha	말차	마차	noun
+measurement	측정, 치수	메저먼트	noun
+mole	두더지, 점	몰	noun
+mortgage	담보대출	모기지	noun
+multitude	다수	멀티튜드	noun
+nanny	유모	네니	noun
+nighttime	야간, 밤	나이트타임	noun
+paddle	노, 패들	패들	noun
+pastime	취미, 오락	페스타임	noun
+pedal	페달	페달	noun
+pessimist	비관론자	페시미스트	noun
+precaution	예방조치	프리코션	noun
+probation	집행유예, 수습	프로베이션	noun
+protagonist	주인공	프로테거니스트	noun
+qualification	자격	퀄리피케이션	noun
+rake	갈퀴	레이크	noun
+rook	떼까마귀, 룩	룩	noun
+siren	사이렌	사이렌	noun
+slaughter	도살, 학살	슬로터	noun
+spectacle	구경거리, 장관	스펙터클	noun
+spotlight	스포트라이트	스포트라이트	noun
+squad	분대, 팀	스쿼드	noun
+sweetness	단맛, 달콤함	스위트니스	noun
+toddler	유아, 아기	토들러	noun
+torment	고통, 고뇌	토먼트	noun
+tuition	수업료, 등록금	튜이션	noun
+waffle	와플	와플	noun
+workforce	노동력, 인력	워크포스	noun
+adaptation	적응, 각색	에뎁테이션	noun
+array	배열, 정렬	어레이	noun
+autonomy	자율, 자치	오토노미	noun
+biodiversity	생물다양성	바이오다이버시티	noun
+breakup	이별, 해체	브레이크업	noun
+brewery	양조장	브루어리	noun
+capability	능력	케이퍼빌리티	noun
+caterpillar	애벌레	캐터필러	noun
+citrus	감귤류	시트러스	noun
+cone	원뿔, 콘	콘	noun
+defect	결함	디펙트	noun
+descendant	자손, 후손	디센던트	noun
+disagreement	의견차이, 불일치	디스어그리먼트	noun
+diver	잠수부, 다이버	다이버	noun
+ecology	생태, 생태학	이콜로지	noun
+electron	전자	일렉트론	noun
+enlightenment	계몽, 깨달음	인라이트먼트	noun
+fanatic	광신자, 광팬	퍼네틱	noun
+federation	연맹, 연방	페더레이션	noun
+granny	할머니	그레니	noun
+gymnastics	체조	짐네스틱스	noun
+handshake	악수	핸드쉐이크	noun
+inflammation	염증	인플러메이션	noun
+intimacy	친밀함	인티머시	noun
+lawsuit	소송	로수트	noun
+loft	다락방	로프트	noun
+madman	미친사람	메드맨	noun
+mainland	본토	메인랜드	noun
+meme	밈	밈	noun
+nun	수녀	넌	noun
+nutrition	영양	뉴트리션	noun
+orientation	오리엔테이션, 방향	오리엔테이션	noun
+ownership	소유권	오너십	noun
+panties	팬티	팬티	noun
+peg	못, 말뚝	페그	noun
+persecution	박해	퍼시큐션	noun
+pomegranate	석류	포머그레니트	noun
+presidency	대통령직	프레지던시	noun
+progressive		프로그레시브	adj
+rhetoric	수사법	레토릭	noun
+rig	장비, 굴착장치	리그	noun
+runner	주자, 러너	러너	noun
+scope	범위	스코프	noun
+silhouette	실루엣	실루엣	noun
+stereo	스테레오	스테레오	noun
+streak	줄무늬, 연속	스트릭	noun
+thug	깡패	서그	noun
+treason	반역	트리즌	noun
+vandal	파괴자	벤들	noun
+visibility	시야, 가시성	비저빌리티	noun
+weirdo	이상한사람, 괴짜	위어도	noun
+wiper	와이퍼	와이퍼	noun
+adrenaline	아드레날린	아드레날린	noun
+aesthetic	미학	에스테틱	noun
+appetizer	전채, 애피타이저	애피타이저	noun
+certainty	확실성	서튼티	noun
+cholesterol	콜레스테롤	콜레스테롤	noun
+conquest	정복	콘퀘스트	noun
+cookbook	요리책	쿡북	noun
+cork	코르크	코르크	noun
+deforestation	삼림벌채	디포리스테이션	noun
+eel	장어	일	noun
+elm	느릅나무	엘름	noun
+emoji	이모지	이모지	noun
+erosion	침식	이로전	noun
+exaggeration	과장	이그제저레이션	noun
+exclamation	감탄, 외침	익스클러메이션	noun
+fighter	전사, 파이터, 전투기	파이터	noun
+firstborn	첫아이	퍼스트본	noun
+fragment	조각, 파편	프레그먼트	noun
+gingerbread	생강빵	진저브레드	noun
+glitter	반짝이	글리터	noun
+graffiti	낙서, 그래피티	그래피티	noun
+grid	격자, 그리드	그리드	noun
+handball	핸드볼	핸드볼	noun
+handmade		핸드메이드	adj
+heap	더미	힙	noun
+likelihood	가능성	라이클리후드	noun
+maze	미로	메이즈	noun
+modesty	겸손	모디스티	noun
+ostrich	타조	오스트리치	noun
+ounce	온스	온스	noun
+outlet	콘센트, 아울렛	아울렛	noun
+painkiller	진통제	페인킬러	noun
+paramedic	구급대원	페러메딕	noun
+peacock	공작	피콕	noun
+perch	횃대	퍼치	noun
+petroleum	석유	페트롤리엄	noun
+recap	요약, 리캡	리캡	noun
+removal	제거	리무벌	noun
+repetition	반복	레피티션	noun
+retail	소매	리테일	noun
+revelation	폭로, 계시	레벨레이션	noun
+rollercoaster	롤러코스터	롤러코스터	noun
+rowboat	노젓는배	로보트	noun
+samurai	사무라이	사무라이	noun
+sarcasm	비꼼, 빈정거림	사케즘	noun
+seminar	세미나	세미나	noun
+sensitivity	민감성, 감수성	센서티비티	noun
+spirituality	영성	스피리추엘리티	noun
+suspension	정지, 정학, 서스펜션	서스펜션	noun
+transit	대중교통, 환승	트랜짓	noun
+valve	밸브	밸브	noun
+accountability	책임	어카운터빌리티	noun
+algebra	대수학	엘지브라	noun
+animism	애니미즘	애니미즘	noun
+blindness	실명, 맹목	블라인드니스	noun
+boom	붐, 호황	붐	noun
+buckle	버클	버클	noun
+chickpea	병아리콩	칙피	noun
+chimpanzee	침팬지	침팬지	noun
+cleanliness	청결	클렌리니스	noun
+compost	퇴비	콤포스트	noun
+conjugation	활용	콘주게이션	noun
+correction	수정, 정정	커렉션	noun
+cushion	쿠션, 방석	쿠션	noun
+dart	다트	다트	noun
+dependence	의존	디펜던스	noun
+dilemma	딜레마	딜레마	noun
+dumpster	대형쓰레기통	덤프스터	noun
+duplicate	복제, 사본, 중복	듀플리케이트	noun
+dynamic		다이나믹	adj
+dynasty	왕조	다이너스티	noun
+elegance	우아함	엘리건스	noun
+fragrance	향기, 향수	프레이그런스	noun
+headscarf	머릿수건, 스카프	헤드스카프	noun
+judo	유도	주도	noun
+lure	미끼, 루어	루어	noun
+mailman	우체부, 집배원	메일맨	noun
+meteorite	운석	미티어라이트	noun
+mic	마이크	마이크	noun
+millennium	천년	밀레니엄	noun
+mindset	사고방식	마인드셋	noun
+navigation	네비게이션, 항해	네비게이션	noun
+ointment	연고	오인트먼트	noun
+pagan	이교도	페이건	noun
+pimple	여드름	핌플	noun
+raisin	건포도	레이즌	noun
+relativity	상대성	렐러티비티	noun
+restoration	복원, 회복	레스토레이션	noun
+seizure	발작, 압수	시저	noun
+sightseeing	관광	사이트시잉	noun
+sodium	나트륨	소듐	noun
+sunflower	해바라기	선플라워	noun
+taboo	금기	터부	noun
+takeout	포장, 테이크아웃	테이크아웃	noun
+vaccination	예방접종	벡시네이션	noun
+variable	변수	베리어블	noun
+variant	변종, 변이	베리언트	noun
+vocal	보컬	보컬	noun
+warden	교도소장, 관리인	워든	noun
+wetland	습지	웻랜드	noun
+wildfire	산불	와일드파이어	noun
+willingness	의지, 기꺼이하는마음	윌링니스	noun
+witchcraft	마법, 마술	위치크래프트	noun
+abode	거처	어보드	noun
+accomplice	공범	어컴플리스	noun
+ammunition	탄약	에뮤니션	noun
+apricot	살구	에이프리콧	noun
+ballot	투표용지, 투표	벨럿	noun
+bitterness	쓴맛, 쓰라림	비터니스	noun
+bureau	국, 사무소	뷰로	noun
+burial	매장	베리얼	noun
+bust	흉상	버스트	noun
+captivity	감금, 포로	켑티비티	noun
+cheetah	치타	치타	noun
+chord	화음, 코드	코드	noun
+coastline	해안선	코스트라인	noun
+contradiction	모순	콘트러딕션	noun
+contributor	기여자, 기고자	컨트리뷰터	noun
+crest	볏, 꼭대기	크레스트	noun
+daisy	데이지	데이지	noun
+dome	돔	돔	noun
+duration	기간	듀레이션	noun
+earplug	귀마개	이어플러그	noun
+emptiness	공허함	엠티니스	noun
+endurance	지구력, 인내	인듀어런스	noun
+exhaustion	탈진, 피로	이그조스천	noun
+fiancee	약혼녀	피앙세	noun
+gag	개그, 재갈	개그	noun
+guideline	지침, 가이드라인	가이드라인	noun
+gust	돌풍	거스트	noun
+hallucination	환각	할루시네이션	noun
+hazard	위험	해저드	noun
+headline	헤드라인, 표제	헤드라인	noun
+iceberg	빙산	아이스버그	noun
+inability	무능력	인어빌리티	noun
+lunatic	미치광이	루너틱	noun
+mahjong	마작	마작	noun
+maker	제작자, 메이커	메이커	noun
+mangrove	맹그로브	맹그로브	noun
+melon	멜론	멜론	noun
+mileage	마일리지, 주행거리	마일리지	noun
+moisture	습기, 수분	모이스처	noun
+monopoly	독점	모노폴리	noun
+orchid	난초	오키드	noun
+plow	쟁기	플라우	noun
+porridge	죽	포리지	noun
+premise	전제	프레미스	noun
+python	비단뱀, 파이썬	파이썬	noun
+rainfall	강우량, 강우	레인폴	noun
+recording	녹음, 녹화	레코딩	noun
+referendum	국민투표	레퍼렌덤	noun
+revolt	반란	리볼트	noun
+ruby	루비	루비	noun
+sauna	사우나	사우나	noun
+shellfish	조개류	셸피시	noun
+skateboard	스케이트보드	스케이트보드	noun
+sponsor	후원자, 스폰서	스폰서	noun
+surplus	흑자, 잉여	서플러스	noun
+tranquility	평온	트렝퀼리티	noun
+unicorn	유니콘	유니콘	noun
+utility	공공요금, 유용성	유틸리티	noun
+veranda	베란다	베란다	noun
+viewpoint	관점	뷰포인트	noun
+werewolf	늑대인간	웨어울프	noun
+willpower	의지력	윌파워	noun
+wretch	비열한놈	레치	noun
+accessory	액세서리	액세서리	noun
+anatomy	해부학	어네터미	noun
+antler	뿔	엔틀러	noun
+arson	방화	아슨	noun
+barge	바지선	바지	noun
+bookshelf	책장	북쉘프	noun
+brightness	밝기	브라이트니스	noun
+brotherhood	형제애	브러더후드	noun
+capsule	캡슐	캡슐	noun
+chairperson	의장	체어퍼슨	noun
+charisma	카리스마	카리스마	noun
+clutch	클러치	클러치	noun
+cod	대구	코드	noun
+compile		컴파일	verb
+complexity	복잡성	컴플렉시티	noun
+conservatory	온실, 음악학교	컨서버토리	noun
+covenant	계약, 언약	커버넌트	noun
+crate	상자	크레이트	noun
+creak	삐걱거림	크리크	noun
+dashboard	계기판, 대시보드	대시보드	noun
+desktop	데스크탑, 바탕화면	데스크탑	noun
+downfall	몰락, 붕괴	다운폴	noun
+entity	실체, 개체	엔티티	noun
+explorer	탐험가	익스플로러	noun
+facade	정면, 외관	파사드	noun
+fraction	분수, 일부	프렉션	noun
+freelance	프리랜서, 프리랜스	프리랜스	noun
+fugitive	도망자, 탈주자	퓨지티브	noun
+granite	화강암	그레닛	noun
+grasshopper	메뚜기, 여치	그레스호퍼	noun
+gulp	한모금	걸프	noun
+haiku	하이쿠	하이쿠	noun
+humanoid	휴머노이드	휴머노이드	noun
+inequality	불평등	이니퀄리티	noun
+intervention	개입, 중재	인터벤션	noun
+lavender	라벤더	라벤더	noun
+mythology	신화	미솔로지	noun
+nucleus	핵, 세포핵	뉴클리어스	noun
+offering	제물, 헌금, 제공	오퍼링	noun
+outlaw	무법자	아웃로	noun
+overflow	범람, 넘침, 오버플로우	오버플로우	noun
+overwork	과로	오버워크	noun
+politeness	공손함, 예의	폴라이트니스	noun
+porcelain	도자기, 자기	포설린	noun
+pottery	도자기, 도예	포터리	noun
+prairie	대초원, 초원	프레리	noun
+puddle	웅덩이, 물웅덩이	퍼들	noun
+recollection	기억, 회상	리콜렉션	noun
+reincarnation	환생	리인카네이션	noun
+ricotta	리코타	리코타	noun
+rider	라이더, 기수	라이더	noun
+rubble	잔해, 돌무더기	러블	noun
+sabotage	사보타주, 방해공작	사보타주	noun
+scroll	스크롤, 두루마리	스크롤	noun
+sesame	참깨, 깨	세서미	noun
+silicon	실리콘, 규소	실리콘	noun
+smoothie	스무디	스무디	noun
+spruce	가문비나무	스프루스	noun
+stench	악취	스텐치	noun
+synagogue	유대교회당	시너고그	noun
+trendy		트렌디	adj
+upbringing	양육, 교육	업브링잉	noun
+vicinity	부근, 근처	비시니티	noun
+viewer	시청자, 뷰어	뷰어	noun
+wheelbarrow	손수레, 외바퀴손수레	휠베로우	noun
+wimp	겁쟁이, 약골	윔프	noun
+zebra	얼룩말	지브라	noun
+administrator	관리자, 행정관	어드미니스트레이터	noun
+afterlife	내세, 사후세계	애프터라이프	noun
+ambush	매복	엠부시	noun
+antidote	해독제	엔티도트	noun
+appliance	가전제품, 기기	어플라이언스	noun
+archipelago	군도, 제도	아키펠라고	noun
+assassination	암살	어세시네이션	noun
+blister	물집	블리스터	noun
+brochure	브로셔, 안내책자	브로셔	noun
+bumblebee	호박벌, 뒤영벌	범블비	noun
+cannon	대포	케넌	noun
+carcass	시체, 사체	카커스	noun
+carton	상자, 팩	카턴	noun
+censorship	검열	센서십	noun
+chandelier	샹들리에	샹들리에	noun
+cicada	매미	시케이더	noun
+cleaner	청소기, 세제, 청소부	클리너	noun
+cloak	망토	클로크	noun
+crossword	십자말풀이	크로스워드	noun
+crunch	크런치	크런치	noun
+demeanor	태도, 처신	디미너	noun
+distrust	불신	디스트러스트	noun
+dumpling	만두	덤플링	noun
+excursion	소풍, 여행	익스커전	noun
+flicker	깜빡임	플리커	noun
+framework	틀, 체계, 프레임워크	프레임워크	noun
+godmother	대모	갓마더	noun
+groan	신음	그로언	noun
+hippo	하마	히포	noun
+hoax	거짓말, 장난, 사기	호크스	noun
+hormone	호르몬	호르몬	noun
+idleness	게으름, 나태	아이들니스	noun
+ignition	점화, 시동	이그니션	noun
+implication	함의, 영향, 암시	임플리케이션	noun
+imprisonment	투옥, 징역	임프리즌먼트	noun
+inclination	경향, 성향	인클리네이션	noun
+inquiry	문의, 조사	인콰이어리	noun
+kiwi	키위	키위	noun
+knapsack	배낭	넵섹	noun
+latch	걸쇠, 빗장	레치	noun
+lumber	목재	럼버	noun
+midtown	중심가, 시내	미드타운	noun
+modification	수정, 변경	모디피케이션	noun
+nickel	니켈	니켈	noun
+prune	말린자두	프룬	noun
+psychopath	사이코패스	사이코패스	noun
+raid	습격, 급습, 레이드	레이드	noun
+rainwater	빗물	레인워터	noun
+rhyme	운, 각운, 라임	라임	noun
+selfishness	이기심	셀피시니스	noun
+sensor	센서, 감지기	센서	noun
+serpent	뱀	서펀트	noun
+shopper	쇼핑객	쇼퍼	noun
+skydiving	스카이다이빙	스카이다이빙	noun
+slogan	슬로건, 구호	슬로건	noun
+solace	위안, 위로	솔리스	noun
+speculation	추측, 투기	스페큘레이션	noun
+staple	주식, 스테이플	스테이플	noun
+steroid	스테로이드	스테로이드	noun
+swig	한모금	스위그	noun
+teaspoon	찻숟가락, 티스푼	티스푼	noun
+threshold	문턱, 임계값	스레숄드	noun
+acrobat	곡예사	에크러벳	noun
+amnesia	기억상실, 기억상실증	엠니지아	noun
+attacker	공격자	어테커	noun
+barricade	바리케이드	바리케이드	noun
+beacon	신호등, 등대, 봉화	비컨	noun
+bison	들소	바이슨	noun
+blur	흐릿함, 블러	블러	noun
+boutique	부티크	부티크	noun
+career	경력, 직업, 커리어	커리어	noun
+clutter	잡동사니, 어수선함	클러터	noun
+combo	콤보, 세트	콤보	noun
+denial	부정, 부인, 거부	디나이얼	noun
+digit	숫자, 자릿수	디짓	noun
+dime	다임	다임	noun
+discomfort	불편, 불쾌감	디스컴퍼트	noun
+disillusion	환멸	디스일루전	noun
+doormat	현관매트, 도어매트	도어매트	noun
+dropping	배설물, 똥	드로핑	noun
+entrepreneur	기업가, 사업가	앙트러프러너	noun
+exterior	외부, 외관, 익스테리어	익스테리어	noun
+fungus	곰팡이, 균류	펑거스	noun
+gallon	갤런	갤런	noun
+godfather	대부	갓파더	noun
+grizzly	회색곰	그리즐리	noun
+headset	헤드셋	헤드셋	noun
+imitation	모방, 흉내, 모조품	이미테이션	noun
+imperialism	제국주의	임피리얼리즘	noun
+inmate	수감자, 재소자	인메이트	noun
+instability	불안정	인스터빌리티	noun
+integer	정수	인티저	noun
+interval	간격, 구간, 인터벌	인터벌	noun
+intestine	장, 창자	인테스틴	noun
+jug	주전자, 물병	저그	noun
+linen	린넨	린넨	noun
+machete	마체테	마체테	noun
+margarine	마가린	마가린	noun
+marrow	골수	메로	noun
+mechanism	메커니즘, 기계장치, 구조	메커니즘	noun
+mercenary	용병	머시너리	noun
+mince	다진고기	민스	noun
+minimal		미니멀	adj
+nausea	메스꺼움, 구역질	노지아	noun
+nectar	꿀, 과즙	넥타	noun
+oregano	오레가노	오레가노	noun
+panther	표범, 흑표범	팬서	noun
+portable		포터블	adj
+preservation	보존, 보호	프리저베이션	noun
+radiator	라디에이터, 방열기	라디에이터	noun
+recipient	수령인, 받는사람	리시피언트	noun
+refusal	거절, 거부	리퓨절	noun
+rehab	재활, 재활치료	리헵	noun
+rye	호밀	라이	noun
+shutter	셔터, 덧문	셔터	noun
+skyscraper	고층건물, 마천루	스카이스크레이퍼	noun
+slumber	잠, 수면	슬럼버	noun
+snowflake	눈송이	스노우플레이크	noun
+spree	흥청망청, 한바탕	스프리	noun
+supervision	감독, 관리	슈퍼비전	noun
+swan	백조	스완	noun
+toad	두꺼비	토드	noun
+typo	오타	타이포	noun
+unhappiness	불행	언해피니스	noun
+washroom	화장실	워시룸	noun
+abbreviation	약어, 줄임말	어브리비에이션	noun
+anthropology	인류학	엔스러폴로지	noun
+armpit	겨드랑이	암핏	noun
+artifact	유물, 인공물	아티펙트	noun
+authenticity	진정성, 진품	오센티시티	noun
+babble	옹알이	베블	noun
+biography	전기, 일대기	바이오그래피	noun
+blackmail	협박, 공갈	블랙메일	noun
+bonfire	모닥불	본파이어	noun
+buff	애호가, 버프	버프	noun
+camouflage	위장, 카무플라주	카무플라주	noun
+charcoal	숯, 목탄	차콜	noun
+colonialism	식민주의	컬로니얼리즘	noun
+commodity	상품, 원자재	커모디티	noun
+conception	개념, 구상, 임신	컨셉션	noun
+concession	양보, 양허	컨세션	noun
+confrontation	대립, 대결	컨프런테이션	noun
+consensus	합의, 공감대	컨센서스	noun
+coverage	보도, 보장, 범위	커버리지	noun
+cuddle	포옹	커들	noun
+cutlery	식기, 수저	커틀러리	noun
+disrespect	무례, 결례	디스리스펙트	noun
+doctorate	박사학위	닥터릿	noun
+dominance	지배, 우세	도미넌스	noun
+earphone	이어폰	이어폰	noun
+gangster	갱단원, 조폭, 갱스터	갱스터	noun
+gazebo	정자	가제보	noun
+gel	젤	젤	noun
+handgun	권총	핸드건	noun
+hassle	번거로움, 귀찮은일	헤슬	noun
+hatchet	손도끼	헤칫	noun
+headmaster	교장	헤드마스터	noun
+hostel	호스텔	호스텔	noun
+insecurity	불안, 불안감	인시큐리티	noun
+internship	인턴십, 인턴	인턴십	noun
+inventory	재고, 목록, 인벤토리	인벤토리	noun
+invoice	송장, 청구서	인보이스	noun
+lactose	유당, 젖당	락토스	noun
+listener	청취자, 듣는사람	리스너	noun
+matrix	행렬, 매트릭스	매트릭스	noun
+merit	장점, 가치	메리트	noun
+metaphor	은유, 비유	메타포	noun
+migraine	편두통	마이그레인	noun
+module	모듈	모듈	noun
+nightingale	나이팅게일	나이팅게일	noun
+ordeal	시련, 고난	오딜	noun
+osteoporosis	골다공증	오스테오포로시스	noun
+polo	폴로	폴로	noun
+prosecution	기소, 검찰	프로시큐션	noun
+proton	양성자	프로톤	noun
+prototype	시제품, 원형, 프로토타입	프로토타입	noun
+refill	리필	리필	noun
+resemblance	유사성, 닮음	리젬블런스	noun
+restart	재시작	리스타트	noun
+sage	세이지, 현자	세이지	noun
+sailboat	돛단배, 요트	세일보트	noun
+sentiment	감정, 정서	센티먼트	noun
+sermon	설교	서먼	noun
+server	서버	서버	noun
+sewage	하수, 오수	수이지	noun
+shopkeeper	가게주인, 점주	샵키퍼	noun
+slump	슬럼프, 부진, 폭락	슬럼프	noun
+sticker	스티커	스티커	noun
+subscriber	구독자, 가입자	서브스크라이버	noun
+summertime	여름철	서머타임	noun
+sweater	스웨터	스웨터	noun
+syntax	구문, 문법	신텍스	noun
+tangle	엉킴	텡글	noun
+taxpayer	납세자	택스페이어	noun
+tilt	기울기, 틸트	틸트	noun
+tint	색조, 틴트	틴트	noun
+vinyl	비닐	바이닐	noun
+width	너비, 폭	위드스	noun
+assailant	공격자, 가해자	어세일런트	noun
+catalog	카탈로그, 목록	카탈로그	noun
+closure	폐쇄, 종결	클로저	noun
+crescent	초승달	크레센트	noun
+excellence	우수성, 탁월함	엑설런스	noun
+farmhouse	농가	팜하우스	noun
+negligence	부주의, 과실, 태만	네글리전스	noun
+pest	해충, 골칫거리	페스트	noun
+reset	리셋, 초기화, 재설정	리셋	noun
+coordination	조정, 협조	코디네이션	noun
+cylinder	원기둥, 실린더	실린더	noun
+elevation	고도, 높이	엘리베이션	noun
+freight	화물	프레이트	noun
+indicator	지표, 표시기	인디케이터	noun
+milestone	이정표	마일스톤	noun
+precedent	선례, 전례	프레시던트	noun
+provision	제공, 공급, 조항	프로비전	noun
+purity	순수, 순도	퓨리티	noun
+royalty	왕족, 로열티, 인세	로열티	noun
+completion	완료, 완성	컴플리션	noun
+counsel	조언, 변호인	카운슬	noun
+manor	장원, 저택	메너	noun
+offline		오프라인	adj,adv
+outline	개요, 윤곽	아웃라인	noun
+persistence	끈기, 지속성	퍼시스턴스	noun
+runway	활주로, 런웨이	런웨이	noun
+specification	사양, 명세, 스펙	스페시피케이션	noun
+treasury	재무부, 국고, 금고	트레저리	noun
+withdrawal	인출, 철수, 금단	위드로얼	noun
+anticipation	기대, 예상	엔티시페이션	noun
+breach	위반, 침해	브리치	noun
+evaluation	평가	이밸류에이션	noun
+falsehood	거짓, 허위	폴스후드	noun
+gateway	관문, 게이트웨이	게이트웨이	noun
+insulation	단열, 절연	인설레이션	noun
+simulation	시뮬레이션, 모의실험	시뮬레이션	noun
+submission	제출, 굴복	서브미션	noun
+succession	연속, 계승	석세션	noun
+vista	전망, 경치	비스타	noun
+acquisition	인수, 획득, 습득	에퀴지션	noun
+arsenic	비소	아세닉	noun
+bulletin	게시, 공보, 뉴스	불리틴	noun
+childbirth	출산, 분만	차일드버스	noun
+curriculum	교육과정, 커리큘럼	커리큘럼	noun
+disposition	성향, 기질, 처분	디스포지션	noun
+dual		듀얼	adj
+ethnicity	민족성, 민족	에스니시티	noun
+fulfillment	성취, 이행, 실현	풀필먼트	noun
+maturity	성숙, 만기	머추리티	noun
+onset	시작, 발병	온셋	noun
+patent	특허	페이턴트	noun
+quotation	인용, 견적	쿼테이션	noun
+ratio	비율, 비	레이쇼	noun
+remainder	나머지, 잔여	리메인더	noun
+tenor	테너	테너	noun
+thrift	절약, 검약	스리프트	noun
+urbanization	도시화	어버니제이션	noun
+birthplace	출생지, 고향	버스플레이스	noun
+confinement	감금, 구속	컨파인먼트	noun
+consultation	상담, 협의	컨설테이션	noun
+correspondence	서신, 대응, 일치	코레스폰던스	noun
+amendment	개정, 수정안	어멘드먼트	noun
+convertible	오픈카, 컨버터블	컨버터블	noun
+detection	탐지, 감지, 발견	디텍션	noun
+fetus	태아	피터스	noun
+indication	징후, 표시, 암시	인디케이션	noun
+ion	이온	이온	noun
+legislature	입법부, 의회	레지슬레이처	noun
+livelihood	생계	라이블리후드	noun
+outset	시초, 처음	아웃셋	noun
+ramp	경사로, 램프	램프	noun
+reservoir	저수지, 저장소	레저버	noun
+shipment	선적, 배송, 출하	쉽먼트	noun
+acceleration	가속, 가속도	액셀러레이션	noun
+acronym	약어, 두문자어	에크러님	noun
+circumference	둘레, 원주	서컴퍼런스	noun
+clause	조항, 절	클로즈	noun
+dispatch	파견, 발송	디스패치	noun
+earning	소득, 수입, 수익	어닝	noun
+installation	설치, 설비	인스톨레이션	noun
+interruption	방해, 중단	인터럽션	noun
+revision	수정, 개정	리비전	noun
+subordinate	부하	서보디닛	noun
+sustainability	지속가능성	서스테이너빌리티	noun
+weekday	평일, 주중	위크데이	noun
+advancement	발전, 진보, 승진	어드밴스먼트	noun
+antenna	안테나, 더듬이	안테나	noun
+correlation	상관관계	코릴레이션	noun
+login	로그인	로그인	noun
+merge		머지	verb
+oval	타원, 타원형	오벌	noun
+precipitation	강수, 강수량	프리시피테이션	noun
+sanitation	위생	세니테이션	noun
+synonym	동의어, 유의어	시노님	noun
+validity	타당성, 유효성	벌리디티	noun
+abolition	폐지	에벌리션	noun
+absentee	결석자, 불참자	엡센티	noun
+accumulation	축적, 누적	어큐뮬레이션	noun
+activation	활성화	액티베이션	noun
+addressee	수신인	에드레시	noun
+adjustment	조정, 조절, 적응	어저스트먼트	noun
+affiliate	계열사, 제휴사	어필리에이트	noun
+affiliation	소속, 제휴	어필리에이션	noun
+affirmation	확언, 단언	어퍼메이션	noun
+aggregate	총합, 합계	에그리게이트	noun
+airfare	항공료, 항공요금	에어페어	noun
+alias	별칭, 가명	에일리어스	noun
+allocation	할당, 배분	엘로케이션	noun
+allotment	할당, 배당	얼롯먼트	noun
+alteration	변경, 수선	올터레이션	noun
+ammonia	암모니아	암모니아	noun
+annex	별관, 부속건물	에넥스	noun
+annotation	주석	어노테이션	noun
+anonymity	익명, 익명성	에너니미티	noun
+appraisal	평가, 감정	어프레이절	noun
+appropriation	충당, 도용	어프로프리에이션	noun
+attendee	참석자	어텐디	noun
+audit	감사, 회계감사	오딧	noun
+auditor	감사관, 감사인	오디터	noun
+authentication	인증	오센티케이션	noun
+authorization	허가, 승인, 인가	오소리제이션	noun
+automation	자동화	오토메이션	noun
+bandwidth	대역폭	밴드위스	noun
+bankbook	통장, 예금통장	뱅크북	noun
+banker	은행가, 은행원	뱅커	noun
+barcode	바코드	바코드	noun
+baseline	기준선, 기준	베이스라인	noun
+batch	묶음, 일괄, 배치	배치	noun
+benchmark	기준, 벤치마크	벤치마크	noun
+beneficiary	수혜자, 수익자	베니피셔리	noun
+blacklist	블랙리스트	블랙리스트	noun
+bloc	블록, 연합	블록	noun
+bookmark	북마크, 책갈피	북마크	noun
+borrower	차용인, 대출자	버로어	noun
+bracket	괄호, 브래킷	브래킷	noun
+brokerage	중개, 증권사	브로커리지	noun
+bullion	금괴, 은괴	불리언	noun
+bylaw	내규, 조례	바이로	noun
+bypass	우회로, 바이패스	바이패스	noun
+calamity	재앙, 재난	컬레미티	noun
+capitalization	대문자, 자본화	캐피털라이제이션	noun
+cardholder	카드소지자	카드홀더	noun
+certification	인증, 증명, 자격증	서티피케이션	noun
+charter	헌장, 전세	차터	noun
+childcare	육아, 보육	차일드케어	noun
+chronicle	연대기	크로니클	noun
+claimant	청구인	클레이먼트	noun
+classification	분류	클레시피케이션	noun
+clearance	허가, 정리, 통관	클리어런스	noun
+coefficient	계수	코이피션트	noun
+cog	톱니	코그	noun
+cohabitation	동거	코헤비테이션	noun
+collateral	담보	컬레터럴	noun
+commemoration	기념	커메머레이션	noun
+commentary	해설, 논평	코멘터리	noun
+commodore	준장	코모도어	noun
+competence	능력, 역량	컴피턴스	noun
+compliance	준수, 순응, 컴플라이언스	컴플라이언스	noun
+composite	합성물, 복합재	컴포짓	noun
+compression	압축	컴프레션	noun
+computation	계산	컴퓨테이션	noun
+condominium	콘도, 아파트	콘도미니엄	noun
+condor	콘도르	콘도르	noun
+conductivity	전도율, 전도성	컨덕티비티	noun
+conduit	도관, 통로	콘딧	noun
+consolidation	통합, 강화	컨솔리데이션	noun
+constituency	선거구, 지지층	컨스티추언시	noun
+constituent	구성요소, 유권자	컨스티추언트	noun
+consumable	소모품	컨슈머블	noun
+contingency	비상사태, 만일의사태	컨틴전시	noun
+contingent	파견대	컨틴전트	noun
+continuation	계속, 연속, 속편	컨티뉴에이션	noun
+contractor	계약자, 하청업체	컨트렉터	noun
+convergence	수렴, 융합	컨버전스	noun
+coordinate	좌표	코디네이트	noun
+correspondent	특파원, 기자	코레스폰던트	noun
+counterpart	상대, 대응물	카운터파트	noun
+crackdown	단속, 탄압	크렉다운	noun
+creditor	채권자	크레디터	noun
+criterion	기준	크라이티리언	noun
+crypto	암호화폐, 크립토	크립토	noun
+cultivation	재배, 경작	컬티베이션	noun
+custodian	관리인, 보관인	커스토디언	noun
+cutback	삭감, 감축	컷백	noun
+cutoff	마감, 기준선, 차단	컷오프	noun
+dealer	딜러, 판매상	딜러	noun
+dealing	거래	딜링	noun
+debtor	채무자	데터	noun
+decimal	소수	데시멀	noun
+decryption	복호화, 암호해독	디크립션	noun
+deductible	공제액	디덕터블	noun
+deduction	공제, 추론	디덕션	noun
+deferment	연기, 유예	디퍼먼트	noun
+delegate	대표, 대의원	델리게이트	noun
+delegation	대표단, 위임	델리게이션	noun
+deletion	삭제	딜리션	noun
+deliberation	숙고, 심의	딜리버레이션	noun
+delinquent	비행청소년	딜링퀀트	noun
+deliverable	결과물, 산출물	딜리버러블	noun
+demerit	단점, 벌점	디메리트	noun
+demolition	철거, 파괴	데몰리션	noun
+demotion	강등	디모션	noun
+denomination	교파, 액면가	디노미네이션	noun
+depositor	예금자	디파지터	noun
+depreciation	감가상각, 가치하락	디프리시에이션	noun
+derivative	파생상품, 파생물	디리버티브	noun
+designation	지정, 명칭	데지그네이션	noun
+detachment	분리, 무관심, 분견대	디테치먼트	noun
+deviation	편차, 일탈	디비에이션	noun
+differential	차이, 차동장치	디퍼렌셜	noun
+directive	지시, 지령	디렉티브	noun
+disbursement	지출, 지급	디스버스먼트	noun
+disclosure	공개, 폭로	디스클로저	noun
+discontinuation	중단, 단종	디스컨티뉴에이션	noun
+dishonor	불명예	디스아너	noun
+disinfection	소독	디스인펙션	noun
+dismissal	해고, 기각	디스미설	noun
+dispersion	분산, 확산	디스퍼전	noun
+displacement	이동, 배수량, 강제이주	디스플레이스먼트	noun
+disqualification	실격, 자격박탈	디스퀄리피케이션	noun
+dissatisfaction	불만, 불만족	디스세티스펙션	noun
+dissemination	보급, 유포	디세미네이션	noun
+distributor	유통업체, 배급업자	디스트리뷰터	noun
+diversion	우회, 전환, 기분전환	다이버전	noun
+dividend	배당금, 배당	디비던드	noun
+documentation	문서, 문서화	다큐멘테이션	noun
+domicile	주소, 거주지	도미사일	noun
+downgrade	다운그레이드, 하향조정	다운그레이드	noun
+drainage	배수	드레이니지	noun
+duplex	복층, 듀플렉스	듀플렉스	noun
+duplication	복제, 중복	듀플리케이션	noun
+durability	내구성	듀러빌리티	noun
+echelon	계층, 계급	에셜론	noun
+educator	교육자	에듀케이터	noun
+eligibility	자격, 적격	엘리저빌리티	noun
+elimination	제거, 탈락	일리미네이션	noun
+enactment	제정	이넥트먼트	noun
+encryption	암호화	인크립션	noun
+enhancement	강화, 향상	인헨스먼트	noun
+enlistment	입대, 모집	인리스트먼트	noun
+enrollment	등록, 입학	인롤먼트	noun
+entitlement	자격, 권리	인타이틀먼트	noun
+entrant	참가자, 입학생	엔트런트	noun
+equity	지분, 공정, 자기자본	에퀴티	noun
+erasure	삭제, 말소	이레이저	noun
+escrow	에스크로	에스크로	noun
+estimation	추정, 견적	에스티메이션	noun
+evaluator	평가자	이밸류에이터	noun
+evaporation	증발	이베퍼레이션	noun
+eviction	퇴거	이빅션	noun
+excavation	발굴	엑스커베이션	noun
+exclusion	배제, 제외	익스클루전	noun
+exemption	면제	이그젬프션	noun
+expenditure	지출, 경비	익스펜디처	noun
+expiration	만료, 만기	익스퍼레이션	noun
+expiry	만료	익스파이어리	noun
+expressway	고속도로	익스프레스웨이	noun
+expulsion	추방, 퇴학	익스펄션	noun
+extraction	추출, 발치	익스트렉션	noun
+fabrication	조작, 날조, 제작	패브리케이션	noun
+fallback	대비책, 예비	폴백	noun
+farmland	농지, 농경지	팜랜드	noun
+fishery	어업, 어장	피셔리	noun
+fixation	집착, 고정	픽세이션	noun
+fixture	고정물, 설비	픽스처	noun
+flotation	부양, 상장	플로테이션	noun
+fluctuation	변동	플럭추에이션	noun
+foreclosure	압류, 담보권행사	포클로저	noun
+forestry	임업	포레스트리	noun
+formality	형식, 형식적절차	포멜리티	noun
+gazette	관보, 신문	거젯	noun
+gist	요지, 요점	지스트	noun
+gradient	경사, 기울기, 그러데이션	그래디언트	noun
+guarantor	보증인	게런터	noun
+habitation	거주, 주거	헤비테이션	noun
+handout	유인물, 배포물	핸드아웃	noun
+handover	인계, 이양	핸드오버	noun
+handrail	난간, 손잡이	핸드레일	noun
+hashtag	해시태그	해시태그	noun
+hepatitis	간염	헤퍼타이티스	noun
+holding	보유, 지주회사	홀딩	noun
+homepage	홈페이지	홈페이지	noun
+honorarium	사례금	아너레리엄	noun
+hospitalization	입원	호스피털라이제이션	noun
+houseboat	하우스보트	하우스보트	noun
+hypertext	하이퍼텍스트	하이퍼텍스트	noun
+imbalance	불균형	임밸런스	noun
+implementation	구현, 실행, 시행	임플리멘테이션	noun
+inadequacy	부족, 부적당	인에더퀴시	noun
+inauguration	취임, 취임식	이노거레이션	noun
+incentive	인센티브, 유인, 장려금	인센티브	noun
+inception	시작, 개시	인셉션	noun
+inclusion	포함, 포용	인클루전	noun
+incompatibility	비호환성, 불일치	인컴페터빌리티	noun
+incorporation	통합, 법인설립	인코퍼레이션	noun
+increment	증가, 증분	인크리먼트	noun
+indemnity	배상, 보상	인뎀니티	noun
+indictment	기소, 고발	인다이트먼트	noun
+infertility	불임	인퍼틸리티	noun
+inflow	유입	인플로우	noun
+informant	정보원, 제보자	인포먼트	noun
+infringement	침해, 위반	인프린지먼트	noun
+initialization	초기화	이니셜라이제이션	noun
+inlet	입구, 작은만	인렛	noun
+inoculation	접종, 예방접종	이노큘레이션	noun
+insolvency	파산, 지불불능	인솔번시	noun
+installment	할부, 분할납부	인스톨먼트	noun
+insufficiency	부족, 불충분	인서피션시	noun
+integration	통합	인티그레이션	noun
+inverse	역, 역수	인버스	noun
+isle	섬	아일	noun
+issuance	발행, 발급	이슈언스	noun
+judiciary	사법부	주디셔리	noun
+jurisdiction	관할권, 관할	주리스딕션	noun
+keyword	키워드, 핵심어	키워드	noun
+knoll	작은언덕, 둔덕	놀	noun
+landfill	매립지, 쓰레기매립	랜드필	noun
+lateness	지각, 늦음	레이트니스	noun
+latitude	위도	레티튜드	noun
+ledge	선반, 바위턱	레지	noun
+legalization	합법화	리걸리제이션	noun
+leverage	레버리지, 영향력	레버리지	noun
+levy	세금, 부과금	레비	noun
+liability	책임, 부채	라이어빌리티	noun
+licensee	면허소지자, 라이센스보유자	라이센시	noun
+lien	유치권, 선취특권	리엔	noun
+lifecycle	수명주기, 라이프사이클	라이프사이클	noun
+linkage	연결, 연계	링키지	noun
+liquidation	청산	리퀴데이션	noun
+liquidity	유동성	리퀴디티	noun
+litigation	소송	리티게이션	noun
+lockout	직장폐쇄	락아웃	noun
+longitude	경도	론지튜드	noun
+magnification	확대, 배율	메그니피케이션	noun
+mandate	권한, 위임	멘데이트	noun
+manpower	인력	맨파워	noun
+markup	마크업, 가격인상	마크업	noun
+median	중앙값	미디언	noun
+mediation	중재, 조정	미디에이션	noun
+memo	메모	메모	noun
+memorandum	각서, 메모	메모랜덤	noun
+metadata	메타데이터	메타데이터	noun
+methodology	방법론	메소돌로지	noun
+mezzanine	중이층	메자닌	noun
+mobilization	동원	모빌리제이션	noun
+modem	모뎀	모뎀	noun
+monoxide	일산화물	모녹사이드	noun
+moratorium	모라토리엄, 유예	모라토리엄	noun
+mortality	사망률, 죽음	모텔리티	noun
+motorhome	캠핑카	모터홈	noun
+multimedia	멀티미디어	멀티미디어	noun
+municipality	지방자치단체, 시	뮤니시펠리티	noun
+newsletter	소식지, 뉴스레터	뉴스레터	noun
+nil	영, 무	닐	noun
+node	노드, 마디	노드	noun
+nomination	지명, 추천	노미네이션	noun
+nominee	후보자, 지명자	노미니	noun
+nonexistence	비존재	논이그지스턴스	noun
+nonpayment	미납, 체납	논페이먼트	noun
+nonprofit	비영리단체	논프로핏	noun
+null		널	adj
+nutritionist	영양사	뉴트리셔니스트	noun
+occupant	거주자, 탑승자	오큐펀트	noun
+offset	오프셋, 상쇄	오프셋	noun
+omission	생략, 누락	오미션	noun
+ordinal	서수	오디널	noun
+originator	창시자, 발신자	오리지네이터	noun
+outflow	유출	아웃플로우	noun
+outsourcing	아웃소싱, 외주	아웃소싱	noun
+overdraft	당좌대월, 초과인출	오버드래프트	noun
+overpass	고가도로, 육교	오버패스	noun
+overpayment	초과지급	오버페이먼트	noun
+oxidation	산화	옥시데이션	noun
+parameter	매개변수, 파라미터	파라미터	noun
+partition	칸막이, 분할, 파티션	파티션	noun
+patriot	애국자	페이트리엇	noun
+payee	수취인	페이이	noun
+payroll	급여, 급여명부	페이롤	noun
+penthouse	펜트하우스	펜트하우스	noun
+pharmaceutical	의약품, 제약	파마수티컬	noun
+placement	배치, 배치고사	플레이스먼트	noun
+plaintiff	원고	플레인티프	noun
+playback	재생	플레이백	noun
+policyholder	보험계약자	폴리시홀더	noun
+polypropylene	폴리프로필렌	폴리프로필렌	noun
+popup	팝업	팝업	noun
+portfolio	포트폴리오	포트폴리오	noun
+postcode	우편번호	포스트코드	noun
+postmark	소인	포스트마크	noun
+postponement	연기	포스트폰먼트	noun
+precedence	우선, 우선순위	프레시던스	noun
+precondition	전제조건	프리컨디션	noun
+predicate	서술어, 술어	프레디킷	noun
+preface	서문, 머리말	프리피스	noun
+prefix	접두사	프리픽스	noun
+prepayment	선불, 선납	프리페이먼트	noun
+preschool	유치원	프리스쿨	noun
+presumption	추정	프리점프션	noun
+preview	미리보기, 시사회, 프리뷰	프리뷰	noun
+printout	출력물	프린트아웃	noun
+procurement	조달	프로큐어먼트	noun
+prohibition	금지, 금주법	프로히비션	noun
+proprietor	소유주, 경영자	프로프라이어터	noun
+propulsion	추진, 추진력	프로펄션	noun
+prospectus	안내서, 투자설명서	프로스펙터스	noun
+protector	보호자, 보호대	프로텍터	noun
+proxy	대리, 대리인, 프록시	프록시	noun
+query	질문, 쿼리	쿼리	noun
+quota	할당량, 쿼터	쿼터	noun
+radioactivity	방사능	레이디오액티비티	noun
+rebate	환급, 리베이트	리베이트	noun
+receivable	미수금	리시버블	noun
+reclamation	간척, 개간	레클러메이션	noun
+recruit	신병, 신입	리크루트	noun
+recruitment	채용, 모집	리크루트먼트	noun
+recurrence	재발	리커런스	noun
+redemption	구원, 상환	리뎀션	noun
+regex	정규표현식	레젝스	noun
+registrar	등록담당자, 학적과	레지스트라	noun
+registry	등록소, 레지스트리	레지스트리	noun
+regulator	규제기관, 조절기	레귤레이터	noun
+reimbursement	상환, 환급	리임버스먼트	noun
+reinstatement	복직, 복원	리인스테이트먼트	noun
+reinvestment	재투자	리인베스트먼트	noun
+reissue	재발행, 재발급	리이슈	noun
+relic	유물, 유적	렐릭	noun
+remittance	송금	리미턴스	noun
+remuneration	보수, 급여	리뮤너레이션	noun
+renewal	갱신, 재개	리뉴얼	noun
+reorganization	개편, 재편성	리오거니제이션	noun
+reparation	배상, 보상	레퍼레이션	noun
+repayment	상환	리페이먼트	noun
+repository	저장소	레포지토리	noun
+repurchase	재구매, 환매	리퍼처스	noun
+resettlement	재정착, 이주	리세틀먼트	noun
+respondent	응답자	리스폰던트	noun
+restructuring	구조조정	리스트럭처링	noun
+resumption	재개	리점프션	noun
+retention	유지, 보유	리텐션	noun
+retraction	철회, 취소	리트렉션	noun
+retrieval	검색, 회수	리트리벌	noun
+retry	재시도	리트라이	noun
+reuse	재사용	리유스	noun
+reversal	역전, 반전	리버설	noun
+revival	부활, 회복	리바이벌	noun
+ripple	잔물결, 파문	리플	noun
+salinity	염분, 염도	설리니티	noun
+schema	스키마, 도식	스키마	noun
+seaweed	해초, 김, 미역	시위드	noun
+segment	부분, 구간, 세그먼트	세그먼트	noun
+seniority	연공서열, 선임	시니오리티	noun
+severance	퇴직금, 단절	세버런스	noun
+shareholder	주주	쉐어홀더	noun
+shipyard	조선소	쉽야드	noun
+shoal	떼, 여울	숄	noun
+sickbed	병상	식베드	noun
+sigma	시그마	시그마	noun
+signatory	서명자, 서명국	시그너토리	noun
+slaughterhouse	도살장	슬로터하우스	noun
+socket	소켓, 콘센트	소켓	noun
+solicitation	권유, 간청	설리시테이션	noun
+specimen	표본, 견본	스페시먼	noun
+sponsorship	후원, 스폰서십	스폰서십	noun
+spur	박차, 자극	스퍼	noun
+stakeholder	이해관계자	스테이크홀더	noun
+standalone		스탠드얼론	adj
+static	정전기	스태틱	noun
+statute	법령, 법규	스테추트	noun
+stillbirth	사산	스틸버스	noun
+stipulation	조항, 규정	스티퓰레이션	noun
+stockholder	주주	스톡홀더	noun
+stockpile	비축물, 비축	스톡파일	noun
+stopover	경유, 기착	스톱오버	noun
+stripe	줄무늬, 스트라이프	스트라이프	noun
+stronghold	요새, 거점	스트롱홀드	noun
+stub	꽁초, 쪼가리	스터브	noun
+subcategory	하위범주, 하위분류	서브카테고리	noun
+subcommittee	소위원회	서브커미티	noun
+subcontract	하청, 하도급	서브컨트렉트	noun
+subcontractor	하청업체, 하도급업체	서브컨트렉터	noun
+subsidiary	자회사	서브시디어리	noun
+subsidy	보조금	서브시디	noun
+substation	변전소	서브스테이션	noun
+substitution	대체, 치환	서브스티튜션	noun
+subtotal	소계	서브토탈	noun
+subtraction	뺄셈	서브트렉션	noun
+suffix	접미사	서픽스	noun
+suitability	적합성	수터빌리티	noun
+sulfur	황	설퍼	noun
+surcharge	추가요금, 할증료	서차지	noun
+suspense	긴장감, 서스펜스	서스펜스	noun
+symposium	심포지엄, 학술토론회	심포지엄	noun
+synchronization	동기화	싱크로나이제이션	noun
+syndicate	신디케이트, 연합	신디케이트	noun
+takeover	인수, 장악	테이크오버	noun
+tariff	관세	테리프	noun
+taxation	과세, 조세	텍세이션	noun
+telecommunication	통신, 전기통신	텔레커뮤니케이션	noun
+telecommuting	재택근무	텔레커뮤팅	noun
+template	템플릿, 서식	템플릿	noun
+tenure	재임기간, 종신재직권	테뉴어	noun
+termination	종료, 해지	터미네이션	noun
+terminology	용어, 전문용어	터미놀로지	noun
+theta	세타	세타	noun
+thumbnail	썸네일, 엄지손톱	썸네일	noun
+tier	계층, 등급	티어	noun
+timeframe	기간, 시간대	타임프레임	noun
+tonnage	톤수	터니지	noun
+toxicity	독성	톡시시티	noun
+trademark	상표, 트레이드마크	트레이드마크	noun
+trainee	연수생, 수습생	트레이니	noun
+tranche	트랑슈, 분할발행분	트랑슈	noun
+transcript	성적증명서, 대본, 녹취록	트랜스크립트	noun
+trustee	수탁자, 이사	트러스티	noun
+turbo	터보	터보	noun
+turnpike	유료고속도로	턴파이크	noun
+underpass	지하도	언더패스	noun
+utilization	활용, 이용	유틸라이제이션	noun
+vacancy	빈자리, 공석, 빈방	베이컨시	noun
+valuation	평가, 가치평가	밸류에이션	noun
+variance	분산, 차이	베리언스	noun
+verification	확인, 검증	베리피케이션	noun
+viaduct	고가교, 육교	바이어덕트	noun
+volatility	변동성	볼라틸리티	noun
+voltage	전압	볼티지	noun
+waybill	화물운송장	웨이빌	noun
+wholesale	도매	홀세일	noun
+widget	위젯	위젯	noun
+grant	보조금, 지원금	그랜트	noun
+judge	판사, 심판, 심사위원	저지	noun
+list	목록, 리스트	리스트	noun
+mark	표시, 자국, 점수, 마크	마크	noun
+skip		스킵	verb
+win	승리	윈	noun
+exciting		익사이팅	adj
+hidden		히든	adj
+limited		리미티드	adj
+major	전공, 메이저	메이저	noun
+real		리얼	adj
+rich		리치	adj
+understanding	이해, 이해심	언더스탠딩	noun
+shocking		쇼킹	adj
+ending	결말, 끝	엔딩	noun
+reading	독서, 읽기	리딩	noun
+training	훈련, 교육, 트레이닝	트레이닝	noun
+shopping	쇼핑, 장보기	쇼핑	noun
+cleaning	청소	클리닝	noun
+cooking	요리	쿠킹	noun
+beginning	시작, 처음	비기닝	noun
+deploy		디플로이	verb
+interactive		인터랙티브	adj
+optional		옵셔널	adj
+super		슈퍼	adj,adv
+breakthrough	돌파구	브레이크스루	noun
+chaos	혼돈, 혼란	카오스	noun
+consistency	일관성, 농도	컨시스턴시	noun
+earnings	소득, 수입, 실적	어닝스	noun
+ethics	윤리, 윤리학	에식스	noun
+flexibility	유연성, 융통성	플렉서빌리티	noun
+funding	자금	펀딩	noun
+grace	우아함, 은혜, 품위	그레이스	noun
+greed	탐욕, 욕심	그리드	noun
+hunger	배고픔, 굶주림	헝거	noun
+illustration	삽화, 일러스트, 예시	일러스트레이션	noun
+momentum	추진력, 탄력, 운동량	모멘텀	noun
+reminder	알림	리마인더	noun
+suffering	고통, 괴로움	서퍼링	noun
+variation	변화, 변형, 변이	베리에이션	noun
+burp	트림	버프	noun
+clash	충돌	클래시	noun
+contest	대회, 경연	콘테스트	noun
+reboot	재부팅	리부트	noun
+shuffle	셔플, 섞기	셔플	noun
+supplement	보충제, 보충	서플먼트	noun
+underline	밑줄	언더라인	noun
+zoom	줌, 확대	줌	noun
+sentimental		센티멘탈	adj
+advertising	광고	애드버타이징	noun
+archive	아카이브, 기록보관소	아카이브	noun
+climax	절정, 클라이맥스	클라이맥스	noun
+debut	데뷔	데뷔	noun
+immunity	면역, 면책	이뮤니티	noun
+overview	개요	오버뷰	noun
+sequel	속편	시퀄	noun
+following	팔로잉, 추종자	팔로잉	noun
+living	생활, 생계	리빙	noun
+thinking	생각, 사고	싱킹	noun
+saying	속담, 격언	세잉	noun
+heating	난방	히팅	noun
+learning	학습, 배움	러닝	noun
+marketing	마케팅	마케팅	noun
+parenting	육아	페어런팅	noun
+housing	주택, 주거	하우징	noun
+spending	지출, 소비	스펜딩	noun
+dating	데이트, 연애	데이팅	noun
+bullying	괴롭힘, 왕따	불링	noun
+ranking	순위, 랭킹	랭킹	noun
+timing	타이밍, 시기	타이밍	noun
+hearing	청력, 청문회	히어링	noun
+glare	눈부심	글레어	noun
+adolescence	청소년기, 사춘기	에돌레선스	noun
+advocacy	옹호, 지지	에드버커시	noun
+affinity	친밀감, 친화력	어피니티	noun
+anguish	고뇌, 괴로움	엥귀시	noun
+aptitude	적성, 소질	엡티튜드	noun
+assurance	보증, 확신, 보험	어슈어런스	noun
+bliss	축복	블리스	noun
+brilliance	탁월함, 광채	브릴리언스	noun
+census	인구조사	센서스	noun
+complication	합병증	컴플리케이션	noun
+constraint	제약, 제한	컨스트레인트	noun
+continuity	연속성	컨티뉴이티	noun
+deceit	속임수, 기만	디시트	noun
+deprivation	박탈, 결핍	디프리베이션	noun
+devotion	헌신, 전념	디보션	noun
+doctrine	교리, 원칙, 독트린	독트린	noun
+endeavor	노력, 시도	인데버	noun
+equilibrium	평형, 균형	이퀼리브리엄	noun
+exploitation	착취, 개발	익스플로이테이션	noun
+familiarity	친숙함	퍼밀리에리티	noun
+fascination	매혹, 매력	페시네이션	noun
+hierarchy	계층, 위계	하이어라키	noun
+hostility	적대감, 적의	호스틸리티	noun
+interference	간섭, 방해	인터피어런스	noun
+justification	정당화, 명분	저스티피케이션	noun
+legitimacy	정당성, 합법성	레지티머시	noun
+literacy	문해력	리터러시	noun
+morale	사기	모럴	noun
+neutrality	중립	뉴트럴리티	noun
+norm	규범, 표준	놈	noun
+novelty	새로움, 참신함	노벨티	noun
+obedience	복종, 순종	오비디언스	noun
+paradox	역설, 모순	패러독스	noun
+persuasion	설득	퍼스웨이전	noun
+prestige	명성, 위신	프레스티지	noun
+pretense	가식, 핑계	프리텐스	noun
+provocation	도발, 자극	프로버케이션	noun
+publicity	홍보, 평판	퍼블리시티	noun
+reconciliation	화해	레컨실리에이션	noun
+recreation	오락, 레크리에이션	레크리에이션	noun
+rehabilitation	재활, 회복	리허빌리테이션	noun
+relevance	관련성, 타당성	렐러번스	noun
+reliability	신뢰성	릴라이어빌리티	noun
+reluctance	꺼림	릴럭턴스	noun
+restraint	억제, 자제	리스트레인트	noun
+reverence	경외, 존경	레버런스	noun
+rigor	엄격함	리거	noun
+rivalry	경쟁, 경쟁의식	라이벌리	noun
+scarcity	부족, 결핍	스케어시티	noun
+scrutiny	감시	스크루티니	noun
+setback	차질, 좌절	셋백	noun
+skepticism	회의론, 회의	스켑티시즘	noun
+stimulus	자극	스티뮬러스	noun
+synthesis	합성, 종합	신서시스	noun
+temperament	기질, 성격	템퍼러먼트	noun
+turmoil	혼란, 소란	터모일	noun
+urgency	긴급, 다급함	어전시	noun
+vitality	활력, 생명력	바이텔리티	noun
+vulnerability	취약성, 약점	벌너러빌리티	noun
+zeal	열의, 열정	질	noun
+acclaim	찬사	어클레임	noun
+barter	물물교환	바터	noun
+brainstorm	브레인스토밍	브레인스톰	noun
+chant	구호, 성가	첸트	noun
+clamp	클램프, 죔쇠	클램프	noun
+crease	주름, 구김	크리스	noun
+detour	우회, 우회로	디투어	noun
+dismay	실망, 당혹	디스메이	noun
+doodle	낙서	두들	noun
+embed		임베드	verb
+foil	호일	호일	noun
+fume	매연, 연기	퓸	noun
+grimace	찡그림	그리머스	noun
+hijack	하이재킹, 납치	하이잭	noun
+hinge	경첩	힌지	noun
+hover		호버	verb
+jolt	충격	졸트	noun
+lash	속눈썹, 채찍질	레시	noun
+lull	소강상태	럴	noun
+lunge	런지	런지	noun
+maneuver	기동, 책략	머누버	noun
+outperform		아웃퍼폼	verb
+overhaul	정비, 점검	오버홀	noun
+overload	과부하	오버로드	noun
+override		오버라이드	verb
+overuse	남용	오버유스	noun
+paraphrase	의역	페러프레이즈	noun
+parody	패러디	패러디	noun
+pioneer	개척자, 선구자	파이어니어	noun
+premiere	개봉, 초연	프리미어	noun
+puncture	펑크	펑처	noun
+rampage	난동	렘페이지	noun
+recoil	반동	리코일	noun
+recount	재검표	리카운트	noun
+redesign	리디자인	리디자인	noun
+redirect		리다이렉트	verb
+relapse	재발	릴렙스	noun
+relay	릴레이, 계주	릴레이	noun
+relish	렐리시	렐리시	noun
+rupture	파열	럽처	noun
+salute	경례	설루트	noun
+salvage	인양	셀비지	noun
+shriek	비명	슈리크	noun
+slander	비방, 중상모략	슬렌더	noun
+slash	슬래시	슬래시	noun
+smear	얼룩, 비방	스미어	noun
+snooze	스누즈, 선잠	스누즈	noun
+sprout	새싹, 싹	스프라우트	noun
+squat	스쿼트	스쿼트	noun
+stride	보폭	스트라이드	noun
+swarm	떼, 무리	스웜	noun
+swindle	사기	스윈들	noun
+tally	집계	텔리	noun
+toil	수고	토일	noun
+underscore	밑줄, 언더스코어	언더스코어	noun
+usher	안내원	어셔	noun
+zigzag	지그재그	지그재그	noun
+acoustic		어쿠스틱	adj
+agile		에자일	adj
+analog	아날로그	아날로그	noun
+binding	바인딩, 제본	바인딩	noun
+demographic	인구층	데모그래픽	noun
+elastic	고무줄	일레스틱	noun
+generic	제네릭, 복제약	제네릭	noun
+glossy		글로시	adj
+humorous		유머러스	adj
+longing	그리움, 갈망	롱잉	noun
+mellow		멜로우	adj
+miniature	미니어처	미니어처	noun
+petite		쁘띠	adj
+responsive		리스폰시브	adj
+sensational		센세이셔널	adj
+stout	스타우트, 흑맥주	스타우트	noun
+tactical		택티컬	adj
+upbeat		업비트	adj
+visionary	선지자, 몽상가	비저너리	noun
+absorption	흡수	업소프션	noun
+abstraction	추상, 추상화	엡스트렉션	noun
+absurdity	부조리, 터무니없음	업서디티	noun
+accessibility	접근성	액세서빌리티	noun
+acknowledgment	인정, 감사의말	엑놀리지먼트	noun
+adaptability	적응력	어댑터빌리티	noun
+adherence	고수, 준수	어드히어런스	noun
+adverb	부사	에드버브	noun
+adversary	적, 상대	에드버서리	noun
+advisory	주의보	어드바이저리	noun
+aesthetics	미학	에스테틱스	noun
+aftermath	여파, 후유증	애프터메스	noun
+agility	민첩성	어질리티	noun
+agitation	동요, 불안	에지테이션	noun
+alienation	소외	에일리어네이션	noun
+allegiance	충성	얼리전스	noun
+ambiguity	모호함	엠비규어티	noun
+amenity	편의시설	어메니티	noun
+amnesty	사면	엠니스티	noun
+amplitude	진폭	엠플리튜드	noun
+analogy	비유, 유추	어넬러지	noun
+anarchy	무정부상태	에너키	noun
+animosity	적대감	에니모시티	noun
+anomaly	이상, 변칙	어노멀리	noun
+antiquity	고대, 골동품	엔티퀴티	noun
+antonym	반의어	엔터님	noun
+apathy	무관심	에퍼시	noun
+aperture	구멍, 조리개	에퍼처	noun
+apparatus	장치, 기구	애퍼래터스	noun
+appendix	부록, 맹장	어펜딕스	noun
+apprehension	불안, 체포	에프리헨션	noun
+apprenticeship	견습, 수습	어프렌티스십	noun
+approximation	근사치	어프록시메이션	noun
+arbitration	중재	아비트레이션	noun
+archaeology	고고학	아키올러지	noun
+articulation	표현, 발음, 관절	아티큘레이션	noun
+ascent	상승, 오르막	어센트	noun
+assertion	주장, 단언	어서션	noun
+assimilation	동화, 흡수	어시밀레이션	noun
+asymmetry	비대칭	에이시메트리	noun
+audacity	대담함, 뻔뻔함	오데시티	noun
+austerity	긴축, 내핍	오스테리티	noun
+aversion	혐오, 반감	어버전	noun
+avoidance	회피	어보이던스	noun
+backlash	반발	백래시	noun
+backlog	밀린일, 적체	백로그	noun
+bailout	구제금융	베일아웃	noun
+banter	농담, 놀림	벤터	noun
+benefactor	후원자	베니펙터	noun
+bibliography	참고문헌	비블리오그래피	noun
+bigotry	편견, 편협함	비거트리	noun
+biotechnology	생명공학	바이오테크놀로지	noun
+blasphemy	신성모독	블레스퍼미	noun
+blockade	봉쇄	블로케이드	noun
+blunder	실수, 큰실수	블런더	noun
+bookkeeping	부기, 장부정리	북키핑	noun
+boycott	보이콧, 불매운동	보이콧	noun
+bravado	허세	브러바도	noun
+brevity	간결함	브레비티	noun
+bribery	뇌물수수	브라이버리	noun
+brutality	잔인함, 만행	브루텔리티	noun
+caliber	구경, 역량	켈리버	noun
+camaraderie	동지애	카머라더리	noun
+caricature	캐리커처, 풍자화	캐리커처	noun
+carnage	대학살	카니지	noun
+cartel	카르텔	카르텔	noun
+causality	인과관계	코젤리티	noun
+chronology	연대기, 연표	크러놀러지	noun
+citation	인용, 표창	사이테이션	noun
+civility	정중함, 예의	시빌리티	noun
+clarification	설명, 해명	클레리피케이션	noun
+cliche	진부한표현, 클리셰	클리셰	noun
+clientele	고객층	클라이언텔	noun
+coercion	강요, 강압	코어전	noun
+cognition	인지	코그니션	noun
+coherence	일관성	코히런스	noun
+cohesion	결속, 응집력	코히전	noun
+collusion	공모, 결탁	컬루전	noun
+combustion	연소	컴버스천	noun
+commencement	시작, 졸업식	커멘스먼트	noun
+compatibility	호환성, 궁합	컴페터빌리티	noun
+compilation	편집, 모음집	컴필레이션	noun
+complacency	자기만족, 안주	컴플레이선시	noun
+compulsion	강박, 강요	컴펄전	noun
+confidentiality	기밀성, 비밀유지	컨피덴셜리티	noun
+configuration	구성, 설정	컨피겨레이션	noun
+confiscation	압수, 몰수	컨피스케이션	noun
+conformity	순응, 일치	컨포미티	noun
+congestion	혼잡, 정체, 코막힘	컨제스천	noun
+conglomerate	대기업, 복합기업	컨글로머릿	noun
+conjecture	추측	컨젝처	noun
+conjunction	접속사, 결합	컨정크션	noun
+connotation	함축, 뉘앙스	코너테이션	noun
+conscription	징병	컨스크립션	noun
+conservatism	보수주의	컨서버티즘	noun
+consolation	위로, 위안	컨설레이션	noun
+consortium	컨소시엄	컨소시엄	noun
+contamination	오염	컨테미네이션	noun
+contemplation	사색, 숙고	컨템플레이션	noun
+contention	논쟁, 주장	컨텐션	noun
+contraception	피임	컨트러셉션	noun
+contraction	수축, 축약	컨트렉션	noun
+cornerstone	초석, 주춧돌	코너스톤	noun
+corrosion	부식	커로전	noun
+counterfeit	위조품	카운터핏	noun
+cowardice	비겁함	카워디스	noun
+credential	자격증명, 자격	크리덴셜	noun
+creed	신조, 교리	크리드	noun
+critique	비평, 평론	크리티크	noun
+crusade	십자군, 운동	크루세이드	noun
+cryptography	암호학	크립토그래피	noun
+culmination	정점, 절정	컬미네이션	noun
+curator	큐레이터	큐레이터	noun
+cybersecurity	사이버보안	사이버시큐리티	noun
+cynicism	냉소, 냉소주의	시니시즘	noun
+deception	속임수, 기만	디셉션	noun
+decomposition	분해, 부패	디컴퍼지션	noun
+decor	장식, 인테리어	데코	noun
+decree	법령, 포고	디크리	noun
+defamation	명예훼손	데퍼메이션	noun
+deference	존중, 경의	데퍼런스	noun
+defiance	반항, 저항	디파이언스	noun
+deficiency	결핍, 부족	디피션시	noun
+deflation	디플레이션	디플레이션	noun
+deformity	기형	디포미티	noun
+degradation	저하, 비하, 분해	데그러데이션	noun
+deity	신	디이티	noun
+delinquency	비행, 연체	딜링퀀시	noun
+delusion	망상	딜루전	noun
+demise	종말, 사망	디마이즈	noun
+deployment	배치, 배포	디플로이먼트	noun
+deportation	추방	디포테이션	noun
+deterioration	악화	디티어리어레이션	noun
+deterrent	억지력, 억제책	디터런트	noun
+dexterity	손재주, 솜씨	덱스테리티	noun
+dichotomy	이분법	다이코터미	noun
+dictation	받아쓰기	딕테이션	noun
+diction	발음, 어법	딕션	noun
+diffusion	확산	디퓨전	noun
+digestion	소화	다이제스천	noun
+digression	여담, 탈선	다이그레션	noun
+discord	불화	디스코드	noun
+discrepancy	불일치, 차이	디스크레펀시	noun
+discretion	재량, 신중함	디스크레션	noun
+disdain	경멸	디스데인	noun
+disillusionment	환멸	디스일루전먼트	noun
+disparity	격차, 불균형	디스페리티	noun
+disruption	혼란, 붕괴, 중단	디스럽션	noun
+dissent	반대, 이의	디센트	noun
+dissertation	논문, 학위논문	디서테이션	noun
+dissolution	해산, 해체	디설루션	noun
+distortion	왜곡	디스토션	noun
+distraction	기분전환	디스트렉션	noun
+divergence	분기, 차이	다이버전스	noun
+divinity	신성, 신학	디비니티	noun
+dogma	교리, 독단	도그마	noun
+domination	지배	도미네이션	noun
+dosage	복용량	도시지	noun
+downturn	침체, 하락	다운턴	noun
+drawback	단점, 결점	드로백	noun
+dropout	중퇴자	드롭아웃	noun
+duality	이중성	듀엘리티	noun
+dynamics	역학, 역동성	다이나믹스	noun
+ecstasy	황홀감, 엑스터시	엑스터시	noun
+efficacy	효능	에피커시	noun
+elasticity	탄력성	일레스티시티	noun
+electorate	유권자	일렉터릿	noun
+eloquence	웅변, 유창함	엘러퀀스	noun
+emancipation	해방	이멘시페이션	noun
+embargo	금수조치, 엠바고	엠바고	noun
+embezzlement	횡령	임베즐먼트	noun
+embodiment	구현, 화신	임보디먼트	noun
+emigration	이민, 이주	에미그레이션	noun
+empowerment	권한부여, 역량강화	임파워먼트	noun
+endorsement	지지, 보증, 광고모델	인도스먼트	noun
+endowment	기부금, 재능	인다우먼트	noun
+enigma	수수께끼	이니그마	noun
+entrepreneurship	기업가정신	앙트러프러너십	noun
+epilogue	에필로그	에필로그	noun
+epiphany	깨달음	이피퍼니	noun
+epitome	전형, 본보기	이피터미	noun
+eradication	근절, 박멸	이레디케이션	noun
+escalation	확대, 상승	에스컬레이션	noun
+etiquette	에티켓, 예절	에티켓	noun
+euphoria	행복감, 도취감	유포리아	noun
+evacuation	대피, 피난	이베큐에이션	noun
+evasion	회피, 탈세	이베이전	noun
+exodus	대탈출, 대이동	엑서더스	noun
+extortion	강탈, 갈취	익스토션	noun
+extradition	범죄인인도	엑스트러디션	noun
+extravagance	사치, 낭비	익스트레버건스	noun
+extremism	극단주의	익스트리미즘	noun
+faction	파벌, 당파	팩션	noun
+fallacy	오류, 그릇된생각	펠러시	noun
+fatality	사망자, 치사율	퍼텔리티	noun
+feasibility	타당성, 실현가능성	피저빌리티	noun
+felony	중범죄	펠러니	noun
+feminism	페미니즘, 여성주의	페미니즘	noun
+fertility	비옥함, 생식력	퍼틸리티	noun
+feud	불화, 반목	퓨드	noun
+fidelity	충실, 정절	피델리티	noun
+forensics	법의학, 포렌식	포렌식	noun
+foresight	선견지명	포사이트	noun
+fortitude	불굴의용기	포티튜드	noun
+fraternity	형제애, 남학생사교클럽	프러터니티	noun
+friction	마찰	프릭션	noun
+fundraising	모금, 기금마련	펀드레이징	noun
+futility	무익함, 헛됨	퓨틸리티	noun
+generalization	일반화	제너럴리제이션	noun
+geology	지질학	지올러지	noun
+globalization	세계화	글로벌리제이션	noun
+glossary	용어집	글로서리	noun
+gluttony	폭식, 탐식	글러터니	noun
+governance	거버넌스, 통치	거버넌스	noun
+gratification	만족	그레티피케이션	noun
+grievance	불만, 고충	그리번스	noun
+hallmark	특징, 품질보증	홀마크	noun
+havoc	대혼란, 큰피해	헤벅	noun
+hegemony	패권, 헤게모니	헤게모니	noun
+heresy	이단	헤러시	noun
+heyday	전성기	헤이데이	noun
+hindsight	뒤늦은깨달음	하인드사이트	noun
+homage	경의, 오마주	오마주	noun
+humiliation	굴욕, 창피	휴밀리에이션	noun
+hydration	수분공급	하이드레이션	noun
+hyperbole	과장법	하이퍼벌리	noun
+hysteria	히스테리	히스테리아	noun
+idealism	이상주의	아이디얼리즘	noun
+idiom	관용구, 숙어	이디엄	noun
+illiteracy	문맹	일리터러시	noun
+immersion	몰입, 담금	이머전	noun
+impeachment	탄핵	임피치먼트	noun
+impetus	자극, 추진력	임피터스	noun
+inaccuracy	부정확	이네큐러시	noun
+incarceration	투옥, 수감	인카서레이션	noun
+incompetence	무능	인컴퍼턴스	noun
+inconsistency	불일치, 모순	인컨시스턴시	noun
+incumbent	현직자	인컴번트	noun
+indigestion	소화불량	인디제스천	noun
+indignation	분개	인디그네이션	noun
+indulgence	탐닉, 관대	인덜전스	noun
+industrialization	산업화	인더스트리얼리제이션	noun
+inefficiency	비효율	이니피션시	noun
+inertia	관성, 타성	이너샤	noun
+infancy	유아기, 초기	인펀시	noun
+inference	추론	인퍼런스	noun
+inferiority	열등, 열등감	인피리오리티	noun
+infinity	무한, 무한대	인피니티	noun
+influx	유입	인플럭스	noun
+ingenuity	독창성, 기발함	인저뉴어티	noun
+inhibition	억제, 거리낌	인히비션	noun
+initiation	입문, 개시, 가입식	이니시에이션	noun
+injunction	금지명령	인정크션	noun
+innuendo	빈정거림, 암시	이뉴엔도	noun
+inscription	비문, 새긴글	인스크립션	noun
+insurgency	반란	인서전시	noun
+interception	가로채기, 인터셉트	인터셉션	noun
+intermission	중간휴식, 인터미션	인터미션	noun
+intimidation	협박, 위협	인티미데이션	noun
+intoxication	중독, 취함	인톡시케이션	noun
+introspection	자기성찰	인트러스펙션	noun
+intrusion	침입, 침해	인트루전	noun
+irrigation	관개	이리게이션	noun
+irritation	짜증, 자극	이리테이션	noun
+itinerary	여행일정	아이티너레리	noun
+jargon	전문용어, 은어	자곤	noun
+jeopardy	위험	제퍼디	noun
+juxtaposition	병치, 나란히놓기	적스터퍼지션	noun
+kinship	친족관계, 유대감	킨십	noun
+layoff	정리해고	레이오프	noun
+leniency	관대함	리니언시	noun
+lethargy	무기력	레서지	noun
+lexicon	어휘, 사전	렉시컨	noun
+liberalism	자유주의	리버럴리즘	noun
+lineage	혈통, 계보	리니지	noun
+linguistics	언어학	링귀스틱스	noun
+logistics	물류, 실행계획	로지스틱스	noun
+longevity	장수, 수명	론제비티	noun
+lust	욕정, 정욕	러스트	noun
+mainstream	주류, 메인스트림	메인스트림	noun
+malfunction	고장, 오작동	멜펑크션	noun
+malpractice	의료과실, 위법행위	멜프렉티스	noun
+manifestation	표현, 징후	메니페스테이션	noun
+manifesto	선언문	매니페스토	noun
+manipulation	조작, 조종	머니퓰레이션	noun
+mantra	주문, 만트라	만트라	noun
+materialism	물질주의, 유물론	머티리얼리즘	noun
+mentality	사고방식	멘텔리티	noun
+merger	합병	머저	noun
+metabolism	신진대사, 대사	머테벌리즘	noun
+metamorphosis	변태, 탈바꿈	메터모퍼시스	noun
+meteorology	기상학	미티어롤러지	noun
+metropolis	대도시	머트로폴리스	noun
+minimalism	미니멀리즘	미니멀리즘	noun
+misconception	오해	미스컨셉션	noun
+misconduct	위법행위, 비행	미스컨덕트	noun
+misdemeanor	경범죄	미스디미너	noun
+misinformation	잘못된정보, 허위정보	미스인포메이션	noun
+monotony	단조로움	머노터니	noun
+morphology	형태학	모폴러지	noun
+motif	모티프	모티프	noun
+multiplication	곱셈	멀티플리케이션	noun
+mutation	돌연변이, 변이	뮤테이션	noun
+mutiny	반란	뮤티니	noun
+narration	내레이션, 서술	내레이션	noun
+negativity	부정적태도	네거티비티	noun
+nepotism	족벌주의	네퍼티즘	noun
+neurology	신경학	뉴롤러지	noun
+nihilism	허무주의	니힐리즘	noun
+notoriety	악명	노터라이어티	noun
+nourishment	영양, 자양분	너리시먼트	noun
+nuance	뉘앙스	뉘앙스	noun
+obituary	부고	오비추어리	noun
+objectivity	객관성	오브젝티비티	noun
+oblivion	망각	어블리비언	noun
+obscurity	무명, 모호함	업스큐리티	noun
+obstruction	방해, 장애물	업스트럭션	noun
+oligarchy	과두정치	올리가키	noun
+optimization	최적화	옵티마이제이션	noun
+ordinance	조례, 법령	오디넌스	noun
+outburst	폭발, 분출	아웃버스트	noun
+outreach	봉사활동, 지원활동	아웃리치	noun
+oversight	감독, 실수	오버사이트	noun
+pacifism	평화주의	페시피즘	noun
+paradigm	패러다임	패러다임	noun
+paranoia	편집증	파라노이아	noun
+parity	동등, 패리티	패리티	noun
+participle	분사	파티시플	noun
+paternity	부성, 친자관계	퍼터니티	noun
+patriarchy	가부장제	페이트리아키	noun
+patronage	후원, 애용	페트러니지	noun
+penance	속죄, 참회	페넌스	noun
+perjury	위증	퍼저리	noun
+permanence	영속성	퍼머넌스	noun
+perpetrator	가해자, 범인	퍼페트레이터	noun
+pessimism	비관주의	페시미즘	noun
+philanthropy	자선	필렌스러피	noun
+phonetics	음성학	포네틱스	noun
+piety	경건함	파이어티	noun
+plagiarism	표절	플레이저리즘	noun
+plausibility	타당성	플로저빌리티	noun
+plea	간청, 탄원	플리	noun
+plethora	과다	플레서라	noun
+pluralism	다원주의	플루럴리즘	noun
+plurality	복수, 다수	플루럴리티	noun
+poise	침착, 균형	포이즈	noun
+polarity	극성	폴레리티	noun
+polarization	양극화	폴러라이제이션	noun
+populace	대중, 민중	포퓰러스	noun
+populism	포퓰리즘	포퓰리즘	noun
+posterity	후세, 후대	포스테리티	noun
+potency	효능, 힘	포턴시	noun
+pragmatism	실용주의	프레그머티즘	noun
+preamble	전문, 서문	프리엠블	noun
+precinct	관할구역, 선거구	프리싱크트	noun
+predecessor	전임자	프레디세서	noun
+predicament	곤경	프리디커먼트	noun
+predisposition	성향, 소인	프리디스퍼지션	noun
+premonition	예감	프리머니션	noun
+prerequisite	전제조건, 선수과목	프리레퀴짓	noun
+pretext	구실, 핑계	프리텍스트	noun
+prevalence	유행, 보급	프레벌런스	noun
+proclamation	선언, 포고	프로클러메이션	noun
+proficiency	숙달, 능숙	프러피션시	noun
+prognosis	예후, 예측	프로그노시스	noun
+proliferation	확산, 급증	프럴리퍼레이션	noun
+prominence	두드러짐, 명성	프로미넌스	noun
+propensity	경향, 성향	프러펜시티	noun
+prophecy	예언	프로퍼시	noun
+proponent	지지자	프러포넌트	noun
+prose	산문	프로즈	noun
+providence	섭리	프로비던스	noun
+proximity	근접, 가까움	프록시미티	noun
+prudence	신중함	프루던스	noun
+psyche	정신, 마음	사이키	noun
+psychiatry	정신의학	사이카이어트리	noun
+psychosis	정신병	사이코시스	noun
+purification	정화	퓨리피케이션	noun
+quandary	곤경, 진퇴양난	콴더리	noun
+quorum	정족수	쿼럼	noun
+ramification	파장, 영향	레미피케이션	noun
+rapport	친밀한관계, 라포	라포	noun
+rarity	희귀함, 희귀품	레어리티	noun
+ratification	비준	레티피케이션	noun
+rationale	근거, 이유	레셔널	noun
+rationality	합리성	레셔넬리티	noun
+realism	현실주의, 사실주의	리얼리즘	noun
+rebuttal	반박	리버틀	noun
+recital	발표회, 리사이틀	리사이틀	noun
+reciprocity	호혜, 상호성	레시프로시티	noun
+recluse	은둔자	레클루스	noun
+reconnaissance	정찰	리코너선스	noun
+reconstruction	재건, 복원	리컨스트럭션	noun
+redundancy	중복, 정리해고	리던던시	noun
+refinement	정제, 세련	리파인먼트	noun
+reinforcement	강화, 증원	리인포스먼트	noun
+remembrance	추모, 기억	리멤브런스	noun
+rendition	연주, 해석	렌디션	noun
+renovation	개조, 보수, 리노베이션	레노베이션	noun
+repercussion	영향, 파장	리퍼커션	noun
+repertoire	레퍼토리	레퍼토리	noun
+repression	억압	리프레션	noun
+reproduction	번식, 복제, 재생	리프러덕션	noun
+resonance	공명, 울림	레저넌스	noun
+respiration	호흡	레스피레이션	noun
+respite	휴식, 유예	레스핏	noun
+restitution	배상, 반환	레스티튜션	noun
+resurgence	부활, 재기	리서전스	noun
+resurrection	부활	레저렉션	noun
+retaliation	보복	리텔리에이션	noun
+retribution	응징, 보복	레트리뷰션	noun
+retrospect	회고	레트러스펙트	noun
+rift	균열, 불화	리프트	noun
+rigidity	경직성	리지디티	noun
+sanctity	신성함	셍크티티	noun
+sanity	제정신, 온전한정신	세니티	noun
+satire	풍자	세타이어	noun
+saturation	포화, 채도	세처레이션	noun
+secession	분리독립, 탈퇴	시세션	noun
+secrecy	비밀, 비밀유지	시크러시	noun
+secularism	세속주의	세큘러리즘	noun
+segregation	분리, 차별	세그리게이션	noun
+semantics	의미론	시맨틱스	noun
+severity	심각성, 엄격함	시베리티	noun
+simplification	단순화	심플리피케이션	noun
+sociology	사회학	소시올러지	noun
+solvency	지불능력	솔번시	noun
+spontaneity	자발성, 즉흥성	스폰터니이티	noun
+stagnation	정체, 침체	스테그네이션	noun
+stamina	체력, 지구력, 스태미나	스태미나	noun
+stealth	잠행, 스텔스	스텔스	noun
+stigma	오명, 낙인	스티그마	noun
+strife	갈등, 다툼	스트라이프	noun
+subjectivity	주관성	서브젝티비티	noun
+subsistence	생존, 생계	서브시스턴스	noun
+subtlety	미묘함	서틀티	noun
+suffrage	참정권, 선거권	서프리지	noun
+supremacy	패권, 우위	수프레머시	noun
+symbolism	상징주의, 상징성	심벌리즘	noun
+symmetry	대칭	시메트리	noun
+synergy	시너지	시너지	noun
+technicality	전문적인사항, 형식적인사항	테크니켈리티	noun
+tenacity	끈기	터네시티	noun
+theology	신학	시올러지	noun
+tirade	장광설, 비난	타이레이드	noun
+totalitarianism	전체주의	토텔리테리어니즘	noun
+treachery	배신	트레처리	noun
+tribunal	재판소	트라이뷰널	noun
+trilogy	삼부작	트릴러지	noun
+trivia	잡학, 사소한것	트리비아	noun
+truce	휴전	트루스	noun
+turnover	이직률, 매출액, 턴오버	턴오버	noun
+ultimatum	최후통첩	얼티메이텀	noun
+underdog	약자, 언더독	언더독	noun
+unification	통일, 통합	유니피케이션	noun
+uniformity	균일성, 획일성	유니포미티	noun
+upheaval	격변, 대변동	업히벌	noun
+uprising	봉기, 반란	업라이징	noun
+utopia	유토피아	유토피아	noun
+valor	용맹	벨러	noun
+vandalism	기물파손	반달리즘	noun
+velocity	속도	벨로시티	noun
+vendetta	복수, 숙원	벤데타	noun
+versatility	다재다능, 다용도	버서틸리티	noun
+veto	거부권	비토	noun
+viability	생존력, 실행가능성	바이어빌리티	noun
+vigilance	경계, 조심	비질런스	noun
+vocation	천직, 소명	보케이션	noun
+wager	내기	웨이저	noun
+whim	변덕, 일시적기분	윔	noun
+workload	업무량, 작업량	워크로드	noun
+worldview	세계관	월드뷰	noun
+zenith	정점, 천정	제니스	noun
+networking	인맥쌓기, 네트워킹	네트워킹	noun
+banking	은행업, 뱅킹	뱅킹	noun
+pricing	가격책정	프라이싱	noun
+wellbeing	행복, 복지, 웰빙	웰빙	noun
+son	아들	선	noun
+jeans	청바지	진	noun
+shorts	반바지	쇼츠	noun
+root	뿌리	루트	noun
+liver	간	리버	noun
+wolf	늑대	울프	noun
+pilot	조종사, 파일럿	파일럿	noun
+waiter	웨이터, 종업원	웨이터	noun
+printer	프린터	프린터	noun
+charger	충전기	차저	noun
+folder	폴더	폴더	noun
+browser	브라우저	브라우저	noun
+cursor	커서	커서	noun
+plastic	플라스틱	플라스틱	noun
+rubber	고무	러버	noun
+running	달리기	러닝	noun
+swimming	수영	스위밍	noun
+boxing	권투, 복싱	복싱	noun
+skiing	스키	스키잉	noun
+skating	스케이트	스케이팅	noun
+cycling	자전거타기, 사이클	사이클링	noun
+wrestling	레슬링	레슬링	noun
+rugby	럭비	럭비	noun
+parking	주차	파킹	noun
+clothing	옷, 의류	클로딩	noun
+hunter	사냥꾼	헌터	noun
+builder	건축업자	빌더	noun
+trainer	트레이너	트레이너	noun
+designer	디자이너	디자이너	noun
+programmer	프로그래머	프로그래머	noun
+photographer	사진작가, 사진사	포토그래퍼	noun
+baker	제빵사	베이커	noun
+barber	이발사	바버	noun
+gardener	정원사	가드너	noun
+bill	계산서, 청구서, 지폐, 법안	빌	noun
+lighter	라이터	라이터	noun
+banner	배너, 현수막	배너	noun
+pointer	포인터	포인터	noun
+cooler	아이스박스, 쿨러	쿨러	noun
+supper	저녁, 저녁밥	서퍼	noun
+freezer	냉동고, 냉동실	프리저	noun
+toaster	토스터	토스터	noun
+blender	믹서기, 블렌더	블렌더	noun
+scanner	스캐너	스캐너	noun
+router	공유기, 라우터	라우터	noun
+bluetooth	블루투스	블루투스	noun
+eraser	지우개	이레이저	noun
+whiteboard	화이트보드	화이트보드	noun
+marker	마커, 매직	마커	noun
+crayon	크레용	크레용	noun
+highlighter	형광펜	하이라이터	noun
+stapler	스테이플러, 호치키스	스테이플러	noun
+ladder	사다리	래더	noun
+zipper	지퍼	지퍼	noun
+dresser	서랍장	드레서	noun
+scooter	스쿠터	스쿠터	noun
+van	밴, 승합차	밴	noun
+crosswalk	횡단보도	크로스워크	noun
+cliff	절벽	클리프	noun
+rectangle	직사각형	렉텡글	noun
+beige	베이지	베이지	noun
+clay	점토, 찰흙	클레이	noun
+fiance	약혼자	피앙세	noun
+tuna	참치	튜나	noun
+pudding	푸딩	푸딩	noun
+chip	칩, 조각	칩	noun
+milkshake	밀크쉐이크	밀크쉐이크	noun
+pretzel	프레첼	프레첼	noun
+herb	허브, 약초	허브	noun
+ginger	생강	진저	noun
+radish	무	레디시	noun
+celery	셀러리	셀러리	noun
+cauliflower	콜리플라워	콜리플라워	noun
+zucchini	애호박, 주키니	주키니	noun
+kale	케일	케일	noun
+beet	비트	비트	noun
+turnip	순무	터닙	noun
+leek	리크, 대파	리크	noun
+parsley	파슬리	파슬리	noun
+cilantro	고수	실란트로	noun
+chive	부추, 차이브	차이브	noun
+scallion	쪽파, 파	스켈리언	noun
+grapefruit	자몽	그레이프프루트	noun
+tangerine	귤	텐저린	noun
+persimmon	감	퍼시먼	noun
+cranberry	크랜베리	크랜베리	noun
+papaya	파파야	파파야	noun
+pistachio	피스타치오	피스타치오	noun
+cashew	캐슈너트	캐슈	noun
+mussel	홍합	머슬	noun
+scallop	가리비	스켈럽	noun
+popsicle	아이스바, 하드	팝시클	noun
+seasoning	양념, 조미료	시즈닝	noun
+frosting	프로스팅	프로스팅	noun
+icing	아이싱	아이싱	noun
+spatula	뒤집개, 주걱	스패출러	noun
+ladle	국자	레이들	noun
+whisk	거품기	위스크	noun
+wok	웍	웍	noun
+rooster	수탉	루스터	noun
+falcon	매	팰컨	noun
+flamingo	플라밍고	플라밍고	noun
+alligator	악어	엘리게이터	noun
+walrus	바다코끼리	월러스	noun
+otter	수달	오터	noun
+beaver	비버	비버	noun
+ladybug	무당벌레	레이디버그	noun
+slug	민달팽이	슬러그	noun
+dragonfly	잠자리	드래곤플라이	noun
+firefly	반딧불이, 반딧불	파이어플라이	noun
+starfish	불가사리	스타피시	noun
+seahorse	해마	시호스	noun
+rhino	코뿔소	라이노	noun
+jaguar	재규어	재규어	noun
+duckling	새끼오리	덕링	noun
+lotus	연꽃	로터스	noun
+cactus	선인장	켁터스	noun
+fern	고사리, 양치식물	펀	noun
+shrub	관목	슈러브	noun
+twig	잔가지	트위그	noun
+bud	싹, 꽃봉오리	버드	noun
+acorn	도토리	에이콘	noun
+eyelash	속눈썹	아이레시	noun
+eyelid	눈꺼풀	아이리드	noun
+artery	동맥	아터리	noun
+bladder	방광	블레더	noun
+syringe	주사기	시린지	noun
+stethoscope	청진기	스테서스코프	noun
+tripod	삼각대	트라이포드	noun
+bead	구슬	비드	noun
+seashell	조개껍데기	시셸	noun
+kennel	개집	케널	noun
+burrow	굴	버로	noun
+anthill	개미집	엔트힐	noun
+harness	하네스	하네스	noun
+dagger	단검	데거	noun
+firecracker	폭죽	파이어크래커	noun
+signboard	간판	사인보드	noun
+adapter	어댑터	어댑터	noun
+avatar	아바타	아바타	noun
+timeline	타임라인	타임라인	noun
+emoticon	이모티콘	이모티콘	noun
+ringtone	벨소리	링톤	noun
+voicemail	음성메일	보이스메일	noun
+blogger	블로거	블로거	noun
+youtuber	유튜버	유튜버	noun
+influencer	인플루언서	인플루언서	noun
+streamer	스트리머	스트리머	noun
+gamer	게이머	게이머	noun
+wiki	위키	위키	noun
+slideshow	슬라이드쇼	슬라이드쇼	noun
+header	헤더	헤더	noun
+footer	푸터	푸터	noun
+checkbox	체크박스	체크박스	noun
+dropdown	드롭다운	드롭다운	noun
+scrollbar	스크롤바	스크롤바	noun
+sidebar	사이드바	사이드바	noun
+taskbar	작업표시줄	태스크바	noun
+typeface	서체	타입페이스	noun
+spacebar	스페이스바	스페이스바	noun
+backspace	백스페이스	백스페이스	noun
+keycap	키캡	키캡	noun
+mousepad	마우스패드	마우스패드	noun
+stylus	스타일러스	스타일러스	noun
+subwoofer	서브우퍼	서브우퍼	noun
+earbud	이어폰, 이어버드	이어버드	noun
+ethernet	이더넷	이더넷	noun
+dongle	동글	동글	noun
+handset	수화기	핸드셋	noun
+dungeon	던전	던전	noun
+loot	전리품	루트	noun
+voucher	상품권, 바우처	바우처	noun
+kiosk	키오스크	키오스크	noun
+trolley	카트, 트롤리	트롤리	noun
+escalator	에스컬레이터	에스컬레이터	noun
+cubicle	칸막이	큐비클	noun
+boardroom	회의실	보드룸	noun
+daycare	어린이집	데이케어	noun
+syllabus	강의계획서	실라버스	noun
+chalkboard	칠판	초크보드	noun
+protractor	각도기	프로트렉터	noun
+abacus	주판	에버커스	noun
+intern	인턴	인턴	noun
+apprentice	견습생, 수습생	어프렌티스	noun
+composer	작곡가	컴포저	noun
+drummer	드러머	드러머	noun
+rapper	래퍼	래퍼	noun
+vocalist	보컬	보컬리스트	noun
+cellist	첼리스트	첼리스트	noun
+cartoonist	만화가	카투니스트	noun
+animator	애니메이터	애니메이터	noun
+illustrator	일러스트레이터	일러스트레이터	noun
+playwright	극작가	플레이라이트	noun
+screenwriter	각본가, 시나리오작가	스크린라이터	noun
+juggler	저글러	저글러	noun
+mason	석공	메이슨	noun
+midwife	조산사, 산파	미드와이프	noun
+pediatrician	소아과의사	피디에트리션	noun
+dermatologist	피부과의사	더머톨러지스트	noun
+copilot	부조종사	코파일럿	noun
+navigator	항해사, 내비게이터	내비게이터	noun
+steward	승무원	스튜어드	noun
+teller	은행원, 창구직원	텔러	noun
+sommelier	소믈리에	소믈리에	noun
+sprinter	단거리선수	스프린터	noun
+skier	스키어	스키어	noun
+skater	스케이터	스케이터	noun
+surfer	서퍼	서퍼	noun
+climber	등반가, 클라이머	클라이머	noun
+cyclist	사이클리스트	사이클리스트	noun
+golfer	골퍼	골퍼	noun
+boxer	권투선수, 복서	복서	noun
+wrestler	레슬러	레슬러	noun
+rancher	목장주	렌처	noun
+lumberjack	벌목꾼	럼버잭	noun
+beekeeper	양봉가	비키퍼	noun
+broker	중개인, 브로커	브로커	noun
+trader	트레이더, 상인	트레이더	noun
+tenant	세입자, 임차인	테넌트	noun
+cosmonaut	우주비행사	코스모넛	noun
+kimchi	김치	김치	noun
+paprika	파프리카	파프리카	noun
+arugula	루콜라	아루굴라	noun
+nutmeg	육두구	넛멕	noun
+clove	정향, 쪽	클로브	noun
+thyme	타임	타임	noun
+rosemary	로즈마리	로즈마리	noun
+dill	딜	딜	noun
+saffron	사프란	사프란	noun
+turmeric	강황	터메릭	noun
+cumin	커민	커민	noun
+wasabi	와사비, 고추냉이	와사비	noun
+miso	미소된장	미소	noun
+tortilla	또띠아	또띠아	noun
+nacho	나초	나초	noun
+macaroni	마카로니	마카로니	noun
+ravioli	라비올리	라비올리	noun
+risotto	리조또	리조또	noun
+omelet	오믈렛	오믈렛	noun
+quiche	키슈	키슈	noun
+casserole	캐서롤	캐서롤	noun
+gravy	그레이비	그레이비	noun
+dressing	드레싱	드레싱	noun
+salsa	살사	살사	noun
+molasses	당밀	몰레시스	noun
+lollipop	막대사탕	롤리팝	noun
+jellybean	젤리빈	젤리빈	noun
+brownie	브라우니	브라우니	noun
+tart	타르트	타르트	noun
+crepe	크레페	크레페	noun
+scone	스콘	스콘	noun
+pita	피타	피타	noun
+baguette	바게트	바게트	noun
+flake	조각, 플레이크	플레이크	noun
+granola	그래놀라	그래놀라	noun
+cornflake	콘플레이크	콘플레이크	noun
+hotdog	핫도그	핫도그	noun
+nugget	너겟	너겟	noun
+patty	패티	패티	noun
+fillet	필레, 살코기	필레	noun
+drumstick	닭다리, 북채	드럼스틱	noun
+sirloin	등심	설로인	noun
+loin	등심	로인	noun
+brisket	양지	브리스킷	noun
+jerky	육포	저키	noun
+prosciutto	프로슈토	프로슈토	noun
+mackerel	고등어	메커럴	noun
+herring	청어	헤링	noun
+catfish	메기	캣피시	noun
+tilapia	틸라피아	틸라피아	noun
+halibut	넙치, 광어	헬리벗	noun
+cantaloupe	캔털루프, 멜론	캔털루프	noun
+honeydew	허니듀	허니듀	noun
+lychee	리치	리치	noun
+durian	두리안	두리안	noun
+guava	구아바	구아바	noun
+passionfruit	패션프루트	패션프루트	noun
+nectarine	천도복숭아	넥타린	noun
+clementine	클레멘타인	클레멘타인	noun
+gooseberry	구스베리	구스베리	noun
+currant	커런트, 건포도	커런트	noun
+mulberry	오디, 뽕나무	멀베리	noun
+quince	모과	퀸스	noun
+rhubarb	대황	루바브	noun
+jackfruit	잭프루트	잭프루트	noun
+dragonfruit	용과	드래곤프루트	noun
+pecan	피칸	피칸	noun
+macadamia	마카다미아	마카다미아	noun
+lentil	렌틸콩	렌틸	noun
+soybean	콩, 대두	소이빈	noun
+edamame	풋콩, 에다마메	에다마메	noun
+bran	겨, 밀기울	브렌	noun
+teacup	찻잔	티컵	noun
+saucer	받침접시	소서	noun
+pitcher	주전자, 투수	피처	noun
+thermos	보온병	써모스	noun
+colander	소쿠리	컬런더	noun
+strainer	체, 거름망	스트레이너	noun
+sieve	체	시브	noun
+grater	강판	그레이터	noun
+peeler	필러, 감자칼	필러	noun
+corkscrew	와인따개, 코르크따개	코크스크루	noun
+opener	따개, 오프너	오프너	noun
+tongs	집게	텅스	noun
+skewer	꼬치	스큐어	noun
+mixer	믹서	믹서	noun
+juicer	착즙기	주서	noun
+counter	계산대, 카운터	카운터	noun
+countertop	조리대	카운터탑	noun
+recliner	리클라이너	리클라이너	noun
+crib	아기침대	크립	noun
+hanger	옷걸이	행거	noun
+clothespin	빨래집게	클로스핀	noun
+softener	섬유유연제, 유연제	소프너	noun
+washer	세탁기, 와셔	와셔	noun
+dryer	건조기, 드라이어	드라이어	noun
+heater	히터, 난방기	히터	noun
+humidifier	가습기	휴미디파이어	noun
+dehumidifier	제습기	디휴미디파이어	noun
+thermostat	온도조절기	서모스텟	noun
+furnace	용광로, 보일러	퍼니스	noun
+boiler	보일러	보일러	noun
+lightbulb	전구	라이트벌브	noun
+lampshade	전등갓	램프쉐이드	noun
+padlock	자물쇠	패드락	noun
+keychain	열쇠고리	키체인	noun
+dustpan	쓰레받기	더스트팬	noun
+duster	먼지떨이	더스터	noun
+plunger	뚫어뻥	플런저	noun
+wastebasket	휴지통	웨이스트베스킷	noun
+recycling	재활용	리사이클링	noun
+sprinkler	스프링클러	스프링클러	noun
+lawnmower	잔디깎이	론모어	noun
+trowel	모종삽	트라월	noun
+pitchfork	쇠스랑	피치포크	noun
+chisel	끌	치즐	noun
+mallet	나무망치	멜릿	noun
+sledgehammer	쇠망치	슬레지해머	noun
+anvil	모루	엔빌	noun
+sandpaper	사포	샌드페이퍼	noun
+paintbrush	붓, 페인트붓	페인트브러시	noun
+roller	롤러	롤러	noun
+putty	퍼티	퍼티	noun
+pulley	도르래	풀리	noun
+lever	레버, 지렛대	레버	noun
+nozzle	노즐	노즐	noun
+parakeet	잉꼬	페러킷	noun
+cockatoo	앵무새, 코카투	코카투	noun
+budgie	잉꼬	버지	noun
+robin	울새	로빈	noun
+bluebird	파랑새	블루버드	noun
+hummingbird	벌새	허밍버드	noun
+woodpecker	딱따구리	우드페커	noun
+kingfisher	물총새	킹피셔	noun
+pelican	펠리컨	펠리컨	noun
+gull	갈매기	걸	noun
+heron	왜가리	헤런	noun
+stork	황새	스토크	noun
+vulture	독수리, 대머리수리	벌처	noun
+albatross	알바트로스	알바트로스	noun
+puffin	퍼핀	퍼핀	noun
+quail	메추라기	퀘일	noun
+pheasant	꿩	페전트	noun
+emu	에뮤	에뮤	noun
+magpie	까치	멕파이	noun
+lark	종달새	라크	noun
+cuckoo	뻐꾸기	쿠쿠	noun
+chihuahua	치와와	치와와	noun
+poodle	푸들	푸들	noun
+bulldog	불독	불독	noun
+beagle	비글	비글	noun
+terrier	테리어	테리어	noun
+retriever	리트리버	리트리버	noun
+collie	콜리	콜리	noun
+dachshund	닥스훈트	닥스훈트	noun
+husky	허스키	허스키	noun
+spaniel	스패니얼	스패니얼	noun
+pug	퍼그	퍼그	noun
+corgi	코기	코기	noun
+antelope	영양	엔털로프	noun
+yak	야크	야크	noun
+llama	라마	라마	noun
+alpaca	알파카	알파카	noun
+porcupine	호저	포큐파인	noun
+armadillo	아르마딜로	아르마딜로	noun
+sloth	나무늘보, 나태	슬로스	noun
+anteater	개미핥기	엔트이터	noun
+opossum	주머니쥐	오포섬	noun
+chipmunk	다람쥐	칩멍크	noun
+ferret	페럿	페럿	noun
+weasel	족제비	위즐	noun
+mink	밍크	밍크	noun
+badger	오소리	베저	noun
+lynx	스라소니	링크스	noun
+cougar	퓨마	쿠거	noun
+puma	퓨마	퓨마	noun
+dingo	딩고	딩고	noun
+baboon	개코원숭이	베분	noun
+orangutan	오랑우탄	오랑우탄	noun
+lemur	여우원숭이	리머	noun
+meerkat	미어캣	미어캣	noun
+mongoose	몽구스	몽구스	noun
+platypus	오리너구리	플레티퍼스	noun
+wombat	웜뱃	웜뱃	noun
+wallaby	왈라비	왈라비	noun
+elk	엘크	엘크	noun
+caribou	순록	케리부	noun
+hoof	발굽	후프	noun
+tusk	엄니	터스크	noun
+mane	갈기	메인	noun
+fang	송곳니	펭	noun
+gill	아가미	길	noun
+beak	부리	비크	noun
+whisker	수염	위스커	noun
+cobra	코브라	코브라	noun
+viper	독사	바이퍼	noun
+rattlesnake	방울뱀	레틀스네이크	noun
+chameleon	카멜레온	카멜레온	noun
+iguana	이구아나	이구아나	noun
+gecko	도마뱀붙이, 게코	게코	noun
+salamander	도롱뇽	샐러맨더	noun
+tadpole	올챙이	테드폴	noun
+tarantula	타란툴라	타란툴라	noun
+millipede	노래기	밀리피드	noun
+termite	흰개미	터마이트	noun
+hornet	말벌	호넷	noun
+mantis	사마귀	멘티스	noun
+cocoon	고치	코쿤	noun
+larva	애벌레, 유충	라바	noun
+maggot	구더기	메것	noun
+louse	이	라우스	noun
+earthworm	지렁이	어스웜	noun
+leech	거머리	리치	noun
+mite	진드기	마이트	noun
+anemone	말미잘, 아네모네	아네모네	noun
+barnacle	따개비	바너클	noun
+krill	크릴	크릴	noun
+plankton	플랑크톤	플랑크톤	noun
+stingray	가오리	스팅레이	noun
+swordfish	황새치	소드피시	noun
+piranha	피라냐	피라냐	noun
+minnow	피라미	미노	noun
+dandelion	민들레	덴디라이언	noun
+daffodil	수선화	데퍼딜	noun
+lilac	라일락	라일락	noun
+jasmine	재스민	재스민	noun
+magnolia	목련	매그놀리아	noun
+camellia	동백꽃, 동백	카멜리아	noun
+azalea	진달래, 철쭉	아잘레아	noun
+chrysanthemum	국화	크리센서멈	noun
+carnation	카네이션	카네이션	noun
+hyacinth	히아신스	히아신스	noun
+iris	붓꽃, 홍채	아이리스	noun
+marigold	금잔화, 메리골드	메리골드	noun
+poppy	양귀비	포피	noun
+peony	모란, 작약	피오니	noun
+pansy	팬지	팬지	noun
+begonia	베고니아	베고니아	noun
+geranium	제라늄	제라늄	noun
+hibiscus	히비스커스	히비스커스	noun
+clover	클로버	클로버	noun
+reed	갈대	리드	noun
+pinecone	솔방울	파인콘	noun
+sapling	묘목	세플링	noun
+seedling	모종, 묘목	시들링	noun
+eyeball	눈알, 안구	아이볼	noun
+retina	망막	레티나	noun
+eardrum	고막	이어드럼	noun
+nostril	콧구멍	노스트릴	noun
+molar	어금니	몰라	noun
+tonsil	편도, 편도선	톤실	noun
+esophagus	식도	이소파거스	noun
+collarbone	쇄골	칼라본	noun
+forearm	팔뚝	포어암	noun
+knuckle	손가락마디	너클	noun
+toenail	발톱	토네일	noun
+fingertip	손끝	핑거팁	noun
+buttock	엉덩이	버톡	noun
+pelvis	골반	펠비스	noun
+navel	배꼽	네이블	noun
+bellybutton	배꼽	벨리버튼	noun
+torso	몸통	토르소	noun
+abdomen	복부, 배	엡더먼	noun
+ligament	인대	리거먼트	noun
+tendon	힘줄	텐던	noun
+cartilage	연골	카틸리지	noun
+pancreas	췌장	펭크리어스	noun
+spleen	비장	스플린	noun
+gallbladder	쓸개, 담낭	골블레더	noun
+uterus	자궁	유터러스	noun
+ovary	난소	오버리	noun
+prostate	전립선	프로스테이트	noun
+thyroid	갑상선	사이로이드	noun
+gland	샘, 분비선	글렌드	noun
+saliva	침	설라이바	noun
+pore	모공	포어	noun
+dimple	보조개	딤플	noun
+acne	여드름	에크니	noun
+wart	사마귀	워트	noun
+callus	굳은살	켈러스	noun
+dandruff	비듬	덴드러프	noun
+scalp	두피	스칼프	noun
+earlobe	귓불	이어로브	noun
+palate	입천장	펠럿	noun
+larynx	후두	레링크스	noun
+diaphragm	횡격막	다이어프렘	noun
+sternum	흉골	스터넘	noun
+vertebra	척추뼈	버터브라	noun
+femur	대퇴골	피머	noun
+kneecap	무릎뼈, 슬개골	니캡	noun
+hamstring	햄스트링	햄스트링	noun
+bicep	이두근	바이셉	noun
+tricep	삼두근	트라이셉	noun
+abs	복근	앱스	noun
+cornea	각막	코니아	noun
+sinus	부비동	사이너스	noun
+nape	목덜미	네이프	noun
+cramp	경련, 쥐	크렘프	noun
+constipation	변비	컨스티페이션	noun
+bronchitis	기관지염	브롱카이티스	noun
+mumps	볼거리	멈프스	noun
+chickenpox	수두	치킨폭스	noun
+smallpox	천연두	스몰폭스	noun
+cholera	콜레라	콜레라	noun
+rabies	광견병	레이비스	noun
+leukemia	백혈병	루키미아	noun
+epilepsy	뇌전증, 간질	에필렙시	noun
+dementia	치매	디멘시아	noun
+arthritis	관절염	아스라이티스	noun
+ulcer	궤양	얼서	noun
+hernia	탈장	허니아	noun
+cavity	충치, 구멍	케비티	noun
+cataract	백내장	케터렉트	noun
+glaucoma	녹내장	글라우코마	noun
+anemia	빈혈	어니미아	noun
+sunburn	일광화상	선번	noun
+frostbite	동상	프로스트바이트	noun
+hives	두드러기	하이브스	noun
+eczema	습진	엑시마	noun
+psoriasis	건선	소라이어시스	noun
+lupus	루푸스	루푸스	noun
+gout	통풍	가우트	noun
+scurvy	괴혈병	스커비	noun
+leprosy	한센병, 나병	레프러시	noun
+polio	소아마비	폴리오	noun
+tetanus	파상풍	테터너스	noun
+diphtheria	디프테리아	디프테리아	noun
+herpes	헤르페스	헤르페스	noun
+pinkeye	결막염	핑크아이	noun
+stye	다래끼	스타이	noun
+lotion	로션	로션	noun
+moisturizer	보습제	모이스처라이저	noun
+deodorant	데오도란트	데오도란트	noun
+ibuprofen	이부프로펜	이부프로펜	noun
+inhaler	흡입기	인헤일러	noun
+insulin	인슐린	인슐린	noun
+gauze	거즈	거즈	noun
+swab	면봉	스와브	noun
+plaster	석고, 회반죽	플라스터	noun
+tourniquet	지혈대	투어니킷	noun
+stretcher	들것	스트레처	noun
+scalpel	메스	스켈펄	noun
+forceps	겸자, 핀셋	포셉스	noun
+catheter	카테터	카테터	noun
+walker	보행기	워커	noun
+pacifier	공갈젖꼭지	페시파이어	noun
+mascara	마스카라	마스카라	noun
+eyeliner	아이라이너	아이라이너	noun
+eyeshadow	아이섀도우	아이섀도우	noun
+concealer	컨실러	컨실러	noun
+conditioner	린스, 컨디셔너	컨디셔너	noun
+hairspray	헤어스프레이	헤어스프레이	noun
+hairdryer	드라이기, 헤어드라이어	헤어드라이어	noun
+tweezers	족집게, 핀셋	트위저스	noun
+floss	치실	플로스	noun
+mouthwash	가글, 구강청결제	마우스워시	noun
+tuxedo	턱시도	턱시도	noun
+parka	파카	파카	noun
+cardigan	카디건	카디건	noun
+turtleneck	터틀넥	터틀넥	noun
+camisole	캐미솔	캐미솔	noun
+leggings	레깅스	레깅스	noun
+tights	타이츠	타이츠	noun
+pantyhose	팬티스타킹, 스타킹	팬티호스	noun
+lingerie	란제리	란제리	noun
+nightgown	잠옷	나이트가운	noun
+bathrobe	목욕가운	배스로브	noun
+bib	턱받이	비브	noun
+earmuff	귀마개	이어머프	noun
+beanie	비니	비니	noun
+beret	베레모	베레	noun
+fedora	페도라	페도라	noun
+sombrero	솜브레로	솜브레로	noun
+visor	선캡, 바이저	바이저	noun
+bandana	반다나	반다나	noun
+headband	머리띠, 헤어밴드	헤드밴드	noun
+necktie	넥타이	넥타이	noun
+bowtie	나비넥타이	보타이	noun
+cufflink	커프스단추	커프링크	noun
+lace	레이스, 끈	레이스	noun
+insole	깔창	인솔	noun
+flipflop	쪼리, 슬리퍼	플립플롭	noun
+loafer	로퍼	로퍼	noun
+moccasin	모카신	모카신	noun
+stiletto	하이힐, 스틸레토	스틸레토	noun
+pendant	펜던트	펜던트	noun
+brooch	브로치	브로치	noun
+anklet	발찌	앵클릿	noun
+tiara	티아라	티아라	noun
+hairpin	머리핀, 실핀	헤어핀	noun
+hairband	머리띠	헤어밴드	noun
+ponytail	포니테일	포니테일	noun
+leotard	레오타드	레오타드	noun
+kilt	킬트	킬트	noun
+sari	사리	사리	noun
+hanbok	한복	한복	noun
+poncho	판초	판초	noun
+shawl	숄	숄	noun
+jumpsuit	점프수트	점프수트	noun
+romper	롬퍼	롬퍼	noun
+bodysuit	바디수트	바디수트	noun
+windbreaker	바람막이	윈드브레이커	noun
+blazer	블레이저	블레이저	noun
+tunic	튜닉	튜닉	noun
+turban	터번	터번	noun
+bonnet	보닛	보닛	noun
+balaclava	바라클라바	발라클라바	noun
+keyring	열쇠고리	키링	noun
+lanyard	목걸이줄, 랜야드	랜야드	noun
+nametag	명찰	네임태그	noun
+tote	토트백	토트	noun
+pouch	파우치	파우치	noun
+satchel	책가방	사첼	noun
+duffel	더플백	더플	noun
+king	왕	킹	noun
+spy	스파이, 간첩	스파이	noun
+dawn	새벽	돈	noun
+hacker	해커	해커	noun
+wallpaper	배경화면, 벽지	월페이퍼	noun
+screenshot	스크린샷, 캡처	스크린샷	noun
+pixel	픽셀	픽셀	noun
+streaming	스트리밍	스트리밍	noun
+chatbot	챗봇	챗봇	noun
+plugin	플러그인	플러그인	noun
+firmware	펌웨어	펌웨어	noun
+malware	악성코드	멀웨어	noun
+firewall	방화벽	파이어월	noun
+cache	캐시	캐시	noun
+inbox	받은편지함	인박스	noun
+toolbar	툴바	툴바	noun
+vlog	브이로그	브이로그	noun
+smartwatch	스마트워치	스마트워치	noun
+webcam	웹캠	웹캠	noun
+joystick	조이스틱	조이스틱	noun
+gamepad	게임패드	게임패드	noun
+controller	컨트롤러	컨트롤러	noun
+touchpad	터치패드	터치패드	noun
+touchscreen	터치스크린	터치스크린	noun
+trackpad	트랙패드	트랙패드	noun
+motherboard	메인보드	마더보드	noun
+amplifier	앰프, 증폭기	앰플리파이어	noun
+turntable	턴테이블	턴테이블	noun
+jukebox	주크박스	주크박스	noun
+xylophone	실로폰	자일로폰	noun
+tambourine	탬버린	탬버린	noun
+cymbal	심벌즈	심벌	noun
+tuba	튜바	튜바	noun
+bagpipe	백파이프	백파이프	noun
+synthesizer	신시사이저	신시사이저	noun
+metronome	메트로놈	메트로놈	noun
+pingpong	탁구	핑퐁	noun
+softball	소프트볼	소프트볼	noun
+lacrosse	라크로스	라크로스	noun
+archery	양궁	아처리	noun
+fencing	펜싱, 울타리	펜싱	noun
+taekwondo	태권도	태권도	noun
+kungfu	쿵후	쿵후	noun
+sumo	스모	스모	noun
+snowboarding	스노보드	스노보딩	noun
+surfing	서핑	서핑	noun
+diving	다이빙	다이빙	noun
+rowing	조정	로잉	noun
+sailing	항해, 요트	세일링	noun
+climbing	등반, 클라이밍	클라이밍	noun
+hiking	등산, 하이킹	하이킹	noun
+jogging	조깅	조깅	noun
+bowling	볼링	볼링	noun
+billiards	당구	빌리어즈	noun
+darts	다트	다츠	noun
+checkers	체커	체커스	noun
+poker	포커	포커	noun
+jigsaw	직소퍼즐, 실톱	직소	noun
+frisbee	프리스비	프리스비	noun
+trampoline	트램펄린	트램펄린	noun
+seesaw	시소	시소	noun
+sandbox	샌드박스, 모래놀이터	샌드박스	noun
+treadmill	러닝머신	트레드밀	noun
+dumbbell	아령, 덤벨	덤벨	noun
+barbell	역기, 바벨	바벨	noun
+shuttlecock	셔틀콕	셔틀콕	noun
+puck	퍽	퍽	noun
+mitt	미트, 글러브	미트	noun
+scoreboard	점수판, 스코어보드	스코어보드	noun
+umpire	심판	엄파이어	noun
+catcher	포수	캐처	noun
+batter	타자, 반죽	배터	noun
+quarterback	쿼터백	쿼터백	noun
+striker	스트라이커, 공격수	스트라이커	noun
+defender	수비수	디펜더	noun
+midfielder	미드필더	미드필더	noun
+limousine	리무진	리무진	noun
+trailer	트레일러, 예고편	트레일러	noun
+firetruck	소방차	파이어트럭	noun
+bulldozer	불도저	불도저	noun
+excavator	굴착기, 포클레인	익스커베이터	noun
+forklift	지게차	포크리프트	noun
+tricycle	세발자전거	트라이시클	noun
+stroller	유모차	스트롤러	noun
+sled	썰매	슬레드	noun
+sleigh	썰매	슬레이	noun
+snowmobile	스노모빌	스노모빌	noun
+gondola	곤돌라	곤돌라	noun
+tanker	유조선	탱커	noun
+freighter	화물선	프레이터	noun
+airship	비행선	에어십	noun
+blimp	비행선	블림프	noun
+glider	글라이더	글라이더	noun
+parachute	낙하산	패러슈트	noun
+bumper	범퍼	범퍼	noun
+taillight	미등	테일라이트	noun
+accelerator	가속페달, 액셀	액셀러레이터	noun
+muffler	머플러, 소음기	머플러	noun
+diesel	디젤, 경유	디젤	noun
+odometer	주행거리계	오도미터	noun
+speedometer	속도계	스피도미터	noun
+stoplight	신호등	스톱라이트	noun
+roundabout	로터리, 회전교차로	라운드어바웃	noun
+gutter	배수로, 홈통	거터	noun
+manhole	맨홀	맨홀	noun
+streetlight	가로등	스트리트라이트	noun
+lamppost	가로등	램프포스트	noun
+hydrant	소화전	하이드런트	noun
+billboard	광고판, 빌보드	빌보드	noun
+igloo	이글루	이글루	noun
+bungalow	방갈로	방갈로	noun
+townhouse	타운하우스	타운하우스	noun
+windmill	풍차	윈드밀	noun
+wharf	부두	워프	noun
+pagoda	탑	파고다	noun
+gymnasium	체육관	짐네이지엄	noun
+florist	꽃집, 플로리스트	플로리스트	noun
+laundromat	빨래방	론드러멧	noun
+deli	델리	델리	noun
+diner	식당, 다이너	다이너	noun
+planetarium	천문관	플레니테리엄	noun
+consulate	영사관	컨설럿	noun
+courthouse	법원	코트하우스	noun
+firehouse	소방서	파이어하우스	noun
+downpour	폭우	다운포어	noun
+monsoon	장마, 몬순	몬순	noun
+cyclone	사이클론	사이클론	noun
+whirlwind	회오리바람	월윈드	noun
+landslide	산사태	랜드슬라이드	noun
+heatwave	폭염	히트웨이브	noun
+icicle	고드름	아이시클	noun
+hailstone	우박	헤일스톤	noun
+sleet	진눈깨비	슬리트	noun
+smog	스모그	스모그	noun
+haze	연무, 안개	헤이즈	noun
+plateau	고원	플레토	noun
+savanna	사바나	사바나	noun
+tundra	툰드라	툰드라	noun
+marsh	습지	마시	noun
+bog	늪	보그	noun
+oasis	오아시스	오아시스	noun
+dune	모래언덕, 사구	듄	noun
+strait	해협	스트레이트	noun
+lagoon	석호	라군	noun
+seashore	해변, 바닷가	시쇼어	noun
+riverbank	강둑	리버뱅크	noun
+estuary	하구	에스추어리	noun
+geyser	간헐천	가이저	noun
+crater	분화구	크레이터	noun
+gorge	협곡	고지	noun
+vineyard	포도밭	빈야드	noun
+woods	숲	우즈	noun
+thicket	덤불	시킷	noun
+pebble	조약돌	페블	noun
+magma	마그마	마그마	noun
+nebula	성운	네뷸라	noun
+tropics	열대	트로픽스	noun
+ballerina	발레리나	발레리나	noun
+butler	집사	버틀러	noun
+caretaker	관리인, 간병인	케어테이커	noun
+courier	택배기사, 배달원	쿠리어	noun
+geologist	지질학자	지올러지스트	noun
+housekeeper	가정부	하우스키퍼	noun
+interpreter	통역사	인터프리터	noun
+jeweler	보석상	주얼러	noun
+jockey	기수	자키	noun
+locksmith	열쇠공	락스미스	noun
+miner	광부	마이너	noun
+babysitter	베이비시터, 보모	베이비시터	noun
+realtor	공인중개사	리얼터	noun
+salesperson	판매원	세일즈퍼슨	noun
+sculptor	조각가	스컬프터	noun
+stewardess	스튜어디스	스튜어디스	noun
+trucker	트럭운전사	트러커	noun
+undertaker	장의사	언더테이커	noun
+welder	용접공	웰더	noun
+zookeeper	사육사	주키퍼	noun
+empress	황후	엠프리스	noun
+ninja	닌자	닌자	noun
+binder	바인더	바인더	noun
+clipboard	클립보드	클립보드	noun
+paperclip	클립	페이퍼클립	noun
+pushpin	압정	푸시핀	noun
+thumbtack	압정	섬텍	noun
+sharpener	연필깎이	샤프너	noun
+cartridge	카트리지	카트리지	noun
+toner	토너	토너	noun
+flyer	전단지	플라이어	noun
+pamphlet	팜플렛	팜플렛	noun
+leaflet	전단지, 리플렛	리플렛	noun
+notepad	메모장	노트패드	noun
+planner	플래너	플래너	noun
+spreadsheet	스프레드시트	스프레드시트	noun
+lunchbox	도시락	런치박스	noun
+locker	사물함	로커	noun
+projector	프로젝터	프로젝터	noun
+podium	연단, 단상	포디엄	noun
+workbook	문제집, 워크북	워크북	noun
+denim	데님	데님	noun
+satin	새틴	새틴	noun
+nylon	나일론	나일론	noun
+polyester	폴리에스터	폴리에스터	noun
+spandex	스판덱스	스판덱스	noun
+fleece	플리스	플리스	noun
+flannel	플란넬	플란넬	noun
+suede	스웨이드	스웨이드	noun
+zinc	아연	징크	noun
+platinum	백금	플래티넘	noun
+titanium	티타늄	티타늄	noun
+slate	슬레이트	슬레이트	noun
+limestone	석회암	라임스톤	noun
+ceramic	세라믹, 도자기	세라믹	noun
+plywood	합판	플라이우드	noun
+tar	타르	타르	noun
+asphalt	아스팔트	아스팔트	noun
+pentagon	오각형	펜타곤	noun
+hexagon	육각형	헥사곤	noun
+octagon	팔각형	옥타곤	noun
+polygon	다각형	폴리곤	noun
+trapezoid	사다리꼴	트레퍼조이드	noun
+parallelogram	평행사변형	페럴렐로그램	noun
+rhombus	마름모	롬버스	noun
+semicircle	반원	세미서클	noun
+turquoise	청록색	터콰이즈	noun
+indigo	남색	인디고	noun
+maroon	적갈색	머룬	noun
+crimson	진홍색	크림슨	noun
+scarlet	주홍색	스칼렛	noun
+magenta	자홍색, 마젠타	마젠타	noun
+cyan	청록색, 시안	시안	noun
+teal	청록색	틸	noun
+khaki	카키	카키	noun
+burgundy	버건디	버건디	noun
+sapphire	사파이어	사파이어	noun
+stepson	의붓아들	스텝선	noun
+stepdaughter	의붓딸	스텝도터	noun
+stepbrother	의붓형제	스텝브러더	noun
+stepsister	의붓자매	스텝시스터	noun
+widower	홀아비	위도어	noun
+youngster	젊은이	영스터	noun
+auntie	이모, 고모	엔티	noun
+tile	타일	타일	noun
+mat	매트, 깔개	매트	noun
+timer	타이머	타이머	noun
+baking	베이킹	베이킹	noun
+yeast	이스트, 효모	이스트	noun
+custard	커스터드	커스터드	noun
+truffle	트러플, 송로버섯	트러플	noun
+gelato	젤라토	젤라토	noun
+sherbet	셔벗	셔벗	noun
+sorbet	소르베	소르베	noun
+toffee	토피	토피	noun
+fudge	퍼지	퍼지	noun
+eclair	에클레어	에클레어	noun
+nougat	누가	누가	noun
+praline	프랄린	프랄린	noun
+meringue	머랭	머랭	noun
+mousse	무스	무스	noun
+souffle	수플레	수플레	noun
+tiramisu	티라미수	티라미수	noun
+parmesan	파마산	파마산	noun
+brie	브리	브리	noun
+gouda	고다	고다	noun
+guacamole	과카몰리	과카몰리	noun
+hummus	후무스	후무스	noun
+falafel	팔라펠	팔라펠	noun
+kebab	케밥	케밥	noun
+paella	파에야	파에야	noun
+goulash	굴라시	굴라시	noun
+chowder	차우더	차우더	noun
+bisque	비스크	비스크	noun
+gazpacho	가스파초	가스파초	noun
+udon	우동	우동	noun
+soba	메밀국수, 소바	소바	noun
+pho	쌀국수	포	noun
+tempura	튀김	템푸라	noun
+teriyaki	데리야키	데리야키	noun
+sashimi	회	사시미	noun
+bulgogi	불고기	불고기	noun
+bibimbap	비빔밥	비빔밥	noun
+tteokbokki	떡볶이	떡볶이	noun
+fettuccine	페투치니	페투치니	noun
+linguine	링귀니	링귀니	noun
+penne	펜네	펜네	noun
+gnocchi	뇨키	뇨키	noun
+chutney	처트니	처트니	noun
+marmalade	마멀레이드	마멀레이드	noun
+shortening	쇼트닝	쇼트닝	noun
+lard	돼지기름, 라드	라드	noun
+gelatin	젤라틴	젤라틴	noun
+cornstarch	옥수수전분	콘스타치	noun
+cornmeal	옥수수가루	콘밀	noun
+polenta	폴렌타	폴렌타	noun
+quinoa	퀴노아	퀴노아	noun
+tapioca	타피오카	타피오카	noun
+kombucha	콤부차	콤부차	noun
+ale	에일	에일	noun
+lager	라거	라거	noun
+brandy	브랜디	브랜디	noun
+cognac	코냑	코냑	noun
+soju	소주	소주	noun
+makgeolli	막걸리	막걸리	noun
+sangria	상그리아	상그리아	noun
+margarita	마르가리타	마르가리타	noun
+martini	마티니	마티니	noun
+mojito	모히토	모히토	noun
+venison	사슴고기	베니슨	noun
+mutton	양고기	머튼	noun
+veal	송아지고기	빌	noun
+tripe	곱창, 양	트라이프	noun
+oxtail	소꼬리	옥스테일	noun
+tenderloin	안심	텐더로인	noun
+ribeye	꽃등심, 립아이	립아이	noun
+prawn	새우, 대하	프론	noun
+crayfish	가재	크레이피시	noun
+abalone	전복	에벌로니	noun
+roe	알, 어란	로	noun
+toothpick	이쑤시개	투스픽	noun
+coaster	컵받침, 코스터	코스터	noun
+placemat	식탁매트	플레이스매트	noun
+funnel	깔때기	퍼널	noun
+potholder	냄비받침	팟홀더	noun
+saucepan	냄비, 소스팬	소스팬	noun
+skillet	프라이팬	스킬렛	noun
+griddle	철판	그리들	noun
+steamer	찜기	스티머	noun
+grinder	분쇄기, 그라인더	그라인더	noun
+scarecrow	허수아비	스케어크로	noun
+haystack	건초더미	헤이스텍	noun
+silo	사일로	사일로	noun
+sickle	낫	시클	noun
+coop	닭장	쿠프	noun
+pigsty	돼지우리	피그스타이	noun
+toucan	투칸	투칸	noun
+cardinal	추기경, 홍관조	카디널	noun
+sturgeon	철갑상어	스터전	noun
+flounder	가자미, 넙치	플라운더	noun
+marlin	청새치	말린	noun
+barracuda	꼬치고기	바라쿠다	noun
+cuttlefish	갑오징어	커틀피시	noun
+gerbil	저빌	저빌	noun
+mammoth	매머드	매머드	noun
+tyrannosaurus	티라노사우루스	티라노사우루스	noun
+mastodon	마스토돈	마스토돈	noun
+beech	너도밤나무	비치	noun
+poplar	포플러	포플러	noun
+redwood	레드우드	레드우드	noun
+sequoia	세쿼이아	세쿼이아	noun
+cypress	사이프러스, 측백나무	사이프러스	noun
+eucalyptus	유칼립투스	유칼립투스	noun
+mahogany	마호가니	마호가니	noun
+ebony	흑단	에보니	noun
+teak	티크	티크	noun
+acacia	아카시아	아카시아	noun
+bonsai	분재	본사이	noun
+turf	잔디	터프	noun
+duct	덕트, 관	덕트	noun
+tapestry	태피스트리	태피스트리	noun
+arch	아치	아치	noun
+spire	첨탑	스파이어	noun
+steeple	첨탑	스티플	noun
+turret	포탑	터렛	noun
+sewer	하수도	수어	noun
+breaker	차단기	브레이커	noun
+wristwatch	손목시계	리스트워치	noun
+stopwatch	스톱워치	스톱워치	noun
+hourglass	모래시계	아워글래스	noun
+sundial	해시계	선다이얼	noun
+quilt	퀼트, 누비이불	퀼트	noun
+duvet	이불	듀벳	noun
+comforter	이불	컴포터	noun
+bedspread	침대커버	베드스프레드	noun
+pillowcase	베갯잇	필로케이스	noun
+bedsheet	침대시트	베드시트	noun
+foyer	현관	포이어	noun
+landing	착륙, 층계참	랜딩	noun
+banister	난간	베니스터	noun
+walkway	통로	워크웨이	noun
+flowerbed	화단	플라워베드	noun
+cot	간이침대	코트	noun
+bunkbed	이층침대	벙크베드	noun
+beanbag	빈백	빈백	noun
+barstool	바스툴	바스툴	noun
+nightlight	수면등	나이트라이트	noun
+drywall	석고보드	드라이월	noun
+rafter	서까래	레프터	noun
+girder	대들보	거더	noun
+spoke	바큇살	스포크	noun
+handlebar	핸들	핸들바	noun
+kickstand	킥스탠드	킥스탠드	noun
+oar	노	오어	noun
+rudder	방향타	러더	noun
+hull	선체	헐	noun
+lifeboat	구명보트	라이프보트	noun
+lifejacket	구명조끼	라이프자켓	noun
+buoy	부표	부이	noun
+cockpit	조종석	콕핏	noun
+propeller	프로펠러	프로펠러	noun
+fuselage	동체	퓨절라지	noun
+locomotive	기관차	로코모티브	noun
+crossing	건널목	크로싱	noun
+interchange	나들목, 인터체인지	인터체인지	noun
+tollgate	톨게이트	톨게이트	noun
+tollbooth	요금소	톨부스	noun
+checkpoint	검문소, 체크포인트	체크포인트	noun
+airbag	에어백	에어백	noun
+aerosol	에어로졸	에어로졸	noun
+airmail	항공우편	에어메일	noun
+antiseptic	소독약	엔티셉틱	noun
+armrest	팔걸이	암레스트	noun
+ashtray	재떨이	에시트레이	noun
+awning	차양	오닝	noun
+barrette	머리핀	버렛	noun
+bathmat	욕실매트	베스매트	noun
+beaker	비커	비커	noun
+beehive	벌집	비하이브	noun
+birdcage	새장	버드케이지	noun
+blowtorch	토치	블로토치	noun
+bobbin	보빈	보빈	noun
+bookend	북엔드	북엔드	noun
+boomerang	부메랑	부메랑	noun
+bottlecap	병뚜껑	보틀캡	noun
+bugle	나팔	뷰글	noun
+bullhorn	확성기	불혼	noun
+bunker	벙커	벙커	noun
+burner	버너	버너	noun
+camcorder	캠코더	캠코더	noun
+candlestick	촛대	캔들스틱	noun
+canister	통, 캐니스터	캐니스터	noun
+canopy	캐노피, 차양	캐노피	noun
+carafe	물병	커레프	noun
+carousel	회전목마	캐러셀	noun
+casket	관	케스킷	noun
+catapult	투석기	케터펄트	noun
+cauldron	가마솥	콜드런	noun
+cellophane	셀로판	셀로판	noun
+chalice	성배	첼리스	noun
+chariot	전차	체리엇	noun
+checkbook	수표책	체크북	noun
+chessboard	체스판	체스보드	noun
+clothesline	빨랫줄	클로즈라인	noun
+cobweb	거미줄	코브웹	noun
+confetti	색종이조각	콘페티	noun
+corkboard	코르크판	코크보드	noun
+dartboard	다트판	다트보드	noun
+deckchair	접이식의자	덱체어	noun
+decanter	디캔터	디캔터	noun
+detector	탐지기	디텍터	noun
+dishcloth	행주	디시클로스	noun
+dispenser	디스펜서	디스펜서	noun
+dollhouse	인형의집	돌하우스	noun
+doorframe	문틀	도어프레임	noun
+drainpipe	배수관	드레인파이프	noun
+drawbridge	도개교	드로브리지	noun
+dynamite	다이너마이트	다이너마이트	noun
+easel	이젤	이젤	noun
+figurine	피규어	피겨린	noun
+filament	필라멘트	필라멘트	noun
+fishbowl	어항	피시볼	noun
+fishhook	낚싯바늘	피시후크	noun
+fishnet	그물	피시넷	noun
+flagpole	깃대	플래그폴	noun
+flipper	오리발	플리퍼	noun
+flowerpot	화분	플라워팟	noun
+flyswatter	파리채	플라이스와터	noun
+footbridge	육교	풋브리지	noun
+footrest	발받침	풋레스트	noun
+goblet	술잔, 고블렛	고블렛	noun
+gong	징	공	noun
+grandstand	관람석	그랜드스탠드	noun
+gravestone	묘비	그레이브스톤	noun
+guardrail	가드레일	가드레일	noun
+hacksaw	쇠톱	헥소	noun
+hairbrush	빗	헤어브러시	noun
+handcuffs	수갑	핸드커프스	noun
+headboard	헤드보드	헤드보드	noun
+headlamp	헤드램프	헤드램프	noun
+headrest	머리받침	헤드레스트	noun
+hearse	영구차	허스	noun
+holster	권총집	홀스터	noun
+horseshoe	편자	호스슈	noun
+icebox	아이스박스	아이스박스	noun
+incense	향	인센스	noun
+incubator	인큐베이터	인큐베이터	noun
+jackhammer	착암기	잭해머	noun
+keg	맥주통	케그	noun
+keyhole	열쇠구멍	키홀	noun
+kiln	가마	킬른	noun
+lasso	올가미	레소	noun
+loudspeaker	확성기	라우드스피커	noun
+magnifier	돋보기	메그니파이어	noun
+mannequin	마네킹	마네킹	noun
+matchbox	성냥갑	매치박스	noun
+matchstick	성냥개비	매치스틱	noun
+megaphone	확성기, 메가폰	메가폰	noun
+minibus	미니버스	미니버스	noun
+mousetrap	쥐덫	마우스트랩	noun
+muzzle	입마개, 총구	머즐	noun
+nutcracker	호두까기	넛크래커	noun
+ornament	장식품	오너먼트	noun
+pail	들통	페일	noun
+pallet	팔레트	파레트	noun
+paperweight	문진	페이퍼웨이트	noun
+parasol	양산, 파라솔	파라솔	noun
+pedestal	받침대	페디스털	noun
+periscope	잠망경	페리스코프	noun
+phonograph	축음기	포노그래프	noun
+piggybank	돼지저금통	피기뱅크	noun
+pinwheel	바람개비	핀휠	noun
+placard	플래카드	플래카드	noun
+plaque	명판, 플라크	플라크	noun
+pocketknife	주머니칼	포켓나이프	noun
+pushcart	손수레	푸시카트	noun
+racetrack	경주로, 경마장	레이스트랙	noun
+reel	릴, 얼레	릴	noun
+revolver	리볼버, 권총	리볼버	noun
+rickshaw	인력거	릭쇼	noun
+rucksack	배낭	룩색	noun
+sandbag	모래주머니	샌드백	noun
+scaffolding	비계	스케폴딩	noun
+scoop	스쿠프, 특종	스쿠프	noun
+scrapbook	스크랩북	스크랩북	noun
+shaker	쉐이커	쉐이커	noun
+shredder	파쇄기	슈레더	noun
+signpost	이정표	사인포스트	noun
+skylight	천창	스카이라이트	noun
+slingshot	새총	슬링샷	noun
+snorkel	스노클	스노클	noun
+snowplow	제설차	스노플라우	noun
+speedboat	쾌속정	스피드보트	noun
+spinner	스피너	스피너	noun
+stepladder	접사다리	스텝레더	noun
+streetcar	노면전차	스트리트카	noun
+sunroof	선루프	선루프	noun
+surfboard	서핑보드	서프보드	noun
+tablespoon	큰술, 테이블스푼	테이블스푼	noun
+tarp	방수포	타프	noun
+thimble	골무	심블	noun
+tinfoil	은박지, 호일	틴포일	noun
+turnstile	개찰구	턴스타일	noun
+urn	유골함	언	noun
+ventilator	인공호흡기, 환풍기	벤틸레이터	noun
+vial	약병	바이알	noun
+washbasin	세면대	워시베이슨	noun
+washboard	빨래판	워시보드	noun
+watchtower	망루	워치타워	noun
+waterbed	물침대	워터베드	noun
+whetstone	숫돌	웻스톤	noun
+windowsill	창턱	윈도실	noun
+wineglass	와인잔	와인글라스	noun
+workbench	작업대	워크벤치	noun
+wreath	화환	리스	noun
+yardstick	잣대	야드스틱	noun
+yoke	멍에	요크	noun
+mayo	마요네즈, 마요	마요	noun
+sundae	선데	선데	noun
+sourdough	사워도우	사워도우	noun
+soymilk	두유	소이밀크	noun
+meatloaf	미트로프	미트로프	noun
+coleslaw	코울슬로	코울슬로	noun
+butterscotch	버터스카치	버터스카치	noun
+buttermilk	버터밀크	버터밀크	noun
+crouton	크루통	크루통	noun
+eggnog	에그노그	에그노그	noun
+enchilada	엔칠라다	엔칠라다	noun
+fajita	파히타	파히타	noun
+frittata	프리타타	프리타타	noun
+gumbo	검보	검보	noun
+jambalaya	잠발라야	잠발라야	noun
+licorice	감초, 감초사탕	리코리스	noun
+panini	파니니	파니니	noun
+pastrami	파스트라미	파스트라미	noun
+quesadilla	퀘사디아	퀘사디아	noun
+sauerkraut	사워크라우트	사워크라우트	noun
+stroganoff	스트로가노프	스트로가노프	noun
+tortellini	토르텔리니	토르텔리니	noun
+wonton	완탕	원톤	noun
+anise	아니스	아니스	noun
+caper	케이퍼	케이퍼	noun
+cardamom	카다멈	카더멈	noun
+cayenne	카이엔페퍼	카이엔	noun
+coriander	고수	코리엔더	noun
+fennel	회향, 펜넬	펜넬	noun
+horseradish	서양고추냉이, 홀스래디시	호스레디시	noun
+lemongrass	레몬그라스	레몬그라스	noun
+peppercorn	통후추	페퍼콘	noun
+tarragon	타라곤	타라곤	noun
+watercress	물냉이, 크레송	워터크레스	noun
+okra	오크라	오크라	noun
+parsnip	파스닙	파스닙	noun
+shallot	샬롯	샬롯	noun
+endive	엔다이브	엔다이브	noun
+chard	근대	차드	noun
+gourd	박	고드	noun
+pomelo	포멜로	포멜로	noun
+yuzu	유자	유주	noun
+pollock	명태	폴락	noun
+yellowtail	방어	옐로우테일	noun
+piglet	새끼돼지	피글렛	noun
+foal	망아지	폴	noun
+colt	망아지	콜트	noun
+stallion	종마	스텔리언	noun
+pup	강아지, 새끼	펍	noun
+fawn	새끼사슴	폰	noun
+hippopotamus	하마	히포포타머스	noun
+rhinoceros	코뿔소	라이노서러스	noun
+gibbon	긴팔원숭이	기번	noun
+locust	메뚜기	로커스트	noun
+aphid	진딧물	에이피드	noun
+bedbug	빈대	베드버그	noun
+silkworm	누에	실크웜	noun
+wren	굴뚝새	렌	noun
+starling	찌르레기	스탈링	noun
+mallard	청둥오리	멜러드	noun
+boa	보아뱀	보아	noun
+anaconda	아나콘다	아나콘다	noun
+mamba	맘바	맘바	noun
+pterodactyl	익룡	테러닥틸	noun
+triceratops	트리케라톱스	트리케라톱스	noun
+stegosaurus	스테고사우루스	스테고사우루스	noun
+brontosaurus	브론토사우루스	브론토사우루스	noun
+velociraptor	벨로키랍토르	벨로시랩터	noun
+chiropractor	척추지압사	카이로프랙터	noun
+optician	안경사	옵티션	noun
+orthodontist	치과교정의	오소돈티스트	noun
+deliveryman	배달원	딜리버리맨	noun
+marshal	보안관	마셜	noun
+notary	공증인	노터리	noun
+foreman	감독, 십장	포먼	noun
+handyman	수리공, 잡역부	핸디맨	noun
+stylist	스타일리스트	스타일리스트	noun
+beautician	미용사	뷰티션	noun
+botanist	식물학자	보테니스트	noun
+zoologist	동물학자	조올러지스트	noun
+archaeologist	고고학자	아키올러지스트	noun
+anthropologist	인류학자	엔스러폴러지스트	noun
+statistician	통계학자	스테티스티션	noun
+cameraman	카메라맨	카메라맨	noun
+cinematographer	촬영감독	시네마토그래퍼	noun
+publisher	출판사	퍼블리셔	noun
+columnist	칼럼니스트	칼럼니스트	noun
+announcer	아나운서	아나운서	noun
+broadcaster	방송인	브로드캐스터	noun
+narrator	내레이터, 화자	내레이터	noun
+choreographer	안무가	코리오그래퍼	noun
+lyricist	작사가	리리시스트	noun
+bassist	베이시스트	베이시스트	noun
+flutist	플루트연주자	플루티스트	noun
+harpist	하프연주자	하피스트	noun
+saxophonist	색소폰연주자	색소포니스트	noun
+trumpeter	트럼펫연주자	트럼피터	noun
+organist	오르간연주자	오거니스트	noun
+adolescent	청소년	어돌레슨트	noun
+retiree	은퇴자	리타이어리	noun
+bridesmaid	신부들러리	브라이즈메이드	noun
+bridegroom	신랑	브라이드그룸	noun
+housemate	하우스메이트	하우스메이트	noun
+playmate	놀이친구	플레이메이트	noun
+schoolmate	학교친구, 동창	스쿨메이트	noun
+penpal	펜팔	펜팔	noun
+bot	봇	봇	noun
+playlist	플레이리스트, 재생목록	플레이리스트	noun
+gadget	기기, 가젯	가젯	noun
+caption	캡션, 자막	캡션	noun
+soundtrack	사운드트랙	사운드트랙	noun
+remix	리믹스	리믹스	noun
+glitch	글리치, 오류	글리치	noun
+ebook	전자책	이북	noun
+audiobook	오디오북	오디오북	noun
+backend	백엔드	백엔드	noun
+frontend	프론트엔드	프론트엔드	noun
+blockchain	블록체인	블록체인	noun
+cryptocurrency	암호화폐, 가상화폐	크립토커런시	noun
+metaverse	메타버스	메타버스	noun
+hologram	홀로그램	홀로그램	noun
+cyborg	사이보그	사이보그	noun
+hyperlink	하이퍼링크	하이퍼링크	noun
+webpage	웹페이지	웹페이지	noun
+webmaster	웹마스터	웹마스터	noun
+retweet	리트윗	리트윗	noun
+repost	리포스트, 재게시	리포스트	noun
+livestream	생방송, 라이브방송	라이브스트림	noun
+vlogger	브이로거	브이로거	noun
+podcaster	팟캐스터	팟캐스터	noun
+installer	설치프로그램, 인스톨러	인스톨러	noun
+hotfix	핫픽스	핫픽스	noun
+datacenter	데이터센터	데이터센터	noun
+kernel	커널, 알맹이	커널	noun
+compiler	컴파일러	컴파일러	noun
+debugger	디버거	디버거	noun
+boolean	불리언	불리언	noun
+bitmap	비트맵	비트맵	noun
+vector	벡터	벡터	noun
+raster	래스터	래스터	noun
+codec	코덱	코덱	noun
+byte	바이트	바이트	noun
+kilobyte	킬로바이트	킬로바이트	noun
+megabyte	메가바이트	메가바이트	noun
+gigabyte	기가바이트	기가바이트	noun
+terabyte	테라바이트	테라바이트	noun
+megapixel	메가픽셀	메가픽셀	noun
+hertz	헤르츠	헤르츠	noun
+watt	와트	와트	noun
+volt	볼트	볼트	noun
+ampere	암페어	암페어	noun
+ohm	옴	옴	noun
+joule	줄	줄	noun
+milligram	밀리그램	밀리그램	noun
+millimeter	밀리미터	밀리미터	noun
+milliliter	밀리리터	밀리리터	noun
+celsius	섭씨	셀시어스	noun
+fahrenheit	화씨	페런하이트	noun
+flashcard	단어카드, 플래시카드	플래시카드	noun
+sketchbook	스케치북	스케치북	noun
+watercolor	수채화, 수채화물감	워터컬러	noun
+acrylic	아크릴	아크릴	noun
+palette	팔레트	팔레트	noun
+pastel	파스텔	파스텔	noun
+feeder	모이통, 급식기	피더	noun
+dining	식사	다이닝	noun
+guestroom	객실, 손님방	게스트룸	noun
+lavatory	화장실	레버터리	noun
+urinal	소변기	유리널	noun
+amphitheater	원형극장	엠피시어터	noun
+ballroom	무도회장	볼룸	noun
+saloon	술집	설룬	noun
+winery	와이너리	와이너리	noun
+distillery	증류소	디스틸러리	noun
+patisserie	제과점	파티스리	noun
+confectionery	제과, 과자	컨펙셔너리	noun
+moat	해자	모트	noun
+citadel	성채	시타델	noun
+levee	제방	레비	noun
+dike	둑, 제방	다이크	noun
+embankment	제방	임벵크먼트	noun
+aqueduct	수도교	에퀴덕트	noun
+foothill	산기슭	풋힐	noun
+fjord	피오르	피오르	noun
+isthmus	지협	이스머스	noun
+atoll	환초	에톨	noun
+sandstorm	모래폭풍	샌드스톰	noun
+rainstorm	폭풍우	레인스톰	noun
+squall	돌풍, 스콜	스콜	noun
+gale	강풍	게일	noun
+tempest	폭풍	템페스트	noun
+twister	회오리바람	트위스터	noun
+permafrost	영구동토층	퍼마프로스트	noun
+snowdrift	눈더미	스노드리프트	noun
+sunbeam	햇살	선빔	noun
+starlight	별빛	스타라이트	noun
+amethyst	자수정	아메시스트	noun
+aquamarine	아쿠아마린	아쿠아마린	noun
+garnet	석류석, 가넷	가넷	noun
+jade	옥, 비취	제이드	noun
+opal	오팔	오팔	noun
+onyx	오닉스	오닉스	noun
+topaz	토파즈	토파즈	noun
+quartz	석영, 쿼츠	쿼츠	noun
+obsidian	흑요석	옵시디언	noun
+basalt	현무암	버솔트	noun
+graphite	흑연	그라파이트	noun
+potassium	칼륨	포테시엄	noun
+calcium	칼슘	칼슘	noun
+magnesium	마그네슘	마그네슘	noun
+chlorine	염소	클로린	noun
+fluoride	불소	플루오라이드	noun
+iodine	요오드	아이오다인	noun
+helium	헬륨	헬륨	noun
+neon	네온	네온	noun
+argon	아르곤	아르곤	noun
+uranium	우라늄	우라늄	noun
+plutonium	플루토늄	플루토늄	noun
+lithium	리튬	리튬	noun
+cobalt	코발트	코발트	noun
+chromium	크롬	크로뮴	noun
+tungsten	텅스텐	텅스텐	noun
+pipette	피펫	피펫	noun
+barometer	기압계	버로미터	noun
+prism	프리즘	프리즘	noun
+torpedo	어뢰	토피도	noun
+warship	군함	워십	noun
+battleship	전함	배틀십	noun
+destroyer	구축함	디스트로이어	noun
+frigate	호위함	프리깃	noun
+cruiser	순양함, 크루저	크루저	noun
+bomber	폭격기	보머	noun
+saber	사브르, 군도	세이버	noun
+lance	창	렌스	noun
+crossbow	석궁	크로스보우	noun
+bayonet	총검	베이어닛	noun
+mace	철퇴	메이스	noun
+dugout	더그아웃	더그아웃	noun
+bullpen	불펜	불펜	noun
+homerun	홈런	홈런	noun
+inning	이닝, 회	이닝	noun
+shortstop	유격수	숏스톱	noun
+outfield	외야	아웃필드	noun
+infield	내야	인필드	noun
+touchdown	터치다운	터치다운	noun
+goalpost	골대	골포스트	noun
+offside	오프사이드	오프사이드	noun
+layup	레이업	레이업	noun
+dunk	덩크	덩크	noun
+rebound	리바운드	리바운드	noun
+hoop	골대, 고리	후프	noun
+backboard	백보드	백보드	noun
+volley	발리	발리	noun
+lob	로브	로브	noun
+putter	퍼터	퍼터	noun
+caddie	캐디	캐디	noun
+tee	티	티	noun
+fairway	페어웨이	페어웨이	noun
+birdie	버디	버디	noun
+bogey	보기	보기	noun
+teether	치발기	티더	noun
+marionette	꼭두각시, 마리오네트	마리오네트	noun
+tinsel	반짝이	틴슬	noun
+mistletoe	겨우살이	미슬토	noun
+pinata	피냐타	피냐타	noun
+sparkler	불꽃막대	스파클러	noun
+rosary	묵주	로저리	noun
+crucifix	십자가	크루서픽스	noun
+pulpit	설교단	풀핏	noun
+hymnal	찬송가책	힘널	noun
+checkmate	체크메이트, 외통수	체크메이트	noun
+joker	조커	조커	noun
+tumbler	텀블러	텀블러	noun
+bassinet	아기바구니	베서넷	noun
+fryer	튀김기	프라이어	noun
+coffeemaker	커피메이커	커피메이커	noun
+coffeepot	커피포트	커피포트	noun
+stovetop	가스레인지	스토브탑	noun
+cooktop	쿡탑	쿡탑	noun
+carnival	카니발, 축제	카니발	noun
+blueprint	청사진, 설계도	블루프린트	noun
+battlefield	전쟁터, 전장	배틀필드	noun
+customs	세관	커스텀스	noun
+cheerleader	치어리더	치어리더	noun
+backpacker	배낭여행자	백패커	noun
+pothole	포트홀, 구덩이	포트홀	noun
+hillside	산비탈, 언덕	힐사이드	noun
+roadside	길가	로드사이드	noun
+waterfront	해안가, 물가	워터프론트	noun
+homeowner	집주인	홈오너	noun
+landowner	지주, 땅주인	랜드오너	noun
+dwelling	주거, 주택	드웰링	noun
+abbey	수도원	에비	noun
+monastery	수도원	모나스터리	noun
+convent	수녀원	컨벤트	noun
+airfield	비행장	에어필드	noun
+airliner	여객기	에어라이너	noun
+airstrip	활주로	에어스트립	noun
+anchorman	앵커	앵커맨	noun
+archer	궁수	아처	noun
+armory	무기고	아모리	noun
+atrium	아트리움	아트리움	noun
+aviator	비행사	에이비에이터	noun
+ballpark	야구장	볼파크	noun
+banknote	지폐	뱅크노트	noun
+baptism	세례	벱티즘	noun
+bazaar	바자, 시장	바자	noun
+beachfront	해변	비치프론트	noun
+bellhop	벨보이	벨홉	noun
+berth	정박지, 침상	버스	noun
+billfold	지갑	빌폴드	noun
+boardwalk	산책로	보드워크	noun
+boathouse	보트창고	보트하우스	noun
+bobsled	봅슬레이	봅슬레드	noun
+bookworm	책벌레	북웜	noun
+bouncer	경비원	바운서	noun
+bridle	굴레	브라이들	noun
+buggy	유모차, 버기	버기	noun
+bureaucrat	관료	뷰러크렛	noun
+busker	거리공연자, 버스커	버스커	noun
+cabaret	카바레	카바레	noun
+campground	캠핑장	캠프그라운드	noun
+cannonball	포탄	케넌볼	noun
+carpool	카풀	카풀	noun
+catwalk	런웨이, 캣워크	캣워크	noun
+chaplain	군목, 사제	체플린	noun
+clubhouse	클럽하우스	클럽하우스	noun
+copier	복사기	코피어	noun
+corral	가축우리	커렐	noun
+cowgirl	카우걸	카우걸	noun
+crypt	지하묘지	크립트	noun
+darkroom	암실	다크룸	noun
+depot	창고, 정류장	디포	noun
+eatery	식당	이터리	noun
+fairground	박람회장	페어그라운드	noun
+firepit	화로	파이어핏	noun
+fishmonger	생선장수	피시멍거	noun
+foundry	주조공장	파운드리	noun
+goldsmith	금세공인	골드스미스	noun
+grocer	식료품상	그로서	noun
+guesthouse	게스트하우스	게스트하우스	noun
+gunman	총잡이	건맨	noun
+hairstylist	헤어디자이너	헤어스타일리스트	noun
+hangar	격납고	헹어	noun
+hatchery	부화장	해처리	noun
+helipad	헬기장	헬리패드	noun
+hermit	은둔자	허밋	noun
+homestead	농가	홈스테드	noun
+infirmary	양호실, 진료소	인퍼머리	noun
+jailer	교도관	제일러	noun
+jetty	방파제, 부두	제티	noun
+junkyard	고물상	정크야드	noun
+lumberyard	목재소	럼버야드	noun
+mailroom	우편실	메일룸	noun
+minaret	첨탑	미너렛	noun
+newsstand	신문가판대	뉴스스탠드	noun
+outhouse	옥외화장실	아웃하우스	noun
+paddock	방목장	패독	noun
+pawnshop	전당포	폰샵	noun
+pavilion	정자, 파빌리온	파빌리온	noun
+quarry	채석장	쿼리	noun
+refinery	정제소	리파이너리	noun
+rink	링크, 스케이트장	링크	noun
+schoolyard	운동장, 교정	스쿨야드	noun
+showroom	전시장, 쇼룸	쇼룸	noun
+skatepark	스케이트장	스케이트파크	noun
+slum	빈민가	슬럼	noun
+storeroom	창고	스토어룸	noun
+storefront	가게앞, 점포	스토어프론트	noun
+teahouse	찻집	티하우스	noun
+tenement	공동주택	테너먼트	noun
+uptown	주택가, 업타운	업타운	noun
+wigwam	원주민천막	위그웜	noun
+heartbeat	심장박동	하트비트	noun
+skyline	스카이라인	스카이라인	noun
+raindrop	빗방울	레인드롭	noun
+teardrop	눈물방울	티어드롭	noun
+sweatshirt	맨투맨, 스웨트셔츠	스웨트셔츠	noun
+sweatpants	추리닝바지, 운동복바지	스웨트팬츠	noun
+tracksuit	운동복, 추리닝	트랙수트	noun
+sportswear	운동복, 스포츠웨어	스포츠웨어	noun
+footwear	신발	풋웨어	noun
+undershirt	속옷, 러닝셔츠	언더셔츠	noun
+underpants	팬티	언더팬츠	noun
+eyeglasses	안경	아이글라스	noun
+handbook	안내서, 핸드북	핸드북	noun
+paperback	문고본	페이퍼백	noun
+hardcover	양장본	하드커버	noun
+storybook	동화책	스토리북	noun
+broadband	광대역, 초고속인터넷	브로드밴드	noun
+chatroom	채팅방	채팅룸	noun
+fanbase	팬층	팬베이스	noun
+toolkit	공구세트, 툴킷	툴킷	noun
+trashcan	쓰레기통	트레시캔	noun
+teabag	티백	티백	noun
+honeybee	꿀벌	허니비	noun
+honeycomb	벌집	허니콤	noun
+houseplant	화분, 실내식물	하우스플랜트	noun
+wildflower	들꽃, 야생화	와일드플라워	noun
+woodland	숲, 삼림	우드랜드	noun
+treetop	나무꼭대기	트리탑	noun
+hilltop	언덕꼭대기	힐탑	noun
+footpath	오솔길, 보도	풋페스	noun
+stairway	계단	스테어웨이	noun
+shipwreck	난파선	십렉	noun
+seabed	해저	시베드	noun
+sandcastle	모래성	샌드캐슬	noun
+sawdust	톱밥	소더스트	noun
+spiderweb	거미줄	스파이더웹	noun
+eggshell	달걀껍데기	에그셸	noun
+breadcrumb	빵가루	브레드크럼	noun
+beeswax	밀랍	비즈왁스	noun
+birthmark	모반, 점	버스마크	noun
+blackhead	블랙헤드	블랙헤드	noun
+bloodstream	혈류	블러드스트림	noun
+bodybuilder	보디빌더	보디빌더	noun
+cheekbone	광대뼈	칙본	noun
+tailbone	꼬리뼈	테일본	noun
+hairline	헤어라인	헤어라인	noun
+earache	귀앓이	이어레이크	noun
+eyedrops	안약	아이드롭스	noun
+catnip	개박하	캣닙	noun
+cockerel	어린수탉	코커럴	noun
+cornfield	옥수수밭	콘필드	noun
+cowbell	카우벨	카우벨	noun
+dewdrop	이슬방울	듀드롭	noun
+doorstop	문버팀쇠	도어스톱	noun
+drumbeat	북소리	드럼비트	noun
+farmyard	농가마당	팜야드	noun
+fishbone	생선가시	피시본	noun
+floorboard	마룻널	플로어보드	noun
+gearbox	변속기, 기어박스	기어박스	noun
+grapevine	포도나무	그레이프바인	noun
+hairclip	머리핀, 헤어클립	헤어클립	noun
+heirloom	가보	에어룸	noun
+jumprope	줄넘기	점프로프	noun
+kneepad	무릎보호대	니패드	noun
+logbook	일지	로그북	noun
+moonbeam	달빛	문빔	noun
+motorboat	모터보트	모터보트	noun
+mudslide	산사태	머드슬라이드	noun
+nutshell	견과껍데기	넛셸	noun
+paintball	페인트볼	페인트볼	noun
+pinball	핀볼	핀볼	noun
+pincushion	바늘꽂이	핀쿠션	noun
+potluck	포틀럭	포틀럭	noun
+rearview	후방	리어뷰	noun
+rosebud	장미꽃봉오리	로즈버드	noun
+saltshaker	소금통	솔트쉐이커	noun
+schoolbag	책가방	스쿨백	noun
+shoebox	신발상자	슈박스	noun
+shoehorn	구둣주걱	슈혼	noun
+sidecar	사이드카	사이드카	noun
+songbird	명금	송버드	noun
+spacesuit	우주복	스페이스수트	noun
+spearmint	스피어민트	스피어민트	noun
+steamboat	증기선	스팀보트	noun
+thunderbolt	벼락	선더볼트	noun
+tiebreaker	타이브레이크	타이브레이커	noun
+toadstool	독버섯	토드스툴	noun
+tugboat	예인선	터그보트	noun
+waistband	허리밴드	웨이스트밴드	noun
+waistline	허리둘레	웨이스트라인	noun
+wastewater	폐수	웨이스트워터	noun
+watchband	시곗줄	워치밴드	noun
+wetsuit	잠수복	웻수트	noun
+wishbone	위시본	위시본	noun
+woodwork	목공, 목공품	우드워크	noun
+wristband	손목밴드	리스트밴드	noun
+sweatband	땀받이밴드	스웨트밴드	noun
+clockwork	태엽장치	클록워크	noun
+candlelight	촛불	캔들라이트	noun
+aardvark	땅돼지	아드바크	noun
+angelfish	엔젤피시	엔젤피시	noun
+bloodhound	블러드하운드	블러드하운드	noun
+bonobo	보노보	보노보	noun
+bullfrog	황소개구리	불프로그	noun
+clownfish	흰동가리, 니모	클라운피시	noun
+cockatiel	왕관앵무	코커틸	noun
+dormouse	겨울잠쥐	도마우스	noun
+egret	백로	이그릿	noun
+grouse	뇌조	그라우스	noun
+guppy	구피	구피	noun
+hornbill	코뿔새	혼빌	noun
+hound	사냥개	하운드	noun
+ibis	따오기	아이비스	noun
+impala	임팔라	임팔라	noun
+jackrabbit	산토끼	잭래빗	noun
+lamprey	칠성장어	렘프리	noun
+lovebird	모란앵무	러브버드	noun
+manatee	매너티	매너티	noun
+mandrill	맨드릴	맨드릴	noun
+marmot	마멋	마멋	noun
+mockingbird	흉내지빠귀	모킹버드	noun
+narwhal	일각고래	나월	noun
+orca	범고래	오르카	noun
+porpoise	돌고래	포퍼스	noun
+pufferfish	복어	퍼퍼피시	noun
+roadrunner	로드러너	로드러너	noun
+sheepdog	양치기개	십도그	noun
+shrew	뒤쥐	슈루	noun
+wildcat	살쾡이	와일드캣	noun
+wildebeest	누	와일더비스트	noun
+wolverine	울버린	울버린	noun
+woodchuck	마멋	우드척	noun
+aloe	알로에	알로에	noun
+bluebell	블루벨	블루벨	noun
+buttercup	미나리아재비	버터컵	noun
+cornflower	수레국화	콘플라워	noun
+crocus	크로커스	크로커스	noun
+edelweiss	에델바이스	에델바이스	noun
+foxglove	디기탈리스	폭스글러브	noun
+gardenia	치자나무	가드니아	noun
+gladiolus	글라디올러스	글라디올러스	noun
+honeysuckle	인동덩굴	허니서클	noun
+hydrangea	수국	하이드레인지아	noun
+mimosa	미모사	미모사	noun
+narcissus	수선화	나르시서스	noun
+oleander	협죽도	올리엔더	noun
+primrose	앵초	프림로즈	noun
+snapdragon	금어초	스냅드래곤	noun
+thistle	엉겅퀴	시슬	noun
+wisteria	등나무	위스테리아	noun
+zinnia	백일홍	지니아	noun
+hazel	개암나무	헤이즐	noun
+holly	호랑가시나무	홀리	noun
+juniper	향나무	주니퍼	noun
+larch	낙엽송	라치	noun
+linden	피나무, 보리수	린든	noun
+myrtle	도금양	머틀	noun
+yew	주목	유	noun
+cosmetic	화장품	코스메틱	noun
+sewing	바느질	소잉	noun
+yarn	실, 털실	얀	noun
+mascot	마스코트	마스코트	noun
+collage	콜라주	콜라주	noun
+serum	세럼, 혈청	세럼	noun
+backdrop	배경	백드롭	noun
+braid	땋은머리	브레이드	noun
+cuff	소맷부리, 커프스	커프	noun
+cutlet	커틀릿, 돈가스	커틀릿	noun
+denture	틀니	덴처	noun
+condiment	양념, 조미료	콘디먼트	noun
+ammo	탄약	에모	noun
+antacid	제산제	엔테시드	noun
+armband	완장	암밴드	noun
+balm	밤, 연고	밤	noun
+baton	바통, 지휘봉	바톤	noun
+bedframe	침대프레임	베드프레임	noun
+bento	도시락	벤토	noun
+cameo	카메오	카메오	noun
+cleat	축구화, 스파이크	클릿	noun
+corsage	코사지	코사지	noun
+dashcam	블랙박스	대시캠	noun
+diorama	디오라마	디오라마	noun
+dishware	식기	디시웨어	noun
+dreamcatcher	드림캐처	드림캐처	noun
+eggbeater	거품기	에그비터	noun
+emblem	엠블럼, 상징	엠블럼	noun
+eyepiece	접안렌즈	아이피스	noun
+facemask	마스크	페이스마스크	noun
+fishtank	어항	피시탱크	noun
+flatbread	납작빵	플랫브레드	noun
+flatware	식기	플랫웨어	noun
+garland	화환	갈런드	noun
+gemstone	보석	젬스톤	noun
+headgear	헤드기어, 모자	헤드기어	noun
+hotplate	핫플레이트	핫플레이트	noun
+hotpot	훠궈, 전골	핫팟	noun
+icepack	얼음팩	아이스팩	noun
+keypad	키패드	키패드	noun
+lipgloss	립글로스	립글로스	noun
+medallion	메달	메달리온	noun
+microchip	마이크로칩	마이크로칩	noun
+mixtape	믹스테이프	믹스테이프	noun
+monocle	외알안경	모노클	noun
+moped	모페드, 원동기	모페드	noun
+nosebleed	코피	노즈블리드	noun
+padding	패딩, 충전재	패딩	noun
+pantsuit	바지정장	팬츠수트	noun
+petticoat	속치마	페티코트	noun
+photocopy	복사, 복사본	포토카피	noun
+pillbox	약통	필박스	noun
+plaid	격자무늬, 체크	플레드	noun
+pompom	방울	폼폼	noun
+postage	우편요금	포스티지	noun
+potpourri	포푸리	포푸리	noun
+raffle	추첨, 경품추첨	래플	noun
+rapier	레이피어	레이피어	noun
+sachet	향주머니	사셰	noun
+sash	띠	새시	noun
+scrubs	수술복	스크럽스	noun
+sequin	스팽글	시퀸	noun
+spork	스포크	스포크	noun
+spyware	스파이웨어	스파이웨어	noun
+stencil	스텐실	스텐실	noun
+sunhat	챙모자	선헷	noun
+talisman	부적	탈리스먼	noun
+tampon	탐폰	탐폰	noun
+toga	토가	토가	noun
+toiletry	세면용품	토일러트리	noun
+towelette	물티슈	타월렛	noun
+toybox	장난감상자	토이박스	noun
+trinket	장신구	트링킷	noun
+twine	노끈	트와인	noun
+washcloth	수건	워시클로스	noun
+halo	후광	헤일로	noun
+commander	사령관, 지휘관	커맨더	noun
+performer	공연자, 연주자	퍼포머	noun
+entertainer	연예인	엔터테이너	noun
+craftsman	장인	크래프츠먼	noun
+gymnast	체조선수	짐네스트	noun
+laborer	노동자	레이버러	noun
+lecturer	강사	렉처러	noun
+missionary	선교사	미셔너리	noun
+storyteller	이야기꾼	스토리텔러	noun
+treasurer	회계담당자	트레저러	noun
+repairman	수리공	리페어맨	noun
+concierge	컨시어지	컨시어지	noun
+landlady	여주인, 집주인	랜드레이디	noun
+spokesperson	대변인	스포크스퍼슨	noun
+negotiator	협상가	네고시에이터	noun
+mediator	중재자	미디에이터	noun
+moderator	사회자, 진행자	모더레이터	noun
+newscaster	뉴스캐스터, 앵커	뉴스캐스터	noun
+meteorologist	기상학자	미티어롤러지스트	noun
+neurologist	신경과의사	뉴롤러지스트	noun
+neurosurgeon	신경외과의사	뉴로서전	noun
+pathologist	병리학자	퍼솔러지스트	noun
+physiotherapist	물리치료사	피지오세러피스트	noun
+hygienist	위생사	하이지니스트	noun
+optometrist	검안사	옵토메트리스트	noun
+blacksmith	대장장이	블랙스미스	noun
+bookkeeper	경리	북키퍼	noun
+bookseller	서적상	북셀러	noun
+brewer	양조업자	브루어	noun
+cadet	사관생도	커뎃	noun
+calligrapher	서예가	캘리그래퍼	noun
+caterer	출장요리사	케이터러	noun
+biographer	전기작가	바이오그래퍼	noun
+dispatcher	배차원	디스패처	noun
+envoy	특사	엔보이	noun
+examiner	심사관, 검사관	이그제미너	noun
+financier	금융가	파이낸시어	noun
+forester	산림관	포리스터	noun
+geographer	지리학자	지오그래퍼	noun
+herbalist	약초상	허벌리스트	noun
+homemaker	주부	홈메이커	noun
+illusionist	마술사	일루저니스트	noun
+innkeeper	여관주인	인키퍼	noun
+jester	광대	제스터	noun
+logger	벌목꾼, 로거	로거	noun
+machinist	기계공	머시니스트	noun
+magistrate	치안판사	메지스트레이트	noun
+mariner	선원	메리너	noun
+milkman	우유배달원	밀크맨	noun
+miller	방앗간주인	밀러	noun
+mortician	장의사	모티션	noun
+oceanographer	해양학자	오셔노그래퍼	noun
+orator	연설가	오레이터	noun
+patrolman	순찰경관	퍼트롤맨	noun
+pawnbroker	전당포주인	폰브로커	noun
+peddler	행상인	페들러	noun
+philanthropist	자선가	필렌스러피스트	noun
+porter	짐꾼, 포터	포터	noun
+potter	도공, 도예가	포터	noun
+preacher	설교자	프리처	noun
+proofreader	교정자	프루프리더	noun
+publicist	홍보담당자	퍼블리시스트	noun
+puppeteer	인형술사	퍼피티어	noun
+recruiter	채용담당자	리크루터	noun
+scribe	필경사	스크라이브	noun
+seamstress	재봉사	심스트리스	noun
+sentry	보초	센트리	noun
+shoemaker	구두장이	슈메이커	noun
+skipper	선장, 주장	스키퍼	noun
+stagehand	무대담당자	스테이지핸드	noun
+stockbroker	증권중개인	스톡브로커	noun
+stonemason	석공	스톤메이슨	noun
+stuntman	스턴트맨	스턴트맨	noun
+surveyor	측량사	서베이어	noun
+taxidermist	박제사	텍시더미스트	noun
+telemarketer	텔레마케터	텔레마케터	noun
+upholsterer	가구장인	업홀스터러	noun
+watchman	경비원	워치맨	noun
+weaver	직조공	위버	noun
+wholesaler	도매상	홀세일러	noun
+woodcutter	나무꾼	우드커터	noun
+woodworker	목공	우드워커	noun
+farmhand	농장일꾼	팜핸드	noun
+ferryman	뱃사공	페리맨	noun
+bellboy	벨보이	벨보이	noun

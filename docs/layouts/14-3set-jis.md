@@ -11,7 +11,7 @@
 | **Abbreviations** | K3S-J, K3S, 3-set |
 | **Designer** | 세벌식: 공병우 (Gong Byeong-u); 세벌식 순아래, the starting point: a later community design. Its JIS form: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |
-| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+| **Contact** | mj@teammirae.com (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/14-3set-jis-dark.png">

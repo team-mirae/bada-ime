@@ -11,7 +11,7 @@
 | **Abbreviations** | Kana Korean |
 | **Designer** | Keys: JIS kana (JIS X 6002). Kana-to-Korean readings: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |
-| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+| **Contact** | mj@teammirae.com (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/19-kana-korean-dark.png">

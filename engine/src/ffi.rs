@@ -56,6 +56,8 @@ pub extern "C" fn bada_data_new(
     emoji_len: usize,
     unicode: *const u8,
     unicode_len: usize,
+    en_ko: *const u8,
+    en_ko_len: usize,
 ) -> *const Data {
     let raw = |ptr: *const u8, len: usize| -> &[u8] {
         if ptr.is_null() || len == 0 {
@@ -73,7 +75,8 @@ pub extern "C" fn bada_data_new(
     .with_japanese(bytes(ja, ja_len))
     .with_kanji(raw(kanji, kanji_len))
     .with_lm(raw(lm, lm_len))
-    .with_search(bytes(symbols, symbols_len), bytes(emoji, emoji_len), bytes(unicode, unicode_len));
+    .with_search(bytes(symbols, symbols_len), bytes(emoji, emoji_len), bytes(unicode, unicode_len))
+    .with_en_ko(bytes(en_ko, en_ko_len));
     Arc::into_raw(Arc::new(data))
 }
 

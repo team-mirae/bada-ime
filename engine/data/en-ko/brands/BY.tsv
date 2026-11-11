@@ -1,0 +1,41 @@
+# Belarus (벨라루스)
+# Covers: trucks and tractors, appliances and electronics, food and dairy, confectionery, beer and vodka,
+# cosmetics, fashion and lingerie, banks and telecom, airline, retail, energy and chemicals, games,
+# sports clubs.
+# Hangul: established Korean forms where they exist (벨라즈, 민스크), otherwise transcribed from Russian/Belarusian
+# following 러시아어 표기법. Wargaming was founded in Minsk (HQ now Nicosia, Cyprus).
+# Sources: own knowledge.
+BelAZ	벨라즈	auto
+MAZ	마즈	auto
+MTZ	엠테제	industrial
+Amkodor	암코도르	industrial
+Belshina	벨시나	auto
+Minsk	민스크	motorcycles
+Atlant	아틀란트	appliances
+Gefest	게페스트	appliances
+Horizont	호리존트	electronics
+Integral	인테그랄	electronics
+Savushkin	사부시킨	food
+Santa Bremor	산타 브레모르	food
+Bellakt	벨락트	food
+Kommunarka	코무나르카	food
+Darida	다리다	drink
+Krinitsa	크리니차	beer
+Lidskoe	리드스코예	beer
+Alivaria	알리바리아	beer
+Bulbash	불바시	spirits
+Minsk Kristall	민스크 크리스탈	spirits
+Belita	벨리타	cosmetics
+Vitex	비텍스	cosmetics
+Milavitsa	밀라비차	fashion
+Mark Formelle	마르크 포르멜레	fashion
+Conte	콘테	fashion
+Belavia	벨라비아	airline
+Belarusbank	벨라루스방크	bank
+Beltelecom	벨텔레콤	telecom
+Euroopt	에우로옵트	retail
+Naftan	나프탄	energy
+Belaruskali	벨라루스칼리	chemicals
+Grodno Azot	그로드노 아조트	chemicals
+Dinamo Minsk	디나모 민스크	sports
+BATE Borisov	바테 보리소프	football club

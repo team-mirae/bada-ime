@@ -1,0 +1,349 @@
+# China (중국)
+# Covers: Chinese-origin / Chinese-headquartered brands: phones, electronics, appliances, chips and AI, carmakers
+# and models, EV makers, internet platforms and apps, games and studios, banks, insurers, telecoms, airlines,
+# logistics, energy, food, drink, beer, baijiu, tea and coffee chains, sportswear, fashion, toys, pharma,
+# media, real estate, football clubs. (Hong Kong, Macau and Taiwan brands are in HK/MO/TW.)
+# Hangul: established Korean market/media forms (화웨이, 샤오미, 알리바바, 텐센트, 비야디, 칭따오), else 중국어 표기법.
+# Sources: own knowledge (Korean media spellings from memory).
+Huawei	화웨이	tech
+Honor	아너	electronics
+Xiaomi	샤오미	electronics
+Redmi	레드미	electronics
+POCO	포코	electronics
+OPPO	오포	electronics
+vivo	비보	electronics
+OnePlus	원플러스	electronics
+realme	리얼미	electronics
+Meizu	메이주	electronics
+ZTE	지티이	telecom
+nubia	누비아	electronics
+Red Magic	레드매직	electronics
+Lenovo	레노버	tech
+TCL	티씨엘	electronics
+Hisense	하이센스	electronics
+Haier	하이얼	appliances
+Midea	미디어	appliances
+Gree	그리	appliances
+Skyworth	스카이워스	electronics
+Changhong	창훙	electronics
+Konka	캉자	electronics
+Galanz	갈란츠	appliances
+Roborock	로보락	appliances
+Dreame	드리미	appliances
+Ecovacs	에코백스	appliances
+Narwal	나르왈	appliances
+DJI	디제이아이	electronics
+Anker	앵커	electronics
+Ugreen	유그린	electronics
+Baseus	베이스어스	electronics
+Amazfit	어메이즈핏	electronics
+Xgimi	엑스지미	electronics
+Dangbei	당베이	electronics
+Edifier	에디파이어	electronics
+QCY	큐씨와이	electronics
+Aqara	아카라	electronics
+Yeelight	이라이트	electronics
+Pantum	판툼	electronics
+Tecno	테크노	electronics
+Infinix	인피닉스	electronics
+Transsion	트랜션	electronics
+BOE	비오이	electronics
+CATL	씨에이티엘	energy
+SMIC	에스엠아이씨	tech
+HiSilicon	하이실리콘	tech
+Hikvision	하이크비전	electronics
+Dahua	다화	electronics
+Inspur	인스퍼	tech
+iFlytek	아이플라이텍	tech
+Megvii	메그비	tech
+Cambricon	캠브리콘	tech
+Unitree	유니트리	tech
+UBTech	유비테크	tech
+EHang	이항	tech
+Kingsoft	킹소프트	software
+DeepSeek	딥시크	tech
+Kimi	키미	app
+Qwen	큐원	tech
+Doubao	더우바오	app
+Zhipu	즈푸	tech
+MiniMax	미니맥스	tech
+BYD	비야디	auto
+Denza	덴자	auto
+Yangwang	양왕	auto
+Seal	씰	auto
+Dolphin	돌핀	auto
+Geely	지리	auto
+Zeekr	지커	auto
+Lynk & Co	링크앤코	auto
+Chery	체리	auto
+Tiggo	티고	auto
+Omoda	오모다	auto
+Great Wall Motor	창청자동차	auto
+Haval	하발	auto
+SAIC Motor	상하이자동차	auto
+Roewe	룽웨이	auto
+Wuling	우링	auto
+Baojun	바오쥔	auto
+Changan	창안	auto
+Dongfeng	둥펑	auto
+FAW	이치	auto
+Hongqi	훙치	auto
+BAIC	베이징자동차	auto
+GAC	광치	auto
+Aion	아이온	auto
+JAC	장화이	auto
+NIO	니오	auto
+Xpeng	샤오펑	auto
+Li Auto	리오토	auto
+Leapmotor	립모터	auto
+Aito	아이토	auto
+Avatr	아바타	auto
+Foton	포톤	auto
+Yutong	위퉁	auto
+CFMOTO	씨에프모토	auto
+NIU	니우	auto
+Ninebot	나인봇	auto
+Sany	싼이	industrial
+XCMG	쉬공	industrial
+Zoomlion	중롄	industrial
+Weichai	웨이차이	industrial
+CRRC	중국중차	industrial
+COMAC	코맥	industrial
+LONGi	룽지	energy
+JinkoSolar	징코솔라	energy
+Trina Solar	트리나솔라	energy
+Goldwind	골드윈드	energy
+Sinopec	시노펙	energy
+PetroChina	페트로차이나	energy
+CNOOC	중국해양석유	energy
+Baowu	바오우	industrial
+Sinochem	시노켐	chemicals
+ChemChina	켐차이나	chemicals
+Alibaba	알리바바	internet
+Taobao	타오바오	internet
+Tmall	티몰	internet
+AliExpress	알리익스프레스	internet
+Alipay	알리페이	finance
+Ant Group	앤트그룹	finance
+DingTalk	딩톡	app
+Cainiao	차이냐오	logistics
+Tencent	텐센트	internet
+WeChat	위챗	app
+QQ	큐큐	app
+WeTV	위티비	media
+Baidu	바이두	internet
+iQIYI	아이치이	media
+ByteDance	바이트댄스	internet
+TikTok	틱톡	app
+Douyin	더우인	app
+Toutiao	터우탸오	app
+CapCut	캡컷	app
+JD.com	징둥닷컴	internet
+Pinduoduo	핀둬둬	internet
+Temu	테무	internet
+Shein	쉬인	fashion
+Meituan	메이퇀	internet
+Ele.me	어러머	app
+DiDi	디디	app
+NetEase	넷이즈	internet
+Weibo	웨이보	app
+Sina	시나	internet
+Sohu	소후	internet
+Bilibili	빌리빌리	app
+Kuaishou	콰이쇼우	app
+Kwai	콰이	app
+Xiaohongshu	샤오훙수	app
+RedNote	레드노트	app
+Zhihu	즈후	app
+Douban	더우반	app
+Youku	유쿠	media
+Trip.com	트립닷컴	travel
+Ctrip	씨트립	travel
+Amap	가오더	app
+Suning	쑤닝	retail
+Gome	궈메이	retail
+Hema	허마	retail
+Miniso	미니소	retail
+Pop Mart	팝마트	toys
+Labubu	라부부	toys
+miHoYo	미호요	games
+HoYoverse	호요버스	games
+Genshin Impact	원신	games
+Honkai: Star Rail	붕괴 스타레일	games
+Zenless Zone Zero	젠레스 존 제로	games
+Black Myth: Wukong	검은 신화 오공	games
+Wuthering Waves	명조	games
+Kuro Games	쿠로게임즈	games
+Hypergryph	하이퍼그리프	games
+Arknights	명일방주	games
+Azur Lane	벽람항로	games
+Yostar	요스타	games
+Girls' Frontline	소녀전선	games
+Punishing: Gray Raven	퍼니싱 그레이 레이븐	games
+Tower of Fantasy	타워 오브 판타지	games
+Infinity Nikki	인피니티 니키	games
+Love and Deepspace	러브앤딥스페이스	games
+Honor of Kings	아너 오브 킹즈	games
+Perfect World	퍼펙트월드	games
+Lilith Games	릴리스게임즈	games
+Rise of Kingdoms	라이즈 오브 킹덤즈	games
+Whiteout Survival	화이트아웃 서바이벌	games
+ICBC	공상은행	bank
+Bank of China	중국은행	bank
+China Construction Bank	중국건설은행	bank
+Agricultural Bank of China	중국농업은행	bank
+Bank of Communications	교통은행	bank
+China Merchants Bank	초상은행	bank
+UnionPay	유니온페이	finance
+Ping An	핑안	insurance
+CITIC	시틱	conglomerate
+Fosun	푸싱	conglomerate
+Wanda	완다	conglomerate
+Evergrande	헝다	real estate
+Country Garden	비구이위안	real estate
+Vanke	완커	real estate
+China Mobile	차이나모바일	telecom
+China Unicom	차이나유니콤	telecom
+China Telecom	차이나텔레콤	telecom
+Air China	에어차이나	airline
+China Eastern Airlines	중국동방항공	airline
+China Southern Airlines	중국남방항공	airline
+Hainan Airlines	하이난항공	airline
+Xiamen Airlines	샤먼항공	airline
+Sichuan Airlines	쓰촨항공	airline
+Shandong Airlines	산둥항공	airline
+Shenzhen Airlines	선전항공	airline
+Spring Airlines	춘추항공	airline
+Tianjin Airlines	톈진항공	airline
+COSCO	코스코	logistics
+SF Express	순펑	logistics
+Jin Jiang	진장	hotel
+Huazhu	화주	hotel
+Tsingtao	칭따오	beer
+Harbin	하얼빈	beer
+Yanjing	옌징	beer
+Moutai	마오타이	spirits
+Wuliangye	우량예	spirits
+Fenjiu	펀주	spirits
+Luzhou Laojiao	루저우 라오자오	spirits
+Nongfu Spring	농푸산취안	drink
+Wahaha	와하하	drink
+Wanglaoji	왕라오지	drink
+Master Kong	캉스푸	food
+Lao Gan Ma	라오간마	food
+Haitian	하이톈	food
+Weilong	웨이룽	food
+Yili	이리	food
+Mengniu	멍뉴	food
+Mixue	미쉐	food
+Luckin Coffee	루이싱커피	food
+Heytea	헤이티	food
+Haidilao	하이디라오	food
+Quanjude	취안쥐더	food
+Chunghwa	중화	tobacco
+Anta	안타	sports
+Li-Ning	리닝	sports
+Bosideng	보시덩	fashion
+Hengrui	헝루이	pharma
+WuXi AppTec	우시앱텍	pharma
+WuXi Biologics	우시바이오로직스	pharma
+BeiGene	베이진	pharma
+Sinovac	시노백	pharma
+Sinopharm	시노팜	pharma
+Mindray	마인드레이	pharma
+Tong Ren Tang	퉁런탕	pharma
+Yunnan Baiyao	윈난바이야오	pharma
+Pien Tze Huang	편자황	pharma
+Xinhua	신화통신	media
+CCTV	씨씨티비	media
+CGTN	씨지티엔	media
+People's Daily	인민일보	media
+Global Times	환구시보	media
+China Daily	차이나데일리	media
+Caixin	차이신	media
+Shanghai Port	상하이 하이강	football club
+Shanghai Shenhua	상하이 선화	football club
+Shandong Taishan	산둥 타이산	football club
+Beijing Guoan	베이징 궈안	football club
+Chengdu Rongcheng	청두 룽청	football club
+China Minsheng Bank	민생은행	bank
+Mijia	미지아	appliances
+Proya	프로야	cosmetics
+Perfect Diary	퍼펙트다이어리	cosmetics
+Florasis	화시쯔	cosmetics
+Chagee	차지	food
+Nayuki	나이쉐	food
+Genki Forest	위안치썬린	drink
+Three Squirrels	싼즈쑹수	food
+Yanghe	양허	spirits
+Tencent Video	텐센트 비디오	media
+QQ Music	큐큐뮤직	app
+Kugou	쿠거우	app
+Ximalaya	시마라야	app
+Fliggy	플리기	travel
+Qunar	취나얼	travel
+Autohome	오토홈	internet
+Xianyu	셴위	app
+Meitu	메이투	app
+WPS Office	더블유피에스 오피스	software
+Huawei Cloud	화웨이 클라우드	tech
+Alibaba Cloud	알리바바 클라우드	tech
+HarmonyOS	하모니오에스	software
+Hunyuan	훈위안	tech
+Ernie	어니	tech
+Moonshot AI	문샷에이아이	tech
+Momenta	모멘타	tech
+Pony.ai	포니에이아이	tech
+WeRide	위라이드	tech
+Horizon Robotics	호라이즌 로보틱스	tech
+Jetour	제투어	auto
+Neta	네타	auto
+King Long	진룽	auto
+Gotion	궈쉬안	energy
+Envision	엔비전	energy
+Tongwei	퉁웨이	energy
+Mango TV	망고티비	media
+Zhiyun	지윈	electronics
+Ulanzi	울란지	electronics
+Godox	고독스	electronics
+Moondrop	문드롭	electronics
+FiiO	피오	electronics
+Yadea	야디	auto
+Zhipu AI	즈푸 에이아이	software
+Manus	마누스	software
+Keychron	키크론	electronics
+ThinkPad	씽크패드	electronics
+Papergames	페이퍼게임즈	games
+Game Science	게임 사이언스	games
+Tencent Games	텐센트 게임즈	games
+Moonton	문톤	games
+Mobile Legends	모바일 레전드	games
+Judydoll	주디돌	cosmetics
+WeChat Pay	위챗페이	fintech
+Tineco	티네코	appliances
+Mi Band	미밴드	electronics
+Atto 3	아토 쓰리	car model
+Sealion	씨라이언	car model
+Xiaomi SU7	샤오미 에스유세븐	car model
+Huawei Mate	화웨이 메이트	electronics
+Honor Magic	아너 매직	electronics
+Lenovo Legion	레노버 리전	electronics
+IdeaPad	아이디어패드	electronics
+Atto 2	아토 투	car model
+Seal U	씰 유	car model
+Varmilo	바밀로	electronics
+Akko	아코	electronics
+XPPen	엑스피펜	electronics
+Huion	휴이온	electronics
+Onyx Boox	오닉스 북스	electronics
+TP-Link	티피링크	electronics
+Tapo	타포	electronics
+Eufy	유피	electronics
+Soundcore	사운드코어	electronics
+Haylou	하이루	audio
+Shokz	샥즈	audio
+Lexar	렉사	electronics
+Coros	코로스	electronics
+Osmo Pocket	오즈모 포켓	electronics
+Kling	클링	software
+Ernie Bot	어니봇	software

@@ -13,6 +13,7 @@ pub mod japanese;
 pub mod kanji;
 pub mod kana_korean;
 pub mod korean_roman;
+pub mod bada_roman;
 pub mod key;
 pub mod layout;
 pub mod romaji;

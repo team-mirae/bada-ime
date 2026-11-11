@@ -277,3 +277,41 @@ fn kana_native_words_stay_kana() {
     let out = romaji("toukyouni");
     assert_eq!(out.preedit, "東京に", "{:?}", out.menu);
 }
+
+/// Layout 15 on the shipped dictionary: the spelling's reading wins unless another is far better known
+/// (jong 종, not 적), and with no known word the jamo model picks the split (지역총괄의, 종속기업이).
+#[test]
+fn bada_roman_ranks_the_spelling_first() {
+    let d = data();
+    for (typed, want) in [("jong", "종"), ("jongsok", "종속"), ("jongsokgieob", "종속기업"), ("jongsokgieobi", "종속기업이"),
+                          ("sok", "속"), ("eui", "의"), ("its", "있"), ("itseo", "있어"), ("gaeui", "개의"), ("gwalui", "괄의"), ("jiyeokchonggwalui", "지역총괄의")] {
+        let mut e = Engine::new(d.clone());
+        e.pin_dictionary(None);
+        let mut s = bada::Settings::default();
+        s.enabled = vec![15];
+        e.set_settings(s);
+        let keys: Vec<(Key, bool)> = typed.chars().map(|c| (Key::from_code(&format!("Key{}", c.to_ascii_uppercase())), false)).collect();
+        assert_eq!(typed_out(&mut e, &keys), want, "{typed}");
+    }
+}
+
+fn typed_out(e: &mut Engine, keys: &[(Key, bool)]) -> String {
+    typed(e, keys).preedit
+}
+
+/// QWERTY and layout 15 together: a real English word that's no Korean word types as English
+/// (interpolate); Korean that's a word stays Korean.
+#[test]
+fn english_beside_bada_roman() {
+    let d = data();
+    for (typed, want) in [("interpolate", "interpolate"), ("serendipity", "serendipity"), ("hanguk", "한국"),
+                          ("saram", "사람"), ("jongsok", "종속"), ("sarang", "사랑"), ("gamsa", "감사")] {
+        let mut e = Engine::new(d.clone());
+        e.pin_dictionary(None);
+        let mut s = bada::Settings::default();
+        s.enabled = vec![0, 15];
+        e.set_settings(s);
+        let keys: Vec<(Key, bool)> = typed.chars().map(|c| (Key::from_code(&format!("Key{}", c.to_ascii_uppercase())), false)).collect();
+        assert_eq!(typed_out(&mut e, &keys), want, "{typed}");
+    }
+}

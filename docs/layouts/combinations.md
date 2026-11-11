@@ -9,7 +9,7 @@ These images put every enabled layout on one keycap, as a printed multi-script k
 
 - **Top left: Latin** (QWERTY 0, Korean Roman 18, Romaji 21). Letters as capitals; on number and
   symbol keys, ⇧ above unshifted.
-- **Bottom left: Korean** (KTS 10, 11, 12, Bada 13, Kana Korean 19). Large: unshifted; small at its
+- **Bottom left: Korean** (KTS 10, 11, 12, Bada 13, bada roman 15, Kana Korean 19). Large: unshifted; small at its
   right: a ⇧ legend that isn't a rule (the tense consonants of 2-set) or the rest of a token key
   (ㅃ / ㅄ). Rule-based ⇧ legends are left off: Moonshot's ⇧ + consonant (+ ㅏ) and ⇧ + a number
   or symbol key (its JIS character).
@@ -32,6 +32,20 @@ Henkan candidates **0, 13, 20**. English words, Korean and Japanese from one mod
 switching: the ranker decides whether `DH` was `dh`, 가 or しく. Bada's common jamo need no Shift, so
 ⇧ stays free for Bada's digits and punctuation and kana's small kana. The same idea as JIS Moonshot
 (0, 12, 20), with Bada in place of the Moonshot Korean layout.
+
+## QWERTY + bada roman + kana
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/qwerty-bada-roman-kana-dark.png">
+  <img src="../images/layouts/qwerty-bada-roman-kana-light.png" alt="QWERTY, bada roman and kana legends on one HHKB JIS keyboard">
+</picture>
+
+Henkan candidates **0, 15, 20**. English, Korean typed as it's romanized, and Japanese kana from one
+mode. QWERTY and bada roman share the letters, so the keycaps show only where bada roman differs:
+`q` is `ch`, `x` an initial ㅇ, `;` a syllable break (the dotted square), `¥` is ₩. The ranker
+decides between the English word and the Korean reading of the same letters: a known Korean word
+first, then a common English word, then a rare English word over a reading that's no Korean word
+(`interpolate`, not 인텔포라테; [spec §6.4](../spec.md)). Kana keeps its own corner.
 
 ## bada + romaji
 

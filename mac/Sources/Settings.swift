@@ -43,9 +43,11 @@ struct BadaSettings: Codable, Equatable {
     var intercept_f = true
     /// "F6"…"F10" → "swallow" | "pass" | "<method>.<action>". Nothing is bound by default.
     var fkeys: [String: String] = [:]
+    /// Layout 15 (bada roman): Japanese romaji readings as shortcuts (mei 명). On by default.
+    var ja_shortcuts = true
 
     enum CodingKeys: String, CodingKey {
-        case enabled, default_muhenkan, weights, skin_tones, use_profiles, profiles, profile_keys, kana_in_profile, profile_order, script_forms, negative_method, intercept_f, fkeys
+        case enabled, default_muhenkan, weights, skin_tones, use_profiles, profiles, profile_keys, kana_in_profile, profile_order, script_forms, negative_method, intercept_f, fkeys, ja_shortcuts
     }
 
     init() {}
@@ -69,6 +71,7 @@ struct BadaSettings: Codable, Equatable {
         negative_method = try c.decodeIfPresent(UInt32.self, forKey: .negative_method)
         intercept_f = try c.decodeIfPresent(Bool.self, forKey: .intercept_f) ?? true
         fkeys = try c.decodeIfPresent([String: String].self, forKey: .fkeys) ?? [:]
+        ja_shortcuts = try c.decodeIfPresent(Bool.self, forKey: .ja_shortcuts) ?? true
     }
 
     static let key = "Settings"

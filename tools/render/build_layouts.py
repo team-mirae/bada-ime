@@ -150,6 +150,31 @@ def roman18():
     out["keys"]["Minus"]["base"] = {"t": "-", "c": "x"}
     return out
 
+ROMAN15_SPELLED = {}
+
+def roman15():
+    """Layout 15 as the engine types it (engine/src/bada_roman.rs, docs/layouts/15-bada-roman.json)."""
+    d = json.load(open(os.path.join(DOCS, "15-bada-roman.json")))
+    keys = {}
+    for code in list(JIS) + ["Key"+c for c in LETTERS]:
+        v = d["keys"].get(code, {"base": [], "shift": []})
+        base = cell_of(v["base"])
+        if base and code.startswith("Key"):
+            base["c"] = "i" if base["t"] == "ㅇ" else "l"
+        shift = None if code.startswith("Key") else cell_of(v["shift"])   # ⇧ letter: the capital
+        if code in ROMAN15_SPELLED:                                       # the vowel keys show their romanization
+            base = {"t": ROMAN15_SPELLED[code], "c": "v"}
+        if code == "Semicolon":                                           # a syllable break: a dotted square, a break of no width
+            base = {"t": "⬚", "c": "x", "s": 14}
+        if base and not base["t"].isascii() and "s" not in base:              # Korean legends at the latin letters' size
+            base["s"] = 19
+        keys[code] = {"base": base, "shift": shift}
+    return dict(id=15, name="bada roman", display="Korean (bada roman)", kind="henkan",
+                no_jis=True,                               # no JIS keycap legends: the cells say what each key types
+                note="Korean typed as it's romanized, as in Korean Roman (18), with keys of its own: q ch, x an initial ㅇ, "
+                     "; a syllable break, - after e ㅐ / ㅒ (e- 애). "
+                     "Number and symbol keys type their JIS characters (¥ ₩; ⇧0 +, ⇧[ 「, ⇧] 」).", keys=keys)
+
 def kana19():
     """Layout 19 as the engine types it (engine/src/kana_korean.rs, docs/kana-korean.md)."""
     d = json.load(open(os.path.join(DOCS, "19-kana-korean.json")))
@@ -188,6 +213,7 @@ if __name__ == "__main__":
     layouts = [
         bada13(),
         k3s14(),
+        roman15(),
         roman18(),
         kana19(),
         None,

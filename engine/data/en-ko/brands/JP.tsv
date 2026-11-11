@@ -1,0 +1,1555 @@
+# Japan (일본)
+# Covers: carmakers and car/motorcycle models, electronics, cameras, audio and musical instruments, games, consoles,
+# game studios and franchises, anime studios and character brands, publishers, broadcasters and newspapers,
+# telecom, internet services and apps, retail, department stores, convenience stores, restaurant chains, food,
+# snacks, drink, beer, whisky and sake, fashion, cosmetics, pharma, banks, insurers, trading houses, industrial,
+# chemicals, construction, railways, airlines, hotels, toys, stationery, watches, sporting goods, sports clubs.
+# Not here: 7-Eleven (US origin, in US.tsv), Lotte, Lotteria and Piccoma (KR.tsv), Kenzo (founded in Paris), Pokémon GO (Niantic, US), DMG Mori (DE.tsv).
+# Hangul: Korean market names where they exist (도요타, 닛산, 유니클로, 무인양품, 닌텐도, 동물의 숲, 역전재판),
+# otherwise established Korean media spelling, otherwise 외래어 표기법 (Japanese: ツ=쓰, initial カ/タ=가/다).
+# Sources: Wikipedia "List of companies of Japan", Nikkei 225 / TOPIX constituents, Brand Finance Japan,
+# Korean company sites (한국닛산, 한국토요타, 캐논코리아, 닌텐도 코리아 titles), 나무위키 for Hangul spellings; own knowledge.
+# Note: compiled largely from the model's own knowledge; the lists named above describe the kinds of sources the entries follow and were not all consulted line by line. Hangul not checked line by line against Korean media.
+Toyota	도요타	auto
+Lexus	렉서스	auto
+Honda	혼다	auto
+Acura	어큐라	auto
+Nissan	닛산	auto
+Infiniti	인피니티	auto
+Datsun	닷선	auto
+Mazda	마쓰다	auto
+Subaru	스바루	auto
+Mitsubishi Motors	미쓰비시자동차	auto
+Suzuki	스즈키	auto
+Daihatsu	다이하쓰	auto
+Isuzu	이스즈	auto
+Hino	히노	auto
+Mitsubishi Fuso	미쓰비시 후소	auto
+UD Trucks	유디 트럭스	auto
+Mitsuoka	미쓰오카	auto
+Kawasaki	가와사키	auto
+Yamaha	야마하	electronics
+Yamaha Motor	야마하발동기	auto
+Toyota Motor	도요타자동차	auto
+Corolla	코롤라	auto
+Camry	캠리	auto
+Prius	프리우스	auto
+RAV4	라브포	auto
+Crown	크라운	auto
+Land Cruiser	랜드크루저	auto
+Hilux	하이럭스	auto
+Yaris	야리스	auto
+Supra	수프라	auto
+Alphard	알파드	auto
+Vellfire	벨파이어	auto
+Sienna	시에나	auto
+Tacoma	타코마	auto
+Tundra	툰드라	auto
+Highlander	하이랜더	auto
+4Runner	포러너	auto
+Avalon	아발론	auto
+Sequoia	세쿼이아	auto
+Century	센추리	auto
+Aqua	아쿠아	auto
+Mirai	미라이	auto
+Hiace	하이에이스	auto
+Celica	셀리카	auto
+Corolla Cross	코롤라 크로스	auto
+Harrier	해리어	auto
+Venza	벤자	auto
+Sprinter Trueno	스프린터 트레노	auto
+Civic	시빅	auto
+Accord	어코드	auto
+CR-V	시알브이	auto
+HR-V	에이치알브이	auto
+Odyssey	오딧세이	auto
+Pilot	파일럿	stationery
+Fit	피트	auto
+Jazz	재즈	auto
+NSX	엔에스엑스	auto
+Integra	인테그라	auto
+Prelude	프렐류드	auto
+Insight	인사이트	auto
+Gold Wing	골드윙	auto
+Super Cub	슈퍼커브	auto
+Skyline	스카이라인	auto
+GT-R	지티알	auto
+Leaf	리프	auto
+Altima	알티마	auto
+Maxima	맥시마	auto
+Sentra	센트라	auto
+Pathfinder	패스파인더	auto
+Murano	무라노	auto
+Rogue	로그	auto
+X-Trail	엑스트레일	auto
+Qashqai	캐시카이	auto
+Juke	쥬크	auto
+Patrol	패트롤	auto
+Silvia	실비아	auto
+Cube	큐브	auto
+March	마치	auto
+Micra	마이크라	auto
+Titan	타이탄	auto
+Navara	나바라	auto
+Fairlady Z	페어레이디 제트	auto
+Ariya	아리아	auto
+Serena	세레나	auto
+Miata	미아타	auto
+MX-5	엠엑스파이브	auto
+RX-7	알엑스세븐	auto
+RX-8	알엑스에이트	auto
+CX-5	씨엑스파이브	auto
+Impreza	임프레자	auto
+Legacy	레거시	auto
+Outback	아웃백	auto
+Forester	포레스터	auto
+WRX	더블유알엑스	auto
+BRZ	비알제트	auto
+Lancer	랜서	auto
+Lancer Evolution	랜서 에볼루션	auto
+Pajero	파제로	auto
+Outlander	아웃랜더	auto
+Delica	델리카	auto
+Swift	스위프트	auto
+Jimny	짐니	auto
+Hayabusa	하야부사	auto
+Vitara	비타라	auto
+Alto	알토	auto
+Ninja	닌자	auto
+Copen	코펜	auto
+Tanto	탄토	auto
+D-Max	디맥스	auto
+Elf	엘프	auto
+Sony	소니	electronics
+Panasonic	파나소닉	electronics
+National	내셔널	electronics
+Sharp	샤프	electronics
+Toshiba	도시바	electronics
+Hitachi	히타치	conglomerate
+NEC	엔이씨	tech
+Fujitsu	후지쓰	tech
+Mitsubishi Electric	미쓰비시전기	electronics
+Mitsubishi	미쓰비시	conglomerate
+Sanyo	산요	electronics
+Kyocera	교세라	electronics
+Murata	무라타	electronics
+TDK	티디케이	electronics
+Omron	오므론	electronics
+Keyence	키엔스	electronics
+Fanuc	화낙	industrial
+Yaskawa	야스카와	industrial
+Nidec	니덱	electronics
+Renesas	르네사스	electronics
+Rohm	롬	electronics
+Tokyo Electron	도쿄일렉트론	electronics
+Advantest	어드밴테스트	electronics
+Kioxia	키옥시아	electronics
+Elpida	엘피다	electronics
+Rapidus	라피더스	electronics
+Socionext	소시오넥스트	electronics
+Lasertec	레이저텍	electronics
+Sumco	섬코	electronics
+Ibiden	이비덴	electronics
+Shin-Etsu	신에쓰	chemicals
+JSR	제이에스알	chemicals
+Hamamatsu Photonics	하마마쓰 포토닉스	electronics
+Shimadzu	시마즈	industrial
+Horiba	호리바	industrial
+Yokogawa	요코가와	industrial
+Azbil	아즈빌	industrial
+Alps Alpine	알프스알파인	electronics
+Alpine	알파인	electronics
+Mabuchi Motor	마부치모터	electronics
+MinebeaMitsumi	미네베아미쓰미	electronics
+Japan Display	재팬디스플레이	electronics
+Nichia	니치아	electronics
+Ushio	우시오	electronics
+Canon	캐논	electronics
+Nikon	니콘	electronics
+Olympus	올림푸스	electronics
+OM System	오엠 시스템	electronics
+Fujifilm	후지필름	electronics
+Instax	인스탁스	electronics
+Pentax	펜탁스	electronics
+Ricoh	리코	electronics
+Konica Minolta	코니카미놀타	electronics
+Minolta	미놀타	electronics
+Konica	코니카	electronics
+Sigma	시그마	electronics
+Tamron	탐론	electronics
+Tokina	토키나	electronics
+Mamiya	마미야	electronics
+Cosina	코시나	electronics
+Epson	엡손	electronics
+Seiko Epson	세이코엡손	electronics
+Brother	브라더	electronics
+Kyocera Document Solutions	교세라 도큐먼트 솔루션즈	electronics
+Casio	카시오	electronics
+Sega Sammy	세가사미	games
+JVC	제이브이씨	electronics
+Victor	빅터	electronics
+Kenwood	켄우드	electronics
+JVCKenwood	제이브이씨켄우드	electronics
+Pioneer	파이오니어	electronics
+Onkyo	온쿄	electronics
+Denon	데논	electronics
+Technics	테크닉스	electronics
+Audio-Technica	오디오테크니카	electronics
+Aiwa	아이와	electronics
+Funai	후나이	electronics
+Teac	티악	electronics
+Tascam	태스컴	electronics
+Fostex	포스텍스	electronics
+Final Audio	파이널 오디오	electronics
+Accuphase	어큐페이즈	electronics
+Luxman	럭스만	electronics
+Esoteric	에소테릭	electronics
+Nakamichi	나카미치	electronics
+Stax	스탁스	electronics
+Roland	롤랜드	music
+Korg	코르그	music
+Kawai	가와이	music
+Ibanez	아이바네즈	music
+ESP	이에스피	music
+Tama	타마	music
+Pearl	펄	music
+Boss	보스	music
+Suzuki Musical	스즈키악기	music
+Buffalo	버팔로	electronics
+Elecom	엘레컴	electronics
+Wacom	와콤	electronics
+I-O Data	아이오데이터	electronics
+Logitec	로지텍	electronics
+Sanwa Supply	산와서플라이	electronics
+Dynabook	다이나북	electronics
+VAIO	바이오	electronics
+Let's note	레츠노트	electronics
+Bravia	브라비아	electronics
+Xperia	엑스페리아	electronics
+Walkman	워크맨	electronics
+Discman	디스크맨	electronics
+Handycam	핸디캠	electronics
+Cyber-shot	사이버샷	electronics
+Aquos	아쿠오스	electronics
+Regza	레그자	electronics
+Viera	비에라	electronics
+Lumix	루믹스	electronics
+Exilim	엑실림	electronics
+G-Shock	지샥	watches
+Baby-G	베이비지	watches
+Pro Trek	프로트렉	watches
+Oceanus	오셔너스	watches
+Edifice	에디피스	watches
+Seiko	세이코	watches
+Grand Seiko	그랜드세이코	watches
+Credor	크레도르	watches
+Citizen	시티즌	watches
+Orient	오리엔트	watches
+Daikin	다이킨	appliances
+Zojirushi	조지루시	appliances
+Tiger	타이거	appliances
+Balmuda	발뮤다	appliances
+Iris Ohyama	아이리스오야마	appliances
+Twinbird	트윈버드	appliances
+Plus Minus Zero	플러스마이너스제로	appliances
+Rinnai	린나이	appliances
+Paloma	파로마	appliances
+Noritz	노리츠	appliances
+Dainichi	다이니치	appliances
+Fujitsu General	후지쓰제너럴	appliances
+Toto	토토	appliances
+Lixil	릭실	construction
+Inax	이낙스	construction
+Makita	마키타	industrial
+HiKOKI	하이코키	industrial
+Ryobi	료비	industrial
+Shimano	시마노	sports
+Bridgestone	브리지스톤	auto
+Yokohama Rubber	요코하마고무	auto
+Toyo Tires	토요타이어	auto
+Sumitomo Rubber	스미토모고무	auto
+Falken	팔켄	auto
+Advan	어드반	auto
+Denso	덴소	auto
+Aisin	아이신	auto
+Toyota Industries	도요타자동직기	industrial
+Toyota Boshoku	도요타방직	auto
+JTEKT	제이텍트	auto
+Koito	고이토	auto
+Yazaki	야자키	auto
+Takata	다카타	auto
+Keihin	게이힌	auto
+Mikuni	미쿠니	auto
+NGK	엔지케이	auto
+NSK	엔에스케이	industrial
+NTN	엔티엔	industrial
+THK	티에이치케이	industrial
+SMC	에스엠씨	industrial
+Calsonic Kansei	칼소닉칸세이	auto
+Exedy	엑세디	auto
+HKS	에이치케이에스	auto
+Nismo	니스모	auto
+Mugen	무겐	auto
+Rays	레이스	auto
+Enkei	엔케이	auto
+Tein	테인	auto
+Cusco	쿠스코	auto
+Nintendo	닌텐도	games
+Nintendo Switch	닌텐도 스위치	games
+Game Boy	게임보이	games
+Game Boy Advance	게임보이 어드밴스	games
+Nintendo DS	닌텐도 디에스	games
+Wii	위	games
+Famicom	패미컴	games
+Super Famicom	슈퍼 패미컴	games
+Virtual Boy	버추얼보이	games
+Mario	마리오	games
+Super Mario	슈퍼 마리오	games
+Mario Kart	마리오 카트	games
+Luigi	루이지	games
+The Legend of Zelda	젤다의 전설	games
+Zelda	젤다	games
+Pokémon	포켓몬	games
+Pikachu	피카츄	games
+Kirby	커비	games
+Donkey Kong	동키콩	games
+Metroid	메트로이드	games
+Splatoon	스플래툰	games
+Animal Crossing	동물의 숲	games
+Super Smash Bros.	슈퍼 스매시브라더스	games
+Fire Emblem	파이어 엠블렘	games
+Xenoblade	제노블레이드	games
+Pikmin	피크민	games
+Star Fox	스타폭스	games
+Yoshi	요시	games
+Wario	와리오	games
+PlayStation	플레이스테이션	games
+PlayStation Portable	플레이스테이션 포터블	games
+PS Vita	피에스 비타	games
+Gran Turismo	그란 투리스모	games
+Sega	세가	games
+Sonic the Hedgehog	소닉 더 헤지혹	games
+Sonic	소닉	games
+Mega Drive	메가드라이브	games
+Dreamcast	드림캐스트	games
+Sega Saturn	세가 새턴	games
+Game Gear	게임기어	games
+Like a Dragon	용과 같이	games
+Virtua Fighter	버추어 파이터	games
+Puyo Puyo	뿌요뿌요	games
+Atlus	아틀러스	games
+Persona	페르소나	games
+Shin Megami Tensei	진 여신전생	games
+Capcom	캡콤	games
+Street Fighter	스트리트 파이터	games
+Resident Evil	레지던트 이블	games
+Biohazard	바이오하자드	games
+Monster Hunter	몬스터 헌터	games
+Mega Man	록맨	games
+Devil May Cry	데빌 메이 크라이	games
+Ace Attorney	역전재판	games
+Dead Rising	데드 라이징	games
+Onimusha	귀무자	games
+Final Fight	파이널 파이트	games
+Square Enix	스퀘어 에닉스	games
+Final Fantasy	파이널 판타지	games
+Dragon Quest	드래곤 퀘스트	games
+Kingdom Hearts	킹덤 하츠	games
+Chrono Trigger	크로노 트리거	games
+Octopath Traveler	옥토패스 트래블러	games
+Nier	니어	games
+Konami	코나미	games
+Metal Gear	메탈 기어	games
+Metal Gear Solid	메탈 기어 솔리드	games
+Silent Hill	사일런트 힐	games
+Castlevania	캐슬바니아	games
+Winning Eleven	위닝일레븐	games
+eFootball	이풋볼	games
+Contra	콘트라	games
+Gradius	그라디우스	games
+Frogger	프로거	games
+Dance Dance Revolution	댄스 댄스 레볼루션	games
+Beatmania	비트매니아	games
+Yu-Gi-Oh!	유희왕	games
+Bandai Namco	반다이 남코	games
+Bandai	반다이	toys
+Namco	남코	games
+Tekken	철권	games
+Pac-Man	팩맨	games
+Galaga	갤러그	games
+Soulcalibur	소울칼리버	games
+Ridge Racer	릿지 레이서	games
+Taiko no Tatsujin	태고의 달인	games
+Katamari Damacy	괴혼	games
+Dragon Ball	드래곤볼	media
+FromSoftware	프롬소프트웨어	games
+Dark Souls	다크 소울	games
+Elden Ring	엘든 링	games
+Sekiro	세키로	games
+Bloodborne	블러드본	games
+Armored Core	아머드 코어	games
+Demon's Souls	데몬즈 소울	games
+Koei Tecmo	코에이 테크모	games
+Koei	코에이	games
+Tecmo	테크모	games
+Dynasty Warriors	진삼국무쌍	games
+Romance of the Three Kingdoms	삼국지	games
+Nobunaga's Ambition	노부나가의 야망	games
+Dead or Alive	데드 오어 얼라이브	games
+Ninja Gaiden	닌자 가이덴	games
+Atelier	아틀리에	games
+Nioh	인왕	games
+SNK	에스엔케이	games
+Neo Geo	네오지오	games
+The King of Fighters	더 킹 오브 파이터즈	games
+Metal Slug	메탈슬러그	games
+Fatal Fury	아랑전설	games
+Samurai Shodown	사무라이 스피리츠	games
+Taito	타이토	games
+Space Invaders	스페이스 인베이더	games
+Bubble Bobble	보글보글	games
+Arkanoid	아르카노이드	games
+Hudson Soft	허드슨	games
+Bomberman	봄버맨	games
+Level-5	레벨 파이브	games
+Yo-kai Watch	요괴워치	games
+Inazuma Eleven	이나즈마 일레븐	games
+Professor Layton	레이튼 교수	games
+Ni no Kuni	니노쿠니	games
+Spike Chunsoft	스파이크 춘소프트	games
+Danganronpa	단간론파	games
+Cygames	사이게임스	games
+Uma Musume	우마무스메	games
+Granblue Fantasy	그랑블루 판타지	games
+PlatinumGames	플래티넘게임즈	games
+Bayonetta	베요네타	games
+Kojima Productions	코지마 프로덕션	games
+Death Stranding	데스 스트랜딩	games
+GungHo	겅호	games
+Puzzle & Dragons	퍼즐앤드래곤	games
+DeNA	디엔에이	internet
+GREE	그리	internet
+Mixi	믹시	internet
+Monster Strike	몬스터 스트라이크	games
+Nihon Falcom	니혼 팔콤	games
+Falcom	팔콤	games
+Ys	이스	games
+The Legend of Heroes	영웅전설	games
+Arc System Works	아크 시스템 웍스	games
+Guilty Gear	길티기어	games
+BlazBlue	블레이블루	games
+Marvelous	마벨러스	games
+Story of Seasons	목장이야기	games
+Rune Factory	룬팩토리	games
+Senran Kagura	섬란 카구라	games
+HAL Laboratory	할 연구소	games
+Game Freak	게임 프리크	games
+Intelligent Systems	인텔리전트 시스템즈	games
+Monolith Soft	모노리스 소프트	games
+tri-Ace	트라이에이스	games
+Star Ocean	스타 오션	games
+Valkyrie Profile	발키리 프로파일	games
+Nippon Ichi Software	니폰이치 소프트웨어	games
+Disgaea	마계전기 디스가이아	games
+Idea Factory	아이디어 팩토리	games
+Compile Heart	컴파일 하트	games
+Hyperdimension Neptunia	초차원게임 넵튠	games
+Vanillaware	바닐라웨어	games
+Grasshopper Manufacture	그래스호퍼 매뉴팩처	games
+No More Heroes	노 모어 히어로즈	games
+Clover Studio	클로버 스튜디오	games
+Okami	오오카미	games
+Irem	아이렘	games
+R-Type	알타입	games
+Jaleco	잘레코	games
+Data East	데이터 이스트	games
+Toaplan	토아플랜	games
+Kemco	켐코	games
+Enterbrain	엔터브레인	games
+RPG Maker	알피지 메이커	games
+Famitsu	패미통	media
+Type-Moon	타입문	games
+Fate/Grand Order	페이트 그랜드 오더	games
+Aniplex	애니플렉스	media
+Mobile Suit Gundam	기동전사 건담	media
+Gundam	건담	media
+Gunpla	건프라	toys
+Tamagotchi	다마고치	toys
+Digimon	디지몬	media
+Ultraman	울트라맨	media
+Godzilla	고질라	media
+Kamen Rider	가면라이더	media
+Super Sentai	슈퍼 전대	media
+Hello Kitty	헬로키티	toys
+Sanrio	산리오	toys
+My Melody	마이멜로디	toys
+Kuromi	쿠로미	toys
+Cinnamoroll	시나모롤	toys
+Pompompurin	폼폼푸린	toys
+Gudetama	구데타마	toys
+Keroppi	케로피	toys
+Little Twin Stars	리틀 트윈 스타	toys
+Rilakkuma	리락쿠마	toys
+San-X	산엑스	toys
+Sumikko Gurashi	스밋코구라시	toys
+Doraemon	도라에몽	media
+Anpanman	호빵맨	media
+Crayon Shin-chan	짱구는 못말려	media
+Chibi Maruko-chan	마루코는 아홉살	media
+Detective Conan	명탐정 코난	media
+One Piece	원피스	media
+Naruto	나루토	media
+Studio Ghibli	스튜디오 지브리	media
+Ghibli	지브리	media
+Totoro	토토로	media
+Toei Animation	도에이 애니메이션	media
+Kyoto Animation	교토 애니메이션	media
+Sunrise	선라이즈	media
+Madhouse	매드하우스	media
+Production I.G	프로덕션 아이지	media
+MAPPA	마파	media
+Ufotable	유포테이블	media
+Wit Studio	위트 스튜디오	media
+Studio Pierrot	스튜디오 피에로	media
+TMS Entertainment	티엠에스 엔터테인먼트	media
+Tatsunoko	다쓰노코	media
+Gainax	가이낙스	media
+Studio Trigger	스튜디오 트리거	media
+CoMix Wave	코믹스 웨이브	media
+Shueisha	슈에이샤	media
+Weekly Shōnen Jump	주간 소년 점프	media
+Shōnen Jump	소년 점프	media
+Kodansha	고단샤	media
+Shogakukan	쇼가쿠칸	media
+Kadokawa	가도카와	media
+Hakusensha	하쿠센샤	media
+Akita Shoten	아키타쇼텐	media
+Futabasha	후타바샤	media
+Shinchosha	신초샤	media
+Bungeishunju	분게이슌주	media
+Iwanami Shoten	이와나미쇼텐	media
+Gakken	각켄	media
+Benesse	베네세	education
+Kumon	구몬	education
+NHK	엔에이치케이	media
+Fuji TV	후지 티비	media
+Nippon TV	니혼 티비	media
+TBS	티비에스	media
+TV Asahi	티비 아사히	media
+TV Tokyo	티비 도쿄	media
+Asahi Shimbun	아사히신문	media
+Yomiuri Shimbun	요미우리신문	media
+Mainichi Shimbun	마이니치신문	media
+Nikkei	닛케이	media
+Nihon Keizai Shimbun	니혼게이자이신문	media
+Sankei Shimbun	산케이신문	media
+Tokyo Shimbun	도쿄신문	media
+Chunichi Shimbun	주니치신문	media
+Kyodo News	교도통신	media
+Jiji Press	지지통신	media
+The Japan Times	재팬 타임스	media
+Nikkei Asia	닛케이 아시아	media
+Toyo Keizai	도요게이자이	media
+Dentsu	덴쓰	media
+Hakuhodo	하쿠호도	media
+Avex	에이벡스	media
+Toho	도호	media
+Shochiku	쇼치쿠	media
+Toei	도에이	media
+Nikkatsu	닛카쓰	media
+Kadokawa Daiei	가도카와 다이에이	media
+Pony Canyon	포니캐니언	media
+King Records	킹레코드	media
+Lantis	란티스	media
+Victor Entertainment	빅터 엔터테인먼트	media
+Yoshimoto Kogyo	요시모토흥업	media
+Hololive	홀로라이브	media
+Nijisanji	니지산지	media
+Vocaloid	보컬로이드	software
+Hatsune Miku	하쓰네 미쿠	media
+Crypton Future Media	크립톤 퓨처 미디어	software
+NTT	엔티티	telecom
+NTT Docomo	엔티티 도코모	telecom
+Docomo	도코모	telecom
+KDDI	케이디디아이	telecom
+au	에이유	telecom
+SoftBank	소프트뱅크	telecom
+Rakuten Mobile	라쿠텐 모바일	telecom
+Y!mobile	와이모바일	telecom
+NTT Data	엔티티 데이터	software
+i-mode	아이모드	telecom
+Rakuten	라쿠텐	internet
+Mercari	메루카리	app
+ZOZOTOWN	조조타운	internet
+Zozo	조조	internet
+Yahoo! Japan	야후 재팬	internet
+LINE	라인	app
+LY Corporation	엘와이 코퍼레이션	internet
+Z Holdings	제트 홀딩스	internet
+Kakaku.com	가카쿠닷컴	internet
+Tabelog	타베로그	app
+Cookpad	쿡패드	app
+SmartNews	스마트뉴스	app
+Gunosy	구노시	app
+Niconico	니코니코	internet
+Nico Nico Douga	니코니코 동화	internet
+Dwango	드왕고	internet
+Pixiv	픽시브	internet
+2channel	니찬네루	internet
+DMM	디엠엠	internet
+Abema	아베마	media
+CyberAgent	사이버에이전트	internet
+Ameba	아메바	internet
+GMO	지엠오	internet
+Recruit	리쿠르트	internet
+Hot Pepper	핫페퍼	app
+SUUMO	스모	app
+Jalan	자란	app
+Rikunabi	리쿠나비	app
+Townwork	타운워크	app
+Sansan	산산	software
+Freee	프리	software
+Money Forward	머니포워드	software
+Cybozu	사이보즈	software
+Trend Micro	트렌드마이크로	software
+Obic	오빅	software
+Justsystems	저스트시스템	software
+Ichitaro	이치타로	software
+ATOK	에이톡	software
+Preferred Networks	프리퍼드 네트웍스	tech
+Sakura Internet	사쿠라 인터넷	internet
+Nifty	니프티	internet
+Biglobe	빅로브	internet
+So-net	소넷	internet
+PayPay	페이페이	app
+Suica	스이카	finance
+Pasmo	파스모	finance
+ICOCA	이코카	finance
+Edy	에디	finance
+WAON	와온	finance
+nanaco	나나코	finance
+Felica	펠리카	tech
+QR Code	큐알 코드	tech
+Denso Wave	덴소 웨이브	tech
+LINE Manga	라인 망가	app
+Shonen Jump+	소년 점프 플러스	app
+Manga One	망가원	app
+Qiita	키타	internet
+Pairs	페어즈	app
+Tapple	태플	app
+Minne	민네	app
+Rakuma	라쿠마	app
+Yahoo! Auctions	야후 옥션	internet
+FamilyMart	패밀리마트	retail
+Lawson	로손	retail
+Ministop	미니스톱	retail
+Daily Yamazaki	데일리 야마자키	retail
+Seicomart	세이코마트	retail
+Seven & i	세븐앤아이	retail
+Ito-Yokado	이토요카도	retail
+Aeon	이온	retail
+Aeon Mall	이온몰	retail
+Don Quijote	돈키호테	retail
+Donki	돈키	retail
+Uniqlo	유니클로	fashion
+GU	지유	fashion
+Fast Retailing	패스트리테일링	fashion
+Muji	무인양품	retail
+Ryohin Keikaku	양품계획	retail
+Nitori	니토리	furniture
+Daiso	다이소	retail
+Can Do	캔두	retail
+Seria	세리아	retail
+3Coins	쓰리코인즈	retail
+Loft	로프트	retail
+Tokyu Hands	도큐핸즈	retail
+Hands	핸즈	retail
+Bic Camera	빅카메라	retail
+Yodobashi Camera	요도바시카메라	retail
+Yamada Denki	야마다전기	retail
+Edion	에디온	retail
+K's Denki	케이즈덴키	retail
+Joshin	조신	retail
+Kojima	고지마	retail
+Nojima	노지마	retail
+Sofmap	소프맵	retail
+Mitsukoshi	미쓰코시	retail
+Isetan	이세탄	retail
+Takashimaya	다카시마야	retail
+Daimaru	다이마루	retail
+Matsuzakaya	마쓰자카야	retail
+Hankyu	한큐	retail
+Hanshin	한신	retail
+Seibu	세이부	retail
+Sogo	소고	retail
+Tokyu	도큐	conglomerate
+Odakyu	오다큐	transport
+Keio	게이오	transport
+Kintetsu	긴테쓰	transport
+Tobu	도부	transport
+Parco	파르코	retail
+Lumine	루미네	retail
+Marui	마루이	retail
+Shibuya 109	시부야 이치마루큐	retail
+Tsutaya	쓰타야	retail
+Book Off	북오프	retail
+Kinokuniya	기노쿠니야	retail
+Maruzen	마루젠	retail
+Junkudo	준쿠도	retail
+Animate	애니메이트	retail
+Mandarake	만다라케	retail
+Lashinbang	라신반	retail
+Matsumoto Kiyoshi	마쓰모토키요시	retail
+Sundrug	선드러그	retail
+Welcia	웰시아	retail
+Tsuruha	쓰루하	retail
+Cosmos Pharmacy	코스모스약품	retail
+Sugi Pharmacy	스기약국	retail
+Workman	워크맨	retail
+Shimamura	시마무라	fashion
+Aoyama	아오야마	fashion
+Aoki	아오키	fashion
+Seijo Ishii	세이조이시이	retail
+Kaldi	칼디	retail
+Gyomu Super	교무 슈퍼	retail
+Hard Off	하드오프	retail
+2nd Street	세컨드 스트리트	retail
+Komehyo	고메효	retail
+Daikokuya	다이코쿠야	retail
+Brand Off	브랜드오프	retail
+Village Vanguard	빌리지 뱅가드	retail
+Afternoon Tea	애프터눈 티	retail
+Francfranc	프랑프랑	furniture
+Karimoku	가리모쿠	furniture
+Actus	악투스	furniture
+Idée	이데	furniture
+Cainz	카인즈	retail
+Kohnan	고난	retail
+DCM	디씨엠	retail
+Komeri	고메리	retail
+Nafco	나프코	retail
+Sports Depo	스포츠 데포	retail
+Xebio	제비오	retail
+Alpen	알펜	retail
+Murasaki Sports	무라사키 스포츠	retail
+Yellow Hat	옐로햇	retail
+Autobacs	오토박스	retail
+Gulliver	걸리버	retail
+Nextage	넥스테이지	retail
+Askul	아스쿨	retail
+Monotaro	모노타로	retail
+Felissimo	펠리시모	retail
+Belle Maison	벨메종	retail
+Dinos	디노스	retail
+Japanet	자파넷	retail
+Yoshinoya	요시노야	food
+Sukiya	스키야	food
+Matsuya	마쓰야	food
+Zensho	젠쇼	food
+CoCo Ichibanya	코코이찌방야	food
+Mos Burger	모스버거	food
+First Kitchen	퍼스트 키친	food
+Freshness Burger	프레시니스 버거	food
+Ippudo	잇푸도	food
+Ichiran	이치란	food
+Afuri	아후리	food
+Tenka Ippin	덴카잇핀	food
+Kourakuen	고라쿠엔	food
+Hidakaya	히다카야	food
+Kagetsu Arashi	가게쓰 아라시	food
+Gyoza no Ohsho	교자노오쇼	food
+Ringer Hut	링거헛	food
+Marugame Seimen	마루가메제면	food
+Hanamaru Udon	하나마루 우동	food
+Kura Sushi	구라스시	food
+Sushiro	스시로	food
+Hamazushi	하마즈시	food
+Kappa Sushi	갓파스시	food
+Genki Sushi	겐키스시	food
+Uobei	우오베이	food
+Saizeriya	사이제리야	food
+Gusto	가스토	food
+Skylark	스카이락	food
+Jonathan's	조나단	food
+Bamiyan	바미얀	food
+Royal Host	로열호스트	food
+Joyfull	조이풀	food
+Gyukaku	규카쿠	food
+Tenya	텐야	food
+Watami	와타미	food
+Torikizoku	도리키조쿠	food
+Isomaru Suisan	이소마루수산	food
+Kushikatsu Tanaka	구시카쓰 다나카	food
+Yakiniku Like	야키니쿠 라이크	food
+Ikinari Steak	이키나리 스테이크	food
+Pepper Lunch	페퍼런치	food
+Ootoya	오토야	food
+Yayoiken	야요이켄	food
+Katsuya	가쓰야	food
+Tonkatsu Wako	돈카쓰 와코	food
+Saboten	사보텐	food
+Fuji Soba	후지소바	food
+Komeda's Coffee	코메다 커피	food
+Doutor	도토루	food
+Excelsior Caffé	엑셀시오르 카페	food
+Ueshima Coffee	우에시마 커피	food
+UCC	유시시	drink
+Key Coffee	키커피	drink
+Saint Marc Café	생마르크 카페	food
+Hoshino Coffee	호시노 커피	food
+Beard Papa's	비어드파파	food
+Chateraise	샤토레제	food
+Fujiya	후지야	food
+Ginza Cozy Corner	긴자 코지코너	food
+Kobe Fugetsudo	고베 후게쓰도	food
+Toraya	도라야	food
+Shiroi Koibito	시로이 고이비토	food
+Tokyo Banana	도쿄바나나	food
+Royce'	로이스	food
+Rokkatei	롯카테이	food
+LeTAO	르타오	food
+Yoku Moku	요쿠모쿠	food
+Sembikiya	센비키야	food
+Mister Donut	미스터도넛	food
+Ajinomoto	아지노모토	food
+Kikkoman	깃코만	food
+Nissin	닛신	food
+Nissin Foods	닛신식품	food
+Cup Noodle	컵누들	food
+Chicken Ramen	치킨라멘	food
+Donbei	돈베이	food
+Demae Iccho	데마에잇초	food
+Maruchan	마루짱	food
+Toyo Suisan	도요스이산	food
+Sapporo Ichiban	삿포로 이치방	food
+Myojo	묘조	food
+Acecook	에이스쿡	food
+Kewpie	큐피	food
+Meiji	메이지	food
+Morinaga	모리나가	food
+Glico	글리코	food
+Ezaki Glico	에자키글리코	food
+Pocky	포키	food
+Pretz	프리츠	food
+Calbee	가루비	food
+Jagabee	자가비	food
+Jagariko	자가리코	food
+Kappa Ebisen	갓파에비센	food
+Frugra	후루구라	food
+Yamazaki Baking	야마자키제빵	food
+Kameda Seika	가메다제과	food
+Kaki no Tane	가키노타네	food
+Bourbon	부르봉	food
+Alfort	알포트	food
+Tohato	도하토	food
+Koikeya	고이케야	food
+House Foods	하우스식품	food
+Vermont Curry	바몬드 카레	food
+S&B	에스앤비	food
+Golden Curry	골든 카레	food
+Mizkan	미쓰칸	food
+Yamasa	야마사	food
+Higashimaru	히가시마루	food
+Marukome	마루코메	food
+Hikari Miso	히카리미소	food
+Kagome	가고메	food
+Nichirei	니치레이	food
+Nippon Ham	닛폰햄	food
+Itoham	이토햄	food
+Prima Ham	프리마햄	food
+Maruha Nichiro	마루하니치로	food
+Nissui	닛스이	food
+Hotto Motto	홋토못토	food
+Origin Bento	오리진 벤토	food
+Snow Brand	유키지루시	food
+Megmilk Snow Brand	유키지루시 메그밀크	food
+Morinaga Milk	모리나가유업	food
+Yakult	야쿠르트	drink
+Calpis	칼피스	drink
+Pocari Sweat	포카리스웨트	drink
+Otsuka	오츠카	pharma
+Oronamin C	오로나민씨	drink
+Lipovitan D	리포비탄디	drink
+Soyjoy	소이조이	food
+CalorieMate	칼로리메이트	food
+Ito En	이토엔	drink
+Oi Ocha	오이오차	drink
+Suntory	산토리	drink
+Iyemon	이에몬	drink
+Boss Coffee	보스 커피	drink
+Suntory Tennensui	산토리 천연수	drink
+Dakara	다카라	drink
+Asahi	아사히	beer
+Asahi Super Dry	아사히 슈퍼드라이	beer
+Mitsuya Cider	미쓰야 사이다	drink
+Wonda	원다	drink
+Calpis Water	칼피스 워터	drink
+Kirin	기린	beer
+Kirin Ichiban	기린 이치방	beer
+Kirin Lager	기린 라거	beer
+Gogo no Kocha	오후의 홍차	drink
+Namacha	나마차	drink
+Sapporo	삿포로	beer
+Yebisu	에비스	beer
+Sapporo Black Label	삿포로 블랙라벨	beer
+Orion Beer	오리온 맥주	beer
+Hitachino Nest	히타치노 네스트	beer
+Echigo Beer	에치고 맥주	beer
+Coedo	코에도	beer
+Premium Malt's	프리미엄 몰츠	beer
+Kinmugi	긴무기	beer
+Strong Zero	스트롱 제로	drink
+Horoyoi	호로요이	drink
+Hyoketsu	효케쓰	drink
+Kodawari Sakaba	고다와리 사카바	drink
+Dydo	다이도	drink
+Pokka Sapporo	폿카삿포로	drink
+Pokka	폿카	drink
+C.C. Lemon	시시레몬	drink
+Kirin Fire	기린 파이어	drink
+Ramune	라무네	drink
+Yamazaki	야마자키	spirits
+Hibiki	히비키	spirits
+Hakushu	하쿠슈	spirits
+Chita	지타	spirits
+Kakubin	가쿠빈	spirits
+Toki	도키	spirits
+Roku Gin	로쿠 진	spirits
+Haku Vodka	하쿠 보드카	spirits
+Nikka	닛카	spirits
+Taketsuru	다케쓰루	spirits
+Yoichi	요이치	spirits
+Miyagikyo	미야기쿄	spirits
+From the Barrel	프롬 더 배럴	spirits
+Black Nikka	블랙 닛카	spirits
+Chichibu	지치부	spirits
+Ichiro's Malt	이치로즈 몰트	spirits
+Mars Whisky	마르스 위스키	spirits
+Akashi	아카시	spirits
+Fuji Gotemba	후지고텐바	spirits
+Kanosuke	가노스케	spirits
+Ki No Bi	기노비	spirits
+Dassai	닷사이	spirits
+Hakkaisan	핫카이산	spirits
+Gekkeikan	겟케이칸	spirits
+Ozeki	오제키	spirits
+Hakutsuru	하쿠쓰루	spirits
+Kubota	구보타	industrial
+Juyondai	주욘다이	spirits
+Kokuryu	고쿠류	spirits
+Kamotsuru	가모쓰루	spirits
+Sho Chiku Bai	쇼치쿠바이	spirits
+Takara Shuzo	다카라주조	spirits
+Kizakura	기자쿠라	spirits
+Kenbishi	겐비시	spirits
+Nanbu Bijin	난부비진	spirits
+Choya	초야	spirits
+Iichiko	이이치코	spirits
+Kuro Kirishima	구로키리시마	spirits
+Kirishima	기리시마	spirits
+Mori Izou	모리이조	spirits
+Hi-Chew	하이츄	food
+Morinaga Milk Caramel	모리나가 밀크캐러멜	food
+Choco Ball	초코볼	food
+Black Thunder	블랙썬더	food
+Umaibo	우마이봉	food
+Country Ma'am	컨트리마아무	food
+Bisco	비스코	food
+Collon	콜론	food
+Milky	밀키	food
+Peko-chan	페코짱	food
+Kabaya	가바야	food
+Pino	피노	food
+Gari-Gari Kun	가리가리군	food
+Akagi	아카기	food
+Yukimi Daifuku	유키미다이후쿠	food
+Papico	파피코	food
+Coolish	쿨리시	food
+Kracie	크라시에	food
+Nerunerunerune	네루네루네루네	food
+Meiji Chocolate	메이지 초콜릿	food
+Meltykiss	멜티키스	food
+Kinoko no Yama	기노코노야마	food
+Takenoko no Sato	다케노코노사토	food
+Galbo	갈보	food
+Puccho	풋초	food
+Every Burger	에브리버거	food
+Yan Yan	얀얀	food
+Comme des Garçons	꼼데가르송	fashion
+Issey Miyake	이세이 미야케	fashion
+Pleats Please	플리츠 플리즈	fashion
+Homme Plissé	옴 플리세	fashion
+Bao Bao	바오바오	fashion
+Yohji Yamamoto	요지 야마모토	fashion
+Junya Watanabe	준야 와타나베	fashion
+Sacai	사카이	fashion
+Undercover	언더커버	fashion
+A Bathing Ape	어 베이싱 에이프	fashion
+BAPE	베이프	fashion
+Neighborhood	네이버후드	fashion
+WTAPS	더블탭스	fashion
+Visvim	비즈빔	fashion
+Porter	포터	fashion
+Yoshida & Co.	요시다 앤 코	fashion
+Human Made	휴먼 메이드	fashion
+Mastermind Japan	마스터마인드 재팬	fashion
+Hysteric Glamour	히스테릭 글래머	fashion
+Tsumori Chisato	쓰모리 지사토	fashion
+Hanae Mori	하나에 모리	fashion
+Kansai Yamamoto	간사이 야마모토	fashion
+Mame Kurogouchi	마메 구로고우치	fashion
+Auralee	오라리	fashion
+Needles	니들스	fashion
+Kapital	캐피탈	fashion
+Evisu	에비수	fashion
+Edwin	에드윈	fashion
+Momotaro Jeans	모모타로 진	fashion
+Pure Blue Japan	퓨어 블루 재팬	fashion
+Beams	빔즈	fashion
+United Arrows	유나이티드 애로우즈	fashion
+Ships	쉽스	fashion
+Journal Standard	저널 스탠다드	fashion
+Nano Universe	나노 유니버스	fashion
+Urban Research	어반 리서치	fashion
+Snidel	스나이델	fashion
+Gelato Pique	젤라토 피케	fashion
+Earth Music & Ecology	어스 뮤직 앤 에콜로지	fashion
+Lowrys Farm	로리즈팜	fashion
+Global Work	글로벌 워크	fashion
+Niko and...	니코앤드	fashion
+Studio Clip	스튜디오 클립	fashion
+Graniph	그라니프	fashion
+Coen	코엔	fashion
+Onward	온워드	fashion
+Samantha Thavasa	사만사 타바사	fashion
+Kitamura	기타무라	fashion
+Herz	헤르츠	fashion
+Master-piece	마스터피스	fashion
+Anello	아넬로	fashion
+Legato Largo	레가토 라르고	fashion
+Tabio	다비오	fashion
+Gunze	군제	fashion
+Wacoal	와코루	fashion
+Peach John	피치 존	fashion
+Mikimoto	미키모토	luxury
+Tasaki	타사키	luxury
+Star Jewelry	스타 주얼리	luxury
+4°C	욘도시	luxury
+Ambush	앰부시	fashion
+Doublet	더블렛	fashion
+Facetasm	파세타즘	fashion
+Kolor	컬러	fashion
+Toga	토가	fashion
+Ne-net	네네트	fashion
+45R	포티파이브알	fashion
+Blue Blue Japan	블루블루 재팬	fashion
+Fragment Design	프래그먼트 디자인	fashion
+Sophnet	소프넷	fashion
+F.C.Real Bristol	에프씨 레알 브리스톨	fashion
+Uniform Experiment	유니폼 익스페리먼트	fashion
+White Mountaineering	화이트 마운티니어링	fashion
+And Wander	앤드원더	fashion
+Nanamica	나나미카	fashion
+Goldwin	골드윈	sports
+Mont-bell	몽벨	sports
+Snow Peak	스노우피크	sports
+Asics	아식스	sports
+Onitsuka Tiger	오니츠카 타이거	sports
+Mizuno	미즈노	sports
+Descente	데상트	sports
+Yonex	요넥스	sports
+Daiwa	다이와	sports
+Gamakatsu	가마카쓰	sports
+Honma	혼마	sports
+Srixon	스릭슨	sports
+XXIO	젝시오	sports
+Bridgestone Golf	브리지스톤 골프	sports
+PRGR	프로기아	sports
+Miura	미우라	sports
+Epon	에폰	sports
+Molten	몰텐	sports
+Mikasa	미카사	sports
+SSK	에스에스케이	sports
+Zett	제트	sports
+Ogasaka	오가사카	sports
+Gallium	갈리움	sports
+Panaracer	파나레이서	sports
+Bridgestone Anchor	브리지스톤 앵커	sports
+Miyata	미야타	sports
+Dura-Ace	듀라에이스	sports
+Ultegra	울테그라	sports
+Shiseido	시세이도	cosmetics
+SK-II	에스케이투	cosmetics
+Kosé	코세	cosmetics
+Kanebo	가네보	cosmetics
+Kao	카오	cosmetics
+Shu Uemura	슈에무라	cosmetics
+Clé de Peau Beauté	끌레드뽀 보떼	cosmetics
+Cosme Decorté	코스메 데코르테	cosmetics
+Albion	알비온	cosmetics
+Pola	폴라	cosmetics
+Orbis	오르비스	cosmetics
+DHC	디에이치씨	cosmetics
+Fancl	판클	cosmetics
+Hada Labo	하다라보	cosmetics
+Rohto	로토	pharma
+Melano CC	멜라노 씨씨	cosmetics
+Biore	비오레	cosmetics
+Senka	센카	cosmetics
+Anessa	아네사	cosmetics
+Elixir	엘릭서	cosmetics
+Majolica Majorca	마조리카 마조르카	cosmetics
+Canmake	캔메이크	cosmetics
+Cezanne	세잔느	cosmetics
+Kate	케이트	cosmetics
+Kiss Me	키스미	cosmetics
+Heroine Make	히로인 메이크	cosmetics
+Ipsa	입사	cosmetics
+RMK	알엠케이	cosmetics
+Suqqu	스쿠	cosmetics
+Lunasol	루나솔	cosmetics
+Curél	큐렐	cosmetics
+Tsubaki	츠바키	cosmetics
+Ma Chérie	마쉐리	cosmetics
+Fino	피노	cosmetics
+Sekkisei	셋키세이	cosmetics
+Freeplus	프리플러스	cosmetics
+Minon	미논	cosmetics
+d program	디 프로그램	cosmetics
+Benefique	베네피크	cosmetics
+Aqualabel	아쿠아레벨	cosmetics
+Maquillage	마키아주	cosmetics
+Integrate	인테그레이트	cosmetics
+Gatsby	갸스비	cosmetics
+Mandom	맨담	cosmetics
+Bifesta	비페스타	cosmetics
+Lucido	루시도	cosmetics
+Milbon	밀본	cosmetics
+Lebel	르벨	cosmetics
+Naris Up	나리스업	cosmetics
+Covermark	커버마크	cosmetics
+Koh Gen Do	고겐도	cosmetics
+Attenir	아테니아	cosmetics
+Dejavu	데자뷰	cosmetics
+Fasio	파시오	cosmetics
+Visée	비세	cosmetics
+Lion	라이온	consumer goods
+Clinica	클리니카	consumer goods
+Unicharm	유니참	consumer goods
+Moony	무니	consumer goods
+Merries	메리즈	consumer goods
+Goo.n	군	consumer goods
+Mamypoko	마미포코	consumer goods
+Pigeon	피죤	consumer goods
+Sofy	소피	consumer goods
+Laurier	로리에	consumer goods
+Attack	어택	consumer goods
+Bub	바브	consumer goods
+Bathclin	바스클린	consumer goods
+Kobayashi	고바야시	pharma
+Kobayashi Pharmaceutical	고바야시제약	pharma
+Eyebon	아이봉	pharma
+Sarasaty	사라사티	consumer goods
+Takeda	다케다	pharma
+Takeda Pharmaceutical	다케다약품	pharma
+Astellas	아스텔라스	pharma
+Daiichi Sankyo	다이이찌산쿄	pharma
+Eisai	에자이	pharma
+Chugai	주가이	pharma
+Otsuka Pharmaceutical	오츠카제약	pharma
+Shionogi	시오노기	pharma
+Ono Pharmaceutical	오노약품	pharma
+Kyowa Kirin	교와기린	pharma
+Sumitomo Pharma	스미토모파마	pharma
+Santen	산텐	pharma
+Taisho	다이쇼	pharma
+Taisho Pharmaceutical	다이쇼제약	pharma
+Mitsubishi Tanabe	미쓰비시다나베	pharma
+Kissei	깃세이	pharma
+Kowa	고와	pharma
+Hisamitsu	히사미쓰	pharma
+Salonpas	살론파스	pharma
+Eve	이브	pharma
+Bufferin	버퍼린	pharma
+Pabron	파브론	pharma
+Seirogan	세이로간	pharma
+Ohta's Isan	오타이산	pharma
+Cabagin	캬베진	pharma
+Alinamin	아리나민	pharma
+Chocola BB	쇼콜라 비비	pharma
+Sante FX	산테 에프엑스	pharma
+Terumo	테루모	pharma
+Sysmex	시스멕스	pharma
+Hoya	호야	electronics
+Nipro	니프로	pharma
+Meiji Seika	메이지제과	pharma
+MUFG	엠유에프지	bank
+Mitsubishi UFJ	미쓰비시 유에프제이	bank
+SMBC	에스엠비씨	bank
+Sumitomo Mitsui	스미토모미쓰이	bank
+Mizuho	미즈호	bank
+Resona	리소나	bank
+Shinsei Bank	신세이은행	bank
+SBI	에스비아이	finance
+Nomura	노무라	finance
+Daiwa Securities	다이와증권	finance
+Nikko	닛코	finance
+Monex	마넥스	finance
+Japan Post	일본우정	logistics
+Japan Post Bank	유초은행	bank
+Japan Post Insurance	간포생명	insurance
+Seven Bank	세븐은행	bank
+Rakuten Bank	라쿠텐은행	bank
+Aeon Bank	이온은행	bank
+Nippon Life	일본생명	insurance
+Dai-ichi Life	다이이치생명	insurance
+Meiji Yasuda	메이지야스다	insurance
+Sumitomo Life	스미토모생명	insurance
+Tokio Marine	도쿄해상	insurance
+Sompo	솜포	insurance
+MS&AD	엠에스앤에이디	insurance
+Mitsui Sumitomo Insurance	미쓰이스미토모해상	insurance
+Aioi Nissay Dowa	아이오이닛세이도와	insurance
+Orix	오릭스	finance
+Acom	아콤	finance
+Aiful	아이풀	finance
+Promise	프로미스	finance
+JCB	제이씨비	finance
+Credit Saison	크레디세존	finance
+JPX	제이피엑스	finance
+Tokyo Stock Exchange	도쿄증권거래소	finance
+Mitsubishi Corporation	미쓰비시상사	conglomerate
+Mitsui	미쓰이	conglomerate
+Mitsui & Co.	미쓰이물산	conglomerate
+Sumitomo	스미토모	conglomerate
+Sumitomo Corporation	스미토모상사	conglomerate
+Itochu	이토추	conglomerate
+Marubeni	마루베니	conglomerate
+Sojitz	소지쓰	conglomerate
+Toyota Tsusho	도요타통상	conglomerate
+Kanematsu	가네마쓰	conglomerate
+SoftBank Group	소프트뱅크그룹	finance
+Mitsubishi Heavy Industries	미쓰비시중공업	industrial
+Kawasaki Heavy Industries	가와사키중공업	industrial
+IHI	아이에이치아이	industrial
+Komatsu	고마쓰	industrial
+Yanmar	얀마	industrial
+Hitachi Construction Machinery	히타치건기	industrial
+Kobelco	고벨코	industrial
+Kobe Steel	고베제강	industrial
+Nippon Steel	일본제철	industrial
+JFE	제이에프이	industrial
+Sumitomo Metal Mining	스미토모금속광산	industrial
+Mitsubishi Materials	미쓰비시머티리얼	industrial
+Toray	도레이	chemicals
+Teijin	데이진	chemicals
+Asahi Kasei	아사히카세이	chemicals
+Mitsubishi Chemical	미쓰비시케미칼	chemicals
+Sumitomo Chemical	스미토모화학	chemicals
+Mitsui Chemicals	미쓰이화학	chemicals
+AGC	에이지씨	chemicals
+Asahi Glass	아사히글라스	chemicals
+Nippon Paint	닛폰페인트	chemicals
+Kansai Paint	간사이페인트	chemicals
+Nitto Denko	닛토덴코	chemicals
+Kuraray	구라레이	chemicals
+Showa Denko	쇼와덴코	chemicals
+Resonac	레조낙	chemicals
+Daicel	다이셀	chemicals
+Tosoh	도소	chemicals
+Kaneka	가네카	chemicals
+Ube	우베	chemicals
+Zeon	제온	chemicals
+Sekisui Chemical	세키스이화학	chemicals
+Sekisui House	세키스이하우스	construction
+Daiwa House	다이와하우스	construction
+Sumitomo Forestry	스미토모임업	construction
+Obayashi	오바야시	construction
+Kajima	가지마	construction
+Shimizu	시미즈	construction
+Taisei	다이세이	construction
+Takenaka	다케나카	construction
+Mitsui Fudosan	미쓰이부동산	construction
+Mitsubishi Estate	미쓰비시지쇼	construction
+Mori Building	모리빌딩	construction
+Sumitomo Realty	스미토모부동산	construction
+Roppongi Hills	롯폰기힐스	construction
+Tokyo Gas	도쿄가스	energy
+Osaka Gas	오사카가스	energy
+TEPCO	도쿄전력	energy
+Kansai Electric	간사이전력	energy
+Chubu Electric	주부전력	energy
+Kyushu Electric	규슈전력	energy
+JERA	제라	energy
+ENEOS	에네오스	energy
+Idemitsu	이데미쓰	energy
+Cosmo Oil	코스모석유	energy
+Inpex	인펙스	energy
+Sumitomo Electric	스미토모전기	industrial
+Furukawa Electric	후루카와전기	industrial
+Fujikura	후지쿠라	industrial
+Hitachi Zosen	히타치조선	industrial
+Kanadevia	가나데비아	industrial
+Mitsui E&S	미쓰이 이앤에스	industrial
+Ebara	에바라	industrial
+Kurita	구리타	industrial
+Daifuku	다이후쿠	industrial
+Amada	아마다	industrial
+Okuma	오쿠마	industrial
+Mazak	마작	industrial
+Brother Industries	브라더공업	electronics
+Nachi	나치	industrial
+Fuji Xerox	후지제록스	electronics
+Fujifilm Business Innovation	후지필름 비즈니스 이노베이션	electronics
+Ricoh Theta	리코 세타	electronics
+Toyota Gazoo Racing	도요타 가주 레이싱	auto
+Japan Airlines	일본항공	airline
+All Nippon Airways	전일본공수	airline
+Peach Aviation	피치항공	airline
+Zipair	집에어	airline
+Skymark	스카이마크	airline
+StarFlyer	스타플라이어	airline
+Spring Japan	스프링재팬	airline
+Air Do	에어두	airline
+Solaseed Air	솔라시드에어	airline
+Fuji Dream Airlines	후지드림에어라인스	airline
+Japan Transocean Air	일본트랜스오션항공	airline
+JR	제이알	transport
+JR East	제이알 동일본	transport
+JR Central	제이알 도카이	transport
+JR West	제이알 서일본	transport
+JR Kyushu	제이알 규슈	transport
+JR Hokkaido	제이알 홋카이도	transport
+Shinkansen	신칸센	transport
+Nozomi	노조미	transport
+Narita Express	나리타 익스프레스	transport
+Tokyo Metro	도쿄메트로	transport
+Keisei	게이세이	transport
+Skyliner	스카이라이너	transport
+Keikyu	게이큐	transport
+Nankai	난카이	transport
+Meitetsu	메이테쓰	transport
+Hankyu Hanshin	한큐한신	transport
+Keihan	게이한	transport
+Romancecar	로맨스카	transport
+Yurikamome	유리카모메	transport
+Enoden	에노덴	transport
+NYK Line	일본우선	logistics
+Mitsui O.S.K. Lines	상선미쓰이	logistics
+K Line	케이라인	logistics
+Ocean Network Express	오션 네트워크 익스프레스	logistics
+Yamato Transport	야마토운수	logistics
+Kuroneko Yamato	구로네코 야마토	logistics
+Sagawa Express	사가와큐빈	logistics
+Nippon Express	닛폰익스프레스	logistics
+Seino	세이노	logistics
+Hitachi Transport	히타치물류	logistics
+Kintetsu World Express	긴테쓰 월드 익스프레스	logistics
+JTB	제이티비	travel
+H.I.S.	에이치아이에스	travel
+Rakuten Travel	라쿠텐 트래블	travel
+Club Tourism	클럽투어리즘	travel
+Hoshino Resorts	호시노리조트	hotel
+Hoshinoya	호시노야	hotel
+APA Hotel	아파호텔	hotel
+Toyoko Inn	도요코인	hotel
+Dormy Inn	도미인	hotel
+Hotel Okura	호텔 오쿠라	hotel
+The Okura Tokyo	디 오쿠라 도쿄	hotel
+Imperial Hotel	제국호텔	hotel
+Hotel New Otani	호텔 뉴오타니	hotel
+Prince Hotels	프린스호텔	hotel
+Super Hotel	슈퍼호텔	hotel
+Route Inn	루트인	hotel
+Hotel Gracery	호텔 그레이서리	hotel
+Mitsui Garden Hotel	미쓰이가든호텔	hotel
+Richmond Hotel	리치몬드 호텔	hotel
+Sotetsu Fresa Inn	소테쓰 프레사 인	hotel
+Tokyu Stay	도큐스테이	hotel
+Nishitetsu	니시테쓰	transport
+Oriental Land	오리엔탈랜드	travel
+Sanrio Puroland	산리오 퓨로랜드	travel
+Huis Ten Bosch	하우스텐보스	travel
+Fuji-Q Highland	후지큐 하이랜드	travel
+Round1	라운드원	travel
+Takara Tomy	다카라토미	toys
+Tomy	토미	toys
+Takara	다카라	toys
+Tomica	토미카	toys
+Plarail	프라레일	toys
+Beyblade	베이블레이드	toys
+Licca-chan	리카짱	toys
+Sylvanian Families	실바니안 패밀리	toys
+Epoch	에포크	toys
+Tamiya	타미야	toys
+Mini 4WD	미니카	toys
+Kotobukiya	고토부키야	toys
+Good Smile Company	굿스마일컴퍼니	toys
+Nendoroid	넨도로이드	toys
+Max Factory	맥스팩토리	toys
+Kaiyodo	가이요도	toys
+Revoltech	리볼텍	toys
+Hasegawa	하세가와	toys
+Aoshima	아오시마	toys
+Fujimi	후지미	toys
+Medicom Toy	메디콤토이	toys
+Be@rbrick	베어브릭	toys
+Kyosho	교쇼	toys
+Futaba	후타바	toys
+Duel Masters	듀얼마스터즈	toys
+Zoids	조이드	toys
+Bandai Spirits	반다이 스피리츠	toys
+S.H.Figuarts	에스에이치 피규아츠	toys
+Banpresto	반프레스토	toys
+Ichiban Kuji	이치방쿠지	toys
+Gashapon	가샤폰	toys
+Furyu	후류	toys
+Sega Toys	세가토이즈	toys
+Megahouse	메가하우스	toys
+Uni-ball	유니볼	stationery
+Mitsubishi Pencil	미쓰비시연필	stationery
+Pentel	펜텔	stationery
+Zebra	제브라	stationery
+Sarasa	사라사	stationery
+Tombow	톰보	stationery
+Kokuyo	고쿠요	stationery
+Campus	캠퍼스	stationery
+Sailor	세일러	stationery
+Platinum	플래티넘	stationery
+Sakura Craypas	사쿠라 크레파스	stationery
+Pigma	피그마	stationery
+Kuretake	구레타케	stationery
+Midori	미도리	stationery
+Traveler's Notebook	트래블러스 노트	stationery
+Hobonichi	호보니치	stationery
+Jetstream	제트스트림	stationery
+Frixion	프릭션	stationery
+Kuru Toga	쿠루토가	stationery
+Energel	에너겔	stationery
+Hi-Tec-C	하이테크씨	stationery
+Signo	시그노	stationery
+King Jim	킹짐	stationery
+Tepra	테프라	stationery
+Lihit Lab	리히트랩	stationery
+Maruman	마루망	stationery
+Nakabayashi	나카바야시	stationery
+Japan Tobacco	일본담배산업	tobacco
+JT	제이티	tobacco
+Mevius	메비우스	tobacco
+Mild Seven	마일드세븐	tobacco
+Seven Stars	세븐스타	tobacco
+Peace	피스	tobacco
+Hope	호프	tobacco
+Ploom	플룸	tobacco
+Yomiuri Giants	요미우리 자이언츠	baseball club
+Hanshin Tigers	한신 타이거스	baseball club
+Chunichi Dragons	주니치 드래건스	baseball club
+Hiroshima Toyo Carp	히로시마 도요 카프	baseball club
+Yokohama DeNA BayStars	요코하마 디엔에이 베이스타스	baseball club
+Tokyo Yakult Swallows	도쿄 야쿠르트 스왈로스	baseball club
+Fukuoka SoftBank Hawks	후쿠오카 소프트뱅크 호크스	baseball club
+Chiba Lotte Marines	지바 롯데 마린스	baseball club
+Orix Buffaloes	오릭스 버펄로스	baseball club
+Tohoku Rakuten Golden Eagles	도호쿠 라쿠텐 골든이글스	baseball club
+Saitama Seibu Lions	사이타마 세이부 라이온스	baseball club
+Hokkaido Nippon-Ham Fighters	홋카이도 닛폰햄 파이터스	baseball club
+Kashima Antlers	가시마 앤틀러스	football club
+Urawa Reds	우라와 레즈	football club
+Yokohama F. Marinos	요코하마 에프 마리노스	football club
+Kawasaki Frontale	가와사키 프론탈레	football club
+Gamba Osaka	감바 오사카	football club
+Cerezo Osaka	세레소 오사카	football club
+Vissel Kobe	비셀 고베	football club
+Nagoya Grampus	나고야 그램퍼스	football club
+Sanfrecce Hiroshima	산프레체 히로시마	football club
+FC Tokyo	에프씨 도쿄	football club
+Kashiwa Reysol	가시와 레이솔	football club
+Júbilo Iwata	주빌로 이와타	football club
+Shimizu S-Pulse	시미즈 에스펄스	football club
+Hokkaido Consadole Sapporo	홋카이도 콘사도레 삿포로	football club
+Albirex Niigata	알비렉스 니가타	football club
+Sagan Tosu	사간 도스	football club
+Avispa Fukuoka	아비스파 후쿠오카	football club
+Shonan Bellmare	쇼난 벨마레	football club
+Tokyo Verdy	도쿄 베르디	football club
+Machida Zelvia	마치다 젤비아	football club
+Kyoto Sanga	교토 상가	football club
+Vegalta Sendai	베갈타 센다이	football club
+Oita Trinita	오이타 트리니타	football club
+Ventforet Kofu	반포레 고후	football club
+Tokushima Vortis	도쿠시마 보르티스	football club
+Montedio Yamagata	몬테디오 야마가타	football club
+Fagiano Okayama	파지아노 오카야마	football club
+Alvark Tokyo	알바르크 도쿄	basketball club
+Chiba Jets	지바 제츠	basketball club
+Utsunomiya Brex	우쓰노미야 브렉스	basketball club
+Ryukyu Golden Kings	류큐 골든 킹스	basketball club
+B.League	비리그	sports
+J.League	제이리그	sports
+Nippon Professional Baseball	일본프로야구	sports
+K-1	케이원	sports
+Rizin	라이진	sports
+New Japan Pro-Wrestling	신일본프로레슬링	sports
+Suzuka Circuit	스즈카 서킷	sports
+Fuji Speedway	후지 스피드웨이	sports
+Japan Racing Association	일본중앙경마회	sports
+PS5	피에스파이브	games
+The Pokémon Company	포켓몬 컴퍼니	games
+Decorté	데코르테	cosmetics
+Addiction	어딕션	cosmetics
+Shiro	시로	cosmetics
+Skin Aqua	스킨아쿠아	cosmetics
+Biore UV	비오레 유브이	cosmetics
+Perfect Whip	퍼펙트휩	cosmetics
+Ichiban Shibori	이치방 시보리	beer
+The Premium Malt's	더 프리미엄 몰츠	beer
+Okura	오쿠라	hotel
+ABC Mart	에이비씨마트	retail
+Pochacco	포차코	toys
+Chiikawa	치이카와	toys
+Pearly Gates	파리게이츠	fashion
+Thermos	써모스	homeware
+Noritake	노리타케	tableware
+Combi	콤비	baby
+Okamoto	오카모토	household
+PlayStation 5	플레이스테이션 파이브	games
+DualSense	듀얼센스	games
+Joy-Con	조이콘	games
+PlayStation Plus	플레이스테이션 플러스	games
+Nintendo Switch Online	닌텐도 스위치 온라인	games
+Clip Studio Paint	클립 스튜디오 페인트	software
+% Arabica	아라비카	coffee
+Graphpaper	그라프페이퍼	fashion
+Hender Scheme	엔더스키마	fashion
+Marantz	마란츠	audio
+Realforce	리얼포스	electronics
+HHKB	해피해킹	electronics
+Happy Hacking Keyboard	해피해킹 키보드	electronics
+Topre	토프레	electronics
+Eizo	에이조	electronics
+Pokémon Unite	포켓몬 유나이트	games
+Pokémon Sleep	포켓몬 슬립	games
+Princess Connect	프린세스 커넥트	games
+Idolmaster	아이돌마스터	games
+Love Live	러브라이브	games
+Touhou	동방 프로젝트	games
+Palworld	팰월드	games
+Pocketpair	포켓페어	games
+TOHO Cinemas	토호시네마즈	cinema
+Japan Rail Pass	재팬레일패스	travel
+JR Pass	제이알 패스	travel
+Koala's March	코알라의 마치	snacks
+Kororo	코로로	candy
+Baby Star	베이비스타	snacks
+Peyoung	페양	food
+Aquarius	아쿠아리우스	drink
+PCX	피씨엑스	motorcycles
+Arai	아라이	motorcycle gear
+Shoei	쇼에이	motorcycle gear
+Uniflame	유니프레임	outdoor
+Tanita	타니타	electronics
+Fujiiryoki	후지의료기	appliances
+Ciao	챠오	pet food
+Powershot	파워샷	electronics
+Coolpix	쿨픽스	electronics
+Sakana AI	사카나 에이아이	software

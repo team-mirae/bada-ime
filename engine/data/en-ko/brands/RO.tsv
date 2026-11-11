@@ -1,0 +1,62 @@
+# Romania (루마니아)
+# Covers: cars and car models, software and tech, banks, energy, airline, retail and e-commerce,
+# logistics, telecom, beer, wine and spirits, mineral water, food and dairy, cosmetics, pharma,
+# appliances, media, football clubs.
+# Hangul: established Korean forms where they exist (다치아, 부쿠레슈티), otherwise 루마니아어 표기법.
+# Note: UiPath was founded in Bucharest (HQ now New York).
+# Sources: own knowledge.
+Dacia	다치아	auto
+Dacia Logan	다치아 로건	auto
+Dacia Duster	다치아 더스터	auto
+Dacia Sandero	다치아 산데로	auto
+Dacia Jogger	다치아 조거	auto
+Dacia Spring	다치아 스프링	auto
+Dacia Bigster	다치아 빅스터	auto
+ARO	아로	auto
+Bitdefender	비트디펜더	software
+UiPath	유아이패스	software
+Banca Transilvania	반카 트란실바니아	bank
+OMV Petrom	오엠브이 페트롬	energy
+Rompetrol	롬페트롤	energy
+Romgaz	롬가스	energy
+Hidroelectrica	히드로엘렉트리카	energy
+Nuclearelectrica	누클레아렐렉트리카	energy
+TAROM	타롬	airline
+eMAG	이맥	retail
+Altex	알텍스	retail
+Flanco	플랑코	retail
+Dedeman	데데만	retail
+Fan Courier	팬 쿠리어	logistics
+Digi	디지	telecom
+Ursus	우르수스	beer
+Timișoreana	티미쇼레아나	beer
+Ciuc	치우크	beer
+Silva	실바	beer
+Ciucaș	치우카시	beer
+Murfatlar	무르파틀라르	wine
+Jidvei	지드베이	wine
+Cotnari	코트나리	wine
+Cramele Recaș	크라멜레 레카시	wine
+Alexandrion	알렉산드리온	spirits
+Borsec	보르세크	drink
+Dorna	도르나	drink
+Aqua Carpatica	아쿠아 카르파티카	drink
+Rom	롬	food
+Kandia	칸디아	food
+Poiana	포이아나	food
+Napolact	나폴락트	food
+Albalact	알발락트	food
+Vel Pitar	벨 피타르	food
+Cris-Tim	크리스팀	food
+Gerovital	게로비탈	cosmetics
+Farmec	파르메크	cosmetics
+Antibiotice	안티비오티체	pharma
+Arctic	아르크티크	appliances
+Pro TV	프로 티비	media
+Adevărul	아데버룰	media
+Steaua București	스테아우아 부쿠레슈티	football club
+FCSB	에프세에스베	football club
+Dinamo București	디나모 부쿠레슈티	football club
+Rapid București	라피드 부쿠레슈티	football club
+CFR Cluj	체에프에르 클루지	football club
+Universitatea Craiova	우니베르시타테아 크라이오바	football club

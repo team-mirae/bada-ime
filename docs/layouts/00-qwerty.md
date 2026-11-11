@@ -11,7 +11,7 @@
 | **Abbreviations** | QWERTY |
 | **Designer** | QWERTY: Christopher Latham Sholes (1870s); its JIS keyboard form: JIS X 6002. Its bada ime form: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |
-| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+| **Contact** | mj@teammirae.com (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/00-qwerty-dark.png">

@@ -12,7 +12,7 @@ use bada::{Data, Engine, Key, Mods, Settings};
 use serde::Deserialize;
 
 /// The data files, in `data_put`'s slot order.
-const SLOTS: usize = 10;
+const SLOTS: usize = 11;
 const KO: usize = 0;
 const EN: usize = 1;
 const HANJA: usize = 2;
@@ -23,6 +23,7 @@ const LM: usize = 6;
 const SYMBOLS: usize = 7;
 const EMOJI: usize = 8;
 const UNICODE: usize = 9;
+const EN_KO: usize = 10;
 
 thread_local! {
     static FILES: RefCell<Vec<Vec<u8>>> = RefCell::new(vec![Vec::new(); SLOTS]);
@@ -65,7 +66,8 @@ pub extern "C" fn init() {
         .with_japanese(text(JA))
         .with_kanji(&files[KANJI])
         .with_lm(&files[LM])
-        .with_search(text(SYMBOLS), text(EMOJI), text(UNICODE));
+        .with_search(text(SYMBOLS), text(EMOJI), text(UNICODE))
+        .with_en_ko(text(EN_KO));
     let engine = Engine::new(Arc::new(data));
     ENGINE.with(|e| *e.borrow_mut() = Some(engine));
 }

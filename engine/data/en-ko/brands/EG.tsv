@@ -1,0 +1,82 @@
+# Egypt (이집트)
+# Covers: airlines, telecom, banks and fintech, startups and apps, food, snacks, dairy, beer and drinks,
+# restaurant chains, tobacco, conglomerates, real estate, construction, steel and cables, pharma,
+# appliances and electronics retail, fashion and jewellery, carpets, media, football clubs.
+# Sources: own knowledge.
+EgyptAir	이집트항공	airline
+Air Cairo	에어 카이로	airline
+Nile Air	나일에어	airline
+Telecom Egypt	텔레콤 이집트	telecom
+WE	위	telecom
+Orascom	오라스콤	conglomerate
+Orascom Construction	오라스콤 건설	construction
+Orascom Development	오라스콤 디벨롭먼트	construction
+El Gouna	엘구나	travel
+Mansour Group	만수르 그룹	conglomerate
+GB Auto	지비 오토	auto
+Speranza	스페란차	auto
+Talaat Moustafa Group	탈라트 무스타파 그룹	construction
+Palm Hills	팜힐스	construction
+SODIC	소딕	construction
+Arab Contractors	아랍 컨트랙터스	construction
+Hassan Allam	하산 알람	construction
+Elsewedy Electric	엘스웨디 일렉트릭	industrial
+Ezz Steel	에즈 스틸	industrial
+Oriental Weavers	오리엔탈 위버스	furniture
+National Bank of Egypt	이집트 국립은행	bank
+Banque Misr	방크 미스르	bank
+Banque du Caire	방크 뒤 카이르	bank
+Commercial International Bank	커머셜 인터내셔널 뱅크	bank
+EFG Hermes	이에프지 에르메스	finance
+Fawry	파우리	finance
+valU	밸류	finance
+MNT-Halan	엠엔티 할란	finance
+Paymob	페이몹	finance
+Swvl	스위블	app
+Instabug	인스타버그	software
+Vezeeta	베지타	app
+Breadfast	브레드패스트	app
+Elmenus	엘메뉴스	app
+Wuzzuf	우주프	internet
+Juhayna	주하이나	food
+Domty	돔티	food
+Edita	에디타	food
+Faragello	파라젤로	food
+Obour Land	오부르 랜드	food
+El Rashidi El Mizan	엘라시디 엘미잔	food
+Abu Auf	아부 아우프	food
+El Abd	엘아브드	food
+Al Ahram Beverages	알아흐람 음료	drink
+Stella	스텔라	beer
+Sakara	사카라	beer
+Fayrouz	파이루즈	drink
+Eastern Company	이스턴 컴퍼니	tobacco
+Cleopatra	클레오파트라	tobacco
+Mo'men	모멘	restaurant
+Cook Door	쿡도어	restaurant
+Gad	가드	restaurant
+Koshary Abou Tarek	코샤리 아부 타렉	restaurant
+Pharco	파르코	pharma
+EIPICO	에이피코	pharma
+Eva Pharma	에바 파마	pharma
+B.TECH	비테크	retail
+Elaraby	엘아라비	electronics
+Tornado	토네이도	appliances
+Fresh	프레시	appliances
+Unionaire	유니온에어	appliances
+Kiriazi	키리아지	appliances
+Cottonil	코토닐	fashion
+Town Team	타운 팀	fashion
+Azza Fahmy	아자 파흐미	jewelry
+Raya Holding	라야 홀딩	conglomerate
+Mena House	메나 하우스	hotel
+Al-Ahram	알아흐람	media
+Al-Masry Al-Youm	알마스리 알욤	media
+Al-Akhbar	알아크바르	media
+Youm7	욤 사바	media
+Ahram Online	아흐람 온라인	media
+Nile TV	나일 티비	media
+Al Ahly	알아흘리	football club
+Zamalek	자말렉	football club
+Pyramids FC	피라미즈	football club
+Ismaily	이스마일리	football club

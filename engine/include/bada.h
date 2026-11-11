@@ -13,7 +13,8 @@ const BadaData *bada_data_new(const uint8_t *ko, size_t ko_len, const uint8_t *e
                               const uint8_t *hanja, size_t hanja_len, const uint8_t *oecd, size_t oecd_len,
                               const uint8_t *ja, size_t ja_len, const uint8_t *kanji, size_t kanji_len,
                               const uint8_t *lm, size_t lm_len, const uint8_t *symbols, size_t symbols_len,
-                              const uint8_t *emoji, size_t emoji_len, const uint8_t *unicode, size_t unicode_len);
+                              const uint8_t *emoji, size_t emoji_len, const uint8_t *unicode, size_t unicode_len,
+                              const uint8_t *en_ko, size_t en_ko_len);
 void bada_data_free(const BadaData *data);
 
 BadaEngine *bada_new(const BadaData *data);

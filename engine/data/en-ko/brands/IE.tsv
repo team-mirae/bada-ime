@@ -1,0 +1,971 @@
+# Ireland (아일랜드)
+# Covers brands originating/headquartered in the Republic of Ireland: stout, whiskey, food and dairy, retailers,
+# banks, airlines and aircraft lessors, tech and internet, media, pubs, hotels, GAA/League of Ireland/rugby clubs.
+# Northern Ireland brands (Bushmills, Belleek, Wrightbus...) are in GB.tsv.
+# Sources: own knowledge (most entries); checked against Wikipedia "List of companies of Ireland", "Category:Irish brands",
+# "Category:Food and drink companies of Ireland", "Category:Retail companies of Ireland", "Category:Irish whiskey",
+# "Category:Distilleries in the Republic of Ireland", "Category:Software companies of Ireland", ISEQ 20 constituents.
+# Hangul: Korean media usage where it exists, otherwise 외래어 표기법 (English; Irish-language names by Irish pronunciation).
+Guinness	기네스	beer
+Guinness Draught	기네스 드래프트	beer
+Guinness Storehouse	기네스 스토어하우스	travel
+Smithwick's	스미딕스	beer
+Harp	하프	beer
+Kilkenny	킬케니	beer
+Beamish	비미시	beer
+Murphy's	머피스	beer
+Hop House 13	홉 하우스 서틴	beer
+Rockshore	록쇼어	beer
+Porterhouse	포터하우스	beer
+O'Hara's	오하라스	beer
+Franciscan Well	프란치스칸 웰	beer
+Galway Bay Brewery	골웨이 베이 브루어리	beer
+Kinnegar	키니거	beer
+Wicklow Wolf	위클로 울프	beer
+Rascals	래스컬스	beer
+Eight Degrees	에이트 디그리스	beer
+White Hag	화이트 해그	beer
+Trouble Brewing	트러블 브루잉	beer
+Dungarvan Brewing	던가번 브루잉	beer
+Carlow Brewing	칼로 브루잉	beer
+Lough Gill	러프 길	beer
+Whiplash	휘플래시	beer
+Open Gate	오픈 게이트	beer
+Jameson	제임슨	spirits
+Tullamore D.E.W.	툴라모어 듀	spirits
+Powers	파워스	spirits
+Paddy	패디	spirits
+Redbreast	레드브레스트	spirits
+Green Spot	그린 스팟	spirits
+Yellow Spot	옐로 스팟	spirits
+Midleton	미들턴	spirits
+Teeling	틸링	spirits
+Kilbeggan	킬베건	spirits
+Connemara	코네마라	spirits
+Tyrconnell	티어코넬	spirits
+Writers' Tears	라이터스 티어스	spirits
+Roe & Co	로 앤 코	spirits
+Slane	슬레인	spirits
+Dingle	딩글	spirits
+Glendalough	글렌달로	spirits
+West Cork Distillers	웨스트 코크 디스틸러스	spirits
+Waterford Distillery	워터퍼드 디스틸러리	spirits
+Knappogue Castle	내포그 캐슬	spirits
+The Irishman	디 아이리시맨	spirits
+Proper No. Twelve	프로퍼 넘버 트웰브	spirits
+Hyde	하이드	spirits
+Jack Ryan	잭 라이언	spirits
+Clonakilty Distillery	클로나킬티 디스틸러리	spirits
+Blackwater	블랙워터	spirits
+Walsh Whiskey	월시 위스키	spirits
+Egan's	이건스	spirits
+Pearse Lyons	피어스 라이언스	spirits
+Powerscourt Distillery	파워스코트 디스틸러리	spirits
+Great Northern	그레이트 노던	spirits
+Cooley	쿨리	spirits
+Irish Distillers	아이리시 디스틸러스	spirits
+Gunpowder Gin	건파우더 진	spirits
+Drumshanbo	드럼섄보	spirits
+Dingle Gin	딩글 진	spirits
+Glendalough Gin	글렌달로 진	spirits
+Cork Dry Gin	코크 드라이 진	spirits
+Method and Madness	메서드 앤 매드니스	spirits
+Ha'penny	하페니	spirits
+Baileys	베일리스	spirits
+Carolans	캐롤란스	spirits
+Irish Mist	아이리시 미스트	spirits
+Merrys	메리스	spirits
+Five Farms	파이브 팜스	spirits
+Coole Swan	쿨 스완	spirits
+Feckin	페킨	spirits
+Magners	매그너스	cider
+Bulmers Ireland	불머스 아일랜드	cider
+Orchard Thieves	오처드 시브스	cider
+Stonewell	스톤웰	cider
+Longueville	롱빌	cider
+C&C Group	씨앤씨 그룹	drink
+Club Orange	클럽 오렌지	drink
+Club Lemon	클럽 레몬	drink
+Cidona	시도나	drink
+TK	티케이	drink
+Football Special	풋볼 스페셜	drink
+MiWadi	미와디	drink
+Nash's	내시스	drink
+Ballygowan	발리고완	drink
+Tipperary Water	티퍼레리 워터	drink
+Deep RiverRock	딥 리버록	drink
+Kerry Spring	케리 스프링	drink
+Barry's Tea	배리스 티	drink
+Bewley's	뷸리스	drink
+Robert Roberts	로버트 로버츠	drink
+Java Republic	자바 리퍼블릭	drink
+Insomnia	인섬니아	cafe
+3fe	스리에프이	cafe
+Butlers Chocolates	버틀러스 초콜릿	food
+Butlers Chocolate Café	버틀러스 초콜릿 카페	cafe
+Lily O'Brien's	릴리 오브라이언스	food
+Clonakilty Chocolate	클로나킬티 초콜릿	food
+Skelligs Chocolate	스켈리그스 초콜릿	food
+Wilde Irish Chocolates	와일드 아이리시 초콜릿	food
+Hadji Bey	하지 베이	food
+Jacob's	제이컵스	food
+Fig Rolls	피그 롤스	food
+Mikado	미카도	food
+Kimberley	킴벌리	food
+Coconut Creams	코코넛 크림스	food
+Jacob's Cream Crackers	제이컵스 크림 크래커	food
+Jacob Fruitfield	제이컵 프루트필드	food
+Valeo Foods	발레오 푸즈	food
+Oatfield	오트필드	food
+Silvermints	실버민츠	food
+Tayto	테이토	food
+Mr. Tayto	미스터 테이토	food
+King Crisps	킹 크리스프스	food
+Hunky Dorys	헝키 도리스	food
+Keogh's	키오스	food
+O'Donnells	오도널스	food
+Perri	페리	food
+Sam Spudz	샘 스퍼즈	food
+Meanies	미니스	food
+Kerrygold	케리골드	food
+Dubliner	더블리너	food
+Kerry Group	케리 그룹	food
+Kerry	케리	food
+Glanbia	글랜비아	food
+Ornua	오르누아	food
+Tirlán	티얼란	food
+Dairygold	데어리골드	food
+Lakeland Dairies	레이클랜드 데어리스	food
+Aurivo	오리보	food
+Avonmore	에이번모어	food
+Low Low	로 로	food
+Charleville	찰빌	food
+Cashel Blue	캐셜 블루	food
+Ballymaloe	발리말루	food
+Durrus	더러스	food
+Gubbeen	구빈	food
+Knockanore	노커노어	food
+Coolea	쿨리아	food
+Glenisk	글레니스크	food
+Glenilen	글레닐런	food
+Clonakilty Black Pudding	클로나킬티 블랙 푸딩	food
+Clonakilty	클로나킬티	food
+Galtee	골티	food
+Denny	데니	food
+Brady Family	브래디 패밀리	food
+Carroll's of Tullamore	캐럴스 오브 털러모어	food
+Rudd's	러즈	food
+Hafner's	하프너스	food
+Olhausen	올하우젠	food
+Shaws	쇼스	food
+Superquinn Sausages	슈퍼퀸 소시지	food
+Kelkin	켈킨	food
+Flahavan's	플라하반스	food
+Odlums	오들럼스	food
+Brennans	브레넌스	food
+Pat the Baker	팻 더 베이커	food
+Johnston Mooney & O'Brien	존스턴 무니 앤 오브라이언	food
+Cuisine de France	퀴진 드 프랑스	food
+Greencore	그린코어	food
+Goodall's	굿올스	food
+Erin	에린	food
+Siúcra	슈크라	food
+YR Sauce	와이알 소스	food
+McDonnells	맥도넬스	food
+Folláin	폴로인	food
+Mileeven	마일리븐	food
+Manor Farm	매너 팜	food
+Green Isle	그린 아일	food
+Donegal Catch	도니골 캐치	food
+HB Ice Cream	에이치비 아이스크림	food
+HB	에이치비	food
+Loop the Loop	루프 더 루프	food
+Golly Bar	골리 바	food
+Murphys Ice Cream	머피스 아이스크림	food
+Teddy's	테디스	food
+Fyffes	파이프스	food
+Origin Enterprises	오리진 엔터프라이지스	food
+Primark	프라이마크	fashion
+Penneys	페니스	fashion
+Dunnes Stores	던스 스토어스	retail
+SuperValu	슈퍼밸류	retail
+Centra	센트라	retail
+Musgrave	머스그레이브	retail
+Daybreak	데이브레이크	retail
+Gala	갈라	retail
+BWG Foods	비더블유지 푸즈	retail
+Brown Thomas	브라운 토머스	retail
+Arnotts	아노츠	retail
+Clerys	클러리스	retail
+Avoca	아보카	retail
+Kilkenny Shop	킬케니 숍	retail
+Blarney Woollen Mills	블라니 울런 밀스	retail
+Meadows & Byrne	메도스 앤 번	retail
+Heatons	히턴스	retail
+Guineys	기니스	retail
+Shaws Department Stores	쇼스 디파트먼트 스토어스	retail
+Carraig Donn	캐릭 돈	fashion
+Elverys	엘버리스	retail
+Lifestyle Sports	라이프스타일 스포츠	retail
+Smyths Toys	스마이스 토이스	retail
+Smyths	스마이스	retail
+Easons	이슨스	retail
+Hodges Figgis	호지스 피기스	retail
+Dubray Books	두브레이 북스	retail
+Kennys	케니스	retail
+Woodie's	우디스	retail
+Atlantic Homecare	애틀랜틱 홈케어	retail
+Chadwicks	채드윅스	retail
+Heiton Buckley	하이턴 버클리	retail
+Grafton Group	그래프턴 그룹	retail
+DID Electrical	디아이디 일렉트리컬	retail
+Power City	파워 시티	retail
+EuroGiant	유로자이언트	retail
+Dealz	딜즈	retail
+Hickey's Pharmacy	히키스 파머시	retail
+McCabes Pharmacy	매케이브스 파머시	retail
+Sam McCauley	샘 매콜리	retail
+Life Pharmacy	라이프 파머시	retail
+Weir & Sons	위어 앤 선스	jewelry
+Applegreen	애플그린	retail
+Maxol	맥솔	energy
+Top Oil	톱 오일	energy
+Emo Oil	이모 오일	energy
+Topaz	토파즈	energy
+Bank of Ireland	뱅크 오브 아일랜드	bank
+AIB	에이아이비	bank
+Allied Irish Banks	얼라이드 아이리시 뱅크스	bank
+Permanent TSB	퍼머넌트 티에스비	bank
+PTSB	피티에스비	bank
+EBS	이비에스	bank
+Central Bank of Ireland	아일랜드 중앙은행	bank
+An Post	언 포스트	logistics
+Irish Life	아이리시 라이프	insurance
+FBD	에프비디	insurance
+Laya Healthcare	라야 헬스케어	insurance
+Vhi	브이에이치아이	insurance
+Irish Life Health	아이리시 라이프 헬스	insurance
+Davy	데이비	finance
+Goodbody	굿바디	finance
+Fexco	펙스코	finance
+Experian	엑스페리언	finance
+Fenergo	페너고	software
+CurrencyFair	커런시페어	finance
+Wayflyer	웨이플라이어	finance
+Flutter	플러터	gambling
+Flutter Entertainment	플러터 엔터테인먼트	gambling
+Paddy Power	패디 파워	gambling
+BoyleSports	보일스포츠	gambling
+Bar One Racing	바 원 레이싱	gambling
+Betdaq	벳닥	gambling
+Irish National Lottery	아일랜드 국영 복권	gambling
+Aer Lingus	에어 링구스	airline
+Ryanair	라이언에어	airline
+CityJet	시티젯	airline
+Emerald Airlines	에메랄드 항공	airline
+Aer Arann	에어 아란	airline
+Stobart Air	스토바트 에어	airline
+ASL Airlines Ireland	에이에스엘 항공 아일랜드	airline
+AerCap	에어캡	leasing
+Avolon	아볼론	leasing
+SMBC Aviation Capital	에스엠비시 에비에이션 캐피털	leasing
+Irish Ferries	아이리시 페리스	transport
+Irish Continental Group	아이리시 컨티넨털 그룹	transport
+Bus Éireann	버스 에런	transport
+Dublin Bus	더블린 버스	transport
+Iarnród Éireann	이어른로드 에런	transport
+Irish Rail	아이리시 레일	transport
+Luas	루아스	transport
+DART	다트	transport
+CIÉ	씨아이이	transport
+Aircoach	에어코치	transport
+Irish Citylink	아이리시 시티링크	transport
+GoBus	고버스	transport
+DAA	디에이에이	airport
+GoCar	고카	transport
+Leap Card	리프 카드	transport
+eir	에어	telecom
+Eir Sport	에어 스포츠	media
+Meteor	미티어	telecom
+Imagine	이매진	telecom
+Digiweb	디지웹	telecom
+Magnet Networks	마그넷 네트웍스	telecom
+Smart Telecom	스마트 텔레콤	telecom
+ESB	이에스비	energy
+Electric Ireland	일렉트릭 아일랜드	energy
+Bord Gáis Energy	보드 가스 에너지	energy
+Energia	에네르지아	energy
+Airtricity	에어트리시티	energy
+Flogas	플로가스	energy
+Bord na Móna	보드 너 모너	energy
+Uisce Éireann	이슈커 에런	utilities
+Gas Networks Ireland	가스 네트웍스 아일랜드	utilities
+EirGrid	에어그리드	energy
+Coillte	퀼처	forestry
+NTR	엔티알	energy
+CRH	씨알에이치	construction
+Kingspan	킹스판	construction
+Smurfit Kappa	스머핏 카파	packaging
+Smurfit Westrock	스머핏 웨스트록	packaging
+DCC	디시시	conglomerate
+Glen Dimplex	글렌 딤플렉스	appliances
+Waterford Stanley	워터퍼드 스탠리	appliances
+Combilift	콤비리프트	industrial
+McHale	맥헤일	industrial
+Mannok	매녹	construction
+SIAC	시악	construction
+Sisk	시스크	construction
+Ardmac	아드맥	construction
+Dalata	달라타	hotel
+Maldron Hotels	몰드론 호텔	hotel
+Clayton Hotels	클레이턴 호텔	hotel
+Jurys Inn	주리스 인	hotel
+The Doyle Collection	더 도일 컬렉션	hotel
+Ashford Castle	애시퍼드 캐슬	hotel
+Adare Manor	어데어 매너	hotel
+The K Club	더 케이 클럽	hotel
+The Merrion	더 메리언	hotel
+The Shelbourne	더 셸번	hotel
+The Gresham	더 그레셤	hotel
+Dromoland Castle	드로몰랜드 캐슬	hotel
+Mount Juliet	마운트 줄리엣	hotel
+Fota Island	포타 아일랜드	hotel
+Park Hotel Kenmare	파크 호텔 켄메어	hotel
+Sheen Falls Lodge	신 폴스 로지	hotel
+The g Hotel	더 지 호텔	hotel
+Monart	모나트	hotel
+Lough Eske Castle	러프 에스크 캐슬	hotel
+Hostelworld	호스텔월드	internet
+Cartrawler	카트롤러	internet
+Intercom	인터컴	software
+Workhuman	워크휴먼	software
+Workvivo	워크비보	software
+Tines	타인스	software
+Flipdish	플립디시	software
+Teamwork.com	팀워크닷컴	software
+Glofox	글로폭스	software
+Evervault	에버볼트	software
+Phorest	포레스트	software
+Fineos	파이니오스	software
+Version 1	버전 원	software
+Datalex	데이탈렉스	software
+Openet	오픈넷	software
+IONA Technologies	아이오나 테크놀로지스	software
+Baltimore Technologies	볼티모어 테크놀로지스	software
+Cúram Software	큐람 소프트웨어	software
+Norkom	노르콤	software
+Havok	하복	software
+Demonware	데몬웨어	software
+Riverdeep	리버딥	software
+SkillSoft	스킬소프트	software
+Kinzen	킨젠	software
+Soapbox Labs	소프박스 랩스	software
+LetsGetChecked	렛츠겟체크드	health
+Manna	만나	tech
+Ding	딩	internet
+Storyful	스토리풀	media
+Daft.ie	대프트	internet
+DoneDeal	던딜	internet
+Adverts.ie	애드버츠	internet
+Carzone	카존	internet
+Boards.ie	보즈	internet
+TheJournal.ie	더저널	media
+Buymie	바이미	internet
+Bleeper	블리퍼	transport
+ICON	아이콘	pharma
+Trinity Biotech	트리니티 바이오텍	pharma
+Uniphar	유니파	pharma
+UDG Healthcare	유디지 헬스케어	pharma
+Sudocrem	수도크림	pharma
+Malin	말린	pharma
+Mainstay Medical	메인스테이 메디컬	medical
+Creganna	크레가나	medical
+RTÉ	아르티이	media
+RTÉ One	아르티이 원	media
+RTÉ Two	아르티이 투	media
+RTÉ Player	아르티이 플레이어	media
+RTÉ Radio 1	아르티이 라디오 원	media
+2FM	투에프엠	media
+Lyric FM	리릭 에프엠	media
+TG4	티지포	media
+Virgin Media Television	버진 미디어 텔레비전	media
+TV3	티비스리	media
+Newstalk	뉴스토크	media
+Today FM	투데이 에프엠	media
+Communicorp	커뮤니코프	media
+Raidió na Gaeltachta	라디오 나 게일타흐타	media
+The Irish Times	아이리시 타임스	media
+Irish Independent	아이리시 인디펜던트	media
+Sunday Independent	선데이 인디펜던트	media
+Irish Examiner	아이리시 이그재미너	media
+The Business Post	비즈니스 포스트	media
+Evening Herald	이브닝 헤럴드	media
+Sunday World	선데이 월드	media
+Irish Daily Star	아이리시 데일리 스타	media
+Hot Press	핫 프레스	media
+The Phoenix	더 피닉스	media
+Independent News & Media	인디펜던트 뉴스 앤 미디어	media
+Thomas Crosbie Holdings	토머스 크로스비 홀딩스	media
+Gill Books	길 북스	publishing
+The O'Brien Press	오브라이언 프레스	publishing
+Poolbeg	풀벡	publishing
+Lilliput Press	릴리풋 프레스	publishing
+Cartoon Saloon	카툰 살롱	media
+Brown Bag Films	브라운 백 필름스	media
+Element Pictures	엘리먼트 픽처스	media
+Ardmore Studios	아드모어 스튜디오	media
+Riverdance	리버댄스	media
+Lord of the Dance	로드 오브 더 댄스	media
+Father Ted	파더 테드	media
+Normal People	노멀 피플	media
+Fair City	페어 시티	media
+The Late Late Show	더 레이트 레이트 쇼	media
+Mrs. Brown's Boys	미시즈 브라운스 보이스	media
+Electric Picnic	일렉트릭 피크닉	festival
+Body & Soul	바디 앤 소울	festival
+Longitude	론지튜드	festival
+Web Summit	웹 서밋	events
+Rothco	로스코	advertising
+Abrakebabra	아브라케밥라	restaurant
+Supermac's	슈퍼맥스	restaurant
+Eddie Rocket's	에디 로켓스	restaurant
+Apache Pizza	아파치 피자	restaurant
+Four Star Pizza	포 스타 피자	restaurant
+O'Briens	오브라이언스	restaurant
+Bewley's Café	뷸리스 카페	cafe
+Doolittles	두리틀스	restaurant
+Captain America's	캡틴 아메리카스	restaurant
+Elephant & Castle	엘리펀트 앤 캐슬	restaurant
+Leo Burdock	레오 버독	restaurant
+Bunsen	번슨	restaurant
+Base Wood Fired Pizza	베이스 우드 파이어드 피자	restaurant
+Camile Thai	카밀 타이	restaurant
+Chopped	촙트	restaurant
+Zaytoon	자이툰	restaurant
+Gourmet Food Parlour	고메 푸드 팔러	restaurant
+Kylemore Café	카일모어 카페	cafe
+Butler's Pantry	버틀러스 팬트리	food
+Avoca Café	아보카 카페	cafe
+Cafe Sol	카페 솔	cafe
+Coffee Angel	커피 엔젤	cafe
+Two Fifty Square	투 피프티 스퀘어	cafe
+Clement & Pekoe	클레멘트 앤 페코	cafe
+Temple Bar	템플 바	pub
+The Brazen Head	브레이즌 헤드	pub
+Johnnie Fox's	조니 폭스	pub
+Davy Byrnes	데이비 번스	pub
+O'Donoghue's	오도너휴스	pub
+The Stag's Head	스태그스 헤드	pub
+Kehoe's	키호스	pub
+Mulligan's	멀리건스	pub
+Toners	토너스	pub
+Doheny & Nesbitt	도허니 앤 네스빗	pub
+McDaid's	맥대즈	pub
+The Long Hall	롱 홀	pub
+John Kavanagh	존 캐버나	pub
+Gravediggers	그레이브디거스	pub
+Whelan's	웰런스	pub
+Sean's Bar	숀스 바	pub
+Copper Face Jacks	카퍼 페이스 잭스	pub
+Fibber Magees	피버 머기스	pub
+The Porterhouse	더 포터하우스	pub
+GAA	지에이에이	sports
+Croke Park	크로크 파크	sports
+Dublin GAA	더블린 지에이에이	sports
+Kerry GAA	케리 지에이에이	sports
+Kilkenny GAA	킬케니 지에이에이	sports
+Cork GAA	코크 지에이에이	sports
+Tipperary GAA	티퍼레리 지에이에이	sports
+Galway GAA	골웨이 지에이에이	sports
+Mayo GAA	메이오 지에이에이	sports
+Limerick GAA	리머릭 지에이에이	sports
+All-Ireland	올아일랜드	sports
+League of Ireland	리그 오브 아일랜드	sports
+FAI	에프에이아이	sports
+Shamrock Rovers	섐록 로버스	football club
+Bohemians	보헤미안스	football club
+Shelbourne	셸번	football club
+St Patrick's Athletic	세인트 패트릭스 애슬레틱	football club
+Dundalk	던도크	football club
+Cork City	코크 시티	football club
+Sligo Rovers	슬라이고 로버스	football club
+Bray Wanderers	브레이 원더러스	football club
+Drogheda United	드로이다 유나이티드	football club
+Galway United	골웨이 유나이티드	football club
+Finn Harps	핀 하프스	football club
+Waterford FC	워터퍼드	football club
+Treaty United	트리티 유나이티드	football club
+Longford Town	롱퍼드 타운	football club
+UCD AFC	유시디	football club
+Athlone Town	애슬론 타운	football club
+Wexford FC	웩스퍼드	football club
+Cobh Ramblers	코브 램블러스	football club
+Kerry FC	케리 에프시	football club
+Leinster Rugby	렌스터 럭비	rugby club
+Munster Rugby	먼스터 럭비	rugby club
+Connacht Rugby	코노트 럭비	rugby club
+Irish Rugby	아이리시 럭비	sports
+Aviva Stadium	아비바 스타디움	sports
+Thomond Park	토먼드 파크	sports
+Leopardstown	레퍼즈타운	sports
+Punchestown	펀치스타운	sports
+The Curragh	커러	sports
+Galway Races	골웨이 레이스	sports
+Coolmore	쿨모어	sports
+Ballydoyle	발리도일	sports
+O'Neills	오닐스	sportswear
+Dubarry	듀배리	fashion
+Magee 1866	매기	fashion
+Inis Meáin	이니시먼	fashion
+Aran Sweater Market	아란 스웨터 마켓	fashion
+Aran Crafts	아란 크래프츠	fashion
+Carrig	캐릭	fashion
+Lucy Nagle	루시 네이글	fashion
+Orla Kiely	올라 카일리	fashion
+Simone Rocha	시몬 로샤	luxury
+Paul Costelloe	폴 코스텔로	fashion
+John Rocha	존 로샤	fashion
+Louise Kennedy	루이즈 케네디	fashion
+Philip Treacy	필립 트레이시	luxury
+Lainey Keogh	레이니 키오	fashion
+Edun	이던	fashion
+Jack Murphy	잭 머피	fashion
+Waterford Crystal	워터퍼드 크리스털	homeware
+Waterford	워터퍼드	homeware
+Tipperary Crystal	티퍼레리 크리스털	homeware
+Galway Crystal	골웨이 크리스털	homeware
+Newbridge Silverware	뉴브리지 실버웨어	homeware
+Nicholas Mosse	니컬러스 모스	homeware
+Stephen Pearce	스티븐 피어스	homeware
+Arklow Pottery	아클로 포터리	homeware
+Louis Mulcahy	루이스 멀케이	homeware
+Kilkenny Design	킬케니 디자인	homeware
+Foxford Woollen Mills	폭스퍼드 울런 밀스	homeware
+Mullingar Pewter	멀링가 퓨터	homeware
+Claddagh Ring	클라다 링	jewelry
+Sculpted by Aimee	스컬프티드 바이 에이미	cosmetics
+Bperfect	비퍼펙트	cosmetics
+SOSU	소수	cosmetics
+Cocoa Brown	코코아 브라운	cosmetics
+Pestle & Mortar	페슬 앤 모타	cosmetics
+Voya	보야	cosmetics
+Inis	이니시	cosmetics
+Human+Kind	휴먼 앤 카인드	cosmetics
+Kinvara Skincare	킨바라 스킨케어	cosmetics
+Ella & Jo	엘라 앤 조	cosmetics
+Seavite	시바이트	cosmetics
+Ballymaloe Relish	발리말루 렐리시	food
+Ballymaloe House	발리말루 하우스	hotel
+Wild Atlantic Way	와일드 애틀랜틱 웨이	travel
+Kerry Foods	케리 푸즈	food
+Cheestrings	치즈스트링스	food
+Golden Vale	골든 베일	food
+Mitchelstown	미첼스타운	food
+Dawn Meats	돈 미츠	food
+ABP Food Group	에이비피 푸드 그룹	food
+Kepak	케팍	food
+Keelings	킬링스	food
+Largo Foods	라고 푸즈	food
+Cully & Sully	컬리 앤 설리	food
+Fulfil	풀필	food
+Strong Roots	스트롱 루츠	food
+Natasha's Living Food	나타샤스 리빙 푸드	food
+Velvet Cloud	벨벳 클라우드	food
+Burren Smokehouse	버런 스모크하우스	food
+Achill Island Sea Salt	아킬 아일랜드 시 솔트	food
+Lir Chocolates	리어 초콜릿	food
+Bó Rua	보 루아	food
+Killowen	킬로언	food
+Club Rock Shandy	클럽 록 섄디	drink
+Country Spring	컨트리 스프링	drink
+Solaris Tea	솔라리스 티	drink
+Irish Water	아이리시 워터	utilities
+ESB Networks	이에스비 네트웍스	energy
+Ervia	에르비아	utilities
+Dublin Port	더블린 포트	logistics
+Expressway	익스프레스웨이	transport
+JJ Kavanagh	제이제이 캐버나	transport
+Wexford Bus	웩스퍼드 버스	transport
+Kitman Labs	킷맨 랩스	software
+Nuritas	누리타스	biotech
+Pointy	포인티	software
+TransferMate	트랜스퍼메이트	finance
+NearForm	니어폼	software
+Poppulo	포퓰로	software
+Daon	다온	software
+Taxback	택스백	finance
+Fleetmatics	플리트매틱스	software
+Movidius	모비디어스	tech
+Decawave	데카웨이브	tech
+Equal1	이퀄원	tech
+Swrve	스워브	software
+PCH International	피시에이치 인터내셔널	logistics
+Dairymaster	데어리마스터	industrial
+Abbey Machinery	애비 머시너리	industrial
+Keenan	키넌	industrial
+Tanco	탄코	industrial
+Durty Nelly's	더티 넬리스	pub
+Matt Molloy's	맷 몰로이스	pub
+Dick Mack's	딕 맥스	pub
+Tigh Neachtain	티 낙턴	pub
+The Palace Bar	팰리스 바	pub
+The Hairy Lemon	헤어리 레몬	pub
+The Oliver St. John Gogarty	올리버 세인트 존 고가티	pub
+The Spaniard	스패니어드	pub
+Bad Bobs	배드 밥스	pub
+The Norseman	노스맨	pub
+Irish Farmers Journal	아이리시 파머스 저널	media
+Joe.ie	조	media
+Her.ie	허	media
+Balls.ie	볼스	media
+The Irish Field	아이리시 필드	media
+Hairy Baby	헤어리 베이비	fashion
+Pamela Scott	파멜라 스콧	fashion
+Champion Sports	챔피언 스포츠	retail
+Homestore + More	홈스토어 앤 모어	retail
+Jurys	주리스	hotel
+The Westbury	웨스트버리	hotel
+The Marker	더 마커	hotel
+The Fitzwilliam	피츠윌리엄	hotel
+Hotel Europe	호텔 유럽	hotel
+Harvey's Point	하비스 포인트	hotel
+Cliff House Hotel	클리프 하우스 호텔	hotel
+Inchydoney	인치도니	hotel
+Carton House	카턴 하우스	hotel
+Press Up	프레스 업	hospitality
+The Dean	더 딘	hotel
+Fairyhouse	페어리하우스	sports
+Irish Derby	아이리시 더비	sports
+Irish Grand National	아이리시 그랜드 내셔널	sports
+Clare GAA	클레어 지에이에이	sports
+Wexford GAA	웩스퍼드 지에이에이	sports
+Waterford GAA	워터퍼드 지에이에이	sports
+Donegal GAA	도니골 지에이에이	sports
+Meath GAA	미스 지에이에이	sports
+Midleton Very Rare	미들턴 베리 레어	spirits
+Red Spot	레드 스폿	spirits
+Blue Spot	블루 스폿	spirits
+Jameson Black Barrel	제임슨 블랙 배럴	spirits
+Jameson Caskmates	제임슨 캐스크메이츠	spirits
+Powers Gold Label	파워스 골드 라벨	spirits
+Clontarf	클론타프	spirits
+Michael Collins	마이클 콜린스	spirits
+Busker	버스커	spirits
+Royal Oak Distillery	로열 오크 디스틸러리	spirits
+Natterjack	내터잭	spirits
+The Dubliner Whiskey	더 더블리너 위스키	spirits
+Dublin Liberties	더블린 리버티스	spirits
+Two Stacks	투 스택스	spirits
+Lambay	램베이	spirits
+J.J. Corry	제이제이 코리	spirits
+Boann	보안	spirits
+Skellig Six18	스켈리그 식스에이틴	spirits
+Bertha's Revenge	버사스 리벤지	spirits
+Micil	미킬	spirits
+Listoke	리스토크	spirits
+An Dúlamán	안 둘라만	spirits
+Sliabh Liag	슐리브 리그	spirits
+Silkie	실키	spirits
+Mad March Hare	매드 마치 헤어	spirits
+Saint Brendan's	세인트 브렌던스	spirits
+Kerrygold Irish Cream	케리골드 아이리시 크림	spirits
+Sheridan's	셰리던스	spirits
+Tullamore Distillery	털러모어 디스틸러리	spirits
+Midleton Distillery	미들턴 디스틸러리	spirits
+Jameson Distillery Bow St.	제임슨 디스틸러리 보 스트리트	travel
+Guinness Foreign Extra Stout	기네스 포린 엑스트라 스타우트	beer
+Guinness Extra Stout	기네스 엑스트라 스타우트	beer
+Guinness 0.0	기네스 제로	beer
+Kaliber	칼리버	beer
+Macardle's	매카들스	beer
+Rye River	라이 리버	beer
+McGargles	맥가글스	beer
+YellowBelly	옐로벨리	beer
+Boyne Brewhouse	보인 브루하우스	beer
+Hope Beer	호프 비어	beer
+Killarney Brewing	킬라니 브루잉	beer
+Galway Hooker	골웨이 후커	beer
+Metalman	메탈맨	beer
+9 White Deer	나인 화이트 디어	beer
+Linden Village	린든 빌리지	cider
+Tanora	타노라	drink
+West Coast Cooler	웨스트 코스트 쿨러	drink
+Club Zero	클럽 제로	drink
+Glenpatrick	글렌패트릭	drink
+Celtic Pure	켈틱 퓨어	drink
+Nobó	노보	food
+Connacht Gold	코노트 골드	food
+Arrabawn	애러반	food
+Lee Strand	리 스트랜드	food
+Premier Milk	프리미어 밀크	food
+Easi Singles	이지 싱글스	food
+Goodfella's	굿펠라스	food
+McCambridge	매캠브리지	food
+Rustlers	러슬러스	food
+Superquinn	슈퍼퀸	retail
+Quinnsworth	퀸스워스	retail
+Roches Stores	로치스 스토어스	retail
+Liffey Meats	리피 미츠	food
+Dawn Farm Foods	돈 팜 푸즈	food
+Total Produce	토털 프로듀스	food
+Emerald Park	에메랄드 파크	travel
+Tayto Park	테이토 파크	travel
+Gino's Gelato	지노스 젤라토	food
+The Rolling Donut	더 롤링 도넛	food
+BB's Coffee & Muffins	비비스 커피 앤드 머핀스	cafe
+Tolteca	톨테카	restaurant
+Sprout & Co	스프라우트 앤드 코	restaurant
+Mizzoni's	미조니스	restaurant
+Donnybrook Fair	도니브룩 페어	retail
+Fallon & Byrne	팰런 앤드 번	retail
+Musgrave MarketPlace	머스그레이브 마켓플레이스	retail
+XL	엑스엘	retail
+Certa	세르타	energy
+Haven Pharmacy	헤이븐 파머시	retail
+Allcare Pharmacy	올케어 파머시	retail
+Peter Mark	피터 마크	beauty
+Xtra-vision	엑스트라비전	retail
+Chartbusters	차트버스터스	retail
+Mr Price	미스터 프라이스	retail
+EuroGeneral	유로제너럴	retail
+Standun	스탠던	retail
+BT2	비티투	retail
+Korky's	코키스	retail
+Marco Moreo	마르코 모레오	fashion
+Chupi	추피	jewelry
+Solvar	솔바	jewelry
+ShanOre	섀노어	jewelry
+Cavan Crystal	캐번 크리스털	homeware
+Royal Tara China	로열 타라 차이나	homeware
+Donegal Parian China	도니골 페리언 차이나	homeware
+Hanna Hats	해나 해츠	fashion
+Aran Woollen Mills	애런 울런 밀스	fashion
+Kerry Woollen Mills	케리 울런 밀스	fashion
+McNutt of Donegal	맥넛 오브 도니골	fashion
+Joanne Hynes	조앤 하인스	fashion
+Manley	맨리	fashion
+Donegal Carpets	도니골 카펫츠	homeware
+Bellamianta	벨라미안타	cosmetics
+Tanorganic	태노거닉	cosmetics
+LearnUpon	런어폰	software
+Pulseway	펄스웨이	software
+Zorin OS	조린 오에스	software
+Vizor	바이저	software
+CR2	시알투	software
+Mcor Technologies	엠코어 테크놀로지스	tech
+Cubic Telecom	큐빅 텔레콤	telecom
+NewsWhip	뉴스윕	software
+Realex Payments	리얼렉스 페이먼츠	finance
+Smartbox	스마트박스	travel
+Romero Games	로메로 게임스	games
+Trustap	트러스탭	finance
+GoMo	고모	telecom
+An Post Mobile	안 포스트 모바일	telecom
+Siro	사이로	telecom
+Enet	이넷	telecom
+Open Eir	오픈 에어	telecom
+Pure Telecom	퓨어 텔레콤	telecom
+Blacknight	블랙나이트	internet
+Esat	에사트	telecom
+Eircom	에어컴	telecom
+Telecom Éireann	텔레콤 에런	telecom
+Pinergy	파이너지	energy
+Panda Power	판다 파워	energy
+Tullow Oil	털로 오일	energy
+Providence Resources	프로비던스 리소시스	energy
+Kenmare Resources	켄메어 리소시스	mining
+Mincon	민콘	industrial
+Irish Cement	아이리시 시멘트	construction
+Roadstone	로드스톤	construction
+Kilsaran	킬서랜	construction
+Ecocem	에코셈	construction
+Tegral	테그럴	construction
+Xtratherm	엑스트라섬	construction
+Munster Joinery	먼스터 조이너리	construction
+Quinn Group	퀸 그룹	conglomerate
+Glenveagh Properties	글렌비 프로퍼티스	construction
+Cairn Homes	케언 홈스	construction
+Ardagh Group	아다 그룹	packaging
+Jefferson Smurfit	제퍼슨 스머핏	packaging
+Moffett	모핏	industrial
+Dennison Trailers	데니슨 트레일러스	industrial
+Mycro Sportsgear	마이크로 스포츠기어	sports
+Vita Cortex	비타 코텍스	industrial
+Élan	엘란	pharma
+Prothena	프로시나	pharma
+Clonmel Healthcare	클론멜 헬스케어	pharma
+Anglo Irish Bank	앵글로 아이리시 은행	bank
+Irish Nationwide	아이리시 네이션와이드	bank
+First Active	퍼스트 액티브	bank
+GPA Group	지피에이 그룹	finance
+New Ireland Assurance	뉴 아일랜드 어슈어런스	insurance
+Cornmarket	콘마켓	finance
+123.ie	원투스리 닷 아이이	insurance
+Chill Insurance	칠 인슈어런스	insurance
+Finance Ireland	파이낸스 아일랜드	finance
+Tote Ireland	토트 아일랜드	gambling
+Goffs	고프스	sports
+Tattersalls Ireland	태터솔스 아일랜드	sports
+Setanta Sports	세탄타 스포츠	media
+Saorview	세어뷰	media
+Cúla 4	쿨라 캐허	media
+RTÉjr	아르티이 주니어	media
+RTÉ News	아르티이 뉴스	media
+RTÉ Guide	아르티이 가이드	media
+RTÉ 2XM	아르티이 투엑스엠	media
+RTÉ Concert Orchestra	아르티이 콘서트 오케스트라	music
+98FM	나인티에이트 에프엠	media
+FM104	에프엠 원오포	media
+Q102	큐 원오투	media
+Spin 1038	스핀 텐서티에이트	media
+Beat 102 103	비트 원오투 원오스리	media
+iRadio	아이라디오	media
+Red FM	레드 에프엠	media
+Cork's 96FM	코크스 나인티식스 에프엠	media
+Radio Kerry	라디오 케리	media
+Highland Radio	하이랜드 라디오	media
+Galway Bay FM	골웨이 베이 에프엠	media
+Midwest Radio	미드웨스트 라디오	media
+Radio Nova	라디오 노바	media
+KCLR	케이시엘아르	media
+WLR FM	더블유엘아르 에프엠	media
+Off The Ball	오프 더 볼	media
+Second Captains	세컨드 캡틴스	media
+Independent.ie	인디펜던트 닷 아이이	media
+BreakingNews.ie	브레이킹뉴스 닷 아이이	media
+The42	더 포티투	media
+SportsJOE	스포츠조	media
+Lovin Dublin	러빈 더블린	media
+The Currency	더 커런시	media
+Evening Echo	이브닝 에코	media
+Connacht Tribune	코노트 트리뷴	media
+Limerick Leader	리머릭 리더	media
+Kilkenny People	킬케니 피플	media
+The Kerryman	더 케리맨	media
+Anglo-Celt	앵글로켈트	media
+Western People	웨스턴 피플	media
+Leinster Leader	렌스터 리더	media
+Munster Express	먼스터 익스프레스	media
+Clare Champion	클레어 챔피언	media
+Tuam Herald	튜엄 헤럴드	media
+Donegal Democrat	도니골 데모크랫	media
+Galway Advertiser	골웨이 애드버타이저	media
+Meath Chronicle	미스 크로니클	media
+Drogheda Independent	드로이다 인디펜던트	media
+The Southern Star	더 서던 스타	media
+VIP Magazine	브이아이피 매거진	media
+RSVP	알에스브이피	media
+Irish Tatler	아이리시 태틀러	media
+Image Magazine	이미지 매거진	media
+Village Magazine	빌리지 매거진	media
+Magill	머길	media
+The Gloss	더 글로스	media
+Totally Dublin	토틀리 더블린	media
+Mercier Press	머시어 프레스	publishing
+New Island Books	뉴 아일랜드 북스	publishing
+Collins Press	콜린스 프레스	publishing
+Folens	폴런스	publishing
+Edco	에드코	publishing
+CJ Fallon	시제이 팰런	publishing
+Ros na Rún	로스 나 룬	media
+Glenroe	글렌로	media
+The Young Offenders	더 영 오펜더스	media
+Love/Hate	러브 헤이트	media
+Bosco	보스코	media
+Podge and Rodge	포지 앤드 로지	media
+Zig and Zag	지그 앤드 재그	media
+Dustin the Turkey	더스틴 더 터키	media
+The Late Late Toy Show	더 레이트 레이트 토이 쇼	media
+Reeling in the Years	릴링 인 더 이어스	media
+Wexford Festival Opera	웩스퍼드 페스티벌 오페라	festival
+Rose of Tralee	로즈 오브 트럴리	festival
+Galway International Arts Festival	골웨이 국제 예술 축제	festival
+St. Patrick's Festival	세인트 패트릭스 페스티벌	festival
+Dublin Horse Show	더블린 호스 쇼	sports
+National Ploughing Championships	내셔널 플라우잉 챔피언십	festival
+Fleadh Cheoil	플라 쿄일	festival
+Guinness Cork Jazz Festival	기네스 코크 재즈 페스티벌	festival
+Forbidden Fruit	포비든 프루트	festival
+All Together Now	올 투게더 나우	festival
+Indiependence	인디펜던스	festival
+Oxegen	옥시젠	festival
+EPIC The Irish Emigration Museum	에픽 아일랜드 이민 박물관	travel
+Little Museum of Dublin	리틀 뮤지엄 오브 더블린	travel
+Ballyfin	밸리핀	hotel
+Castlemartyr	캐슬마터	hotel
+Hayfield Manor	헤이필드 매너	hotel
+Glenlo Abbey	글렌로 애비	hotel
+Kelly's Resort Hotel	켈리스 리조트 호텔	hotel
+Druids Glen	드루이즈 글렌	hotel
+The Clarence	더 클래런스	hotel
+The Dylan	더 딜런	hotel
+Parknasilla	파크너실라	hotel
+Great Southern Hotels	그레이트 서던 호텔스	hotel
+Fitzpatrick Hotels	피츠패트릭 호텔스	hotel
+Tifco	티프코	hotel
+Ballybunion Golf Club	밸리버니언 골프 클럽	sports
+Lahinch Golf Club	라힌치 골프 클럽	sports
+Portmarnock Golf Club	포트마녹 골프 클럽	sports
+Irish Open	아이리시 오픈	sports
+Offaly GAA	오펄리 지에이에이	sports
+Laois GAA	리시 지에이에이	sports
+Kildare GAA	킬데어 지에이에이	sports
+Roscommon GAA	로스커먼 지에이에이	sports
+Sligo GAA	슬라이고 지에이에이	sports
+Leitrim GAA	리트림 지에이에이	sports
+Cavan GAA	캐번 지에이에이	sports
+Monaghan GAA	모너핸 지에이에이	sports
+Longford GAA	롱퍼드 지에이에이	sports
+Westmeath GAA	웨스트미스 지에이에이	sports
+Louth GAA	라우스 지에이에이	sports
+Wicklow GAA	위클로 지에이에이	sports
+Carlow GAA	칼로 지에이에이	sports
+Ballyhale Shamrocks	밸리헤일 섐록스	sports
+Aer Lingus Regional	에어 링구스 리저널	airline
+Dublin Coach	더블린 코치	transport
+Dublinbikes	더블린바이크스	transport
+Aran Island Ferries	애런 아일랜드 페리스	transport
+Omniplex	옴니플렉스	cinema
+IMC Cinemas	아이엠시 시네마스	cinema
+Leisureplex	레저플렉스	leisure
+Azzurri	아주리	sports
+EZ Living Furniture	이지 리빙 퍼니처	furniture
+Bargaintown	바겐타운	furniture
+Michael Murphy Home Furnishing	마이클 머피 홈 퍼니싱	furniture
+Mattress Mick	매트리스 믹	retail
+Art & Hobby	아트 앤드 하비	retail
+Carrolls Irish Gifts	캐럴스 아이리시 기프츠	retail
+House of Ireland	하우스 오브 아일랜드	retail
+The Sweater Shop	더 스웨터 숍	retail
+Waltons	월턴스	retail
+Trintech	트린테크	software
+Boxever	박스에버	software
+PrepayPower	프리페이파워	energy
+Linked Finance	링크드 파이낸스	finance
+Nightline	나이트라인	logistics
+Doyle Shipping Group	도일 시핑 그룹	logistics
+Arklow Shipping	아클로 시핑	logistics
+Celtic Link Ferries	켈틱 링크 페리스	transport
+GAAGO	가고	media
+Agriland	애그리랜드	media
+Dublin Marathon	더블린 마라톤	sports
+Lemon's	레먼스	food
+Toffee Pops	토피 팝스	food
+Macroom Oatmeal	매크룸 오트밀	food
+Wexford Cheddar	웩스퍼드 체더	food
+Kilmeaden	킬미든	food
+Wolfwalkers	울프워커스	media
+Song of the Sea	송 오브 더 시	media
+The Secret of Kells	켈스의 비밀	media
+Moone Boy	문 보이	media
+Bad Sisters	배드 시스터스	media
+The Banshees of Inisherin	이니셰린의 밴시	media
+Zed Candy	제드 캔디	food
+Avonmore Protein Milk	에이번모어 프로틴 밀크	food
+Burren Perfumery	버런 퍼퓨머리	cosmetics
+John Hanly	존 핸리	fashion
+Aer Lingus AerClub	에어 링구스 에어클럽	airline
+Aer Arann Islands	에어 아란 아일랜즈	airline
+Golden Discs	골든 디스크스	retail
+Chapters Bookstore	챕터스 북스토어	retail
+Hughes & Hughes	휴스 앤드 휴스	retail

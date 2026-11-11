@@ -4,7 +4,7 @@
 // Data files in the wasm crate's slot order (web/wasm/src/lib.rs).
 export const DATA_FILES = [
   "ko-words.tsv", "en-words.txt", "hanja.tsv", "oecd.tsv", "ja-words.txt",
-  "kanji.bin", "ko-jamo-4gram.bin", "symbols.tsv", "emoji.tsv", "unicode-names.tsv",
+  "kanji.bin", "ko-jamo-4gram.bin", "symbols.tsv", "emoji.tsv", "unicode-names.tsv", "en-ko.tsv",
 ];
 
 const OP = {

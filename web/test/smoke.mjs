@@ -43,6 +43,12 @@ engine.setMode("muhenkan");
 assert.equal(engine.key("KeyA").consumed, false);
 assert.equal(engine.key("IntlRo").commit, "\\");
 assert.equal(engine.key("IntlRo", { shift: true }).commit, "_");
+// bada roman (15): a romaji shortcut mixed with Korean spelling ranks first (seigong 성공)
+engine.applySettings({ enabled: [15] });
+engine.setMode("henkan");
+r = type(letters("seigong"));
+assert.equal(r.last.preedit, "성공");
+engine.flush();
 // Catalog
 const cat = engine.catalog();
 assert.ok(cat.layouts.some(l => l.id === 13) && cat.actions.length > 5);

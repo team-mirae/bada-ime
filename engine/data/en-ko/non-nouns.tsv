@@ -1,0 +1,3685 @@
+# bada ime: English -> Korean dictionary, non-noun words (verbs, adjectives, adverbs).
+# Set aside when common.tsv was restricted to nouns: NOT built, kept for a possible later use.
+# Columns (tab-separated): english<TAB>korean<TAB>hangul<TAB>pos (same as common.tsv before the noun pass)
+#   hangul: established spelling first; otherwise as it sounds, /æ/ as ㅔ (not 외래어 표기법)
+ask	묻다, 물어보다, 요청하다	에스크	verb
+away	멀리, 떨어져	어웨이	adv
+bad	나쁘다, 나쁜	배드	adj
+good	좋다, 좋은, 착한	굿	adj
+big	크다, 큰	빅	adj
+think	생각하다, 생각	싱크	verb
+buy	사다, 구매하다	바이	verb
+come	오다	컴	verb
+easy	쉽다, 쉬운	이지	adj
+enough	충분하다, 충분히, 충분한	이너프	adj,adv
+far	멀다, 먼, 멀리	파	adj,adv
+few	몇몇, 적은	퓨	adj
+find	찾다, 발견하다	파인드	verb
+get	얻다, 받다, 가져오다	겟	verb
+give	주다	기브	verb
+go	가다	고	verb
+great	대단하다, 훌륭한, 큰	그레이트	adj
+keep	유지하다, 지키다, 계속하다	킵	verb
+know	알다	노	verb
+last	마지막, 지난, 지속되다	라스트	adj,verb
+like	좋아하다	라이크	verb
+little	작은, 조금	리틀	adj
+long	길다, 긴	롱	adj
+make	만들다	메이크	verb
+many	많다, 많은	메니	adj
+maybe	아마, 어쩌면	메이비	adv
+mean	의미하다, 뜻하다, 못된	민	verb,adj
+more	더	모어	adv,adj
+most	가장, 대부분	모스트	adv,adj
+much	많이, 많은	머치	adv,adj
+new	새로운, 새	뉴	adj
+next	다음, 다음의	넥스트	adj
+now	지금, 이제	나우	adv
+once	한번, 한때	원스	adv
+put	놓다, 두다, 넣다	풋	verb
+quite	꽤, 상당히	콰이트	adv
+ready	준비된, 준비되다	레디	adj
+really	정말, 진짜	리얼리	adv
+say	말하다	세이	verb
+see	보다	시	verb
+soon	곧, 금방	순	adv
+sure	확실하다, 물론	슈어	adj,adv
+take	가져가다, 잡다, 타다	테이크	verb
+tell	말하다, 알려주다	텔	verb
+together	함께, 같이	투게더	adv
+want	원하다	원트	verb
+able	가능한, 유능한	에이블	adj
+eat	먹다	이트	verb
+speak	말하다	스피크	verb
+hear	듣다	히어	verb
+probably	아마	프로버블리	adv
+believe	믿다	빌리브	verb
+happy	행복하다, 행복한, 기쁜	해피	adj
+hard	어렵다, 단단하다, 열심히	하드	adj,adv
+happen	일어나다, 생기다	헤픈	verb
+understand	이해하다	언더스텐드	verb
+read	읽다	리드	verb
+late	늦다, 늦은, 늦게	레이트	adj,adv
+wrong	틀리다, 잘못된, 틀린	롱	adj
+alone	혼자, 홀로	얼론	adv,adj
+lose	잃다, 지다	루즈	verb
+large	크다, 큰	라지	adj
+pretty	예쁘다, 예쁜, 꽤	프리티	adj,adv
+afraid	두렵다, 무섭다	어프레이드	adj
+remember	기억하다	리멤버	verb
+learn	배우다	런	verb
+teach	가르치다	티치	verb
+available	사용가능한, 가능한	어베일러블	adj
+seem	보이다	심	verb
+almost	거의	올모스트	adv
+early	일찍, 이른, 이르다	얼리	adv,adj
+busy	바쁘다, 바쁜	비지	adj
+beautiful	아름답다, 아름다운	뷰티풀	adj
+suppose	생각하다, 가정하다	서포즈	verb
+decide	결정하다	디사이드	verb
+high	높다, 높은	하이	adj
+marry	결혼하다	메리	verb
+different	다르다, 다른	디퍼런트	adj
+meet	만나다	미트	verb
+young	젊다, 어린, 젊은	영	adj
+small	작다, 작은	스몰	adj
+tired	피곤하다, 피곤한	타이어드	adj
+important	중요하다, 중요한	임포턴트	adj
+whole	전체, 전부, 온	홀	adj
+true	사실인, 진짜, 참	트루	adj
+send	보내다	센드	verb
+become	되다	비컴	verb
+difficult	어렵다, 어려운	디피컬트	adj
+enjoy	즐기다	엔조이	verb
+die	죽다	다이	verb
+usually	보통, 대개	유주얼리	adv
+actually	사실, 실제로	엑추얼리	adv
+possible	가능하다, 가능한	파서블	adj
+hurt	다치다, 아프다, 상처	허트	verb,adj
+wear	입다, 쓰다, 신다	웨어	verb
+write	쓰다	라이트	verb
+sick	아프다, 아픈	식	adj
+glad	기쁘다, 기쁜	글레드	adj
+spend	쓰다, 보내다	스펜드	verb
+close	닫다, 가까운	클로즈	verb,adj
+bring	가져오다, 데려오다	브링	verb
+forget	잊다	포겟	verb
+full	가득한, 배부르다	풀	adj
+perfect	완벽하다, 완벽한	퍼펙트	adj
+angry	화나다, 화난	앵그리	adj
+correct	맞다, 정확한, 고치다	코렉트	adj,verb
+exactly	정확히	이그젝틀리	adv
+born	태어나다, 태어난	본	adj
+begin	시작하다	비긴	verb
+quickly	빨리	퀴클리	adv
+sometimes	가끔, 때때로	섬타임스	adv
+sit	앉다	싯	verb
+fast	빠르다, 빠른, 빨리	패스트	adj,adv
+several	여러, 몇몇	세버럴	adj
+arrive	도착하다	어라이브	verb
+dead	죽은	데드	adj
+hungry	배고프다, 배고픈	헝그리	adj
+scared	무섭다, 겁먹은	스케어드	adj
+allow	허락하다, 허용하다	얼라우	verb
+finally	마침내, 결국	파이널리	adv
+catch	잡다	캐치	verb
+completely	완전히	컴플리틀리	adv
+add	더하다, 추가하다	애드	verb
+clean	깨끗하다, 깨끗한, 청소하다	클린	adj,verb
+prefer	선호하다	프리퍼	verb
+sing	노래하다	싱	verb
+alright	괜찮다	올라이트	adj
+listen	듣다	리슨	verb
+agree	동의하다	어그리	verb
+expect	기대하다, 예상하다	익스펙트	verb
+instead	대신	인스테드	adv
+strong	강하다, 강한, 튼튼한	스트롱	adj
+stupid	멍청하다, 바보같은	스튜피드	adj
+asleep	잠든	어슬립	adj
+short	짧다, 짧은, 키작은	쇼트	adj
+careful	조심하다, 조심스러운	케어풀	adj
+shoot	쏘다	슛	verb
+intelligent	똑똑하다, 지능적인	인텔리전트	adj
+strange	이상하다, 이상한	스트레인지	adj
+immediately	즉시, 바로	이미디어틀리	adv
+poor	가난하다, 가난한, 불쌍한	푸어	adj
+expensive	비싸다, 비싼	익스펜시브	adj
+miss	그리워하다, 놓치다	미스	verb
+serious	심각하다, 진지한	시리어스	adj
+hold	잡다, 들다	홀드	verb
+cry	울다	크라이	verb
+quiet	조용하다, 조용한	콰이엇	adj
+realize	깨닫다	리얼라이즈	verb
+mad	화난, 미친	매드	adj
+dangerous	위험하다, 위험한	데인저러스	adj
+certain	확실한, 특정한	서튼	adj
+ahead	앞에, 앞으로	어헤드	adv
+admit	인정하다	어드밋	verb
+explain	설명하다	익스플레인	verb
+crazy	미친, 미치다	크레이지	adj
+tall	키가큰, 높은	톨	adj
+quit	그만두다	큇	verb
+sell	팔다	셀	verb
+fix	고치다	픽스	verb
+upset	속상하다, 화난	업셋	adj
+lucky	운좋은, 행운의	러키	adj
+deep	깊다, 깊은	딥	adj
+famous	유명하다, 유명한	페이머스	adj
+save	구하다, 저장하다, 아끼다	세이브	verb
+suddenly	갑자기	서든리	adv
+definitely	확실히, 분명히	데피니틀리	adv
+invite	초대하다	인바이트	verb
+common	흔하다, 흔한, 공통의	커먼	adj
+nervous	긴장하다, 긴장한, 불안한	너버스	adj
+proud	자랑스럽다, 자랑스러운	프라우드	adj
+hurry	서두르다	허리	verb
+huge	거대하다, 거대한	휴지	adj
+shut	닫다	셧	verb
+popular	인기있는, 대중적인	파퓰러	adj
+funny	웃기다, 재미있는, 웃긴	퍼니	adj
+pull	당기다	풀	verb
+grow	자라다, 키우다	그로우	verb
+wash	씻다, 빨다	워시	verb
+forward	앞으로	포워드	adv
+alive	살아있는	얼라이브	adj
+receive	받다	리시브	verb
+refuse	거절하다	리퓨즈	verb
+sad	슬프다, 슬픈	새드	adj
+necessary	필요하다, 필요한	네서서리	adj
+prepare	준비하다	프리페어	verb
+recently	최근에	리슨틀리	adv
+throw	던지다	스로우	verb
+heavy	무겁다, 무거운	헤비	adj
+absolutely	절대적으로, 완전히	엡설루틀리	adv
+steal	훔치다	스틸	verb
+avoid	피하다	어보이드	verb
+ill	아프다, 아픈	일	adj
+consider	고려하다	컨시더	verb
+certainly	확실히, 물론	서튼리	adv
+foreign	외국의, 외국	포린	adj
+terrible	끔찍하다, 끔찍한	테리블	adj
+straight	똑바로, 곧은, 직진	스트레이트	adj,adv
+unfortunately	불행히도, 안타깝게도	언포처너틀리	adv
+injure	부상당하다	인저	verb
+extremely	극도로, 매우	익스트림리	adv
+hardly	거의, 좀처럼	하들리	adv
+regular	정기적인, 보통의	레귤러	adj
+warm	따뜻하다, 따뜻한	웜	adj
+wonderful	멋지다, 훌륭한	원더풀	adj
+convince	설득하다, 확신시키다	컨빈스	verb
+easily	쉽게	이질리	adv
+confirm	확인하다	컨펌	verb
+accept	받아들이다, 수락하다	억셉트	verb
+slowly	천천히	슬로울리	adv
+choose	고르다, 선택하다	추즈	verb
+entire	전체의	인타이어	adj
+carry	들고가다, 나르다	캐리	verb
+reach	도달하다, 닿다	리치	verb
+impossible	불가능하다, 불가능한	임파서블	adj
+hide	숨기다, 숨다	하이드	verb
+aware	알고있는	어웨어	adj
+complete	완료하다, 완전한	컴플리트	verb,adj
+personal	개인적인, 개인	퍼스널	adj
+low	낮다, 낮은	로우	adj
+seriously	진지하게, 심각하게	시리어슬리	adv
+empty	비다, 빈, 비어있는	엠프티	adj
+protect	보호하다, 지키다	프로텍트	verb
+continue	계속하다	컨티뉴	verb
+join	가입하다, 참여하다	조인	verb
+enter	들어가다, 입력하다	엔터	verb
+due	예정된, 마감인	듀	adj
+manage	관리하다, 해내다	메니지	verb
+fresh	신선하다, 신선한	프레시	adj
+perhaps	아마	퍼헵스	adv
+normal	보통의, 정상적인	노멀	adj
+wake	깨다, 깨우다	웨이크	verb
+fail	실패하다	페일	verb
+borrow	빌리다	바로우	verb
+sleepy	졸리다, 졸린	슬리피	adj
+solve	풀다, 해결하다	솔브	verb
+weird	이상하다, 이상한	위어드	adj
+eventually	결국	이벤추얼리	adv
+confuse	혼동하다	컨퓨즈	verb
+fill	채우다	필	verb
+carefully	조심스럽게, 신중히	케어풀리	adv
+national	국가의, 국립	내셔널	adj
+honest	정직하다, 솔직한	어니스트	adj
+locate	찾다, 위치하다	로케이트	verb
+appreciate	감사하다, 감상하다	어프리시에이트	verb
+thin	얇다, 마른, 얇은	신	adj
+international	국제, 국제적인	인터내셔널	adj
+calm	차분하다, 침착한	캄	adj
+healthy	건강하다, 건강한	헬시	adj
+excited	신나다, 흥분한	익사이티드	adj
+hang	걸다, 매달다	행	verb
+afford	여유가있다, 감당하다	어포드	verb
+dirty	더럽다, 더러운	더티	adj
+excellent	훌륭하다, 우수한	엑설런트	adj
+economic	경제적, 경제의	이코노믹	adj
+disappoint	실망시키다	디서포인트	verb
+jealous	질투하다, 질투하는	젤러스	adj
+involve	포함하다, 관련되다	인볼브	verb
+twice	두번	트와이스	adv
+translate	번역하다	트렌슬레이트	verb
+awake	깨어있는	어웨이크	adj
+boring	지루하다, 지루한	보링	adj
+lonely	외롭다, 외로운	론리	adj
+interesting	재미있다, 흥미로운	인터레스팅	adj
+awesome	굉장하다, 멋진	어썸	adj
+slow	느리다, 느린	슬로	adj
+intend	의도하다	인텐드	verb
+delicious	맛있다, 맛있는	딜리셔스	adj
+currently	현재	커런틀리	adv
+amazing	놀랍다, 놀라운	어메이징	adj
+political	정치적인, 정치의	폴리티컬	adj
+friendly	친절하다, 친근한	프렌들리	adj
+forgive	용서하다	포기브	verb
+loud	시끄럽다, 시끄러운	라우드	adj
+suggest	제안하다	서제스트	verb
+exist	존재하다	이그지스트	verb
+quick	빠르다, 빠른	퀵	adj
+discover	발견하다	디스커버	verb
+usual	보통의, 평소의	유주얼	adj
+guilty	유죄인, 죄책감	길티	adj
+impress	감동시키다	임프레스	verb
+comfortable	편하다, 편안한	컴포터블	adj
+obviously	분명히, 당연히	오비어슬리	adv
+lend	빌려주다	렌드	verb
+apologize	사과하다	어폴러자이즈	verb
+responsible	책임있는, 책임이있다	리스판서블	adj
+abroad	해외, 해외로	어브로드	adv
+require	필요로하다, 요구하다	리콰이어	verb
+nearly	거의	니어리	adv
+clearly	분명히	클리어리	adv
+similar	비슷하다, 비슷한	시밀러	adj
+barely	간신히, 거의	베얼리	adv
+anyway	어쨌든	애니웨이	adv
+count	세다	카운트	verb
+advise	조언하다	어드바이즈	verb
+further	더, 더나아가	퍼더	adv,adj
+western	서양의, 서부의	웨스턴	adj
+imagine	상상하다	이매진	verb
+shy	수줍다, 수줍은	샤이	adj
+attend	참석하다	어텐드	verb
+totally	완전히	토탈리	adv
+forever	영원히	포에버	adv
+recognize	알아보다, 인정하다	레코그나이즈	verb
+shortly	곧	쇼틀리	adv
+silent	조용한, 침묵하는	사일런트	adj
+innocent	무죄인, 순진한	이노센트	adj
+pretend	척하다	프리텐드	verb
+deny	부인하다, 거부하다	디나이	verb
+wet	젖다, 젖은	웻	adj
+improve	개선하다, 향상시키다	임프루브	verb
+discuss	논의하다, 토론하다	디스커스	verb
+ancient	고대의	에인션트	adj
+satisfy	만족시키다	세티스파이	verb
+apparently	보아하니, 듣자하니	어페런틀리	adv
+remain	남다	리메인	verb
+rude	무례하다, 무례한	루드	adj
+bright	밝다, 밝은	브라이트	adj
+grab	잡다, 붙잡다	그랩	verb
+appear	나타나다	어피어	verb
+hire	고용하다	하이어	verb
+wise	현명하다, 현명한	와이즈	adj
+simply	그냥, 단순히	심플리	adv
+successful	성공적인	석세스풀	adj
+apart	떨어져	어파트	adv
+lately	최근에	레이틀리	adv
+unhappy	불행하다, 불행한	언해피	adj
+include	포함하다	인클루드	verb
+truly	진심으로, 정말로	트룰리	adv
+recommend	추천하다	리코멘드	verb
+embarrassed	당황하다, 창피하다	임베러스트	adj
+succeed	성공하다	석시드	verb
+fairly	꽤, 공정하게	페어리	adv
+badly	심하게, 나쁘게	베들리	adv
+create	만들다, 창조하다	크리에이트	verb
+nearby	근처, 근처의	니어바이	adj,adv
+handsome	잘생기다, 잘생긴	핸섬	adj
+cheap	싸다, 싼	칩	adj
+useful	유용하다, 유용한	유스풀	adj
+complicated	복잡하다, 복잡한	컴플리케이티드	adj
+exhausted	지치다, 지친	이그조스티드	adj
+weak	약하다, 약한	위크	adj
+punish	벌하다, 처벌하다	퍼니시	verb
+absent	결석한, 없는	엡선트	adj
+seldom	좀처럼, 드물게	셀덤	adv
+determine	결정하다	디터민	verb
+curious	궁금하다, 호기심많은	큐리어스	adj
+obvious	분명하다, 분명한, 뻔한	오비어스	adj
+provide	제공하다	프로바이드	verb
+rarely	드물게, 좀처럼	레어리	adv
+highly	매우, 높이	하이리	adv
+perfectly	완벽하게	퍼펙틀리	adv
+abandon	버리다, 포기하다	어벤던	verb
+medical	의료, 의학의	메디컬	adj
+desperate	절박하다, 필사적인	데스퍼릿	adj
+disappear	사라지다	디서피어	verb
+ugly	못생기다, 못생긴	어글리	adj
+lazy	게으르다, 게으른	레이지	adj
+solar	태양의, 태양	솔라	adj
+thirsty	목마르다, 목마른	서스티	adj
+express	표현하다	익스프레스	verb
+pregnant	임신한	프레그넌트	adj
+prove	증명하다	프루브	verb
+commit	저지르다, 약속하다	커밋	verb
+belong	속하다	빌롱	verb
+survive	살아남다, 생존하다	서바이브	verb
+owe	빚지다	오	verb
+thick	두껍다, 두꺼운	식	adj
+suffer	고통받다, 겪다	서퍼	verb
+fully	완전히	풀리	adv
+suspicious	의심스럽다, 수상한	서스피셔스	adj
+pour	붓다, 따르다	포	verb
+assume	가정하다, 추정하다	어슘	verb
+destroy	파괴하다	디스트로이	verb
+mention	언급하다	멘션	verb
+constantly	끊임없이	컨스턴틀리	adv
+particular	특정한, 특별한	파티큘러	adj
+accuse	비난하다, 고발하다	어큐즈	verb
+especially	특히	이스페셜리	adv
+prevent	막다, 예방하다	프리벤트	verb
+various	다양한	베리어스	adj
+familiar	익숙하다, 익숙한	퍼밀리어	adj
+depressed	우울하다, 우울한	디프레스트	adj
+retire	은퇴하다	리타이어	verb
+warn	경고하다	원	verb
+remove	제거하다, 없애다	리무브	verb
+annoying	짜증나다, 짜증나는	어노잉	adj
+religious	종교적인	릴리저스	adj
+powerful	강력하다, 강력한	파워풀	adj
+develop	개발하다, 발전하다	디벨롭	verb
+motivate	동기부여하다	모티베이트	verb
+horrible	끔찍하다, 끔찍한	호러블	adj
+dare	감히	데어	verb
+climb	오르다, 등산하다	클라임	verb
+complain	불평하다	컴플레인	verb
+confident	자신있는, 자신감있는	컨피던트	adj
+draw	그리다	드로우	verb
+possibly	아마	파서블리	adv
+capable	유능한	케이퍼블	adj
+relate	관련시키다, 공감하다	릴레이트	verb
+dear	친애하는, 사랑하는	디어	adj
+grateful	감사하다, 고마운	그레이트풀	adj
+adopt	입양하다, 채택하다	어돕트	verb
+anytime	언제든지	애니타임	adv
+deliver	배달하다	딜리버	verb
+entirely	완전히	인타이어리	adv
+properly	제대로	프로펄리	adv
+ashamed	부끄럽다, 부끄러운	어셰임드	adj
+reluctant	꺼리는, 마지못한	릴럭턴트	adj
+bake	굽다	베이크	verb
+deeply	깊이, 깊게	디플리	adv
+surround	둘러싸다	서라운드	verb
+relax	쉬다, 휴식하다, 긴장풀다	릴랙스	verb
+introduce	소개하다, 도입하다	인트로듀스	verb
+uncomfortable	불편한, 불편하다	언컴포터블	adj
+traditional	전통적인, 전통	트레디셔널	adj
+brave	용감한, 용감하다	브레이브	adj
+depend	의존하다, 달려있다	디펜드	verb
+persuade	설득하다	퍼스웨이드	verb
+someday	언젠가	섬데이	adv
+polite	예의바른, 공손한, 정중한	폴라이트	adj
+illegal	불법, 불법적인	일리걸	adj
+specific	구체적인, 특정한	스페시픽	adj
+terrify	겁주다	테리파이	verb
+active	활동적인, 적극적인, 활발한	액티브	adj
+bury	묻다, 매장하다	베리	verb
+threaten	위협하다, 협박하다	스레튼	verb
+burst	터지다, 터뜨리다	버스트	verb
+ignore	무시하다	이그노어	verb
+seek	찾다, 구하다	시크	verb
+scary	무서운, 무섭다	스케어리	adj
+anxious	불안한, 걱정하는	엥크셔스	adj
+directly	직접, 바로	디렉틀리	adv
+otherwise	아니면	아더와이즈	adv
+argue	다투다, 주장하다, 논쟁하다	아규	verb
+mistaken	잘못된, 틀린	미스테이컨	adj
+defend	방어하다, 지키다, 변호하다	디펜드	verb
+swear	맹세하다, 욕하다	스웨어	verb
+generally	일반적으로, 대체로	제너럴리	adv
+northern	북쪽의, 북부	노던	adj
+engage	참여하다, 약혼하다, 관여하다	인게이지	verb
+apply	지원하다, 적용하다, 바르다	어플라이	verb
+quietly	조용히	콰이어틀리	adv
+reasonable	합리적인, 적당한	리즈너블	adj
+accidentally	실수로, 우연히	엑시덴탈리	adv
+repeat	반복하다, 되풀이하다	리피트	verb
+remind	상기시키다	리마인드	verb
+urgent	긴급한, 급한	어전트	adj
+central	중앙의, 중심	센트럴	adj
+celebrate	축하하다, 기념하다	셀러브레이트	verb
+financial	재정적인, 금융, 재무	파이낸셜	adj
+aggressive	공격적인, 적극적인	어그레시브	adj
+recent	최근의, 최근	리센트	adj
+describe	묘사하다, 설명하다	디스크라이브	verb
+gather	모이다, 모으다	게더	verb
+pleasant	즐거운, 쾌적한, 상냥한	플레즌트	adj
+wealthy	부유한, 부자인	웰시	adj
+fluent	유창한	플루언트	adj
+replace	교체하다, 대신하다, 바꾸다	리플레이스	verb
+sudden	갑작스러운, 갑작스럽다	서든	adj
+strict	엄격한, 엄하다	스트릭트	adj
+fantastic	환상적인, 멋진	판타스틱	adj
+helpful	도움되는, 유용한	헬프풀	adj
+false	거짓의, 틀린, 가짜	폴스	adj
+correctly	정확하게, 올바르게	커렉틀리	adv
+elect	선출하다, 뽑다	일렉트	verb
+foolish	어리석은	풀리시	adj
+cultural	문화적인, 문화	컬처럴	adj
+equal	같은, 동등한, 평등한	이퀄	adj
+achieve	이루다, 달성하다, 성취하다	어치브	verb
+contain	포함하다, 담다	컨테인	verb
+tiny	작은	타이니	adj
+awful	끔찍한, 지독한	오펄	adj
+pray	기도하다, 빌다	프레이	verb
+announce	발표하다, 알리다	어나운스	verb
+differently	다르게	디퍼런틀리	adv
+particularly	특히	퍼티큘러리	adv
+valuable	귀중한, 소중한, 가치있는	벨류어블	adj
+attractive	매력적인	어트렉티브	adj
+cancel	취소하다	캔슬	verb
+unusual	특이한, 드문, 이상한	언유주얼	adj
+yell	소리치다, 고함치다	옐	verb
+golden	황금의, 금빛	골든	adj
+grand	웅장한, 대	그랜드	adj
+wherever	어디든지	웨어에버	adv
+earn	벌다, 얻다	언	verb
+multiple	여러, 다수의, 복수	멀티플	adj
+regularly	정기적으로, 규칙적으로	레귤러리	adv
+therefore	그러므로, 따라서	데어포어	adv
+eager	열망하는, 간절한	이거	adj
+narrow	좁은, 좁다	네로우	adj
+mostly	대부분, 주로	모스틀리	adv
+organize	정리하다, 조직하다, 준비하다	오거나이즈	verb
+optimistic	낙관적인, 긍정적인	옵티미스틱	adj
+insist	주장하다, 고집하다	인시스트	verb
+nowadays	요즘, 요즈음	나우어데이즈	adv
+silly	어리석은, 유치한	실리	adj
+aside	옆으로, 따로	어사이드	adv
+occur	일어나다, 발생하다	어커	verb
+select	선택하다, 고르다	셀렉트	verb
+pale	창백한, 옅은	페일	adj
+ridiculous	터무니없는, 우스꽝스러운	리디큘러스	adj
+independent	독립적인, 독립된	인디펜던트	adj
+produce	생산하다, 만들다	프로듀스	verb
+odd	이상한, 홀수의	오드	adj
+toss	던지다	토스	verb
+miserable	비참한, 불행한	미저러블	adj
+slip	미끄러지다	슬립	verb
+frustrate	좌절시키다	프러스트레이트	verb
+generous	관대한, 너그러운	제너러스	adj
+publish	출판하다, 발행하다, 게시하다	퍼블리시	verb
+frequently	자주, 빈번하게	프리퀀틀리	adv
+attract	끌다, 끌어들이다	어트렉트	verb
+compare	비교하다	컴페어	verb
+furious	격노한	퓨리어스	adj
+legal	법적인, 합법적인	리걸	adj
+tend	돌보다	텐드	verb
+nuclear	핵, 원자력	뉴클리어	adj
+inform	알리다, 통지하다	인폼	verb
+slightly	약간, 조금	슬라이틀리	adv
+exact	정확한	이그젝트	adj
+stubborn	고집센, 완고한	스터번	adj
+amuse	웃기다	어뮤즈	verb
+loudly	큰소리로, 시끄럽게	라우들리	adv
+scare	겁주다	스케어	verb
+electric	전기의, 전기	일렉트릭	adj
+normally	보통, 일반적으로	노멀리	adv
+ordinary	평범한, 보통의	오디너리	adj
+southern	남쪽의, 남부	서던	adj
+allergic	알레르기, 알레르기성	엘러직	adj
+scientific	과학적인	사이언티픽	adj
+violent	폭력적인, 격렬한	바이올런트	adj
+discourage	낙담시키다, 단념시키다	디스커리지	verb
+effective	효과적인	이펙티브	adj
+obey	따르다, 복종하다	오베이	verb
+tempt	유혹하다	템프트	verb
+massive	거대한, 엄청난	메시브	adj
+dumb	멍청한	덤	adj
+personally	개인적으로, 직접	퍼스널리	adv
+pure	순수한	퓨어	adj
+careless	부주의한, 경솔한	케어리스	adj
+convert	전환하다, 바꾸다, 개종하다	컨버트	verb
+deaf	귀먹은, 청각장애의	데프	adj
+behave	행동하다, 처신하다	비헤이브	verb
+admire	존경하다, 감탄하다	어드마이어	verb
+communicate	소통하다, 의사소통하다	커뮤니케이트	verb
+heavily	심하게, 많이	헤빌리	adv
+skeptical	회의적인	스켑티컬	adj
+breathe	숨쉬다, 호흡하다	브리드	verb
+freeze	얼다, 얼리다	프리즈	verb
+unknown	미지의	언노운	adj
+bound	묶인, 경계	바운드	adj,noun
+betray	배신하다	비트레이	verb
+reduce	줄이다, 감소시키다	리듀스	verb
+teenage	십대의	틴에이지	adj
+invent	발명하다	인벤트	verb
+significant	중요한, 상당한	시그니피컨트	adj
+sunny	화창한, 맑은	서니	adj
+emotional	감정적인, 감성적인	이모셔널	adj
+useless	쓸모없는	유스리스	adj
+incredible	놀라운, 엄청난	인크레더블	adj
+surely	확실히, 분명히	슈어리	adv
+hesitant	망설이는, 주저하는	헤지턴트	adj
+reject	거절하다, 거부하다	리젝트	verb
+respond	응답하다, 대답하다, 반응하다	리스폰드	verb
+raw	날것의, 생	로	adj
+cruel	잔인한	크루얼	adj
+rely	의지하다, 의존하다	릴라이	verb
+severe	심각한, 심한, 엄한	시비어	adj
+beg	빌다, 구걸하다, 애원하다	베그	verb
+loose	헐거운, 느슨한	루스	adj
+obsess	집착하다	옵세스	verb
+separate	분리하다, 별개의, 따로	세퍼레이트	adj,verb
+vain	헛된, 허영심이많은	베인	adj
+wooden	목재의	우든	adj
+noisy	시끄러운	노이지	adj
+overcome	극복하다, 이겨내다	오버컴	verb
+divide	나누다, 분할하다	디바이드	verb
+somewhat	약간, 다소	섬왓	adv
+indoor	실내의, 실내	인도어	adj
+irritate	자극하다	이리테이트	verb
+reveal	드러내다, 밝히다, 폭로하다	리빌	verb
+incredibly	엄청나게	인크레더블리	adv
+tow	견인하다	토	verb
+previous	이전의, 앞의	프리비어스	adj
+collect	모으다, 수집하다	컬렉트	verb
+fluently	유창하게	플루언틀리	adv
+closely	자세히, 밀접하게	클로슬리	adv
+literally	문자그대로	리터럴리	adv
+thus	따라서, 그러므로	더스	adv
+artificial	인공의, 인공	아티피셜	adj
+confess	고백하다, 자백하다	컨페스	verb
+affect	영향	어펙트	verb
+insane	미친, 정신나간	인세인	adj
+stab	찌르다	스텝	verb
+somehow	어떻게든, 왠지	섬하우	adv
+approximately	대략, 약	어프록시미틀리	adv
+explore	탐험하다, 탐구하다	익스플로어	verb
+selfish	이기적인	셀피시	adj
+impatient	조급한	임페이션트	adj
+resist	저항하다, 참다	레지스트	verb
+consist	구성되다, 이루어지다	컨시스트	verb
+painful	고통스러운, 아픈	페인풀	adj
+participate	참가하다, 참여하다	파티시페이트	verb
+relatively	비교적, 상대적으로	렐러티블리	adv
+unfair	불공평한, 부당한	언페어	adj
+sensitive	민감한, 예민한	센서티브	adj
+shout	외치다, 소리치다	샤우트	verb
+suspend	정지하다, 중단하다	서스펜드	verb
+connect	연결하다, 잇다	커넥트	verb
+fond	좋아하는	폰드	adj
+reliable	믿음직한, 확실한	릴라이어블	adj
+rainy	비오는	레이니	adj
+additional	추가의, 추가적인	어디셔널	adj
+settle	정착하다, 해결하다	세틀	verb
+spill	쏟다, 흘리다	스필	verb
+relieve	덜다, 안심시키다, 완화하다	릴리브	verb
+unlock	잠금해제하다, 열다	언락	verb
+bother	신경쓰다	바더	verb
+peaceful	평화로운	피스풀	adj
+appropriate	적절한, 알맞은	어프로프리에이트	adj
+dedicate	바치다, 헌신하다	데디케이트	verb
+rapidly	빠르게, 급속히	레피들리	adv
+vast	광대한, 막대한	베스트	adj
+recover	회복하다, 되찾다	리커버	verb
+arrogant	거만한, 오만한	에러건트	adj
+haunt	출몰하다, 괴롭히다	혼트	verb
+encourage	격려하다, 권장하다	인커리지	verb
+unemployed	실직한, 실업자	언임플로이드	adj
+arrange	정리하다, 배열하다, 준비하다	어레인지	verb
+resign	사임하다, 사직하다	리자인	verb
+safely	안전하게	세이플리	adv
+unlucky	불운한	언러키	adj
+greet	인사하다, 맞이하다	그리트	verb
+disagree	반대하다	디스어그리	verb
+maintain	유지하다	메인테인	verb
+overweight	과체중의	오버웨이트	adj
+propose	제안하다, 청혼하다	프로포즈	verb
+supreme	최고의	슈프림	adj
+terribly	몹시, 끔찍하게	테러블리	adv
+unexpected	예상치못한, 뜻밖의	언익스펙티드	adj
+decent	괜찮은, 품위있는	디센트	adj
+greatly	크게, 대단히	그레이틀리	adv
+declare	선언하다, 신고하다	디클레어	verb
+typical	전형적인, 일반적인	티피컬	adj
+bleed	피흘리다, 출혈하다	블리드	verb
+dizzy	어지러운	디지	adj
+drag	끌다, 드래그	드래그	verb
+drown	익사하다	드라운	verb
+accompany	동반하다, 동행하다	어컴퍼니	verb
+distant	먼, 멀리있는	디스턴트	adj
+brilliant	훌륭한, 빛나는, 뛰어난	브릴리언트	adj
+hopefully	바라건대, 희망적으로	호프풀리	adv
+inspire	고무하다	인스파이어	verb
+accurate	정확한	에큐럿	adj
+fascinate	매혹하다, 사로잡다	페서네이트	verb
+holy	신성한, 거룩한	홀리	adj
+mutual	상호의, 서로의	뮤추얼	adj
+slam	쾅닫다	슬램	verb
+bless	축복하다	블레스	verb
+wipe	닦다	와이프	verb
+convenient	편리한	컨비니언트	adj
+flee	도망치다, 달아나다	플리	verb
+infect	감염시키다	인펙트	verb
+naturally	자연스럽게, 당연히	네처럴리	adv
+sore	아픈, 쓰린	소어	adj
+civil	시민의, 민사의	시빌	adj
+delete	삭제하다, 지우다	딜리트	verb
+absolute	절대적인, 완전한	앱솔루트	adj
+eastern	동쪽의, 동부	이스턴	adj
+gorgeous	멋진	고저스	adj
+approve	승인하다, 찬성하다	어프루브	verb
+establish	설립하다, 확립하다	이스테블리시	verb
+conscious	의식하는, 의식적인	컨셔스	adj
+unconscious	무의식의	언컨셔스	adj
+contribute	기여하다, 공헌하다	컨트리뷰트	verb
+distract	방해하다	디스트렉트	verb
+practical	실용적인, 현실적인	프렉티컬	adj
+honestly	솔직히, 정직하게	어니스틀리	adv
+perform	공연하다, 수행하다	퍼폼	verb
+unlike	다른, 달리	언라이크	adj
+afterward	나중에, 그후에	에프터워드	adv
+luckily	다행히, 운좋게	러킬리	adv
+creepy	오싹한, 소름끼치는	크리피	adj
+instantly	즉시	인스턴틀리	adv
+precious	소중한, 귀중한	프레셔스	adj
+pry	캐묻다, 비틀어열다	프라이	verb
+rural	시골의, 농촌의	루럴	adj
+assure	보장하다, 장담하다	어슈어	verb
+elderly	나이든, 노인	엘더리	adj
+homesick	향수병의	홈식	adj
+naive	순진한	나이브	adj
+sympathetic	동정적인, 공감하는	심퍼세틱	adj
+environmental	환경의, 환경적인	인바이런멘털	adj
+bend	굽히다, 구부리다	벤드	verb
+gradually	점차, 서서히	그레주얼리	adv
+nasty	고약한, 불쾌한	네스티	adj
+suitable	적합한, 알맞은	수터블	adj
+fry	튀기다, 볶다	프라이	verb
+awkward	어색한	오쿼드	adj
+educate	교육하다	에듀케이트	verb
+gently	부드럽게, 살살	젠틀리	adv
+identify	확인하다, 식별하다	아이덴티파이	verb
+visible	보이는	비저블	adj
+attach	붙이다, 첨부하다	어테치	verb
+ambitious	야심있는, 야심찬	엠비셔스	adj
+fortunate	운좋은, 다행인	포처닛	adj
+extraordinary	특별한, 비범한	엑스트라오디너리	adj
+enormous	거대한, 막대한	이노머스	adj
+primary	주요한, 기본의, 초등의	프라이머리	adj
+academic	학문적인, 학업의	아카데믹	adj
+happily	행복하게	헤필리	adv
+numerous	많은, 수많은	뉴머러스	adj
+historical	역사적인, 역사의	히스토리컬	adj
+overnight	밤새, 하룻밤	오버나이트	adv
+sincere	진실한, 진심의	신시어	adj
+devote	바치다, 헌신하다	디보트	verb
+elsewhere	다른곳, 딴곳	엘스웨어	adv
+intense	강렬한, 극심한	인텐스	adj
+mysterious	신비한, 이상한	미스테리어스	adj
+remarkable	놀라운	리마커블	adj
+originally	원래, 본래	오리지널리	adv
+democratic	민주적인, 민주주의의	데모크레틱	adj
+examine	검사하다, 조사하다	이그제민	verb
+nod	끄덕이다	노드	verb
+diplomatic	외교의, 외교적인	디플로메틱	adj
+dislike	싫어하다	디스라이크	verb
+accomplish	이루다, 성취하다, 완수하다	어컴플리시	verb
+expose	노출하다, 폭로하다	익스포즈	verb
+jog	조깅하다	조그	verb
+occupy	차지하다, 점령하다	오큐파이	verb
+bare	맨, 벌거벗은	베어	adj
+concentrate	집중하다	칸센트레이트	verb
+glance	흘끗보다, 힐끗보다	글렌스	verb,noun
+impressive	인상적인	임프레시브	adj
+acceptable	허용되는	억셉터블	adj
+decorate	장식하다, 꾸미다	데코레이트	verb
+federal	연방의	페더럴	adj
+successfully	성공적으로	석세스풀리	adv
+hesitate	망설이다, 주저하다	헤지테이트	verb
+broad	넓은	브로드	adj
+competitive	경쟁적인, 경쟁력있는	컴피티티브	adj
+disturb	방해하다	디스터브	verb
+talkative	수다스러운	토커티브	adj
+secretly	몰래, 비밀리에	시크리틀리	adv
+vulnerable	취약한	벌너러블	adj
+harmful	해로운	함풀	adj
+observe	관찰하다, 지켜보다	옵저브	verb
+strongly	강하게, 강력히	스트롱리	adv
+alike	비슷한, 똑같이	얼라이크	adj
+kidnap	납치하다, 유괴하다	키드넵	verb
+stun	기절시키다	스턴	verb
+delicate	섬세한, 연약한	델리케이트	adj
+found	설립하다, 세우다	파운드	verb
+merely	단지, 그저	미어리	adv
+permanent	영구적인, 영원한	퍼머넌트	adj
+scold	꾸짖다, 혼내다	스콜드	verb
+everyday	일상의, 매일의	에브리데이	adj
+fold	접다	폴드	verb
+forbidden	금지된	포비든	adj
+necessarily	반드시, 필연적으로	네서세럴리	adv
+supportive	지지하는	서포티브	adj
+weigh	무게가나가다	웨이	verb
+tasty	맛있는	테이스티	adj
+regard	여기다, 간주하다	리가드	verb
+snore	코골다	스노어	verb
+widely	널리	와이들리	adv
+ensure	보장하다	인슈어	verb
+qualify	자격	퀄리파이	verb
+mere	단지, 단순한	미어	adj
+slap	때리다, 뺨때리다	슬랩	verb
+logical	논리적인	로지컬	adj
+picky	까다로운	피키	adj
+dependent	의존하는	디펜던트	adj
+harsh	가혹한, 혹독한	하시	adj
+indigenous	토착의, 원주민의	인디저너스	adj
+interrupt	방해하다, 끼어들다	인터럽트	verb
+smooth	매끄러운, 부드러운	스무스	adj
+react	반응하다	리액트	verb
+oppose	반대하다	어포즈	verb
+passionate	열정적인	페셔네이트	adj
+shine	빛나다, 비추다	샤인	verb
+deadly	치명적인	데들리	adj
+efficient	효율적인	이피션트	adj
+overwhelm	압도하다	오버웰름	verb
+awfully	몹시, 대단히	오플리	adv
+dig	파다	디그	verb
+heartbroken	비통한	하트브로큰	adj
+mainly	주로	메인리	adv
+pessimistic	비관적인	페시미스틱	adj
+valid	유효한, 타당한	벨리드	adj
+prohibit	금지하다	프로히비트	verb
+slight	약간의, 사소한	슬라이트	adj
+actual	실제의	엑추얼	adj
+isolate	고립시키다, 격리하다	아이솔레이트	verb
+pronounce	발음하다, 선언하다	프로나운스	verb
+rotten	썩은	로튼	adj
+starve	굶주리다, 굶다	스타브	verb
+mentally	정신적으로	멘탈리	adv
+cope	대처하다, 대응하다	코프	verb
+secure	안전한, 확보하다	시큐어	adj,verb
+expel	쫓아내다, 퇴학시키다	익스펠	verb
+fortunately	다행히	포처니틀리	adv
+dine	식사하다	다인	verb
+incorrect	틀린, 부정확한	인코렉트	adj
+basically	기본적으로	베이시컬리	adv
+ripe	익은, 잘익은	라이프	adj
+thoroughly	철저히	서럴리	adv
+backward	뒤로, 거꾸로	백워드	adv,adj
+bald	대머리의	볼드	adj
+physically	신체적으로, 물리적으로	피지컬리	adv
+beloved	사랑하는	빌러비드	adj
+eternal	영원한	이터널	adj
+annual	연간의, 매년의	에뉴얼	adj
+faint	기절하다, 희미한	페인트	verb,adj
+skim	훑어보다	스킴	verb
+risky	위험한	리스키	adj
+tolerate	참다, 용인하다	톨러레이트	verb
+domestic	국내의, 가정의	도메스틱	adj
+immediate	즉각적인	이미디어트	adj
+practically	사실상, 거의, 실제로	프렉티컬리	adv
+spoil	망치다, 버릇없게만들다, 상하다	스포일	verb
+cautious	조심스러운, 신중한, 조심스럽다	코셔스	adj
+rip	찢다, 뜯다	립	verb
+technical	기술적, 기술의, 전문적	테크니컬	adj
+postpone	연기하다, 미루다	포스트폰	verb
+lower	낮추다, 내리다, 아래의	로어	verb,adj
+promote	홍보하다, 승진시키다, 촉진하다	프로모트	verb
+boil	끓이다, 끓다, 삶다	보일	verb
+cheerful	쾌활한, 명랑한, 밝은	치어풀	adj
+ignorant	무지한, 무식한	이그노런트	adj
+consult	상담하다, 상의하다, 참고하다	컨설트	verb
+temporary	임시, 일시적, 임시의	템포러리	adj
+desperately	필사적으로, 절실히, 몹시	데스퍼리틀리	adv
+greedy	욕심많은, 탐욕스러운	그리디	adj
+increasingly	점점, 점점더, 갈수록	인크리싱리	adv
+officially	공식적으로, 정식으로	오피셜리	adv
+sacred	신성한, 성스러운	세이크리드	adj
+appoint	임명하다, 지정하다	어포인트	verb
+overseas	해외, 해외의, 해외로	오버시스	adj,adv
+presidential	대통령의, 대선	프레지덴셜	adj
+punctual	정시의	펑크추얼	adj
+secondary	이차적, 부차적, 중등	세컨더리	adj
+corrupt	부패한, 타락한, 손상되다	커럽트	adj,verb
+extend	연장하다, 늘리다, 확장하다	익스텐드	verb
+occasionally	가끔, 때때로	오케이저널리	adv
+sarcastic	비꼬는, 빈정대는	사케스틱	adj
+tidy	깔끔한, 정돈하다, 깔끔하다	타이디	adj,verb
+explode	폭발하다, 터지다	익스플로드	verb
+misunderstand	오해하다	미스언더스텐드	verb
+uneasy	불안한, 불편한	언이지	adj
+fundamental	근본적, 기본적, 기초	펀더멘탈	adj
+rapid	빠른, 급속한	레피드	adj
+tightly	꽉, 단단히, 빽빽이	타이틀리	adv
+vanish	사라지다, 없어지다	베니시	verb
+compete	경쟁하다, 겨루다	컴피트	verb
+reflect	반영하다, 반사하다, 반성하다	리플렉트	verb
+regardless	상관없이, 관계없이	리가들리스	adv
+spiritual	영적, 정신적, 영적인	스피리츄얼	adj
+cloudy	흐린, 흐리다, 구름낀	클라우디	adj
+halfway	중간, 중간에, 도중에	하프웨이	adv,adj
+poorly	서툴게, 형편없이	푸어리	adv
+unaware	모르는	언어웨어	adj
+absorb	흡수하다, 빨아들이다	엡소브	verb
+behold	보다, 바라보다	비홀드	verb
+devastate	파괴하다	데버스테이트	verb
+diagnose	진단하다	다이에그노스	verb
+universal	보편적, 일반적, 전세계의	유니버셜	adj
+bloody	피투성이의, 피비린내나는	블러디	adj
+filthy	더러운, 불결한	필시	adj
+freely	자유롭게, 마음대로	프리리	adv
+kindly	친절하게, 친절한	카인들리	adv,adj
+severely	심하게, 엄하게	시비어리	adv
+emerge	나타나다, 등장하다, 드러나다	이머지	verb
+predict	예측하다, 예상하다	프리딕트	verb
+ticklish	간지럼타는, 간지러운	티클리시	adj
+unavailable	이용불가	언어베일러블	adj
+uncertain	불확실한, 확신이없는	언서튼	adj
+unpleasant	불쾌한, 불쾌하다	언플레전트	adj
+crawl	기어가다, 기다	크롤	verb
+investigate	조사하다, 수사하다	인베스티게이트	verb
+rub	문지르다, 비비다	럽	verb
+surprisingly	놀랍게도, 의외로	서프라이징리	adv
+absurd	터무니없는, 황당한, 부조리한	엡서드	adj
+elementary	초등, 기본적인, 초급	엘리멘터리	adj
+faithful	충실한, 성실한	페이스풀	adj
+paranoid	편집증, 피해망상	파라노이드	adj
+regional	지역의, 지역적	리저널	adj
+adorable	사랑스러운, 귀여운	어도러블	adj
+dull	지루한, 둔한, 무딘	덜	adj
+inherit	상속하다, 물려받다	인헤릿	verb
+enthusiastic	열정적인, 열광적인	인수지에스틱	adj
+proceed	진행하다, 계속하다, 나아가다	프로시드	verb
+wander	돌아다니다, 헤매다, 방황하다	원더	verb
+windy	바람부는, 바람이많은	윈디	adj
+assign	배정하다, 할당하다, 맡기다	어사인	verb
+beautifully	아름답게	뷰티풀리	adv
+hopeless	절망적인, 가망없는	호플리스	adj
+humiliate	모욕하다	휴밀리에이트	verb
+previously	이전에, 앞서	프리비어슬리	adv
+whatsoever	전혀, 조금도	왓소에버	adv
+civic	시민의, 시의	시빅	adj
+invisible	투명한	인비저블	adj
+humble	겸손한, 초라한	험블	adj
+sneak	몰래가다, 살금살금가다	스니크	verb
+sweep	쓸다, 청소하다	스위프	verb
+thankful	감사하는, 고마운	셍크풀	adj
+abusive	학대하는, 욕설의	어뷰시브	adj
+linguistic	언어의, 언어학의	링귀스틱	adj
+reluctantly	마지못해, 억지로	릴럭턴틀리	adv
+shallow	얕은, 얕다, 피상적인	셸로우	adj
+acquaint	알리다, 익히다	어퀘인트	verb
+agricultural	농업의, 농업	에그리컬처럴	adj
+sensible	현명한, 분별있는	센서블	adj
+softly	부드럽게, 조용히	소프틀리	adv
+disrespectful	무례한, 버릇없는	디스리스펙트풀	adj
+genuinely	진심으로, 진정으로	제뉴인리	adv
+interpret	해석하다, 통역하다	인터프리트	verb
+trustworthy	믿음직한, 신뢰	트러스트워디	adj
+inevitable	불가피한	이네비터블	adj
+merry	즐거운, 명랑한	메리	adj
+pursue	추구하다, 쫓다	퍼슈	verb
+roughly	대략, 거칠게	러플리	adv
+unfortunate	불행한, 유감스러운	언포처닛	adj
+adapt	적응하다, 각색하다	어뎁트	verb
+crucial	중요한, 결정적인	크루셜	adj
+heal	치유하다, 낫다, 치료하다	힐	verb
+lay	놓다, 눕히다, 낳다	레이	verb
+precisely	정확히, 바로	프리사이슬리	adv
+silently	조용히, 말없이	사일런틀리	adv
+aged	나이든, 숙성된	에이지드	adj
+diverse	다양한	다이버스	adj
+interfere	간섭하다, 방해하다	인터피어	verb
+oblige	돕다	어블라이지	verb
+adjust	조정하다, 맞추다, 적응하다	어저스트	verb
+electrical	전기의, 전기	일렉트리컬	adj
+salty	짠, 짜다	솔티	adj
+sufficient	충분한	서피션트	adj
+biological	생물학적, 생물의	바이올로지컬	adj
+countless	무수한	카운틀리스	adj
+deceive	속이다, 기만하다	디시브	verb
+invest	투자하다	인베스트	verb
+poisonous	독이있는, 유독한	포이즈너스	adj
+preserve	보존하다, 지키다, 보호하다	프리저브	verb
+represent	대표하다, 나타내다	리프레젠트	verb
+seize	붙잡다, 압수하다, 장악하다	시즈	verb
+steady	꾸준한, 안정된	스테디	adj
+submit	제출하다, 굴복하다	서브밋	verb
+suck	빨다, 형편없다	서크	verb
+commonly	흔히, 일반적으로	코먼리	adv
+equally	똑같이, 동등하게	이퀄리	adv
+fragile	깨지기쉬운, 연약한	프레질	adj
+peacefully	평화롭게	피스풀리	adv
+stare	쳐다보다, 응시하다	스테어	verb
+unnecessary	불필요한, 필요없는	언네서세리	adj
+worthy	가치있는, 자격있는	워디	adj
+cooperate	협력하다, 협조하다	코오퍼레이트	verb
+distinguish	구별하다, 구분하다	디스팅귀시	verb
+melt	녹다, 녹이다	멜트	verb
+execute	실행하다, 처형하다	엑시큐트	verb
+magnificent	웅장한, 멋진, 훌륭한	메그니피센트	adj
+squeeze	짜다, 쥐어짜다, 압박	스퀴즈	verb
+accommodate	수용하다, 숙박시키다	어코모데이트	verb
+atomic	원자의, 원자력	아토믹	adj
+chop	썰다, 다지다, 자르다	찹	verb
+expand	확장하다, 넓히다, 팽창하다	익스펜드	verb
+float	뜨다, 떠다니다	플로트	verb
+partly	부분적으로, 일부	파틀리	adv
+scatter	흩뿌리다, 흩어지다	스케터	verb
+fatal	치명적인, 치명적	페이탈	adj
+genuine	진짜의, 진품의, 진정한	제뉴인	adj
+magical	마법의, 마법같은	매지컬	adj
+productive	생산적인, 생산적	프로덕티브	adj
+slippery	미끄러운, 미끄럽다	슬리퍼리	adj
+steep	가파른, 가파르다	스티프	adj
+terrific	훌륭한, 굉장한	테리픽	adj
+astonish	놀래다	어스토니시	verb
+athletic	운동의, 체육의	애슬레틱	adj
+dense	밀집한, 빽빽한, 짙은	덴스	adj
+divine	신성한, 신의	디바인	adj
+endless	끝없는, 끝없다	엔드리스	adj
+fussy	까다로운	퍼시	adj
+loyal	충성스러운, 충실한	로얄	adj
+barefoot	맨발, 맨발로	베어풋	adj,adv
+criticize	비판하다, 비난하다	크리티사이즈	verb
+dismiss	해고하다, 묵살하다, 일축하다	디스미스	verb
+flexible	유연한, 융통성있는	플렉시블	adj
+frequent	잦은, 빈번한	프리퀀트	adj
+newly	새로, 최근에	뉴리	adv
+operate	작동하다, 운영하다, 수술하다	오퍼레이트	verb
+rocky	바위가많은	로키	adj
+sexually	성적으로	섹슈얼리	adv
+tease	놀리다	티즈	verb
+testify	증언하다	테스티파이	verb
+truthful	정직한, 진실한	트루스풀	adj
+confront	맞서다, 직면하다	컨프런트	verb
+differ	다르다	디퍼	verb
+internal	내부의, 내부, 국내의	인터널	adj
+outstanding	뛰어난, 훌륭한, 미결제의	아웃스텐딩	adj
+foster	위탁, 기르다, 육성하다	포스터	adj,verb
+genetic	유전의, 유전적	제네틱	adj
+inappropriate	부적절한	인어프로프리에이트	adj
+keen	열심인, 예리한, 날카로운	킨	adj
+largely	주로, 대체로	라지리	adv
+strangely	이상하게	스트레인질리	adv
+upcoming	다가오는, 곧있을	업커밍	adj
+briefly	잠깐, 간단히	브리플리	adv
+notify	알리다, 통지하다	노티파이	verb
+politely	정중하게, 공손히	폴라이틀리	adv
+startle	놀래다	스타틀	verb
+sustainable	지속가능한	서스테이너블	adj
+advertise	광고하다	에드버타이즈	verb
+employ	고용하다, 사용하다	임플로이	verb
+farther	더멀리, 더먼	파더	adv,adj
+icy	얼음같은, 얼어붙은, 차가운	아이시	adj
+magnetic	자기의, 자석의, 자성	마그네틱	adj
+mature	성숙한, 어른스러운, 성숙하다	머처	adj,verb
+overall	전반적인, 전체의, 전반적으로	오버롤	adj,adv
+significantly	상당히, 크게	시그니피컨틀리	adv
+smoothly	순조롭게, 부드럽게	스무슬리	adv
+sophisticated	세련된, 정교한	소피스티케이티드	adj
+artistic	예술적인, 예술의	아티스틱	adj
+dependable	믿음직한	디펜더블	adj
+impolite	무례한, 버릇없는	임폴라이트	adj
+reckless	무모한, 난폭한	레클리스	adj
+unsure	확신없는, 불확실한	언슈어	adj
+considerable	상당한	컨시더러블	adj
+dishonest	부정직한	디스어니스트	adj
+intentionally	의도적으로, 일부러	인텐셔널리	adv
+lightly	가볍게, 살짝	라이틀리	adv
+neat	깔끔한, 단정한, 멋진	니트	adj
+proven	입증된, 증명된	프루븐	adj
+refer	언급하다, 참조하다, 가리키다	리퍼	verb
+repeatedly	반복적으로, 되풀이하여	리피티들리	adv
+despise	경멸하다, 멸시하다	디스파이즈	verb
+distinct	뚜렷한, 별개의	디스팅트	adj
+fierce	사나운, 치열한, 격렬한	피어스	adj
+chew	씹다	츄	verb
+nonfat	무지방	논펫	adj
+evident	분명한, 명백한	에비던트	adj
+helpless	무력한, 속수무책의	헬플리스	adj
+identical	동일한, 똑같은	아이덴티컬	adj
+prior	이전의, 사전의	프라이어	adj
+radical	급진적, 급진적인, 근본적	레디컬	adj
+utterly	완전히, 전혀	어털리	adv
+messy	지저분한, 엉망인	메시	adj
+scarcely	거의없는, 간신히	스케어슬리	adv
+steer	조종하다	스티어	verb
+swollen	부은, 부어오른	스월런	adj
+automatically	자동으로, 자동적으로	오토메티컬리	adv
+gross	역겨운, 총	그로스	adj
+imaginary	상상의, 가상의	이메지너리	adj
+memorize	외우다, 암기하다	메모라이즈	verb
+naughty	버릇없는, 장난꾸러기의	노티	adj
+resolve	해결하다, 결심하다	리졸브	verb
+consume	소비하다, 섭취하다	컨슘	verb
+tragic	비극적인, 비극적	트레직	adj
+typically	일반적으로, 보통	티피컬리	adv
+corporate	기업의, 법인의	코퍼레이트	adj
+diligent	부지런한, 성실한	딜리전트	adj
+endanger	위험에빠뜨리다	인데인저	verb
+evict	쫓아내다, 퇴거시키다	이빅트	verb
+extinct	멸종한, 멸종된	익스팅트	adj
+grammatical	문법적, 문법의	그레머티컬	adj
+preferably	가급적, 되도록이면	프리퍼러블리	adv
+wag	흔들다	왜그	verb
+donate	기부하다, 기증하다	도네이트	verb
+gladly	기꺼이	글레들리	adv
+gullible	잘속는	걸리블	adj
+obedient	순종적인, 말잘듣는	오비디언트	adj
+deliberately	일부러, 고의로, 신중히	딜리버러틀리	adv
+grumpy	심술궂은, 투덜대는	그럼피	adj
+nervously	초조하게, 긴장해서	너버슬리	adv
+specifically	구체적으로, 특히	스페시피컬리	adv
+stressful	스트레스가많은	스트레스풀	adj
+strictly	엄격하게, 엄밀히	스트릭틀리	adv
+enjoyable	즐거운, 재미있는	엔조이어블	adj
+frankly	솔직히	프렝클리	adv
+infinite	무한한, 무한	인피니트	adj
+patiently	끈기있게	페이션틀리	adv
+regain	되찾다, 회복하다	리게인	verb
+altogether	완전히, 전부, 모두	올투게더	adv
+angrily	화나서, 성나서	엥그릴리	adv
+construct	건설하다, 구성하다	컨스트럭트	verb
+contagious	전염성의, 전염되는	컨테이저스	adj
+define	정의하다, 규정하다	디파인	verb
+emotionally	감정적으로, 정서적으로	이모셔널리	adv
+historic	역사적인, 역사적	히스토릭	adj
+indifferent	무관심한	인디퍼런트	adj
+sob	흐느끼다	소브	verb
+aboard	탑승한, 승선한	어보드	adv
+bang	쾅, 탕, 치다	뱅	noun,verb
+cozy	아늑한, 포근한	코지	adj
+pathetic	한심한, 불쌍한	퍼세틱	adj
+stiff	뻣뻣한, 딱딱한	스티프	adj
+stumble	비틀거리다, 넘어질뻔하다	스텀블	verb
+apt	적절한, 경향이있는	엡트	adj
+immune	면역의, 면역	이뮨	adj
+influential	영향력있는	인플루엔셜	adj
+stray	길잃은, 떠돌이	스트레이	adj,verb
+vague	모호한, 애매한	베이그	adj
+childish	유치한	차일디시	adj
+coastal	해안의, 연안	코스탈	adj
+dodge	피하다	도지	verb
+excessive	과도한, 지나친	익세시브	adj
+milky	우윳빛의	밀키	adj
+overhear	엿듣다, 우연히듣다	오버히어	verb
+acknowledge	인정하다	에크널리지	verb
+crave	갈망하다, 몹시원하다	크레이브	verb
+grasp	파악하다, 붙잡다	그레스프	verb
+hardworking	근면한, 열심히일하는	하드워킹	adj
+idle	게으른, 한가한, 놀고있는	아이들	adj
+legally	법적으로, 합법적으로	리걸리	adv
+obnoxious	불쾌한, 아주싫은	어브녹셔스	adj
+polar	극지의, 북극의	폴라	adj
+realistic	현실적인, 사실적인	리얼리스틱	adj
+timid	소심한, 겁많은	티미드	adj
+chilly	쌀쌀한, 쌀쌀하다	칠리	adj
+colonial	식민지의, 식민	콜로니얼	adj
+exaggerate	과장하다	이그제저레이트	verb
+fetch	가져오다	페치	verb
+impose	부과하다, 강요하다	임포즈	verb
+irresponsible	무책임한	이리스폰서블	adj
+partially	부분적으로	파셜리	adv
+stingy	인색한, 쩨쩨한	스틴지	adj
+transform	변형하다, 바꾸다	트랜스폼	verb
+unclear	불분명한	언클리어	adj
+controversial	논란이많은, 논쟁적인	컨트로버셜	adj
+firmly	단호하게, 굳게, 단단히	펌리	adv
+fulfill	이행하다, 성취하다, 충족시키다	풀필	verb
+intimidate	위협하다, 겁주다	인티미데이트	verb
+possess	소유하다, 가지다	퍼제스	verb
+seasonal	계절의, 계절적	시즈널	adj
+ultimately	결국, 궁극적으로	얼티미틀리	adv
+vaccinate	예방접종하다	벡시네이트	verb
+worthless	쓸모없는, 가치없는	워슬리스	adj
+bossy	거만한, 우두머리행세하는	보시	adj
+competent	유능한, 능숙한	컴피턴트	adj
+effectively	효과적으로	이펙티블리	adv
+elaborate	정교한, 자세히설명하다	일레버릿	adj,verb
+insecure	불안한, 불안정한	인시큐어	adj
+overly	지나치게, 너무	오벌리	adv
+primarily	주로	프라이메럴리	adv
+protective	보호하는, 보호의	프로텍티브	adj
+restore	복원하다, 회복하다, 복구하다	리스토어	verb
+acquire	획득하다, 얻다, 습득하다	어콰이어	verb
+disable	비활성화하다	디세이블	verb
+relevant	관련된, 적절한	렐러번트	adj
+edible	식용의	에디블	adj
+freshly	갓, 새로	프레슐리	adv
+openly	공개적으로, 드러내놓고	오픈리	adv
+brew	양조하다, 끓이다	브루	verb
+humid	습한, 눅눅한, 후덥지근한	휴미드	adj
+justify	정당화하다	저스티파이	verb
+obtain	얻다, 획득하다	옵테인	verb
+sadly	슬프게도, 안타깝게도	세들리	adv
+sticky	끈적끈적한, 끈적이는	스티키	adj
+tremble	떨다, 떨리다	트렘블	verb
+widespread	널리퍼진, 광범위한	와이드스프레드	adj
+accessible	접근가능한, 이용가능한	엑세서블	adj
+equip	갖추다, 장비하다	이큅	verb
+resemble	닮다	리젬블	verb
+restless	불안한, 들썩이는	레스틀리스	adj
+sew	바느질하다, 꿰매다	소	verb
+strive	노력하다, 애쓰다	스트라이브	verb
+descend	내려가다, 하강하다	디센드	verb
+oversleep	늦잠자다	오버슬립	verb
+violate	위반하다, 침해하다	바이올레이트	verb
+adore	아주좋아하다, 흠모하다	어도어	verb
+agitate	선동하다, 동요시키다	에지테이트	verb
+arise	생기다, 발생하다	어라이즈	verb
+bilingual	이중언어의, 이중언어사용자	바이링구얼	adj
+persistent	끈질긴, 지속적인	퍼시스턴트	adj
+stir	젓다, 휘젓다	스터	verb
+vary	다양하다, 다르다	베리	verb
+carve	조각하다, 새기다	카브	verb
+courageous	용감한	커레이저스	adj
+educational	교육적, 교육의	에듀케이셔널	adj
+equivalent	동등한, 상응하는	이퀴벌런트	adj,noun
+flip	뒤집다, 넘기다	플립	verb
+incompetent	무능한	인컴피턴트	adj
+invade	침략하다, 침입하다	인베이드	verb
+worthwhile	가치있는, 보람있는	워스와일	adj
+attentive	주의깊은, 세심한	어텐티브	adj
+combine	결합하다, 합치다	컴바인	verb
+congratulate	축하하다	콩그레츄레이트	verb
+hostile	적대적인	호스타일	adj
+immense	엄청난, 거대한	이멘스	adj
+unfriendly	불친절한, 비우호적인	언프렌들리	adj
+verify	확인하다, 검증하다	베리파이	verb
+discreet	신중한, 조심스러운	디스크리트	adj
+disorganized	정리안된, 체계없는	디스오거나이즈드	adj
+forgetful	잘잊어버리는, 건망증있는	포겟풀	adj
+psychological	심리적, 심리학의	사이콜로지컬	adj
+brutal	잔인한, 잔혹한	브루털	adj
+consistent	일관된, 꾸준한	컨시스턴트	adj
+deprive	빼앗다, 박탈하다	디프라이브	verb
+derive	유래하다, 얻다	디라이브	verb
+exotic	이국적인	엑조틱	adj
+medieval	중세의, 중세	미디벌	adj
+nicely	잘, 멋지게, 친절하게	나이슬리	adv
+splendid	훌륭한, 화려한	스플렌디드	adj
+flush	붉어지다	플러시	verb
+literary	문학의, 문학적	리터러리	adj
+nevertheless	그럼에도, 그런데도	네버더레스	adv
+respectful	공손한, 존중하는	리스펙트풀	adj
+unpredictable	예측불가	언프리딕터블	adj
+brightly	밝게	브라이틀리	adv
+clumsy	서투른, 어설픈, 덜렁대는	클럼지	adj
+demonstrate	보여주다, 증명하다, 시위하다	데먼스트레이트	verb
+doubtful	의심스러운	다우트풀	adj
+fabulous	멋진, 굉장한	페뷸러스	adj
+rational	이성적인, 합리적인	레셔널	adj
+soak	담그다, 적시다	소크	verb
+indicate	나타내다, 가리키다	인디케이트	verb
+intrude	침범하다, 방해하다	인트루드	verb
+lively	활기찬, 생기있는	라이블리	adj
+peculiar	특이한, 이상한	피큘리어	adj
+profound	심오한, 깊은	프러파운드	adj
+satisfactory	만족스러운	세티스펙터리	adj
+unacceptable	용납불가	언엑셉터블	adj
+aloud	소리내어, 큰소리로	어라우드	adv
+conceal	숨기다, 감추다	컨실	verb
+devour	먹어치우다, 삼키다	디바워	verb
+extensive	광범위한, 폭넓은	익스텐시브	adj
+harmless	무해한	함리스	adj
+inspect	검사하다, 점검하다	인스펙트	verb
+lick	핥다	릭	verb
+martial	무술의, 군사의	마셜	adj
+sincerely	진심으로	신시얼리	adv
+underestimate	과소평가하다	언더에스티메이트	verb
+unreasonable	불합리한, 비합리적인	언리즈너블	adj
+cautiously	조심스럽게, 신중하게	코셔슬리	adv
+damp	축축한, 눅눅한	뎀프	adj
+deport	추방하다	디포트	verb
+external	외부의, 외부	익스터널	adj
+furry	털이많은	퍼리	adj
+renowned	유명한, 저명한	리나운드	adj
+secular	세속적인	세큘러	adj
+steadily	꾸준히, 착실히	스테딜리	adv
+anticipate	예상하다, 기대하다	엔티서페이트	verb
+calmly	침착하게, 차분하게	캄리	adv
+convey	전달하다, 운반하다	컨베이	verb
+hopeful	희망에찬, 기대하는	호프풀	adj
+illiterate	문맹의	일리터릿	adj
+initially	처음에	이니셜리	adv
+intimate	친밀한, 은밀한	인티밋	adj
+muddy	진흙투성이의, 질퍽한	머디	adj
+plead	간청하다, 탄원하다, 변론하다	플리드	verb
+speechless	말문이막힌, 어이없는	스피치리스	adj
+unfamiliar	낯선, 생소한	언페밀리어	adj
+upscale	고급, 고급스러운	업스케일	adj
+abduct	납치하다, 유괴하다	엡덕트	verb
+anonymous	익명, 익명의	어노니머스	adj
+endure	견디다, 참다, 버티다	인듀어	verb
+meaningless	무의미한, 의미없는	미닝리스	adj
+meanwhile	한편, 그동안	민와일	adv
+ongoing	진행중인, 계속되는	온고잉	adj
+outgoing	외향적인, 사교적인	아웃고잉	adj
+choke	질식하다, 숨막히다, 목조르다	초크	verb
+defensive	방어적인, 수비의	디펜시브	adj
+dim	어둑한, 흐릿한, 어둡다	딤	adj
+oral	구두의, 입의, 구강	오럴	adj
+precise	정확한, 정밀한	프리사이스	adj
+swift	빠른, 신속한	스위프트	adj
+unexpectedly	뜻밖에, 갑자기, 예상외로	언익스펙티들리	adv
+chubby	통통한, 포동포동한	처비	adj
+designate	지정하다, 지명하다	데지그네이트	verb
+energetic	활기찬, 에너지넘치는	에너제틱	adj
+hilarious	웃긴, 아주재미있는	힐레어리어스	adj
+thorough	철저한, 꼼꼼한	서로	adj
+transparent	투명한, 투명	트렌스페런트	adj
+apparent	명백한, 분명한, 겉보기의	어페런트	adj
+beware	조심하다, 주의하다	비웨어	verb
+depart	출발하다, 떠나다	디파트	verb
+drunken	술취한	드렁큰	adj
+evolve	진화하다, 발전하다	이볼브	verb
+expire	만료되다, 끝나다	익스파이어	verb
+paralyze	마비시키다, 마비되다	페럴라이즈	verb
+populate	거주하다, 채우다	파퓰레이트	verb
+understandable	당연한	언더스텐더블	adj
+authentic	진짜의, 진정한, 정통의	오센틱	adj
+bizarre	기이한, 기괴한, 이상한	비자르	adj
+compel	강요하다, 억지로시키다	컴펠	verb
+illegally	불법으로, 불법적으로	일리걸리	adv
+instruct	지시하다, 가르치다	인스트럭트	verb
+resistant	저항하는, 내성이있는	리지스턴트	adj
+tremendous	엄청난, 굉장한	트리멘더스	adj
+violently	격렬하게, 난폭하게	바이얼런틀리	adv
+curly	곱슬곱슬한, 곱슬	컬리	adj
+diagnostic	진단의, 진단	다이어그노스틱	adj
+financially	재정적으로, 경제적으로	파이넨셜리	adv
+lunar	달의, 음력	루너	adj
+masculine	남성적인, 남자다운	메스큘린	adj
+mighty	강력한, 힘센	마이티	adj
+potentially	잠재적으로	포텐셜리	adv
+sue	고소하다, 소송하다	수	verb
+unbiased	공정한, 편견없는	언바이어스트	adj
+unsafe	위험한	언세이프	adj
+unusually	유난히, 이례적으로	언유주얼리	adv
+cease	그치다, 중지하다	시스	verb
+eliminate	없애다, 제거하다	일리미네이트	verb
+mash	으깨다	매시	verb
+mechanical	기계의, 기계적인	메카니컬	adj
+petty	사소한, 하찮은, 쩨쩨한	페티	adj
+pointless	무의미한, 쓸데없는	포인트리스	adj
+separately	따로, 별도로, 각각	세퍼러틀리	adv
+strategic	전략적인	스트레티직	adj
+uncommon	드문	언커먼	adj
+withdraw	인출하다, 철수하다, 물러나다	위드드로	verb
+beforehand	미리, 사전에	비포헨드	adv
+calculate	계산하다	켈큘레이트	verb
+entertain	접대하다	엔터테인	verb
+generate	생성하다, 만들어내다, 발생시키다	제너레이트	verb
+irrelevant	무관한, 상관없는	이렐러번트	adj
+mindful	유념하는, 의식하는	마인드풀	adj
+persuasive	설득력있는	퍼스웨이시브	adj
+prescribe	처방하다, 규정하다	프리스크라이브	verb
+reconsider	재고하다, 다시생각하다	리컨시더	verb
+technically	기술적으로, 엄밀히	테크니컬리	adv
+condemn	비난하다, 규탄하다, 선고하다	컨뎀	verb
+detect	감지하다, 탐지하다, 발견하다	디텍트	verb
+dwell	살다, 거주하다	드웰	verb
+envious	부러워하는, 질투하는	엔비어스	adj
+gloomy	우울한, 어두운	글루미	adj
+mathematical	수학의, 수학적인	메서메티컬	adj
+mow	베다, 깎다	모	verb
+perceive	인지하다, 지각하다, 인식하다	퍼시브	verb
+renew	갱신하다	리뉴	verb
+renewable	재생가능한	리뉴어블	adj
+scarce	부족한, 드문	스케어스	adj
+unstable	불안정한	언스테이블	adj
+adventurous	모험심강한, 모험적인	어드벤처러스	adj
+affordable	저렴한	어포더블	adj
+fasten	매다, 고정하다, 채우다	페슨	verb
+grouchy	투덜대는, 짜증내는	그라우치	adj
+inexpensive	저렴한, 값싼	인익스펜시브	adj
+intensive	집중적인, 집약적인	인텐시브	adj
+moderate	적당한, 온건한, 보통의	모더레이트	adj
+racial	인종의, 인종적인	레이셜	adj
+snatch	낚아채다, 잡아채다	스네치	verb
+unhurt	무사한	언허트	adj
+weep	울다, 흐느끼다	위프	verb
+amid	가운데, 속에서	어미드	adv
+bankrupt	파산한, 파산	벵크럽트	adj
+clarify	명확히하다, 해명하다	클레리파이	verb
+considerate	배려하는, 사려깊은	컨시더릿	adj
+hospitalize	입원시키다	호스피털라이즈	verb
+neatly	깔끔하게, 단정하게	니틀리	adv
+negotiate	협상하다, 교섭하다	니고시에이트	verb
+renovate	개조하다, 수리하다, 리모델링하다	리노베이트	verb
+secretive	비밀스러운	시크리티브	adj
+strangle	목조르다, 교살하다	스트렝글	verb
+temporarily	일시적으로, 임시로	템퍼레럴리	adv
+weary	지친, 피곤한	위어리	adj
+baffle	당황시키다	베플	verb
+hollow	속이빈, 텅빈, 구멍	할로우	adj,noun
+navigate	항해하다, 탐색하다	네비게이트	verb
+purely	순전히, 순수하게	퓨어리	adv
+remarry	재혼하다	리메리	verb
+spectacular	장관인, 굉장한	스펙테큘러	adj
+strengthen	강화하다	스트렝슨	verb
+thoughtful	사려깊은, 배려있는	소트풀	adj
+wisely	현명하게	와이즐리	adv
+assertive	적극적인, 단호한	어서티브	adj
+beneficial	유익한, 이로운	베니피셜	adj
+conclude	결론짓다, 끝내다	컨클루드	verb
+conquer	정복하다	컨커	verb
+delightful	즐거운, 기쁜, 매력적인	딜라이트풀	adj
+destined	운명인, 예정된	데스틴드	adj
+dreadful	끔찍한, 지독한	드레드풀	adj
+immature	미숙한, 철없는	이머추어	adj
+mutually	서로, 상호간에	뮤추얼리	adv
+obstinate	고집센, 완고한	옵스티닛	adj
+underwater	수중, 물속의	언더워터	adj,adv
+willingly	기꺼이	윌링리	adv
+witty	재치있는	위티	adj
+abruptly	갑자기, 불쑥	어브럽틀리	adv
+abundant	풍부한	어번던트	adj
+civilized	문명화된, 교양있는	시빌라이즈드	adj
+enable	활성화하다	이네이블	verb
+essentially	본질적으로, 사실상	에센셜리	adv
+exceptional	뛰어난, 예외적인	익셉셔널	adj
+exceptionally	유난히, 예외적으로	익셉셔널리	adv
+frantic	정신없는, 미친듯한	프렌틱	adj
+gigantic	거대한	자이겐틱	adj
+graze	스치다	그레이즈	verb
+imitate	흉내내다, 모방하다	이미테이트	verb
+unite	연합하다, 통합하다, 뭉치다	유나이트	verb
+vacant	비어있는, 공석인	베이컨트	adj
+warmly	따뜻하게, 다정하게	웜리	adv
+wrestle	레슬링하다, 씨름하다	레슬	verb
+exclusively	독점적으로, 오로지	익스클루시블리	adv
+indispensable	필수적인, 없어서는안될	인디스펜서블	adj
+infectious	전염성의, 감염성의	인펙셔스	adj
+mend	고치다, 수선하다	멘드	verb
+nauseous	메스꺼운, 구역질나는	노셔스	adj
+prone	경향이있는, 엎드린	프론	adj
+rebuild	재건하다, 다시짓다	리빌드	verb
+shove	밀치다, 떠밀다	셔브	verb
+solitary	고독한, 혼자의	솔리터리	adj
+considerably	상당히, 꽤	컨시더러블리	adv
+detain	구금하다, 억류하다	디테인	verb
+eagerly	열심히, 간절히	이거리	adv
+humanitarian	인도주의적인, 인도적	휴머니테리언	adj
+prudent	신중한, 분별있는	프루던트	adj
+subscribe	구독하다, 가입하다	서브스크라이브	verb
+continuous	계속되는, 지속적인, 연속적인	컨티뉴어스	adj
+immortal	불멸의	이모털	adj
+marvelous	놀라운, 훌륭한	마블러스	adj
+meaningful	의미있는, 뜻깊은	미닝풀	adj
+psychiatric	정신의학의, 정신과의	사이키에트릭	adj
+shameful	부끄러운, 수치스러운	셰임풀	adj
+supposedly	아마, 소위	서포즈들리	adv
+suppress	억압하다, 진압하다, 억누르다	서프레스	verb
+urgently	급히, 긴급하게	어전틀리	adv
+accountable	책임있는	어카운터블	adj
+amputate	절단하다	엠퓨테이트	verb
+blink	깜빡이다, 깜박임	블링크	verb
+breathtaking	숨막히는, 놀라운	브레스테이킹	adj
+browse	둘러보다, 검색하다	브라우즈	verb
+fluffy	푹신한, 보송보송한	플러피	adj
+mandatory	의무적인, 필수의	멘더토리	adj
+muscular	근육질의, 근육의	머스큘러	adj
+owing	빚진	오잉	adj
+prosperous	번영하는, 부유한	프로스퍼러스	adj
+consistently	일관되게, 꾸준히	컨시스턴틀리	adv
+crouch	웅크리다, 쭈그리다	크라우치	verb
+dire	심각한, 끔찍한	다이어	adj
+dominant	지배적인, 우세한	도미넌트	adj
+growl	으르렁거리다	그라울	verb
+howl	울부짖다, 하울링	하울	verb
+inseparable	불가분의	인세퍼러블	adj
+overlook	간과하다, 내려다보다	오버룩	verb
+passionately	열정적으로	페셔니틀리	adv
+plunge	뛰어들다, 급락하다	플런지	verb
+politically	정치적으로	폴리티컬리	adv
+powerless	무력한, 힘없는	파워리스	adj
+prominent	유명한, 두드러진, 저명한	프로미넌트	adj
+reckon	생각하다, 계산하다	레컨	verb
+seemingly	겉보기에, 외견상	시밍리	adv
+sharpen	갈다, 깎다	샤펀	verb
+stern	엄격한, 선미	스턴	adj
+thrive	번창하다, 잘자라다	스라이브	verb
+traditionally	전통적으로	트레디셔널리	adv
+claustrophobic	폐소공포증의, 답답한	클로스트러포빅	adj
+creep	기다, 살금살금가다, 소름끼치는사람	크립	verb,noun
+dissatisfied	불만스러운, 불만족한	디스세티스파이드	adj
+eligible	자격이있는, 적격의	엘리지블	adj
+incapable	무능한	인케이퍼블	adj
+interact	상호작용하다, 소통하다	인터렉트	verb
+mock	조롱하다, 놀리다, 모의	목	verb,adj
+promptly	즉시, 신속하게	프롬프틀리	adv
+sharply	급격히, 날카롭게	샤플리	adv
+unhealthy	건강에나쁜, 해로운	언헬시	adj
+utmost	최대의, 최고의	엇모스트	adj
+vibrant	활기찬, 생생한	바이브런트	adj
+vicious	사나운, 악랄한	비셔스	adj
+collective	집단적인, 공동의	컬렉티브	adj
+confine	가두다, 제한하다	컨파인	verb
+conscientious	성실한, 양심적인	콘시엔셔스	adj
+knowledgeable	박식한, 아는것이많은	날리저블	adj
+manipulate	조종하다, 조작하다	머니퓰레이트	verb
+manipulative	조종하는, 교활한	머니퓰러티브	adj
+motionless	가만히있는	모션리스	adj
+nosy	참견하는, 오지랖넓은	노지	adj
+peek	엿보다, 훔쳐보다	피크	verb
+pollute	오염시키다	폴루트	verb
+spacious	넓은, 널찍한	스페이셔스	adj
+subtle	미묘한, 섬세한	서틀	adj
+undecided	미정의	언디사이디드	adj
+unfinished	미완성의	언피니시드	adj
+virtually	사실상, 거의, 가상으로	버추얼리	adv
+ambidextrous	양손잡이의	엠비덱스트러스	adj
+await	기다리다	어웨이트	verb
+cheesy	유치한, 느끼한	치지	adj
+dusty	먼지투성이의	더스티	adj
+economically	경제적으로	이코노미컬리	adv
+fashionable	유행하는, 세련된	패셔너블	adj
+harass	괴롭히다, 희롱하다	허레스	verb
+impartial	공정한, 공평한	임파셜	adj
+invincible	무적의, 천하무적	인빈서블	adj
+luxurious	호화로운, 사치스러운	럭셔리어스	adj
+northeastern	북동쪽의, 북동부의	노스이스턴	adj
+obligated	의무가있는	오블리게이티드	adj
+pushy	강요하는, 밀어붙이는	푸시	adj
+recite	암송하다, 낭독하다	리사이트	verb
+restrain	억제하다, 제지하다	리스트레인	verb
+technological	기술적인, 기술의	테크놀로지컬	adj
+analyze	분석하다	에널라이즈	verb
+destructive	파괴적인	디스트럭티브	adj
+distribute	배포하다, 분배하다, 유통하다	디스트리뷰트	verb
+dominate	지배하다, 장악하다	도미네이트	verb
+frantically	미친듯이, 정신없이	프렌티컬리	adv
+frown	찡그리다, 찌푸리다	프라운	verb
+furnish	제공하다	퍼니시	verb
+grind	갈다, 빻다	그라인드	verb
+groggy	비틀거리는, 정신이몽롱한	그로기	adj
+rot	썩다, 부패	로트	verb
+shiny	빛나는, 반짝이는	샤이니	adj
+tuck	밀어넣다, 집어넣다	턱	verb
+undress	탈의하다	언드레스	verb
+unprecedented	전례없는	언프레시덴티드	adj
+abide	지키다, 따르다	어바이드	verb
+alongside	나란히, 함께	얼롱사이드	adv
+bathe	목욕하다, 씻다	베이드	verb
+continuously	계속, 지속적으로	컨티뉴어슬리	adv
+contradict	모순되다, 반박하다	콘트러딕트	verb
+dispose	처리하다, 처분하다	디스포즈	verb
+invasive	침략적인, 침습적인	인베이시브	adj
+lame	절름발이의, 시시한	레임	adj
+legitimate	합법적인, 정당한	레지티밋	adj
+mountainous	산이많은, 산악의	마운티너스	adj
+pave	포장하다, 깔다	페이브	verb
+prioritize	우선시하다	프라이오리타이즈	verb
+repay	갚다, 상환하다	리페이	verb
+rustle	바스락거리다	러슬	verb
+scramble	뒤섞다, 허둥지둥하다, 스크램블	스크램블	verb
+tighten	조이다, 강화하다	타이튼	verb
+trivial	사소한, 하찮은	트리비얼	adj
+assemble	조립하다, 모이다	어셈블	verb
+bitterly	몹시, 쓰라리게	비털리	adv
+conceive	상상하다, 임신하다, 구상하다	컨시브	verb
+definite	확실한, 명확한, 한정된	데피닛	adj
+disoriented	혼란스러운	디스오리엔티드	adj
+flatter	아첨하다, 비위맞추다	플레터	verb
+perish	죽다, 사라지다, 멸망하다	페리시	verb
+thankfully	다행히, 고맙게도	셍크풀리	adv
+undergo	겪다, 받다	언더고	verb
+unharmed	무사한	언함드	adj
+verbal	말의, 언어의, 구두의	버벌	adj
+actively	적극적으로, 활발하게	엑티블리	adv
+adorn	장식하다, 꾸미다	어돈	verb
+brutally	잔인하게	브루털리	adv
+compatible	호환되는, 양립하는	컴페터블	adj
+comprehensive	포괄적인, 종합적인	컴프리헨시브	adj
+decisive	결정적인, 단호한	디사이시브	adj
+doze	졸다, 꾸벅꾸벅졸다	도즈	verb
+govern	통치하다, 다스리다	거번	verb
+intolerant	편협한	인톨러런트	adj
+originate	유래하다, 비롯되다	오리지네이트	verb
+partial	부분적인, 편파적인	파셜	adj
+repaint	다시칠하다	리페인트	verb
+yelp	비명, 깨갱거리다	옐프	verb
+charismatic	카리스마있는	카리스마틱	adj
+comprehend	이해하다, 파악하다	컴프리헨드	verb
+courteous	예의바른, 공손한	커티어스	adj
+dread	두려워하다, 공포	드레드	verb,noun
+drowsy	졸린, 나른한	드라우지	adj
+evidently	분명히, 명백히	에비던틀리	adv
+gracefully	우아하게	그레이스풀리	adv
+grin	씩웃다, 활짝웃다	그린	verb,noun
+imprison	투옥하다, 가두다	임프리즌	verb
+madly	미친듯이, 몹시	메들리	adv
+moody	변덕스러운, 기분이안좋은	무디	adj
+observant	관찰력있는, 눈치빠른	옵저번트	adj
+privately	개인적으로, 은밀히	프라이비틀리	adv
+readily	쉽게, 기꺼이	레딜리	adv
+ruthless	무자비한, 냉혹한	루스리스	adj
+solely	오로지, 단지	솔리	adv
+sow	파종하다, 뿌리다	소	verb
+substantial	상당한, 실질적인	서브스텐셜	adj
+tricky	까다로운, 교묘한	트리키	adj
+unfairly	부당하게, 불공평하게	언페어리	adv
+unwell	몸이안좋은, 아픈	언웰	adj
+volcanic	화산의	볼케닉	adj
+ashore	해변으로, 물가에	어쇼어	adv
+avid	열렬한, 열심인	에비드	adj
+chronic	만성의, 만성적인	크로닉	adj
+enhance	향상시키다, 강화하다	인헨스	verb
+grammatically	문법적으로	그레머티컬리	adv
+inferior	열등한, 하위의	인피리어	adj
+recline	기대다, 눕다	리클라인	verb
+spontaneous	자발적인, 즉흥적인	스폰테이니어스	adj
+undone	풀린	언던	adj
+weave	짜다, 엮다	위브	verb
+woozy	어지러운, 띵한	우지	adj
+addictive	중독성있는	어딕티브	adj
+admirable	훌륭한	에드머러블	adj
+ambiguous	애매한, 모호한	엠비규어스	adj
+applaud	박수치다, 칭찬하다	어플로드	verb
+costly	비싼, 대가가큰	코스틀리	adj
+cunning	교활한, 영리한	커닝	adj
+dearly	몹시, 대단히	디어리	adv
+evacuate	대피시키다, 대피하다	이베큐에이트	verb
+hum	콧노래부르다, 윙윙거리다	험	verb
+innovative	혁신적인	이노베이티브	adj
+notorious	악명높은	노토리어스	adj
+pinch	꼬집다, 한꼬집	핀치	verb,noun
+provoke	자극하다, 도발하다, 유발하다	프로보크	verb
+resourceful	수완좋은, 지략있는	리소스풀	adj
+slender	날씬한, 가느다란	슬렌더	adj
+specify	명시하다, 지정하다	스페시파이	verb
+superstitious	미신적인	슈퍼스티셔스	adj
+transmit	전송하다, 전염시키다	트렌스미트	verb
+trim	다듬다, 손질하다	트림	verb
+unrealistic	비현실적인	언리얼리스틱	adj
+yummy	맛있는	야미	adj
+animate	애니메이션화하다	애니메이트	verb
+constructive	건설적인	컨스트럭티브	adj
+detest	혐오하다, 몹시싫어하다	디테스트	verb
+enrage	격분시키다	인레이지	verb
+erupt	분출하다, 폭발하다	이럽트	verb
+fictional	허구의, 가상의	픽셔널	adj
+gravitational	중력의	그레비테이셔널	adj
+inhabit	살다, 거주하다	인헤비트	verb
+inject	주사하다, 주입하다	인젝트	verb
+irrational	비이성적인, 비합리적인	이레셔널	adj
+malicious	악의적인	멀리셔스	adj
+maternal	어머니의, 모성의	머터널	adj
+preferable	더나은, 바람직한	프리퍼러블	adj
+restrict	제한하다	리스트릭트	verb
+chaotic	혼란스러운	케이오틱	adj
+classify	분류하다	클레시파이	verb
+dubious	의심스러운, 수상한	듀비어스	adj
+ethical	윤리적인	에티컬	adj
+forbid	금지하다	포비드	verb
+hairy	털이많은	헤어리	adj
+incorrectly	틀리게, 부정확하게	인코렉틀리	adv
+insignificant	사소한, 하찮은	인시그니피컨트	adj
+legendary	전설적인	레전더리	adj
+lousy	형편없는, 엉망인	라우지	adj
+needy	가난한, 애정결핍의	니디	adj
+perplexed	당혹한, 어리둥절한	퍼플렉스트	adj
+rewrite	다시쓰다	리라이트	verb
+snowy	눈이오는, 눈덮인	스노위	adj
+stormy	폭풍우치는	스토미	adj
+undoubtedly	의심할여지없이, 틀림없이	언다우티들리	adv
+unpopular	인기없는	언파퓰러	adj
+drastically	대폭, 급격히	드레스티컬리	adv
+eloquent	웅변의, 설득력있는	엘러퀀트	adj
+fertile	비옥한, 생식력있는	퍼틀	adj
+heartless	무정한, 냉정한	하트리스	adj
+informal	비공식적인, 격식없는	인포멀	adj
+insanely	미친듯이, 엄청나게	인세인리	adv
+majestic	장엄한, 위엄있는	마제스틱	adj
+rusty	녹슨	러스티	adj
+pat	토닥이다, 쓰다듬다	펫	verb
+chuck	던지다	척	verb
+modify	수정하다, 변경하다	모디파이	verb
+moreover	게다가, 더욱이	모어오버	adv
+multiply	곱하다, 증가하다	멀티플라이	verb
+mumble	중얼거리다	멈블	verb
+paranormal	초자연적인	파라노말	adj
+playful	장난스러운, 장난기있는	플레이풀	adj
+prestigious	명망있는, 일류의	프레스티저스	adj
+proofread	교정하다, 교정보다	프루프리드	verb
+publicly	공개적으로, 공공연히	퍼블리클리	adv
+residential	주거의, 주택의	레지덴셜	adj
+reunite	재회하다, 재결합하다	리유나이트	verb
+sloppy	엉성한, 대충한	슬로피	adj
+suburban	교외의	서버번	adj
+unzip	압축해제	언집	verb
+abolish	폐지하다	어볼리시	verb
+alter	바꾸다, 변경하다, 수선하다	올터	verb
+boast	자랑하다, 뽐내다	보스트	verb
+fade	바래다, 희미해지다, 사라지다	페이드	verb
+imply	암시하다, 의미하다	임플라이	verb
+lifelong	평생의	라이프롱	adj
+livid	격노한	리비드	adj
+meditate	명상하다	메디테이트	verb
+proudly	자랑스럽게	프라우들리	adv
+rigid	엄격한, 딱딱한, 경직된	리지드	adj
+supernatural	초자연적인	슈퍼내추럴	adj
+cranky	짜증내는, 까다로운	크렝키	adj
+experimental	실험적인, 실험의	익스페리멘탈	adj
+formally	공식적으로, 정식으로	포멀리	adv
+formerly	이전에, 예전에	포머리	adv
+horrific	끔찍한	호리픽	adj
+itchy	가려운	이치	adj
+mischievous	장난꾸러기의, 짓궂은	미스치버스	adj
+mislead	오도하다, 잘못이끌다	미스리드	verb
+permanently	영구적으로, 영원히	퍼머넌틀리	adv
+philosophical	철학적인	필로소피컬	adj
+possessive	소유욕이강한, 소유격	퍼제시브	adj
+prevail	우세하다, 이기다	프리베일	verb
+profitable	수익성있는, 이익이되는	프로피터블	adj
+socially	사회적으로	소셜리	adv
+superficial	피상적인, 표면적인	슈퍼피셜	adj
+tipsy	약간취한, 알딸딸한	팁시	adj
+atmospheric	대기의, 분위기있는	엣모스페릭	adj
+barren	척박한, 불모의	베런	adj
+bravely	용감하게	브레이블리	adv
+collide	충돌하다, 부딪치다	컬라이드	verb
+efficiently	효율적으로	이피션틀리	adv
+exceed	초과하다, 넘다	익시드	verb
+exceedingly	대단히, 매우	익시딩리	adv
+extraordinarily	특별히, 엄청나게	익스트로디너릴리	adv
+glorious	영광스러운, 멋진	글로리어스	adj
+incomplete	불완전한, 미완성의	인컴플리트	adj
+likable	호감가는, 정감가는	라이커블	adj
+literal	문자그대로의	리터럴	adj
+mourn	애도하다, 슬퍼하다	몬	verb
+outspoken	거침없는, 솔직한	아웃스포큰	adj
+pleasantly	즐겁게, 기분좋게	플레전틀리	adv
+populous	인구가많은	파퓰러스	adj
+reschedule	일정변경	리스케줄	verb
+simultaneously	동시에	사이멀테이니어슬리	adv
+summon	소환하다, 부르다	서먼	verb
+suspiciously	수상하게	서스피셔슬리	adv
+swiftly	신속하게, 빨리	스위프틀리	adv
+unbeatable	무적의	언비터블	adj
+unnatural	부자연스러운	언네추럴	adj
+voluntarily	자발적으로	볼런터릴리	adv
+annually	매년, 해마다	에뉴얼리	adv
+awaken	깨우다, 깨어나다, 일깨우다	어웨이큰	verb
+cherish	소중히하다, 아끼다	체리시	verb
+correspond	일치하다, 대응하다	코레스폰드	verb
+exclude	제외하다, 배제하다	익스클루드	verb
+extinguish	끄다, 소화하다	익스팅귀시	verb
+fling	던지다	플링	verb
+hence	그러므로, 따라서	헨스	adv
+hideous	끔찍한, 흉측한	히디어스	adj
+limp	절뚝거리다, 축늘어진	림프	verb,adj
+needless	불필요한	니들리스	adj
+randomly	무작위로, 랜덤으로	랜덤리	adv
+reassure	안심시키다	리어슈어	verb
+refine	정제하다, 다듬다	리파인	verb
+robotic	로봇의	로보틱	adj
+robust	튼튼한, 강건한	로버스트	adj
+seasick	뱃멀미하는, 뱃멀미	시식	adj
+shady	그늘진, 수상한	셰이디	adj
+starry	별이빛나는	스타리	adj
+straighten	펴다	스트레이튼	verb
+unethical	비윤리적인	언에티컬	adj
+unfaithful	불성실한, 바람피우는	언페이스풀	adj
+unkind	불친절한	언카인드	adj
+unpack	풀다	언팩	verb
+accumulate	축적하다, 모으다	어큐뮬레이트	verb
+acute	급성의, 예리한	어큐트	adj
+assert	주장하다	어서트	verb
+assess	평가하다	어세스	verb
+baptize	세례하다	벱타이즈	verb
+blunt	무딘, 직설적인	블런트	adj
+brainwash	세뇌하다	브레인워시	verb
+budge	꿈쩍하다, 움직이다	버지	verb
+celestial	천체의, 하늘의	셀레스티얼	adj
+clueless	아무것도모르는	클루리스	adj
+contaminate	오염시키다	컨테미네이트	verb
+dramatically	극적으로	드라마티컬리	adv
+enclose	동봉하다, 둘러싸다	인클로즈	verb
+furiously	맹렬히, 격렬하게	퓨리어슬리	adv
+giggle	킥킥웃다	기글	verb
+imperial	제국의	임피리얼	adj
+presume	추정하다, 가정하다	프리줌	verb
+shrink	줄어들다	슈링크	verb
+sketchy	대충의, 수상한	스케치	adj
+soar	치솟다	소어	verb
+sprinkle	뿌리다	스프링클	verb
+stale	퀴퀴한	스테일	adj
+tedious	지루한	티디어스	adj
+traumatic	충격적인	트라우마틱	adj
+visibly	현저히	비저블리	adv
+aboriginal	원주민의, 토착의	에버리지널	adj
+aggressively	공격적으로	어그레시블리	adv
+authoritarian	권위주의적인	오서리테리언	adj
+autistic	자폐증의	오티스틱	adj
+casually	무심코, 캐주얼하게	케주얼리	adv
+disregard	무시하다	디스리가드	verb
+distinctive	독특한	디스팅크티브	adj
+drastic	과감한, 급격한	드레스틱	adj
+drench	흠뻑적시다	드렌치	verb
+eccentric	괴짜의, 별난	익센트릭	adj
+fluster	당황시키다	플러스터	verb
+foggy	안개낀	포기	adj
+horribly	끔찍하게	호러블리	adv
+inherently	본질적으로	인히어런틀리	adv
+intently	열심히, 골똘히	인텐틀리	adv
+lone	혼자의, 외로운	론	adj
+memorable	기억에남는	메모러블	adj
+overboard	배밖으로	오버보드	adv
+overheat	과열되다	오버히트	verb
+picturesque	그림같은	픽처레스크	adj
+proficient	능숙한	프로피션트	adj
+revive	되살리다, 부활시키다	리바이브	verb
+aback	깜짝놀라	어벡	adv
+affectionate	다정한	어펙셔닛	adj
+amend	개정하다, 수정하다	어멘드	verb
+assassinate	암살하다	어세시네이트	verb
+authorize	승인하다, 허가하다	오소라이즈	verb
+captivate	매혹하다	켑티베이트	verb
+collaborate	협력하다, 협업하다	콜라보레이트	verb
+compassionate	동정심있는, 자비로운	컴페셔닛	adj
+cosmic	우주의	코즈믹	adj
+crisp	바삭한	크리스프	adj
+cultivate	재배하다, 기르다	컬티베이트	verb
+customary	관례적인	커스터머리	adj
+disastrous	재앙적인, 참담한	디제스트러스	adj
+enroll	등록하다	인롤	verb
+feasible	실현가능한	피저블	adj
+hateful	증오에찬	헤이트풀	adj
+hearty	푸짐한, 따뜻한	하티	adj
+heavenly	천국의, 천상의	헤븐리	adj
+hoarse	목쉰	호스	adj
+imaginative	상상력이풍부한	이메지너티브	adj
+immoral	부도덕한	이모럴	adj
+inquire	문의하다	인콰이어	verb
+intact	온전한	인텍트	adj
+intervene	개입하다	인터빈	verb
+metropolitan	대도시의, 수도권의	메트로폴리탄	adj
+nonetheless	그럼에도, 그런데도	넌더레스	adv
+outrageous	터무니없는	아웃레이저스	adj
+persecute	박해하다	퍼시큐트	verb
+prehistoric	선사시대의	프리히스토릭	adj
+primitive	원시적인	프리미티브	adj
+sniff	킁킁거리다, 냄새맡다	스니프	verb
+tickle	간지럽히다	티클	verb
+wildly	격렬하게, 거칠게	와일들리	adv
+alternate	번갈아하다, 대체의	올터네이트	verb,adj
+brag	자랑하다	브레그	verb
+cling	매달리다, 달라붙다	클링	verb
+colorblind	색맹의	컬러블라인드	adj
+comfortably	편안하게	컴퍼터블리	adv
+confiscate	압수하다	컨피스케이트	verb
+continually	계속해서	컨티뉴얼리	adv
+conventional	전통적인, 관습적인	컨벤셔널	adj
+deliberate	고의적인, 신중한	딜리버릿	adj
+demolish	철거하다	디몰리시	verb
+depict	묘사하다	디픽트	verb
+devout	독실한	디바우트	adj
+emphasize	강조하다	엠퍼사이즈	verb
+formidable	가공할, 만만찮은	포미더블	adj
+greasy	기름진	그리시	adj
+impulsive	충동적인	임펄시브	adj
+irregular	불규칙한	이레귤러	adj
+nag	잔소리하다	네그	verb
+respectively	각각	리스펙티블리	adv
+rinse	헹구다	린스	verb
+sneaky	교활한, 몰래하는	스니키	adj
+stark	삭막한, 완전한	스타크	adj
+straightforward	간단한, 솔직한	스트레이트포워드	adj
+sturdy	튼튼한	스터디	adj
+suffocate	질식하다	서퍼케이트	verb
+vulgar	저속한	벌거	adj
+weaken	약화시키다	위큰	verb
+accidental	우연한	엑시덴탈	adj
+accurately	정확하게	에큐러틀리	adv
+administrative	행정의	어드미니스트레이티브	adj
+articulate	표현하다, 명료한	아티큘레이트	verb
+deem	여기다	딤	verb
+detach	떼다, 분리하다	디테치	verb
+devise	고안하다	디바이즈	verb
+endlessly	끝없이	엔들리슬리	adv
+erase	지우다	이레이즈	verb
+erect	세우다, 똑바로선	이렉트	verb,adj
+err	실수하다	어	verb
+excessively	지나치게	익세시블리	adv
+gasp	숨이막히다, 헐떡이다	게스프	verb
+globally	전세계적으로	글로벌리	adv
+harden	굳다, 굳히다	하든	verb
+obese	비만의	오비스	adj
+petrify	석화시키다	페트리파이	verb
+pluck	뽑다, 따다	플럭	verb
+redundant	불필요한, 중복된	리던던트	adj
+respective	각각의	리스펙티브	adj
+respiratory	호흡기의	레스피러토리	adj
+scoot	서둘러가다	스쿠트	verb
+specialize	전문으로하다	스페셜라이즈	verb
+sustain	유지하다, 지속하다	서스테인	verb
+uncover	밝혀내다	언커버	verb
+venomous	독이있는	베너머스	adj
+vile	비열한, 역겨운	바일	adj
+attain	달성하다	어테인	verb
+auxiliary	보조의	오그질리어리	adj
+bewilder	당황시키다	비윌더	verb
+compose	작곡하다, 구성하다	컴포즈	verb
+delusional	망상의	딜루저널	adj
+disqualify	실격시키다	디스퀄리파이	verb
+distraught	심란한	디스트로트	adj
+grim	암울한, 냉혹한	그림	adj
+hastily	서둘러	헤이스틸리	adv
+historically	역사적으로	히스토리컬리	adv
+hurriedly	허둥지둥	허리들리	adv
+illuminate	비추다, 밝히다	일루미네이트	verb
+inclusive	포괄적인	인클루시브	adj
+insensitive	무감각한, 둔감한	인센서티브	adj
+instinctively	본능적으로	인스팅티블리	adv
+juggle	저글링하다	저글	verb
+juicy	즙이많은	주시	adj
+mediocre	평범한, 그저그런	미디오커	adj
+perpetual	영원한, 끊임없는	퍼페추얼	adj
+profusely	많이, 아낌없이	프러퓨슬리	adv
+soundly	깊이, 푹	사운들리	adv
+underway	진행중인	언더웨이	adj
+unfold	펼치다, 전개되다	언폴드	verb
+unsuccessful	실패한	언석세스풀	adj
+wary	경계하는	웨어리	adj
+wonderfully	훌륭하게, 멋지게	원더풀리	adv
+adequate	적절한, 충분한	에디퀴트	adj
+bipolar	조울증의	바이폴러	adj
+chirp	짹짹거리다	처프	verb
+chuckle	킬킬웃다	처클	verb
+comply	따르다, 준수하다	컴플라이	verb
+disobedient	반항하는	디스오비디언트	adj
+endow	부여하다	인다우	verb
+exclaim	외치다	익스클레임	verb
+exploit	이용하다, 착취하다	익스플로잇	verb
+graceful	우아한	그레이스풀	adj
+heed	주의하다	히드	verb
+hurtful	상처주는	허트풀	adj
+imperative	필수적인, 명령법	임퍼러티브	adj
+locally	지역적으로, 현지에서	로컬리	adv
+lush	무성한	러쉬	adj
+marital	결혼의	메리털	adj
+obscure	모호한, 무명의	옵스큐어	adj
+predictable	예측가능한	프리딕터블	adj
+pricey	비싼	프라이시	adj
+seduce	유혹하다	시듀스	verb
+sleepless	잠못이루는	슬리플리스	adj
+smack	찰싹때리다	스멕	verb
+suicidal	자살하고싶은	수이사이들	adj
+teem	가득하다	팀	verb
+unattended	방치된	언어텐디드	adj
+unlimited	무제한의	언리미티드	adj
+accelerate	가속하다	액셀러레이트	verb
+adjacent	인접한	어제이선트	adj
+banish	추방하다	베니시	verb
+characterize	특징짓다	캐릭터라이즈	verb
+confidential	기밀의	컨피덴셜	adj
+dissolve	녹다, 용해하다	디졸브	verb
+excitedly	흥분해서	익사이티들리	adv
+fiery	불같은	파이어리	adj
+glide	미끄러지다, 활공하다	글라이드	verb
+hectic	정신없이바쁜	헥틱	adj
+irreplaceable	대체불가능한	이리플레이서블	adj
+multilingual	다국어의	멀티링구얼	adj
+occasional	가끔의	오케이저널	adj
+plausible	그럴듯한	플로저블	adj
+positively	긍정적으로	포지티블리	adv
+rebellious	반항적인	리벨리어스	adj
+revolve	회전하다, 돌다	리볼브	verb
+sane	제정신의	세인	adj
+shrug	으쓱하다	슈러그	verb
+sideways	옆으로	사이드웨이스	adv
+underage	미성년의	언더에이지	adj
+unrelated	관계없는	언릴레이티드	adj
+untie	풀다	언타이	verb
+upright	똑바른, 직립의	업라이트	adj
+versatile	다재다능한, 다용도의	버서타일	adj
+vouch	보증하다	바우치	verb
+accordingly	그에따라	어코딩리	adv
+blindly	맹목적으로	블라인들리	adv
+clinical	임상의	클리니컬	adj
+demote	강등시키다	디모트	verb
+despicable	비열한	디스피커블	adj
+deteriorate	악화되다	디티리어레이트	verb
+disconnect	연결해제, 끊다	디스커넥트	verb
+distort	왜곡하다	디스토트	verb
+ethnically	민족적으로	에스니컬리	adv
+functional	기능적인	펑셔널	adj
+harshly	가혹하게	하실리	adv
+hind	뒤의	하인드	adj
+honorable	명예로운	아너러블	adj
+insure	보험에들다	인슈어	verb
+liable	책임있는	라이어블	adj
+lifeless	생명이없는	라이플리스	adj
+momentarily	잠시	모먼테럴리	adv
+negatively	부정적으로	네거티블리	adv
+oppress	억압하다	오프레스	verb
+overconfident	자만하는	오버컨피던트	adj
+poke	찌르다, 쿡찌르다	포크	verb
+predominantly	주로, 대부분	프리도미넌틀리	adv
+priceless	귀중한, 값진	프라이스리스	adj
+respectable	훌륭한	리스펙터블	adj
+scenic	경치좋은	시닉	adj
+soothe	달래다	수드	verb
+sweaty	땀에젖은	스웨티	adj
+wilt	시들다	윌트	verb
+withstand	견디다	위드스텐드	verb
+almighty	전능한	올마이티	adj
+ample	충분한	엠플	adj
+anxiously	걱정스럽게	엥크셔슬리	adv
+appreciative	감사하는	어프리셔티브	adj
+bounce	튀다	바운스	verb
+compulsive	강박적인	컴펄시브	adj
+densely	빽빽하게	덴슬리	adv
+devoid	없는	디보이드	adj
+dimensional	차원의	디멘셔널	adj
+electoral	선거의	일렉토럴	adj
+fertilize	수정시키다	퍼틸라이즈	verb
+foremost	가장중요한	포모스트	adj
+genetically	유전적으로	제네티컬리	adv
+hypocritical	위선적인	히포크리티컬	adj
+immensely	대단히, 엄청나게	이멘슬리	adv
+impeccable	완벽한	임페커블	adj
+inconvenient	불편한	인컨비니언트	adj
+insufficient	불충분한	인서피션트	adj
+likewise	마찬가지로	라이크와이즈	adv
+mar	망치다	마	verb
+monetary	통화의, 금전적	모니터리	adj
+offshore	앞바다의, 해외의	오프쇼어	adj
+outward	외부의, 밖으로	아웃워드	adj,adv
+overreact	과잉반응하다	오버리액트	verb
+pitiful	불쌍한, 한심한	피티풀	adj
+poetic	시적인	포에틱	adj
+premature	너무이른, 조산의	프리머추어	adj
+questionable	의심스러운	퀘스처너블	adj
+reproduce	번식하다, 재현하다	리프로듀스	verb
+resilient	회복력있는	리질리언트	adj
+savagely	잔인하게	세비지리	adv
+sever	자르다, 끊다	세버	verb
+smelly	냄새나는	스멜리	adj
+summarize	요약하다	서머라이즈	verb
+theoretical	이론적인	시어레티컬	adj
+unenthusiastic	열의없는	언인수지에스틱	adj
+unjust	부당한	언저스트	adj
+unload	내리다, 하역하다	언로드	verb
+uphill	오르막, 오르막의	업힐	adj,adv
+aimlessly	목적없이	에임리슬리	adv
+allege	주장하다	얼레지	verb
+catastrophic	재앙적인	케터스트로픽	adj
+confidently	자신있게	콘피던틀리	adv
+conserve	보존하다, 절약하다	컨서브	verb
+culinary	요리의	컬리너리	adj
+deranged	미친	디레인지드	adj
+dumbfounded	어안이벙벙한	덤파운디드	adj
+ecological	생태학적인	에콜로지컬	adj
+exquisite	정교한, 매우아름다운	익스퀴짓	adj
+favorable	호의적인, 유리한	페이버러블	adj
+frugal	검소한	프루걸	adj
+geopolitical	지정학적	지오폴리티컬	adj
+hysterical	히스테리의	히스테리컬	adj
+indulge	탐닉하다, 즐기다	인덜지	verb
+interrogate	심문하다	인테러게이트	verb
+loosen	풀다, 늦추다	루슨	verb
+moist	촉촉한	모이스트	adj
+nutritious	영양가높은	뉴트리셔스	adj
+oddly	이상하게	오들리	adv
+playfully	장난스럽게	플레이풀리	adv
+remotely	원격으로	리모틀리	adv
+roam	돌아다니다	롬	verb
+rumble	우르릉거리다	럼블	verb
+skillful	능숙한	스킬풀	adj
+sociable	사교적인	소셔블	adj
+squeal	꽥소리지르다	스퀼	verb
+structural	구조적인	스트럭처럴	adj
+swell	붓다, 부풀다	스웰	verb
+unavoidable	불가피한	언어보이더블	adj
+unwanted	원치않는	언원티드	adj
+activate	활성화하다	엑티베이트	verb
+aspire	열망하다	어스파이어	verb
+carelessly	부주의하게	케어리슬리	adv
+cripple	불구로만들다	크리플	verb
+critically	비판적으로, 위독하게	크리티컬리	adv
+crunchy	바삭바삭한	크런치	adj
+culturally	문화적으로	컬처럴리	adv
+enforce	시행하다, 강요하다	인포스	verb
+evaluate	평가하다	이벨류에이트	verb
+extravagant	사치스러운	익스트레버건트	adj
+flawless	흠없는, 완벽한	플로리스	adj
+hasty	성급한	헤이스티	adj
+intensely	강렬하게	인텐슬리	adv
+lethal	치명적인	리설	adj
+merciful	자비로운	머시풀	adj
+morally	도덕적으로	모럴리	adv
+nocturnal	야행성의	녹터널	adj
+nostalgic	그리운	노스텔직	adj
+overcast	흐린	오버케스트	adj
+patriotic	애국적인	페이트리오틱	adj
+penetrate	관통하다	페너트레이트	verb
+prevalent	널리퍼진	프레벌런트	adj
+professionally	전문적으로	프러페셔널리	adv
+radioactive	방사성의	레이디오엑티브	adj
+reap	거두다, 수확하다	립	verb
+reprimand	질책하다	레프리멘드	verb
+retrieve	되찾다, 회수하다	리트리브	verb
+strew	흩뿌리다	스트루	verb
+stuffy	답답한, 코막힌	스터피	adj
+subjective	주관적인	서브젝티브	adj
+surgical	수술의	서지컬	adj
+synthetic	합성의	신세틱	adj
+tame	길들이다, 길들여진	테임	verb,adj
+unfit	부적합한	언핏	adj
+unprepared	준비가안된	언프리페어드	adj
+untidy	지저분한	언타이디	adj
+wrongly	잘못	롱리	adv
+abrupt	갑작스러운	어브럽트	adj
+allegedly	이른바, 듣자하니	얼레지들리	adv
+anyhow	어쨌든	에니하우	adv
+botanical	식물의	버태니컬	adj
+clad	입은	클레드	adj
+clench	꽉쥐다	클렌치	verb
+colonize	식민지화하다	콜러나이즈	verb
+derogatory	경멸적인	디로거토리	adj
+dislocate	탈구시키다	디슬로케이트	verb
+fundamentally	근본적으로	펀더멘털리	adv
+herbal	허브의, 약초의	허벌	adj
+incurable	불치의	인큐어러블	adj
+independently	독립적으로	인디펜던틀리	adv
+insert	삽입하다, 넣다	인서트	verb
+internationally	국제적으로	인터네셔널리	adv
+intricate	복잡한	인트리킷	adj
+joyful	기쁜	조이풀	adj
+misplace	잘못두다	미스플레이스	verb
+moan	신음하다	몬	verb
+omit	생략하다	오밋	verb
+orthodox	정통의	오서독스	adj
+overpower	제압하다	오버파워	verb
+slack	느슨한, 태만한	슬랙	adj
+submerge	잠기다, 물속에넣다	서브머지	verb
+volatile	변덕스러운, 휘발성의	볼러타일	adj
+wither	시들다	위더	verb
+administer	관리하다, 투여하다	어드미니스터	verb
+afflict	괴롭히다	어플릭트	verb
+agreeable	기분좋은, 동의하는	어그리어블	adj
+alleviate	완화하다	얼리비에이트	verb
+colossal	거대한	컬로설	adj
+constitutional	헌법의	콘스티튜셔널	adj
+daft	어리석은	데프트	adj
+discard	버리다	디스카드	verb
+disobey	불복종하다, 어기다	디스오베이	verb
+doable	가능한	두어블	adj
+economical	경제적인, 절약하는	이코노미컬	adj
+effortlessly	쉽게	에포틀리슬리	adv
+enlist	입대하다	인리스트	verb
+fatty	지방이많은	페티	adj
+fearful	두려워하는	피어풀	adj
+fiscal	재정의	피스컬	adj
+flick	튕기다	플릭	verb
+fuzzy	흐릿한, 보송보송한	퍼지	adj
+grumble	투덜거리다	그럼블	verb
+impatiently	초조하게	임페이션틀리	adv
+inadequate	부적절한, 불충분한	인에디퀴트	adj
+indebted	빚진, 신세진	인데티드	adj
+ineffective	효과없는	인이펙티브	adj
+infest	들끓다, 만연하다	인페스트	verb
+lurk	잠복하다, 숨어있다	러크	verb
+meddle	간섭하다	메들	verb
+mesmerize	매료시키다	메즈머라이즈	verb
+meticulous	꼼꼼한	머티큘러스	adj
+obsessive	강박적인, 집착하는	옵세시브	adj
+persist	지속하다, 고집하다	퍼시스트	verb
+posh	고급스러운	포쉬	adj
+preach	설교하다	프리치	verb
+purr	가르랑거리다	퍼	verb
+retain	유지하다, 보유하다	리테인	verb
+ridiculously	터무니없이	리디큘러슬리	adv
+rustic	시골풍의	러스틱	adj
+scientifically	과학적으로	사이언티피컬리	adv
+squeak	찍찍거리다, 삐걱거리다	스퀵	verb
+stimulate	자극하다	스티뮬레이트	verb
+sufficiently	충분히	서피션틀리	adv
+territorial	영토의	테리토리얼	adj
+touchy	민감한	터치	adj
+undermine	약화시키다	언더마인	verb
+upward	위로, 상승하는	업워드	adv,adj
+voluntary	자발적인	볼런테리	adj
+widen	넓히다	와이든	verb
+abnormal	비정상적인	에브노멀	adj
+appropriately	적절하게	어프로프리어틀리	adv
+arouse	불러일으키다	어라우즈	verb
+atop	꼭대기에	어톱	adv
+attentively	주의깊게	어텐티블리	adv
+autonomous	자율의, 자치의	오토노머스	adj
+conform	따르다	컨폼	verb
+consecutive	연속적인	컨세큐티브	adj
+disloyal	불충한	디스로열	adj
+easygoing	느긋한	이지고잉	adj
+finalize	마무리하다	파이널라이즈	verb
+fragrant	향기로운	프레이그런트	adj
+illustrate	설명하다	일러스트레이트	verb
+ingenious	독창적인	인지니어스	adj
+integral	필수적인	인티그럴	adj
+integrate	통합하다	인티그레이트	verb
+intentional	의도적인	인텐셔널	adj
+ironic	아이러니한, 반어적인	아이러닉	adj
+kneel	무릎꿇다	닐	verb
+migratory	이동하는, 철새의	마이그러토리	adj
+noticeable	뚜렷한, 두드러진	노티서블	adj
+obsolete	구식의	옵솔리트	adj
+pretentious	허세부리는	프리텐셔스	adj
+problematic	문제가있는	프로블러메틱	adj
+proclaim	선언하다	프로클레임	verb
+resent	분개하다	리젠트	verb
+ridicule	조롱하다	리디큘	verb
+rotate	회전하다	로테이트	verb
+scorch	그슬리다	스코치	verb
+solemn	엄숙한	솔럼	adj
+surpass	능가하다	서페스	verb
+unwavering	흔들림없는	언웨이버링	adj
+worsen	악화되다	워슨	verb
+yank	홱잡아당기다	옝크	verb
+architectural	건축의	아키텍처럴	adj
+chiefly	주로	치플리	adv
+cognitive	인지의	코그니티브	adj
+confide	털어놓다	컨파이드	verb
+cowardly	비겁한	카워들리	adj
+cremate	화장하다	크리메이트	verb
+customize	맞춤화하다, 커스터마이즈하다	커스터마이즈	verb
+defective	결함있는, 불량	디펙티브	adj
+disclose	공개하다, 밝히다	디스클로즈	verb
+diversify	다양화하다	다이버시파이	verb
+elevate	높이다, 올리다	엘리베이트	verb
+gracious	친절한, 우아한	그레이셔스	adj
+immerse	담그다, 몰두하다	이머스	verb
+irritable	예민한	이리터블	adj
+liberate	해방하다, 해방시키다	리버레이트	verb
+magnify	확대하다	메그니파이	verb
+methodical	체계적인, 꼼꼼한	메서디컬	adj
+namely	즉, 다시말해	네임리	adv
+outdated	구식의, 낡은	아웃데이티드	adj
+reasonably	합리적으로, 꽤	리즈너블리	adv
+rejoice	기뻐하다	리조이스	verb
+render	렌더링하다, 만들다, 제공하다	렌더	verb
+sinister	불길한, 사악한	시니스터	adj
+specially	특별히	스페셜리	adv
+suffice	충분하다	서파이스	verb
+swerve	피하다	스워브	verb
+synonymous	동의어의, 같은의미의	시노니머스	adj
+treacherous	위험한, 배신하는	트레처러스	adj
+unimportant	사소한	언임포턴트	adj
+uninteresting	재미없는	언인터레스팅	adj
+abound	많다, 풍부하다	어바운드	verb
+adamant	단호한	에더먼트	adj
+ancestral	조상의, 선조의	엔세스트럴	adj
+arbitrary	임의의, 자의적인	아비트러리	adj
+certify	증명하다, 인증하다	서티파이	verb
+circular	원형의, 순환의	서큘러	adj
+circumcise	할례하다, 포경수술하다	서컴사이즈	verb
+continental	대륙의	콘티넨털	adj
+dangerously	위험하게	데인저러슬리	adv
+disagreeable	불쾌한	디스어그리어블	adj
+downright	완전히, 순전히	다운라이트	adv,adj
+eerie	으스스한, 섬뜩한	이어리	adj
+emigrate	이민가다, 이주하다	에미그레이트	verb
+evasive	회피하는, 얼버무리는	이베이시브	adj
+gradual	점진적인	그레주얼	adj
+infallible	틀림없는, 절대적인	인펠러블	adj
+irreversible	불가역적인	이리버서블	adj
+manually	수동으로	메뉴얼리	adv
+marginalize	소외시키다	마지널라이즈	verb
+misjudge	잘못판단하다, 오판하다	미스저지	verb
+moldy	곰팡이핀	몰디	adj
+narcissistic	자기애적인, 나르시시스트적인	나르시시스틱	adj
+oblivious	무관심한	어블리비어스	adj
+oppressive	억압적인, 숨막히는	어프레시브	adj
+overwhelmingly	압도적으로	오버웰밍리	adv
+painfully	고통스럽게, 아프게	페인펄리	adv
+plainly	분명히, 솔직히	플레인리	adv
+prickly	가시가많은, 따끔따끔한	프리클리	adj
+prolong	연장하다, 늘이다	프롤롱	verb
+provocative	도발적인	프러보커티브	adj
+puke	토하다	퓨크	verb
+quench	해소하다, 끄다	퀜치	verb
+relocate	이전하다, 이주하다	리로케이트	verb
+rosy	장밋빛의, 장밋빛	로지	adj
+shameless	뻔뻔한, 염치없는	셰임리스	adj
+sly	교활한, 음흉한	슬라이	adj
+superb	최고의, 훌륭한	슈퍼브	adj
+unanswered	대답없는, 미해결의	언엔서드	adj
+wholly	전적으로, 완전히	홀리	adv
+abstain	삼가다, 기권하다	엡스테인	verb
+advisable	바람직한	어드바이저블	adj
+aerial	공중의, 항공의	에어리얼	adj
+arid	건조한, 메마른	에리드	adj
+avenge	복수하다	어벤지	verb
+barbaric	야만적인	바베릭	adj
+bind	묶다, 구속하다	바인드	verb
+bleak	암울한, 황량한	블리크	adj
+dehydrate	탈수시키다, 건조시키다	디하이드레이트	verb
+fiercely	맹렬히, 격렬하게	피어슬리	adv
+fishy	수상한, 비린	피쉬	adj
+futile	헛된, 소용없는	퓨타일	adj
+heroic	영웅적인	히로익	adj
+inflate	부풀리다, 팽창시키다	인플레이트	verb
+lengthy	긴, 장황한	렝시	adj
+merrily	즐겁게, 명랑하게	메릴리	adv
+mistreat	학대하다	미스트리트	verb
+repulsive	역겨운, 혐오스러운	리펄시브	adj
+rhetorical	수사적인	리토리컬	adj
+succumb	굴복하다, 무너지다	석컴	verb
+telepathic	텔레파시의	텔레파식	adj
+tranquil	고요한, 평온한	트렝퀼	adj
+untrue	사실이아닌, 거짓의	언트루	adj
+aggravate	악화시키다	에그러베이트	verb
+ardent	열렬한	아던트	adj
+awhile	잠시, 잠깐	어와일	adv
+constitute	구성하다	컨스티튜트	verb
+crafty	교활한	크레프티	adj
+crumble	부서지다, 무너지다	크럼블	verb
+dazzle	현혹하다	데즐	verb
+delirious	정신착란의, 열광한	딜리리어스	adj
+denounce	비난하다, 고발하다	디나운스	verb
+embark	승선하다, 착수하다	임바크	verb
+eradicate	근절하다, 박멸하다	이레디케이트	verb
+excel	뛰어나다	엑셀	verb
+horizontal	수평의, 가로	호리존털	adj
+hospitable	친절한, 환대하는	호스피터블	adj
+illegible	읽기어려운	일레저블	adj
+improvise	즉흥으로하다, 임기응변하다	임프로바이즈	verb
+infinitely	무한히	인피니틀리	adv
+inherent	내재된, 고유의	인히어런트	adj
+lavish	호화로운, 사치스러운	레비시	adj
+lucrative	수익성좋은	루크러티브	adj
+moderately	적당히, 중간정도로	모더러틀리	adv
+onboard	탑재된, 기내의	온보드	adj
+parliamentary	의회의	팔러멘터리	adj
+plump	통통한, 포동포동한	플럼프	adj
+procrastinate	미루다, 꾸물거리다	프로크레스티네이트	verb
+reborn	다시태어난, 환생한	리본	adj
+remarkably	놀랍게도, 현저히	리마커블리	adv
+reside	거주하다, 살다	리자이드	verb
+scrub	문지르다, 문질러닦다	스크럽	verb
+senseless	무의미한, 무분별한	센스리스	adj
+serene	고요한, 평온한	서린	adj
+stinky	냄새나는	스팅키	adj
+stricken	시달리는, 고통받는	스트리컨	adj
+subsequently	그후, 이어서	서브시퀀틀리	adv
+timeless	영원한	타임리스	adj
+undertake	맡다, 착수하다	언더테이크	verb
+vibrate	진동하다, 떨리다	바이브레이트	verb
+victorious	승리한	빅토리어스	adj
+vigilant	경계하는, 조심하는	비질런트	adj
+vividly	생생하게, 선명하게	비비들리	adv
+exempt	면제된, 면제하다	이그젬프트	adj,verb
+postal	우편의	포스털	adj
+applicable	해당되는	에플리커블	adj
+municipal	시의, 지방자치의	뮤니시펄	adj
+electromagnetic	전자기의	일렉트로마그네틱	adj
+intermediate	중급의, 중간의	인터미디어트	adj
+outright	완전히, 노골적인	아웃라이트	adv,adj
+tribal	부족의	트라이벌	adj
+standardize	표준화하다	스텐더다이즈	verb
+unpaid	미지급의, 무급의	언페이드	adj
+indirect	간접적인	인다이렉트	adj
+maritime	해양의, 해상의	메리타임	adj
+molecular	분자의	몰레큘러	adj
+overdue	기한이지난, 연체된	오버듀	adj
+terminate	종료하다, 끝내다	터미네이트	verb
+finite	유한한	파이나이트	adj
+internally	내부적으로	인터널리	adv
+subsequent	이후의, 다음의	서브시퀀트	adj
+validate	검증하다, 확인하다	벨리데이트	verb
+bilateral	양자의, 쌍방의	바이레터럴	adj
+comparative	비교의, 비교적인	컴페러티브	adj
+explicit	명시적인, 노골적인	익스플리싯	adj
+operational	운영상의, 작동하는	오퍼레이셔널	adj
+precede	앞서다, 선행하다	프리시드	verb
+adjustable	조절가능한	어저스터블	adj
+align	정렬하다, 맞추다	얼라인	verb
+allocate	할당하다, 배분하다	엘로케이트	verb
+annul	무효로하다, 취소하다	어널	verb
+appraise	평가하다, 감정하다	어프레이즈	verb
+arbitrarily	임의로, 마음대로	아비트레럴리	adv
+archival	기록의, 기록보관의	아카이벌	adj
+bestow	수여하다, 주다	비스토	verb
+broke	빈털터리인, 파산한	브로크	adj
+capitalize	대문자로쓰다, 활용하다	케피털라이즈	verb
+concurrent	동시의, 공존하는	컨커런트	adj
+consign	맡기다, 위탁하다	컨사인	verb
+consolidate	통합하다, 강화하다	컨솔리데이트	verb
+contractual	계약상의	컨트렉추얼	adj
+corroborate	확증하다, 뒷받침하다	커로버레이트	verb
+cumulative	누적의, 누적	큐뮬러티브	adj
+decompose	분해하다, 부패하다	디컴포즈	verb
+defer	미루다, 연기하다	디퍼	verb
+directional	방향의	디렉셔널	adj
+disband	해산하다	디스벤드	verb
+disciplinary	징계의	디서플리너리	adj
+elapse	경과하다, 지나다	일렙스	verb
+emancipate	해방하다	이멘시페이트	verb
+embody	구현하다, 구체화하다	임보디	verb
+encrypt	암호화하다	인크립트	verb
+entrust	맡기다, 위임하다	인트러스트	verb
+erroneous	잘못된, 틀린	이로니어스	adj
+exchangeable	교환가능한	익스체인저블	adj
+exemplify	예시하다, 예증하다	이그젬플리파이	verb
+facilitate	촉진하다	퍼실리테이트	verb
+flagrant	노골적인, 명백한	플레이그런트	adj
+fractional	부분적인, 분수의	프렉셔널	adj
+geographic	지리적인, 지리의	지오그래픽	adj
+geological	지질의, 지질학의	지올로지컬	adj
+geometric	기하학적인	지오메트릭	adj
+governmental	정부의	거버먼털	adj
+henceforth	이후로, 앞으로	헨스포스	adv
+hourly	매시간의, 시간당	아워리	adj,adv
+implicit	암묵적인, 함축적인	임플리싯	adj
+inactive	비활성의	인엑티브	adj
+incapacitate	무력화하다	인커페서테이트	verb
+incorporate	포함하다, 통합하다, 법인화하다	인코퍼레이트	verb
+incremental	점진적인, 증분의	인크리멘털	adj
+incur	초래하다, 발생시키다	인커	verb
+ineligible	자격없는	인엘리저블	adj
+informative	유익한	인포머티브	adj
+institutional	제도적인, 기관의	인스티튜셔널	adj
+insulate	단열하다, 절연하다, 격리하다	인설레이트	verb
+intangible	무형의	인텐저블	adj
+interbank	은행간의	인터뱅크	adj
+interim	임시의, 중간의	인터림	adj
+intrinsic	본질적인, 고유한	인트린식	adj
+judicial	사법의, 재판의	주디셜	adj
+liquidate	청산하다	리퀴데이트	verb
+logistic	물류의	로지스틱	adj
+malignant	악성의	멀리그넌트	adj
+marginal	주변의, 미미한, 한계의	마지널	adj
+marginally	약간, 미미하게	마지널리	adv
+marketable	시장성있는	마케터블	adj
+midway	중간에, 도중에	미드웨이	adv,adj
+miscellaneous	기타, 잡다한	미셀레니어스	adj
+modular	모듈식의	모듈러	adj
+multilateral	다자간의	멀티레터럴	adj
+negotiable	협상가능한	니고시어블	adj
+nominal	명목상의	노미널	adj
+nominate	지명하다, 추천하다	노미네이트	verb
+numeric	숫자의	뉴메릭	adj
+numerical	수치의, 숫자의	뉴메리컬	adj
+occupational	직업의	오큐페이셔널	adj
+oversee	감독하다	오버시	verb
+parse	구문분석하다, 파싱하다	파스	verb
+participatory	참여의	파티시퍼토리	adj
+payable	지불해야할	페이어블	adj
+penultimate	끝에서두번째의	피널티밋	adj
+periodically	주기적으로	피리오디컬리	adv
+preferential	우대의, 특혜의	프레퍼렌셜	adj
+preliminary	예비의, 사전의	프릴리미너리	adj
+prepay	선불하다	프리페이	verb
+promotional	홍보의, 판촉의	프로모셔널	adj
+proportional	비례하는	프로포셔널	adj
+proprietary	독점의, 소유의	프로프라이어터리	adj
+provisional	임시의, 잠정적인	프로비저널	adj
+qualitative	질적인	퀄리테이티브	adj
+quantify	정량화하다	퀀티파이	verb
+quantitative	양적인, 정량적인	퀀티테이티브	adj
+radial	방사형의	레이디얼	adj
+reclaim	되찾다, 회수하다	리클레임	verb
+refinance	재융자하다	리파이낸스	verb
+refuel	급유하다	리퓨얼	verb
+regulate	규제하다, 조절하다	레귤레이트	verb
+regulatory	규제의	레귤러토리	adj
+reinvest	재투자하다	리인베스트	verb
+reopen	다시열다, 재개하다	리오픈	verb
+resend	재전송하다, 다시보내다	리센드	verb
+residual	잔여의, 잔류	레지듀얼	adj
+retractable	개폐식의	리트렉터블	adj
+revert	되돌리다, 복귀하다	리버트	verb
+rework	재작업하다, 수정하다	리워크	verb
+rue	후회하다	루	verb
+seasonally	계절적으로	시즈널리	adv
+secede	탈퇴하다, 분리독립하다	시시드	verb
+shorten	줄이다	쇼튼	verb
+simulate	모의실험하다, 흉내내다	시뮬레이트	verb
+spatial	공간의, 공간적인	스페이셜	adj
+statistical	통계적인, 통계의	스테티스티컬	adj
+statutory	법정의, 법령의	스테추토리	adj
+stipulate	규정하다, 명시하다	스티퓰레이트	verb
+straddle	걸치다	스트레들	verb
+subtract	빼다, 감하다	서브트렉트	verb
+sundry	잡다한, 여러가지의	선드리	adj
+supersede	대체하다	슈퍼시드	verb
+supervise	감독하다, 관리하다	슈퍼바이즈	verb
+supervisory	감독의	슈퍼바이저리	adj
+supplemental	보충의, 추가의	서플리멘털	adj
+supplementary	보충의, 추가의	서플리멘터리	adj
+symmetric	대칭의, 대칭적인	시메트릭	adj
+synthesize	합성하다, 종합하다	신서사이즈	verb
+systematic	체계적인	시스터메틱	adj
+tangible	유형의, 실체적인	텐저블	adj
+taxable	과세대상의	텍서블	adj
+temporal	시간의, 일시적인	템퍼럴	adj
+textual	본문의, 텍스트의	텍스추얼	adj
+tidal	조수의, 조석의	타이들	adj
+tradable	거래가능한	트레이더블	adj
+transact	거래하다	트랜잭트	verb
+transferable	양도가능한	트렌스퍼러블	adj
+transliterate	음역하다	트렌스리터레이트	verb
+unapproved	미승인	언어프루브드	adj
+unclaimed	주인없는	언클레임드	adj
+underemployed	불완전고용의	언더임플로이드	adj
+underwrite	인수하다, 보증하다	언더라이트	verb
+unearned	불로의	언언드	adj
+unilateral	일방적인	유니레터럴	adj
+unrestricted	제한없는	언리스트릭티드	adj
+unused	미사용의	언유즈드	adj
+utilize	활용하다, 이용하다	유틸라이즈	verb
+vindicate	입증하다	빈디케이트	verb
+wireless	무선의, 무선	와이어리스	adj
+withhold	보류하다, 원천징수하다	위드홀드	verb
+own	소유하다, 자신의	오운	verb,adj
+rob	털다, 강탈하다	로브	verb
+advanced	고급의, 진보한, 발전된	어드밴스트	adj
+bitter	쓴, 쓰다, 씁쓸하다	비터	adj
+clever	영리한, 똑똑하다	클레버	adj
+former	이전의, 전	포머	adj
+proper	적절한, 올바른	프로퍼	adj
+surprising	놀라운	서프라이징	adj
+indeed	정말, 실로	인디드	adv
+disgusting	역겨운, 구역질나는	디스거스팅	adj
+interested	관심있는, 흥미있는	인터레스티드	adj
+bored	지루한, 심심한	보어드	adj
+surprised	놀란	서프라이즈드	adj
+worried	걱정하는, 걱정되는	워리드	adj
+married	결혼한, 기혼의	메리드	adj
+confused	혼란스러운, 헷갈리는	컨퓨즈드	adj
+satisfied	만족한	세티스파이드	adj
+frustrated	좌절한, 답답한	프러스트레이티드	adj
+disappointed	실망한	디서포인티드	adj
+shocked	충격받은	쇼크트	adj
+relieved	안도한, 안심한	릴리브드	adj
+confusing	헷갈리는, 혼란스러운	컨퓨징	adj
+disappointing	실망스러운	디서포인팅	adj
+challenging	어려운, 도전적인	챌린징	adj
+missing	없어진, 실종된	미싱	adj
+pleased	기쁜, 만족한	플리즈드	adj
+crowded	붐비는, 혼잡한	크라우디드	adj
+stressed	스트레스받은	스트레스트	adj
+categorize	분류하다	케티고라이즈	verb
+cite	인용하다	사이트	verb
+compensate	보상하다, 보충하다	컴펜세이트	verb
+compress	압축하다	컴프레스	verb
+configure	설정하다, 구성하다	컨피겨	verb
+differentiate	구별하다, 차별화하다	디퍼렌시에이트	verb
+digest	소화하다	다이제스트	verb,noun
+diminish	줄어들다, 감소하다	디미니시	verb
+discriminate	차별하다, 구별하다	디스크리미네이트	verb
+disrupt	방해하다	디스럽트	verb
+endorse	지지하다, 보증하다	인도스	verb
+enlarge	확대하다, 키우다	인라지	verb
+evaporate	증발하다	이베퍼레이트	verb
+flourish	번창하다, 번성하다	플러리시	verb
+grieve	슬퍼하다, 애도하다	그리브	verb
+infer	추론하다	인퍼	verb
+initiate	시작하다, 개시하다	이니시에이트	verb
+migrate	이주하다, 이동하다	마이그레이트	verb
+minimize	최소화하다	미니마이즈	verb
+nurture	양육하다, 키우다	너처	verb
+reinforce	강화하다, 보강하다	리인포스	verb
+revise	수정하다, 개정하다	리바이즈	verb
+scrape	긁다, 긁어내다	스크레이프	verb
+shatter	깨지다	셰터	verb
+simplify	단순화하다	심플리파이	verb
+undo	되돌리다, 취소하다	언두	verb
+visualize	시각화하다, 상상하다	비주얼라이즈	verb
+detailed	자세한, 상세한	디테일드	adj
+embarrassing	창피한, 당황스러운	임베러싱	adj
+experienced	숙련된	익스피리언스트	adj
+frank	솔직한	프랭크	adj
+frightening	무서운	프라이트닝	adj
+modest	겸손한, 적당한	모디스트	adj
+notable	유명한	노터블	adj
+skilled	숙련된, 능숙한	스킬드	adj
+talented	재능있는	텔런티드	adj
+tender	부드러운, 다정한	텐더	adj
+upper	위쪽의, 상부의	어퍼	adj
+willing	자발적인, 기꺼이하는	윌링	adj
+additionally	게다가, 추가로	어디셔널리	adv
+consequently	결과적으로, 따라서	컨시퀀틀리	adv
+indoors	실내에서, 실내	인도어스	adv
+outdoors	야외에서, 야외	아웃도어스	adv
+similarly	비슷하게, 마찬가지로	시밀러리	adv
+automate	자동화하다	오토메이트	verb
+maximize	최대화하다, 극대화하다	멕시마이즈	verb
+portray	묘사하다, 그리다	포트레이	verb
+recharge	충전하다, 재충전하다	리차지	verb
+redo	다시하다	리두	verb
+charming	매력적인	차밍	adj
+convincing	설득력있는	컨빈싱	adj
+dedicated	헌신적인, 전용의	데디케이티드	adj
+demanding	까다로운, 힘든	디멘딩	adj
+devoted	헌신적인, 열성적인	디보티드	adj
+disposable	일회용의	디스포저블	adj
+disturbing	충격적인	디스터빙	adj
+fascinating	매력적인, 흥미로운	페시네이팅	adj
+optimal	최적의	옵티멀	adj
+overwhelming	압도적인	오버웰밍	adj
+puzzled	어리둥절한	퍼즐드	adj
+qualified	자격이있는	퀄리파이드	adj
+refreshing	상쾌한, 신선한	리프레싱	adj
+relaxed	느긋한, 편안한	릴랙스트	adj
+stunning	아주멋진, 놀라운	스터닝	adj
+symbolic	상징적인	심볼릭	adj
+ideally	이상적으로	아이디얼리	adv
+frightened	겁먹은, 무서워하는	프라이튼드	adj
+terrified	겁에질린	테러파이드	adj
+amused	재미있어하는	어뮤즈드	adj
+satisfying	만족스러운	세티스파잉	adj
+amusing	재미있는, 즐거운	어뮤징	adj
+existing	기존의, 현재의	이그지스팅	adj
+remaining	남은, 나머지의	리메이닝	adj
+leading	선도적인, 주요한	리딩	adj
+increasing	증가하는	인크리싱	adj
+working	일하는, 작동하는	워킹	adj
+loving	다정한, 사랑하는	러빙	adj
+caring	배려하는, 다정한	케어링	adj
+touching	감동적인	터칭	adj
+moving	감동적인, 움직이는	무빙	adj
+delighted	아주기쁜	딜라이티드	adj
+thrilled	신난, 아주기쁜	스릴드	adj
+impressed	감명받은, 감동받은	임프레스트	adj
+determined	단호한, 결심한	디터민드	adj
+motivated	의욕있는, 동기부여된	모티베이티드	adj
+organized	정리된, 조직적인	오거나이즈드	adj
+spoiled	버릇없는, 상한	스포일드	adj
+united	연합한, 통합된	유나이티드	adj
+educated	교육받은, 교양있는	에듀케이티드	adj
+tiring	피곤한	타이어링	adj
+relaxing	편안한, 느긋한	릴랙싱	adj
+inspiring	감동적인, 고무적인	인스파이어링	adj
+promising	유망한	프로미싱	adj
+terrifying	무시무시한	테러파잉	adj
+furthermore	게다가, 더욱이	퍼더모어	adv
+afterwards	나중에, 그후에	에프터워즈	adv
+ascend	오르다, 상승하다	어센드	verb
+coincide	일치하다, 겹치다	코인사이드	verb
+concede	인정하다, 양보하다	컨시드	verb
+contemplate	숙고하다, 고려하다	컨템플레이트	verb
+deduct	공제하다, 빼다	디덕트	verb
+deviate	벗어나다, 이탈하다	디비에이트	verb
+dictate	지시하다	딕테이트	verb
+emit	방출하다, 내뿜다	이미트	verb
+enact	제정하다	이넥트	verb
+enlighten	깨우치다, 계몽하다	인라이튼	verb
+fluctuate	변동하다	플럭추에이트	verb
+foresee	예견하다, 내다보다	포시	verb
+formulate	공식화하다	포뮬레이트	verb
+hinder	방해하다	힌더	verb
+induce	유도하다, 유발하다	인듀스	verb
+inhibit	억제하다	인히비트	verb
+innovate	혁신하다	이노베이트	verb
+intercept	가로채다, 차단하다	인터셉트	verb
+lessen	줄이다, 덜다	레슨	verb
+linger	머무르다	링거	verb
+mimic	흉내내다, 모방하다	미믹	verb
+mutter	중얼거리다	머터	verb
+narrate	이야기하다, 서술하다	내레이트	verb
+nourish	키우다	너리시	verb
+outweigh	능가하다	아웃웨이	verb
+ponder	숙고하다	폰더	verb
+preside	주재하다	프리사이드	verb
+prosecute	기소하다	프로시큐트	verb
+prosper	번영하다, 번창하다	프로스퍼	verb
+reconcile	화해시키다, 조화시키다	레컨사일	verb
+rehearse	리허설하다, 연습하다	리허스	verb
+speculate	추측하다, 투기하다	스페큘레이트	verb
+stabilize	안정시키다	스테이빌라이즈	verb
+sway	흔들다, 흔들리다	스웨이	verb
+sympathize	동정하다, 공감하다	심퍼사이즈	verb
+unify	통일하다, 통합하다	유니파이	verb
+uphold	지지하다, 유지하다	업홀드	verb
+utter	말하다, 완전한	어터	verb,adj
+adverse	불리한, 부정적인	에드버스	adj
+approximate	대략의, 근사치의	어프록시메이트	adj,verb
+coarse	거친, 굵은	코스	adj
+comparable	비슷한	컴페러블	adj
+compulsory	의무적인, 강제적인	컴펄서리	adj
+conceptual	개념적인	컨셉추얼	adj
+earnest	진지한, 성실한	어니스트	adj
+eventual	최종적인	이벤추얼	adj
+feeble	약한, 허약한	피블	adj
+fruitful	유익한	프루트풀	adj
+imminent	임박한	이미넌트	adj
+imperfect	불완전한	임퍼펙트	adj
+jolly	즐거운, 쾌활한	졸리	adj
+linear	선형의, 직선의	리니어	adj
+probable	그럴듯한, 개연성있는	프로버블	adj
+provincial	지방의	프로빈셜	adj
+repetitive	반복적인	리피티티브	adj
+sober	냉정한	소버	adj
+striking	인상적인	스트라이킹	adj
+tolerant	관대한	톨러런트	adj
+wicked	사악한, 못된	위키드	adj
+zealous	열성적인	젤러스	adj
+broadly	대체로, 넓게	브로들리	adv
+conveniently	편리하게	컨비니언틀리	adv
+distinctly	뚜렷하게, 분명히	디스팅틀리	adv
+evenly	고르게, 균등하게	이븐리	adv
+explicitly	명시적으로, 분명히	익스플리시틀리	adv
+faithfully	충실하게	페이스풀리	adv
+loosely	느슨하게	루슬리	adv
+notably	특히, 현저히	노터블리	adv
+rudely	무례하게	루들리	adv
+thereby	그로써	데어바이	adv
+vastly	엄청나게, 크게	베스틀리	adv
+abbreviate	줄이다, 약어로쓰다	어브리비에이트	verb
+abort	중단하다, 낙태하다	어보트	verb
+adhere	고수하다, 붙다	에드히어	verb
+affirm	단언하다, 확인하다	어펌	verb
+alienate	소외시키다	에일리어네이트	verb
+amass	모으다, 축적하다	어메스	verb
+amplify	증폭하다, 확대하다	앰플리파이	verb
+appease	달래다, 진정시키다	어피즈	verb
+apprehend	체포하다, 이해하다	에프리헨드	verb
+assimilate	동화하다, 흡수하다	어시밀레이트	verb
+attest	증명하다	어테스트	verb
+augment	증가시키다, 늘리다	오그먼트	verb
+authenticate	인증하다	오센티케이트	verb
+avert	피하다, 막다	어버트	verb
+backfire	역효과	백파이어	verb
+belittle	얕보다, 깎아내리다	비리틀	verb
+bicker	말다툼하다	비커	verb
+blurt	불쑥말하다	블러트	verb
+bolster	강화하다, 북돋우다	볼스터	verb
+bombard	폭격하다, 퍼붓다	봄바드	verb
+brighten	밝아지다	브라이튼	verb
+broaden	넓히다	브로든	verb
+brood	곱씹다, 품다	브루드	verb
+bulge	불룩하다, 부풀다	벌지	verb,noun
+calibrate	보정하다	켈리브레이트	verb
+capsize	뒤집히다, 전복되다	켑사이즈	verb
+caress	애무하다, 쓰다듬다	커레스	verb
+censor	검열하다	센서	verb
+centralize	집중시키다, 중앙집권화하다	센트럴라이즈	verb
+chatter	수다떨다, 재잘거리다	체터	verb
+choreograph	안무하다	코리오그래프	verb
+circulate	순환하다, 유포하다	서큘레이트	verb
+circumvent	우회하다, 피하다	서컴벤트	verb
+coax	달래다, 구슬리다	콕스	verb
+coerce	강요하다	코어스	verb
+commemorate	기념하다	커메머레이트	verb
+commence	시작하다	커멘스	verb
+commend	칭찬하다	커멘드	verb
+complement	보완하다, 보충	컴플리먼트	verb,noun
+comprise	구성하다, 포함하다	컴프라이즈	verb
+concur	동의하다	컨커	verb
+condense	응축하다, 압축하다	컨덴스	verb
+condone	용납하다	컨돈	verb
+confer	수여하다, 협의하다	컨퍼	verb
+conjure	떠올리다	컨저	verb
+conspire	공모하다	컨스파이어	verb
+constrain	제약하다	컨스트레인	verb
+converse	대화하다, 반대	컨버스	verb,noun
+convene	소집하다	컨빈	verb
+cram	벼락치기하다, 쑤셔넣다	크렘	verb
+crumple	구기다	크럼플	verb
+culminate	절정에이르다	컬미네이트	verb
+curtail	줄이다, 단축하다	커테일	verb
+dangle	매달리다, 매달다	뎅글	verb
+debunk	폭로하다	디벙크	verb
+decelerate	감속하다	디셀러레이트	verb
+decipher	해독하다	디사이퍼	verb
+decode	해독하다, 디코딩하다	디코드	verb
+deduce	추론하다	디듀스	verb
+defy	거역하다, 무시하다	디파이	verb
+degrade	비하하다, 저하시키다	디그레이드	verb
+deplete	고갈시키다	디플리트	verb
+deplore	개탄하다	디플로어	verb
+deter	단념시키다, 억제하다	디터	verb
+devalue	평가절하하다	디벨류	verb
+digitize	디지털화하다	디지타이즈	verb
+dilute	희석하다	다일루트	verb
+disapprove	반대하다, 못마땅해하다	디서프루브	verb
+disarm	무장해제하다	디스암	verb
+discern	분별하다, 알아차리다	디선	verb
+discontinue	중단하다, 단종하다	디스컨티뉴	verb
+dismantle	분해하다, 해체하다	디스멘틀	verb
+disown	의절하다	디스오운	verb
+dispel	떨쳐버리다, 없애다	디스펠	verb
+disperse	흩어지다, 해산시키다	디스퍼스	verb
+displace	대체하다, 쫓아내다	디스플레이스	verb
+disprove	반증하다	디스프루브	verb
+dissect	해부하다, 분석하다	다이섹트	verb
+dissuade	단념시키다	디스웨이드	verb
+distill	증류하다	디스틸	verb
+divert	돌리다, 전환하다	다이버트	verb
+divulge	누설하다, 밝히다	다이벌지	verb
+dribble	드리블하다	드리블	verb
+dwindle	줄어들다	드윈들	verb
+eavesdrop	엿듣다	이브즈드롭	verb
+elicit	끌어내다, 이끌어내다	일리시트	verb
+elude	피하다, 빠져나가다	일루드	verb
+embellish	꾸미다, 장식하다	임벨리시	verb
+embezzle	횡령하다	임베즐	verb
+encircle	둘러싸다	인서클	verb
+encode	암호화하다, 인코딩하다	인코드	verb
+encompass	아우르다, 포함하다	인컴퍼스	verb
+engrave	새기다, 조각하다	인그레이브	verb
+engulf	삼키다, 휩싸다	인걸프	verb
+enslave	노예로만들다	인슬레이브	verb
+entail	수반하다	인테일	verb
+entangle	얽히다	인텡글	verb
+envision	상상하다, 구상하다	인비전	verb
+equate	동일시하다	이퀘이트	verb
+erode	침식하다, 약화시키다	이로드	verb
+escalate	확대되다, 고조되다	에스컬레이트	verb
+evade	피하다, 회피하다	이베이드	verb
+evoke	불러일으키다	이보크	verb
+exacerbate	악화시키다	이그제서베이트	verb
+excavate	발굴하다	엑스커베이트	verb
+exert	발휘하다, 쓰다	이그저트	verb
+exhale	내쉬다	엑스헤일	verb
+expedite	신속히처리하다	엑스퍼다이트	verb
+extort	갈취하다	익스토트	verb
+fabricate	조작하다, 제작하다	페브리케이트	verb
+fathom	헤아리다, 이해하다	페덤	verb
+fidget	꼼지락거리다	피짓	verb
+flaunt	과시하다	플론트	verb
+flinch	움찔하다	플린치	verb
+flutter	펄럭이다, 두근거리다	플러터	verb
+fortify	강화하다, 요새화하다	포티파이	verb
+foretell	예언하다	포텔	verb
+forfeit	몰수당하다, 박탈당하다	포핏	verb
+fumble	더듬다, 놓치다	펌블	verb
+generalize	일반화하다	제너럴라이즈	verb
+germinate	발아하다, 싹트다	저미네이트	verb
+gloat	고소해하다	글로트	verb
+glorify	미화하다, 찬미하다	글로리파이	verb
+gnaw	갉아먹다	노	verb
+gobble	게걸스럽게먹다	고블	verb
+grapple	씨름하다, 붙잡다	그레플	verb
+grope	더듬다	그로프	verb
+guzzle	벌컥벌컥마시다	거즐	verb
+hamper	방해하다	헴퍼	verb
+hasten	서두르다	헤이슨	verb
+haggle	흥정하다	헤글	verb
+heave	들어올리다	히브	verb
+hoard	비축하다, 사재기하다	호드	verb
+hoist	들어올리다	호이스트	verb
+huddle	옹기종기모이다	허들	verb
+hurl	던지다	헐	verb
+hydrate	수분공급	하이드레이트	verb
+idolize	우상화하다	아이돌라이즈	verb
+immigrate	이민오다, 이주하다	이미그레이트	verb
+impair	손상시키다	임페어	verb
+impart	전하다, 나누어주다	임파트	verb
+impede	방해하다	임피드	verb
+impersonate	흉내내다, 사칭하다	임퍼서네이트	verb
+implore	간청하다	임플로어	verb
+incite	선동하다	인사이트	verb
+indict	기소하다	인다이트	verb
+indoctrinate	세뇌하다	인독트리네이트	verb
+infiltrate	침투하다	인필트레이트	verb
+inflame	불붙이다	인플레임	verb
+inflict	가하다, 입히다	인플릭트	verb
+infringe	침해하다	인프린지	verb
+infuriate	격분시키다	인퓨리에이트	verb
+ingest	섭취하다	인제스트	verb
+inhale	들이마시다, 흡입하다	인헤일	verb
+instigate	선동하다, 부추기다	인스티게이트	verb
+instill	주입하다, 심어주다	인스틸	verb
+intensify	강화하다, 심해지다	인텐시파이	verb
+invalidate	무효화하다	인벨리데이트	verb
+irrigate	관개하다	이리게이트	verb
+jeopardize	위협하다	제퍼다이즈	verb
+kindle	불붙이다	킨들	verb
+knead	반죽하다	니드	verb
+lament	애도하다, 한탄하다	러멘트	verb,noun
+legalize	합법화하다	리걸라이즈	verb
+legislate	입법하다	레지슬레이트	verb
+loathe	혐오하다	로드	verb
+loiter	어슬렁거리다	로이터	verb
+lubricate	윤활하다	루브리케이트	verb
+materialize	실현되다, 나타나다	머티리얼라이즈	verb
+mediate	중재하다	미디에이트	verb
+misbehave	못되게굴다	미스비헤이브	verb
+miscalculate	잘못계산하다	미스켈큘레이트	verb
+misinterpret	잘못해석하다, 오해하다	미스인터프리트	verb
+mispronounce	잘못발음하다	미스프러나운스	verb
+mitigate	완화하다	미티게이트	verb
+mobilize	동원하다	모빌라이즈	verb
+modernize	현대화하다	모더나이즈	verb
+moisten	적시다	모이슨	verb
+monopolize	독점하다	머노폴라이즈	verb
+munch	우적우적먹다	먼치	verb
+mutate	변이하다, 돌연변이	뮤테이트	verb
+nibble	조금씩뜯어먹다	니블	verb
+neutralize	중화하다, 무력화하다	뉴트럴라이즈	verb
+nudge	슬쩍찌르다	너지	verb
+nullify	무효화하다	널리파이	verb
+obliterate	말살하다, 지우다	어블리터레이트	verb
+obstruct	막다, 방해하다	업스트럭트	verb
+ooze	스며나오다	우즈	verb
+orchestrate	조직하다, 편곡하다	오케스트레이트	verb
+ostracize	따돌리다	오스트러사이즈	verb
+outdo	능가하다	아웃두	verb
+outlast	더오래가다	아웃레스트	verb
+outlive	더오래살다	아웃리브	verb
+outnumber	수적으로능가하다	아웃넘버	verb
+outsmart	한수앞서다	아웃스마트	verb
+overcharge	바가지씌우다, 과충전	오버차지	verb
+overeat	과식하다	오버이트	verb
+overestimate	과대평가하다	오버에스티메이트	verb
+overrate	과대평가하다	오버레이트	verb
+overrule	기각하다	오버룰	verb
+overshadow	가리다	오버쉐도우	verb
+overstate	과장하다	오버스테이트	verb
+overtake	추월하다, 앞지르다	오버테이크	verb
+overthrow	전복시키다, 타도하다	오버스로	verb
+overturn	뒤집다, 뒤집히다	오버턴	verb
+penalize	처벌하다	피널라이즈	verb
+perpetuate	영속시키다	퍼페추에이트	verb
+persevere	인내하다, 견디다	퍼서비어	verb
+pertain	관련되다	퍼테인	verb
+pester	괴롭히다, 조르다	페스터	verb
+pierce	뚫다, 찌르다	피어스	verb
+pinpoint	정확히찾아내다	핀포인트	verb
+placate	달래다	플레이케이트	verb
+plagiarize	표절하다	플레이저라이즈	verb
+plummet	곤두박질치다, 폭락하다	플러밋	verb
+plunder	약탈하다	플런더	verb
+pounce	덮치다	파운스	verb
+precipitate	촉발하다, 침전시키다	프리시피테이트	verb
+preheat	예열하다	프리히트	verb
+privatize	민영화하다	프라이버타이즈	verb
+proliferate	급증하다, 확산되다	프롤리퍼레이트	verb
+propel	추진하다	프로펠	verb
+protrude	튀어나오다	프로트루드	verb
+publicize	홍보하다, 알리다	퍼블리사이즈	verb
+purify	정화하다	퓨리파이	verb
+quiver	떨다, 떨림	퀴버	verb
+radiate	방출하다, 발산하다	레이디에이트	verb
+ramble	횡설수설하다, 거닐다	렘블	verb
+ransack	뒤지다	렌섹	verb
+ratify	비준하다	레티파이	verb
+rationalize	합리화하다	레셔널라이즈	verb
+ravage	황폐화하다	레비지	verb
+reaffirm	재확인하다	리어펌	verb
+rearrange	재배열하다, 재배치하다	리어레인지	verb
+rebuke	꾸짖다, 질책	리뷰크	verb
+recede	물러나다, 후퇴하다	리시드	verb
+reconstruct	재건하다	리컨스트럭트	verb
+rectify	바로잡다	렉티파이	verb
+recur	재발하다	리커	verb
+redeem	되찾다, 상환하다, 교환하다	리딤	verb
+redefine	재정의하다	리디파인	verb
+rediscover	재발견하다	리디스커버	verb
+redistribute	재분배하다	리디스트리뷰트	verb
+reevaluate	재평가하다	리이벨류에이트	verb
+refurbish	새로꾸미다	리퍼비시	verb
+refute	반박하다	리퓨트	verb
+regenerate	재생하다	리제너레이트	verb
+regress	퇴행하다	리그레스	verb
+regroup	재편성하다	리그룹	verb
+reimburse	상환하다, 환급하다	리임버스	verb
+reiterate	되풀이하다	리이터레이트	verb
+relent	누그러지다	릴렌트	verb
+relinquish	포기하다, 내주다	릴링퀴시	verb
+remodel	리모델링하다, 개조하다	리모델	verb
+rename	이름바꾸기, 개명하다	리네임	verb
+renounce	포기하다, 단념하다	리나운스	verb
+reorganize	재편성하다, 재조직하다	리오거나이즈	verb
+repel	물리치다, 쫓아내다	리펠	verb
+repent	회개하다, 뉘우치다	리펜트	verb
+rephrase	바꿔말하다	리프레이즈	verb
+replenish	보충하다	리플레니시	verb
+replicate	복제하다, 재현하다	레플리케이트	verb
+repress	억압하다, 억누르다	리프레스	verb
+reproach	비난하다, 책망	리프로치	verb,noun
+rescind	철회하다, 폐지하다	리신드	verb
+resonate	울려퍼지다	레저네이트	verb
+restate	다시말하다	리스테이트	verb
+restock	다시채우다, 재입고하다	리스톡	verb
+restructure	구조조정하다, 재구성하다	리스트럭처	verb
+resurface	다시나타나다	리서피스	verb
+resurrect	부활시키다	레저렉트	verb
+retaliate	보복하다	리텔리에이트	verb
+rethink	재고하다	리싱크	verb
+retort	반박하다, 말대꾸하다	리토트	verb
+retract	철회하다, 집어넣다	리트렉트	verb
+retrain	재교육하다	리트레인	verb
+revamp	개편하다	리벰프	verb
+revel	즐기다, 흥청거리다	레벌	verb
+revere	숭배하다, 존경하다	리비어	verb
+revoke	취소하다, 철회하다	리보크	verb
+rewind	되감다	리와인드	verb
+ripen	익다, 숙성하다	라이펀	verb
+rummage	뒤지다	러미지	verb
+sanitize	소독하다, 살균하다	세니타이즈	verb
+saturate	포화시키다, 흠뻑적시다	세처레이트	verb
+savor	음미하다	세이버	verb
+scald	데다	스콜드	verb
+scavenge	뒤지다, 찾아다니다	스케빈지	verb
+scoff	비웃다	스코프	verb
+scour	샅샅이뒤지다, 문질러닦다	스카워	verb
+scowl	노려보다, 찡그리다	스카울	verb
+scribble	휘갈겨쓰다, 낙서	스크리블	verb,noun
+scrutinize	면밀히조사하다	스크루터나이즈	verb
+sculpt	조각하다	스컬프트	verb
+secrete	분비하다	시크리트	verb
+segregate	분리하다, 차별하다	세그리게이트	verb
+shred	파쇄하다, 잘게찢다	슈레드	verb
+shudder	몸서리치다	셔더	verb
+shun	피하다, 멀리하다	선	verb
+sidestep	피하다, 회피하다	사이드스텝	verb
+sift	체로거르다, 가려내다	시프트	verb
+simmer	약불로끓이다	시머	verb
+skew	왜곡하다	스큐	verb
+slay	죽이다, 살해하다	슬레이	verb
+slither	미끄러지듯가다	슬리더	verb
+slouch	구부정하게앉다	슬라우치	verb
+smirk	히죽웃다	스머크	verb
+smother	질식시키다	스머더	verb
+smuggle	밀수하다	스머글	verb
+snarl	으르렁거리다	스날	verb
+snicker	낄낄거리다	스니커	verb
+snuggle	파고들다, 껴안다	스너글	verb
+socialize	어울리다, 사귀다	소셜라이즈	verb
+solicit	간청하다, 요청하다	설리시트	verb
+solidify	굳히다, 굳어지다	설리디파이	verb
+sprawl	뻗다, 퍼지다	스프롤	verb
+squander	낭비하다	스콴더	verb
+stagger	비틀거리다	스테거	verb
+stagnate	정체되다	스테그네이트	verb
+stammer	더듬다	스테머	verb
+stash	숨기다, 숨겨둔것	스테시	verb,noun
+stifle	억누르다	스타이플	verb
+stomp	쿵쿵걷다, 짓밟다	스톰프	verb
+streamline	간소화하다, 유선형	스트림라인	verb,noun
+strut	으스대며걷다	스트럿	verb
+stutter	더듬다	스터터	verb
+subdue	진압하다, 억누르다	서브듀	verb
+subside	가라앉다, 진정되다	서브사이드	verb
+swat	찰싹때리다	스왓	verb
+swoop	급강하하다, 덮치다	스웁	verb
+symbolize	상징하다	심벌라이즈	verb
+synchronize	동기화하다	싱크러나이즈	verb
+tamper	함부로손대다, 조작하다	템퍼	verb
+tarnish	더럽히다, 변색되다	타니시	verb
+taunt	조롱하다, 놀리다	톤트	verb
+televise	방송하다	텔리바이즈	verb
+thaw	녹다, 해동하다	소	verb
+thrash	마구때리다, 몸부림치다	스레시	verb
+thwart	좌절시키다, 방해하다	스워트	verb
+tingle	따끔거리다, 얼얼하다	팅글	verb
+tinker	만지작거리다	팅커	verb
+topple	넘어뜨리다, 무너지다	토플	verb
+trample	짓밟다	트렘플	verb
+transcend	초월하다	트렌센드	verb
+transcribe	받아쓰다, 전사하다	트렌스크라이브	verb
+traverse	가로지르다, 횡단하다	트레버스	verb
+tread	밟다, 걷다	트레드	verb
+trespass	무단침입하다	트레스페스	verb
+trickle	똑똑떨어지다	트리클	verb
+trot	빠르게걷다, 속보	트롯	verb
+trudge	터벅터벅걷다	트러지	verb
+tumble	굴러떨어지다, 폭락하다	텀블	verb
+twinkle	반짝이다	트윙클	verb
+twitch	경련하다, 씰룩거리다	트위치	verb
+undercut	더싸게팔다, 약화시키다	언더컷	verb
+understate	축소해말하다	언더스테이트	verb
+unearth	발굴하다	언어스	verb
+unleash	풀어놓다, 촉발하다	언리시	verb
+unravel	풀다, 해명하다	언레블	verb
+unveil	공개하다, 발표하다	언베일	verb
+uplift	고양시키다, 들어올리다	업리프트	verb
+uproot	뿌리째뽑다	업루트	verb
+usurp	찬탈하다	유섭	verb
+vandalize	파손하다	벤덜라이즈	verb
+vaporize	증발시키다	베이퍼라이즈	verb
+ventilate	환기하다	벤틸레이트	verb
+wade	헤치며걷다	웨이드	verb
+waive	면제하다, 포기하다	웨이브	verb
+wallow	뒹굴다, 빠지다	월로	verb
+waver	흔들리다, 망설이다	웨이버	verb
+wheeze	쌕쌕거리다	위즈	verb
+whimper	훌쩍이다, 낑낑거리다	윔퍼	verb
+whine	징징대다, 투덜대다	와인	verb
+whirl	빙빙돌다	월	verb
+wield	휘두르다, 행사하다	윌드	verb
+wiggle	꼼지락거리다, 흔들다	위글	verb
+wince	움찔하다	윈스	verb
+wobble	흔들리다, 비틀거리다	워블	verb
+woo	구애하다	우	verb
+wriggle	꿈틀거리다	리글	verb
+wring	짜다, 비틀다	링	verb
+yearn	갈망하다, 동경하다	연	verb
+zap	없애다, 공격하다	젭	verb
+acidic	산성의	어시딕	adj
+adept	능숙한	어뎁트	adj
+affluent	부유한	에플루언트	adj
+airtight	밀폐된	에어타이트	adj
+alarming	걱정스러운, 놀라운	얼라밍	adj
+aloof	냉담한, 무관심한	얼루프	adj
+altruistic	이타적인	엘트루이스틱	adj
+amicable	우호적인	에미커블	adj
+analytical	분석적인	에널리티컬	adj
+anatomical	해부학적인	에너토미컬	adj
+angelic	천사같은	엔젤릭	adj
+animated	활기찬, 애니메이션의	애니메이티드	adj
+antisocial	반사회적인	엔티소셜	adj
+apathetic	무관심한	에퍼세틱	adj
+appalling	끔찍한	어폴링	adj
+appetizing	맛있어보이는	에피타이징	adj
+arduous	고된, 힘든	아두어스	adj
+argumentative	논쟁적인, 따지기좋아하는	아규멘터티브	adj
+aristocratic	귀족적인	어리스터크레틱	adj
+aromatic	향기로운	아로마틱	adj
+astonishing	놀라운	어스토니싱	adj
+astute	기민한, 영리한	어스튜트	adj
+atrocious	끔찍한, 극악한	어트로셔스	adj
+atypical	비전형적인	에이티피컬	adj
+audacious	대담한	오데이셔스	adj
+audible	들리는	오더블	adj
+austere	엄격한, 간소한	오스티어	adj
+bashful	수줍은	베시풀	adj
+benevolent	자비로운	버네벌런트	adj
+bewildered	당황한, 어리둥절한	비윌더드	adj
+biased	편향된	바이어스트	adj
+biodegradable	생분해성의	바이오디그레이더블	adj
+bland	싱거운, 밋밋한	블렌드	adj
+blatant	노골적인, 뻔한	블레이턴트	adj
+boastful	자랑하는	보스트풀	adj
+bogus	가짜의	보거스	adj
+bony	뼈가앙상한, 가시가많은	보니	adj
+breezy	산들바람이부는	브리지	adj
+brisk	활발한, 상쾌한	브리스크	adj
+brittle	부서지기쉬운	브리틀	adj
+bubbly	거품이많은, 쾌활한	버블리	adj
+bulky	부피가큰	벌키	adj
+bumpy	울퉁불퉁한	범피	adj
+callous	냉담한	켈러스	adj
+candid	솔직한	켄디드	adj
+carefree	근심걱정없는	케어프리	adj
+catchy	기억하기쉬운, 귀에쏙들어오는	캐치	adj
+ceremonial	의식의	세러모니얼	adj
+charitable	자선의, 관대한	체리터블	adj
+chatty	수다스러운	체티	adj
+cheeky	건방진, 뻔뻔한	치키	adj
+clingy	집착하는, 들러붙는	클링기	adj
+coherent	일관성있는	코히런트	adj
+cohesive	결속력있는	코히시브	adj
+colloquial	구어체의	컬로퀴얼	adj
+combative	전투적인	컴베티브	adj
+comedic	코미디의	커미딕	adj
+communal	공동의	커뮤널	adj
+complacent	자기만족에빠진	컴플레이선트	adj
+complimentary	무료의, 칭찬하는	컴플리멘터리	adj
+composed	침착한, 구성된	컴포즈드	adj
+concise	간결한	컨사이스	adj
+conclusive	결정적인	컨클루시브	adj
+condescending	거들먹거리는	컨디센딩	adj
+confrontational	대립적인	컨프런테이셔널	adj
+contented	만족한	컨텐티드	adj
+contentious	논쟁적인	컨텐셔스	adj
+cordial	다정한, 진심의	코디얼	adj
+covert	은밀한, 비밀의	코버트	adj
+crooked	비뚤어진, 구부러진	크루키드	adj
+cryptic	알쏭달쏭한, 아리송한	크립틱	adj
+cumbersome	번거로운, 거추장스러운	컴버섬	adj
+dainty	앙증맞은, 섬세한	데인티	adj
+daring	대담한	데어링	adj
+dazzling	눈부신	데즐링	adj
+debatable	논란의여지가있는	디베이터블	adj
+deceptive	기만적인, 속이는	디셉티브	adj
+decorative	장식용의	데코러티브	adj
+defiant	반항적인	디파이언트	adj
+deficient	부족한, 결핍된	디피션트	adj
+definitive	최종적인, 결정적인	디피니티브	adj
+deft	능숙한	데프트	adj
+dejected	낙담한	디젝티드	adj
+deplorable	개탄스러운	디플로러블	adj
+deprived	궁핍한, 박탈당한	디프라이브드	adj
+deserted	버려진, 인적이끊긴	디저티드	adj
+deserving	자격이있는	디저빙	adj
+desolate	황량한, 쓸쓸한	데설럿	adj
+destitute	극빈한	데스티튜트	adj
+detached	분리된, 무관심한	디테치트	adj
+detrimental	해로운	데트리멘털	adj
+devious	교활한	디비어스	adj
+diabolical	악마같은, 극악한	다이어볼리컬	adj
+disgruntled	불만스러운	디스그런틀드	adj
+disinterested	공평한, 무관심한	디스인터레스티드	adj
+dismal	음울한, 형편없는	디즈멀	adj
+disproportionate	불균형적인	디스프러포셔닛	adj
+docile	유순한, 고분고분한	도사일	adj
+dogmatic	독단적인	도그메틱	adj
+dormant	휴면중인, 잠자는	도먼트	adj
+dreary	따분한, 음울한	드리어리	adj
+durable	내구성있는, 튼튼한	듀러블	adj
+dutiful	충실한	듀티풀	adj
+earthly	지상의, 세속의	어스리	adj
+ecstatic	황홀한, 열광하는	엑스테틱	adj
+edgy	날카로운, 초조한	엣지	adj
+effortless	쉬운	에퍼틀리스	adj
+egocentric	자기중심적인	이고센트릭	adj
+elusive	찾기힘든, 파악하기어려운	일루시브	adj
+eminent	저명한	에미넌트	adj
+empathetic	공감하는	엠퍼세틱	adj
+empirical	경험적인, 실증적인	임피리컬	adj
+encouraging	고무적인	인커리징	adj
+endangered	멸종위기의	인데인저드	adj
+endearing	사랑스러운	인디어링	adj
+enigmatic	수수께끼같은	에니그메틱	adj
+enlightened	깨어있는, 계몽된	인라이튼드	adj
+entrepreneurial	기업가적인	앙트러프러너리얼	adj
+ephemeral	덧없는, 순식간의	이페머럴	adj
+erratic	불규칙한, 변덕스러운	이레틱	adj
+esteemed	존경받는	이스팀드	adj
+euphoric	행복감에도취된	유포릭	adj
+everlasting	영원한	에버레스팅	adj
+exasperated	몹시화가난	이그제스퍼레이티드	adj
+excruciating	극심한	익스크루시에이팅	adj
+exemplary	모범적인	이그젬플러리	adj
+exhaustive	철저한, 총망라한	이그조스티브	adj
+exhilarating	짜릿한, 신나는	이그질러레이팅	adj
+exorbitant	터무니없이비싼	이그조비턴트	adj
+expansive	광범위한, 넓은	익스펜시브	adj
+expendable	소모품의	익스펜더블	adj
+extroverted	외향적인	엑스트러버티드	adj
+exuberant	활기넘치는	이그주버런트	adj
+factual	사실의, 사실에입각한	펙추얼	adj
+faded	바랜, 시든	페이디드	adj
+fallible	틀리기쉬운	펠러블	adj
+famished	몹시배고픈	페미시트	adj
+fanatical	광신적인	퍼네티컬	adj
+fastidious	까다로운	페스티디어스	adj
+fatherly	아버지같은	파덜리	adj
+faulty	결함있는	폴티	adj
+fearless	겁없는, 두려움없는	피얼리스	adj
+feisty	혈기왕성한	파이스티	adj
+ferocious	사나운, 맹렬한	퍼로셔스	adj
+fervent	열렬한	퍼번트	adj
+festive	축제의, 흥겨운	페스티브	adj
+fickle	변덕스러운	피클	adj
+flamboyant	화려한	플렘보이언트	adj
+flawed	결함있는	플로드	adj
+fleeting	순식간의, 덧없는	플리팅	adj
+flimsy	얇은, 허술한	플림지	adj
+forceful	강력한, 단호한	포스풀	adj
+foreseeable	예측가능한	포시어블	adj
+forgiving	관대한	포기빙	adj
+forlorn	쓸쓸한, 버림받은	폴론	adj
+forthcoming	다가오는, 곧나올	포스커밍	adj
+frail	허약한, 연약한	프레일	adj
+fraudulent	사기의, 부정한	프로듈런트	adj
+frenzied	광란의	프렌지드	adj
+frigid	몹시추운, 냉담한	프리지드	adj
+frivolous	경박한, 하찮은	프리벌러스	adj
+frosty	서리가내린, 냉랭한	프로스티	adj
+gallant	용감한, 정중한	겔런트	adj
+gaudy	야한, 요란한	고디	adj
+genial	상냥한	지니얼	adj
+gleeful	신이난	글리풀	adj
+goofy	바보같은, 얼빠진	구피	adj
+gratuitous	불필요한, 쓸데없는	그러튜이터스	adj
+gregarious	사교적인	그리게리어스	adj
+grisly	섬뜩한	그리즐리	adj
+groundbreaking	획기적인	그라운드브레이킹	adj
+grueling	고된, 힘든	그루얼링	adj
+gruesome	섬뜩한, 끔찍한	그루섬	adj
+gutsy	배짱있는	거치	adj
+habitual	습관적인	허비추얼	adj
+haggard	초췌한	헤거드	adj
+haphazard	되는대로의	헵헤저드	adj
+harmonious	조화로운	하모니어스	adj
+haughty	오만한	호티	adj
+hazardous	위험한, 유해한	헤저더스	adj
+hazy	흐릿한, 안개낀	헤이지	adj
+heartbreaking	가슴아픈	하트브레이킹	adj
+heartfelt	진심어린	하트펠트	adj
+heated	열띤, 가열된	히티드	adj
+hefty	무거운, 큰	헤프티	adj
+heinous	극악무도한	헤이너스	adj
+hereditary	유전적인, 세습의	허레디테리	adj
+homogeneous	동질적인, 균질한	호모지니어스	adj
+horrendous	끔찍한	호렌더스	adj
+humane	인도적인	휴메인	adj
+hygienic	위생적인	하이지에닉	adj
+hyperactive	과잉행동의	하이퍼엑티브	adj
+hypothetical	가설의, 가상의	하이퍼세티컬	adj
+idealistic	이상주의적인	아이디얼리스틱	adj
+idiotic	바보같은	이디오틱	adj
+illicit	불법의	일리시트	adj
+illogical	비논리적인	일로지컬	adj
+illustrious	저명한, 빛나는	일러스트리어스	adj
+immaculate	티없는, 깔끔한	이메큘럿	adj
+immovable	부동의	이무버블	adj
+impersonal	비인간적인	임퍼스널	adj
+impoverished	빈곤한	임포버리시트	adj
+impractical	비실용적인	임프렉티컬	adj
+imprecise	부정확한	임프리사이스	adj
+impromptu	즉흥적인	임프롬프투	adj
+improper	부적절한	임프로퍼	adj
+inaccurate	부정확한	이네큐럿	adj
+inadvertent	고의가아닌	이너드버턴트	adj
+incessant	끊임없는	인세선트	adj
+incompatible	비호환, 양립불가	인컴페터블	adj
+inconsiderate	배려없는	인컨시더럿	adj
+inconsistent	일관성없는	인컨시스턴트	adj
+indecisive	우유부단한	인디사이시브	adj
+indefinite	무기한의, 불확실한	인데피닛	adj
+indignant	분개한	인디그넌트	adj
+indulgent	관대한, 제멋대로하는	인덜전트	adj
+industrious	근면한	인더스트리어스	adj
+inefficient	비효율적인	이니피션트	adj
+inept	서투른	이넵트	adj
+inexperienced	경험이없는, 미숙한	이닉스피리언스트	adj
+infamous	악명높은	인퍼머스	adj
+infantile	유치한	인펀타일	adj
+inflexible	융통성없는	인플렉서블	adj
+infrequent	드문	인프리퀀트	adj
+inhumane	비인간적인	인휴메인	adj
+inquisitive	호기심많은	인퀴지티브	adj
+insatiable	만족할줄모르는	인세이셔블	adj
+insightful	통찰력있는	인사이트풀	adj
+insistent	고집하는, 끈질긴	인시스턴트	adj
+insolent	무례한, 건방진	인설런트	adj
+intrepid	용감무쌍한	인트레피드	adj
+intriguing	흥미로운	인트리깅	adj
+introverted	내향적인	인트러버티드	adj
+intrusive	거슬리는, 침해하는	인트루시브	adj
+invaluable	매우귀중한	인벨류어블	adj
+inventive	창의적인	인벤티브	adj
+irate	성난	아이레이트	adj
+jaded	지친, 시들한	제이디드	adj
+jagged	들쭉날쭉한	제기드	adj
+jittery	초조한	지터리	adj
+jovial	쾌활한	조비얼	adj
+jubilant	환희에찬	주빌런트	adj
+judicious	현명한	주디셔스	adj
+juvenile	청소년의, 유치한	주버나일	adj,noun
+laborious	힘든, 고된	러보리어스	adj
+lawful	합법적인	로풀	adj
+lenient	관대한	리니언트	adj
+lethargic	무기력한	러사직	adj
+lighthearted	마음이가벼운, 쾌활한	라이트하티드	adj
+listless	무기력한	리스틀리스	adj
+lofty	높은, 고상한	로프티	adj
+lopsided	한쪽으로기운	롭사이디드	adj
+lucid	명쾌한, 또렷한	루시드	adj
+ludicrous	터무니없는	루디크러스	adj
+lukewarm	미지근한	루크웜	adj
+malleable	유연한, 잘펴지는	멜리어블	adj
+malnourished	영양실조의	멜너리시트	adj
+materialistic	물질주의적인	머티리얼리스틱	adj
+meek	온순한	미크	adj
+melodramatic	신파적인, 과장된	멜로드러메틱	adj
+menacing	위협적인	메너싱	adj
+merciless	무자비한	머실리스	adj
+mindless	무심한, 생각없는	마인들리스	adj
+minuscule	아주작은	미너스큘	adj
+misguided	잘못된	미스가이디드	adj
+misleading	오해의소지가있는, 호도하는	미스리딩	adj
+monotonous	단조로운	머노터너스	adj
+monstrous	괴물같은, 끔찍한	몬스트러스	adj
+monumental	기념비적인, 엄청난	모뉴멘털	adj
+morbid	병적인	모비드	adj
+motherly	어머니같은	머덜리	adj
+mundane	평범한, 일상적인	먼데인	adj
+murky	흐린, 탁한	머키	adj
+musty	곰팡내나는	머스티	adj
+nameless	이름없는	네임리스	adj
+nearsighted	근시의	니어사이티드	adj
+negligent	부주의한, 태만한	네글리전트	adj
+negligible	무시해도될정도의	네글리저블	adj
+neglected	방치된	니글렉티드	adj
+nimble	민첩한	님블	adj
+nomadic	유목의	노메딕	adj
+nonchalant	태연한	논셜런트	adj
+nonsensical	터무니없는	논센시컬	adj
+obscene	외설적인	업신	adj
+ominous	불길한	오미너스	adj
+omnipotent	전능한	옴니퍼턴트	adj
+opaque	불투명한	오페이크	adj
+opinionated	독선적인	어피니어네이티드	adj
+opposing	반대하는, 상대의	어포징	adj
+opulent	호화로운	오퓰런트	adj
+orderly	정돈된, 질서있는	오덜리	adj
+organizational	조직의	오거니제이셔널	adj
+ornate	화려하게장식된	오네이트	adj
+outlandish	기이한	아웃렌디시	adj
+overbearing	고압적인	오버베어링	adj
+overjoyed	매우기쁜	오버조이드	adj
+overrated	과대평가된	오버레이티드	adj
+overt	공공연한	오버트	adj
+overzealous	지나치게열성적인	오버젤러스	adj
+painless	통증없는	페인리스	adj
+painstaking	공들인, 꼼꼼한	페인즈테이킹	adj
+palatable	맛있는	펠러터블	adj
+paltry	하찮은	폴트리	adj
+panoramic	파노라마의	페너레믹	adj
+paramount	가장중요한	파라마운트	adj
+penniless	무일푼의	페닐리스	adj
+pensive	생각에잠긴	펜시브	adj
+perceptive	통찰력있는	퍼셉티브	adj
+perennial	다년생의, 영원한	퍼레니얼	adj
+perilous	위험한	페럴러스	adj
+perky	발랄한	퍼키	adj
+pertinent	관련있는, 적절한	퍼티넌트	adj
+perverse	비뚤어진, 변태적인	퍼버스	adj
+philanthropic	자선의	필런스로픽	adj
+pious	경건한, 독실한	파이어스	adj
+placid	잔잔한, 차분한	플레시드	adj
+plentiful	풍부한	플렌티풀	adj
+poignant	가슴아픈, 통렬한	포이넌트	adj
+poised	침착한	포이즈드	adj
+polished	세련된, 광택이나는	폴리시트	adj
+pompous	거만한	폼퍼스	adj
+potent	강력한, 효능있는	포턴트	adj
+pragmatic	실용적인	프레그메틱	adj
+precarious	불안정한, 위태로운	프리케어리어스	adj
+precocious	조숙한	프리코셔스	adj
+predatory	포식성의, 약탈적인	프레더토리	adj
+predominant	지배적인, 우세한	프리도미넌트	adj
+preoccupied	정신이팔린	프리오큐파이드	adj
+preposterous	터무니없는	프리포스터러스	adj
+presumptuous	주제넘은	프리점프추어스	adj
+pristine	깨끗한, 원래상태의	프리스틴	adj
+proactive	적극적인, 주도적인	프로액티브	adj
+prodigious	엄청난	프러디저스	adj
+prolific	다작의, 다산의	프럴리픽	adj
+prolonged	장기적인, 오래끄는	프럴롱드	adj
+prophetic	예언의	프러페틱	adj
+puffy	부은, 부푼	퍼피	adj
+pungent	톡쏘는, 얼얼한	펀전트	adj
+puny	작고약한	퓨니	adj
+purposeful	목적이있는	퍼포스풀	adj
+quaint	예스러운, 진기한	퀘인트	adj
+queasy	메스꺼운	퀴지	adj
+quirky	별난, 독특한	퀴키	adj
+radiant	빛나는, 환한	레이디언트	adj
+rancid	상한, 썩은내나는	렌시드	adj
+readable	읽기쉬운	리더블	adj
+receptive	수용적인	리셉티브	adj
+rectangular	직사각형의	렉텡귤러	adj
+recurring	반복되는, 되풀이되는	리커링	adj
+refined	세련된, 정제된	리파인드	adj
+reflective	반사하는, 사색적인	리플렉티브	adj
+regretful	후회하는	리그렛풀	adj
+relentless	가차없는, 끈질긴	릴렌틀리스	adj
+reliant	의존하는	릴라이언트	adj
+remorseful	후회하는	리모스풀	adj
+repressed	억압된	리프레스트	adj
+reputable	평판좋은	레퓨터블	adj
+resentful	분개한	리젠트풀	adj
+reserved	예약된, 내성적인	리저브드	adj
+resolute	단호한	레절루트	adj
+restrictive	제한적인	리스트릭티브	adj
+retroactive	소급하는	레트로엑티브	adj
+revolting	역겨운	리볼팅	adj
+rewarding	보람있는	리워딩	adj
+rhythmic	리드미컬한	리드믹	adj
+rickety	곧무너질듯한	리키티	adj
+righteous	정의로운, 올바른	라이처스	adj
+rigorous	엄격한, 철저한	리거러스	adj
+rowdy	소란스러운	라우디	adj
+rugged	울퉁불퉁한, 튼튼한	러기드	adj
+sadistic	가학적인	서디스틱	adj
+sanitary	위생의, 위생적인	세니터리	adj
+sassy	건방진, 당돌한	세시	adj
+satirical	풍자적인	서티리컬	adj
+scandalous	수치스러운, 스캔들의	스켄덜러스	adj
+scathing	신랄한	스케이딩	adj
+scholarly	학술적인	스칼럴리	adj
+scornful	경멸하는	스콘풀	adj
+scrawny	앙상한	스크로니	adj
+scrupulous	양심적인, 꼼꼼한	스크루퓰러스	adj
+secluded	외딴, 한적한	시클루디드	adj
+sedentary	앉아서하는, 정착성의	세던테리	adj
+seductive	유혹적인	시덕티브	adj
+selective	선택적인, 까다로운	실렉티브	adj
+selfless	이타적인	셀플리스	adj
+sensual	관능적인	센슈얼	adj
+sheepish	멋쩍은	시피시	adj
+shoddy	조잡한	쇼디	adj
+shrewd	약삭빠른, 기민한	슈루드	adj
+shrill	날카로운	슈릴	adj
+skimpy	빈약한, 노출이심한	스킴피	adj
+sleek	매끈한	슬리크	adj
+sluggish	느린, 부진한	슬러기시	adj
+smug	우쭐대는	스머그	adj
+snobbish	속물적인	스노비시	adj
+snug	포근한, 꼭맞는	스너그	adj
+somber	침울한, 어두운	솜버	adj
+soothing	진정시키는	수딩	adj
+sorrowful	슬픈	소로풀	adj
+spirited	활발한, 기운찬	스피리티드	adj
+spiteful	악의적인	스파이트풀	adj
+spotless	티끌하나없는	스폿리스	adj
+squeamish	비위가약한	스퀴미시	adj
+staggering	충격적인, 엄청난	스테거링	adj
+stagnant	정체된, 고여있는	스테그넌트	adj
+staunch	확고한, 충실한	스톤치	adj
+stealthy	몰래하는	스텔시	adj
+steadfast	확고부동한	스테드페스트	adj
+stellar	뛰어난, 별의	스텔러	adj
+sterile	살균된, 불임의	스테릴	adj
+stoic	금욕적인	스토익	adj
+strenuous	힘든, 격렬한	스트레뉴어스	adj
+stringent	엄격한	스트린전트	adj
+studious	학구적인	스튜디어스	adj
+submissive	순종적인	서브미시브	adj
+succinct	간결한	석싱크트	adj
+suffocating	숨막히는	서퍼케이팅	adj
+sullen	뚱한, 시무룩한	설런	adj
+sumptuous	호화로운	섬프추어스	adj
+superfluous	불필요한	수퍼플루어스	adj
+surreal	초현실적인	서리얼	adj
+susceptible	취약한, 걸리기쉬운	서셉터블	adj
+symmetrical	대칭의	시메트리컬	adj
+tacky	촌스러운, 끈적한	테키	adj
+tactful	요령있는	텍트풀	adj
+tactless	눈치없는	텍틀리스	adj
+tardy	늦은, 지각한	타디	adj
+tasteful	고상한, 세련된	테이스트풀	adj
+tasteless	맛없는, 천박한	테이스틀리스	adj
+taut	팽팽한	토트	adj
+tearful	눈물어린	티어풀	adj
+temperamental	변덕스러운	템퍼러멘털	adj
+temperate	온화한, 절제된	템퍼럿	adj
+tenacious	끈질긴	터네이셔스	adj
+tentative	잠정적인	텐터티브	adj
+tepid	미지근한	테피드	adj
+terse	간결한, 퉁명스러운	터스	adj
+theatrical	연극의, 과장된	시에트리컬	adj
+therapeutic	치료의, 치료효과가있는	세러퓨틱	adj
+thoughtless	생각없는, 경솔한	소틀리스	adj
+threatening	위협적인	스레트닝	adj
+thrifty	검소한, 알뜰한	스리프티	adj
+thrilling	짜릿한, 스릴넘치는	스릴링	adj
+tireless	지칠줄모르는	타이어리스	adj
+tiresome	지루한, 성가신	타이어섬	adj
+topical	시사적인, 국소의	토피컬	adj
+torrential	억수같은	토렌셜	adj
+transient	일시적인	트렌지언트	adj
+tumultuous	떠들썩한	튜멀추어스	adj
+turbulent	격동의, 난기류의	터뷸런트	adj
+tyrannical	폭군의, 포악한	티레니컬	adj
+ubiquitous	어디에나있는	유비쿼터스	adj
+unanimous	만장일치의	유네니머스	adj
+unannounced	예고없는	언어나운스트	adj
+unarmed	비무장의	언암드	adj
+unattractive	매력없는	언어트렉티브	adj
+unauthorized	무단의	언오서라이즈드	adj
+uncanny	기이한, 묘한	언캐니	adj
+unchanged	변함없는	언체인지드	adj
+unconditional	무조건적인	언컨디셔널	adj
+unconventional	색다른	언컨벤셔널	adj
+underprivileged	소외된	언더프리빌리지드	adj
+undisputed	논란의여지없는	언디스퓨티드	adj
+uneducated	무식한	언에듀케이티드	adj
+unequal	불평등한	언이퀄	adj
+uneven	울퉁불퉁한, 불균등한	언이븐	adj
+unfavorable	불리한	언페이버러블	adj
+unforeseen	예기치못한	언포신	adj
+ungrateful	배은망덕한	언그레이트풀	adj
+unheard	전례없는	언허드	adj
+unhelpful	도움이안되는	언헬프풀	adj
+unidentified	신원미상의	언아이덴티파이드	adj
+uninhabited	무인의	언인헤비티드	adj
+unintentional	고의가아닌	언인텐셔널	adj
+uninterested	무관심한	언인터레스티드	adj
+unlawful	불법의	언로풀	adj
+unmarried	미혼의	언메리드	adj
+unmistakable	틀림없는	언미스테이커블	adj
+unofficial	비공식의	언오피셜	adj
+unorthodox	정통이아닌, 색다른	언오서독스	adj
+unproductive	비생산적인	언프러덕티브	adj
+unqualified	자격이없는	언퀄리파이드	adj
+unreal	비현실적인	언리얼	adj
+unresolved	미해결의	언리졸브드	adj
+unruly	제멋대로인	언룰리	adj
+unsatisfactory	불만족스러운	언세티스펙터리	adj
+unscathed	무사한	언스케이드	adj
+unselfish	이타적인	언셀피시	adj
+unskilled	미숙한	언스킬드	adj
+unsolved	미해결의	언솔브드	adj
+unspoken	무언의	언스포컨	adj
+unsteady	불안정한	언스테디	adj
+unsuitable	부적합한	언수터블	adj
+untimely	때이른	언타임리	adj
+untold	막대한	언톨드	adj
+unworthy	가치없는	언워디	adj
+uptight	긴장한, 깐깐한	업타이트	adj
+usable	사용가능한	유저블	adj
+utopian	이상향의	유토피언	adj
+valiant	용감한	벨리언트	adj
+vengeful	복수심에불타는	벤지풀	adj
+verbose	장황한	버보스	adj
+viable	실행가능한	바이어블	adj
+vigorous	활발한, 격렬한	비거러스	adj
+virtuous	덕이있는	버추어스	adj
+voracious	게걸스러운	보레이셔스	adj
+wacky	엉뚱한, 괴짜인	왜키	adj
+wasteful	낭비하는	웨이스트풀	adj
+watchful	경계하는	워치풀	adj
+wavy	물결모양의, 곱슬한	웨이비	adj
+weightless	무중력의	웨이틀리스	adj
+welcoming	환영하는, 따뜻한	웰커밍	adj
+wholesome	건전한, 몸에좋은	홀섬	adj
+willful	고의적인, 고집센	윌풀	adj
+wishful	갈망하는	위시풀	adj
+wistful	아쉬워하는, 애석해하는	위스트풀	adj
+withdrawn	내성적인, 위축된	위드드론	adj
+wobbly	흔들거리는	워블리	adj
+workable	실행가능한	워커블	adj
+worldly	세속적인	월들리	adj
+worrisome	걱정스러운	워리섬	adj
+wretched	비참한	레치드	adj
+wry	비꼬는, 씁쓸한	라이	adj
+youthful	젊은, 젊음의	유스풀	adj
+zany	엉뚱한	제이니	adj
+abnormally	비정상적으로	엡노멀리	adv
+abundantly	풍부하게	어번던틀리	adv
+adequately	적절하게, 충분히	에디퀴틀리	adv
+affectionately	다정하게	어펙셔니틀리	adv
+alarmingly	놀라울정도로	얼라밍리	adv
+alternately	번갈아	올터니틀리	adv
+amazingly	놀랍게도	어메이징리	adv
+arguably	거의틀림없이	아규어블리	adv
+arrogantly	거만하게	에러건틀리	adv
+artificially	인위적으로	아티피셜리	adv
+awkwardly	어색하게	오쿼들리	adv
+boldly	대담하게	볼들리	adv
+cheerfully	쾌활하게, 기분좋게	치어풀리	adv
+cleverly	영리하게	클레버리	adv
+comparatively	비교적	컴페러티블리	adv
+consciously	의식적으로	컨셔슬리	adv
+creatively	창의적으로	크리에이티블리	adv
+cruelly	잔인하게	크루얼리	adv
+decently	제대로, 품위있게	디슨틀리	adv
+diligently	부지런히	딜리전틀리	adv
+dreadfully	몹시, 끔찍하게	드레드풀리	adv
+elegantly	우아하게	엘리건틀리	adv
+enormously	엄청나게	이노머슬리	adv
+enthusiastically	열정적으로	인수지에스티컬리	adv
+fondly	다정하게	폰들리	adv
+foolishly	어리석게	풀리실리	adv
+forcibly	강제로	포서블리	adv
+generously	관대하게, 넉넉하게	제너러슬리	adv
+gratefully	감사하며	그레이트풀리	adv
+helplessly	속수무책으로	헬플리슬리	adv
+hopelessly	절망적으로	호플리슬리	adv
+humbly	겸손하게	험블리	adv
+importantly	중요하게	임포턴틀리	adv
+impressively	인상적으로	임프레시블리	adv
+indirectly	간접적으로	인디렉틀리	adv
+individually	개별적으로, 개인적으로	인디비주얼리	adv
+inevitably	필연적으로, 불가피하게	이네비터블리	adv
+innocently	순진하게	이노선틀리	adv
+interestingly	흥미롭게도	인터레스팅리	adv
+ironically	아이러니하게도, 역설적으로	아이로니컬리	adv
+jokingly	농담으로	조킹리	adv
+joyfully	즐겁게	조이풀리	adv
+lazily	게으르게	레이질리	adv
+lovingly	다정하게	러빙리	adv
+magically	마법처럼	매지컬리	adv
+mildly	약간, 부드럽게	마일들리	adv
+miraculously	기적적으로	미레큘러슬리	adv
+miserably	비참하게	미저러블리	adv
+mistakenly	실수로, 잘못	미스테이컨리	adv
+modestly	겸손하게	모디스틀리	adv
+mysteriously	신비롭게, 이상하게	미스티리어슬리	adv
+narrowly	가까스로, 좁게	네로리	adv
+objectively	객관적으로	업젝티블리	adv
+optimistically	낙관적으로	옵티미스티컬리	adv
+persistently	끈질기게	퍼시스턴틀리	adv
+powerfully	강력하게	파워풀리	adv
+presumably	아마, 짐작건대	프리주머블리	adv
+profoundly	깊이	프러파운들리	adv
+radically	근본적으로	레디컬리	adv
+realistically	현실적으로	리얼리스티컬리	adv
+recklessly	무모하게	레클리슬리	adv
+reliably	확실하게	릴라이어블리	adv
+respectfully	정중하게	리스펙트풀리	adv
+responsibly	책임감있게	리스폰서블리	adv
+ruthlessly	무자비하게	루슬리슬리	adv
+sarcastically	비꼬듯이	사케스티컬리	adv
+securely	안전하게, 단단히	시큐얼리	adv
+selfishly	이기적으로	셀피실리	adv
+sensibly	분별있게	센서블리	adv
+shyly	수줍게	샤이리	adv
+skillfully	능숙하게	스킬풀리	adv
+sleepily	졸린듯이	슬리필리	adv
+solemnly	엄숙하게	솔럼리	adv
+spontaneously	자발적으로	스폰테이니어슬리	adv
+stubbornly	고집스럽게	스터번리	adv
+stupidly	어리석게	스튜피들리	adv
+subtly	미묘하게	서틀리	adv
+sweetly	다정하게, 달콤하게	스위틀리	adv
+systematically	체계적으로	시스터메티컬리	adv
+tenderly	다정하게	텐덜리	adv
+theoretically	이론적으로	시어레티컬리	adv
+thoughtfully	사려깊게	소트풀리	adv
+tragically	비극적으로	트레지컬리	adv
+tremendously	엄청나게	트리멘더슬리	adv
+unconsciously	무의식적으로	언컨셔슬리	adv
+understandably	당연히	언더스텐더블리	adv
+unhappily	불행하게	언헤필리	adv
+unnecessarily	불필요하게	언네서세럴리	adv
+vaguely	모호하게, 어렴풋이	베이글리	adv
+verbally	말로, 구두로	버벌리	adv
+vertically	수직으로	버티컬리	adv
+vigorously	힘차게	비거러슬리	adv
+visually	시각적으로	비주얼리	adv
+weakly	약하게	위클리	adv
+wholeheartedly	진심으로	홀하티들리	adv
+yearly	매년, 연간	이어리	adv,adj
+partisan	당파적인, 지지자	파티잔	adj,noun
+accomplished	뛰어난, 완성된	어컴플리시트	adj
+lasting	지속적인	레스팅	adj
+horrifying	끔찍한	호러파잉	adj
+humiliating	굴욕적인	휴밀리에이팅	adj
+heartwarming	훈훈한, 마음이따뜻해지는	하트워밍	adj
+nightly	밤마다, 매일밤	나이틀리	adv,adj

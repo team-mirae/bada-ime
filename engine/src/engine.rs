@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use crate::data::Data;
 use crate::japanese;
 use crate::key::{Key, Mods};
-use crate::layout::{self, BADA, K3S_JIS, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI, SYMBOLS, UNICODE};
+use crate::layout::{self, BADA, BADA_ROMAN, K3S_JIS, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI, SYMBOLS, UNICODE};
 use crate::userdict::{Language, Strength, UserDict};
 use crate::width::{Width, convert};
 
@@ -41,6 +41,8 @@ pub struct Settings {
     pub intercept_f: bool,
     /// "F6" … "F10" → "swallow" | "pass" | "<method>.<action>". Missing: swallow.
     pub fkeys: HashMap<String, String>,
+    /// Layout 15: "Accept Japanese romaji readings as shortcuts when it saves keystrokes" (mei 명).
+    pub ja_shortcuts: bool,
 }
 
 impl Default for Settings {
@@ -55,6 +57,7 @@ impl Default for Settings {
             negative_method: None,
             intercept_f: true,
             fkeys: HashMap::new(),
+            ja_shortcuts: true,
         }
     }
 }
@@ -110,6 +113,11 @@ pub const ACTIONS: &[(u32, &str, &str)] = &[
         "hanja",
         "Hanja: selection, else staged text, else OECD countries",
     ),
+    (BADA_ROMAN, "initials", "Initial consonants only: selection, else staged text (한국 → ㅎㄱ)"),
+    (BADA_ROMAN, "vowels", "Vowels only: selection, else staged text (한국 → ㅏㅜ)"),
+    (BADA_ROMAN, "finals", "Final consonants only, syllables without one dropped: selection, else staged text (한국 → ㄴㄱ)"),
+    (BADA_ROMAN, "fullwidth-latin", "Full-width Latin (the keys as QWERTY)"),
+    (BADA_ROMAN, "halfwidth-latin", "Half-width Latin (the keys as QWERTY)"),
     (LEGACY_KOREAN, "commit", "Commit as typed (this layout's reading, no ranking)"),
     (LEGACY_KOREAN, "commit-bare", "Commit as typed, implied ㅇ dropped (가어 → 가ㅓ)"),
     (LEGACY_MOONSHOT, "commit", "Commit as typed (this layout's reading, no ranking)"),
@@ -141,6 +149,60 @@ pub const ACTIONS: &[(u32, &str, &str)] = &[
         "Half-width Latin (the letters typed)",
     ),
 ];
+
+/// Layout 15: what a reading that departs from the spelling costs, per syllable it changes (ln of how
+/// many times better known it must be: e^3 ≈ 20), and at most.
+const BADA_ROMAN_VARIANT_COST: f64 = 3.0;
+const BADA_ROMAN_VARIANT_MAX: f64 = 10.0;
+/// Layout 15, no reading known: the jamo model's cost per changed syllable (log10), and how much more
+/// likely (log10) a reading must look than the spelling's to show first.
+const BADA_ROMAN_LM_VARIANT: f64 = 2.5;
+const BADA_ROMAN_LM_MARGIN: f64 = 2.0;
+
+/// How far two readings of the same letters are apart: edit distance over their jamo, a silent
+/// initial ㅇ left out. Splitting the letters elsewhere costs nothing (기어비 / 기업이), reading a
+/// letter as another jamo does (종 / 정: 1).
+fn syllable_distance(a: &str, b: &str) -> usize {
+    let jamo = |s: &str| -> Vec<char> {
+        let mut out = Vec::new();
+        for c in s.chars() {
+            match crate::hangul::decompose(c) {
+                Some((l, v, f)) => {
+                    if l != 'ㅇ' {
+                        out.push(l);
+                    }
+                    out.push(v);
+                    out.extend(f);
+                }
+                None => out.push(c),
+            }
+        }
+        out
+    };
+    let (a, b) = (jamo(a), jamo(b));
+    let mut row: Vec<usize> = (0..=b.len()).collect();
+    for i in 1..=a.len() {
+        let mut prev = row[0];
+        row[0] = i;
+        for j in 1..=b.len() {
+            let cur = row[j];
+            row[j] = (row[j] + 1).min(row[j - 1] + 1).min(prev + usize::from(a[i - 1] != b[j - 1]));
+            prev = cur;
+        }
+    }
+    row[b.len()]
+}
+
+/// Layout 15's actions that keep one jamo of each syllable.
+fn keep(action: &str) -> Option<crate::bada_roman::Keep> {
+    use crate::bada_roman::Keep;
+    match action {
+        "initials" => Some(Keep::Initials),
+        "vowels" => Some(Keep::Vowels),
+        "finals" => Some(Keep::Finals),
+        _ => None,
+    }
+}
 
 /// Methods that offer script forms as negative menu entries (§6.4).
 const SCRIPT_FORM_METHODS: &[u32] = &[KANA, ROMAJI];
@@ -222,6 +284,8 @@ struct Entry {
     japanese: bool,
     /// Where it came from: typo suggestions go under layout 13's reading.
     origin: Origin,
+    /// The layout that raised it (None: added after the layouts, as typo suggestions).
+    source: Option<u32>,
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -240,7 +304,7 @@ impl Entry {
     /// A kana entry, its romaji as the note.
     fn kana(text: String, score: f64) -> Entry {
         let note = crate::romaji::romaji(&text).unwrap_or_default();
-        Entry { text, score, note, japanese: true, origin: Origin::Other }
+        Entry { text, score, note, japanese: true, origin: Origin::Other, source: None }
     }
 }
 
@@ -274,6 +338,9 @@ pub struct Engine {
     /// Signed index into the menu (§6.4): 0 is the top entry, negatives are script forms.
     index: i32,
     pick: Option<Pick>,
+    /// A row picked in the menu (§6.4) and its layout: typing on keeps it, as the row that extends
+    /// it, else that layout's best (inter → interpolate when QWERTY's row was picked).
+    chosen: Option<(String, Option<u32>)>,
     /// Waiting for the host's selection for this action.
     waiting: Option<String>,
     /// Muhenkan's open ⌥ + letter variants list.
@@ -297,6 +364,7 @@ impl Engine {
             negatives: Vec::new(),
             index: 0,
             pick: None,
+            chosen: None,
             waiting: None,
             held: None,
             pinned: None,
@@ -419,6 +487,7 @@ impl Engine {
         self.negatives.clear();
         self.index = 0;
         self.pick = None;
+        self.chosen = None;
     }
 
     fn take_shown(&mut self) -> String {
@@ -475,6 +544,10 @@ impl Engine {
                     let letters = text.chars().all(|c| c.is_ascii_alphabetic());
                     let score = if self.data.is_english(&text) || user.as_ref().is_some_and(|u| u.count(Language::English, &text) > 0) {
                         90.0
+                    } else if letters && self.data.is_english_rare(&text) {
+                        // A real word, just not a common one: over a reading that's no known Korean
+                        // word (80), under any known Korean word (interpolate, not 인텔포라테).
+                        85.0
                     } else if letters {
                         30.0
                     } else {
@@ -525,6 +598,74 @@ impl Engine {
                             score: score + tie - 0.01 * (i + 1) as f64,
                         ..Entry::default()
                     });
+                    }
+                }
+                BADA_ROMAN => {
+                    // Every reading ranked by word counts: the default first only while no other
+                    // reading is a better-known word (romaji shortcuts may rank first, seigong 성공);
+                    // then the English dictionary, never first (docs/layouts/15-bada-roman.md).
+                    let all = crate::bada_roman::readings(&self.presses, 4096, self.settings.ja_shortcuts);
+                    let Some(default) = all.first().cloned() else {
+                        continue;
+                    };
+                    let count = self.ko_count(&user, &default);
+                    let loose = default.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
+                    let score = if count > 0 {
+                        100.0 + (count as f64).ln()
+                    } else if loose {
+                        40.0
+                    } else {
+                        80.0
+                    };
+                    // Another reading departs from the spelling (o as ㅓ, ng as ㄱ, another split): it
+                    // must be much better known to rank over the reading the letters spell (jong 종,
+                    // not 적; jongsok 종속, not 정석). Known still beats unknown (seigong 성공).
+                    let cost = |r: &str| (BADA_ROMAN_VARIANT_COST * syllable_distance(&default, r) as f64).min(BADA_ROMAN_VARIANT_MAX);
+                    let mut known: Vec<(String, f64)> = all[1..]
+                        .iter()
+                        .map(|r| (r, self.ko_count(&user, r)))
+                        .filter(|r| r.1 > 0)
+                        .map(|(r, n)| (r.clone(), 100.0 + (n as f64).ln() - cost(r)))
+                        .collect();
+                    known.sort_by(|a, b| b.1.total_cmp(&a.1));
+                    // Nothing known: the reading that looks most like Korean (the jamo model), when
+                    // it's clearly more likely than the spelling's (jiyeokchonggwalui 지역총괄의, not
+                    // 지역촌꽈릐; jongsokgieobi 종속기업이).
+                    let mut guess = None;
+                    if count == 0 && known.is_empty() && !loose {
+                        if let Some(lm) = &self.data.lm {
+                            let lp = |r: &str| lm.logprob(r) - BADA_ROMAN_LM_VARIANT * syllable_distance(&default, r) as f64;
+                            let base = lm.logprob(&default);
+                            if let Some((r, v)) = all[1..].iter().take(512).map(|r| (r, lp(r))).max_by(|a, b| a.1.total_cmp(&b.1)) {
+                                if v - base > BADA_ROMAN_LM_MARGIN {
+                                    guess = Some(r.clone());
+                                }
+                            }
+                        }
+                    }
+                    if let Some(g) = guess {
+                        entries.push(Entry { text: g, score: score + 1.0 + tie, ..Entry::default() });
+                    }
+                    entries.push(Entry { text: default, score: score + tie, ..Entry::default() });
+                    for (i, (text, s)) in known.into_iter().take(8).enumerate() {
+                        let s = s.max(90.0);
+                        entries.push(Entry { text, score: s + tie - 0.00001 * (i + 1) as f64, ..Entry::default() });
+                    }
+                    if let Some((word, capital)) = crate::bada_roman::latin_word(&self.presses) {
+                        let top = entries[start..].iter().map(|e| e.score).fold(f64::MIN, f64::max);
+                        let dict: Vec<String> = if capital {
+                            self.data.en_ko.name(&word).to_vec()
+                        } else {
+                            self.data.en_ko.word(&word)
+                        };
+                        for (i, text) in dict.into_iter().take(8).enumerate() {
+                            entries.push(Entry {
+                                text,
+                                score: top - 0.5 - 0.01 * i as f64,
+                                note: if capital { format!("{}{}", word[..1].to_ascii_uppercase(), &word[1..]) } else { word.clone() },
+                                ..Entry::default()
+                            });
+                        }
                     }
                 }
                 KTS | LEGACY_KOREAN | LEGACY_MOONSHOT | BADA | K3S_JIS => {
@@ -598,6 +739,7 @@ impl Engine {
                                     note: text.clone(),
                                     japanese: true,
                                     origin: Origin::Other,
+                                    source: None,
                                 });
                                 row += 1;
                             }
@@ -611,6 +753,7 @@ impl Engine {
                                     note: text.clone(),
                                     japanese: true,
                                     origin: Origin::Other,
+                                    source: None,
                                 });
                             }
                             if known {
@@ -625,6 +768,9 @@ impl Engine {
                 }
                 _ => {}
             }
+            entries[start..].iter_mut().for_each(|e| {
+                e.source.get_or_insert(id);
+            });
             // The layout's weight (§5.3), on everything it raised.
             let weight = self.settings.weights.get(&id).copied().filter(|w| w.is_finite()).map_or(1.0, |w| w.clamp(0.0, 10.0));
             if weight != 1.0 {
@@ -694,6 +840,14 @@ impl Engine {
             }
         }
         self.entries = entries;
+        // A row picked in the menu stays picked as typing goes on.
+        if let Some((text, source)) = &self.chosen {
+            let at = self.entries.iter().position(|e| e.text.starts_with(text.as_str()))
+                .or_else(|| source.and_then(|s| self.entries.iter().position(|e| e.source == Some(s))));
+            if let Some(i) = at {
+                self.index = i as i32;
+            }
+        }
     }
 
     fn finish(&mut self, mut out: Output) -> Output {
@@ -748,6 +902,10 @@ impl Engine {
         } else {
             (self.index - 1).max(low)
         };
+        // Remember a row picked below the top; back at the top, nothing is picked.
+        self.chosen = (self.index > 0)
+            .then(|| self.entries.get(self.index as usize).map(|e| (e.text.clone(), e.source)))
+            .flatten();
     }
 
     // ---------- keys ----------
@@ -929,6 +1087,16 @@ impl Engine {
             }
             _ => {}
         }
+        // bada roman: punctuation (and digits) end the word. What shows is committed first, so the
+        // character can't re-rank it (한국 stays 한국 when . follows). ⌥; is ·, the one ⌥ key it takes.
+        if key.is_kana_space() && self.over.is_none() && self.candidates(&self.profile).contains(&BADA_ROMAN) {
+            let press = Press { key, shift: mods.shift, alt: mods.alt };
+            if let Some(c) = crate::bada_roman::literal(&self.presses, press) {
+                let mut text = if self.staged() { self.take_shown() } else { String::new() };
+                text.push(c);
+                return consumed(text);
+            }
+        }
         if key.is_kana_space() && !(mods.alt && !mods.shift) {
             let press = Press {
                 key,
@@ -939,6 +1107,17 @@ impl Engine {
             if any {
                 self.presses.push(press);
                 self.recompute();
+                // A picked entry that nothing extends now stays as it was, and the new key starts a
+                // word of its own after it (콕핏 picked, then eui: 콕핏의).
+                if let Some((text, _)) = self.chosen.clone() {
+                    if !self.entries.get(self.index as usize).is_some_and(|e| e.text.starts_with(text.as_str())) {
+                        self.prefix.push_str(&text);
+                        self.presses = vec![press];
+                        self.chosen = None;
+                        self.over = None;
+                        self.recompute();
+                    }
+                }
                 return consumed(String::new());
             }
         }
@@ -1058,6 +1237,31 @@ impl Engine {
             }
             return out;
         }
+        if method == BADA_ROMAN {
+            if let Some(w) = match action {
+                "fullwidth-latin" => Some(Width::Full),
+                "halfwidth-latin" => Some(Width::Half),
+                _ => None,
+            } {
+                // As in the Japanese layouts: the staged keys as QWERTY.
+                if !self.presses.is_empty() {
+                    self.over = Some(Override::Qwerty(w));
+                    self.recompute();
+                }
+            } else if keep(action).is_some() {
+                if self.staged() {
+                    let text = self.shown();
+                    self.prefix = crate::bada_roman::keep_jamo(&text, keep(action).unwrap());
+                    self.presses.clear();
+                    self.over = None;
+                    self.recompute();
+                } else {
+                    out.need_selection = Some(action.to_string());
+                    self.waiting = out.need_selection.clone();
+                }
+            }
+            return out;
+        }
         if SCRIPT_FORM_METHODS.contains(&method) {
             if !self.presses.is_empty() {
                 self.over = Some(match action {
@@ -1165,6 +1369,12 @@ impl Engine {
                     },
                 );
                 out.replace_selection = true;
+            }
+            Some(w) if keep(w).is_some() => {
+                if !selected.is_empty() {
+                    out.commit = crate::bada_roman::keep_jamo(selected, keep(w).unwrap());
+                    out.replace_selection = true;
+                }
             }
             Some("hanja") => {
                 if !selected.is_empty() {
@@ -1547,6 +1757,114 @@ mod tests {
     }
 
     #[test]
+    fn a_picked_row_stays_picked_while_typing() {
+        let data = Data::parse("인터\t50\n", "inter\n#! rare\ninterpolate\n", "", "");
+        let mut e = Engine::new(Arc::new(data));
+        e.pin_dictionary(None);
+        let mut s = Settings::default();
+        s.enabled = vec![QWERTY, BADA_ROMAN];
+        e.set_settings(s);
+        // a rare English word: over a reading that's no Korean word
+        for c in "interpolate".chars() {
+            press(&mut e, Key::from_code(&format!("Key{}", c.to_ascii_uppercase())));
+        }
+        assert_eq!(e.shown(), "interpolate");
+        e.flush();
+        // 인터 is a known word: first; pick QWERTY's inter, type on: interpo… stays QWERTY's
+        for c in "inteo".chars() {
+            press(&mut e, Key::from_code(&format!("Key{}", c.to_ascii_uppercase())));
+        }
+        assert_eq!(e.shown(), "인터");
+        let picked = e.entries.iter().position(|x| x.text == "inteo").unwrap();
+        for _ in 0..picked {
+            press(&mut e, Tab);
+        }
+        assert_eq!(e.shown(), "inteo");
+        press(&mut e, KeyP);
+        assert_eq!(e.shown(), "inteop");
+        // back to the top: nothing picked any more
+        while e.index > 0 {
+            e.key(Tab, Mods::SHIFT);
+        }
+        press(&mut e, KeyO);
+        assert_ne!(e.shown(), "inteopo");
+    }
+
+    #[test]
+    fn a_picked_entry_nothing_extends_stays_as_it_was() {
+        let data = Data::parse("의\t90\n", "cockpit\n", "", "").with_en_ko("cockpit\t조종석\t콕핏\tnoun\n");
+        let mut e = Engine::new(Arc::new(data));
+        e.pin_dictionary(None);
+        let mut s = Settings::default();
+        s.enabled = vec![QWERTY, BADA_ROMAN];
+        e.set_settings(s);
+        for c in "cockpit".chars() {
+            press(&mut e, Key::from_code(&format!("Key{}", c.to_ascii_uppercase())));
+        }
+        assert_eq!(e.shown(), "cockpit");
+        while e.shown() != "콕핏" {
+            press(&mut e, Tab);
+        }
+        for k in [KeyE, KeyU, KeyI] {
+            press(&mut e, k);
+        }
+        assert_eq!(e.shown(), "콕핏의");
+        assert_eq!(press(&mut e, Space).commit, "콕핏의");
+    }
+
+    #[test]
+    fn bada_roman_punctuation_commits_the_word() {
+        let mut e = bada_roman();
+        letters(&mut e, "hanguk");
+        let out = press(&mut e, Period);
+        assert_eq!((out.commit.as_str(), out.preedit.as_str(), out.consumed), ("한국.", "", true));
+        // after e, - is ㅐ, not punctuation
+        letters(&mut e, "se");
+        assert_eq!(press(&mut e, Minus).preedit, "새");
+    }
+
+    #[test]
+    fn bada_roman_option_semicolon_is_a_middle_dot() {
+        let mut e = bada_roman();
+        letters(&mut e, "saengsan");
+        let out = e.key(Semicolon, Mods { alt: true, ..Mods::NONE });
+        assert_eq!((out.commit.as_str(), out.consumed), ("생산·", true));
+        // other ⌥ keys aren't taken
+        assert!(!e.key(Comma, Mods { alt: true, ..Mods::NONE }).consumed);
+    }
+
+    #[test]
+    fn bada_roman_latin_actions() {
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![BADA_ROMAN];
+        e.set_settings(s);
+        for k in [KeyH, KeyA, Semicolon] {
+            press(&mut e, k);
+        }
+        e.action(BADA_ROMAN, "fullwidth-latin");
+        assert_eq!(e.shown(), "ｈａ；");
+        e.action(BADA_ROMAN, "halfwidth-latin");
+        assert_eq!(e.shown(), "ha;");
+    }
+
+    #[test]
+    fn bada_roman_number_row() {
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![BADA_ROMAN];
+        e.set_settings(s);
+        for k in [KeyS, KeyU, KeyL] {
+            press(&mut e, k);
+        }
+        // a digit commits the word before it, then types itself
+        let out = press(&mut e, Digit1);
+        assert_eq!((out.commit.as_str(), out.preedit.as_str(), out.consumed), ("술1", "", true));
+        // ⇧1 is !
+        assert_eq!(shift(&mut e, Digit1).commit, "!");
+    }
+
+    #[test]
     fn kana_korean_shows_the_table_and_offers_words() {
         let mut e = engine();
         let mut s = Settings::default();
@@ -1672,5 +1990,78 @@ mod tests {
         let out = press(&mut e, Backquote);
         assert_eq!(out.preedit, "１");
         assert!(out.consumed);
+    }
+
+    /// Layout 15 alone, with a small dictionary.
+    fn bada_roman() -> Engine {
+        let data = Data::parse(
+            "성공\t80\n세이공\t0\n사과\t50\n한국\t60\n명패\t5\n",
+            "",
+            "",
+            "",
+        )
+        .with_en_ko("apple\t사과\t애플\tnoun\nagile\t\t에자일\tadj\n#! brands\nApple\t애플\ttech\nMcDonald's\t맥도날드\trestaurant\n");
+        let mut e = Engine::new(Arc::new(data));
+        e.pin_dictionary(None);
+        let mut s = Settings::default();
+        s.enabled = vec![BADA_ROMAN];
+        s.fkeys.insert("F6".into(), "15.initials".into());
+        s.fkeys.insert("F7".into(), "15.finals".into());
+        e.set_settings(s);
+        e
+    }
+    fn letters(e: &mut Engine, text: &str) -> Output {
+        let mut out = Output::default();
+        for c in text.chars() {
+            let k = Key::from_code(&format!("Key{}", c.to_ascii_uppercase()));
+            out = if c.is_ascii_uppercase() { shift(e, k) } else { press(e, k) };
+        }
+        out
+    }
+
+    #[test]
+    fn bada_roman_shortcuts_may_rank_first() {
+        let mut e = bada_roman();
+        let out = letters(&mut e, "seigong");
+        assert_eq!(out.preedit, "성공");
+        // off: the letters' reading
+        let mut s = e.settings().clone();
+        s.ja_shortcuts = false;
+        e.set_settings(s);
+        assert_eq!(e.flush().commit, "세이공");
+    }
+
+    #[test]
+    fn bada_roman_dictionary_never_first() {
+        let mut e = bada_roman();
+        let out = letters(&mut e, "apple");
+        assert_ne!(out.menu[0], "사과");
+        assert_eq!(out.menu[1], "사과");
+        assert_eq!(out.menu[2], "애플");
+        e.flush();
+        let out = letters(&mut e, "Apple");
+        assert_eq!(out.menu[1], "애플");
+        assert!(!out.menu.contains(&"사과".to_string()));
+        e.flush();
+        let out = letters(&mut e, "agile");
+        assert_eq!(out.menu[1], "에자일");
+        e.flush();
+        let out = letters(&mut e, "Mcdonalds");
+        assert!(out.menu.contains(&"맥도날드".to_string()));
+    }
+
+    #[test]
+    fn bada_roman_keep_jamo_actions() {
+        let mut e = bada_roman();
+        letters(&mut e, "hanguk");
+        let out = press(&mut e, F6);
+        assert_eq!(out.preedit, "ㅎㄱ");
+        assert_eq!(e.flush().commit, "ㅎㄱ");
+        // nothing staged: the selection
+        let out = press(&mut e, F7);
+        assert_eq!(out.need_selection.as_deref(), Some("finals"));
+        let out = e.host_selection("닭고기 abc");
+        assert_eq!(out.commit, "ㄺ abc");
+        assert!(out.replace_selection);
     }
 }

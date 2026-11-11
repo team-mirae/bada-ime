@@ -1,0 +1,967 @@
+# Czechia (체코)
+# Covers: cars and vehicles (Škoda models, Tatra, Zetor, Jawa), beer and spirits, food and confectionery,
+# drinks and mineral water, games and software (JetBrains, Avast, Bohemia Interactive, Warhorse),
+# internet services and e-commerce, banks and insurers, energy and industry, glass and porcelain,
+# fashion and outdoor, cosmetics, pharma and OTC drugs, media, transport, betting, toys and board games,
+# furniture and home, sports clubs.
+# Sources: en.wikipedia "List of companies of the Czech Republic", "Category:Czech brands", "Beer in the Czech
+# Republic"; cs.wikipedia "Seznam největších českých firem podle tržeb", "Seznam pivovarů v Česku" and categories
+# České firmy / potravinářské / internetové / softwarové / mediální / strojírenské / chemické / energetické /
+# elektrotechnické / sklářské / farmaceutické / textilní / obuvnické firmy, Čeští maloobchodníci, České startupy,
+# Pojišťovny v Česku, České televizní / rozhlasové stanice, Nakladatelství, Porcelánky, Sázkové kanceláře,
+# Výrobci motocyklů, Značky čokolády; own knowledge for the rest. Hangul: established Korean forms where known,
+# otherwise 외래어 표기법 (체코어 표기 세칙) from own knowledge.
+Škoda	스코다	auto
+Škoda Auto	스코다 오토	auto
+Octavia	옥타비아	auto
+Fabia	파비아	auto
+Superb	슈퍼브	auto
+Kodiaq	코디악	auto
+Karoq	카록	auto
+Kamiq	카미크	auto
+Enyaq	엔야크	auto
+Elroq	엘록	auto
+Scala	스칼라	auto
+Rapid	래피드	auto
+Yeti	예티	auto
+Felicia	펠리시아	auto
+Favorit	파보리트	auto
+Tatra	타트라	auto
+Tatra Trucks	타트라 트럭스	auto
+Avia	아비아	auto
+Liaz	리아스	auto
+Praga	프라가	auto
+Karosa	카로사	auto
+SOR	소르	auto
+Jawa	야와	auto
+Velorex	벨로렉스	auto
+Zetor	제토르	auto
+Kaipan	카이판	auto
+Walter	발테르	industrial
+Aero Vodochody	아에로 보도호디	aerospace
+Let Kunovice	레트 쿠노비체	aerospace
+Zlín Aircraft	즐린 에어크래프트	aerospace
+Evektor	에벡토르	aerospace
+Škoda Transportation	스코다 트랜스포테이션	industrial
+Škoda Group	스코다 그룹	industrial
+Tedom	테돔	industrial
+Česká zbrojovka	체스카 즈브로요프카	defense
+Colt CZ	콜트 시제트	defense
+Sellier & Bellot	셀리에 앤드 벨로	defense
+CSG	시에스지	defense
+Czechoslovak Group	체코슬로바크 그룹	defense
+Pilsner Urquell	필스너 우르켈	beer
+Plzeňský Prazdroj	플젠스키 프라즈드로이	beer
+Budvar	부드바르	beer
+Budějovický Budvar	부데요비츠키 부드바르	beer
+Kozel	코젤	beer
+Velkopopovický Kozel	벨코포포비츠키 코젤	beer
+Staropramen	스타로프라멘	beer
+Gambrinus	감브리누스	beer
+Radegast	라데가스트	beer
+Krušovice	크루쇼비체	beer
+Bernard	베르나르트	beer
+Svijany	스비야니	beer
+Starobrno	스타로브르노	beer
+Ostravar	오스트라바르	beer
+Březňák	브르제즈냐크	beer
+Lobkowicz	로프코비츠	beer
+Primátor	프리마토르	beer
+Holba	홀바	beer
+Litovel	리토벨	beer
+Zubr	주브르	beer
+Rohozec	로호제츠	beer
+Platan	플라탄	beer
+Regent	레겐트	beer
+Samson	삼손	beer
+Klášter	클라시테르	beer
+Únětické	우녜티츠케	beer
+Matuška	마투슈카	beer
+Konrad	콘라트	beer
+Rychtář	리흐타르시	beer
+Bakalář	바칼라르시	beer
+Černá Hora	체르나 호라	beer
+Ferdinand	페르디난트	beer
+Postřižinské	포스트르지진스케	beer
+Nymburk	님부르크	beer
+Braník	브라니크	beer
+Herold	헤롤트	beer
+Zlatopramen	즐라토프라멘	beer
+Poutník	포우트니크	beer
+Pernštejn	페른시테인	beer
+Strakonický Dudák	스트라코니츠키 두다크	beer
+Krakonoš	크라코노시	beer
+Ježek	예제크	beer
+Kocour	코초우르	beer
+Becherovka	베헤로프카	spirits
+Jan Becher	얀 베헤르	spirits
+Fernet Stock	페르네트 스토크	spirits
+Božkov	보슈코프	spirits
+Tuzemák	투제마크	spirits
+Jelínek	옐리네크	spirits
+Žufánek	주파네크	spirits
+Bohemia Sekt	보헤미아 섹트	drink
+Znovín Znojmo	즈노빈 즈노이모	drink
+Kofola	코폴라	drink
+Mattoni	마토니	drink
+Magnesia	마그네시아	drink
+Poděbradka	포데브라트카	drink
+Hanácká kyselka	하나츠카 키셀카	drink
+Vincentka	빈첸트카	drink
+Dobrá voda	도브라 보다	drink
+Korunní	코루니	drink
+Toma	토마	drink
+Relax	렐락스	drink
+Semtex	셈텍스	drink
+Big Shock	빅 쇼크	drink
+Jupí	유피	drink
+Jupík	유피크	drink
+Jemča	옘차	drink
+Jihlavanka	이흘라반카	drink
+Doubleshot	더블샷	drink
+Hamé	하메	food
+Otma	오트마	food
+Znojmia	즈노이미아	food
+Májka	마이카	food
+Madeta	마데타	food
+Niva	니바	food
+Olma	올마	food
+Kunín	쿠닌	food
+Pribina	프리비나	food
+Lučina	루치나	food
+Gothaj	고타이	food
+Kostelecké uzeniny	코스텔레츠케 우제니니	food
+Vodňanské kuře	보드냔스케 쿠르제	food
+Penam	페남	food
+Hopi Popi	호피 포피	food
+Fidorka	피도르카	food
+Kolonáda	콜로나다	food
+Opavia	오파비아	food
+Studentská pečeť	스투덴츠카 페체티	food
+Margot	마르고트	food
+Lentilky	렌틸키	food
+Hašlerky	하실레르키	food
+Sfinx	스핑크스	food
+Carla	카를라	food
+Kofila	코필라	food
+Deli	델리	food
+Bebe	베베	food
+Brumík	브루미크	food
+Miňonky	미뇬키	food
+Zlaté Oplatky	즐라테 오플라트키	food
+Karlovarské oplatky	카를로바르스케 오플라트키	food
+Pedro	페드로	food
+Bon Pari	봉 파리	food
+Míša	미샤	food
+Bohemia Chips	보헤미아 칩스	food
+Emco	엠코	food
+Bonavita	보나비타	food
+Semix	세믹스	food
+Mixit	믹시트	food
+Vitana	비타나	food
+Odkolek	오드콜레크	food
+United Bakeries	유나이티드 베이커리스	food
+Babiččina volba	바비치나 볼바	food
+Olomoucké tvarůžky	올로모우츠케 트바루슈키	food
+Lunter	룬테르	food
+Choceňská mlékárna	호첸스카 믈레카르나	food
+Agrofert	아그로페르트	conglomerate
+Rohlik	로흘리크	retail
+Košík	코시크	retail
+Alza	알자	retail
+Notino	노티노	retail
+Dr. Max	닥터 맥스	retail
+Pilulka	필룰카	retail
+Teta	테타	retail
+Datart	다타르트	retail
+Sportisimo	스포르티시모	retail
+Mountfield	마운트필드	retail
+Hruška	흐루슈카	retail
+Bonami	보나미	retail
+Footshop	풋숍	retail
+Rock Point	록 포인트	retail
+Hudy	후디	retail
+Bata	바타	fashion
+Tescoma	테스코마	home
+Zásilkovna	자실코브나	logistics
+Packeta	패키타	logistics
+Česká pošta	체스카 포시타	logistics
+Heureka	헤우레카	internet
+Bazoš	바조시	internet
+Sreality	에스리얼리티	internet
+Slevomat	슬레보마트	internet
+Liftago	리프타고	app
+Twisto	트위스토	finance
+Kiwi.com	키위닷컴	travel
+Seznam	세즈남	internet
+Seznam Zprávy	세즈남 즈프라비	media
+Livesport	라이브스포츠	internet
+Flashscore	플래시스코어	internet
+Productboard	프로덕트보드	software
+Avast	어베스트	software
+AVG	에이브이지	software
+JetBrains	제트브레인스	software
+IntelliJ IDEA	인텔리제이 아이디어	software
+PyCharm	파이참	software
+WebStorm	웹스톰	software
+PhpStorm	피에이치피스톰	software
+Rider	라이더	software
+CLion	시라이언	software
+GoLand	고랜드	software
+DataGrip	데이터그립	software
+DataSpell	데이터스펠	software
+RubyMine	루비마인	software
+RustRover	러스트로버	software
+ReSharper	리샤퍼	software
+TeamCity	팀시티	software
+YouTrack	유트랙	software
+Kotlin	코틀린	software
+Fleet	플리트	software
+Kentico	켄티코	software
+Socialbakers	소셜베이커스	software
+Mews	뮤스	software
+Apify	아피파이	software
+Ataccama	아타카마	software
+Better Stack	베터 스택	software
+Shoptet	숍테트	software
+Y Soft	와이 소프트	software
+Prusa Research	프루사 리서치	tech
+Original Prusa	오리지널 프루사	tech
+Trezor	트레저	tech
+SatoshiLabs	사토시랩스	tech
+Jablotron	야블로트론	tech
+GoodAI	굿 에이아이	tech
+Bohemia Interactive	보헤미아 인터랙티브	games
+Arma	아르마	games
+DayZ	데이지	games
+Operation Flashpoint	오퍼레이션 플래시포인트	games
+Warhorse Studios	워호스 스튜디오	games
+Kingdom Come: Deliverance	킹덤 컴 딜리버런스	games
+Amanita Design	아마니타 디자인	games
+Machinarium	머시나리움	games
+Samorost	사모로스트	games
+Botanicula	보타니쿨라	games
+Creaks	크릭스	games
+Chuchel	후헬	games
+Mafia	마피아	games
+Illusion Softworks	일루전 소프트웍스	games
+Hidden & Dangerous	히든 앤드 데인저러스	games
+Vietcong	베트콩	games
+SCS Software	에스시에스 소프트웨어	games
+Euro Truck Simulator	유로 트럭 시뮬레이터	games
+American Truck Simulator	아메리칸 트럭 시뮬레이터	games
+Keen Software House	킨 소프트웨어 하우스	games
+Space Engineers	스페이스 엔지니어스	games
+Medieval Engineers	미디벌 엔지니어스	games
+Beat Games	비트 게임즈	games
+Beat Saber	비트 세이버	games
+Madfinger Games	매드핑거 게임즈	games
+Shadowgun	섀도건	games
+Dead Trigger	데드 트리거	games
+Pterodon	프테로돈	games
+Charles Games	찰스 게임즈	games
+Czech Games Edition	체크 게임스 에디션	games
+Codenames	코드네임	games
+Through the Ages	스루 디 에이지스	games
+Galaxy Trucker	갤럭시 트러커	games
+Dungeon Lords	던전 로드	games
+Albi	알비	games
+Mindok	민도크	games
+iDNES	아이디네스	media
+Blesk	블레스크	media
+Mladá fronta Dnes	믈라다 프론타 드네스	media
+Lidové noviny	리도베 노비니	media
+Hospodářské noviny	호스포다르시스케 노비니	media
+Právo	프라보	media
+Respekt	레스펙트	media
+Reflex	레플렉스	media
+Deník	데니크	media
+Česká televize	체스카 텔레비제	media
+TV Nova	티브이 노바	media
+Prima	프리마	media
+Barrandov	바란도프	media
+Český rozhlas	체스키 로즐라스	media
+Radiožurnál	라디오주르날	media
+Evropa 2	에브로파 드바	media
+Frekvence 1	프레크벤체 예드나	media
+Radio Impuls	라디오 임풀스	media
+Óčko	오치코	media
+Voyo	보요	media
+Oneplay	원플레이	media
+Cetin	체틴	telecom
+Česká spořitelna	체스카 스포르지텔나	bank
+ČSOB	체에스오베	bank
+Komerční banka	코메르치니 방카	bank
+Moneta Money Bank	모네타 머니 뱅크	bank
+Fio banka	피오 방카	bank
+Air Bank	에어 뱅크	bank
+Banka Creditas	방카 크레디타스	bank
+J&T Banka	제이앤티 방카	bank
+Česká národní banka	체스카 나로드니 방카	bank
+PPF	피피에프	finance
+Home Credit	홈크레디트	finance
+Kooperativa	코오페라티바	insurance
+Česká pojišťovna	체스카 포이시툐브나	insurance
+Slavia pojišťovna	슬라비아 포이시툐브나	insurance
+Direct pojišťovna	디렉트 포이시툐브나	insurance
+ČEZ	체즈	energy
+Orlen Unipetrol	오를렌 우니페트롤	energy
+Unipetrol	우니페트롤	energy
+Benzina	벤지나	energy
+EPH	이피에이치	energy
+Synthesia	신테시아	chemicals
+Spolchemie	스폴헤미에	chemicals
+Lovochemie	로보헤미에	chemicals
+Deza	데자	chemicals
+Fatra	파트라	chemicals
+Barum	바룸	auto
+Mitas	미타스	auto
+Rubena	루베나	industrial
+Třinecké železárny	트르지네츠케 젤레자르니	industrial
+Vítkovice	비트코비체	industrial
+Brano	브라노	auto
+Thermona	테르모나	appliances
+Dakon	다콘	appliances
+Atmos	아트모스	appliances
+Mora	모라	appliances
+ETA	에타	appliances
+Sencor	센코르	appliances
+Concept	콘쳅트	appliances
+Niceboy	나이스보이	electronics
+Evolveo	에볼베오	electronics
+iGET	아이겟	electronics
+Truelife	트루라이프	electronics
+Linet	리네트	health
+Borcad	보르카트	industrial
+Elmarco	엘마르코	industrial
+Meopta	메옵타	industrial
+Tescan	테스칸	industrial
+Bioveta	비오베타	pharma
+Moser	모제르	luxury
+Preciosa	프레치오사	luxury
+Bohemia Crystal	보헤미아 크리스털	home
+Crystalex	크리스탈렉스	home
+Rückl	뤼클	home
+Lasvit	라스비트	home
+Český porcelán	체스키 포르첼란	home
+Thun	툰	home
+Leander	레안데르	home
+Jablonex	야블로넥스	luxury
+Granát Turnov	그라나트 투르노프	luxury
+Kavalierglass	카발리에르글라스	home
+Simax	시막스	home
+Koh-i-noor	코이누르	stationery
+Koh-i-noor Hardtmuth	코이누르 하르트무트	stationery
+Centropen	첸트로펜	stationery
+Merkur	메르쿠르	toys
+Seva	세바	toys
+Igráček	이그라체크	toys
+Krtek	크르텍	toys
+Pat & Mat	패트와 매트	media
+Moravská ústředna	모라프스카 우스트르제드나	toys
+Petrof	페트로프	music
+Amati	아마티	music
+Rieger-Kloss	리게르클로스	music
+Strunal	스트루날	music
+Weinbach	바인바흐	music
+Ton	톤	furniture
+Jitona	이토나	furniture
+LD Seating	엘디 시팅	furniture
+Sapeli	사펠리	home
+Hanák	하나크	furniture
+Dřevojas	드르제보야스	furniture
+Jika	이카	home
+Ravak	라바크	home
+Sapho	사포	home
+Rako	라코	home
+Pietro Filipi	피에트로 필리피	fashion
+Blažek	블라제크	fashion
+Koutný	코우트니	fashion
+Alpine Pro	알파인 프로	sports
+Husky	허스키	sports
+Hannah	한나	sports
+Tilak	틸라크	sports
+Direct Alpine	디렉트 알파인	sports
+Singing Rock	싱잉 록	sports
+Rafiki	라피키	sports
+Warmpeace	웜피스	sports
+Zajo	자요	sports
+Loap	로아프	sports
+Botas	보타스	fashion
+Funstorm	펀스톰	fashion
+Lasting	라스팅	sports
+Moira	모이라	sports
+Bushman	부시맨	fashion
+Klara Nademlynska	클라라 나데믈린스카	fashion
+Tonak	토나크	fashion
+Pegres	페그레스	fashion
+Prim	프림	watches
+Ryor	리오르	cosmetics
+Dermacol	데르마콜	cosmetics
+Manufaktura	마누팍투라	cosmetics
+Botanicus	보타니쿠스	cosmetics
+Astrid	아스트리트	cosmetics
+Indulona	인둘로나	cosmetics
+Alpa	알파	cosmetics
+Bione Cosmetics	비오네 코스메틱스	cosmetics
+Zentiva	젠티바	pharma
+Walmark	발마르크	pharma
+Ibalgin	이발긴	pharma
+Paralen	파랄렌	pharma
+Acylpyrin	아칠피린	pharma
+Celaskon	첼라스콘	pharma
+Biopron	비오프론	pharma
+Marťánci	마르탄치	pharma
+Ginkoprim	긴코프림	pharma
+Stoptussin	스톱투신	pharma
+Czech Airlines	체코 항공	airline
+Smartwings	스마트윙스	airline
+České dráhy	체스케 드라히	transport
+RegioJet	레지오젯	transport
+Leo Express	레오 익스프레스	transport
+Student Agency	스튜던트 에이전시	transport
+Orea Hotels	오레아 호텔스	hotel
+Čedok	체도크	travel
+Invia	인비아	travel
+Fischer	피셰르	travel
+Exim Tours	엑심 투어스	travel
+Blue Style	블루 스타일	travel
+Sparta Praha	스파르타 프라하	football club
+Slavia Praha	슬라비아 프라하	football club
+Viktoria Plzeň	빅토리아 플젠	football club
+Baník Ostrava	바니크 오스트라바	football club
+Sigma Olomouc	시그마 올로모우츠	football club
+Slovan Liberec	슬로반 리베레츠	football club
+Bohemians 1905	보헤미안스 천구백오	football club
+Mladá Boleslav	믈라다 볼레슬라프	football club
+FK Jablonec	에프케이 야블로네츠	football club
+FK Teplice	에프케이 테플리체	football club
+Zbrojovka Brno	즈브로요프카 브르노	football club
+FC Hradec Králové	에프시 흐라데츠 크랄로베	football club
+Dukla Praha	두클라 프라하	football club
+FK Pardubice	에프케이 파르두비체	football club
+Slovácko	슬로바츠코	football club
+FC Zlín	에프시 즐린	football club
+MFK Karviná	엠에프케이 카르비나	football club
+Dynamo České Budějovice	디나모 체스케 부데요비체	football club
+Viktoria Žižkov	빅토리아 지슈코프	football club
+Chance Liga	찬스 리가	sports
+Kometa Brno	코메타 브르노	sports
+Oceláři Třinec	오첼라르지 트르지네츠	sports
+Dynamo Pardubice	디나모 파르두비체	sports
+Bílí Tygři Liberec	빌리 티그르지 리베레츠	sports
+Fortuna	포르투나	games
+Tipsport	팁스포르트	games
+Chance	찬스	games
+Sazka	사스카	games
+Allwyn	올윈	games
+Synot	시노트	games
+Petra	페트라	tobacco
+Bageterie Boulevard	바게테리 불바르	restaurant
+Ugo	우고	restaurant
+Kolkovna	콜코브나	restaurant
+Lokál	로칼	restaurant
+Potrefená husa	포트레페나 후사	restaurant
+Ambiente	암비엔테	restaurant
+Dobrá čajovna	도브라 차요브나	restaurant
+Citigo	시티고	auto
+Roomster	룸스터	auto
+Epiq	에픽	auto
+Laurin & Klement	라우린 앤드 클레멘트	auto
+Čezeta	체제타	auto
+Wikov	비코프	auto
+Bristell	브리스텔	aerospace
+Hostan	호스탄	beer
+Dačický	다치츠키	beer
+Rebel	레벨	beer
+Hubertus	후베르투스	beer
+Žatec	자테츠	beer
+Chodovar	호도바르	beer
+Siko	시코	retail
+Planeo	플라네오	retail
+Knihy Dobrovský	크니히 도브로프스키	retail
+Luxor	룩소르	retail
+Kosmas	코스마스	retail
+Albatros	알바트로스	media
+Form Factory	폼 팩토리	fitness
+Mapy.com	마피 닷컴	app
+Zboží	즈보지	internet
+Bezrealitky	베즈레알리트키	internet
+Rekola	레콜라	app
+GoPay	고페이	finance
+Comgate	콤게이트	finance
+Portu	포르투	finance
+Coinmate	코인메이트	finance
+Týden	티덴	media
+Rádio Blaník	라디오 블라니크	media
+Hitrádio	히트라디오	media
+Kovosvit	코보스비트	industrial
+Explosia	엑스플로시아	chemicals
+Saloos	살로스	cosmetics
+Nobilis Tilia	노빌리스 틸리아	cosmetics
+Herbadent	헤르바덴트	cosmetics
+Vivaco	비바코	cosmetics
+Dr. Müller Pharma	닥터 뮐러 파르마	pharma
+Topvet	톱베트	pharma
+Večerníček	베체르니체크	media
+Rumcajs	룸차이스	media
+Bob a Bobek	보브 아 보베크	media
+Grandhotel Pupp	그랜드호텔 푸프	hotel
+Toptrans	톱트란스	logistics
+WeDo	위두	logistics
+Author	아우토르	sports
+Superior	수페리오르	sports
+Rock Machine	록 머신	sports
+Leader Fox	리더 폭스	sports
+Sporten	스포르텐	sports
+Banquet	뱅큇	home
+Birell	비렐	drink
+U Fleků	우 플레쿠	beer
+U Medvídků	우 메드비트쿠	beer
+U Zlatého tygra	우 즐라테호 티그라	restaurant
+Pegas	페가스	beer
+Dalešice	달레시체	beer
+Berounský medvěd	베로운스키 메드볘트	beer
+Pražačka	프라자치카	beer
+Černovar	체르노바르	beer
+Orlík	오를리크	beer
+Novopacké	노보파츠케	beer
+Pardál	파르달	beer
+Pardubický Porter	파르두비츠키 포르테르	beer
+Purkmistr	푸르크미스트르	beer
+Zichovec	지호베츠	beer
+Sibeeria	시베리아	beer
+Klášterní pivovar Strahov	클라시테르니 피보바르 스트라호프	beer
+Vinohradský pivovar	비노흐라츠키 피보바르	beer
+Dva Kohouti	드바 코호우티	beer
+Chotěboř	호톄보르시	beer
+Gold Cock	골드 콕	spirits
+Hammer Head	해머 헤드	spirits
+Dynybyl	디니빌	spirits
+Starorežná	스타로레주나	spirits
+Myslivec	미슬리베츠	spirits
+Praděd	프라뎨트	spirits
+Palírna U Zeleného stromu	팔리르나 우 젤레네호 스트로무	spirits
+Zaječická hořká	자예치츠카 호르시카	drink
+Bílinská kyselka	빌린스카 키셀카	drink
+Aquila	아퀼라	drink
+Ondrášovka	온드라쇼프카	drink
+Šaratica	샤라티차	drink
+Frisco	프리스코	drink
+Top Topic	톱 토픽	drink
+Erektus	에렉투스	drink
+Karlovarské minerální vody	카를로바르스케 미네랄니 보디	drink
+Château Valtice	샤토 발티체	wine
+Templářské sklepy Čejkovice	템플라르시스케 스클레피 체이코비체	wine
+Vinium	비니움	wine
+Vino Mikulov	비노 미쿨로프	wine
+Habánské sklepy	하반스케 스클레피	wine
+Sonberk	손베르크	wine
+Lahofer	라호페르	wine
+Vinselekt Michlovský	빈셀렉트 미흘로프스키	wine
+Château Bzenec	샤토 브제네츠	wine
+Orion	오리온	food
+Zora	조라	food
+Tatranky	타트란키	food
+Fruko-Schulz	프루코 슐츠	drink
+Kitl	키틀	drink
+Leros	레로스	drink
+Nutrend	누트렌트	food
+Dr. Popov	닥터 포포프	drink
+Alika	알리카	food
+Sklizeno	스클리제노	retail
+Crocodille	크로코딜	restaurant
+Fruitisimo	프루티시모	restaurant
+Marlenka	마를렌카	food
+Pribináček	프리비나체크	food
+Lipánek	리파네크	food
+Hollandia	홀란디아	food
+Milko	밀코	food
+Želetava	젤레타바	food
+Gran Moravia	그란 모라비아	food
+Král sýrů	크랄 시루	food
+Apetito	아페티토	food
+Mrož	므로시	food
+Krahulík	크라훌리크	food
+Váhala	바할라	food
+Masna Studená	마스나 스투데나	food
+Vodňanská drůbež	보드냔스카 드루베시	food
+Raciola	라치올라	food
+Spak	스파크	food
+Lagris	라그리스	food
+Nowaco	노바코	food
+Pragosoja	프라고소야	food
+Topnatur	톱나투르	food
+Country Life	컨트리 라이프	retail
+Extrifit	엑스트리피트	food
+Oxalis	옥살리스	drink
+Mamacoffee	마마커피	drink
+Rebelbean	레벨빈	drink
+Melta	멜타	drink
+Paneria	파네리아	restaurant
+Pizza Coloseum	피자 콜로세움	restaurant
+Café Louvre	카페 루브르	restaurant
+Café Slavia	카페 슬라비아	restaurant
+Dáme jídlo	다메 이들로	app
+Megafyt	메가피트	pharma
+Terno	테르노	retail
+Tamda	탐다	retail
+Brněnka	브르녠카	retail
+Flop	플로프	retail
+Benu	베누	retail
+AAA Auto	트리플에이 오토	retail
+AutoESA	아우토에사	retail
+Mototechna	모토테흐나	retail
+Auto Kelly	아우토 켈리	retail
+Carvago	카르바고	internet
+Mall Group	몰 그룹	retail
+Mironet	미로네트	retail
+Glami	글라미	internet
+Biano	비아노	internet
+Aukro	아우크로	internet
+Zoot	조트	retail
+Freshlabels	프레시라벨스	retail
+Lentiamo	렌티아모	retail
+Vivantis	비반티스	retail
+Tipli	티플리	internet
+Knihobot	크니호보트	retail
+Palmknihy	팔름크니히	retail
+Megaknihy	메가크니히	retail
+Asko	아스코	retail
+Hecht	헤흐트	tools
+Extol	엑스톨	tools
+Narex	나렉스	tools
+Fieldmann	필드만	tools
+Gogen	고겐	electronics
+Solight	솔라이트	electronics
+Emos	에모스	electronics
+Connect IT	커넥트 아이티	electronics
+Robe	로브	electronics
+2N	투엔	electronics
+Eltodo	엘토도	industrial
+Pompo	폼포	retail
+Sparkys	스파키스	retail
+Kytary	키타리	retail
+Mobil Pohotovost	모빌 포호토보스트	retail
+Trenýrkárna	트레니르카르나	retail
+Bezvatriko	베즈바트리코	retail
+Alzabox	알자박스	logistics
+Balíkovna	발리코브나	logistics
+PPL	피피엘	logistics
+Autocont	아우토콘트	tech
+Pelikán	펠리칸	travel
+Lamax	라막스	electronics
+Aligator	알리가토르	electronics
+Umax	유맥스	electronics
+Crussis	크루시스	sports
+Lauben	라우벤	appliances
+Catler	캐틀러	appliances
+Vari	바리	industrial
+ABRA	아브라	software
+Pohoda	포호다	software
+Fakturoid	팍투로이드	software
+Freelo	프릴로	software
+IceWarp	아이스워프	software
+Integromat	인테그로마트	software
+MyQ	마이큐	software
+Rossum	로섬	software
+Safetica	세이프티카	software
+Smartlook	스마트룩	software
+Smartsupp	스마트서프	software
+STRV	에스티알브이	software
+Zoner	조너	software
+Zoner Photo Studio	조너 포토 스튜디오	software
+Ecomail	이코메일	software
+Shopsys	숍시스	software
+Localazy	로컬라지	software
+Whalebone	웨일본	software
+Flowmon	플로몬	software
+Spendee	스펜디	app
+Spaceflow	스페이스플로	software
+IP Fabric	아이피 패브릭	software
+Wedos	웨도스	internet
+Forpsi	포르프시	internet
+Ulož.to	울로시토	internet
+PrusaSlicer	프루사슬라이서	software
+Rockaway	록어웨이	finance
+Hyperskill	하이퍼스킬	software
+Tolgee	톨지	software
+Junie	주니	software
+Datalore	데이터로어	software
+Qodana	코다나	software
+Factorio	팩토리오	games
+Wube Software	우베 소프트웨어	games
+Ylands	일랜즈	games
+Altar Games	알타 게임즈	games
+Original War	오리지널 워	games
+Grip Digital	그립 디지털	games
+Pilgrims	필그림스	games
+Phonopolis	포노폴리스	games
+Happy Game	해피 게임	games
+Novinky.cz	노빈키	media
+Firmy.cz	피르미	internet
+Sklik	스클리크	internet
+Sauto	사우토	internet
+Centrum.cz	첸트룸	internet
+Aktuálně.cz	아크투알녜	media
+Deník N	데니크 엔	media
+iRozhlas	아이로즐라스	media
+DVTV	디브이티브이	media
+CzechCrunch	체크크런치	media
+Živě.cz	지볘	media
+Lupa.cz	루파	media
+Jablíčkář	야블리치카르시	media
+Letem světem Applem	레템 스볘템 아플렘	media
+ČSFD	체에스에프데	internet
+Kinobox	키노박스	internet
+Databáze knih	다타바제 크니흐	internet
+Lítačka	리타치카	app
+Idos	이도스	app
+Stream.cz	스트림	media
+iPrima	아이프리마	media
+Lidovky	리도프키	media
+Ekonom	에코놈	media
+Mladá fronta	믈라다 프론타	media
+Czech News Center	체크 뉴스 센터	media
+Mafra	마프라	media
+Economia	에코노미아	media
+ČTK	체테카	media
+Čtyřlístek	치티르실리스테크	media
+Mach a Šebestová	마흐 아 셰베스토바	media
+Pan Tau	판 타우	media
+Arabela	아라벨라	media
+Maxipes Fík	막시페스 피크	media
+Rákosníček	라코스니체크	media
+Spejbl a Hurvínek	스페이블 아 후르비네크	media
+Nova Cinema	노바 시네마	media
+Nova Sport	노바 스포르트	media
+Nova Action	노바 액션	media
+Prima Cool	프리마 쿨	media
+Prima Love	프리마 러브	media
+Prima Max	프리마 맥스	media
+Prima Zoom	프리마 줌	media
+CNN Prima News	시엔엔 프리마 뉴스	media
+ČT sport	체테 스포르트	media
+Déčko	데치코	media
+Televize Seznam	텔레비제 세즈남	media
+TV Noe	티브이 노에	media
+Radio Kiss	라디오 키스	media
+Country Radio	컨트리 라디오	media
+Rock Radio	록 라디오	media
+Rádio Beat	라디오 비트	media
+Rádio Wave	라디오 웨이브	media
+Bonton	본톤	media
+Bontonfilm	본톤필름	media
+Supraphon	수프라폰	music
+Panton	판톤	music
+Barrandov Studios	바란도프 스튜디오스	media
+Lucerna	루체르나	entertainment
+Equa bank	에콰 뱅크	bank
+Partners Banka	파트너스 방카	bank
+Trinity Bank	트리니티 뱅크	bank
+Modrá pyramida	모드라 피라미다	bank
+Buřinka	부르진카	bank
+Max banka	막스 방카	bank
+Česká exportní banka	체스카 엑스포르트니 방카	bank
+Investown	인베스타운	finance
+Fondee	폰디	finance
+Anycoin	애니코인	finance
+Conseq	콘세크	finance
+Broker Consulting	브로커 컨설팅	finance
+Fincentrum	핀첸트룸	finance
+Citfin	칫핀	finance
+Essox	에속스	finance
+Zonky	존키	finance
+Skip Pay	스킵 페이	finance
+ThePay	더페이	finance
+Benefit Plus	베네핏 플러스	finance
+Cebia	체비아	internet
+FTMO	에프티엠오	finance
+Česká podnikatelská pojišťovna	체스카 포드니카텔스카 포이시툐브나	insurance
+Simplea	심플레아	insurance
+Renomia	레노미아	insurance
+VZP	브이지피	insurance
+Eurowag	유로왁	logistics
+Bohemia Energy	보헤미아 에너지	energy
+Centropol	첸트로폴	energy
+MND	엠엔디	energy
+ČEPS	체프스	energy
+Čepro	체프로	energy
+EuroOil	유로오일	energy
+Robin Oil	로빈 오일	energy
+Tank ONO	탕크 오노	energy
+Škoda JS	스코다 제이에스	energy
+Doosan Škoda Power	두산 스코다 파워	energy
+Škoda Electric	스코다 일렉트릭	industrial
+Škoda Vagonka	스코다 바곤카	industrial
+Pražská energetika	프라시스카 에네르게티카	energy
+Pražská plynárenská	프라시스카 플리나렌스카	energy
+Sokolovská uhelná	소콜로프스카 우헬나	energy
+Metrostav	메트로스타프	construction
+Subterra	수브테라	construction
+Promet Group	프로메트 그룹	industrial
+Žďas	즈다스	industrial
+Moravia Steel	모라비아 스틸	industrial
+Bonatrans	보나트란스	industrial
+CZ Loko	시제트 로코	industrial
+Inekon	이네콘	industrial
+Mikov	미코프	tools
+Jihostroj	이호스트로이	aerospace
+Motor Jikov	모토르 이코프	industrial
+Bednar	베드나르	industrial
+Excalibur Army	엑스칼리버 아미	defense
+Omnipol	옴니폴	defense
+Aircraft Industries	에어크래프트 인더스트리스	aerospace
+Kubíček Balloons	쿠비체크 벌룬스	aerospace
+BTL	비티엘	health
+Beznoska	베즈노스카	health
+Eduard	에두아르트	toys
+Foma	포마	photo
+Royal Dux	로열 둑스	home
+Karlovarský porcelán	카를로바르스키 포르첼란	home
+Rudolf Kämpf	루돌프 켐프	home
+Loetz	뢰츠	home
+Bomma	봄마	home
+Egermann	에게르만	home
+Furch	푸르흐	music
+Josef Lidl	요세프 리들	music
+Monti System	몬티 시스템	toys
+Detoa	데토아	toys
+Efko	에프코	toys
+Dino Toys	디노 토이스	toys
+Blackfire	블랙파이어	games
+Druchema	드루헤마	chemicals
+Severochema	세베로헤마	chemicals
+Qalt	칼트	household
+Krystal	크리스탈	household
+Savo	사보	household
+Lybar	리바르	cosmetics
+Velvana	벨바나	household
+Linteo	린테오	household
+Bagmaster	백마스터	fashion
+Topgal	톱갈	fashion
+Het	헤트	paint
+Primalex	프리말렉스	paint
+Balakryl	발라크릴	paint
+Colorlak	콜로를라크	paint
+Heluz	헬루스	construction
+DEK	데크	construction
+Preol	프레올	chemicals
+Spolana	스폴라나	chemicals
+Paramo	파라모	energy
+Alcaplast	알카플라스트	home
+Alcadrain	알카드레인	home
+České Radiokomunikace	체스케 라디오코무니카체	telecom
+Nordic Telecom	노르딕 텔레콤	telecom
+Poda	포다	telecom
+Kaktus	칵투스	telecom
+Telly	텔리	telecom
+Trimm	트림	sports
+Kenvelo	켄벨로	fashion
+Pleas	플레아스	fashion
+Lanex	라넥스	sports
+Triola	트리올라	fashion
+Vasky	바스키	fashion
+Prabos	프라보스	fashion
+Bopo	보포	fashion
+Kazeto	카제토	fashion
+Bohempia	보헴피아	fashion
+Velamos	벨라모스	sports
+Pinguin	핑귄	sports
+Sir Joseph	서 조지프	sports
+Rock Empire	록 엠파이어	sports
+Ocún	오춘	sports
+Rock Pillars	록 필러스	sports
+High Point	하이 포인트	sports
+Klimatex	클리마텍스	sports
+Isolda	이솔다	cosmetics
+Bohemia Gifts	보헤미아 기프츠	cosmetics
+Medpharma	메드파르마	pharma
+Barny's	바르니스	pharma
+Favea	파베아	pharma
+Valetol	발레톨	pharma
+Ataralgin	아타랄긴	pharma
+Endiaron	엔디아론	pharma
+Sotio	소티오	pharma
+Klenoty Aurum	클레노티 아우룸	luxury
+Elton	엘톤	watches
+ČZ	체제트	auto
+Ogar	오가르	auto
+Babetta	바베타	auto
+Pionýr	피오니르	auto
+Forman	포르만	auto
+Estelle	에스텔	auto
+Praktik	프락티크	auto
+Tatraplan	타트라플란	auto
+Praga Bohema	프라가 보헤마	auto
+MTX	엠티엑스	auto
+Buggyra	부기라	sports
+Travel Service	트래블 서비스	airline
+ČSAD	체에스아데	transport
+Hotel Jalta	호텔 얄타	hotel
+Chateau Mcely	샤토 므첼리	hotel
+Aquapalace	아쿠아팔라체	entertainment
+Dinopark	디노파크	entertainment
+FC Vysočina Jihlava	에프시 비소치나 이흘라바	football club
+FK Příbram	에프케이 프르지브람	football club
+SFC Opava	에스에프시 오파바	football club
+HC Sparta Praha	에이치시 스파르타 프라하	sports
+HC Vítkovice	에이치시 비트코비체	sports
+Rytíři Kladno	리티르지 클라드노	sports
+HC Energie Karlovy Vary	에이치시 에네르기에 카를로비 바리	sports
+HC Škoda Plzeň	에이치시 스코다 플젠	sports
+HC Olomouc	에이치시 올로모우츠	sports
+HC Litvínov	에이치시 리트비노프	sports
+Motor České Budějovice	모토르 체스케 부데요비체	sports
+Berani Zlín	베라니 즐린	sports
+Mountfield HK	마운트필드 에이치케이	sports
+Tipsport extraliga	팁스포르트 엑스트랄리가	sports
+Zlatá tretra	즐라타 트레트라	sports
+Velká pardubická	벨카 파르두비츠카	sports
+Jizerská padesátka	이제르스카 파데사트카	sports
+RunCzech	런체크	sports
+Granko	그란코	drink
+Delissa	델리사	food
+Jesenka	예센카	food
+Kočičí jazýčky	코치치 야지치키	food
+Gumotex	구모텍스	sports
+Koupelny Ptáček	코우펠니 프타체크	retail
+Viadrus	비아드루스	appliances
+Česká mincovna	체스카 민초브나	luxury
+Sportka	스포르트카	games
+Colours of Ostrava	컬러스 오브 오스트라바	entertainment
+Rock for People	록 포 피플	entertainment
+Pražské jaro	프라시스케 야로	entertainment
+Mighty Sounds	마이티 사운즈	entertainment
+Brutal Assault	브루탈 어설트	entertainment
+Letní Letná	레트니 레트나	entertainment
+Laterna magika	라테르나 마기카	entertainment
+Herbacos	헤르바코스	pharma
+Septonex	셉토넥스	pharma
+Framykoin	프라미코인	pharma
+Kinedryl	키네드릴	pharma
+Kurzy.cz	쿠르지	internet
+Brokis	브로키스	home
+Ajeto	아예토	home
+Qubus	쿠부스	home
+Preciosa Lighting	프레치오사 라이팅	home
+Café Savoy	카페 사보이	restaurant
+Café Imperial	카페 임페리알	restaurant
+Kantýna	칸티나	restaurant
+Naše maso	나셰 마소	restaurant
+Purity Vision	퓨리티 비전	cosmetics
+Pytloun	피틀로운	hotel
+PPF banka	피피에프 방카	bank
+Hypoteční banka	히포테치니 방카	bank
+KKCG	케이케이시지	finance
+Accolade	어콜레이드	real estate
+CTP	시티피	real estate
+Crestyl	크레스틸	real estate
+Central Group	센트럴 그룹	real estate
+Finep	피네프	real estate
+Trigema	트리게마	real estate
+Sekyra Group	세키라 그룹	real estate
+Kotva	코트바	retail
+Bílá labuť	빌라 라부티	retail
+Scio	시오	education
+Qerko	케르코	app

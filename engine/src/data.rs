@@ -88,6 +88,8 @@ const JA_COMMON: &str = include_str!("../data/ja-common-words.txt");
 pub struct Data {
     korean: KoreanWords,
     english: HashSet<String>,
+    /// Rare English words (Webster's Second, past the common list), sorted: known, but ranked under it.
+    english_rare: Vec<Box<str>>,
     japanese: HashSet<String>,
     /// Japanese words usually written in kana (`ja-kana-native.txt`, built in).
     kana_native: HashSet<String>,
@@ -102,6 +104,68 @@ pub struct Data {
     pub search: crate::search::Search,
     /// (hanja, Korean name)
     pub oecd: Vec<(String, String)>,
+    /// Layout 15's English dictionary (`en-ko.tsv`).
+    pub en_ko: EnKo,
+}
+
+/// Layout 15's English dictionary (docs/layouts/15-bada-roman.md): common words and brand names.
+#[derive(Default)]
+pub struct EnKo {
+    /// Lowercase word → (its Korean words, the word in Hangul).
+    words: HashMap<String, (Vec<String>, String)>,
+    /// A name's letters, lowercase → its Hangul spellings (several brands may share a name).
+    names: HashMap<String, Vec<String>>,
+}
+
+impl EnKo {
+    /// From `en-ko.tsv`: common words (`english<TAB>korean, …<TAB>hangul<TAB>pos`), then after a
+    /// `#! brands` line, brand names (`name<TAB>hangul<TAB>category`).
+    pub fn parse(tsv: &str) -> EnKo {
+        let mut e = EnKo::default();
+        let mut brands = false;
+        for line in tsv.lines() {
+            if line.starts_with("#! brands") {
+                brands = true;
+                continue;
+            }
+            if line.starts_with('#') || line.trim().is_empty() {
+                continue;
+            }
+            let f: Vec<&str> = line.split('\t').collect();
+            if brands {
+                let (Some(name), Some(hangul)) = (f.first(), f.get(1)) else { continue };
+                let key: String = name.chars().filter(|c| c.is_ascii_alphabetic()).collect::<String>().to_ascii_lowercase();
+                if key.is_empty() || hangul.is_empty() {
+                    continue;
+                }
+                let list = e.names.entry(key).or_default();
+                if !list.iter().any(|h| h == hangul) {
+                    list.push(hangul.to_string());
+                }
+            } else {
+                let (Some(word), Some(korean), Some(hangul)) = (f.first(), f.get(1), f.get(2)) else { continue };
+                let korean: Vec<String> = korean.split(',').map(|k| k.trim().to_string()).filter(|k| !k.is_empty()).collect();
+                e.words.entry(word.to_lowercase()).or_insert((korean, hangul.to_string()));
+            }
+        }
+        e
+    }
+
+    /// A lowercase word's readings: its Korean words, then the word in Hangul.
+    pub fn word(&self, word: &str) -> Vec<String> {
+        self.words.get(word).map_or_else(Vec::new, |(k, h)| {
+            let mut out = k.clone();
+            if !h.is_empty() && !out.contains(h) {
+                out.push(h.clone());
+            }
+            out
+        })
+    }
+
+    /// A capitalized name's readings: its Hangul spellings.
+    pub fn name(&self, letters: &str) -> &[String] {
+        self.names.get(&letters.to_ascii_lowercase()).map_or(&[], Vec::as_slice)
+    }
 }
 
 impl Data {
@@ -126,12 +190,24 @@ impl Data {
                 data.ja_common.entry(reading.to_string()).or_default().push(word.to_string());
             }
         }
-        for line in english.lines().filter(|l| !l.starts_with('#')) {
+        // The list's own words, then (after `#! rare`) the rare ones: words, but not common ones.
+        let mut rare = false;
+        for line in english.lines() {
+            if line.starts_with("#! rare") {
+                rare = true;
+                continue;
+            }
             let w = line.trim();
-            if !w.is_empty() {
+            if w.is_empty() || w.starts_with('#') {
+                continue;
+            }
+            if rare {
+                data.english_rare.push(w.to_lowercase().into_boxed_str());
+            } else {
                 data.english.insert(w.to_lowercase());
             }
         }
+        data.english_rare.sort_unstable();
         for line in oecd.lines().filter(|l| !l.starts_with('#')) {
             let mut f = line.split('\t');
             if let (Some(h), Some(name)) = (f.next(), f.next()) {
@@ -159,6 +235,12 @@ impl Data {
     /// Adds the searches of layouts 150 and 151 (`symbols.tsv`, `emoji.tsv`, `unicode-names.tsv`).
     pub fn with_search(mut self, symbols: &str, emoji: &str, unicode: &str) -> Data {
         self.search = crate::search::Search::parse(symbols, emoji, unicode);
+        self
+    }
+
+    /// Adds layout 15's English dictionary (`en-ko.tsv`, built from `engine/data/en-ko/`).
+    pub fn with_en_ko(mut self, tsv: &str) -> Data {
+        self.en_ko = EnKo::parse(tsv);
         self
     }
 
@@ -199,6 +281,11 @@ impl Data {
 
     pub fn is_english(&self, word: &str) -> bool {
         self.english.contains(&word.to_lowercase())
+    }
+
+    /// A word of the rare English list (`#! rare` in en-words.txt: tools/build_en_rare.py).
+    pub fn is_english_rare(&self, word: &str) -> bool {
+        self.english_rare.binary_search_by(|w| (**w).cmp(word.to_lowercase().as_str())).is_ok()
     }
 }
 

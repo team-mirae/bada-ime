@@ -11,7 +11,7 @@
 | **Abbreviations** | KTS, 2-set, 2벌식 |
 | **Designer** | The Korean national standard KS X 5002 (formerly KS C 5715, 1982). Its JIS form in bada ime: Min Jun Sung (Mirae Research) |
 | **Maintainer** | Mirae Research (미래 리서치) |
-| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+| **Contact** | mj@teammirae.com (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/10-kts-dark.png">

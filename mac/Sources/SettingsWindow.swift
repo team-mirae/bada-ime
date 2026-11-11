@@ -23,6 +23,7 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
     private var muhenkanPopup = NSPopUpButton()
     private var negativePopup = NSPopUpButton()
     private var scriptFormsBox = NSButton()
+    private var jaShortcutsBox = NSButton()
     private var interceptBox = NSButton()
     private var fProfilePopup = NSPopUpButton()
     private var fOwnPopup = NSPopUpButton()
@@ -281,6 +282,12 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
         negativePopup.isEnabled = settings.script_forms
         stack.addArrangedSubview(negativePopup)
         stack.addArrangedSubview(help("Japanese (Kana) and Japanese (Romaji) offer them: −1 hiragana, −2 katakana."))
+
+        stack.addArrangedSubview(label("Korean (bada roman, 15)", bold: true))
+        jaShortcutsBox = NSButton(checkboxWithTitle: "Accept Japanese romaji readings as shortcuts when it saves keystrokes", target: self, action: #selector(changed(_:)))
+        jaShortcutsBox.state = settings.ja_shortcuts ? .on : .off
+        jaShortcutsBox.toolTip = "i.e. mei as 명, or jou as 정"
+        stack.addArrangedSubview(jaShortcutsBox)
 
         stack = page("F Keys")
         stack.addArrangedSubview(label("F6–F10", bold: true))
@@ -651,6 +658,7 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
         }
         if let tag = muhenkanPopup.selectedItem?.tag { settings.default_muhenkan = UInt32(tag) }
         settings.script_forms = scriptFormsBox.state == .on
+        settings.ja_shortcuts = jaShortcutsBox.state == .on
         negativePopup.isEnabled = settings.script_forms
         let negative = negativePopup.selectedItem?.tag ?? -1
         settings.negative_method = negative < 0 ? nil : UInt32(negative)

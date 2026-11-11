@@ -63,13 +63,15 @@ the robot fails if the layout doesn't earn it:
 The report's **Claims** table gives each layout's claim and what it earns. Each layout page states
 its claims in its metadata header, and the layouts README in its table; `pages_state_the_claims`
 (a fast test, also in debug builds) checks they match the JSON. A layout may claim less
-than it earns, never more. GitHub Actions (`.github/workflows/robot.yml`) runs the robot on every
+than it earns, never more; claiming less is a **warning** (on stderr, in the report, and as an
+annotation on the GitHub Actions run), not a failure. GitHub Actions (`.github/workflows/robot.yml`) runs the robot on every
 push to main and every pull request, and puts the report in the run's summary.
 
 | Layout | Language | Claims |
 |---|---|---|
 | 00 | english | perfect |
 | 10–14 | korean | perfect |
+| 15 | korean | experimental (the English dictionary and romaji shortcuts aren't typed) |
 | 18 | korean | production |
 | 19 | korean | experimental (69% on Common Voice; the gaps are open questions in [kana-korean.md](kana-korean.md)) |
 | 20, 21 | japanese_kana, japanese_romaji | production (every common word; 87% of the law texts, 93% of Tatoeba) |

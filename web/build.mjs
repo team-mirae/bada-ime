@@ -37,8 +37,19 @@ const version = readFileSync(root + "engine/Cargo.toml", "utf8").match(/^version
 const manifest = { version, wasm: { path: `bada.${hash(wasm)}.wasm`, size: wasm.length }, data: {}, layouts: [] };
 writeFileSync(out + manifest.wasm.path, wasm);
 
+// en-ko.tsv: layout 15's English dictionary, put together as mac/Makefile does (sensitive words left
+// out): the common words, then the brand names after a `#! brands` line.
+function enKo() {
+  const dir = root + "engine/data/en-ko/";
+  const brands = readdirSync(dir + "brands").filter(f => f.endsWith(".tsv")).sort()
+    .map(f => readFileSync(dir + "brands/" + f, "utf8"))
+    .map(t => (t.endsWith("\n") ? t : t + "\n"));
+  const common = readFileSync(dir + "common.tsv", "utf8");
+  return Buffer.from([common.endsWith("\n") ? common : common + "\n", "#! brands\n", ...brands].join(""));
+}
 for (const f of DATA_FILES) {
-  const gz = gzipSync(readFileSync(root + "engine/data/" + f), { level: 9 });
+  const bytes = f === "en-ko.tsv" ? enKo() : readFileSync(root + "engine/data/" + f);
+  const gz = gzipSync(bytes, { level: 9 });
   const path = `data/${f}.${hash(gz)}.gz`;
   writeFileSync(out + path, gz);
   manifest.data[f] = { path, size: gz.length };

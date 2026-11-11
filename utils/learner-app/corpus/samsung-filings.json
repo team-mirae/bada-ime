@@ -1,0 +1,23 @@
+{
+  "about": "Samsung group listed companies and the filing whose 'II. 사업의 내용' (business description) section the practice corpus is cut from. Found with the Magic DART connector (OpenDART); fetched by tools/fetch-dart.mjs.",
+  "report": "반기보고서 (2026.06)",
+  "filings": [
+    { "company": "삼성전자", "corp_code": "00126380", "rcept_no": "20260814003699" },
+    { "company": "삼성물산", "corp_code": "00149655", "rcept_no": "20260814002969" },
+    { "company": "삼성생명", "corp_code": "00126256", "rcept_no": "20260814003263" },
+    { "company": "삼성전기", "corp_code": "00126371", "rcept_no": "20260814003805" },
+    { "company": "삼성SDI", "corp_code": "00126362", "rcept_no": "20260814003578" },
+    { "company": "삼성에스디에스", "corp_code": "00126186", "rcept_no": "20260814003604" },
+    { "company": "삼성바이오로직스", "corp_code": "00877059", "rcept_no": "20260814003375" },
+    { "company": "삼성에피스홀딩스", "corp_code": "01965324", "rcept_no": "20260814002990" },
+    { "company": "삼성화재해상보험", "corp_code": "00139214", "rcept_no": "20260814003992" },
+    { "company": "삼성증권", "corp_code": "00104856", "rcept_no": "20260814002836" },
+    { "company": "삼성카드", "corp_code": "00126292", "rcept_no": "20260814003715" },
+    { "company": "삼성E&A", "corp_code": "00126308", "rcept_no": "20260814003428" },
+    { "company": "삼성중공업", "corp_code": "00126478", "rcept_no": "20260814003496" },
+    { "company": "에스원", "corp_code": "00158501", "rcept_no": "20260814003817" },
+    { "company": "제일기획", "corp_code": "00148276", "rcept_no": "20260814003310" },
+    { "company": "호텔신라", "corp_code": "00165680", "rcept_no": "20260814001955" },
+    { "company": "멀티캠퍼스", "corp_code": "00425351", "rcept_no": "20260814003903" }
+  ]
+}

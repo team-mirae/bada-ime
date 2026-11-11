@@ -5,6 +5,7 @@
 //! - 13 JIS Bada (henkan): `docs/layouts/13-bada.json`, deterministic (docs/bada-layout.md).
 //! - 14 JIS 3-set (henkan): `docs/layouts/14-3set-jis.json`, read as it is (docs/layouts/14-3set-jis.md).
 //! - 150 Symbols and 151 Unicode (henkan): searches (`search.rs`).
+//! - 15 bada roman (henkan): `bada_roman.rs`.
 //! - 18 JIS Korean Roman (henkan): `korean_roman.rs`.
 //! - 19 JIS Kana Korean (henkan): `kana_korean.rs`.
 //! - 20 JIS Kana and 21 JIS Romaji (henkan, deterministic for now): `japanese.rs`.
@@ -18,6 +19,7 @@ pub const LEGACY_KOREAN: u32 = 11;
 pub const LEGACY_MOONSHOT: u32 = 12;
 pub const BADA: u32 = 13;
 pub const K3S_JIS: u32 = 14;
+pub const BADA_ROMAN: u32 = 15;
 pub const SYMBOLS: u32 = 150;
 pub const UNICODE: u32 = 151;
 pub const KOREAN_ROMAN: u32 = 18;
@@ -33,6 +35,7 @@ pub const CATALOG: &[(u32, &str, bool)] = &[
     (LEGACY_MOONSHOT, "Korean (legacy-moonshot)", true),
     (BADA, "Korean (bada)", true),
     (K3S_JIS, "Korean (3-set JIS)", true),
+    (BADA_ROMAN, "Korean (bada roman)", true),
     (KOREAN_ROMAN, "Korean (Roman)", true),
     (KANA_KOREAN, "Korean (Kana)", true),
     (KANA, "Japanese (Kana)", true),
@@ -537,6 +540,9 @@ fn compose_with(id: u32, presses: &[Press], drop_implied: bool) -> String {
     if id == KANA_KOREAN {
         return crate::kana_korean::compose_presses(presses);
     }
+    if id == BADA_ROMAN {
+        return crate::bada_roman::compose_presses(presses);
+    }
     if id == K3S_JIS {
         return compose_moa(id, presses);
     }
@@ -814,6 +820,7 @@ pub fn takes(id: u32, p: Press) -> bool {
         QWERTY => jis_char(p.key, p.shift).is_some(),
         KANA_KOREAN => crate::kana_korean::takes(p),
         KOREAN_ROMAN => crate::korean_roman::takes(p),
+        BADA_ROMAN => crate::bada_roman::takes(p),
         KANA => crate::japanese::kana_takes(p),
         ROMAJI => crate::japanese::romaji_takes(p),
         SYMBOLS | UNICODE => !p.alt && (p.key == Key::Space || jis_char(p.key, p.shift).is_some()),

@@ -186,6 +186,9 @@ function menuPage(s) {
     select([[-1, "The lowest enabled method that offers them"], ...api.catalog.layouts.filter(l => l.henkan).map(l => [l.id, `${l.name}  (${l.id})`])],
       s.negative_method ?? -1, v => change(s => { s.negative_method = Number(v) < 0 ? null : Number(v); }), { disabled: !s.script_forms }),
     hint("Japanese (Kana) and Japanese (Romaji) offer them: −1 hiragana, −2 katakana."),
+    heading("Korean (bada roman, 15)"),
+    Object.assign(check("Accept Japanese romaji readings as shortcuts when it saves keystrokes", s.ja_shortcuts,
+      v => change(s => { s.ja_shortcuts = v; })), { title: "i.e. mei as 명, or jou as 정" }),
   ];
 }
 

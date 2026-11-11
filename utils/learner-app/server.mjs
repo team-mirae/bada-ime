@@ -8,21 +8,30 @@ import { extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { learn, parseSession, toDictionary } from "./lib/learn.mjs";
 import { RENDER_DIR } from "./lib/layouts.mjs";
+import { summarize } from "./lib/practice.mjs";
 
 const HERE = fileURLToPath(new URL(".", import.meta.url));
 const DATA = join(HERE, "data"), SESSIONS = join(DATA, "sessions"), EXPORTS = join(DATA, "exports");
+const CORPUS = join(DATA, "corpus", "samsung.json"), PRACTICE = join(DATA, "practice");
 const BADA_DIR = join(homedir(), "Library", "Application Support", "bada-ime");
 const PORT = Number(process.argv[process.argv.indexOf("--port") + 1]) || 5713;
 mkdirSync(SESSIONS, { recursive: true });
 mkdirSync(EXPORTS, { recursive: true });
+mkdirSync(PRACTICE, { recursive: true });
+const RESULTS = join(PRACTICE, "results.jsonl");
+const results = () => existsSync(RESULTS)
+  ? readFileSync(RESULTS, "utf8").split("\n").filter(Boolean).map(l => JSON.parse(l)) : [];
 
 const STATIC = {
   "/": join(HERE, "public", "index.html"),
   "/app.js": join(HERE, "public", "app.js"),
+  "/practice": join(HERE, "public", "practice.html"),
+  "/practice.js": join(HERE, "public", "practice.js"),
+  "/practice-lib.js": join(HERE, "lib", "practice.mjs"),
   "/keyboards.js": join(RENDER_DIR, "keyboards.js"),
   "/layouts.js": join(RENDER_DIR, "layouts.js"),
 };
-const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8" };
+const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8" };
 const SESSION_ID = /^[0-9TZ-]+-[a-z0-9]{4}$/;
 const stamp = () => new Date().toISOString().replace(/[:.]/g, "-");
 
@@ -68,6 +77,25 @@ const server = createServer(async (req, res) => {
       if (!SESSION_ID.test(session) || !Array.isArray(events)) return send(res, 400, { error: "bad session or events" });
       appendFileSync(join(SESSIONS, session + ".jsonl"), events.map(e => JSON.stringify(e) + "\n").join(""));
       return send(res, 200, { ok: true, saved: events.length });
+    }
+    // Copy practice (/practice): the corpus, one result per sentence typed, and their totals.
+    if (req.method === "GET" && url.pathname === "/api/corpus") {
+      if (!existsSync(CORPUS)) return send(res, 404, { error: "no corpus: run node tools/fetch-dart.mjs" });
+      return send(res, 200, readFileSync(CORPUS));
+    }
+    if (req.method === "POST" && url.pathname === "/api/practice") {
+      const r = JSON.parse(await readBody(req));
+      if (typeof r.target !== "string" || typeof r.typed !== "string") return send(res, 400, { error: "target and typed are required" });
+      const keep = { t: new Date().toISOString(), company: String(r.company || ""), rcept_no: String(r.rcept_no || ""), index: Number(r.index) || 0,
+        target: r.target, typed: r.typed, ms: Number(r.ms) || 0, keys: Number(r.keys) || 0, backspaces: Number(r.backspaces) || 0,
+        live: Array.isArray(r.live) ? r.live.slice(0, 500).map(e => ({ expected: String(e.expected || ""), got: String(e.got || "") })) : [] };
+      appendFileSync(RESULTS, JSON.stringify(keep) + "\n");
+      return send(res, 200, { ok: true });
+    }
+    if (req.method === "GET" && url.pathname === "/api/practice/stats") {
+      const all = results(), company = url.searchParams.get("company");
+      return send(res, 200, { all: summarize(all), company: company ? summarize(all.filter(r => r.company === company)) : null,
+        done: all.map(r => `${r.rcept_no}:${r.index}`) });
     }
     if (req.method === "GET" && url.pathname === "/api/stats") {
       const { exp } = build(url);

@@ -16,6 +16,7 @@
 - Engine: `cargo test` in `engine/`. macOS: `make` / `make install` in `mac/`.
 - `engine/data/ko-words.tsv`: `python3 engine/tools/build_ko_words.py` (reads the jis-moonshot corpora).
   Then `python3 engine/tools/build_jamo_lm.py` (the typo model, `ko-jamo-4gram.bin`, from ko-words.tsv).
+- `engine/data/en-words.txt`'s `#! rare` section: `python3 engine/tools/build_en_rare.py` (from macOS's `/usr/share/dict/words`).
 - `engine/data/emoji.tsv`, `unicode-names.tsv`: `python3 engine/tools/build_unicode_data.py` (Unicode files in
   `engine/tools/cache/unicode/`, URLs in the script). `symbols.tsv` and `unicode-aliases.tsv` are hand-written.
 - Typing robot (`docs/robot.md`): `cargo test --release --test robot`. Corpora: `engine/tests/data/robot/`,
@@ -23,6 +24,8 @@
   Layout JSONs for the layouts defined in code: `cargo run --example layout_json`.
   Each JSON claims a reliability per language (perfect / production / experimental); CI
   (`.github/workflows/robot.yml`) fails a layout that doesn't earn its claim.
+- `engine/data/ja-shortcuts.tsv` (layout 15): `python3 engine/tools/build_ja_shortcuts.py` (Unihan in
+  `engine/tools/cache/unicode/Unihan/`, URL in the script).
 - `engine/data/ja-kana-native.txt` and `ja-common-words.txt`: `tools/analysis/.venv/bin/python engine/tools/build_kana_native.py`.
 - Web simulator (`web/`, bada.sjun.me): `node web/build.mjs` → `web/dist`; `node web/test/smoke.mjs`. Deployed to Vercel
   by `.github/workflows/deploy-web.yml` on push to main. It ports the Mac shell's behaviour (InputController,

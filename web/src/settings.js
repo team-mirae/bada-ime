@@ -24,7 +24,7 @@ export function defaults() {
   return {
     enabled: [13], default_muhenkan: 0, use_profiles: false, profiles: {}, weights: {}, profile_keys: {},
     kana_in_profile: {}, profile_order: ["mac-kana", "henkan", "katakana"], skin_tones: [...ALL_TONES],
-    script_forms: false, negative_method: null, intercept_f: true, fkeys: {},
+    script_forms: false, negative_method: null, intercept_f: true, fkeys: {}, ja_shortcuts: true,
   };
 }
 
@@ -56,6 +56,7 @@ export function normalize(raw) {
   if (Number.isInteger(raw.negative_method)) s.negative_method = raw.negative_method;
   if (typeof raw.intercept_f === "boolean") s.intercept_f = raw.intercept_f;
   if (isObj(raw.fkeys)) s.fkeys = strings(raw.fkeys);
+  if (typeof raw.ja_shortcuts === "boolean") s.ja_shortcuts = raw.ja_shortcuts;
   return s;
 }
 

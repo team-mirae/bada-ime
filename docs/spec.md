@@ -119,6 +119,7 @@ maintainer, contact) and is governed by the maintainer rules there.
 | 12 | JIS Moonshot | `Korean (legacy-moonshot)` | henkan, deterministic | JIS Moonshot Mode A's Korean reading (moonshot.md §9) |
 | 13 | JIS Bada | `Korean (bada)` | henkan, deterministic | new: [bada-layout.md](bada-layout.md) |
 | 14 | JIS 3-set (세벌식 JIS, K3S-J) | `Korean (3-set JIS)` | henkan, deterministic | new: [layouts/14-3set-jis.md](layouts/14-3set-jis.md), designed by the owner from 세벌식 순아래; 모아쓰기 (jamo of a syllable in any order) |
+| 15 | bada roman | `Korean (bada roman)` | henkan, ranked (the default reading, or a better-known one, shows; the English dictionary never first) | new: [layouts/15-bada-roman.md](layouts/15-bada-roman.md) |
 | 18 | JIS Korean Roman | `Korean (Roman)` | henkan, ranked (the default reading shows; other readings offered) | new: [korean-roman.md](korean-roman.md) |
 | 19 | JIS Kana Korean | `Korean (Kana)` | henkan, ranked (the table's reading shows; other pronunciations offered) | new, minor: [kana-korean.md](kana-korean.md) |
 | 20 | JIS Kana | `Japanese (Kana)` | henkan, non-deterministic (kanji conversion) | JIS Moonshot `A_KANA`: [japanese.md](japanese.md) |
@@ -215,8 +216,13 @@ The interpretations of the staged keys form one menu with **signed indexes**:
 | **0** | The top-ranked interpretation: what shows while typing |
 | 1, 2, … | The other ranked interpretations: kanji conversions and mixed suggestions, every enabled candidate's readings together |
 
-- Typing always lands on **0**. Next (かな, Tab, ↓) goes up from there; previous (⇧かな, ⇧Tab, ↑)
+- Typing lands on **0**. Next (かな, Tab, ↓) goes up from there; previous (⇧かな, ⇧Tab, ↑)
   goes down, and **below 0 into the negative entries**.
+- **A picked entry stays picked** (owner, 2026-11-11). After Next has picked an entry above 0, typing
+  on lands on the best entry that extends it (QWERTY's `inter` picked, then `polate`: `interpolate`;
+  정석 picked, then more letters: 정석기업). If no entry extends it, the pick stays as it is and the
+  new keys start a word of their own after it (`cockpit`'s 콕핏 picked, then `eui`: 콕핏의). Going
+  back to 0 drops the pick; committing ends it.
 - Japanese methods (20 Kana, 21 Romaji) define **−1 hiragana** and **−2 katakana**: from a fresh
   reading, ⇧Tab once is hiragana, twice katakana.
 - **Optional, off by default** (owner, 2026-11-08): Settings → "Script forms below the top entry"
@@ -233,7 +239,11 @@ The interpretations of the staged keys form one menu with **signed indexes**:
   default: the lowest-id enabled method that offers them (20 Kana before 21 Romaji).
 - Other conversions are **not** negative entries: half-width comes from ⇧半角/全角, the old F8–F10
   conversions from F-key actions (§6.5), and the plain English reading is a ranked entry (≥ 0)
-  whenever QWERTY (0) is enabled.
+  whenever QWERTY (0) is enabled. It ranks by `en-words.txt`: a common word (the list's head) over
+  a Korean reading that's no known word; a **rare word** (its `#! rare` section, Webster's Second
+  from macOS's word list: `engine/tools/build_en_rare.py`) over a Korean reading that's no known word
+  too, but under a common English word and under any known Korean word (owner, 2026-11-11:
+  `interpolate`, not 인텔포라테); other letters last.
 - **No wrap.** Next on the last entry and previous on the lowest negative entry do nothing.
 - Committing commits the entry shown, whatever its index.
 
@@ -344,7 +354,7 @@ the output.
 
 ### 7.0 What v0.1 builds
 
-- Layouts **0** (QWERTY), **10** (2-set), **11** (JIS Korean), **12** (JIS Moonshot), **13** (Bada, bada-layout.md), **14** (3-set JIS), **18** (Korean Roman), **19** (Kana Korean),
+- Layouts **0** (QWERTY), **10** (2-set), **11** (JIS Korean), **12** (JIS Moonshot), **13** (Bada, bada-layout.md), **14** (3-set JIS), **15** (bada roman), **18** (Korean Roman), **19** (Kana Korean),
   **20** (Kana), **21** (Romaji), **150** (Symbols) and **151** (Unicode). 20 and 21 convert to kanji (Mozc's dictionary, docs/japanese.md)
   and give the negative entries (−1 hiragana, −2 katakana); their menu rows carry romaji / kana notes.
 - 11 and 12 are the Korean readings only, deterministic: the keys, implied ㅇ, the double press and

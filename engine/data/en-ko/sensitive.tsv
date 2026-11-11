@@ -1,0 +1,51 @@
+# bada ime: English -> Korean dictionary, sensitive words (layout 15, bada roman).
+# Vulgar words, slurs and hateful terms, sexual terms and drug terms, kept apart from common.tsv.
+# Left out of builds by default; included only with `make SENSITIVE=1` (mac/Makefile).
+# Built by hand (Claude, 2026-11): moved out of common.tsv plus common vulgar/slang words.
+# Columns (tab-separated): english<TAB>korean<TAB>hangul<TAB>pos
+#   english  lowercase base form (headword)
+#   korean   Korean word(s), most common sense first, ", "-separated, at most 4
+#   hangul   the English word in Hangul: established spelling first; otherwise as it sounds, /æ/ as ㅔ
+#   pos      noun | verb | adj | adv (main first, comma-separated)
+butt	엉덩이	버트	noun
+bastard	개자식, 놈	베스터드	noun
+shit	똥, 젠장, 제기랄	쉣	noun
+fuck	젠장, 씨발, 엿	퍽	verb
+bitch	개년, 썅년	비치	noun
+ass	엉덩이, 똥구멍	에스	noun
+asshole	개자식, 똥구멍	에스홀	noun
+piss	오줌, 오줌싸다	피스	noun,verb
+crap	헛소리, 쓰레기, 젠장	크랩	noun
+damn	젠장, 빌어먹을	댐	adj
+bullshit	개소리, 헛소리	불쉿	noun
+motherfucker	개새끼	마더퍼커	noun
+dumbass	멍청이, 바보	덤에스	noun
+dick	자지, 개자식	딕	noun
+cock	자지, 수탉	콕	noun
+pussy	보지, 겁쟁이	푸시	noun
+boob	가슴, 젖	붑	noun
+slut	걸레, 창녀	슬럿	noun
+whore	창녀, 매춘부	호어	noun
+hooker	창녀, 매춘부	후커	noun
+retard	저능아, 바보	리타드	noun
+sex	성, 섹스	섹스	noun
+sexual	성적인	섹슈얼	adj
+rape	강간, 성폭행	레이프	noun,verb
+penis	음경, 성기	피너스	noun
+prostitute	매춘부	프로스티튜트	noun
+pornography	포르노, 음란물	포르노그래피	noun
+condom	콘돔	콘돔	noun
+nude	누드, 나체의	누드	adj,noun
+vagina	질	버자이너	noun
+virginity	순결, 처녀성	버지니티	noun
+prostitution	매춘	프로스티튜션	noun
+porn	포르노, 야동	포르노	noun
+horny	꼴린, 발정난	호니	adj
+dildo	딜도	딜도	noun
+orgasm	오르가슴, 절정	오르가슴	noun
+masturbate	자위하다	마스터베이트	verb
+blowjob	오럴섹스	블로잡	noun
+cocaine	코카인	코카인	noun
+marijuana	마리화나, 대마초	마리화나	noun
+heroin	헤로인	헤로인	noun
+meth	필로폰, 메스암페타민	메스	noun

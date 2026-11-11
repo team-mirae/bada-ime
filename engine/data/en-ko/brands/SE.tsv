@@ -1,0 +1,1017 @@
+# Sweden (스웨덴)
+# Covers Swedish-origin / Swedish-headquartered brands: companies, consumer brands, products and product lines
+# (IKEA products, Saab/Koenigsegg models), retailers, banks, media, apps, games and studios, food and drink,
+# fashion, beauty, sports clubs.
+# Sources: own knowledge; Korean market names where known (IKEA Korea product names, Korean media spellings);
+# otherwise 외래어 표기법 (스웨덴어).
+IKEA	이케아	furniture
+Volvo	볼보	auto
+Volvo Cars	볼보자동차	auto
+Volvo Trucks	볼보트럭	auto
+Volvo Penta	볼보 펜타	industrial
+Saab	사브	auto
+Scania	스카니아	auto
+Ericsson	에릭슨	telecom
+H&M	에이치앤엠	fashion
+Spotify	스포티파이	app
+Electrolux	일렉트로룩스	appliances
+Husqvarna	허스크바나	industrial
+Atlas Copco	아트라스콥코	industrial
+Epiroc	에피록	industrial
+Sandvik	샌드빅	industrial
+SKF	에스케이에프	industrial
+Alfa Laval	알파라발	industrial
+Assa Abloy	아사아블로이	industrial
+Hexagon	헥사곤	tech
+Essity	에시티	consumer goods
+SCA	에스시에이	paper
+Tetra Pak	테트라팩	packaging
+Securitas	시큐리타스	security
+Skanska	스칸스카	construction
+NCC	엔시시	construction
+Peab	페아브	construction
+Boliden	볼리덴	mining
+SSAB	에스에스에이비	steel
+Hardox	하독스	steel
+Vattenfall	바텐폴	energy
+Telia	텔리아	telecom
+Tele2	텔레투	telecom
+Klarna	클라르나	finance
+Mojang	모장	games
+Minecraft	마인크래프트	games
+King	킹	games
+Candy Crush Saga	캔디 크러시 사가	games
+DICE	다이스	games
+Battlefield	배틀필드	games
+Mirror's Edge	미러스 엣지	games
+Paradox Interactive	패러독스 인터랙티브	games
+Europa Universalis	유로파 유니버설리스	games
+Crusader Kings	크루세이더 킹즈	games
+Hearts of Iron	하츠 오브 아이언	games
+Stellaris	스텔라리스	games
+Victoria	빅토리아	games
+Absolut	앱솔루트	spirits
+Fjällräven	피엘라벤	fashion
+Kånken	칸켄	fashion
+Acne Studios	아크네 스튜디오	fashion
+Daniel Wellington	다니엘 웰링턴	watches
+Hasselblad	핫셀블라드	electronics
+Thule	툴레	sports
+Polestar	폴스타	auto
+Koenigsegg	코닉세그	auto
+Oatly	오틀리	food
+Northvolt	노스볼트	energy
+Truecaller	트루콜러	app
+Tobii	토비	tech
+Axis Communications	엑시스 커뮤니케이션즈	tech
+Getinge	게팅게	medical
+Elekta	엘렉타	medical
+Mölnlycke	묄른뤼케	medical
+Sobi	소비	pharma
+Orexo	오렉소	pharma
+Recipharm	레시팜	pharma
+Pharmacia	파마시아	pharma
+Astra	아스트라	pharma
+Investor AB	인베스터	finance
+Kinnevik	키네비크	finance
+Industrivärden	인두스트리베르덴	finance
+EQT	이큐티	finance
+Handelsbanken	한델스방켄	bank
+SEB	에스이비	bank
+Swedbank	스웨드뱅크	bank
+Länsförsäkringar	렌스푀르셰크링아르	insurance
+Folksam	폴크삼	insurance
+Skandia	스칸디아	insurance
+Trygg-Hansa	트뤼그한사	insurance
+SPP	에스피피	insurance
+AMF	에이엠에프	insurance
+Alecta	알렉타	insurance
+Avanza	아반사	finance
+Nordnet	노르드넷	finance
+Collector Bank	콜렉터 뱅크	bank
+Resurs Bank	레수르스 방크	bank
+Ikano Bank	이카노 뱅크	bank
+Qliro	클리로	finance
+Swish	스위시	app
+BankID	뱅크아이디	app
+Trustly	트러스틀리	finance
+Zettle	제틀	finance
+iZettle	아이제틀	finance
+Tink	팅크	finance
+Anyfin	애니핀	finance
+Kry	크뤼	app
+Sinch	신치	tech
+Storytel	스토리텔	app
+Epidemic Sound	에피데믹 사운드	media
+Readly	레들리	app
+Mentimeter	멘티미터	software
+Hemnet	헴네트	internet
+Blocket	블로케트	internet
+Tradera	트라데라	internet
+Prisjakt	프리스약트	internet
+PriceRunner	프라이스러너	internet
+Voi	보이	mobility
+Einride	에인리데	logistics
+Evolution	에볼루션	games
+NetEnt	넷엔트	games
+Betsson	베트손	games
+Kindred	킨드레드	games
+LeoVegas	레오베가스	games
+ATG	에이티지	games
+Svenska Spel	스벤스카 스펠	games
+Fortnox	포트녹스	software
+Qlik	클릭	software
+MySQL	마이에스큐엘	software
+µTorrent	유토렌트	software
+The Pirate Bay	파이럿 베이	internet
+Mycronic	마이크로닉	tech
+Fingerprint Cards	핑거프린트 카드	tech
+Doro	도로	electronics
+Teenage Engineering	틴에이지 엔지니어링	electronics
+Elektron	엘렉트론	electronics
+Nord	노르드	electronics
+Clavia	클라비아	electronics
+Urbanears	어반이어스	electronics
+Sudio	수디오	electronics
+Happy Plugs	해피 플러그스	electronics
+Zound Industries	자운드 인더스트리스	electronics
+Defunc	디펑크	electronics
+Jays	제이스	electronics
+& Other Stories	앤 아더 스토리즈	fashion
+Monki	몽키	fashion
+Weekday	위크데이	fashion
+Arket	아르켓	fashion
+Cheap Monday	칩 먼데이	fashion
+Filippa K	필리파 케이	fashion
+Tiger of Sweden	타이거 오브 스웨덴	fashion
+J.Lindeberg	제이린드버그	fashion
+Nudie Jeans	누디진	fashion
+Björn Borg	비에른 보리	fashion
+Peak Performance	피크퍼포먼스	fashion
+Haglöfs	하글로프스	fashion
+Houdini	후디니	fashion
+Klättermusen	클레테르무센	fashion
+Craft	크래프트	sports
+Röhnisch	뢰니시	sports
+Eytys	에이티스	fashion
+Our Legacy	아워레가시	fashion
+Hope	호프	fashion
+Rodebjer	루데비에르	fashion
+Odd Molly	오드 몰리	fashion
+Whyred	와이레드	fashion
+Sandqvist	샌드크비스트	fashion
+Triwa	트리바	watches
+Lindex	린덱스	fashion
+KappAhl	카팔	fashion
+Gina Tricot	지나 트리콧	fashion
+Ellos	엘로스	retail
+Nelly	넬리	fashion
+NA-KD	네이키드	fashion
+Bubbleroom	버블룸	fashion
+Desenio	데세니오	retail
+Polarn O. Pyret	폴라른 오 퓌레트	fashion
+Brothers	브라더스	fashion
+MQ	엠큐	fashion
+Indiska	인디스카	retail
+Hampton Republic	햄프턴 리퍼블릭	fashion
+Dobsom	돕솜	fashion
+Stutterheim	스투테르헤임	fashion
+Uniforms for the Dedicated	유니폼스 포 더 데디케이티드	fashion
+Totême	토템	fashion
+Axel Arigato	악셀 아리가토	fashion
+Hästens	헤스텐스	furniture
+Dux	둑스	furniture
+Kährs	셰르스	furniture
+Kinnarps	신나르프스	furniture
+Lammhults	람훌츠	furniture
+Källemo	셸레모	furniture
+Gärsnäs	예르스네스	furniture
+Offecct	오펙트	furniture
+Blå Station	블로 스타시온	furniture
+Norrgavel	노르가벨	furniture
+Svenskt Tenn	스벤스크트 텐	furniture
+String	스트링	furniture
+Massproductions	매스프로덕션스	furniture
+Mio	미오	furniture
+Svenska Hem	스벤스카 헴	furniture
+Hemtex	헴텍스	retail
+Gustavsberg	구스타브스베리	appliances
+Ifö	이푀	appliances
+Orrefors	오레포르스	glass
+Kosta Boda	코스타 보다	glass
+Rörstrand	뢰르스트란드	tableware
+Höganäs	회가네스	tableware
+Asko	아스코	appliances
+Cylinda	실린다	appliances
+Husqvarna Viking	허스크바나 바이킹	appliances
+Bahco	바코	industrial
+Sandvik Coromant	샌드빅 코로만트	industrial
+Primus	프리무스	sports
+Trangia	트랑기아	sports
+Optimus	옵티무스	sports
+Babybjörn	베이비뵨	baby
+Elodie Details	엘로디 디테일	baby
+Jollyroom	졸리룸	retail
+Babyshop	베이비숍	retail
+Clas Ohlson	클라스 올손	retail
+Biltema	빌테마	retail
+Jula	율라	retail
+Rusta	루스타	retail
+Åhléns	올렌스	retail
+NK	엔케이	retail
+Nordiska Kompaniet	노르디스카 콤파니에트	retail
+Bukowskis	부코프스키스	retail
+Systembolaget	시스템볼라게트	retail
+Apoteket	아포테케트	retail
+Apotek Hjärtat	아포테크 예르타트	retail
+Kronans Apotek	크로난스 아포테크	retail
+Apotea	아포테아	retail
+ICA	이카	retail
+Willys	윌리스	retail
+Hemköp	헴셰프	retail
+Axfood	악스푸드	retail
+City Gross	시티 그로스	retail
+Mathem	마템	retail
+Lyko	뤼코	beauty
+Kicks	킥스	beauty
+Stadium	스타디움	retail
+Naturkompaniet	나투르콤파니에트	retail
+Team Sportia	팀 스포르티아	retail
+Granngården	그란고르덴	retail
+Byggmax	뷔그막스	retail
+Beijer	베이에르	retail
+Netonnet	넷온넷	retail
+Webhallen	웹할렌	retail
+Inet	아이넷	retail
+Dustin	더스틴	retail
+Kjell & Company	셸 앤 컴퍼니	retail
+Teknikmagasinet	테크니크마가시네트	retail
+CDON	시디온	retail
+Panduro	판두로	retail
+Glitter	글리터	retail
+Pressbyrån	프레스뷔론	retail
+Espresso House	에스프레소 하우스	food
+Wayne's Coffee	웨인스 커피	food
+Max	맥스	food
+Sibylla	시뷜라	food
+Bastard Burgers	배스터드 버거스	food
+O'Learys	오리어리스	food
+Absolut Vodka	앱솔루트 보드카	spirits
+Purity Vodka	퓨리티 보드카	spirits
+Level Vodka	레벨 보드카	spirits
+Explorer	엑스플로러	spirits
+O.P. Anderson	오페 안데르손	spirits
+Skåne Akvavit	스코네 아크바비트	spirits
+Hernö Gin	헤르뇌 진	spirits
+Mackmyra	마크뮈라	spirits
+High Coast	하이 코스트	spirits
+Smögen	스뫼겐	spirits
+Spirit of Hven	스피릿 오브 벤	spirits
+Kopparberg	코파르베리	drink
+Rekorderlig	레코르데를리그	drink
+Briska	브리스카	drink
+Herrljunga	헤를융아	drink
+Pripps	프립스	beer
+Pripps Blå	프립스 블로	beer
+Spendrups	스펜드룹스	beer
+Mariestads	마리에스타즈	beer
+Åbro	오브로	beer
+Falcon	팔콘	beer
+Norrlands Guld	노를란즈 굴드	beer
+Sofiero	소피에로	beer
+Nils Oscar	닐스 오스카르	beer
+Omnipollo	옴니폴로	beer
+Oppigårds	오피고르즈	beer
+Poppels	포펠스	beer
+Dugges	두게스	beer
+Loka	로카	drink
+Ramlösa	람뢰사	drink
+Trocadero	트로카데로	drink
+Pommac	포막	drink
+Champis	샴피스	drink
+Zingo	싱고	drink
+Festis	페스티스	drink
+Bravo	브라보	drink
+God Morgon	구드 모론	drink
+Proviva	프로비바	drink
+Yoggi	요기	food
+Skånemejerier	스코네메예리에르	food
+Norrmejerier	노르메예리에르	food
+Gefleortens	예블레오르텐스	food
+Bregott	브레고트	food
+Garant	가란트	food
+Eldorado	엘도라도	food
+Scan	스칸	food
+Lantmännen	란트멘넨	food
+Kungsörnen	쿵쇠르넨	food
+GoGreen	고그린	food
+Risenta	리센타	food
+Santa Maria	산타 마리아	food
+Estrella	에스트렐라	food
+OLW	오엘더블유	food
+Kalles Kaviar	칼레스 카비아르	food
+Abba	아바	food
+Felix	펠릭스	food
+Findus	핀두스	food
+Pågen	포겐	food
+Wasa	와사	food
+Leksands	렉산즈	food
+Polarbröd	폴라르브뢰드	food
+Göteborgs Kex	예테보리 셱스	food
+Ballerina	발레리나	food
+Singoalla	싱오알라	food
+Brago	브라고	food
+Marabou	마라부	food
+Daim	다임	food
+Cloetta	클로에타	food
+Kexchoklad	셱스쇼클라드	food
+Ahlgrens bilar	알그렌스 빌라르	food
+Malaco	말라코	food
+Polly	폴리	food
+Plopp	플로프	food
+Japp	야프	food
+Center	센테르	food
+Läkerol	레케롤	food
+Bubs	붑스	food
+Gott & Blandat	고트 오 블란다트	food
+Djungelvrål	융엘브롤	food
+Löfbergs	뢰프베리스	coffee
+Zoégas	소에가스	coffee
+Gevalia	예발리아	coffee
+Arvid Nordquist	아르비드 노르드크비스트	coffee
+Swedish Match	스웨디시 매치	tobacco
+General	제너럴	tobacco
+Göteborgs Rapé	예테보리 라페	tobacco
+Ettan	에탄	tobacco
+Grovsnus	그로브스누스	tobacco
+Catch	캐치	tobacco
+Röda Lacket	뢰다 라케트	tobacco
+Granit	그라니트	tobacco
+Kronan	크로난	tobacco
+Siberia	시베리아	tobacco
+Zyn	진	tobacco
+Skruf	스크루프	tobacco
+Nick & Johnny	닉 앤 조니	tobacco
+Billy	빌리	furniture
+Poäng	포엥	furniture
+Kallax	칼락스	furniture
+Malm	말름	furniture
+Hemnes	헴네스	furniture
+Ektorp	엑토르프	furniture
+Klippan	클리판	furniture
+Lack	라크	furniture
+Pax	팍스	furniture
+Ivar	이바르	furniture
+Alex	알렉스	furniture
+Brimnes	브림네스	furniture
+Bestå	베스토	furniture
+Vittsjö	비트셰	furniture
+Kivik	시비크	furniture
+Söderhamn	쇠데르함	furniture
+Friheten	프리헤텐	furniture
+Vimle	빔레	furniture
+Landskrona	란스크로나	furniture
+Finnala	핀날라	furniture
+Strandmon	스트란드몬	furniture
+Ekenäset	에케네세트	furniture
+Lisabo	리사보	furniture
+Ingatorp	잉아토르프	furniture
+Ekedalen	에케달렌	furniture
+Mörbylånga	뫼르뷜롱아	furniture
+Melltorp	멜토르프	furniture
+Norden	노르덴	furniture
+Docksta	독스타	furniture
+Tarva	타르바	furniture
+Songesand	송에산드	furniture
+Brusali	브루살리	furniture
+Nordli	노르들리	furniture
+Kullen	쿨렌	furniture
+Idanäs	이다네스	furniture
+Sundvik	순드비크	furniture
+Smågöra	스모예라	furniture
+Sniglar	스니글라르	furniture
+Trofast	트로파스트	furniture
+Flisat	플리사트	furniture
+Stuva	스투바	furniture
+Markus	마르쿠스	furniture
+Järvfjället	예르브피엘레트	furniture
+Flintan	플린탄	furniture
+Millberget	밀베리에트	furniture
+Lagkapten	라그캅텐	furniture
+Mittzon	미트손	furniture
+Trotten	트로텐	furniture
+Bekant	베칸트	furniture
+Micke	미케	furniture
+Linnmon	린몬	furniture
+Adils	아딜스	furniture
+Olov	올로브	furniture
+Skarsta	스카르스타	furniture
+Idåsen	이도센	furniture
+Eket	에케트	furniture
+Platsa	플랏사	furniture
+Kleppstad	클렙스타드	furniture
+Askvoll	아스크볼	furniture
+Rakkestad	라케스타드	furniture
+Metod	메토드	furniture
+Knoxhult	크녹스훌트	furniture
+Enhet	엔헤트	furniture
+Kungsbacka	쿵스바카	furniture
+Voxtorp	복스토르프	furniture
+Bodbyn	보드뷘	furniture
+Askersund	아스케르순드	furniture
+Ringhult	링훌트	furniture
+Godmorgon	고드모론	furniture
+Lillången	릴롱엔	furniture
+Hejne	헤이네	furniture
+Algot	알고트	furniture
+Boaxel	보악셀	furniture
+Elvarli	엘바를리	furniture
+Ranarp	라나르프	lighting
+Hektar	헥타르	lighting
+Tertial	테르티알	lighting
+Forså	포르소	lighting
+Jansjö	얀셰	lighting
+Lauters	라우테르스	lighting
+Regolit	레골리트	lighting
+Fado	파도	lighting
+Tradfri	트로드프리	electronics
+Symfonisk	심포니스크	electronics
+Vappeby	바페뷔	electronics
+Eneby	에네뷔	electronics
+Starkvind	스타르크빈드	appliances
+Förnuftig	푀르누프티그	appliances
+Fyrtur	퓌르투르	furniture
+Kadrilj	카드릴	furniture
+Dirigera	디리게라	electronics
+Vindstyrka	빈드스튀르카	electronics
+Frakta	프락타	retail
+Skubb	스쿠브	retail
+Samla	삼라	retail
+Variera	바리에라	retail
+Skådis	스코디스	furniture
+Dinera	디네라	tableware
+Vardagen	바르다겐	tableware
+Oftast	오프타스트	tableware
+Djungelskog	융엘스코그	toys
+Blåhaj	블로하이	toys
+Gosig	고시그	toys
+Duktig	둑티그	toys
+Mula	물라	toys
+Morgedal	모르게달	furniture
+Hövåg	회보그	furniture
+Malfors	말포르스	furniture
+Slattum	슬라툼	furniture
+Tarsele	타르셀레	furniture
+Hauga	하우가	furniture
+Gladom	글라돔	furniture
+Volvo Amazon	볼보 아마존	auto
+Volvo Duett	볼보 듀엣	auto
+Saab Sonett	사브 소네트	auto
+Saab Gripen	사브 그리펜	aerospace
+Gripen	그리펜	aerospace
+Viggen	비겐	aerospace
+Draken	드라켄	aerospace
+Bofors	보포르스	defense
+Kockums	코쿰스	defense
+Hägglunds	헤글룬드	defense
+Carl Gustaf	칼 구스타프	defense
+Agera	아게라	auto
+Regera	레제라	auto
+Jesko	제스코	auto
+Gemera	제메라	auto
+CCX	시시엑스	auto
+Cake	케이크	auto
+Uniti	유니티	auto
+Husqvarna Motorcycles	허스크바나 모터사이클	auto
+Volvo Construction Equipment	볼보건설기계	industrial
+Volvo Buses	볼보 버스	auto
+Haldex	할덱스	auto
+Autoliv	오토리브	auto
+Veoneer	비오니어	auto
+Thule Group	툴레 그룹	sports
+Trelleborg	트렐레보리	industrial
+Indutrade	인두트라데	industrial
+Lifco	리프코	industrial
+Addtech	애드테크	industrial
+Nibe	니베	appliances
+Munters	문테르스	industrial
+Systemair	시스템에어	industrial
+Swegon	스웨곤	industrial
+Lindab	린다브	industrial
+Sweco	스웨코	construction
+AFRY	아프뤼	construction
+Bonava	보나바	construction
+Castellum	카스텔룸	real estate
+Fabege	파베게	real estate
+Balder	발데르	real estate
+Wallenstam	발렌스탐	real estate
+Vasakronan	바사크로난	real estate
+HSB	에이치에스비	real estate
+Riksbyggen	릭스뷔겐	real estate
+Holmen	홀멘	paper
+Billerud	빌레루드	paper
+Tork	토크	paper
+Tena	테나	consumer goods
+Libresse	리브레스	consumer goods
+Libero	리베로	consumer goods
+Edet	에데트	consumer goods
+Mepilex	메필렉스	medical
+Oriflame	오리플레임	cosmetics
+Foreo	포레오	beauty
+Byredo	바이레도	cosmetics
+L:a Bruket	라 브루케트	cosmetics
+Isadora	이사도라	cosmetics
+Estrid	에스트리드	beauty
+Barberians	바버리언스	beauty
+Maria Åkerberg	마리아 오케르베리	cosmetics
+Grow Gorgeous	그로우 고저스	cosmetics
+Björn Axén	비에른 악센	cosmetics
+Sachajuan	사샤후안	cosmetics
+Verso	베르소	cosmetics
+Ida Warg	이다 바리	cosmetics
+Swedish Dream	스웨디시 드림	cosmetics
+ACO	아코	cosmetics
+Apolosophy	아폴로소피	cosmetics
+Idun Minerals	이둔 미네랄스	cosmetics
+Bonnier	보니에르	media
+Aftonbladet	아프톤블라데트	media
+Expressen	엑스프레센	media
+Dagens Nyheter	다겐스 뉘헤테르	media
+Svenska Dagbladet	스벤스카 다그블라데트	media
+Dagens Industri	다겐스 인두스트리	media
+Göteborgs-Posten	예테보리스포스텐	media
+Sydsvenskan	쉬드스벤스칸	media
+SVT	에스브이티	media
+Sveriges Television	스베리예스 텔레비시온	media
+Sveriges Radio	스베리예스 라디오	media
+TV4	티브이포	media
+Viaplay	비아플레이	media
+MTG	엠티지	media
+Nordic Entertainment Group	노르딕 엔터테인먼트 그룹	media
+Bonnier Förlagen	보니에르 푀를라겐	media
+Natur & Kultur	나투르 오 쿨투르	media
+Norstedts	노르스테츠	media
+Ny Teknik	뉘 테크니크	media
+Metro	메트로	media
+Mojang Studios	모장 스튜디오	games
+King Digital Entertainment	킹 디지털 엔터테인먼트	games
+Pet Rescue Saga	펫 레스큐 사가	games
+Farm Heroes Saga	팜 히어로즈 사가	games
+Bubble Witch Saga	버블 위치 사가	games
+Candy Crush Soda Saga	캔디 크러시 소다 사가	games
+Embracer Group	엠브레이서 그룹	games
+Starbreeze	스타브리즈	games
+Payday	페이데이	games
+Overkill Software	오버킬 소프트웨어	games
+Massive Entertainment	매시브 엔터테인먼트	games
+Avalanche Studios	아발란체 스튜디오	games
+Just Cause	저스트 코즈	games
+Hazelight	헤이즐라이트	games
+It Takes Two	잇 테이크 투	games
+A Way Out	어 웨이 아웃	games
+Split Fiction	스플릿 픽션	games
+MachineGames	머신게임즈	games
+Coffee Stain	커피 스테인	games
+Goat Simulator	고트 시뮬레이터	games
+Satisfactory	새티스팩토리	games
+Valheim	발헤임	games
+Iron Gate	아이언 게이트	games
+Teardown	티어다운	games
+Frictional Games	프릭셔널 게임즈	games
+Amnesia	암네시아	games
+SOMA	소마	games
+Penumbra	페넘브라	games
+Tarsier Studios	타르시에르 스튜디오	games
+Fatshark	팻샤크	games
+Sharkmob	샤크몹	games
+Arrowhead	애로우헤드	games
+Helldivers	헬다이버즈	games
+Magicka	매지카	games
+Toca Boca	토카 보카	games
+Raw Fury	로 퓨리	games
+Thunderful	선더풀	games
+SteamWorld	스팀월드	games
+Image & Form	이미지 앤 폼	games
+Landfall	랜드폴	games
+Totally Accurate Battle Simulator	토탈리 어큐레이트 배틀 시뮬레이터	games
+Stunlock Studios	스턴락 스튜디오	games
+V Rising	브이 라이징	games
+Battlerite	배틀라이트	games
+Bloodline Champions	블러드라인 챔피언스	games
+Neon Giant	네온 자이언트	games
+The Ascent	디 어센트	games
+Turborilla	터보릴라	games
+Mad Skills Motocross	매드 스킬스 모토크로스	games
+Dreamhack	드림핵	games
+Ninjas in Pyjamas	닌자스 인 파자마스	games
+Imperator	임페라토르	games
+Unravel	언래블	games
+Coldwood	콜드우드	games
+Minecraft Dungeons	마인크래프트 던전스	games
+Minecraft Legends	마인크래프트 레전드	games
+Star Stable	스타 스테이블	games
+Malmö FF	말뫼	football club
+AIK	에이아이케이	football club
+Djurgårdens IF	유르고르덴스	football club
+Hammarby	함마르뷔	football club
+IFK Göteborg	예테보리	football club
+IFK Norrköping	노르셰핑	football club
+Helsingborgs IF	헬싱보리	football club
+BK Häcken	헤켄	football club
+IF Elfsborg	엘프스보리	football club
+Kalmar FF	칼마르	football club
+Örebro SK	외레브로	football club
+GAIS	가이스	football club
+Örgryte IS	외리그뤼테	football club
+Halmstads BK	할름스타드	football club
+Östers IF	외스테르스	football club
+Mjällby AIF	미엘뷔	football club
+IK Sirius	시리우스	football club
+Degerfors IF	데예르포르스	football club
+IFK Värnamo	베르나모	football club
+IF Brommapojkarna	브롬마포이카르나	football club
+Färjestad BK	페리에스타드	hockey club
+Frölunda HC	프뢸룬다	hockey club
+Luleå HF	룰레오	hockey club
+Skellefteå AIK	셸레프테오	hockey club
+Brynäs IF	브뤼네스	hockey club
+Modo Hockey	모도	hockey club
+Växjö Lakers	벡셰 레이커스	hockey club
+Rögle BK	뢰글레	hockey club
+Linköping HC	린셰핑	hockey club
+SAS	스칸디나비아항공	airline
+SJ	에스제이	travel
+Stena Line	스테나 라인	travel
+Destination Gotland	데스티나시온 고틀란드	travel
+Arlanda Express	알란다 익스프레스	travel
+SL	에스엘	travel
+Västtrafik	베스트라피크	travel
+Skånetrafiken	스코네트라피켄	travel
+Flygbussarna	플뤼그부사르나	travel
+Swebus	스웨버스	travel
+BRA	브라	airline
+Braathens	브로텐스	airline
+PostNord	포스트노르드	logistics
+Budbee	버드비	logistics
+Instabox	인스타박스	logistics
+Airmee	에어미	logistics
+Green Cargo	그린 카고	logistics
+Swedavia	스웨다비아	travel
+Ving	빙	travel
+Scandic	스칸딕	hotel
+Elite Hotels	엘리트 호텔	hotel
+Icehotel	아이스호텔	hotel
+Treehotel	트리호텔	hotel
+Grand Hôtel	그랜드 호텔	hotel
+Story Hotels	스토리 호텔	hotel
+Nobis Hospitality	노비스 호스피탈리티	hotel
+Sven Vintappare	스벤 빈타파레	hotel
+Comviq	콤비크	telecom
+Halebop	할레보프	telecom
+Hallon	할론	telecom
+Bredband2	브레드반드투	telecom
+Com Hem	콤헴	telecom
+Bahnhof	반호프	telecom
+Ownit	오운잇	telecom
+Vimla	빔라	telecom
+Fello	펠로	telecom
+Jonsered	욘세레드	industrial
+Automower	오토모어	appliances
+Stiga	스티가	sports
+Hultafors	훌타포르스	industrial
+Snickers Workwear	스니커즈 워크웨어	fashion
+Blåkläder	블로클레데르	fashion
+Fristads	프리스타즈	fashion
+Gränsfors Bruk	그렌스포르스 브루크	industrial
+Morakniv	모라크니브	sports
+Fällkniven	펠크니벤	sports
+Silva	실바	sports
+Light My Fire	라이트 마이 파이어	sports
+Lundhags	룬드학스	fashion
+Hestra	헤스트라	fashion
+Kavat	카바트	fashion
+Icebug	아이스버그	fashion
+POC	피오씨	sports
+Mips	밉스	sports
+Hövding	회브딩	sports
+Bliz	블리즈	sports
+Salming	살밍	sports
+Unihoc	유니혹	sports
+Tretorn	트레톤	fashion
+Didriksons	디드릭손스	fashion
+Sail Racing	세일 레이싱	fashion
+Pinewood	파인우드	fashion
+Swedteam	스웨드팀	fashion
+Vagabond	배가본드	fashion
+Din Sko	딘 스코	retail
+Scorett	스코레트	retail
+Morris	모리스	fashion
+Oscar Jacobson	오스카 야콥손	fashion
+Eton	이튼	fashion
+Lexington	렉싱턴	fashion
+Mini Rodini	미니 로디니	fashion
+Swedish Hasbeens	스웨디시 해즈빈스	fashion
+Dr. Denim	닥터 데님	fashion
+WESC	웨스크	fashion
+Velour	벨루르	fashion
+Efva Attling	에바 아틀링	jewelry
+Sophie by Sophie	소피 바이 소피	jewelry
+Edblad	에드블라드	jewelry
+Syster P	쉬스테르 페	jewelry
+Maria Nilsdotter	마리아 닐스도테르	jewelry
+Drakenberg Sjölin	드라켄베리 셸린	jewelry
+Brio	브리오	toys
+Micki	미키	toys
+Emmaljunga	엠말융아	baby
+Axkid	액스키드	baby
+Lekia	레키아	retail
+Audio Pro	오디오 프로	electronics
+Primare	프리마레	electronics
+Profoto	프로포토	electronics
+Deltaco	델타코	electronics
+Ecolean	에콜린	packaging
+ESAB	에사브	industrial
+Ovako	오바코	steel
+LKAB	엘케이에이비	mining
+Uddeholm	우드홀름	steel
+Höganäs AB	회가네스 에이비	industrial
+Alleima	알레이마	steel
+Dometic	도메틱	industrial
+Nolato	놀라토	industrial
+Hexpol	헥스폴	industrial
+Beijer Ref	베이에르 레프	industrial
+Camfil	캄필	industrial
+Alimak	알리막	industrial
+Saab AB	사브 에이비	defense
+Electrolux Professional	일렉트로룩스 프로페셔널	appliances
+Nobina	노비나	travel
+Loomis	루미스	security
+Verisure	베리슈어	security
+Securitas Direct	시큐리타스 다이렉트	security
+Intrum	인트룸	finance
+Hoist Finance	호이스트 파이낸스	finance
+Preem	프렘	energy
+OKQ8	오케이큐에이트	energy
+Ellevio	엘레비오	energy
+Sectra	섹트라	medical
+Vitrolife	비트로라이프	medical
+Biotage	바이오타지	medical
+Bactiguard	박티가드	medical
+CellaVision	셀라비전	medical
+Camurus	카무루스	pharma
+BioArctic	바이오아크틱	pharma
+Hansa Biopharma	한사 바이오파마	pharma
+Losec	로섹	pharma
+Xylocaine	자일로카인	pharma
+Nicorette	니코레트	pharma
+Seloken	셀로켄	pharma
+Treo	트레오	pharma
+Bamyl	바뮐	pharma
+Barnängen	바르넹엔	consumer goods
+Vademecum	바데메쿰	consumer goods
+Capio	카피오	medical
+Aleris	알레리스	medical
+Min Doktor	민 독토르	app
+Doktor.se	독토르 에스이	app
+Synsam	쉰삼	retail
+Smarteyes	스마트아이즈	retail
+Lensway	렌즈웨이	retail
+GB Glace	지비 글라스	food
+Hemglass	헴글라스	food
+SIA Glass	시아 글라스	food
+Triumf Glass	트리움프 글라스	food
+Lejonet & Björnen	레요네트 오 비외르넨	food
+Engelholms Glass	엥엘홀름스 글라스	food
+Piggelin	피겔린	food
+Nogger	노거	food
+Gifflar	이플라르	food
+Krisprolls	크리스프롤스	food
+Skogaholm	스코가홀름	food
+Hönö Kaka	회뇌 카카	food
+Gille	이레	food
+Brämhults	브렘훌츠	drink
+Kiviks Musteri	시비크스 무스테리	drink
+Ekströms	엑스트룀스	food
+Önos	외노스	food
+Kockens	코켄스	food
+Saltå Kvarn	살토 크바른	food
+Lindvalls Kaffe	린드발스 카페	coffee
+Apotekarnes	아포테카르네스	drink
+Grönstedts	그뢴스테츠	spirits
+Renat	레나트	spirits
+Gooh	구	food
+Frasses	프라세스	food
+Pinchos	핀초스	food
+Jensens Böfhus	옌센스 뵈프후스	food
+Fabrique	파브리크	food
+Pååls Bagels	폴스 베이글스	food
+Vete-Katten	베테카텐	food
+Mr Cake	미스터 케이크	food
+Brödernas	브뢰데르나스	food
+Holy Greens	홀리 그린스	food
+Liseberg	리세베리	travel
+Gröna Lund	그뢰나 룬드	travel
+Kolmården	콜모르덴	travel
+Astrid Lindgrens Värld	아스트리드 린드그렌스 베르드	travel
+Junibacken	유니바켄	travel
+Skansen	스칸센	travel
+Lovable	러버블	software
+Legora	레고라	software
+Sana Labs	사나 랩스	software
+Detectify	디텍티파이	software
+Kivra	시브라	app
+Billogram	빌로그램	software
+Bokio	보키오	software
+Acast	에이캐스트	media
+BookBeat	북비트	app
+Nextory	넥스토리	app
+Bambuser	밤부서	software
+Soundtrack Your Brand	사운드트랙 유어 브랜드	media
+Bokadirekt	보카디렉트	app
+Booli	불리	internet
+Matsmart	맛스마르트	retail
+Motatos	모타토스	retail
+Linas Matkasse	리나스 맛카세	food
+Hedvig	헤드비그	insurance
+Lendo	렌도	finance
+SBAB	에스비에이비	bank
+Landshypotek	란스휘포테크	bank
+Svea Bank	스베아 방크	bank
+Marginalen Bank	마르기날렌 방크	bank
+Northmill	노스밀	finance
+Bluestep	블루스텝	bank
+ICA Banken	이카 방켄	bank
+Nordax	노르닥스	bank
+Sparbanken	스파르방켄	bank
+Moderna Försäkringar	모데르나 푀르셰크링아르	insurance
+Dina Försäkringar	디나 푀르셰크링아르	insurance
+KPA Pension	케이피에이 펜시온	insurance
+Movestic	모베스틱	insurance
+Lagerhaus	라게르하우스	retail
+Ordning & Reda	오르드닝 오 레다	retail
+Designtorget	데시그토리예트	retail
+Dollarstore	달러스토어	retail
+ÖoB	외오베	retail
+Coolstuff	쿨스터프	retail
+Bygghemma	뷔그헴마	retail
+Royal Design	로열 디자인	retail
+Nordiska Galleriet	노르디스카 갈레리에트	retail
+Svenssons i Lammhult	스벤손스 이 람훌트	retail
+Trademax	트레이드맥스	retail
+Furniturebox	퍼니처박스	retail
+Em Home	엠 홈	retail
+Sportamore	스포르타모레	retail
+Addnature	애드네이처	retail
+Outnorth	아웃노스	retail
+Jotex	요텍스	retail
+Cellbes	셀베스	retail
+Halens	할렌스	retail
+Gymgrossisten	윔그로시스텐	retail
+Bodystore	바디스토어	retail
+House of Dagmar	하우스 오브 다그마르	fashion
+A Day's March	어 데이즈 마치	fashion
+Asket	아스케트	fashion
+CDLP	시디엘피	fashion
+Ivanhoe of Sweden	아이반호 오브 스웨덴	fashion
+Jumperfabriken	윔페르파브리켄	fashion
+Twist & Tango	트위스트 앤 탱고	fashion
+By Malina	바이 말리나	fashion
+Hagström	하그스트룀	music
+Bamse	밤세	media
+Veckans Affärer	벡칸스 아페레르	media
+Fokus	포쿠스	media
+Damernas Värld	다메르나스 베르드	media
+Kamratposten	캄라트포스텐	media
+Hemmets Journal	헴메츠 유르날	media
+Allers	알레르스	media
+SVT Play	에스브이티 플레이	media
+TV4 Play	티브이포 플레이	media
+C More	시 모어	media
+Casall	카살	sports
+Aim'n	에임앤	sports
+Stronger	스트롱거	sports
+Better Bodies	베터 바디스	sports
+Friskis & Svettis	프리스키스 오 스베티스	sports
+Nordic Wellness	노르딕 웰니스	sports
+Fitness24Seven	피트니스 트웬티포 세븐	sports
+Barebells	베어벨스	food
+Nick's	닉스	food
+Tyngre	튕레	food
+Star Nutrition	스타 뉴트리션	food
+Njie	녜	food
+ProPud	프로푸드	food
+Anamma	아남마	food
+Hälsans Kök	헬산스 셰크	food
+Sproud	스프라우드	drink
+Nocco	노코	drink
+Vitamin Well	비타민 웰	drink
+Powerking	파워킹	drink
+Pucko	푸코	drink
+Smakis	스마키스	drink
+Froosh	프루시	drink
+Brännland	브렌란드	drink
+Svenska LantChips	스벤스카 란트칩스	food
+Bullens	불렌스	food
+Lohmanders	로만데르스	food
+Slotts	슬로츠	food
+Zeta	세타	food
+Design House Stockholm	디자인 하우스 스톡홀름	furniture
+Skultuna	스쿨투나	tableware
+Gense	옌세	tableware
+Sagaform	사가포름	tableware
+Pukeberg	푸케베리	glass
+Swedese	스웨데세	furniture
+Fogia	포기아	furniture
+Wästberg	베스트베리	lighting
+Ballograf	발로그라프	stationery
+Esselte	에셀테	stationery
+Crescent	크레센트	bicycles
+Monark	모나르크	bicycles
+Skeppshult	셰프스훌트	bicycles
+Nimbus	님부스	boats
+Hallberg-Rassy	할베리라시	boats
+Najad	나야드	boats
+Storebro	스토레브로	boats
+Candela	칸델라	boats
+Embark Studios	엠바크 스튜디오	games
+The Finals	더 파이널스	games
+Arc Raiders	아크 레이더스	games
+Liquid Swords	리퀴드 소드	games
+Pieces Interactive	피시즈 인터랙티브	games
+Snowprint Studios	스노프린트 스튜디오	games
+Netlight	넷라이트	tech
+Knowit	노잇	tech
+AcadeMedia	아카데메디아	education
+Hemfrid	헴프리드	services
+Pricer	프라이서	tech
+Anoto	아노토	tech
+Neonode	네오노드	tech
+Smart Eye	스마트 아이	tech
+Arjo	아르요	medical
+HMS Networks	에이치엠에스 네트웍스	tech
+IFS	아이에프에스	software
+Polarium	폴라리움	energy
+Stegra	스테그라	steel
+Hybrit	하이브릿	steel
+Bixia	빅시아	energy
+Johan & Nyström	요한 오 뉘스트룀	coffee
+Da Matteo	다 마테오	coffee
+Drop Coffee	드롭 커피	coffee
+Löwengrip	뢰벤그립	cosmetics
+Rapunzel of Sweden	라푼젤 오브 스웨덴	cosmetics
+Depend	디펜드	cosmetics
+Swedish Fish	스웨디시 피시	food
+XL-Bygg	엑스엘뷔그	retail
+Bolist	볼리스트	retail
+Cervera	세르베라	retail
+Duka	두카	retail
+Lekmer	레크메르	retail
+Sellpy	셀피	retail
+Hööks	획스	retail
+Kitchentime	키친타임	retail
+Bagaren och Kocken	바가렌 오크 코켄	retail
+Mekonomen	메코노멘	retail
+Bilia	빌리아	retail
+Hedin Bil	헤딘 빌	retail
+Kvdbil	코베데빌	internet
+Wayke	웨이크	internet
+Delicato	델리카토	food
+Kalaspuffar	칼라스푸파르	food
+Frebaco	프레바코	food
+Finax	피낙스	food
+Semper	셈페르	food
+Kronfågel	크론포겔	food
+Guldfågeln	굴드포겔른	food
+Dafgårds	다프고르즈	food
+Lithells	리텔스	food
+Lysekils	뤼세실스	food
+Västerbottensost	베스테르보텐스오스트	food
+Falbygdens Ost	팔뷔그덴스 오스트	food
+Lindahls	린달스	food
+Pistonhead	피스톤헤드	beer
+Eriksberg	에릭스베리	beer
+Yubico	유비코	tech
+YubiKey	유비키	tech
+Mapillary	마필러리	tech
+Erlang	얼랭	software
+Instabee	인스타비	logistics
+Werlabs	웨어랩스	medical
+Mindler	민들레르	app
+Natural Cycles	내추럴 사이클스	app
+Lifesum	라이프섬	app
+SkiStar	스키스타	travel
+Gainomax	가이노막스	drink
+Risifrutti	리시프루티	food
+Adlibris	아들리브리스	retail
+Bokus	보쿠스	retail
+Candy Crush	캔디크러시	games
+XC90	엑스씨나인티	car model
+COS	코스	fashion
+Hilleberg	힐레베르그	outdoor
+H&M Home	에이치앤엠 홈	homeware
+Polestar 2	폴스타 투	car model
+EX30	이엑스써티	car model
+XC60	엑스씨식스티	car model
+XC40	엑스씨포티	car model
+S90	에스나인티	car model
+Fractal Design	프랙탈 디자인	electronics

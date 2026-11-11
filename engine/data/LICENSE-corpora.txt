@@ -46,3 +46,6 @@ ja-kana-native.txt (Japanese words usually written in kana; built into the engin
 from Tatoeba (https://tatoeba.org, CC BY 2.0 FR) Japanese sentences, read with SudachiPy and
 SudachiDict core (Apache-2.0), by tools/build_kana_native.py. So does ja-common-words.txt (the most
 common Japanese words not written in kana; built into the engine): words and readings with counts.
+
+en-words.txt's `#! rare` section is Webster's Second New International Dictionary (1934), in the
+public domain, as macOS ships it in /usr/share/dict/words (engine/tools/build_en_rare.py).

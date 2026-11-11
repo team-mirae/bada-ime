@@ -1,4 +1,4 @@
-//! Write docs/layouts/NN-name.json for the layouts the engine defines in code (0, 10, 11, 12, 18,
+//! Write docs/layouts/NN-name.json for the layouts the engine defines in code (0, 10, 11, 12, 15, 18,
 //! 20, 21, 150, 151), in the editor's `bada-layout/1` format plus the fields the typing robot
 //! reads (`languages`, `input`, `rules`, spelling tables; docs/robot.md).
 //!
@@ -151,6 +151,14 @@ fn main() {
     write("10-kts.json", &korean(layout::KTS, "JIS KTS"));
     write("11-korean-legacy.json", &korean(layout::LEGACY_KOREAN, "JIS Korean Legacy"));
     write("12-moonshot.json", &korean(layout::LEGACY_MOONSHOT, "JIS Moonshot"));
+
+    // 15: the letters as 18, its own keys (`,` ㅓ, `.` ㅡ, `:` ㅢ, `@` final ㅇ, x initial ㅇ, `;` the break).
+    let mut bada_roman = layout(15, "bada roman", &[("korean", "experimental")], "roman",
+        keys(|k, s| bada::bada_roman::token(k, s).map(|(t, r)| vec![tok(t, r)]).unwrap_or_default()));
+    let mut table = roman_table();
+    table["break"] = json!(";");
+    bada_roman["spelling"] = table;
+    write("15-bada-roman.json", &bada_roman);
 
     let mut roman = layout(18, "JIS Korean Roman", &[("korean", "production")], "roman", keys(|k, s| jis(k, s, "l")));
     roman["spelling"] = roman_table();

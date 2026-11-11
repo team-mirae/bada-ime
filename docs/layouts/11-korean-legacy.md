@@ -11,7 +11,7 @@
 | **Abbreviations** | JIS Korean, legacy-korean |
 | **Designer** | Min Jun Sung (Mirae Research), from the JIS Korean input method (Mode A) |
 | **Maintainer** | Mirae Research (미래 리서치) |
-| **Contact** | biz@sjun.me (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
+| **Contact** | mj@teammirae.com (Mirae Research); issues at https://github.com/team-mirae/bada-ime |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../images/layouts/11-korean-legacy-dark.png">

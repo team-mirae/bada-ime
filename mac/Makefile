@@ -2,6 +2,7 @@
 #   make            build build/BadaIME.app
 #   make install    copy it to ~/Library/Input Methods, register it, add a login agent
 #   make uninstall  remove it
+#   make SENSITIVE=1  also build in the vulgar, hateful and sensitive English words (layout 15)
 ENGINE     := ../engine
 HEADER     := $(ENGINE)/include/bada.h
 BUILD      := build
@@ -16,6 +17,16 @@ SIGN_IDENTITY ?= $(or $(shell security find-identity -v -p codesigning 2>/dev/nu
 LSREGISTER := /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
 DATA       := $(ENGINE)/data/ko-words.tsv $(ENGINE)/data/en-words.txt $(ENGINE)/data/hanja.tsv $(ENGINE)/data/oecd.tsv $(ENGINE)/data/ja-words.txt $(ENGINE)/data/kanji.bin $(ENGINE)/data/ko-jamo-4gram.bin $(ENGINE)/data/symbols.tsv $(ENGINE)/data/emoji.tsv $(ENGINE)/data/unicode-names.tsv $(ENGINE)/data/LICENSE-mozc.txt \
               $(ENGINE)/data/LICENSE-corpora.txt $(ENGINE)/data/LICENSE-libhangul-hanja.txt $(ENGINE)/data/LICENSE-unicode.txt
+# The English → Korean dictionary (layout 15, docs/layouts/15-bada-roman.md). Vulgar, hateful and
+# sensitive words (en-ko/sensitive.tsv) are left out; `make SENSITIVE=1` builds them in.
+SENSITIVE  ?= 0
+EN_KO      := $(ENGINE)/data/en-ko/common.tsv
+ifeq ($(SENSITIVE),1)
+EN_KO      += $(ENGINE)/data/en-ko/sensitive.tsv
+endif
+BRANDS     := $(sort $(wildcard $(ENGINE)/data/en-ko/brands/*.tsv))
+# Rebuilds the app when SENSITIVE changes.
+SENSITIVE_STAMP := $(BUILD)/.sensitive
 ICONS      := $(BUILD)/bada.tiff $(BUILD)/muhenkan.tiff $(BUILD)/henkan.tiff
 # The app's icon, for Settings → About only (the input menu keeps 바: Resources/icons).
 ABOUT_ICON := ../docs/images/icon/bada-icon-512.png
@@ -25,6 +36,7 @@ export MACOSX_DEPLOYMENT_TARGET := $(MIN_MACOS)
 .PHONY: all install uninstall clean
 all: $(APP)
 $(shell mkdir -p $(BUILD) && touch $(BUILD)/.metadata_never_index)
+$(shell echo $(SENSITIVE) | cmp -s - $(SENSITIVE_STAMP) || echo $(SENSITIVE) > $(SENSITIVE_STAMP))
 
 $(BUILD)/libbada.a: $(wildcard $(ENGINE)/src/*.rs) $(ENGINE)/Cargo.toml
 	$(CARGO) build --manifest-path $(ENGINE)/Cargo.toml --release --target-dir $(TARGET_DIR) --target aarch64-apple-darwin
@@ -42,7 +54,7 @@ $(BUILD)/BadaIME: $(BUILD)/arm64/BadaIME $(BUILD)/x86_64/BadaIME
 $(BUILD)/%.tiff: Resources/icons/%.png Resources/icons/%@2x.png
 	tiffutil -cathidpicheck Resources/icons/$*.png Resources/icons/$*@2x.png -out $@
 
-$(APP): $(BUILD)/BadaIME $(ICONS) $(ABOUT_ICON) Info.plist $(DATA) $(wildcard Resources/*.lproj/*)
+$(APP): $(BUILD)/BadaIME $(ICONS) $(ABOUT_ICON) Info.plist $(DATA) $(EN_KO) $(BRANDS) $(SENSITIVE_STAMP) $(wildcard Resources/*.lproj/*)
 	rm -rf $@
 	mkdir -p $@/Contents/MacOS $@/Contents/Resources/data
 	cp Info.plist $@/Contents/Info.plist
@@ -51,6 +63,7 @@ $(APP): $(BUILD)/BadaIME $(ICONS) $(ABOUT_ICON) Info.plist $(DATA) $(wildcard Re
 	cp $(ABOUT_ICON) $@/Contents/Resources/bada-icon.png
 	cp -R Resources/en.lproj Resources/ko.lproj Resources/ja.lproj $@/Contents/Resources/
 	cp $(DATA) $@/Contents/Resources/data/
+	{ awk 1 $(EN_KO); echo '#! brands'; awk 1 $(BRANDS); } > $@/Contents/Resources/data/en-ko.tsv
 	cp ../LICENSE $@/Contents/Resources/LICENSE.txt
 	codesign --force --sign "$(SIGN_IDENTITY)" $@
 

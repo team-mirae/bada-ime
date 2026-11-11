@@ -24,6 +24,24 @@ deleted. Changing the layouts shown starts a new session.
 
 The server listens on 127.0.0.1 only and refuses other hosts and cross-site writes.
 
+## Copy practice (`/practice`)
+
+<http://127.0.0.1:5713/practice> shows one sentence at a time to copy with bada ime; press Enter for
+the next. It counts every wrong syllable **when it's committed**, even if you fix it afterwards, and
+shows what you type instead (리 → 라), the syllables you get wrong most, what you left uncorrected,
+accuracy and syllables per minute, per company and over the last 30 sentences.
+
+The sentences are the "II. 사업의 내용" sections of the Samsung group's listed companies' filings
+(반기보고서 2026.06), listed in [corpus/samsung-filings.json](corpus/samsung-filings.json) (found with
+the Magic DART connector). Download them once, from the public DART viewer:
+
+```sh
+node tools/fetch-dart.mjs     # → data/corpus/samsung.json, about 2,000 sentences
+```
+
+Results: `data/practice/results.jsonl`, one line per sentence (the target, what you typed, time, keys,
+backspaces, the mistakes made). Delete it to start over.
+
 ## Export
 
 | Button | File | Use |
