@@ -1,184 +1,187 @@
-# bada ime
+### <br>
 
-<img src="docs/images/icon/bada-icon.svg" width="96" height="96" alt="bada ime icon">
+<p align="center">
+  <img src="docs/images/icon/bada-icon.svg" width="96" height="96" alt="bada ime icon">
 
-바다 입력기 · バダIME: a macOS input method for JIS keyboards with two modes. **Muhenkan** (英数)
-types QWERTY. **Henkan** (かな) reads every key with all the Korean, Japanese and Latin layouts you
-enable, at once, and ranks the readings as you type. There are no sub-modes to switch.
+  <h3 align="center">
+	바다 입력기 · バダIME
+  </h3>
+
+  <p align="center">
+	An input method for multilinguals.
+  </p>
+</p>
+
+### <br>
+
+### Why this was built
+
+Multilingual typing is an afterthought in most IMEs. Even JIS,
+which has 4 keys dedicated to language actions, does not take
+into account that the user may want to type a language other
+than English or Japanese.
+
+In bada, multilingual typing is why the IME exists at all.
+
+There are two modes: **muhenkan** and **henkan**. This is exactly
+the same as in Japanese keyboards. However, the **henkan** mode,
+which is entered using **かな**, types every single candidate language
+you have setup simultaneously, then ranks them and shows you candidates.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-bada-kana-dark.png">
   <img src="docs/images/layouts/qwerty-bada-kana-light.png" alt="QWERTY, bada and kana on one HHKB JIS keyboard">
 </picture>
 
-Status: **0.1.5**. 13 layouts, including two Korean layouts of its own, **bada** and **bada
-roman**; henkan profiles on かな, 変換 and カタカナ, kanji conversion, typo suggestions for bada,
-symbol and Unicode search, and a user dictionary. Spec: [docs/spec.md](docs/spec.md).
-
-**Try it in a browser:** [bada.sjun.me](https://bada.sjun.me) runs the same engine (WebAssembly)
-with the same settings, on an HHKB or Apple-style JIS keyboard drawn on screen ([web/](web/README.md)).
-
-## bada and bada roman
-
-Two Korean layouts made for bada ime. Either can share henkan mode with QWERTY and Japanese.
-
-**bada** (layout 13), on the keyboard above, types like 2-set, keeps finals like 3-set, and uses
-the whole key space like JIS kana: digits and punctuation are on ⇧, so Korean never needs a
-prediction or a mode switch for them. Every key reads one way only. The design:
-[docs/bada-layout.md](docs/bada-layout.md); how it compares: [docs/layouts/13-bada.md](docs/layouts/13-bada.md).
-
-**bada roman** (layout 15) types Korean as it's romanized, on the QWERTY letters you already
-know: `hanguk` 한국, `annyeonghaseyo` 안녕하세요. A few keys of its own help: `q` is ㅊ (`ch`), `x`
-an initial ㅇ (`xx` ㅇㅇ), `;` splits syllables, and `-` after `e` gives ㅐ (`e-` 애). Readings are
-ranked by word counts, so the word you mean usually comes first. English words also offer their
-Korean in the menu (`apple` 사과, 애플), and a Japanese on'yomi can stand for its Sino-Korean
-syllable where that's shorter (`mei` 명). The rules: [docs/layouts/15-bada-roman.md](docs/layouts/15-bada-roman.md).
+This example demonstrates QWERTY (0), bada (13), and Japanese Kana (20)
+all typed in **henkan** mode. Thus, `3`, `u`, `q` produce candidates
+`3uq` (QWERTY), `쪄ㅃ` (bada), `あなた` (kana) at the same time, and ranks
+them. Obviously here only Japanese produces a legible phrase, so Japanese would
+rank first.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-bada-roman-kana-dark.png">
   <img src="docs/images/layouts/qwerty-bada-roman-kana-light.png" alt="QWERTY, bada roman and kana on one HHKB JIS keyboard">
 </picture>
 
-For someone who types QWERTY and 2-set (KTS), the usual English / Korean pair:
+This example demonstrates QWERTY (0), bada roman (15), and Japanese Kana (20).
+`g`, `w`, `i`, `h`, `a` produce candidates `gwiha` (QWERTY), `귀하` (bada roman),
+`きてにくた` (kana). Obviously here Korean makes the most sense, so Korean is ranked first.
 
-| | bada roman (15) | bada (13) |
-|---|---|---|
-| Time to learn | Less than an hour | A week to several months |
-| Once fluent, against 2-set | Faster and more comfortable for casual and colloquial text; significantly slower for formal text | Faster and more comfortable |
+[**Try it out!**](https://bada.sjun.me/)
 
-Which to choose:
+### bada
 
-- **You rarely type Korean** (under 1% of your typing): **bada roman**. Your 2-set muscle memory
-  stays as it is.
-- **You mostly type Korean** (half your typing or more) **and have time to practice**: **bada**.
-  It's worth the learning.
+How was bada(13) designed? Its main consideration was that your wrists would never
+have to move. All movement is done by your fingers, either moving up/down or left/right.
+This reduces strain on your hands, and makes typing more comfortable.
 
-## Install
+Once you are fluent in bada typing, expect less fatigue.
 
-Needs macOS 13 or later, Rust and the Command Line Tools (no Xcode).
+Do not expect faster typing. For faster typing, use 3-set unshifted (14).
+It allows NKRO typing (모아치기), which makes for incredibly fast typing.
+
+### bada roman
+
+Why does bada roman(15) exist at all? It was a fluke. I (the original developer) tried
+Korean input using roman letters as an experimental joke, but it was surprisingly good.
+Seriously, even if you know Korean, give it a try.
+
+If you type primarily in English (i.e. a developer) and very rarely in Korean,
+even if you are a fluent Korean speaker, this is a very good setup.
+
+It also does not mess with your Korean 2-set (KTS) muscle memory, as aren't memorizing
+key positions. You instead memorize which roman letters map to which Korean jamo, and
+keep your typing in QWERTY, separate from your existing memory of KTS.
+
+### How to install
+
+Download a release, or build from source.
+
+The releases are signed with an Apple Development certificate, but they are not notarized.
+macOS will only run them without complaining on the developer's own Macs. Everywhere else,
+build from source. It only takes a few minutes.
 
 ```sh
-cd mac
-make            # build/BadaIME.app (universal)
-make install    # into ~/Library/Input Methods, registered, with a login agent
+git clone https://github.com/team-mirae/bada-ime
+cd bada-ime/mac
+make install
 ```
 
-Then, in System Settings → Keyboard → Input Sources:
+You need Rust and the Command Line Tools. Xcode is not needed.
 
-1. Check that **Bada Muhenkan** (English) and **Bada Henkan** (Japanese) are listed.
-2. Add **ABC – Extended**, then remove **ABC**, so 英数 lands in Bada Muhenkan.
-3. Remove any other Japanese input methods, so かな lands in Bada Henkan.
-4. From the input menu, choose **Allow 英数 and かな Everywhere…**, which grants Accessibility.
-   Without it, かな can't move through the menu while you're already in henkan mode.
+Then go to System Settings → Keyboard → Input Sources:
 
-Or let an assistant do it: in a clone, tell a coding assistant
-`Read docs/interactive-prompts/start.md and follow it.` It installs bada ime, sets up the input
-sources and layouts with you, and then builds your dictionary.
+1. Check that **Bada Muhenkan** and **Bada Henkan** are listed.
+2. Add **ABC – Extended**, then remove **ABC**. Now **英数** always lands in muhenkan.
+3. Remove every other Japanese input method. Now **かな** always lands in henkan.
+4. From the input menu, choose **Allow 英数 and かな Everywhere…**. Without it, **かな** can't
+   move through the candidates while you are already in henkan.
 
-## Typing
+Too lazy? Open a coding assistant in the cloned folder and tell it
+`Read docs/interactive-prompts/start.md and follow it.` It will install bada, set it up,
+and build your dictionary with you.
 
-| Key | What it does |
+### How to type
+
+Type in **henkan**, and the best candidate shows as you type. **Space** commits it.
+
+If the first candidate is wrong, press **Tab**, **↓** or **かな** to move to the next one.
+**⇧Tab**, **↑** and **⇧かな** go back. **⇧Enter** commits what shows, and nothing else.
+**Esc** commits too. It does not cancel, unlike most IMEs.
+
+**英数** goes back to **muhenkan**, which is plain QWERTY.
+
+### Henkan profiles
+
+One henkan is not always enough. If you type Japanese and Korean a lot, you may want them on
+separate keys. Turn on Settings → Profiles, and **かな**, **変換** and **カタカナ** each get
+their own set of layouts. For example:
+
+| Key | Layouts |
 |---|---|
-| 英数 | Muhenkan mode (QWERTY). From henkan mode, it commits what shows first |
-| かな | Henkan mode. Already there, with something staged: the next entry in the menu |
-| Tab, ↓ / ⇧Tab, ↑, ⇧かな | Next / previous entry in the menu |
-| Space, Enter, Esc, … | Commit what shows, then do what the key does (Esc commits; it doesn't cancel) |
-| ⇧Enter | Commit what shows, and nothing else |
-| 半角/全角, ⇧半角/全角 | Full-width / half-width: the preedit, or else the selection |
-| ⌥Space | Full-width space in henkan mode; `_` in muhenkan mode |
-| ⌥ + letter (muhenkan) | Its accented variants (⌥e: è é ê ë …); 1–9 pick one |
-| F6–F10 | Bound in Settings to the layouts' actions (hiragana, katakana, half-width…); swallowed by default |
+| かな | QWERTY + bada roman |
+| 変換 | QWERTY + Japanese Kana |
+| カタカナ | Symbols + Unicode |
 
-The menu has the readings of every enabled layout, plus kanji conversions, typo suggestions and
-search results, best first. Entry 0 is what shows while you type. With **script forms** on
-(Settings → Menu), ⇧Tab from entry 0 goes to hiragana (−1) and then katakana (−2). Each layout can
-also be given a weight (0–10) that scales the scores of its readings.
+Japanese PC keyboards have **変換** and **カタカナ**, but macOS ignores them. bada reads them
+anyway (it needs Input Monitoring for this): press **Record** in Settings → Profiles, then
+press the key.
 
-## Henkan profiles
+The developer's own setup, an HHKB with three profiles: [docs/examples/hhkb-profiles](docs/examples/hhkb-profiles/README.md).
 
-Profiles are off by default. When they're on (Settings → Profiles), three keys each bring up henkan
-mode with **their own set of layouts**:
+### Learn Korean
 
-| Key | Profile | By default |
-|---|---|---|
-| かな | `mac-kana` | the henkan candidates (Settings → Layouts) |
-| 変換 | `henkan` | the same as かな |
-| カタカナ | `katakana` | the same as かな |
+Don't know Korean? [bada.sjun.me/learn](https://bada.sjun.me/learn) teaches you the letters
+with bada roman, then its shortcuts, then 2-set (KTS). Each level ends with the national
+anthem. It runs on the same engine as the IME.
 
-- Each profile either has **its own candidates**, or uses another profile's ("Same as …"). For
-  example, かな could be QWERTY + bada, 変換 QWERTY + Japanese kana, and カタカナ Symbols + Unicode.
-- **From muhenkan**, a profile key enters henkan mode in that profile. **In henkan**, another
-  profile's key commits what's staged and switches profile. The current profile's own key is the
-  next menu entry, as かな is.
-- **かな in another profile** is a setting per profile. The default goes to the next menu entry
-  when there's a menu, and otherwise back to かな's profile. The other choices: always back to
-  かな's, cycle through the profiles (in an order you set), go to 変換's or カタカナ's profile, or
-  leave for muhenkan.
-- **F keys per profile:** each profile can have its own F6–F10 bindings, or use かな's.
-- **Recording the keys:** macOS gives a PC keyboard's 変換 and カタカナ no key events of their own
-  (カタカナ arrives as かな), so bada ime reads them from the keyboard's HID reports. Choose
-  **Record** in Settings → Profiles and press the key; any key can be recorded this way. This needs
-  Input Monitoring as well as Accessibility.
+### Your dictionary
 
-An example, an HHKB JIS with 変換 and カタカナ on Fn + かな and Fn + 英数, Korean on かな,
-Japanese on 変換 and symbols on カタカナ: [docs/examples/hhkb-profiles](docs/examples/hhkb-profiles/README.md)
-(settings file, keymap and a page of the whole setup).
+bada ranks candidates by how common the words are. Your own words may not be common.
+Put them in `~/Library/Application Support/bada-ime/dictionary.json`, along with the words
+you never mean. The format: [docs/dictionary-contract.md](docs/dictionary-contract.md).
 
-Settings → Backup exports and imports all settings as one file (`bada-settings/1`). The web
-simulator reads the same file.
+[utils/learner-app](utils/learner-app/README.md) logs your typing and turns it into a
+dictionary.
 
-## Layouts
-
-The keyboards above are **QWERTY + bada + kana** (layouts 0, 13, 20) and **QWERTY + bada roman +
-kana** (0, 15, 20): English, Korean and Japanese from one mode. Any other set works the same way,
-for example standard 2-set Korean with English, **QWERTY + KTS** (0, 10):
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-kts-dark.png">
-  <img src="docs/images/layouts/qwerty-kts-light.png" alt="QWERTY and 2-set Korean on one HHKB JIS keyboard">
-</picture>
+### Layouts (ABC/가/かな)
 
 | Id | Layout | |
 |---|---|---|
-| 0 | QWERTY | muhenkan, and a henkan candidate for English |
-| 10 | Korean (2-set) | standard KS X 5002 on the JIS letter keys |
-| 11, 12 | Korean (legacy-korean, legacy-moonshot) | the readings of JIS Korean and JIS Moonshot |
-| 13 | Korean (bada) | [bada-layout.md](docs/bada-layout.md) |
+| 0 | QWERTY | muhenkan, and English in henkan |
+| 10 | Korean (2-set) | KTS, the standard Korean keyboard |
+| 13 | Korean (bada) | [docs/bada-layout.md](docs/bada-layout.md) |
+| 15 | Korean (bada roman) | [docs/layouts/15-bada-roman.md](docs/layouts/15-bada-roman.md) |
+| 20 | Japanese (Kana) | JIS kana, with kanji conversion |
+| 21 | Japanese (Romaji) | romaji, with kanji conversion |
+
+### Layouts (other)
+
+| Id | Layout | |
+|---|---|---|
+| 11 | Korean (legacy-korean) | from JIS Korean |
+| 12 | Korean (legacy-moonshot) | from JIS Moonshot |
 | 14 | Korean (3-set JIS) | 세벌식 for JIS, 모아쓰기 |
-| 15 | Korean (bada roman) | [15-bada-roman.md](docs/layouts/15-bada-roman.md) |
-| 18 | Korean (Roman) | Korean typed in romanisation |
-| 19 | Korean (Kana) | Korean typed in kana |
-| 20, 21 | Japanese (Kana, Romaji) | with kanji conversion (Mozc's dictionary) |
+| 18 | Korean (Roman) | Korean in romanization |
+| 19 | Korean (Kana) | Korean in kana |
 | 150 | Symbols | symbols and emoji by name |
 | 151 | Unicode | any character by its Unicode name |
 
-Every layout, with its rules and reliability: [docs/layouts](docs/layouts/README.md). More
-combinations (QWERTY + bada roman + kana, bada + romaji, QWERTY + romaji): [docs/layouts/combinations.md](docs/layouts/combinations.md).
+Every layout and its rules: [docs/layouts](docs/layouts/README.md). The spec: [docs/spec.md](docs/spec.md).
 
-## Your dictionary
-
-`~/Library/Application Support/bada-ime/dictionary.json` holds the words you mean (ranked up) and
-the words you never mean (ranked down, or never offered), for every layout. The format is
-[docs/dictionary-contract.md](docs/dictionary-contract.md). The input menu's **Open Dictionary
-Folder** opens its folder. After you change the file, it's reloaded the next time bada is activated
-(switch away and back).
-
-To learn your words from your own typing, type in [utils/learner-app](utils/learner-app/README.md)
-(a local page that logs a plain text field), then have an assistant merge its export into your
-dictionary.
-
-## Development
+### For developers
 
 | Path | What |
 |---|---|
-| `engine/` | The core, in Rust: layouts, composition, ranking, the menu. `cargo test`; the typing robot: `cargo test --release --test robot` ([docs/robot.md](docs/robot.md)) |
-| `mac/` | The InputMethodKit shell, in Swift: input modes, the 英数 / かな key tap, the menu, settings |
-| `web/` | The simulator at bada.sjun.me: `node web/build.mjs`, `node web/test/smoke.mjs` |
-| `docs/` | The spec, the bada layout and its history, one page per layout |
-| `tools/` | Corpus analysis, the layout renderer and editor, a key drill, the setup page, the icon and the social preview |
-| `utils/learner-app/` | Logs your typing for your dictionary: `npm start` |
+| `engine/` | The core, in Rust. All behaviour lives here. `cargo test` |
+| `mac/` | The macOS shell, in Swift. `make` |
+| `web/` | [bada.sjun.me](https://bada.sjun.me): the engine in WebAssembly. `node web/build.mjs` |
+| `docs/` | The spec, the layouts, and their history |
+| `tools/`, `utils/` | Analysis, the layout renderer, the learner app |
 
-All behaviour lives in the engine; the shell translates keys, switches input sources and applies
-the output. A change to the Mac shell's behaviour needs the same change in `web/src`.
+A change to the macOS shell needs the same change in `web/src`.
+
+### License
 
 MIT © Mirae Research
