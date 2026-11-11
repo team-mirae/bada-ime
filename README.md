@@ -132,9 +132,10 @@ The developer's own setup, an HHKB with three profiles: [docs/examples/hhkb-prof
 
 ### Learn Korean
 
-Don't know Korean? [bada.sjun.me/learn](https://bada.sjun.me/learn) teaches you the letters
-with bada roman, then its shortcuts, then 2-set (KTS). Each level ends with the national
-anthem. It runs on the same engine as the IME.
+Don't know Korean? [learn.sjun.me](https://learn.sjun.me) teaches you to type it, by typing:
+pick the layout you're aiming for (bada roman, 2-set or bada) and learn it from the first lesson.
+Each track ends with the national anthem. It runs on the same engine as the IME, and its MCP
+server (`https://learn.sjun.me/mcp`) teaches and quizzes you from an AI client.
 
 ### Your dictionary
 

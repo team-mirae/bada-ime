@@ -21,14 +21,8 @@ keeps the keys from it.
 
 ## Learn Korean
 
-[bada.sjun.me/learn](https://bada.sjun.me/learn) (`learn.html`, `learn.js`): typing lessons on the
-same engine, with the letter keys and `;` drawn on screen. Level 1 teaches the Hangul letters in
-bada roman (layout 15), Level 2 its shortcuts, Level 3 2-set (layout 10). Each lesson ends in a drill:
-a word, its standard romanization (Revised Romanization) and its keys above it; Space commits it and
-it's checked. Every lesson is open from the start; an optional introduction shows on the first visit.
-Levels 1 to 3 end with the anthem (애국가, verse 1 and the refrain) and its English adaptation. The
-lessons are data (`learn-content.js`); `web/test/learn.mjs` types every drill through the engine and
-fails if one doesn't give its word.
+Moved to its own site: [learn.sjun.me](https://learn.sjun.me) ([team-mirae/learn-korean](https://github.com/team-mirae/learn-korean)),
+which ships a copy of this engine. `bada.sjun.me/learn` redirects there.
 
 ## Build
 
@@ -36,7 +30,6 @@ fails if one doesn't give its word.
 node web/build.mjs                  # web/dist (needs Rust with the wasm32-unknown-unknown target)
 python3 -m http.server -d web/dist  # then open http://localhost:8000
 node web/test/smoke.mjs             # the engine as WebAssembly, typing on the shipped data
-node web/test/learn.mjs             # every Learn Korean drill types as written
 ```
 
 `web/wasm` is a small crate over the engine with a raw WebAssembly ABI (no wasm-bindgen): the ops

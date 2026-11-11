@@ -1,5 +1,5 @@
 // Loads the engine for a page: the manifest (web/build.mjs), the layouts, the wasm and the data,
-// with progress. Shared by the simulator (app.js) and Learn Korean (learn.js).
+// with progress.
 import { Engine, DATA_FILES } from "./engine.js";
 
 async function fetchBytes(url, gz, onBytes) {

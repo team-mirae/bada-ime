@@ -1,7 +1,6 @@
 # Deploys the web simulator (web/) to Vercel, bada.sjun.me, on every push to main that touches the
 # page or the engine and data it runs. The smoke test (web/test/smoke.mjs: the engine as WebAssembly,
-# typing on the shipped data) and the Learn Korean test (web/test/learn.mjs: every drill types as
-# written) gate the deploy.
+# typing on the shipped data) gates the deploy.
 #
 # The site is built here, not on Vercel: it compiles the engine to wasm with Rust, which Vercel's
 # build image doesn't have. `node web/build.mjs --vercel` writes web/.vercel/output (the Build Output
@@ -57,8 +56,6 @@ jobs:
         run: node web/build.mjs --vercel
       - name: Smoke test
         run: node web/test/smoke.mjs
-      - name: Learn Korean drills
-        run: node web/test/learn.mjs
       - name: Deploy to production
         working-directory: web
         run: npx --yes vercel@62 deploy --prebuilt --prod --token="$VERCEL_TOKEN"
