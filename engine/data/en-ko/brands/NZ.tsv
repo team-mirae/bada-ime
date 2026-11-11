@@ -15,7 +15,7 @@
 # web search for Korean titles; own knowledge for the rest (wine producers, beer, tourism operators, sports clubs,
 # media, Hangul spellings).
 ASB	에이에스비	bank
-BNZ	비엔지	bank
+BNZ	비엔제트	bank
 Bank of New Zealand	뉴질랜드 은행	bank
 Kiwibank	키위뱅크	bank
 TSB	티에스비	bank
@@ -28,7 +28,7 @@ Kiwi Wealth	키위 웰스	finance
 Fisher Funds	피셔 펀즈	finance
 Milford Asset Management	밀퍼드 자산운용	finance
 InvestNow	인베스트나우	finance
-NZX	엔젯엑스	finance
+NZX	엔제트엑스	finance
 Smartshares	스마트셰어스	finance
 Laybuy	레이바이	finance
 Genoapay	제노아페이	finance
@@ -62,16 +62,16 @@ Waitomo Fuel	와이토모 퓨얼	energy
 Transpower	트랜스파워	energy
 Todd Energy	토드 에너지	energy
 Nova Energy	노바 에너지	energy
-TVNZ	티브이엔젯	media
+TVNZ	티브이엔제트	media
 TVNZ+	티브이엔젯 플러스	media
 ThreeNow	스리나우	media
 Sky TV	스카이 티브이	media
 Whakaata Māori	와카타 마오리	media
-RNZ	알엔젯	media
+RNZ	알엔제트	media
 Newstalk ZB	뉴스토크 제트비	media
 ZM	제트엠	media
 More FM	모어 에프엠	media
-NZME	엔젯엠이	media
+NZME	엔제트엠이	media
 NZ Herald	뉴질랜드 헤럴드	newspaper
 The New Zealand Herald	더 뉴질랜드 헤럴드	newspaper
 The Dominion Post	더 도미니언 포스트	newspaper
@@ -541,7 +541,7 @@ PGG Wrightson	피지지 라이트슨	retail
 Farmlands	팜랜즈	retail
 Ravensdown	레이븐즈다운	chemicals
 Ballance	밸런스	chemicals
-LIC	엘아이시	tech
+LIC	엘아이씨	tech
 Waikato Milking Systems	와이카토 밀킹 시스템스	tech
 Todd Corporation	토드 코퍼레이션	conglomerate
 Trimax	트라이맥스	industrial
@@ -603,7 +603,7 @@ Akahu	아카후	finance
 Centrix	센트릭스	finance
 Heartland Group	하트랜드 그룹	finance
 NBS	엔비에스	bank
-FNZ	에프엔지	finance
+FNZ	에프엔제트	finance
 NZ Super Fund	뉴질랜드 슈퍼 펀드	finance
 Instant Kiwi	인스턴트 키위	lottery
 AA Insurance	에이에이 인슈어런스	insurance
@@ -835,7 +835,7 @@ Fresh 'n Fruity	프레시 앤 프루티	food
 Primo	프리모	drink
 Tararua	타라루아	food
 Westgold	웨스트골드	food
-NZMP	엔젯엠피	food
+NZMP	엔제트엠피	food
 Farm Source	팜 소스	agriculture
 Whitestone Cheese	화이트스톤 치즈	food
 Over the Moon	오버 더 문	food

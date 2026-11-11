@@ -15,7 +15,7 @@
 Commonwealth Bank	커먼웰스 뱅크	bank
 CommBank	컴뱅크	bank
 CommSec	컴섹	finance
-ANZ	에이엔지	bank
+ANZ	에이엔제트	bank
 Westpac	웨스트팩	bank
 NAB	엔에이비	bank
 National Australia Bank	내셔널 오스트레일리아 뱅크	bank
@@ -72,15 +72,15 @@ Budget Direct	버짓 다이렉트	insurance
 Medibank	메디뱅크	insurance
 ahm	에이에이치엠	insurance
 nib	닙	insurance
-HCF	에이치시에프	insurance
+HCF	에이치씨에프	insurance
 HBF	에이치비에프	insurance
 TAL	탈	insurance
-MLC	엠엘시	insurance
+MLC	엠엘씨	insurance
 Real Insurance	리얼 인슈어런스	insurance
-RACV	알에이시브이	insurance
-RACQ	알에이시큐	insurance
+RACV	알에이씨브이	insurance
+RACQ	알에이씨큐	insurance
 RAA	알에이에이	insurance
-RAC	알에이시	insurance
+RAC	알에이씨	insurance
 Telstra	텔스트라	telecom
 Optus	옵터스	telecom
 TPG Telecom	티피지 텔레콤	telecom
@@ -103,7 +103,7 @@ Seven Network	세븐 네트워크	media
 7plus	세븐플러스	media
 Network 10	네트워크 텐	media
 10 Play	텐 플레이	media
-ABC	에이비시	media
+ABC	에이비씨	media
 ABC iview	에이비시 아이뷰	media
 Triple J	트리플 제이	media
 SBS	에스비에스	media
@@ -188,7 +188,7 @@ Dick Smith	딕 스미스	retail
 Rebel	레벨	retail
 Rebel Sport	레벨 스포츠	retail
 Amart Sports	에이마트 스포츠	retail
-BCF	비시에프	retail
+BCF	비씨에프	retail
 Supercheap Auto	슈퍼칩 오토	retail
 Repco	렙코	retail
 Autobarn	오토반	retail
@@ -428,7 +428,7 @@ Spray n' Wipe	스프레이 앤 와이프	household
 Sorbent	소르벤트	household
 Solvol	솔볼	household
 Le Tan	르 탠	cosmetics
-CSL	시에스엘	pharma
+CSL	씨에스엘	pharma
 CSL Behring	시에스엘 베링	pharma
 Seqirus	세키러스	pharma
 Cochlear	코클리어	medical
@@ -481,7 +481,7 @@ Milo	마일로	drink
 Aeroplane Jelly	에어로플레인 젤리	food
 Rosella	로젤라	food
 Golden Circle	골든 서클	food
-SPC	에스피시	food
+SPC	에스피씨	food
 Ardmona	아드모나	food
 IXL	아이엑스엘	food
 Bega	베가	food
@@ -593,7 +593,7 @@ West End	웨스트 엔드	beer
 Melbourne Bitter	멜버른 비터	beer
 Reschs	레시스	beer
 Carlton & United Breweries	칼턴 앤드 유나이티드 브루어리스	beer
-CUB	시유비	beer
+CUB	씨유비	beer
 Bentspoke	벤트스포크	beer
 Stomping Ground	스톰핑 그라운드	beer
 Kaiju! Beer	카이주 비어	beer
@@ -692,7 +692,7 @@ Amcor	암코	industrial
 Orora	오로라	industrial
 Boral	보랄	construction
 James Hardie	제임스 하디	construction
-CSR	시에스알	construction
+CSR	씨에스알	construction
 BlueScope	블루스코프	industrial
 Incitec Pivot	인사이텍 피벗	chemicals
 Orica	오리카	chemicals

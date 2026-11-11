@@ -424,7 +424,7 @@ Mabe	마베	appliances
 Koblenz	코블렌스	appliances
 Cinsa	신사	appliances
 Vasconia	바스코니아	appliances
-IEM	이엠	appliances
+IEM	아이이엠	appliances
 Atvio	아트비오	electronics
 Lanix	라닉스	electronics
 Vorago	보라고	electronics
@@ -482,9 +482,9 @@ Afore Azteca	아포레 아스테카	finance
 Afore Coppel	아포레 코펠	finance
 Profuturo	프로푸투로	finance
 Grupo Bursátil Mexicano	그루포 부르사틸 멕시카노	finance
-GBM	헤베에메	finance
+GBM	지비엠	finance
 Bolsa Mexicana de Valores	볼사 멕시카나 데 발로레스	finance
-BMV	베에메베	finance
+BMV	비엠브이	finance
 Grupo Elektra	그루포 엘렉트라	retail
 Grupo Salinas	그루포 살리나스	conglomerate
 Telcel	텔셀	telecom
@@ -528,7 +528,7 @@ W Radio	더블유 라디오	media
 Radiópolis	라디오폴리스	media
 Grupo Radio Centro	그루포 라디오 센트로	media
 Grupo ACIR	그루포 아시르	media
-MVS	엠베에세	media
+MVS	엠브이에스	media
 MVS Radio	엠베에세 라디오	media
 Exa FM	엑사 에프엠	media
 El Universal	엘 우니베르살	newspaper
@@ -591,9 +591,9 @@ Correos de México	코레오스 데 멕시코	logistics
 Grupo Aeroportuario del Pacífico	그루포 아에로포르투아리오 델 파시피코	travel
 ASUR	아수르	travel
 OMA	오마	travel
-ADO	아데오	bus
+ADO	에이디오	bus
 Grupo ADO	그루포 아데오	bus
-ETN	에테에네	bus
+ETN	이티엔	bus
 Primera Plus	프리메라 플루스	bus
 Estrella Blanca	에스트레야 블랑카	bus
 Estrella Roja	에스트레야 로하	bus
@@ -615,7 +615,7 @@ Alpek	알펙	chemicals
 Nemak	네막	auto parts
 Cemex	시멕스	construction
 Cementos Chihuahua	세멘토스 치와와	construction
-GCC	헤세세	construction
+GCC	지씨씨	construction
 Cementos Moctezuma	세멘토스 목테수마	construction
 Cementos Fortaleza	세멘토스 포르탈레사	construction
 ICA	이카	construction
@@ -628,7 +628,7 @@ Orbia	오르비아	chemicals
 Mexichem	멕시켐	chemicals
 Pemex	페멕스	energy
 Petróleos Mexicanos	페트롤레오스 멕시카노스	energy
-CFE	세에페에	energy
+CFE	씨에프이	energy
 Comisión Federal de Electricidad	코미시온 페데랄 데 엘렉트리시다드	energy
 IEnova	이에노바	energy
 G500	헤 키니엔토스	energy
@@ -690,7 +690,7 @@ Ocesa	오세사	entertainment
 Corona Capital	코로나 카피탈	entertainment
 Vive Latino	비베 라티노	entertainment
 Lucha Libre AAA	루차 리브레 아아아	entertainment
-CMLL	세에메엘레엘레	entertainment
+CMLL	씨엠엘엘	entertainment
 Arena México	아레나 멕시코	entertainment
 Caliente	칼리엔테	gambling
 Play City	플레이 시티	gambling
@@ -953,7 +953,7 @@ Sabori	사보리	food
 Bepensa	베펜사	drink
 Pochteca	포치테카	chemicals
 Traxión	트락시온	logistics
-TMM	테에메에메	logistics
+TMM	티엠엠	logistics
 Elementia	엘레멘티아	construction
 Pinsa	핀사	food
 Dolores	돌로레스	food

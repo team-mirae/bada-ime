@@ -331,7 +331,7 @@ Cenit	세니트	energy
 Reficar	레피카르	energy
 Promigas	프로미가스	energy
 Gases de Occidente	가세스 데 옥시덴테	energy
-EPM	에페에메	energy
+EPM	이피엠	energy
 Empresas Públicas de Medellín	엠프레사스 푸블리카스 데 메데인	energy
 Celsia	셀시아	energy
 Isagen	이사헨	energy
@@ -395,7 +395,7 @@ Noraver	노라베르	pharma
 Dioxogen	디옥소헨	pharma
 Bonfiest	본피에스트	pharma
 Mieltertos	미엘테르토스	pharma
-JGB	호타헤베	pharma
+JGB	제이지비	pharma
 Kola Granulada JGB	콜라 그라눌라다 호타헤베	pharma
 Tarrito Rojo	타리토 로호	pharma
 Procaps	프로캅스	pharma
@@ -424,7 +424,7 @@ Sofasa	소파사	auto
 Busscar	부스카르	auto
 Superpolo	수페르폴로	auto
 Non Plus Ultra	논 플루스 울트라	auto
-GW	헤도블레베	bicycles
+GW	지더블유	bicycles
 Avianca	아비앙카	airline
 Avianca Cargo	아비앙카 카고	airline
 Satena	사테나	airline
@@ -443,7 +443,7 @@ Envía	엔비아	logistics
 Interrapidísimo	인테르라피디시모	logistics
 4-72	쿠아트로 세텐타이도스	logistics
 Deprisa	데프리사	logistics
-TCC	테세세	logistics
+TCC	티씨씨	logistics
 Saferbo	사페르보	logistics
 Mensajeros Urbanos	멘사헤로스 우르바노스	logistics
 Expreso Bolivariano	엑스프레소 볼리바리아노	bus
@@ -484,7 +484,7 @@ Mono	모노	finance
 Caracol	카라콜	media
 Caracol Televisión	카라콜 텔레비시온	media
 Caracol Radio	카라콜 라디오	media
-RCN	에레세에네	media
+RCN	알씨엔	media
 RCN Televisión	에레세에네 텔레비시온	media
 RCN Radio	에레세에네 라디오	media
 Canal 1	카날 우노	media
@@ -528,7 +528,7 @@ Dinero	디네로	magazine
 Noticias Caracol	노티시아스 카라콜	media
 Noticias RCN	노티시아스 에레세에네	media
 Caracol Play	카라콜 플레이	media
-ETB	에테베	telecom
+ETB	이티비	telecom
 UNE	우네	telecom
 Avantel	아반텔	telecom
 Hoteles Estelar	오텔레스 에스텔라르	hotel
@@ -687,7 +687,7 @@ Aloha	알로하	food
 Menta Helada	멘타 엘라다	candy
 Saviloe	사빌로에	beauty
 Colbón	콜본	household
-MK	에메카	pharma
+MK	엠케이	pharma
 Jabón Rey	하본 레이	household
 Coco Varela	코코 바렐라	household
 Varela	바렐라	household
@@ -819,12 +819,12 @@ Banco Unión	방코 우니온	bank
 Tyba	티바	finance
 Trii	트리	finance
 Transfiya	트란스피야	finance
-PSE	페세에	finance
+PSE	피에스이	finance
 ACH Colombia	아세아체 콜롬비아	finance
 Redeban	레데반	finance
 Credibanco	크레디방코	finance
 Servibanca	세르비방카	finance
-ATH	아테아체	finance
+ATH	에이티에이치	finance
 Bre-B	브레베	finance
 DataCrédito	다타크레디토	finance
 Finagro	피나그로	finance
@@ -906,7 +906,7 @@ Transmetro	트란스메트로	transport
 Metroplús	메트로플루스	transport
 EnCicla	엔시클라	transport
 Regiotram	레히오트람	transport
-SITP	에세이테페	transport
+SITP	에스아이티피	transport
 Expreso Palmira	엑스프레소 팔미라	bus
 Coomotor	코오모토르	bus
 Flota Occidental	플로타 옥시덴탈	bus
@@ -916,7 +916,7 @@ Taxis Libres	탁시스 리브레스	transport
 Tax Express	택스 익스프레스	transport
 Domina	도미나	logistics
 Redetrans	레데트란스	logistics
-PSL	페에세엘레	software
+PSL	피에스엘	software
 Loggro	로그로	software
 Heinsohn	하인손	software
 Sophos Solutions	소포스 솔루션스	software
@@ -935,7 +935,7 @@ Metrotel	메트로텔	telecom
 NTN24	에네테에네 베인티쿠아트로	media
 RCN Nuestra Tele	에레세에네 누에스트라 텔레	media
 Canal Institucional	카날 인스티투시오날	media
-RTVC	에레테베세	media
+RTVC	알티브이씨	media
 Telecafé	텔레카페	media
 Teleislas	텔레이슬라스	media
 Canal TRO	카날 트로	media
@@ -948,7 +948,7 @@ La Cariñosa	라 카리뇨사	media
 Antena 2	안테나 도스	media
 Fantástica	판타스티카	media
 Radio Red	라디오 레드	media
-HJCK	아체호타세카	media
+HJCK	에이치제이씨케이	media
 Javeriana Estéreo	하베리아나 에스테레오	media
 Radio Santa Fe	라디오 산타 페	media
 Colmundo Radio	콜문도 라디오	media

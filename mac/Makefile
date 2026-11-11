@@ -27,6 +27,8 @@ ifeq ($(SENSITIVE),1)
 EN_KO      += $(ENGINE)/data/en-ko/sensitive.tsv
 endif
 BRANDS     := $(sort $(wildcard $(ENGINE)/data/en-ko/brands/*.tsv))
+# Where brands share a name, which Hangul shows first (engine/tools/build_shared_order.py).
+SHARED     := $(ENGINE)/data/en-ko/shared-order.tsv
 # Rebuilds the app when SENSITIVE changes.
 SENSITIVE_STAMP := $(BUILD)/.sensitive
 ICONS      := $(BUILD)/bada.tiff $(BUILD)/muhenkan.tiff $(BUILD)/henkan.tiff
@@ -70,7 +72,7 @@ $(KEYLAYOUT) &: $(BUILD)/make-keylayout ../docs/layouts/13-bada.json
 $(BUILD)/%.tiff: Resources/icons/%.png Resources/icons/%@2x.png
 	tiffutil -cathidpicheck Resources/icons/$*.png Resources/icons/$*@2x.png -out $@
 
-$(APP): $(BUILD)/BadaIME $(ICONS) $(KEYLAYOUT) $(ABOUT_ICON) Info.plist $(DATA) $(EN_KO) $(BRANDS) $(SENSITIVE_STAMP) $(wildcard Resources/*.lproj/*)
+$(APP): $(BUILD)/BadaIME $(ICONS) $(KEYLAYOUT) $(ABOUT_ICON) Info.plist $(DATA) $(EN_KO) $(BRANDS) $(SHARED) $(SENSITIVE_STAMP) $(wildcard Resources/*.lproj/*)
 	rm -rf $@
 	mkdir -p $@/Contents/MacOS $@/Contents/Resources/data
 	cp Info.plist $@/Contents/Info.plist
@@ -79,7 +81,7 @@ $(APP): $(BUILD)/BadaIME $(ICONS) $(KEYLAYOUT) $(ABOUT_ICON) Info.plist $(DATA) 
 	cp $(ABOUT_ICON) $@/Contents/Resources/bada-icon.png
 	cp -R Resources/en.lproj Resources/ko.lproj Resources/ja.lproj $@/Contents/Resources/
 	cp $(DATA) $@/Contents/Resources/data/
-	{ awk 1 $(EN_KO); echo '#! brands'; awk 1 $(BRANDS); } > $@/Contents/Resources/data/en-ko.tsv
+	{ awk 1 $(EN_KO); echo '#! brands'; awk 1 $(BRANDS); echo '#! order'; awk 1 $(SHARED); } > $@/Contents/Resources/data/en-ko.tsv
 	cp ../LICENSE $@/Contents/Resources/LICENSE.txt
 	codesign --force --sign "$(SIGN_IDENTITY)" $@
 

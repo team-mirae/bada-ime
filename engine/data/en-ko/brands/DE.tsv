@@ -27,7 +27,7 @@ Wartburg	바르트부르크	auto
 NSU	엔에스유	auto
 Horch	호르히	auto
 Auto Union	아우토 우니온	auto
-DKW	데카베	auto
+DKW	디케이더블유	auto
 Brabus	브라부스	auto
 Ruf	루프	auto
 Lorinser	로린저	auto
@@ -420,7 +420,7 @@ Trade Republic	트레이드 리퍼블릭	finance
 Scalable Capital	스케일러블 캐피털	finance
 Solaris	솔라리스	bank
 Consorsbank	콘소르스방크	bank
-DKB	데카베	bank
+DKB	디케이비	bank
 Targobank	타르고방크	bank
 Aareal Bank	아레알 방크	bank
 Deutsche Börse	도이체뵈르제	finance
@@ -438,12 +438,12 @@ Debeka	데베카	insurance
 R+V	에르운트파우	insurance
 Signal Iduna	지그날 이두나	insurance
 HUK-Coburg	후크코부르크	insurance
-DEVK	데에파우카	insurance
+DEVK	디이브이케이	insurance
 Gothaer	고타어	insurance
-AOK	아오카	insurance
+AOK	에이오케이	insurance
 Techniker Krankenkasse	테크니커 크랑켄카세	insurance
 Barmer	바르머	insurance
-DAK	데아카	insurance
+DAK	디에이케이	insurance
 Hapag-Lloyd	하파크로이드	logistics
 DHL	디에이치엘	logistics
 Deutsche Post	도이체 포스트	logistics
@@ -454,7 +454,7 @@ Dachser	닥서	logistics
 Rhenus	레누스	logistics
 Fiege	피게	logistics
 Deutsche Bahn	도이체 반	transport
-ICE	이체에	transport
+ICE	아이씨이	transport
 FlixBus	플릭스버스	transport
 Flix	플릭스	transport
 FlixTrain	플릭스트레인	transport
@@ -531,7 +531,7 @@ T+A	티플러스에이	audio
 Dual	듀얼	audio
 Braun	브라운	appliances
 Miele	밀레	appliances
-AEG	아에게	appliances
+AEG	에이이지	appliances
 Neff	네프	appliances
 Gaggenau	가게나우	appliances
 WMF	더블유엠에프	kitchenware
@@ -546,7 +546,7 @@ Kaiser	카이저	kitchenware
 Rosenthal	로젠탈	tableware
 Hutschenreuther	후첸로이터	tableware
 Meissen	마이센	tableware
-KPM	카페엠	tableware
+KPM	케이피엠	tableware
 Fürstenberg	퓌르스텐베르크	tableware
 Nymphenburg	님펜부르크	tableware
 Arzberg	아르츠베르크	tableware
@@ -623,7 +623,7 @@ Peek & Cloppenburg	피크 앤 클로펜부르크	retail
 Deichmann	다이히만	retail
 Takko	타코	retail
 KiK	키크	retail
-NKD	엔카데	retail
+NKD	엔케이디	retail
 Ernsting's family	에른스팅스 패밀리	retail
 Tom Tailor	톰 테일러	fashion
 S.Oliver	에스올리버	fashion
@@ -893,7 +893,7 @@ Bad Brambacher	바트 브람바허	water
 Selters	젤터스	water
 Spezi	슈페치	drink
 Frankfurter Allgemeine Zeitung	프랑크푸르터 알게마이네 차이퉁	media
-FAZ	에프아체트	media
+FAZ	에프에이제트	media
 Süddeutsche Zeitung	쥐트도이체 차이퉁	media
 Die Zeit	디 차이트	media
 Der Spiegel	슈피겔	media
@@ -912,11 +912,11 @@ Kicker	키커	media
 Bravo	브라보	media
 Deutsche Welle	도이체 벨레	media
 DW	디더블유	media
-ARD	아에르데	media
-ZDF	체데에프	media
+ARD	에이알디	media
+ZDF	제트디에프	media
 Das Erste	다스 에르스테	media
 Tagesschau	타게스샤우	media
-RTL	에르테엘	media
+RTL	알티엘	media
 ProSieben	프로지벤	media
 Sat.1	자트 아인스	media
 ProSiebenSat.1	프로지벤자트아인스	media
@@ -943,7 +943,7 @@ Ravensburger	라벤스부르거	toys
 Deutsche Grammophon	도이치 그라모폰	music
 BMG	비엠지	music
 Bundesliga	분데스리가	sports
-DFB	데에프베	sports
+DFB	디에프비	sports
 Bayern München	바이에른 뮌헨	football club
 Borussia Dortmund	보루시아 도르트문트	football club
 RB Leipzig	알비 라이프치히	football club
@@ -1116,7 +1116,7 @@ Coffee Fellows	커피 펠로스	restaurant
 Balzac Coffee	발작 커피	restaurant
 Einstein Kaffee	아인슈타인 카페	restaurant
 E.ON	이온	energy
-RWE	에르베에	energy
+RWE	알더블유이	energy
 EnBW	엔베베	energy
 Uniper	유니퍼	energy
 Wintershall	빈터스할	energy
