@@ -27,7 +27,7 @@ permissions:
 jobs:
   build:
     name: Test and build BadaIME.app
-    runs-on: macos-15
+    runs-on: macos-26   # the macOS 26 SDK: NSGlassEffectView (SuggestionWindow.swift)
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
