@@ -33,14 +33,18 @@ func abcChars(_ code: Int, _ mods: Int) -> String {
     return String(utf16CodeUnits: buf, count: len)
 }
 
-// The layers: index, its modifiers, the Carbon modifiers to translate ABC with
-let maps: [(String, Int)] = [
-    ("<modifier keys=\"caps?\"/>", 0),
-    ("<modifier keys=\"anyShift caps?\"/>", shiftKey),
-    ("<modifier keys=\"caps? anyOption\"/>", optionKey),
-    ("<modifier keys=\"anyShift caps? anyOption\"/>", shiftKey | optionKey),
-    ("<modifier keys=\"anyShift? caps? anyOption? command\"/>", cmdKey),
-    ("<modifier keys=\"anyShift? caps? anyOption? command? anyControl\"/>", controlKey),
+// The layers: its modifiers, the Carbon modifiers to translate ABC with, and which of the layout's
+// own layers (0 unshifted, 1 ⇧) it takes, if any. Caps Lock has a layer of its own (ABC's capitals;
+// the layout's own unshifted keys, so ろ stays \ and bada's jamo stay jamo): without it, Caps Lock
+// would type lowercase (spec §6.7).
+let maps: [(String, Int, Int?)] = [
+    ("<modifier keys=\"\"/>", 0, 0),
+    ("<modifier keys=\"anyShift caps?\"/>", shiftKey, 1),
+    ("<modifier keys=\"caps\"/>", alphaLock, 0),
+    ("<modifier keys=\"caps? anyOption\"/>", optionKey, nil),
+    ("<modifier keys=\"anyShift caps? anyOption\"/>", shiftKey | optionKey, nil),
+    ("<modifier keys=\"anyShift? caps? anyOption? command\"/>", cmdKey, nil),
+    ("<modifier keys=\"anyShift? caps? anyOption? command? anyControl\"/>", controlKey, nil),
 ]
 func xml(_ s: String) -> String {
     s.unicodeScalars.map { u in
@@ -48,7 +52,8 @@ func xml(_ s: String) -> String {
     }.joined()
 }
 
-/// A layout: ABC with `change(code, layer)` where it returns something (layers 0 and 1 only).
+/// A layout: ABC with `change(code, layer)` where it returns something (layers 0 and 1 only: the
+/// unshifted, ⇧ and Caps Lock layers).
 func write(name: String, id: Int, _ change: (Int, Int) -> String?) throws {
     var out = """
     <?xml version="1.1" encoding="UTF-8"?>
@@ -61,13 +66,13 @@ func write(name: String, id: Int, _ change: (Int, Int) -> String?) throws {
         <modifierMap id="mods" defaultIndex="0">
 
     """
-    for (i, (mod, _)) in maps.enumerated() { out += "        <keyMapSelect mapIndex=\"\(i)\">\(mod)</keyMapSelect>\n" }
+    for (i, (mod, _, _)) in maps.enumerated() { out += "        <keyMapSelect mapIndex=\"\(i)\">\(mod)</keyMapSelect>\n" }
     out += "    </modifierMap>\n    <keyMapSet id=\"all\">\n"
-    for (i, (_, mods)) in maps.enumerated() {
+    for (i, (_, mods, own)) in maps.enumerated() {
         out += "        <keyMap index=\"\(i)\">\n"
         for code in 0..<128 {
             var s = abcChars(code, mods)
-            if i < 2, let changed = change(code, i) { s = changed }
+            if let own, let changed = change(code, own) { s = changed }
             if !s.isEmpty { out += "            <key code=\"\(code)\" output=\"\(xml(s))\"/>\n" }
         }
         out += "        </keyMap>\n"

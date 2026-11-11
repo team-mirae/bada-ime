@@ -73,8 +73,11 @@ still types in password fields.)
 muhenkan, ABC; in henkan, **bada's (13) legends**, whatever layouts the profile uses (one board can't
 show them all). That layout is `bada.keylayout`, hidden from the input source list and shipped in the
 app (`mac/tools/make-keylayout.swift`): ABC as a JIS keyboard has it, with bada's jamo on the
-unshifted and ⇧ layers. Its ⌥, ⌘ and ⌃ layers are ABC's, so shortcuts are unchanged; a key the
-engine passes on that carries a jamo there is typed as ABC types it, by the input method.
+unshifted and ⇧ layers, and on a Caps Lock layer of its own, which shows the unshifted jamo (henkan
+ignores Caps Lock, §6.7). Its ⌥, ⌘ and ⌃ layers are ABC's, so shortcuts are unchanged; a key the
+engine passes on that carries a jamo there is typed as ABC types it, by the input method. Muhenkan's
+`qwerty.keylayout` is ABC with ろ as `\` (⇧ `_`), and has the same Caps Lock layer: ABC's capitals.
+Without that layer a keylayout's Caps Lock types its unshifted layer, lowercase.
 
 ### 4.2 Muhenkan mode
 
