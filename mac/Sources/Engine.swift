@@ -79,6 +79,11 @@ final class Engine {
         _ = bada_set_settings(handle, settings)
     }
 
+    /// bada-compatible v1.1 `P_state` (spec §9): the engine's state as JSON, read-only.
+    func state() -> String? {
+        bada_state(handle).map { String(cString: $0) }
+    }
+
     /// The layouts and every method's F-key actions, as JSON.
     func catalog() -> [String: Any] {
         guard let pointer = bada_catalog(handle), let data = String(cString: pointer).data(using: .utf8) else { return [:] }

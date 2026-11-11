@@ -173,6 +173,8 @@ Every layout and its rules: [docs/layouts](docs/layouts/README.md). The spec: [d
 
 ### For developers
 
+The engine is [**bada-compatible**](https://github.com/team-mirae/bada-compatible).
+
 | Path | What |
 |---|---|
 | `engine/` | The core, in Rust. All behaviour lives here. `cargo test` |

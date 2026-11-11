@@ -28,6 +28,11 @@ const char *bada_set_profile(BadaEngine *engine, const char *name);
 const char *bada_flush(BadaEngine *engine);
 const char *bada_host_selection(BadaEngine *engine, const char *text);
 const char *bada_catalog(BadaEngine *engine);
+/* bada-compatible v1.1 P_state (optional; dlsym it): the engine's state for its wrapper, read-only.
+   {"format":"bada-compatible-state/1","mode":"muhenkan"|"henkan"|null,"profile":…,"staged":…,
+   "preedit":…,"menu":[…],"selected":…,"zero":…,"horizontal":…,"need_selection":…}. "staged" is
+   what bada_flush would commit now; the rest is the last Output's. Changes nothing. */
+const char *bada_state(BadaEngine *engine);
 
 void bada_string_free(char *text);
 
