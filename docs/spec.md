@@ -340,7 +340,7 @@ with its own set of henkan candidates:
 | `/docs` | This spec, the Bada layout design, a page per layout and combination examples (`docs/layouts`, images in `docs/images/layouts`), the layout 13 design history and its saved candidates (`docs/bada-history.md`, `docs/history/`) |
 | `/tools/analysis`, `/tools/render`, `/tools/editor`, `/tools/practice`, `/tools/setup-page` | Corpus analysis and layout optimisation, the layout renderer (with combinations, and `export_png.py` for the docs' images), the layout editor, a key drill, a page of a setup's key legends per mode |
 | `/utils/learner-app` | A local page that logs your typing and exports it for your dictionary (§8) |
-| `/web` | The web simulator ([bada.sjun.me](https://bada.sjun.me)): the engine compiled to WebAssembly behind a text field, the Mac shell's key handling, menu and settings window ported to the page (settings in the browser's local storage, the same `bada-settings/1` file), and the keyboard drawn by §7.1's renderer. Deployed by `.github/workflows/deploy-web.yml` |
+| `/web` | The web simulator ([bada.sjun.me](https://bada.sjun.me)): the engine compiled to WebAssembly behind a text field, the Mac shell's key handling, menu and settings window ported to the page (settings in the browser's local storage, the same `bada-settings/1` file), and the keyboard drawn by §7.1's renderer. Deployed by `.github/workflows/deploy-web.yml`. Learn Korean (`/learn`): typing lessons on the same engine, bada roman (15) then 2-set (10) |
 
 All behaviour lives in the engine; the shell translates keys, switches input sources and applies
 the output.

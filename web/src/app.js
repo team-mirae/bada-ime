@@ -2,7 +2,7 @@
 // (mac/Sources/InputController.swift, LanguageKeyTap.swift): keys in, text and a menu out. All
 // behaviour is the engine's; this file moves keys in, applies the output, and switches modes.
 
-import { Engine, DATA_FILES } from "./engine.js";
+import { loadEngine } from "./load.js";
 import * as S from "./settings.js";
 import { drawKeyboard } from "./keyboard.js";
 import { openSettings } from "./settings-ui.js";
@@ -36,37 +36,14 @@ applyTheme();
 
 // ── Loading ────────────────────────────────────────────────────────────────────────────────────
 
-async function fetchBytes(url, gz, onBytes) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`${url}: ${res.status}`);
-  let body = res.body.pipeThrough(new TransformStream({ transform(chunk, c) { onBytes(chunk.length); c.enqueue(chunk); } }));
-  if (gz) body = body.pipeThrough(new DecompressionStream("gzip"));
-  return new Uint8Array(await new Response(body).arrayBuffer());
-}
-
 async function start() {
-  const manifest = await (await fetch("manifest.json", { cache: "no-cache" })).json();
-  version = manifest.version || "";
-  await Promise.all(manifest.layouts.map(async path => {
-    const l = await (await fetch(path)).json();
-    layouts[l.id] = l;
-  }));
-  const total = manifest.wasm.size + DATA_FILES.reduce((n, f) => n + (manifest.data[f]?.size || 0), 0);
-  let got = 0;
-  const tick = n => {
-    got += n;
+  const loaded = await loadEngine((got, total, phase) => {
     $("progress").style.width = `${Math.min(100, (100 * got) / total).toFixed(1)}%`;
-    $("progressText").textContent = `${(got / 1e6).toFixed(1)} of ${(total / 1e6).toFixed(1)} MB`;
-  };
-  const [wasm, ...files] = await Promise.all([
-    fetchBytes(manifest.wasm.path, false, tick),
-    ...DATA_FILES.map(f => manifest.data[f] ? fetchBytes(manifest.data[f].path, true, tick) : Promise.resolve(new Uint8Array())),
-  ]);
-  $("progressText").textContent = "Starting the engine…";
-  await new Promise(r => setTimeout(r, 30));
-  engine = await Engine.load(wasm);
-  files.forEach((bytes, i) => engine.put(i, bytes));
-  engine.init();
+    $("progressText").textContent = phase === "starting" ? "Starting the engine…" : `${(got / 1e6).toFixed(1)} of ${(total / 1e6).toFixed(1)} MB`;
+  });
+  engine = loaded.engine;
+  version = loaded.manifest.version || "";
+  Object.assign(layouts, loaded.layouts);
   catalog = engine.catalog();
   loadDictionary(localStorage.getItem(DICT_STORE) || "");
   applySettings();

@@ -75,6 +75,7 @@ if (process.argv.includes("--vercel")) {
   const routes = [
     ...HEADERS.map(([src, value]) => ({ src, headers: { "Cache-Control": value }, continue: true })),
     { handle: "filesystem" },
+    { src: "^/learn/?$", dest: "/learn.html" },
   ];
   writeFileSync(vercel + "config.json", JSON.stringify({ version: 3, routes }, null, 1));
   console.log("web/.vercel/output: ready for vercel deploy --prebuilt");
