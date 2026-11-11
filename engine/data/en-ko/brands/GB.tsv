@@ -35,8 +35,8 @@ Sunbeam	선빔	auto
 Hillman	힐먼	auto
 Riley	라일리	auto
 Westfield	웨스트필드	auto
-BAC	비에이시	auto
-LEVC	엘이브이시	auto
+BAC	비에이씨	auto
+LEVC	엘이브이씨	auto
 Ineos Grenadier	이네오스 그레나디어	auto
 Norton	노턴	motorcycles
 BSA	비에스에이	motorcycles
@@ -92,7 +92,7 @@ Moulton	몰턴	bicycles
 Boardman	보드먼	bicycles
 Rapha	라파	sportswear
 Dunlop	던롭	tires
-JCB	제이시비	industrial
+JCB	제이씨비	industrial
 Perkins	퍼킨스	industrial
 Rolls-Royce Holdings	롤스로이스 홀딩스	industrial
 BAE Systems	비에이이 시스템스	defense
@@ -787,7 +787,7 @@ Gordon Ramsay	고든 램지	restaurant
 Jamie Oliver	제이미 올리버	restaurant
 Deliveroo	딜리버루	app
 Just Eat	저스트 잇	app
-HSBC	에이치에스비시	bank
+HSBC	에이치에스비씨	bank
 Barclays	바클레이스	bank
 Barclaycard	바클레이카드	finance
 Lloyds	로이즈	bank
@@ -891,7 +891,7 @@ Anglo American	앵글로 아메리칸	mining
 Johnson Matthey	존슨 매티	chemicals
 Croda	크로다	chemicals
 INEOS	이네오스	chemicals
-ICI	아이시아이	chemicals
+ICI	아이씨아이	chemicals
 Victrex	빅트렉스	chemicals
 Severn Trent	세번 트렌트	utilities
 Thames Water	템스 워터	utilities
@@ -1002,10 +1002,10 @@ Sky Q	스카이 큐	media
 Now TV	나우 티비	media
 BritBox	브릿박스	media
 DAZN	다즌	media
-BBC	비비시	media
+BBC	비비씨	media
 BBC News	비비시 뉴스	media
 BBC World Service	비비시 월드 서비스	media
-ITV	아이티비	media
+ITV	아이티브이	media
 Channel 4	채널 포	media
 Channel 5	채널 파이브	media
 Sky News	스카이 뉴스	media
@@ -1335,7 +1335,7 @@ Dennis	데니스	auto
 Morris Minor	모리스 마이너	car model
 Elan	엘란	car model
 AA	에이에이	services
-RAC	알에이시	services
+RAC	알에이씨	services
 Arnold Clark	아널드 클라크	retail
 Ronseal	론실	consumer goods
 Cuprinol	쿠프리놀	consumer goods

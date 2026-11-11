@@ -272,8 +272,8 @@ Petrofina	페트로피나	energy
 Fina	피나	energy
 Ageas	에이지스	insurance
 AG Insurance	에이지 인슈어런스	insurance
-KBC	케이비시	bank
-CBC	세베세	bank
+KBC	케이비씨	bank
+CBC	씨비씨	bank
 Belfius	벨피우스	bank
 Fortis	포르티스	bank
 BNP Paribas Fortis	비엔피 파리바 포르티스	bank
@@ -297,7 +297,7 @@ Payconiq	페이코닉	finance
 Itsme	이츠미	app
 Isabel	이자벨	software
 Sofina	소피나	finance
-GBL	제베엘	finance
+GBL	지비엘	finance
 Groupe Bruxelles Lambert	그루프 브뤼셀 랑베르	finance
 Ackermans & van Haaren	아커르만스 엔 판하런	finance
 Cofinimmo	코피니모	finance
@@ -310,12 +310,12 @@ Sabena	사베나	airline
 TUI fly Belgium	투이 플라이 벨기에	airline
 Air Belgium	에어 벨지움	airline
 VLM Airlines	브이엘엠 항공	airline
-SNCB	에스엔세베	travel
-NMBS	엔엠베에스	travel
+SNCB	에스엔씨비	travel
+NMBS	엔엠비에스	travel
 De Lijn	더 레인	travel
 STIB	스티브	travel
-MIVB	엠이페베	travel
-TEC	테에세	travel
+MIVB	엠아이브이비	travel
+TEC	티이씨	travel
 Brussels Airport	브뤼셀 공항	travel
 Thalys	탈리스	travel
 Colruyt	콜뤼트	retail
@@ -341,7 +341,7 @@ Standaard Boekhandel	스탄다르트 부크한델	retail
 Club	클뤼프	retail
 Torfs	토르프스	retail
 Brantano	브란타노	retail
-JBC	제이베세	fashion
+JBC	제이비씨	fashion
 Ava	아바	retail
 ZEB	제브	fashion
 Bel&Bo	벨 엔 보	fashion
@@ -368,7 +368,7 @@ Veronique Branquinho	베로니크 브랑키뉴	luxury
 Bellerose	벨로즈	fashion
 Scapa	스카파	fashion
 Terre Bleue	테르 블뢰	fashion
-CKS	세카에스	fashion
+CKS	씨케이에스	fashion
 Filou & Friends	필루 앤 프렌즈	fashion
 Sarah Pacini	사라 파치니	fashion
 Hampton Bays	햄턴 베이스	fashion
@@ -451,11 +451,11 @@ Asco Industries	아스코 인더스트리스	industrial
 SABCA	사브카	industrial
 John Cockerill	존 코커릴	industrial
 Cockerill	코커릴	industrial
-CMI	세엠이	industrial
+CMI	씨엠아이	industrial
 Jan De Nul	얀 더 뉠	construction
 DEME	데메	construction
 BESIX	베식스	construction
-CFE	세에프에	construction
+CFE	씨에프이	construction
 Willemen	빌러먼	construction
 Bosal	보잘	auto
 Vandewiele	판더빌러	industrial
@@ -480,10 +480,10 @@ Mediahuis	미디어하위스	media
 DPG Media	디피지 미디어	media
 Roularta	룰라르타	media
 Rossel	로셀	media
-IPM	이페엠	media
-VRT	페에르테	media
-RTBF	에르테베에프	media
-VTM	페테엠	media
+IPM	아이피엠	media
+VRT	브이알티	media
+RTBF	알티비에프	media
+VTM	브이티엠	media
 RTL-TVI	에르테엘 테베이	media
 Play	플레이	media
 Eén	에인	media
@@ -614,7 +614,7 @@ KAS Eupen	오이펜	football club
 Beerschot	베이르스호트	football club
 Lommel	로멀	football club
 Dender	덴더르	football club
-RWDM	에르베데엠	football club
+RWDM	알더블유디엠	football club
 Lierse	리르서	football club
 KV Oostende	오스텐더	football club
 Waasland-Beveren	바슬란트베버런	football club
@@ -684,7 +684,7 @@ Rombouts	롬바우츠	drink
 Jacqmotte	자크모트	drink
 Tiense Suiker	티너서 사위커르	food
 Candico	칸디코	food
-Pinguin	핑퀸	food
+Pinguin	핑귄	food
 Laurent Gerbaud	로랑 제르보	food
 Zaabär	자바르	food
 Maison Elisabeth	메종 엘리자베트	food
@@ -740,7 +740,7 @@ Vandersanden	판더르산던	industrial
 Carmeuse	카르뫼즈	industrial
 Prayon	프레이용	chemicals
 Katoen Natie	카툰 나티	logistics
-CMB	세엠베	logistics
+CMB	씨엠비	logistics
 Euronav	유로나브	logistics
 Exmar	엑스마르	logistics
 H.Essers	하 에서르스	logistics
@@ -778,7 +778,7 @@ Acerta	아세르타	finance
 Partena	파르테나	finance
 SD Worx	에스디 웍스	software
 Touring	투링	travel
-VAB	페아베	travel
+VAB	브이에이비	travel
 Martin's Hotels	마틴스 호텔	hotel
 Vente-Exclusive	방텍스클뤼시브	internet
 Sortlist	소트리스트	internet
@@ -829,7 +829,7 @@ Atenor	아테노르	finance
 Immobel	이모벨	finance
 Befimmo	베피모	finance
 Montea	몬테아	finance
-VGP	페헤페	finance
+VGP	브이지피	finance
 Sipef	시페프	food
 Econocom	에코노콤	software
 Cegeka	세헤카	software
@@ -876,7 +876,7 @@ CPH Bank	세페하 방크	bank
 Corona Direct	코로나 디렉트	insurance
 Fidea	피데아	insurance
 Integrale	인테흐랄러	insurance
-GB	제베	retail
+GB	지비	retail
 Mestdagh	메스다흐	retail
 Renmans	렌만스	retail
 Cru	크뤼	retail
@@ -974,7 +974,7 @@ Collishop	콜리숍	retail
 Novy	노비	appliances
 Nestor Martin	네스토르 마르탱	appliances
 Bulex	뷜렉스	appliances
-ACV	에이시브이	appliances
+ACV	에이씨브이	appliances
 Duco	뒤코	industrial
 Balterio	발테리오	industrial
 BerryAlloc	베리얼록	industrial

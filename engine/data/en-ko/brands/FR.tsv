@@ -859,7 +859,7 @@ Lu	루	food
 Prince	프린스	food
 Petit Écolier	프티 에콜리에	food
 Pépito	페피토	food
-BN	베엔	food
+BN	비엔	food
 Jacquet	자케	food
 Harrys	해리스	food
 Pasquier	파스키에	food
@@ -1155,12 +1155,12 @@ Air Austral	에어 오스트랄	airline
 Hop!	홉	airline
 Air Inter	에어 앵테르	airline
 Flying Blue	플라잉 블루	airline
-SNCF	에스엔세에프	rail
+SNCF	에스엔씨에프	rail
 TGV	테제베	rail
 TGV inOui	테제베 이누이	rail
 Ouigo	위고	rail
 Intercités	앵테르시테	rail
-RATP	에르아테페	transport
+RATP	알에이티피	transport
 Keolis	케올리스	transport
 Transdev	트랜스데브	transport
 CMA CGM	씨엠에이 씨지엠	logistics
@@ -1180,7 +1180,7 @@ Nouvelles Frontières	누벨 프롱티에르	travel
 Fram	프람	travel
 Orange	오랑주	telecom
 Sosh	소시	telecom
-SFR	에스에프에르	telecom
+SFR	에스에프알	telecom
 Bouygues Telecom	부이그 텔레콤	telecom
 Free	프리	telecom
 Free Mobile	프리 모바일	telecom
@@ -1238,7 +1238,7 @@ Ulule	울룰레	internet
 Malt	몰트	internet
 Sorare	소레어	internet
 Voodoo	부두	games
-VLC	브이엘시	software
+VLC	브이엘씨	software
 VideoLAN	비디오랜	software
 Ubisoft	유비소프트	games
 Assassin's Creed	어쌔신 크리드	games
@@ -1342,7 +1342,7 @@ Les Inrockuptibles	레 장록	media
 Science & Vie	시앙스 에 비	media
 Géo	제오	media
 Le Journal du Dimanche	르 주르날 뒤 디망슈	media
-AFP	아에프페	media
+AFP	에이에프피	media
 TF1	테에프앙	media
 France Télévisions	프랑스 텔레비지옹	media
 France 2	프랑스 되	media
@@ -1354,15 +1354,15 @@ M6	엠시스	media
 Radio France	라디오 프랑스	media
 France Inter	프랑스 앵테르	media
 France Culture	프랑스 퀼튀르	media
-RFI	에르에프이	media
+RFI	알에프아이	media
 Europe 1	유럽 앵	media
-NRJ	엔에르지	media
+NRJ	엔알제이	media
 Skyrock	스카이록	media
 Fun Radio	펀 라디오	media
 Nostalgie	노스탈지	media
 Pathé	파테	media
 Gaumont	고몽	media
-UGC	위제세	media
+UGC	유지씨	media
 EuropaCorp	유로파코프	media
 Xilam	질람	media
 Banijay	바니제이	media

@@ -11,12 +11,12 @@
 # constituents, Brand Finance Canada 100, league club lists; Korean news and 나무위키 for Hangul spellings.
 # Note: compiled largely from the model's own knowledge; the lists named above describe the kinds of sources the entries follow and were not all consulted line by line. Hangul not checked line by line against Korean media.
 Royal Bank of Canada	로열 뱅크 오브 캐나다	bank
-RBC	알비시	bank
+RBC	알비씨	bank
 TD Bank	티디 뱅크	bank
 Scotiabank	스코샤뱅크	bank
 BMO	비엠오	bank
 Bank of Montreal	몬트리올 은행	bank
-CIBC	시아이비시	bank
+CIBC	씨아이비씨	bank
 National Bank of Canada	캐나다 내셔널 뱅크	bank
 Desjardins	데자르댕	bank
 Laurentian Bank	로렌시안 뱅크	bank
@@ -57,7 +57,7 @@ Brookfield Asset Management	브룩필드 자산운용	finance
 Brookfield Renewable	브룩필드 리뉴어블	energy
 Onex	오넥스	finance
 CPP Investments	시피피 인베스트먼츠	finance
-CDPQ	시디피큐	finance
+CDPQ	씨디피큐	finance
 OMERS	오머스	finance
 Ontario Teachers' Pension Plan	온타리오 교원연금	finance
 TMX Group	티엠엑스 그룹	finance
@@ -90,25 +90,25 @@ Xplore	익스플로어	telecom
 Distributel	디스트리뷰텔	telecom
 Sympatico	심퍼티코	internet
 Telesat	텔레샛	telecom
-BCE	비시이	telecom
+BCE	비씨이	telecom
 Quebecor	케베코르	media
 Corus Entertainment	코러스 엔터테인먼트	media
 Bell Media	벨 미디어	media
 Rogers Media	로저스 미디어	media
-CBC	시비시	media
+CBC	씨비씨	media
 Radio-Canada	라디오캐나다	media
-CTV	시티브이	media
+CTV	씨티브이	media
 Global News	글로벌 뉴스	media
 Global Television Network	글로벌 텔레비전 네트워크	media
 Citytv	시티티브이	media
-TVA	테베아	media
+TVA	티브이에이	media
 Noovo	누보	media
 TVO	티브이오	media
 Télé-Québec	텔레케베크	media
 APTN	에이피티엔	media
 TSN	티에스엔	media
 Sportsnet	스포츠넷	media
-RDS	에르데에스	media
+RDS	알디에스	media
 CP24	시피 투웨니포	media
 CBC News	시비시 뉴스	media
 CBC Gem	시비시 젬	media
@@ -264,7 +264,7 @@ Rossy	로시	retail
 Home Hardware	홈 하드웨어	retail
 Rona	로나	retail
 Réno-Dépôt	레노데포	retail
-BMR	베엠에르	retail
+BMR	비엠알	retail
 Canac	카나크	retail
 Patrick Morin	파트리크 모랭	retail
 Lee Valley Tools	리 밸리 툴스	retail
@@ -727,7 +727,7 @@ Hudson's Bay Point Blanket	허드슨스 베이 포인트 블랭킷	fashion
 Westcomb	웨스트콤	fashion
 Chlorophylle	클로로필	fashion
 Mustang Survival	머스탱 서바이벌	fashion
-MEC	엠이시	retail
+MEC	엠이씨	retail
 Mountain Equipment Company	마운틴 이큅먼트 컴퍼니	retail
 Aldo	알도	fashion
 Call It Spring	콜 잇 스프링	fashion
@@ -743,7 +743,7 @@ Poppy Barley	파피 발리	fashion
 Kodiak	코디악	fashion
 Royer	루아예	fashion
 Bauer	바우어	sports
-CCM	시시엠	sports
+CCM	씨씨엠	sports
 Sherwood	셔우드	sports
 Graf	그라프	sports
 Cervélo	서벨로	sports
@@ -765,7 +765,7 @@ Research In Motion	리서치 인 모션	electronics
 BlackBerry Messenger	블랙베리 메신저	app
 QNX	큐엔엑스	software
 OpenText	오픈텍스트	software
-CGI	시지아이	software
+CGI	씨지아이	software
 Celestica	셀레스티카	electronics
 Constellation Software	컨스텔레이션 소프트웨어	software
 Kinaxis	키낙시스	software
@@ -917,15 +917,15 @@ Canadian Airlines	캐나디안 항공	airline
 Canada 3000	캐나다 스리사우전드	airline
 Via Rail	비아 레일	rail
 Rocky Mountaineer	로키 마운티니어	rail
-CN	시엔	rail
+CN	씨엔	rail
 Canadian National Railway	캐나다 국영 철도	rail
 Canadian Pacific	캐나디안 퍼시픽	rail
-CPKC	시피케이시	rail
+CPKC	씨피케이씨	rail
 GO Transit	고 트랜싯	transport
 Metrolinx	메트롤링스	transport
-TTC	티티시	transport
+TTC	티티씨	transport
 Presto	프레스토	transport
-STM	에스테엠	transport
+STM	에스티엠	transport
 TransLink	트랜스링크	transport
 SkyTrain	스카이트레인	transport
 OC Transpo	오시 트랜스포	transport
@@ -962,14 +962,14 @@ Fountain Tire	파운틴 타이어	auto
 Mr. Transmission	미스터 트랜스미션	auto
 Speedy Auto Service	스피디 오토 서비스	auto
 Uni-Select	위니셀렉트	auto
-CAE	시에이이	industrial
+CAE	씨에이이	industrial
 De Havilland Canada	드 하빌랜드 캐나다	industrial
 Dash 8	대시 에이트	industrial
 Twin Otter	트윈 오터	industrial
 Viking Air	바이킹 에어	industrial
 Bombardier Challenger	봄바디어 챌린저	industrial
 Bombardier Global	봄바디어 글로벌	industrial
-CRJ	시알제이	industrial
+CRJ	씨알제이	industrial
 Canadair	캐나데어	industrial
 Avro Arrow	애브로 애로	industrial
 MDA	엠디에이	industrial

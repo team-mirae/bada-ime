@@ -123,7 +123,7 @@ VDL Groep	브이디엘 그룹	industrial
 Vredestein	브레데스테인	auto
 Apollo Vredestein	아폴로 브레데스테인	auto
 Aalberts	알베르츠	industrial
-TKH	티케이하	industrial
+TKH	티케이에이치	industrial
 Kendrion	켄드리온	industrial
 Alfen	알펜	energy
 Hunter Douglas	헌터 더글러스	furniture
@@ -179,7 +179,7 @@ Nettorama	네토라마	retail
 Jan Linders	얀 린더르스	retail
 Boni	보니	retail
 Sligro	슬리흐로	retail
-BCC	베세세	retail
+BCC	비씨씨	retail
 Leen Bakker	레인 바커르	furniture
 Kwantum	크반텀	furniture
 Beter Bed	베터르 베트	furniture
@@ -422,17 +422,17 @@ Nationale-Nederlanden	나시오날러네덜란던	insurance
 Achmea	아흐메아	insurance
 Centraal Beheer	센트랄 베헤이르	insurance
 Interpolis	인터폴리스	insurance
-FBTO	에프베테오	insurance
+FBTO	에프비티오	insurance
 Ohra	오라	insurance
 Zilveren Kruis	질버런 크라위스	insurance
-VGZ	페헤제트	insurance
-CZ	세제트	insurance
+VGZ	브이지제트	insurance
+CZ	씨제트	insurance
 Menzis	멘지스	insurance
 a.s.r.	아에스에르	insurance
 Delta Lloyd	델타 로이드	insurance
 Univé	위니베	insurance
-APG	아페헤	finance
-PGGM	페헤헤엠	finance
+APG	에이피지	finance
+PGGM	피지지엠	finance
 Robeco	로베코	finance
 DeGiro	디기로	finance
 BinckBank	빙크방크	finance
@@ -455,9 +455,9 @@ NS	엔에스	travel
 Nederlandse Spoorwegen	네덜란드 철도	travel
 Schiphol	스히폴	travel
 Connexxion	코넥시온	travel
-GVB	헤페베	travel
-RET	에르에테	travel
-HTM	하테엠	travel
+GVB	지브이비	travel
+RET	알이티	travel
+HTM	에이치티엠	travel
 Qbuzz	큐버즈	travel
 OV-chipkaart	오페이 칩카르트	travel
 Holland America Line	홀랜드 아메리카 라인	travel
@@ -482,7 +482,7 @@ The Social Hub	더 소셜 허브	hotel
 Inntel	인텔	hotel
 Sunweb	선웹	travel
 D-reizen	데레이전	travel
-ANWB	아엔베베	travel
+ANWB	에이엔더블유비	travel
 Eurocamp	유로캠프	travel
 Krasnapolsky	크라스나폴스키	hotel
 Amstel Hotel	암스텔 호텔	hotel
@@ -492,7 +492,7 @@ Talpa	탈파	media
 Endemol	엔데몰	media
 Endemol Shine	엔데몰 샤인	media
 De Telegraaf	더 텔레흐라프	media
-NRC	엔에르세	media
+NRC	엔알씨	media
 de Volkskrant	더 폴크스크란트	media
 Trouw	트라우	media
 Het Parool	헷 파롤	media
@@ -510,11 +510,11 @@ Viva	비바	media
 Panorama	파노라마	media
 Donald Duck Weekblad	도널드 덕 베이크블라트	media
 Brainstorm	브레인스톰	media
-VPRO	페페에르오	media
+VPRO	브이피알오	media
 AVROTROS	아브로트로스	media
 BNNVARA	베엔엔파라	media
 KRO-NCRV	카에르오 엔세에르페	media
-EO	에오	media
+EO	이오	media
 NOS	노스	media
 Studio Sport	스튜디오 스포르트	media
 Het Journaal	헷 주르날	media
@@ -552,7 +552,7 @@ FC Dordrecht	도르드레흐트	football club
 MVV Maastricht	마스트리흐트	football club
 TOP Oss	오스	football club
 Eredivisie	에레디비시	sports
-KNVB	카엔페베	sports
+KNVB	케이엔브이비	sports
 Team Visma	비스마	sports
 Jumbo-Visma	점보비스마	sports
 Stanno	스탄노	sports
@@ -784,7 +784,7 @@ Glorix	글로릭스	household
 Biotex	비오텍스	household
 Brabantia	브라반티아	household
 Royal VKB	로열 페카베	household
-BK	베카	household
+BK	비케이	household
 Bestron	베스트론	appliances
 Princess	프린세스	appliances
 Tristar	트리스타	appliances
@@ -929,7 +929,7 @@ Us Heit	위스 헤이트	beer
 Muifel	마이펄	beer
 VDL Nedcar	브이디엘 네드카	auto
 NedCar	네드카	auto
-SHV	에스하베	conglomerate
+SHV	에스에이치브이	conglomerate
 Makro	마크로	retail
 Eriks	에릭스	industrial
 Stedin	스테딘	energy
@@ -997,8 +997,8 @@ Ter Marsch & Co	테르 마르스 엔 코	food
 Budget Mobiel	버짓 모빌	telecom
 InShared	인셰어드	insurance
 Zorg en Zekerheid	조르흐 엔 제커르헤이트	insurance
-DSW	데에스베	insurance
-ONVZ	오엔페제트	insurance
+DSW	디에스더블유	insurance
+ONVZ	오엔브이제트	insurance
 Carver	카버	auto
 Bux	벅스	finance
 Meesman	메이스만	finance

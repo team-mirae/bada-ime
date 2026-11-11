@@ -161,15 +161,15 @@ Transtejo	트란스테주	transport
 Brisa	브리자	infrastructure
 Via Verde	비아 베르드	infrastructure
 ANA Aeroportos	아나 아에로포르투스	travel
-CTT	세테테	logistics
+CTT	씨티티	logistics
 Famel	파멜	motorcycles
 Casal	카잘	motorcycles
-UMM	우엠엠	auto
+UMM	유엠엠	auto
 Miranda	미란다	bicycles
 Órbita	오르비타	bicycles
-RTP	에레테페	media
+RTP	알티피	media
 SIC	시크	media
-TVI	테베이	media
+TVI	티브이아이	media
 SIC Notícias	시크 노티시아스	media
 Público	푸블리쿠	newspaper
 Expresso	이스프레수	newspaper
@@ -189,8 +189,8 @@ Cofina	코피나	media
 Global Media Group	글로벌 미디어 그룹	media
 Rádio Comercial	하디우 코메르시알	radio
 Renascença	헤나셴사	radio
-TSF	테에스에프	radio
-RFM	에레에페에메	radio
+TSF	티에스에프	radio
+RFM	알에프엠	radio
 Porto Editora	포르투 에디토라	publishing
 Leya	레이아	publishing
 Lusa	루자	media
@@ -222,7 +222,7 @@ Licor Beirão	리코르 베이랑	spirits
 Macieira	마시에이라	spirits
 Ginja Sem Rival	진자 생 히발	spirits
 Espinheira	이스피녜이라	spirits
-CRF	세에레에프	spirits
+CRF	씨알에프	spirits
 Croft	크로프트	wine
 Taylor's	테일러스	wine
 Fonseca	폰세카	wine
@@ -422,7 +422,7 @@ Sol	솔	newspaper
 Jornal Económico	조르날 에코노미쿠	newspaper
 Caras	카라스	magazine
 Nova Gente	노바 젠트	magazine
-CMTV	세에메테베	media
+CMTV	씨엠티브이	media
 Porto Canal	포르투 카날	media
 RTP Play	에레테페 플레이	media
 Opto	옵투	media
@@ -482,7 +482,7 @@ Majora	마조라	toys
 Viúva Lamego	비우바 라메구	ceramics
 Sant'Anna	산타나	ceramics
 Banif	바니프	bank
-BPN	베페에네	bank
+BPN	비피엔	bank
 Banco Carregosa	방쿠 카헤고자	bank
 Banco BiG	방쿠 비그	bank
 Banco Invest	방쿠 인베스트	bank
@@ -492,7 +492,7 @@ Multicare	멀티케어	insurance
 Ocidental	오시덴탈	insurance
 ZON	존	telecom
 Optimus	옵티무스	telecom
-TMN	테에메에네	telecom
+TMN	티엠엔	telecom
 Clix	클릭스	telecom
 Goldenergy	골드에너지	energy
 Petrogal	페트로갈	energy
@@ -525,7 +525,7 @@ Smartex	스마텍스	tech
 Somague	소마그	construction
 Grupo Lena	그루푸 레나	construction
 Edifer	에디페르	construction
-DST	데에스테	construction
+DST	디에스티	construction
 Casais	카자이스	construction
 Ramada	하마다	industrial
 Inapa	이나파	industrial
@@ -600,7 +600,7 @@ RTP3	에르테페 스리	media
 RTP Internacional	에르테페 인테르나시오날	media
 Sport TV	스포르트 티비	media
 Canal 11	카날 온즈	media
-BTV	베테베	media
+BTV	비티브이	media
 Sporting TV	스포르팅 티비	media
 Antena 2	안테나 도이스	media
 Antena 3	안테나 트레스	media
@@ -615,7 +615,7 @@ Dom Quixote	동 키숏	publishing
 Edições 70	에디송이스 세텐타	publishing
 Quetzal	케트잘	publishing
 Carristur	카히스투르	travel
-STCP	에스테세페	transport
+STCP	에스티씨피	transport
 Metro Sul do Tejo	메트루 술 두 테주	transport
 Gira	지라	transport
 EMEL	에멜	transport
@@ -628,7 +628,7 @@ FC Felgueiras	에프세 펠게이라스	football club
 CD Trofense	세데 트로펜스	football club
 União da Madeira	우니앙 다 마데이라	football club
 Amora FC	아모라 에프세	football club
-FPF	에프페에프	sports
+FPF	에프피에프	sports
 Totoloto	토톨로투	lottery
 Totobola	토토볼라	lottery
 Raspadinha	하스파디냐	lottery
@@ -707,7 +707,7 @@ CMS Helmets	시엠에스 헬멧	helmets
 Cubanas	쿠바나스	footwear
 EFAPEL	에파펠	electrical
 Firmo	피르무	stationery
-AJP	아제페	motorcycles
+AJP	에이제이피	motorcycles
 TAP Express	탑 익스프레스	airline
 SATA Air Açores	사타 에어 아소르스	airline
 Volta a Portugal	볼타 아 포르투갈	sports
