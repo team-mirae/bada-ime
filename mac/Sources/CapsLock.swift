@@ -88,6 +88,7 @@ enum CapsLock {
         on = value
         setSystem(value)
         HIDKeys.setCapsLED(value)
+        BadaState.refresh()
     }
 
     /// The physical key, from HIDKeys: down or up. `on` is still what it was before the press: a
@@ -118,6 +119,7 @@ enum CapsLock {
             enforceUntil = .distantPast
             native = true
             on.toggle()
+            BadaState.refresh()
             return
         }
         let flags = CGEventSource.flagsState(.combinedSessionState)
@@ -157,6 +159,7 @@ enum CapsLock {
                 hold(false)
             } else {
                 on = value
+                BadaState.refresh()
             }
         }
         return false

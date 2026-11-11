@@ -423,7 +423,46 @@ interactive setup is [interactive-prompts/](interactive-prompts/README.md). Load
 the next activation after the file changes; the input menu's "Open Dictionary Folder" opens its
 folder.
 
-## 9. Open questions
+## 9. State for other apps (bada-compatible v1.1)
+
+The engine exports the optional `bada_state` (`engine/include/bada.h`), bada-compatible v1.1's
+`P_state` ([bada-compatible-v1.md §12](https://github.com/team-mirae/bada-compatible/blob/main/docs/bada-compatible-v1.md)):
+read-only, it changes nothing. Its `staged` is exactly what `bada_flush` would commit now, in either
+mode (the ⌥ + letter variants: what shows; a menu on the host's selection: `""`); `Engine::flush`
+commits `Engine::staged`, so the two can't differ. The display fields are the last Output's.
+
+The macOS shell publishes it for scripts (Hammerspoon, Karabiner-Elements, a status bar), read-only:
+nothing read from outside flows back into the engine.
+
+- **File** `~/Library/Application Support/me.sjun.inputmethod.Bada/state.json`, rewritten atomically
+  (a temporary file, then a rename).
+- **Distributed notification** `me.sjun.inputmethod.Bada.state`, its object the same JSON.
+- **When:** after every engine call that returns an Output, and on mode, profile, focus, input
+  source and Caps Lock changes. Only when the JSON changed.
+- **Fields:** the engine's (`format` `"bada-compatible-state/1"`, `mode`, `profile`, `staged`,
+  `preedit`, `menu`, `selected`, `zero`, `horizontal`, `need_selection`) as is, and the shell's under
+  `host`: `app` (the focused app's bundle id), `secure`, `input_source` (the selected input source's
+  id), `active` (one of bada ime's modes is selected), `caps_lock` (`on` as held, §6.7; `handled`,
+  `setting`, `rule`) and `version`.
+- **Secure input** (a password field): nothing typed is published: `staged`, `preedit` and `menu`
+  are empty, and `host.secure` is true.
+
+```lua
+-- Hammerspoon: the mode in the menu bar
+local bar = hs.menubar.new()
+local function show(json)
+  local s = hs.json.decode(json)
+  if s then bar:setTitle(s.mode == "henkan" and "가" or "A") end
+end
+watcher = hs.distributednotifications.new(function(_, json) show(json) end, "me.sjun.inputmethod.Bada.state")
+watcher:start()
+```
+
+Karabiner-Elements: a script (run from Hammerspoon on the notification, or a launch agent watching the
+file) reads the file and sets a variable for rules to match, e.g. `'/Library/Application
+Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --set-variables '{"bada_mode": "henkan"}'`.
+
+## 10. Open questions
 
 Collected from above:
 
