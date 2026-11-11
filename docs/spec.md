@@ -359,6 +359,8 @@ One setting, three behaviours:
 
 What Caps Lock types in muhenkan is the **muhenkan rule** (§6.2): ALL CAPS or UPPER_SNAKE.
 
+When it misbehaves on a keyboard: [troubleshooting.md](troubleshooting.md#caps-lock-spec-67).
+
 ## 7. Build and layout of the repo
 
 | Path | What |

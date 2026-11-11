@@ -76,6 +76,21 @@ enum HIDKeys {
         }
     }
 
+    /// Each keyboard's Caps Lock LED as last set (for the diagnostic log).
+    static func capsLEDs() -> String {
+        guard let manager, let devices = IOHIDManagerCopyDevices(manager) as? Set<IOHIDDevice> else { return "none" }
+        var out: [String] = []
+        for device in devices {
+            let match = [kIOHIDElementUsagePageKey: kHIDPage_LEDs, kIOHIDElementUsageKey: kHIDUsage_LED_CapsLock] as CFDictionary
+            guard let elements = IOHIDDeviceCopyMatchingElements(device, match, IOOptionBits(kIOHIDOptionsTypeNone)) as? [IOHIDElement], let element = elements.first else { continue }
+            let name = IOHIDDeviceGetProperty(device, kIOHIDProductKey as CFString) as? String ?? "?"
+            var value = Unmanaged.passUnretained(IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, element, 0, -1))
+            let r = IOHIDDeviceGetValue(device, element, &value)
+            out.append("\(name)=\(r == kIOReturnSuccess ? String(IOHIDValueGetIntegerValue(value.takeUnretainedValue())) : "?")")
+        }
+        return out.joined(separator: ", ")
+    }
+
     private static func value(_ value: IOHIDValue) {
         let element = IOHIDValueGetElement(value)
         guard IOHIDElementGetUsagePage(element) == kHIDPage_KeyboardOrKeypad else { return }

@@ -50,31 +50,52 @@ enum CapsLock {
     private static var enforceUntil = Date.distantPast
     private static var keyDown = false
 
-    static var systemState: Bool { CGEventSource.flagsState(.hidSystemState).contains(.maskAlphaShift) }
+    /// macOS's Caps Lock state, as IOHIDSystem has it (CGEventSource's flags can lag behind it, as
+    /// with Karabiner-Elements' virtual keyboard).
+    static var systemState: Bool {
+        var state = false
+        withSystem { IOHIDGetModifierLockState($0, Int32(kIOHIDCapsLockState), &state) }
+        return state
+    }
 
-    /// Sets macOS's Caps Lock state (and so its LED).
-    private static func setSystem(_ value: Bool) {
+    private static func withSystem(_ body: (io_connect_t) -> Void) {
         let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching(kIOHIDSystemClass))
         guard service != 0 else { return }
         defer { IOObjectRelease(service) }
         var connect: io_connect_t = 0
         guard IOServiceOpen(service, mach_task_self_, UInt32(kIOHIDParamConnectType), &connect) == KERN_SUCCESS else { return }
         defer { IOServiceClose(connect) }
-        IOHIDSetModifierLockState(connect, Int32(kIOHIDCapsLockState), value)
+        body(connect)
     }
 
+    /// Sets macOS's Caps Lock state (and so its LED).
+    private static func setSystem(_ value: Bool) {
+        DiagnosticLog.note("Caps Lock: set system \(value)")
+        withSystem { IOHIDSetModifierLockState($0, Int32(kIOHIDCapsLockState), value) }
+    }
+
+    /// Holds Caps Lock at `value`: set, and the LEDs set directly too, even when macOS already reads
+    /// it so (a keyboard's LED can lag behind, as through Karabiner-Elements).
     private static func hold(_ value: Bool) {
         on = value
-        if systemState != value { setSystem(value) }
+        setSystem(value)
+        HIDKeys.setCapsLED(value)
     }
 
-    /// The physical key, from HIDKeys: down or up.
+    /// The physical key, from HIDKeys: down or up. `on` is still what it was before the press: a
+    /// change macOS reports first waits for this (`changed`).
     static func key(down: Bool) {
         guard isHandled else { return }
+        DiagnosticLog.note("Caps Lock: key \(down ? "down" : "up"), held \(on), system \(systemState)")
         if !down {
             keyDown = false
             enforceUntil = Date().addingTimeInterval(0.5)
             if systemState != on { setSystem(on) }
+            for delay in [0.3, 1.0] {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    DiagnosticLog.note("Caps Lock: +\(delay)s held \(on), system \(systemState), LEDs \(HIDKeys.capsLEDs())")
+                }
+            }
             return
         }
         keyDown = true
@@ -102,29 +123,40 @@ enum CapsLock {
     /// toggle, undone).
     static func changed(to value: Bool) -> Bool {
         guard isHandled else { return true }
-        if value == on { return true }
+        if value == on { DiagnosticLog.note("Caps Lock: macOS says \(value), as held"); return true }
+        DiagnosticLog.note("Caps Lock: macOS says \(value), held \(on)\(keyDown || Date() < enforceUntil ? " (the key: undone)" : "")")
         if keyDown || Date() < enforceUntil {
             DispatchQueue.main.async { if systemState != on { setSystem(on) } }
             return false
         }
-        // Not the key: another app. In henkan, off unless Caps Lock is respected.
-        if setting != .respect && Modes.selectedNow() == .henkan {
-            DispatchQueue.main.async { hold(false) }
-            return false
+        // macOS often reports its own toggle before the key's HID report arrives: wait for it before
+        // taking the change as another app's. Swallowed meanwhile.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if keyDown || Date() < enforceUntil {
+                if systemState != on { setSystem(on) }
+                return
+            }
+            // Not the key: another app. In henkan, off unless Caps Lock is respected.
+            if setting != .respect && Modes.selectedNow() == .henkan {
+                DiagnosticLog.note("Caps Lock: another app turned it on in henkan: off")
+                hold(false)
+            } else {
+                on = systemState
+            }
         }
-        on = value
-        return true
+        return false
     }
 
     /// The mode changed: leaving muhenkan forgets Caps Lock, unless it's respected.
     static func modeChanged(to mode: BadaMode) {
         guard isHandled, setting != .respect, mode != .muhenkan else { return }
-        if on || systemState { hold(false) }
+        hold(false)
     }
 
-    /// The Caps Lock LED, lit or dark against the state for a moment, set directly on each keyboard.
+    /// The Caps Lock LED lit for a moment, set directly on each keyboard (a mode switch by Caps Lock
+    /// always leaves Caps Lock off).
     static func blink() {
-        HIDKeys.setCapsLED(!on)
+        HIDKeys.setCapsLED(true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { HIDKeys.setCapsLED(on) }
     }
 

@@ -241,8 +241,8 @@ function drawCaps(lit = state.caps) {
   keys.CapsLock?.classList.toggle("latched", lit);
 }
 
-function blinkCaps() {
-  drawCaps(!state.caps);
+function blinkCaps() {   // a mode switch by Caps Lock always leaves Caps Lock off: a flash on
+  drawCaps(true);
   setTimeout(() => drawCaps(), 150);
 }
 
