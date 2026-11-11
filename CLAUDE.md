@@ -9,6 +9,10 @@
 - Names: bada (lowercase), バダ (katakana), 바다.
 - A new layout page `docs/layouts/NNN-name.md` needs the metadata header and follows the maintainer
   rules in `docs/layouts/README.md`; its in-code name must be unique.
+- The engine's C ABI (`engine/include/bada.h`, `engine/src/ffi.rs`) is bada-compatible v1.1
+  (`../bada-compatible/docs/bada-compatible-v1.md`): `bada_state` is its optional `P_state` (§12), and
+  `staged` must equal what `bada_flush` commits (`Engine::flush` uses `Engine::staged`). Keep bada.h,
+  ffi.rs and that doc in agreement. The Mac shell publishes it (spec §9, `mac/Sources/BadaState.swift`).
 - macOS only, JIS only. Caps Lock is bada's (spec §6.7): no remapping; it needs Accessibility and Input Monitoring.
 
 ## Building

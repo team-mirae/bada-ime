@@ -20,6 +20,10 @@ final class BadaInputController: IMKInputController {
     override init!(server: IMKServer!, delegate: Any!, client inputClient: Any!) {
         super.init(server: server, delegate: delegate, client: inputClient)
         engine.apply(BadaSettings.current.engineJSON)
+        // The mode now, in case keys come before activateServer (after a restart): the state
+        // (spec §9) reports it.
+        _ = engine.setMode(Modes.selectedNow() ?? Modes.current)
+        _ = engine.setProfile(Modes.profile)
         settingsObserver = NotificationCenter.default.addObserver(forName: BadaSettings.changed, object: nil, queue: .main) { [weak self] _ in
             self?.engine.apply(BadaSettings.current.engineJSON)
         }
@@ -155,6 +159,7 @@ final class BadaInputController: IMKInputController {
         engine.apply(BadaSettings.current.engineJSON)
         _ = engine.setProfile(Modes.profile)
         if let client { Keyboards.show(for: mode, in: client) }
+        publishState(client)
         UserDictionary.refresh()
         DispatchQueue.main.async { LanguageKeyTap.check() }
     }
@@ -173,6 +178,7 @@ final class BadaInputController: IMKInputController {
         // After super: selecting the mode puts its own keyboard in place.
         if tag == kTextServiceInputModePropertyTag, let client = sender as? IMKTextInput {
             Keyboards.show(for: Modes.current, in: client)
+            publishState(client)
         }
     }
 
@@ -212,6 +218,7 @@ final class BadaInputController: IMKInputController {
         }
         showMenu(out, client)
         menuRows = out.menu.count
+        publishState(client)
         // The engine needs the selection (hanja, 半角/全角 with nothing staged).
         if out.need_selection != nil && depth == 0 {
             let selection = client.selectedRange()
@@ -223,6 +230,12 @@ final class BadaInputController: IMKInputController {
     }
 
     private var menuGeneration = 0
+
+    /// The engine's state for other apps (spec §9): after every Output, and on mode, profile and
+    /// focus changes.
+    private func publishState(_ client: IMKTextInput?) {
+        BadaState.publish(engine.state(), app: client?.bundleIdentifier())
+    }
 
     private func showMenu(_ out: EngineOutput, _ client: IMKTextInput) {
         menuGeneration += 1

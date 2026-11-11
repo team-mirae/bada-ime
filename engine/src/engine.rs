@@ -332,6 +332,7 @@ struct Pick {
     target: PickTarget,
 }
 
+#[derive(Clone)]
 pub struct Engine {
     data: Arc<Data>,
     settings: Settings,
@@ -455,24 +456,39 @@ impl Engine {
         self.mode
     }
 
-    /// Commits whatever shows (focus lost, mode switch, a click).
-    pub fn flush(&mut self) -> Output {
-        let mut out = Output::default();
-        if let Some(h) = self.held.take() {
-            out.commit = h.shown().to_string();
-            return self.finish(out);
+    /// What `flush` would commit now (bada-compatible v1.1 `P_state`, §12): the text as it would be
+    /// typed, never the presses. The ⌥ + letter variants: the letter or variant that shows; a pick
+    /// on staged text: what shows; a pick on the host's selection: nothing (the selection stays);
+    /// else what shows, when something is staged. Changes nothing; `flush` uses it.
+    pub fn staged(&self) -> String {
+        if let Some(h) = &self.held {
+            return h.shown().to_string();
         }
-        out.commit = match self.pick.take() {
+        match &self.pick {
             Some(p) => match p.target {
-                PickTarget::Staged { .. } => self.take_shown(),
+                PickTarget::Staged { .. } => self.shown(),
                 _ => String::new(),
             },
-            None => self.take_shown(),
-        };
+            None if self.has_staged() => self.shown(),
+            None => String::new(),
+        }
+    }
+
+    /// Commits whatever shows (focus lost, mode switch, a click): `staged`.
+    pub fn flush(&mut self) -> Output {
+        let mut out = Output::default();
+        out.commit = self.staged();
+        if self.held.take().is_some() {
+            return self.finish(out);
+        }
+        match self.pick.take() {
+            Some(p) if !matches!(p.target, PickTarget::Staged { .. }) => {}
+            _ => self.clear(),
+        }
         self.finish(out)
     }
 
-    fn staged(&self) -> bool {
+    fn has_staged(&self) -> bool {
         !self.prefix.is_empty() || !self.presses.is_empty()
     }
 
@@ -906,7 +922,7 @@ impl Engine {
         }
         out.preedit = self.shown();
         let rows = self.negatives.len() + self.entries.len();
-        if self.staged() && rows > 1 {
+        if self.has_staged() && rows > 1 {
             let rows: Vec<&Entry> = self.negatives.iter().rev().chain(self.entries.iter()).collect();
             out.menu = rows.iter().map(|e| e.text.clone()).collect();
             if rows.iter().any(|e| !e.note.is_empty() || e.japanese) {
@@ -1055,7 +1071,7 @@ impl Engine {
         if mods.is_shortcut() {
             return self.commit_then_pass();
         }
-        let staged = self.staged();
+        let staged = self.has_staged();
         let consumed = |commit: String| Output {
             commit,
             consumed: true,
@@ -1122,7 +1138,7 @@ impl Engine {
             let press = Press { key, shift: mods.shift, alt: mods.alt };
             let others = candidates.iter().any(|&id| id != BADA_ROMAN && id != QWERTY && layout::takes(id, press));
             if let Some(c) = crate::bada_roman::literal(&self.presses, press).filter(|_| !others) {
-                let mut text = if self.staged() { self.take_shown() } else { String::new() };
+                let mut text = if self.has_staged() { self.take_shown() } else { String::new() };
                 text.push(c);
                 return consumed(text);
             }
@@ -1279,7 +1295,7 @@ impl Engine {
                     self.recompute();
                 }
             } else if keep(action).is_some() {
-                if self.staged() {
+                if self.has_staged() {
                     let text = self.shown();
                     self.prefix = crate::bada_roman::keep_jamo(&text, keep(action).unwrap());
                     self.presses.clear();
@@ -1342,7 +1358,7 @@ impl Engine {
                 self.recompute();
             }
             "hanja" => {
-                if self.staged() {
+                if self.has_staged() {
                     let text = self.shown();
                     if let Some(pick) = self.hanja_pick(&text, true) {
                         self.pick = Some(pick);

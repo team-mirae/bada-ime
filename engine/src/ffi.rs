@@ -14,6 +14,46 @@ use crate::layout::CATALOG;
 pub struct Handle {
     engine: Engine,
     last: CString,
+    /// The mode last set by `bada_set_mode` (for `bada_state`); None before the first.
+    mode: Option<Mode>,
+    /// The last Output returned, for `bada_state`'s display fields.
+    shown: Output,
+}
+
+/// `bada_state`'s format (bada-compatible v1.1, §12).
+pub const STATE_FORMAT: &str = "bada-compatible-state/1";
+
+/// What `bada_state` answers (bada-compatible v1.1, §12).
+#[derive(serde::Serialize, Deserialize, Debug, PartialEq)]
+pub struct State {
+    pub format: String,
+    pub mode: Option<String>,
+    pub profile: Option<String>,
+    pub staged: String,
+    pub preedit: String,
+    pub menu: Vec<String>,
+    pub selected: usize,
+    pub zero: usize,
+    pub horizontal: bool,
+    pub need_selection: Option<String>,
+}
+
+impl State {
+    /// The engine's state, as `bada_state` reports it.
+    pub fn of(engine: &Engine, mode: Option<Mode>, shown: &Output) -> State {
+        State {
+            format: STATE_FORMAT.into(),
+            mode: mode.map(|m| if m == Mode::Muhenkan { "muhenkan" } else { "henkan" }.into()),
+            profile: Some(engine.profile().to_string()),
+            staged: engine.staged(),
+            preedit: shown.preedit.clone(),
+            menu: shown.menu.clone(),
+            selected: shown.selected,
+            zero: shown.zero,
+            horizontal: shown.horizontal,
+            need_selection: shown.need_selection.clone(),
+        }
+    }
 }
 
 fn bytes<'a>(ptr: *const u8, len: usize) -> &'a str {
@@ -101,6 +141,8 @@ pub extern "C" fn bada_new(data: *const Data) -> *mut Handle {
     Box::into_raw(Box::new(Handle {
         engine: Engine::new(data),
         last: CString::default(),
+        mode: None,
+        shown: Output::default(),
     }))
 }
 
@@ -122,6 +164,15 @@ fn reply(handle: *mut Handle, out: impl serde::Serialize) -> *const c_char {
     h.last.as_ptr()
 }
 
+/// Replies with an Output, kept for `bada_state`.
+fn output(handle: *mut Handle, out: Output) -> *const c_char {
+    // SAFETY: a live handle from bada_new.
+    if let Some(h) = unsafe { handle.as_mut() } {
+        h.shown = out.clone();
+    }
+    reply(handle, out)
+}
+
 fn with<T>(handle: *mut Handle, f: impl FnOnce(&mut Engine) -> T) -> Option<T> {
     // SAFETY: a live handle from bada_new.
     unsafe { handle.as_mut() }.map(|h| f(&mut h.engine))
@@ -141,7 +192,7 @@ pub extern "C" fn bada_key(handle: *mut Handle, event: *const c_char) -> *const 
         .ok()
         .and_then(|e| with(handle, |engine| engine.key(Key::from_code(&e.key), e.mods)))
         .unwrap_or_default();
-    reply(handle, out)
+    output(handle, out)
 }
 
 /// Settings JSON (engine::Settings). Returns the settings in effect.
@@ -164,7 +215,11 @@ pub extern "C" fn bada_set_mode(handle: *mut Handle, mode: u32) -> *const c_char
         Mode::Henkan
     };
     let out = with(handle, |e| e.set_mode(mode)).unwrap_or_default();
-    reply(handle, out)
+    // SAFETY: a live handle from bada_new.
+    if let Some(h) = unsafe { handle.as_mut() } {
+        h.mode = Some(mode);
+    }
+    output(handle, out)
 }
 
 /// Switches henkan profile ("mac-kana", "henkan", "katakana"; spec §6.6). Returns an Output (what
@@ -173,13 +228,13 @@ pub extern "C" fn bada_set_mode(handle: *mut Handle, mode: u32) -> *const c_char
 pub extern "C" fn bada_set_profile(handle: *mut Handle, name: *const c_char) -> *const c_char {
     let name = cstr(name).to_string();
     let out = with(handle, |e| e.set_profile(&name)).unwrap_or_default();
-    reply(handle, out)
+    output(handle, out)
 }
 
 #[unsafe(no_mangle)]
 pub extern "C" fn bada_flush(handle: *mut Handle) -> *const c_char {
     let out = with(handle, Engine::flush).unwrap_or_default();
-    reply(handle, out)
+    output(handle, out)
 }
 
 /// The host's selected text, after an Output with `need_selection`.
@@ -187,7 +242,21 @@ pub extern "C" fn bada_flush(handle: *mut Handle) -> *const c_char {
 pub extern "C" fn bada_host_selection(handle: *mut Handle, text: *const c_char) -> *const c_char {
     let text = cstr(text).to_string();
     let out: Output = with(handle, |e| e.host_selection(&text)).unwrap_or_default();
-    reply(handle, out)
+    output(handle, out)
+}
+
+/// bada-compatible v1.1 `P_state` (§12), optional: the engine's state for its wrapper, read-only.
+/// `{"format":"bada-compatible-state/1","mode":…,"profile":…,"staged":…,"preedit":…,"menu":…,
+/// "selected":…,"zero":…,"horizontal":…,"need_selection":…}`. `staged` is what `bada_flush` would
+/// commit now; the display fields are the last Output's. Changes nothing; null for a null engine.
+#[unsafe(no_mangle)]
+pub extern "C" fn bada_state(handle: *mut Handle) -> *const c_char {
+    // SAFETY: a live handle from bada_new.
+    let Some(h) = (unsafe { handle.as_ref() }) else {
+        return std::ptr::null();
+    };
+    let state = State::of(&h.engine, h.mode, &h.shown);
+    reply(handle, state)
 }
 
 /// The layout catalog and every method's F-key actions, for the settings window.
