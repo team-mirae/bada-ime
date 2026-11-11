@@ -104,9 +104,11 @@ install-prebuilt:
 	mkdir -p "$(dir $(LOGIN_AGENT))"
 	cp tools/login-agent.plist "$(LOGIN_AGENT)"
 
+# --norsrc: no extended attributes, which a zip carries as ._ files; unzip extracts those into
+# the bundle and its seal breaks (the keylayouts carry com.apple.TextEncoding).
 dist: $(APP)
 	rm -f $(DIST)
-	ditto -c -k --keepParent $(APP) $(DIST)
+	ditto -c -k --norsrc --keepParent $(APP) $(DIST)
 	@echo $(DIST)
 
 uninstall:
