@@ -237,7 +237,7 @@ fn colloquial_unicode_on_real_data() {
     assert!(!d.search.symbols("joo", &all, 10).iter().any(|x| x.0 == "㈜"));
 }
 
-/// Kana-native words (docs/japanese.md, "Where the kana goes"): their kana first, also inside a
+/// Kana-native words (docs/spec.md §11.2, "Where the kana goes"): their kana first, also inside a
 /// phrase; a known word's kana no lower than second.
 #[test]
 fn kana_native_words_stay_kana() {
@@ -362,6 +362,7 @@ fn typed_out(e: &mut Engine, keys: &[(Key, bool)]) -> String {
 #[test]
 fn english_beside_bada_roman() {
     let d = data();
+    // (love, told: common words from the generated part of en-words.txt, `word<TAB>count`)
     for (typed, want) in [("interpolate", "interpolate"), ("serendipity", "serendipity"), ("hanguk", "한국"),
                           ("saram", "사람"), ("jongsok", "종속"), ("sarang", "사랑"), ("gamsa", "감사"),
                           ("love", "love"), ("told", "told")] {
@@ -374,4 +375,3 @@ fn english_beside_bada_roman() {
         assert_eq!(typed_out(&mut e, &keys), want, "{typed}");
     }
 }
-    // (love, told: common words from the generated part of en-words.txt, `word<TAB>count`)

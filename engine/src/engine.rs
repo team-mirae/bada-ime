@@ -1,5 +1,5 @@
 //! The engine: muhenkan and henkan modes (spec §4), the signed suggestion menu (§6.4), the keys
-//! (§6), F-key actions (§6.5) and Bada's actions (bada-layout.md §6).
+//! (§6), F-key actions (§6.5) and Bada's actions (docs/layouts/13-bada.md §6).
 //!
 //! Event in → output out. The shell owns input-source switching (英数, かな, HYPER/MEH+かな) and
 //! the host text; the engine says what to commit, what to show and whether it took the key.
@@ -588,7 +588,7 @@ impl Engine {
                 }
                 KANA_KOREAN | KOREAN_ROMAN => {
                     // The table's reading shows; every other pronunciation that spells a known word is
-                    // offered under it, most frequent first (docs/kana-korean.md, "Readings").
+                    // offered under it, most frequent first (docs/layouts/19-kana-korean.md, "Readings").
                     let all = if id == KANA_KOREAN {
                         crate::kana_korean::readings(&self.presses, 4096)
                     } else {
@@ -906,7 +906,7 @@ impl Engine {
         entries.sort_by(|a, b| b.score.total_cmp(&a.score));
         let mut seen = std::collections::HashSet::new();
         entries.retain(|e| seen.insert(e.text.clone()));
-        // Typo suggestions (bada-layout.md §5): right under layout 13's reading, never above it
+        // Typo suggestions (docs/layouts/13-bada.md §5): right under layout 13's reading, never above it
         // and never first.
         if let Some(lm) = self.data.lm.as_ref().filter(|_| enabled.contains(&BADA)) {
             if let Some(at) = entries.iter().position(|e| e.origin == Origin::Composed(BADA)) {
@@ -1306,7 +1306,7 @@ impl Engine {
         self.action(method, action)
     }
 
-    /// A method's action (bada-layout.md §6; Japanese: docs/japanese.md).
+    /// A method's action (docs/layouts/13-bada.md §6; Japanese: docs/spec.md §6.5).
     pub fn action(&mut self, method: u32, action: &str) -> Output {
         let mut out = Output {
             consumed: true,
@@ -1545,7 +1545,7 @@ mod tests {
         // With ⌘ or ⌃ it is the app's shortcut.
         assert!(!e.key(IntlRo, Mods { meta: true, ..Mods::NONE }).consumed);
         // Henkan: 13 types ㅢ on it; its ⇧ is the unshifted JIS character `\` and ⇧⌥ the shifted
-        // one `_` (bada-layout.md §4).
+        // one `_` (docs/layouts/13-bada.md §4).
         let mut e = engine();
         e.set_mode(Mode::Henkan);
         assert_eq!(press(&mut e, IntlRo).preedit, "ㅢ");
