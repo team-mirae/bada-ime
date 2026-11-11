@@ -5,7 +5,7 @@ import Cocoa
 /// variants.
 /// Modeled on the macOS Japanese input method's live-conversion list: a rounded Liquid Glass panel,
 /// one row per suggestion with hairline separators, and a slim scroll thumb when it overflows. The
-/// English modes' letter variants (spec §3.6.3) are single letters, so they run in one row instead,
+/// English modes' letter variants (spec §6.2; jis-korean spec §3.6.3) are single letters, so they run in one row instead,
 /// each with the digit that picks it.
 final class SuggestionWindow {
     static let shared = SuggestionWindow()

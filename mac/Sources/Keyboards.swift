@@ -25,7 +25,7 @@ enum Keyboards {
     }
 
     /// What ABC types for a key that bada.keylayout gives a jamo on this layer, or nil: unshifted,
-    /// every key named in KeyMap that bada (13) takes; with ⇧, J K L ; ¥ (docs/bada-layout.md §2).
+    /// every key named in KeyMap that bada (13) takes; with ⇧, J K L ; ¥ (docs/layouts/13-bada.md §2).
     static func passOn(code: Int, shift: Bool) -> String? {
         guard let name = keyNames[code], badaKeys.contains(name) else { return nil }
         if shift && !badaShifted.contains(code) { return nil }

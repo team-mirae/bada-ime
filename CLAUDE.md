@@ -1,6 +1,6 @@
 # bada ime
 
-- Source of truth: `docs/spec.md` (the IME) and `docs/bada-layout.md` (layout 13). If code and docs
+- Source of truth: `docs/spec.md` (the IME) and `docs/layouts/13-bada.md` (layout 13). If code and docs
   disagree, the docs win or are updated in the same change. Don't implement **[decide]** items
   silently.
 - Most code is ported from `~/Projects/jis-moonshot` and `~/Projects/jis-korean`; read their
@@ -35,6 +35,6 @@
 - `engine/data/ja-kana-native.txt` and `ja-common-words.txt`: `tools/analysis/.venv/bin/python engine/tools/build_kana_native.py`.
 - Web simulator (`web/`, bada.sjun.me): `node web/build.mjs` → `web/dist`; `node web/test/smoke.mjs`. Deployed to Vercel
   by `.github/workflows/deploy-web.yml` on push to main. It ports the Mac shell's behaviour (InputController,
-  ProfileKeys, Settings, SettingsWindow): a change there needs the same change in `web/src`.
+  ProfileKeys, Settings, SettingsWindow, CapsLock): a change there needs the same change in `web/src`.
 - `utils/learner-app`: `npm start` / `npm test` (Node 20+, no packages).
-- Analysis tools need `tools/analysis/.venv` with numpy (see docs/bada-history.md §9).
+- Analysis tools need `tools/analysis/.venv` with numpy (see docs/layouts/13-bada.md §H9).

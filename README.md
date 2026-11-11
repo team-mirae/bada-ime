@@ -88,15 +88,19 @@ cd bada-ime/mac
 make install
 ```
 
-You need Rust and the Command Line Tools. Xcode is not needed.
+You need Rust and the Command Line Tools (for macOS 26 or later). Xcode is not needed. The app
+is universal, so Rust needs both Mac targets:
+`rustup target add aarch64-apple-darwin x86_64-apple-darwin`.
 
 Then go to System Settings → Keyboard → Input Sources:
 
-1. Check that **Bada Muhenkan** and **Bada Henkan** are listed.
+1. Check that **bada (muhenkan)** and **bada (henkan)** are listed.
 2. Add **ABC – Extended**, then remove **ABC**. Now **英数** always lands in muhenkan.
 3. Remove every other Japanese input method. Now **かな** always lands in henkan.
-4. From the input menu, choose **Allow 英数 and かな Everywhere…**. Without it, **かな** can't
-   move through the candidates while you are already in henkan.
+4. From the input menu, choose **Allow 英数 and かな Everywhere…**, and allow Accessibility and
+   Input Monitoring. Without them, **かな** can't move through the candidates while you are
+   already in henkan, and Caps Lock stays macOS's.
+5. Turn off **Use Caps Lock to switch to and from ABC**. Caps Lock is bada's now (see below).
 
 Too lazy? Open a coding assistant in the cloned folder and tell it
 `Read docs/interactive-prompts/start.md and follow it.` It will install bada, set it up,
@@ -112,6 +116,10 @@ If the first candidate is wrong, press **Tab**, **↓** or **かな** to move to
 
 **英数** goes back to **muhenkan**, which is plain QWERTY.
 
+**Caps Lock** switches between the two modes. To get capitals, hold **⇧** (or **⌃**, **⌥**, **⌘**)
+and press Caps Lock in muhenkan. Settings → Layouts → Caps Lock can make it a plain Caps Lock
+again.
+
 ### Henkan profiles
 
 One henkan is not always enough. If you type Japanese and Korean a lot, you may want them on
@@ -125,7 +133,7 @@ their own set of layouts. For example:
 | カタカナ | Symbols + Unicode |
 
 Japanese PC keyboards have **変換** and **カタカナ**, but macOS ignores them. bada reads them
-anyway (it needs Input Monitoring for this): press **Record** in Settings → Profiles, then
+anyway (it needs Input Monitoring for this): press **Record Key…** in Settings → Profiles, then
 press the key.
 
 The developer's own setup, an HHKB with three profiles: [docs/examples/hhkb-profiles](docs/examples/hhkb-profiles/README.md).
@@ -152,7 +160,7 @@ dictionary.
 |---|---|---|
 | 0 | QWERTY | muhenkan, and English in henkan |
 | 10 | Korean (2-set) | KTS, the standard Korean keyboard |
-| 13 | Korean (bada) | [docs/bada-layout.md](docs/bada-layout.md) |
+| 13 | Korean (bada) | [docs/layouts/13-bada.md](docs/layouts/13-bada.md) |
 | 15 | Korean (bada roman) | [docs/layouts/15-bada-roman.md](docs/layouts/15-bada-roman.md) |
 | 20 | Japanese (Kana) | JIS kana, with kanji conversion |
 | 21 | Japanese (Romaji) | romaji, with kanji conversion |
