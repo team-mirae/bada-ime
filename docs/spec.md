@@ -69,6 +69,13 @@ act in the input method directly.
 かな in Bada Henkan. (ABC – Extended stays installed because macOS keeps one plain keyboard; it
 still types in password fields.)
 
+**The Keyboard Viewer** shows the keyboard layout the input method sets (`overrideKeyboard`): in
+muhenkan, ABC; in henkan, **bada's (13) legends**, whatever layouts the profile uses (one board can't
+show them all). That layout is `bada.keylayout`, hidden from the input source list and shipped in the
+app (`mac/tools/make-keylayout.swift`): ABC as a JIS keyboard has it, with bada's jamo on the
+unshifted and ⇧ layers. Its ⌥, ⌘ and ⌃ layers are ABC's, so shortcuts are unchanged; a key the
+engine passes on that carries a jamo there is typed as ABC types it, by the input method.
+
 ### 4.2 Muhenkan mode
 
 QWERTY passthrough: practically the same as JIS English in JIS Moonshot. Only muhenkan layouts run

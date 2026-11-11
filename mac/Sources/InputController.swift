@@ -74,6 +74,13 @@ final class BadaInputController: IMKInputController {
         }
         let out = engine.key(keyName(event.keyCode), shift: shift, ctrl: ctrl, alt: alt, meta: cmd)
         apply(out, to: client)
+        // In henkan the keyboard is bada.keylayout, for the Keyboard Viewer: a key passed on that
+        // carries a jamo there is typed as ABC types it (as it would be in muhenkan).
+        if !out.consumed && Modes.current == .henkan && !cmd && !ctrl && !alt,
+           let text = Keyboards.passOn(code: code, shift: shift) {
+            client.insertText(text, replacementRange: NSRange(location: NSNotFound, length: 0))
+            return true
+        }
         return out.consumed
     }
 
@@ -118,6 +125,7 @@ final class BadaInputController: IMKInputController {
         apply(engine.setMode(mode), to: client)
         _ = engine.setProfile(Modes.profile)
         Modes.current = mode
+        Keyboards.show(for: mode, in: client)
         DispatchQueue.main.async { Modes.select(mode, in: client) }
     }
 
@@ -131,8 +139,7 @@ final class BadaInputController: IMKInputController {
         _ = engine.setMode(mode)
         engine.apply(BadaSettings.current.engineJSON)
         _ = engine.setProfile(Modes.profile)
-        // Keys the engine passes on type JIS characters through ABC.
-        client?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
+        if let client { Keyboards.show(for: mode, in: client) }
         UserDictionary.refresh()
         DispatchQueue.main.async { LanguageKeyTap.check() }
     }
@@ -148,6 +155,10 @@ final class BadaInputController: IMKInputController {
             _ = engine.setProfile(Modes.profile)
         }
         super.setValue(value, forTag: tag, client: sender)
+        // After super: selecting the mode puts its own keyboard in place.
+        if tag == kTextServiceInputModePropertyTag, let client = sender as? IMKTextInput {
+            Keyboards.show(for: Modes.current, in: client)
+        }
     }
 
     override func deactivateServer(_ sender: Any!) {
