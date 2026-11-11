@@ -46,6 +46,14 @@ enum CapsLock {
 
     /// Caps Lock as bada ime holds it.
     private static var on = systemState
+    /// The press being handled is macOS's own (another input source): left alone.
+    private static var native = false
+
+    /// Caps Lock is on, for what bada ime types (spec §6.2): as bada ime holds it when it handles
+    /// Caps Lock (macOS's key events don't carry that), else as the key event says.
+    static func isOn(_ flags: NSEvent.ModifierFlags) -> Bool {
+        isHandled ? on : flags.contains(.capsLock)
+    }
     /// Until when a Caps Lock change that disagrees with `on` is macOS's own toggle, to undo.
     private static var enforceUntil = Date.distantPast
     private static var keyDown = false
@@ -87,6 +95,10 @@ enum CapsLock {
     static func key(down: Bool) {
         guard isHandled else { return }
         DiagnosticLog.note("Caps Lock: key \(down ? "down" : "up"), held \(on), system \(systemState)")
+        if native {
+            if !down { native = false }
+            return
+        }
         if !down {
             keyDown = false
             enforceUntil = Date().addingTimeInterval(0.5)
@@ -100,9 +112,12 @@ enum CapsLock {
         }
         keyDown = true
         enforceUntil = .distantFuture
-        // Another input source (ABC in a password field): Caps Lock as macOS has it.
+        // Another input source (ABC in a password field): Caps Lock is macOS's own toggle, untouched.
         guard let mode = Modes.selectedNow() else {
-            hold(!on)
+            keyDown = false
+            enforceUntil = .distantPast
+            native = true
+            on.toggle()
             return
         }
         let flags = CGEventSource.flagsState(.combinedSessionState)
@@ -141,7 +156,7 @@ enum CapsLock {
                 DiagnosticLog.note("Caps Lock: another app turned it on in henkan: off")
                 hold(false)
             } else {
-                on = systemState
+                on = value
             }
         }
         return false
