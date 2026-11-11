@@ -11,12 +11,47 @@ enable, at once, and ranks the readings as you type. There are no sub-modes to s
   <img src="docs/images/layouts/qwerty-bada-kana-light.png" alt="QWERTY, bada and kana on one HHKB JIS keyboard">
 </picture>
 
-Status: **0.1.5**. 12 layouts, henkan profiles on かな, 変換 and カタカナ, kanji conversion, typo
-suggestions for bada, symbol and Unicode search, and a user dictionary. Spec:
-[docs/spec.md](docs/spec.md); the bada layout: [docs/bada-layout.md](docs/bada-layout.md).
+Status: **0.1.5**. 13 layouts, including two Korean layouts of its own, **bada** and **bada
+roman**; henkan profiles on かな, 変換 and カタカナ, kanji conversion, typo suggestions for bada,
+symbol and Unicode search, and a user dictionary. Spec: [docs/spec.md](docs/spec.md).
 
 **Try it in a browser:** [bada.sjun.me](https://bada.sjun.me) runs the same engine (WebAssembly)
 with the same settings, on an HHKB or Apple-style JIS keyboard drawn on screen ([web/](web/README.md)).
+
+## bada and bada roman
+
+Two Korean layouts made for bada ime. Either can share henkan mode with QWERTY and Japanese.
+
+**bada** (layout 13), on the keyboard above, types like 2-set, keeps finals like 3-set, and uses
+the whole key space like JIS kana: digits and punctuation are on ⇧, so Korean never needs a
+prediction or a mode switch for them. Every key reads one way only. The design:
+[docs/bada-layout.md](docs/bada-layout.md); how it compares: [docs/layouts/13-bada.md](docs/layouts/13-bada.md).
+
+**bada roman** (layout 15) types Korean as it's romanized, on the QWERTY letters you already
+know: `hanguk` 한국, `annyeonghaseyo` 안녕하세요. A few keys of its own help: `q` is ㅊ (`ch`), `x`
+an initial ㅇ (`xx` ㅇㅇ), `;` splits syllables, and `-` after `e` gives ㅐ (`e-` 애). Readings are
+ranked by word counts, so the word you mean usually comes first. English words also offer their
+Korean in the menu (`apple` 사과, 애플), and a Japanese on'yomi can stand for its Sino-Korean
+syllable where that's shorter (`mei` 명). The rules: [docs/layouts/15-bada-roman.md](docs/layouts/15-bada-roman.md).
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-bada-roman-kana-dark.png">
+  <img src="docs/images/layouts/qwerty-bada-roman-kana-light.png" alt="QWERTY, bada roman and kana on one HHKB JIS keyboard">
+</picture>
+
+For someone who types QWERTY and 2-set (KTS), the usual English / Korean pair:
+
+| | bada roman (15) | bada (13) |
+|---|---|---|
+| Time to learn | Less than an hour | A week to several months |
+| Once fluent, against 2-set | Faster and more comfortable for casual and colloquial text; significantly slower for formal text | Faster and more comfortable |
+
+Which to choose:
+
+- **You rarely type Korean** (under 1% of your typing): **bada roman**. Your 2-set muscle memory
+  stays as it is.
+- **You mostly type Korean** (half your typing or more) **and have time to practice**: **bada**.
+  It's worth the learning.
 
 ## Install
 
@@ -94,13 +129,9 @@ simulator reads the same file.
 
 ## Layouts
 
-**bada** (layout 13) types like 2-set, keeps finals like 3-set, and uses the whole key space like JIS
-kana: digits and punctuation are on ⇧, so Korean never needs a prediction or a mode switch for them.
-How it compares: [docs/layouts/13-bada.md](docs/layouts/13-bada.md).
-
-The keyboard above is **QWERTY + bada + kana** (layouts 0, 13, 20): English, Korean and Japanese
-from one mode. Any other set works the same way, for example standard 2-set Korean with English,
-**QWERTY + KTS** (0, 10):
+The keyboards above are **QWERTY + bada + kana** (layouts 0, 13, 20) and **QWERTY + bada roman +
+kana** (0, 15, 20): English, Korean and Japanese from one mode. Any other set works the same way,
+for example standard 2-set Korean with English, **QWERTY + KTS** (0, 10):
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-kts-dark.png">
@@ -114,6 +145,7 @@ from one mode. Any other set works the same way, for example standard 2-set Kore
 | 11, 12 | Korean (legacy-korean, legacy-moonshot) | the readings of JIS Korean and JIS Moonshot |
 | 13 | Korean (bada) | [bada-layout.md](docs/bada-layout.md) |
 | 14 | Korean (3-set JIS) | 세벌식 for JIS, 모아쓰기 |
+| 15 | Korean (bada roman) | [15-bada-roman.md](docs/layouts/15-bada-roman.md) |
 | 18 | Korean (Roman) | Korean typed in romanisation |
 | 19 | Korean (Kana) | Korean typed in kana |
 | 20, 21 | Japanese (Kana, Romaji) | with kanji conversion (Mozc's dictionary) |
@@ -121,7 +153,7 @@ from one mode. Any other set works the same way, for example standard 2-set Kore
 | 151 | Unicode | any character by its Unicode name |
 
 Every layout, with its rules and reliability: [docs/layouts](docs/layouts/README.md). More
-combinations (bada + romaji, QWERTY + romaji): [docs/layouts/combinations.md](docs/layouts/combinations.md).
+combinations (QWERTY + bada roman + kana, bada + romaji, QWERTY + romaji): [docs/layouts/combinations.md](docs/layouts/combinations.md).
 
 ## Your dictionary
 
