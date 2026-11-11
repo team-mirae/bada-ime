@@ -1,6 +1,8 @@
 # Builds BadaIME.app (universal arm64 + x86_64) with the Command Line Tools; no Xcode needed.
 #   make            build build/BadaIME.app
 #   make install    copy it to ~/Library/Input Methods, register it, add a login agent
+#   make dist       build/BadaIME-<version>.zip (what CI uploads: .github/workflows/mac.yml)
+#   make install-prebuilt PREBUILT=path/BadaIME.app   install an app built elsewhere (CI), unbuilt
 #   make uninstall  remove it
 #   make SENSITIVE=1  also build in the vulgar, hateful and sensitive English words (layout 15)
 ENGINE     := ../engine
@@ -28,12 +30,18 @@ BRANDS     := $(sort $(wildcard $(ENGINE)/data/en-ko/brands/*.tsv))
 # Rebuilds the app when SENSITIVE changes.
 SENSITIVE_STAMP := $(BUILD)/.sensitive
 ICONS      := $(BUILD)/bada.tiff $(BUILD)/muhenkan.tiff $(BUILD)/henkan.tiff
+# The Keyboard Viewer's legends: bada's (13) jamo in henkan, ABC with ろ as \ _ in muhenkan
+# (tools/make-keylayout.swift).
+KEYLAYOUT  := $(BUILD)/bada.keylayout $(BUILD)/qwerty.keylayout
 # The app's icon, for Settings → About only (the input menu keeps 바: Resources/icons).
 ABOUT_ICON := ../docs/images/icon/bada-icon-512.png
 
 export MACOSX_DEPLOYMENT_TARGET := $(MIN_MACOS)
 
-.PHONY: all install uninstall clean
+VERSION    := $(shell /usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' Info.plist)
+DIST       := $(BUILD)/BadaIME-$(VERSION).zip
+
+.PHONY: all install install-prebuilt dist uninstall clean
 all: $(APP)
 $(shell mkdir -p $(BUILD) && touch $(BUILD)/.metadata_never_index)
 $(shell echo $(SENSITIVE) | cmp -s - $(SENSITIVE_STAMP) || echo $(SENSITIVE) > $(SENSITIVE_STAMP))
@@ -51,15 +59,23 @@ $(BUILD)/%/BadaIME: $(SOURCES) $(HEADER) $(BUILD)/libbada.a
 $(BUILD)/BadaIME: $(BUILD)/arm64/BadaIME $(BUILD)/x86_64/BadaIME
 	lipo -create -output $@ $^
 
+$(BUILD)/make-keylayout: tools/make-keylayout.swift Sources/KeyMap.swift
+	@mkdir -p $(BUILD)/keylayout
+	cp tools/make-keylayout.swift $(BUILD)/keylayout/main.swift
+	swiftc -O $(BUILD)/keylayout/main.swift Sources/KeyMap.swift -o $@
+
+$(KEYLAYOUT) &: $(BUILD)/make-keylayout ../docs/layouts/13-bada.json
+	$(BUILD)/make-keylayout ../docs/layouts/13-bada.json $(BUILD)
+
 $(BUILD)/%.tiff: Resources/icons/%.png Resources/icons/%@2x.png
 	tiffutil -cathidpicheck Resources/icons/$*.png Resources/icons/$*@2x.png -out $@
 
-$(APP): $(BUILD)/BadaIME $(ICONS) $(ABOUT_ICON) Info.plist $(DATA) $(EN_KO) $(BRANDS) $(SENSITIVE_STAMP) $(wildcard Resources/*.lproj/*)
+$(APP): $(BUILD)/BadaIME $(ICONS) $(KEYLAYOUT) $(ABOUT_ICON) Info.plist $(DATA) $(EN_KO) $(BRANDS) $(SENSITIVE_STAMP) $(wildcard Resources/*.lproj/*)
 	rm -rf $@
 	mkdir -p $@/Contents/MacOS $@/Contents/Resources/data
 	cp Info.plist $@/Contents/Info.plist
 	cp $(BUILD)/BadaIME $@/Contents/MacOS/BadaIME
-	cp $(ICONS) $@/Contents/Resources/
+	cp $(ICONS) $(KEYLAYOUT) $@/Contents/Resources/
 	cp $(ABOUT_ICON) $@/Contents/Resources/bada-icon.png
 	cp -R Resources/en.lproj Resources/ko.lproj Resources/ja.lproj $@/Contents/Resources/
 	cp $(DATA) $@/Contents/Resources/data/
@@ -68,18 +84,30 @@ $(APP): $(BUILD)/BadaIME $(ICONS) $(ABOUT_ICON) Info.plist $(DATA) $(EN_KO) $(BR
 	codesign --force --sign "$(SIGN_IDENTITY)" $@
 
 install: $(APP)
+	$(MAKE) install-prebuilt PREBUILT=$(APP)
+
+# No dependencies: installs PREBUILT as it is (an app from CI, or the one `install` just built).
+PREBUILT ?= $(APP)
+install-prebuilt:
+	@test -d "$(PREBUILT)" || { echo "No app at $(PREBUILT)"; exit 1; }
 	@killall BadaIME 2>/dev/null || true
 	mkdir -p "$(INSTALL_TO)"
 	rm -rf "$(INSTALL_TO)/.BadaIME.app.new"
-	ditto $(APP) "$(INSTALL_TO)/.BadaIME.app.new"
+	ditto "$(PREBUILT)" "$(INSTALL_TO)/.BadaIME.app.new"
+	xattr -dr com.apple.quarantine "$(INSTALL_TO)/.BadaIME.app.new" 2>/dev/null || true
 	if [ -d "$(INSTALL_TO)/BadaIME.app" ]; then rm -rf "$(INSTALL_TO)/.BadaIME.app.old"; mv "$(INSTALL_TO)/BadaIME.app" "$(INSTALL_TO)/.BadaIME.app.old"; fi
 	mv "$(INSTALL_TO)/.BadaIME.app.new" "$(INSTALL_TO)/BadaIME.app"
 	rm -rf "$(INSTALL_TO)/.BadaIME.app.old"
-	$(LSREGISTER) -u "$(CURDIR)/$(APP)" 2>/dev/null || true
+	$(LSREGISTER) -u "$(abspath $(PREBUILT))" 2>/dev/null || true
 	$(LSREGISTER) -f "$(INSTALL_TO)/BadaIME.app"
 	swift tools/register.swift "$(INSTALL_TO)/BadaIME.app"
 	mkdir -p "$(dir $(LOGIN_AGENT))"
 	cp tools/login-agent.plist "$(LOGIN_AGENT)"
+
+dist: $(APP)
+	rm -f $(DIST)
+	ditto -c -k --keepParent $(APP) $(DIST)
+	@echo $(DIST)
 
 uninstall:
 	@killall BadaIME 2>/dev/null || true

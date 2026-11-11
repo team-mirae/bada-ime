@@ -33,6 +33,16 @@ for _ in 0..<5 {
         settle(1.5)
     }
 }
+// bada.keylayout (the Keyboard Viewer's legends in henkan, hidden): macOS often lists it only after
+// a second registration of a freshly installed bundle.
+let keylayout = bundleID + ".keylayout.bada"
+for _ in 0..<4 where !sources(enabledOnly: false).map(id).contains(keylayout) {
+    TISRegisterInputSource(URL(fileURLWithPath: path) as CFURL)
+    settle(1.5)
+}
+if !sources(enabledOnly: false).map(id).contains(keylayout) {
+    print("bada.keylayout isn't listed yet: the Keyboard Viewer shows ABC in henkan until it is (log out and in).")
+}
 let now = Set(sources(enabledOnly: true).map(id)).intersection(modes)
 print(now.isEmpty
     ? "Registered. Add bada (muhenkan) under English and bada (henkan) under Japanese in System Settings → Keyboard → Input Sources (log out and in if they aren't listed)."
