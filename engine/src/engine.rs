@@ -69,6 +69,10 @@ const SEARCH_RESULTS: usize = 40;
 const TYPO_SUGGESTIONS: usize = 3;
 /// Japanese: rows given to a reading's most common words (`ja-common-words.txt`).
 const COMMON_ROWS: usize = 3;
+/// Japanese: conversions of a reading the menu lists, at most.
+const CONVERSIONS: usize = 6;
+/// Japanese: how far down the conversions the user's own words are looked for.
+const USER_CONVERSIONS: usize = 32;
 
 /// A henkan profile (§6.6): its own candidates, or a link to another profile.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
@@ -747,9 +751,30 @@ impl Engine {
                     let loose = text.contains(japanese::DAKUTEN)
                         || text.contains(japanese::HANDAKUTEN)
                         || text.chars().any(|c| c.is_ascii_alphabetic());
-                    let known = self.data.is_japanese(&text)
-                        || self.data.is_kana_native(&text)
-                        || user.as_ref().is_some_and(|u| u.count(Language::Japanese, &text) > 0);
+                    // The user's Japanese words (docs/dictionary-contract.md) that the reading
+                    // writes, in whatever script they are: the kana typed, its katakana, one of its
+                    // conversions (looked for further down than the menu lists) or a common word
+                    // read so. The most used first.
+                    let kata = japanese::katakana(&text);
+                    let own = user.as_ref().filter(|u| u.has_positive(Language::Japanese));
+                    let conversions = match &self.data.kanji {
+                        Some(kanji) if !loose => kanji.convert(&text, if own.is_some() { USER_CONVERSIONS } else { CONVERSIONS }),
+                        _ => Vec::new(),
+                    };
+                    let mut mine: Vec<(&str, u32)> = Vec::new();
+                    if let Some(u) = own {
+                        let forms = [text.as_str(), kata.as_str()].into_iter()
+                            .chain(conversions.iter().map(|c| c.0.as_str()))
+                            .chain(self.data.common_japanese(&text).iter().map(String::as_str));
+                        for form in forms {
+                            let count = u.count(Language::Japanese, form);
+                            if count > 0 && !mine.iter().any(|m| m.0 == form) {
+                                mine.push((form, count));
+                            }
+                        }
+                        mine.sort_by(|a, b| b.1.cmp(&a.1));
+                    }
+                    let known = self.data.is_japanese(&text) || self.data.is_kana_native(&text) || !mine.is_empty();
                     let score = if known {
                         92.0
                     } else if loose {
@@ -757,26 +782,26 @@ impl Engine {
                     } else {
                         70.0
                     };
-                    // Kanji conversions (docs/japanese.md), each with the kana reading as its note,
+                    // Kanji conversions (docs/spec.md §11.2), each with the kana reading as its note,
                     // above the kana itself. The kana goes where conversion ranks it (kana-native
                     // words convert to kana: この, ちょっと), a known word's no lower than second
                     // (あなた under 貴方), a kana-native word first.
                     let mut kana_score = score + tie;
                     if !loose {
-                        if let Some(kanji) = &self.data.kanji {
+                        if self.data.kanji.is_some() {
                             let mut row = 0;
-                            for (conv, _) in kanji.convert(&text, 6) {
+                            for (conv, _) in conversions.iter().take(CONVERSIONS) {
                                 let at = score + tie + 0.5 - 0.01 * row as f64;
-                                if conv == text {
+                                if *conv == text {
                                     kana_score = kana_score.max(at + 0.001);
                                     continue;
                                 }
                                 // Its katakana is a row already when script forms are on (−2).
-                                if self.settings.script_forms && conv == japanese::katakana(&text) {
+                                if self.settings.script_forms && *conv == kata {
                                     continue;
                                 }
                                 entries.push(Entry {
-                                    text: conv,
+                                    text: conv.clone(),
                                     score: at,
                                     note: text.clone(),
                                     japanese: true,
@@ -804,6 +829,22 @@ impl Engine {
                             if self.data.is_kana_native(&text) {
                                 kana_score = kana_score.max(score + tie + 0.6);
                             }
+                        }
+                    }
+                    // The user's own words come first, the most used at the top.
+                    for (k, (word, _)) in mine.iter().enumerate() {
+                        let at = score + tie + 0.7 - 0.001 * k as f64;
+                        if *word == text {
+                            kana_score = kana_score.max(at);
+                        } else {
+                            entries.push(Entry {
+                                text: word.to_string(),
+                                score: at,
+                                note: text.clone(),
+                                japanese: true,
+                                origin: Origin::Other,
+                                source: None,
+                            });
                         }
                     }
                     entries.push(Entry::kana(text, kana_score));
