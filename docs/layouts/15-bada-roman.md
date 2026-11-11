@@ -27,14 +27,30 @@ Built (`engine/src/bada_roman.rs`; key map `15-bada-roman.json`, written by
 
 ## Rules
 
-- **An English dictionary.** English words typed in letters convert to Korean. The case of the
-  first letter says which reading:
-  - lowercase: the Korean word first, then the word written in Hangul as it sounds: `apple` 사과,
-    then 애플;
-  - capitalized: the name, written in Hangul as it sounds (a brand, a place, a person): `Apple` 애플.
+- **An English dictionary.** English words typed in letters convert to Korean. The case says
+  which readings (owner, 2026-11-11):
+  - lowercase: the common word only: the Korean word first, then the word written in Hangul as it
+    sounds: `apple` 사과, then 애플;
+  - any capital (`Apple`, `iPhone`, `McDonalds`, a single `A`): brand names too, first, then the
+    common word: `Apple` 애플, then 사과;
+  - all caps (two letters or more, all capitals): a brand is more likely, so brand names only:
+    `APPLE` 애플. With no brand by that name, the common word: `AGILE` 에자일.
 
   **A dictionary reading never ranks first: at best it's second.** Whatever the letters type as
-  Korean comes first; `apple` offers 사과 at row 2 and 애플 at row 3, `Apple` 애플 at row 2.
+  Korean comes first; `apple` offers 사과 at row 2 and 애플 at row 3, `Apple` 애플 at row 2 and 사과
+  at row 3. Only letters are looked up, so a name with digits (Audi A3, 007) never matches.
+
+  **Brands sharing a name** (Corona: a Mexican beer and a Colombian ceramics maker) offer each
+  Hangul spelling; the one that shows first is the brand with the most revenue, where that's known;
+  else the most consumer-facing; else the shortest Hangul; else the one whose country code comes
+  first alphabetically (owner, 2026-11-11). Revenue and consumer calls:
+  `engine/data/en-ko/shared-rank.tsv`; the order the engine reads, with the other two rules applied:
+  `shared-order.tsv`, from `engine/tools/build_shared_order.py`.
+
+  **Initialisms** are written as the brand writes itself in Korean, where it does (BTS 방탄소년단,
+  SSG 쓱, TGV 테제베, CCTV 씨씨티비); otherwise with the Korean names of the English letters, whatever
+  the brand's country (owner, 2026-11-11): USA 유에스에이, SNCF 에스엔씨에프 (not 에스엔세에프), ARD
+  에이알디. C is 씨 and Z 제트. A name said as a word is written as it's said: UEFA 유에파, IKEA 이케아.
 
   **Nouns, and borrowed words.** The dictionary keeps nouns, offering their noun senses only
   (`red` 빨강, not 빨갛다). A verb, adjective or adverb is kept only when Korean borrows it as it
@@ -82,8 +98,9 @@ Built (`engine/src/bada_roman.rs`; key map `15-bada-roman.json`, written by
   reading. `nj` is still ㄵ (`anj` 앉).
 - **`;` separates syllables**: `han;guk` 한국, `hang;uk` 항욱. `-` and `'` don't (unlike Korean
   Roman, 18).
-- **`-` lengthens ㅔ and ㅖ** into ㅐ and ㅒ, as ー does in Korean (Kana), 19: `e-` 애, `se-` 새,
-  `he-` 해, `ye-` 얘.
+- **`-` lengthens ㅔ, ㅖ and ㅞ** into ㅐ, ㅒ and ㅙ, as ー does ㅔ and ㅖ in Korean (Kana), 19:
+  `e-` 애, `se-` 새, `he-` 해, `ye-` 얘, `we-` 왜, `dwe-` 돼 (ㅞ: owner, 2026-11-11). The other vowels
+  have no long form; after them, and anywhere else, `-` is a hyphen (`a-` 아-).
 - **`x` is ㅇ as an initial**, as Korean chat writes it (ㅇㅇ, ㅇㅋ): `xx` ㅇㅇ, `xk` ㅇㅋ. Before
   a vowel it starts a syllable with ㅇ, which also splits: `anxa` 안아, never 아나. `x` is in no
   romanization, so it reads nothing else.
@@ -146,16 +163,8 @@ is, in place.
 
 - Tried and taken out (2026-11-11): `,` ㅓ, `.` ㅡ, `:` ㅢ, `@` final ㅇ, `0` `oo`, `9` `yo`, `8`
   `yu`; then the number and symbol keys typed nothing on the base layer, until they went back to JIS.
-- **[decide]** Whether `-` gives other vowels a long form too (as in Korean (Kana), 19), and what
-  `-` types where there is no ㅔ or ㅖ before it.
-- **[decide]** Other informal spellings worth a second reading, as names are written: `oo` ㅠ
-  after y (Yoon 윤), `uh` ㅓ (Suh 서), `ah` ㅏ (Ahn 안), a silent final `h` (Oh 오), `oi` ㅚ
-  (Choi 최), `ar` ㅏ (Park 박), initial `l` read as ㅇ or ㄴ (Lee 이, Lim 임).
-- **[decide]** One name, several brands (Corona: a Mexican beer and a Colombian ceramics maker;
-  720 such names across the country files, listed in `engine/data/en-ko/brands/_progress.md`):
-  which Hangul shows when they differ. And how initialisms are written: English letter names
-  (SNCF 에스엔씨에프) or the source language's (에스엔세에프); the files mix both.
-- **[decide]** All caps (`APPLE`), names of several words (`Coca-Cola`, `General Motors`), and
-  inflected forms (`apples`, `ran`).
-- **[decide]** The rest of the design: keys, display name, kind (deterministic or ranked), and the
-  languages and reliability its JSON will claim.
+- Decided against (owner, 2026-11-11): a second reading for informal name spellings (`oo` ㅠ after
+  y as in Yoon, `uh` ㅓ as in Suh, `ah`, a silent final `h`, `oi` ㅚ, `ar` ㅏ, initial `l` as ㅇ or
+  ㄴ). Readings stay rule-based.
+- **[decide]** Names of several words (`Coca-Cola`, `General Motors`) and inflected forms
+  (`apples`, `ran`).

@@ -17,6 +17,8 @@
 - `engine/data/ko-words.tsv`: `python3 engine/tools/build_ko_words.py` (reads the jis-moonshot corpora).
   Then `python3 engine/tools/build_jamo_lm.py` (the typo model, `ko-jamo-4gram.bin`, from ko-words.tsv).
 - `engine/data/en-words.txt`'s `#! rare` section: `python3 engine/tools/build_en_rare.py` (from macOS's `/usr/share/dict/words`).
+- `engine/data/en-ko/shared-order.tsv` (layout 15, brands sharing a name): `python3 engine/tools/build_shared_order.py`
+  (from `brands/*.tsv` and the curated `shared-rank.tsv`); rerun after editing either.
 - `engine/data/emoji.tsv`, `unicode-names.tsv`: `python3 engine/tools/build_unicode_data.py` (Unicode files in
   `engine/tools/cache/unicode/`, URLs in the script). `symbols.tsv` and `unicode-aliases.tsv` are hand-written.
 - Typing robot (`docs/robot.md`): `cargo test --release --test robot`. Corpora: `engine/tests/data/robot/`,

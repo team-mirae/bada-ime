@@ -1,9 +1,10 @@
 //! Layout 15, bada roman (docs/layouts/15-bada-roman.md): Korean typed as it's romanized, as in
 //! Korean Roman (18), with keys of its own: `q` ch, `x` an initial ㅇ, `;` a syllable break, `-`
-//! after e ㅐ / ㅒ (e- 애); `woo` ㅜ and a final `h` ㅎ. The other number and symbol keys type their
-//! JIS characters on both layers (¥ is ₩; ⇧0 +, ⇧[ 「, ⇧] 」). `yu` and `u` before a final also read ㅕ
-//! and ㅓ (nyun 년, sung 성), and a Japanese on'yomi types its Sino-Korean syllable where that's
-//! shorter (mei 명: `engine/data/ja-shortcuts.tsv`), mixed with Korean spelling (seigong 성공).
+//! after e ㅐ / ㅒ / ㅙ (e- 애, we- 왜), elsewhere a hyphen; `woo` ㅜ and a final `h` ㅎ. The other
+//! number and symbol keys type their JIS characters on both layers (¥ is ₩; ⇧0 +, ⇧[ 「, ⇧] 」).
+//! `yu` and `u` before a final also read ㅕ and ㅓ (nyun 년, sung 성), and a Japanese on'yomi types
+//! its Sino-Korean syllable where that's shorter (mei 명: `engine/data/ja-shortcuts.tsv`), mixed
+//! with Korean spelling (seigong 성공).
 //!
 //! The default reading comes first (the longest onset for each next syllable, as in 18); every
 //! other reading follows, for the engine to rank by word counts.
@@ -29,7 +30,7 @@ const ONSETS: &[(&str, &[char])] = &[
 ];
 
 const VOWELS: &[(&str, &[char])] = &[
-    ("yae", &['ㅒ', 'ㅖ']), ("wae", &['ㅙ', 'ㅞ', 'ㅚ']), ("yeo", &['ㅕ']), ("weo", &['ㅝ']), ("woo", &['ㅜ']), ("you", &['ㅠ']), ("eui", &['ㅢ']), ("yeL", &['ㅒ']),
+    ("yae", &['ㅒ', 'ㅖ']), ("wae", &['ㅙ', 'ㅞ', 'ㅚ']), ("yeo", &['ㅕ']), ("weo", &['ㅝ']), ("woo", &['ㅜ']), ("you", &['ㅠ']), ("eui", &['ㅢ']), ("yeL", &['ㅒ']), ("weL", &['ㅙ']),
     ("ae", &['ㅐ', 'ㅔ']), ("ya", &['ㅑ']), ("eo", &['ㅓ']), ("ye", &['ㅖ', 'ㅒ']), ("wa", &['ㅘ']),
     ("oe", &['ㅚ', 'ㅙ', 'ㅞ']), ("yo", &['ㅛ', 'ㅕ']), ("wo", &['ㅝ']), ("we", &['ㅞ', 'ㅙ', 'ㅚ']),
     ("wi", &['ㅟ']), ("yu", &['ㅠ']), ("eu", &['ㅡ']), ("ui", &['ㅢ']), ("oo", &['ㅜ']), ("ee", &['ㅣ']),
@@ -265,19 +266,29 @@ pub fn compose_presses(presses: &[Press]) -> String {
     readings(presses, 1, false).into_iter().next().unwrap_or_default()
 }
 
-/// The presses as an English word, if they're letters only: (lowercase word, capitalized).
-/// Capitalized: only the first letter typed with Shift. All caps: None (not settled yet).
-pub fn latin_word(presses: &[Press]) -> Option<(String, bool)> {
+/// How an English word was typed: all lowercase, all caps (two letters or more, every one with
+/// Shift), or mixed (any other use of Shift: `Apple`, `iPhone`, `McDonalds`, `A`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Case {
+    Lower,
+    Mixed,
+    Caps,
+}
+
+/// The presses as an English word, if they're letters only: (lowercase word, the word as typed, its case).
+pub fn latin_word(presses: &[Press]) -> Option<(String, String, Case)> {
     if presses.is_empty() || !presses.iter().all(|p| p.key.is_letter() && !p.alt) {
         return None;
     }
     let word: String = presses.iter().filter_map(|p| jis_char(p.key, false)).collect();
+    let typed: String = presses.iter().filter_map(|p| jis_char(p.key, p.shift)).collect();
     let shifted = presses.iter().filter(|p| p.shift).count();
-    match shifted {
-        0 => Some((word, false)),
-        1 if presses[0].shift => Some((word, true)),
-        _ => None,
-    }
+    let case = match shifted {
+        0 => Case::Lower,
+        n if n == presses.len() && n >= 2 => Case::Caps,
+        _ => Case::Mixed,
+    };
+    Some((word, typed, case))
 }
 
 /// A byte that doesn't make a syllable, as it shows.
@@ -410,6 +421,11 @@ mod tests {
         assert_eq!(default("e-"), "애");
         assert_eq!(default("pe-"), "패");
         assert_eq!(default("ye-"), "얘");
+        assert_eq!(default("we-"), "왜");
+        assert_eq!(default("dwe-"), "돼");
+        assert_eq!(default("gwe-n"), "괜");
+        assert_eq!(default("a-"), "아-");
+        assert_eq!(default("han-guk"), "한-국");
         assert_eq!(default("Hanguk"), "한국");
         // the number and symbol keys: JIS on both layers, but ¥ ₩, ⇧0 +, ⇧[ 「, ⇧] 」, ⇧; ;
         let base = |k| compose_presses(&[Press::new(k, false)]);
@@ -492,9 +508,12 @@ mod tests {
 
     #[test]
     fn english_words() {
-        assert_eq!(latin_word(&presses("apple")), Some(("apple".into(), false)));
-        assert_eq!(latin_word(&presses("Apple")), Some(("apple".into(), true)));
-        assert_eq!(latin_word(&presses("APPLE")), None);
+        let w = |t: &str| latin_word(&presses(t)).map(|(w, t, c)| (w, t, c));
+        assert_eq!(w("apple"), Some(("apple".into(), "apple".into(), Case::Lower)));
+        assert_eq!(w("Apple"), Some(("apple".into(), "Apple".into(), Case::Mixed)));
+        assert_eq!(w("iPhone"), Some(("iphone".into(), "iPhone".into(), Case::Mixed)));
+        assert_eq!(w("APPLE"), Some(("apple".into(), "APPLE".into(), Case::Caps)));
+        assert_eq!(w("A"), Some(("a".into(), "A".into(), Case::Mixed)));
         assert_eq!(latin_word(&presses("ap,")), None);
     }
 

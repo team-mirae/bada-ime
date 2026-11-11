@@ -665,18 +665,30 @@ impl Engine {
                         let s = s.max(90.0);
                         entries.push(Entry { text, score: s + tie - 0.00001 * (i + 1) as f64, ..Entry::default() });
                     }
-                    if let Some((word, capital)) = crate::bada_roman::latin_word(&self.presses) {
+                    if let Some((word, typed, case)) = crate::bada_roman::latin_word(&self.presses) {
+                        use crate::bada_roman::Case;
                         let top = entries[start..].iter().map(|e| e.score).fold(f64::MIN, f64::max);
-                        let dict: Vec<String> = if capital {
-                            self.data.en_ko.name(&word).to_vec()
-                        } else {
-                            self.data.en_ko.word(&word)
+                        // Lowercase: the common word. Any capital: brands first, then the word; all
+                        // caps: brands only, the word when there's no brand by that name.
+                        let names = self.data.en_ko.name(&word);
+                        let dict: Vec<String> = match case {
+                            Case::Lower => self.data.en_ko.word(&word),
+                            Case::Caps if !names.is_empty() => names.to_vec(),
+                            Case::Caps | Case::Mixed => {
+                                let mut d = names.to_vec();
+                                for w in self.data.en_ko.word(&word) {
+                                    if !d.contains(&w) {
+                                        d.push(w);
+                                    }
+                                }
+                                d
+                            }
                         };
                         for (i, text) in dict.into_iter().take(8).enumerate() {
                             entries.push(Entry {
                                 text,
                                 score: top - 0.5 - 0.01 * i as f64,
-                                note: if capital { format!("{}{}", word[..1].to_ascii_uppercase(), &word[1..]) } else { word.clone() },
+                                note: typed.clone(),
                                 ..Entry::default()
                             });
                         }
@@ -2100,7 +2112,16 @@ mod tests {
         e.flush();
         let out = letters(&mut e, "Apple");
         assert_eq!(out.menu[1], "애플");
+        assert_eq!(out.menu[2], "사과");
+        e.flush();
+        // all caps: brands only
+        let out = letters(&mut e, "APPLE");
+        assert_eq!(out.menu[1], "애플");
         assert!(!out.menu.contains(&"사과".to_string()));
+        e.flush();
+        // all caps with no brand by that name: the word
+        let out = letters(&mut e, "AGILE");
+        assert_eq!(out.menu[1], "에자일");
         e.flush();
         let out = letters(&mut e, "agile");
         assert_eq!(out.menu[1], "에자일");

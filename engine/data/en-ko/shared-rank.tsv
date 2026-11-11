@@ -1,0 +1,185 @@
+# Brands sharing one name (docs/layouts/15-bada-roman.md): which shows first. One line per name:
+# key<TAB>countries, best first<TAB>basis (revenue | consumer)<TAB>note.
+# Names not listed fall back to the shortest Hangul, then the earlier country code
+# (engine/tools/build_shared_order.py).
+abc	US AU ID ES LB	revenue	Disney's ABC vs Australian public broadcaster, Heinz ABC, Vocento's ABC
+accent	KR PL	revenue	Hyundai Accent vs small Polish sportswear
+admiral	AT GB	revenue	Novomatic's Admiral gaming vs small UK sportswear brand
+adobe	US CL	revenue	Adobe Inc. vs Chilean winery
+aia	HK IT	revenue	AIA Group vs Italian poultry firm
+aib	IE LT	revenue	Allied Irish Banks vs Lithuanian retailer
+aje	PE AU	revenue	AJE Group (Big Cola) vs Australian fashion label
+alhambra	FR ES	revenue	Van Cleef & Arpels (Richemont) vs Mahou's Alhambra beer
+alpine	JP FR	revenue	Alps Alpine (~$6B) vs Renault's Alpine
+alwahda	AE SY	revenue	Abu Dhabi's Al Wahda vs Syrian club
+ambar	ES PT	consumer	beer vs stationery
+ampm	IL CR	revenue	Israeli AM:PM chain vs small Costa Rican chain
+apu	MN FI	revenue	APU (Mongolian beverage group) vs Finnish magazine
+argos	GB NL	revenue	Argos (Sainsbury's, ~GBP 4B) vs Argos Energies
+as	ES CZ	consumer	sports daily AS vs Zdas machinery
+atlantic	FR PL	revenue	Groupe Atlantic (~EUR 3B) vs Polish fashion label
+atos	FR KR	revenue	Atos SE vs discontinued Hyundai Atos
+austral	FR CL	revenue	Renault Austral vs Chilean beer
+axess	TR AT	consumer	Akbank's Axess credit card vs ski-ticketing supplier
+bacchus	KR BE	revenue	Dong-A's Bacchus vs small Belgian beer
+barcel	ES MX	revenue	Barcelo Group (~EUR 5B) vs Bimbo's Barcel snacks
+barwa	QA PL	revenue	Barwa Real Estate vs Polish cosmetics
+bci	CL MZ	revenue	Banco de Credito e Inversiones vs Mozambican BCI
+bianchi	IT CO	revenue	Bianchi bicycles vs Colombian candy maker
+bit	LT IL	revenue	Bite telecom vs Bank Hapoalim's payment app
+blow	DK PL	revenue	Lakrids by Bulow vs small Polish electronics
+bm	TR GB	revenue	BIM (~$10B+) vs B&M (~GBP 5.5B)
+bmc	TR CH	revenue	BMC trucks/defence vs BMC bicycles
+bq	GB ES	revenue	B&Q (Kingfisher) vs BQ electronics
+br	AT DK IS	revenue	B&R (ABB) vs BR toys vs Icelandic beer
+brandt	FR DE	revenue	Brandt appliances vs Brandt zwieback
+brisa	TR PT CO	revenue	Brisa (Bridgestone-Sabanci) vs Brisa toll roads vs bottled water
+btc	BS BW	revenue	Bahamas Telecom vs Botswana Telecom
+btv	KR AT PT BW	revenue	SK Broadband's Btv vs Austrian regional bank
+campus	JP PL	revenue	Kokuyo Campus notebooks vs Polish sportswear
+candia	FR GR	revenue	Sodiaal's Candia milk vs Greek furniture
+cbc	CA BE	revenue	CBC/Radio-Canada vs KBC's Walloon bank
+centauro	BR ES	revenue	Centauro (Grupo SBF) vs Spanish car rental
+cfe	MX BE	revenue	Comision Federal de Electricidad vs CFE contractor
+champion	US NG	revenue	Champion apparel vs Nigerian beer
+clubhouse	CA US	revenue	McCormick's Club House spices vs Clubhouse app
+colbn	CL CO	revenue	Colbun power vs Colombian glue brand
+compal	TW PT	revenue	Compal Electronics vs Sumol+Compal juice
+coop	CH IT GB NL	revenue	Coop CH (~CHF 34B) > Coop Italia > Co-op Group > Coop NL
+coral	GR GB PT	revenue	Coral fuel (Motor Oil) vs Entain's Coral vs Madeira beer
+corsair	US FR	revenue	Corsair Gaming vs Corsair airline
+costes	NL HU	revenue	Costes fashion chain vs Budapest restaurant
+cova	FR IT	revenue	Covea insurance vs Pasticceria Cova
+crystal	CO BZ	revenue	Crystal SAS apparel vs Belize bottled water
+csl	AU HK	revenue	CSL Limited vs HK telecom
+cultura	FR DK	revenue	Cultura retail vs Danish food brand
+daum	KR FR	revenue	Kakao's Daum vs Daum crystal
+drtv	DK CG	revenue	Danish public broadcaster vs Congolese channel
+dst	PT BN	revenue	DST construction group vs Brunei telecom
+dupont	US BE	revenue	DuPont vs Brasserie Dupont
+electra	IL CV	revenue	Electra group vs Cape Verde utility
+elephantcastle	CA IE	revenue	Canadian pub chain vs single Dublin restaurant
+elite	CL IL GR GB	revenue	Elite (Essity/CMPC tissue) vs Strauss Elite vs Greek and UK brands
+elm	SA HU	revenue	Elm Company vs ELMU utility
+esquire	US KR	consumer	Esquire magazine vs Korean shoemaker
+eta	CH CZ NZ	revenue	Swatch's ETA vs Czech appliances vs NZ snacks
+exame	BR PT	revenue	Brazilian business magazine vs Portuguese edition
+fischer	DE AT CZ FR	revenue	fischerwerke vs Fischer skis vs travel vs beer
+fortaleza	BR ES MX	revenue	Fortaleza EC vs Cafe Fortaleza vs small tequila
+fortis	CA BE CH	revenue	Fortis Inc. vs BNP Paribas Fortis vs watches
+foursquare	NZ BB	revenue	Foodstuffs' Four Square vs Barbados rum
+gallo	GT ES PT	revenue	Cerveceria Centro Americana vs Pastas Gallo vs olive oil
+gbm	MX MR	revenue	Grupo Bursatil Mexicano vs Mauritanian bank
+geni	SI IL	revenue	GEN-I energy trader vs Geni.com
+gira	DE PT	revenue	Gira electrical vs Lisbon bike share
+globus	DE CH HU	revenue	Globus hypermarkets vs Swiss department store vs food
+go	MT FR	revenue	GO plc vs GEO magazine
+goon	JP DK	revenue	Daio Paper's goo.n diapers vs Danish energy firm
+greggs	GB NZ	revenue	Greggs plc vs NZ food brand
+gull	NZ IS	revenue	Gull fuel vs Icelandic beer
+haba	TR DE	revenue	Habas industrial group vs HABA toys
+hema	CN NL	revenue	Alibaba's Hema (~CNY 60B) vs HEMA (~EUR 1.4B)
+hera	IT KR	revenue	Hera utility vs Amorepacific's Hera
+hero	CH NG	revenue	Hero Group vs AB InBev Nigeria's Hero beer
+highlanders	NZ ZW	revenue	Super Rugby franchise vs Bulawayo football club
+homecenter	CL IL	revenue	Sodimac Homecenter vs Israeli Home Center
+hugel	KR FR	revenue	Hugel Inc. vs Famille Hugel wine
+humana	US DE	revenue	Humana Inc. vs Humana baby food
+humax	KR CO	revenue	Humax vs Colombian pharma
+ice	DE CR NO	revenue	Deutsche Bahn's ICE vs Costa Rican ICE vs Ice telecom
+igo	AU CA HU	revenue	IGO Limited vs Iogo yogurt vs iGO navigation
+imbank	KR KE	revenue	iM Bank (DGB) vs I&M Bank Kenya
+isabel	ES BE	revenue	Garavilla's Isabel tuna vs Isabel Group software
+jacobs	DE IE	revenue	JDE's Jacobs coffee vs Jacob's biscuits
+jcb	GB JP	revenue	JCB machinery (GBP 6.5B) vs JCB card (JPY 466B)
+jensen	NO GB	revenue	Jensen beds vs defunct Jensen Motors
+joker	NO TR	revenue	NorgesGruppen's Joker vs Turkish baby retailer
+jordan	US NO	revenue	Nike's Jordan vs Jordan toothbrushes
+jumbo	NL CL GR CO TR	revenue	Jumbo (~EUR 10B) > Cencosud's Jumbo > Jumbo SA (GR)
+jura	CH GB	revenue	JURA coffee machines vs Jura whisky
+jyp	KR FI	revenue	JYP Entertainment vs JYP Jyvaskyla
+kaiser	BR AT DE LI	revenue	Heineken Brazil's Kaiser vs Brau Union's Kaiser
+kbc	BE KE	revenue	KBC Group vs Kenya Broadcasting Corporation
+keba	AT TR	revenue	KEBA automation vs Kosebasi restaurants
+kgi	TW CH	revenue	KGI Financial vs Kagi wafers
+kik	DE CA	revenue	KiK discount retailer vs Kik messenger
+komax	CH KR	revenue	Komax Group vs Korean housewares
+lacroix	US FR	revenue	National Beverage's LaCroix vs Bayard's La Croix
+lagerhaus	AT SE	revenue	Raiffeisen Lagerhaus vs Swedish homeware chain
+lan	CL IE	revenue	LAN (LATAM) vs defunct Elan
+lechat	FR BE	revenue	Henkel's Le Chat detergent vs Belgian magazine
+legrand	FR PL	revenue	Legrand SA vs Polish sportswear
+len	ES TR MX	revenue	SEAT/Cupra Leon vs Solen confectionery vs Leon beer
+leschos	FR ML	revenue	Les Echos (LVMH) vs Malian daily
+lic	IN NZ	revenue	Life Insurance Corporation of India vs NZ dairy co-op
+lindemans	AU BE	revenue	TWE's Lindeman's wine vs Lindemans brewery
+loewe	ES DE	revenue	LVMH's Loewe vs Loewe TVs
+lotus	BE GB ES	revenue	Lotus Bakeries vs Lotus Cars vs Lotus watches
+lowes	US AU	revenue	Lowe's Companies vs Lowes menswear
+marcopolo	BR DE	revenue	Marcopolo buses vs Marc O'Polo
+matiz	KR CO	revenue	Daewoo/Chevrolet Matiz vs Colombian coffee
+maxima	LT JP	revenue	Maxima Grupe (~EUR 5B) vs Nissan Maxima model
+maxims	HK FR	revenue	Maxim's Caterers vs Maxim's de Paris
+meli	ES BE	revenue	Melia Hotels vs Meli honey
+merkur	AT SI CZ	revenue	REWE's Merkur vs Slovenian Merkur vs toys
+metrobank	PH GB	revenue	Metrobank Philippines vs Metro Bank UK
+milo	AU NO	revenue	Nestle's Milo vs Norwegian household brand
+modelo	MX PT	revenue	Grupo Modelo beer vs Continente Modelo
+morgan	FR GB	revenue	Morgan fashion vs Morgan Motor Company
+mustang	US DE ES CO	revenue	Ford Mustang vs Mustang jeans vs shoes vs cigarettes
+nos	PT NL SE	revenue	NOS telecom vs Dutch public broadcaster
+ob	KR SE	revenue	Oriental Brewery vs OoB discount chain
+obic	JP IT	revenue	OBIC Co. vs Obica restaurants
+ocn	KR CZ	revenue	CJ ENM's OCN vs small Czech outdoor brand
+odfjell	NO CL	revenue	Odfjell SE shipping vs Odfjell Vineyards
+oma	MX PL	revenue	OMA airports vs Van Pur's Lomza beer
+orange	FR GB	revenue	Orange SA vs Orange amplifiers
+paloma	JP SI	revenue	Paloma water heaters (Rheem owner) vs Slovenian paper
+peacock	US KR	revenue	NBCU's Peacock vs E-mart's Peacock label
+picard	FR DE	revenue	Picard Surgeles vs Picard leather goods
+pinguin	BE CZ	revenue	Greenyard's Pinguin frozen veg vs Czech sports brand
+polar	VE FI PL	revenue	Empresas Polar vs Polar Electro vs Polar appliances
+postbus	CH AT	revenue	PostAuto/PostBus CH vs OBB Postbus
+ppc	GR ZA	revenue	Public Power Corporation vs PPC cement
+presidente	DO MX	revenue	Cerveceria Nacional Dominicana vs Presidente brandy
+primus	CD BE SE CL MX	revenue	Bralima (Heineken) Primus vs Haacht Primus vs stoves
+pse	PL CO	revenue	Polskie Sieci Elektroenergetyczne vs Colombian payment network
+ramada	US PT	revenue	Wyndham's Ramada vs Ramada Acos
+ray	KR FI	revenue	Kia Ray vs defunct Finnish slot association
+rba	HU RW	revenue	Raba automotive vs Rwanda Broadcasting Agency
+record	BR PT	revenue	RecordTV vs Record sports daily
+rider	BR CZ	revenue	Grendene's Rider vs Czech software firm
+robinhood	US CA SR	revenue	Robinhood Markets vs Robin Hood flour vs Surinamese club
+rog	TW SI	revenue	ASUS ROG vs Rog bicycles
+rtl	DE LU	revenue	RTL Deutschland vs RTL Letzebuerg
+rv	DE IS	revenue	R+V Versicherung vs RUV
+sanlorenzo	IT AR	revenue	Sanlorenzo yachts vs San Lorenzo club
+santanna	IT PT	revenue	Acqua Sant'Anna vs Portuguese ceramics
+santos	AU FR BR	revenue	Santos Ltd vs Cartier Santos vs Santos FC
+sats	SG NO	revenue	SATS Ltd vs Sats gyms
+sea	SG CL	revenue	Sea Limited vs Sena wine
+seb	FR SE	consumer	Groupe SEB vs SEB bank: revenues similar, appliances more consumer
+securitas	SE CH	revenue	Securitas AB vs Securitas Swiss group
+selecta	CH DE PY	revenue	Selecta vending vs Selecta toys vs yerba mate
+sika	CH PE	revenue	Sika AG vs Belcorp's Esika
+skylark	JP IL	revenue	Skylark Holdings vs Elbit's Skylark drone
+smcp	FR MR	revenue	SMCP fashion group vs Mauritanian food firm
+socar	AZ KR	revenue	State Oil Company of Azerbaijan vs Socar car sharing
+spc	KR AU	revenue	SPC Group vs SPC Ardmona
+star	NG PL	revenue	Nigerian Breweries' Star vs defunct Star trucks
+sto	DE MV	revenue	Sto SE vs State Trading Organisation
+supra	JP FR	revenue	Toyota Supra vs Supra stoves
+ta	EC TR DE	revenue	Tia supermarkets vs Tac textiles vs T+A audio
+theherald	GB ZW	revenue	The Herald (Glasgow) vs Zimbabwe's The Herald
+thepeninsula	HK QA	revenue	Peninsula Hotels (HSH) vs Qatari daily
+think	AT NO	revenue	Think! shoes vs defunct Think EV maker
+tide	US GB NO	revenue	P&G's Tide vs Tide business banking vs Tide buses
+tofa	TR PT	revenue	Tofas (Fiat JV) vs Portuguese coffee
+topaz	IE PL	revenue	Topaz fuel (Applegreen) vs Polish retailer
+trafic	FR BE	revenue	Renault Trafic vs Belgian discount chain
+ucb	BE CM	revenue	UCB pharma vs Cameroonian brewer
+unitel	AO MN BO	revenue	Unitel Angola vs Unitel Mongolia vs Bolivian TV
+ushuaa	FR ES	revenue	Ushuaia cosmetics vs Ibiza club
+vpbank	VN LI	revenue	VPBank Vietnam vs VP Bank Liechtenstein
+zalo	VN NO	consumer	Zalo messenger vs Norwegian household brand
+zebra	US JP	revenue	Zebra Technologies vs Zebra pens

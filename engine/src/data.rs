@@ -113,39 +113,64 @@ pub struct Data {
 pub struct EnKo {
     /// Lowercase word → (its Korean words, the word in Hangul).
     words: HashMap<String, (Vec<String>, String)>,
-    /// A name's letters, lowercase → its Hangul spellings (several brands may share a name).
+    /// A name's letters, lowercase → its Hangul spellings (several brands may share a name), in the
+    /// order of the `#! order` section, if it lists the name.
     names: HashMap<String, Vec<String>>,
 }
 
 impl EnKo {
     /// From `en-ko.tsv`: common words (`english<TAB>korean, …<TAB>hangul<TAB>pos`), then after a
-    /// `#! brands` line, brand names (`name<TAB>hangul<TAB>category`).
+    /// `#! brands` line, brand names (`name<TAB>hangul<TAB>category`; a name with digits never
+    /// matches, as only letters are looked up), then after a `#! order` line, which Hangul comes first
+    /// where brands share a name (`key<TAB>hangul, hangul, …`: `engine/data/en-ko/shared-order.tsv`).
     pub fn parse(tsv: &str) -> EnKo {
         let mut e = EnKo::default();
-        let mut brands = false;
+        let mut section = "words";
+        let mut order: Vec<(String, Vec<String>)> = Vec::new();
         for line in tsv.lines() {
-            if line.starts_with("#! brands") {
-                brands = true;
+            if let Some(rest) = line.strip_prefix("#! ") {
+                section = match rest.split_whitespace().next() {
+                    Some("brands") => "brands",
+                    Some("order") => "order",
+                    _ => section,
+                };
                 continue;
             }
             if line.starts_with('#') || line.trim().is_empty() {
                 continue;
             }
             let f: Vec<&str> = line.split('\t').collect();
-            if brands {
-                let (Some(name), Some(hangul)) = (f.first(), f.get(1)) else { continue };
-                let key: String = name.chars().filter(|c| c.is_ascii_alphabetic()).collect::<String>().to_ascii_lowercase();
-                if key.is_empty() || hangul.is_empty() {
-                    continue;
+            match section {
+                "brands" => {
+                    let (Some(name), Some(hangul)) = (f.first(), f.get(1)) else { continue };
+                    if name.chars().any(|c| c.is_ascii_digit()) {
+                        continue;
+                    }
+                    let key: String = name.chars().filter(|c| c.is_ascii_alphabetic()).collect::<String>().to_ascii_lowercase();
+                    if key.is_empty() || hangul.is_empty() {
+                        continue;
+                    }
+                    let list = e.names.entry(key).or_default();
+                    if !list.iter().any(|h| h == hangul) {
+                        list.push(hangul.to_string());
+                    }
                 }
-                let list = e.names.entry(key).or_default();
-                if !list.iter().any(|h| h == hangul) {
-                    list.push(hangul.to_string());
+                "order" => {
+                    let (Some(key), Some(list)) = (f.first(), f.get(1)) else { continue };
+                    order.push((key.to_string(), list.split(',').map(|h| h.trim().to_string()).filter(|h| !h.is_empty()).collect()));
                 }
-            } else {
-                let (Some(word), Some(korean), Some(hangul)) = (f.first(), f.get(1), f.get(2)) else { continue };
-                let korean: Vec<String> = korean.split(',').map(|k| k.trim().to_string()).filter(|k| !k.is_empty()).collect();
-                e.words.entry(word.to_lowercase()).or_insert((korean, hangul.to_string()));
+                _ => {
+                    let (Some(word), Some(korean), Some(hangul)) = (f.first(), f.get(1), f.get(2)) else { continue };
+                    let korean: Vec<String> = korean.split(',').map(|k| k.trim().to_string()).filter(|k| !k.is_empty()).collect();
+                    e.words.entry(word.to_lowercase()).or_insert((korean, hangul.to_string()));
+                }
+            }
+        }
+        // The listed spellings first, in order; any others after, as they were.
+        for (key, first) in order {
+            if let Some(list) = e.names.get_mut(&key) {
+                let rank = |h: &String| first.iter().position(|f| f == h).unwrap_or(usize::MAX);
+                list.sort_by_key(rank);
             }
         }
         e
@@ -162,7 +187,7 @@ impl EnKo {
         })
     }
 
-    /// A capitalized name's readings: its Hangul spellings.
+    /// A name's readings: its Hangul spellings, the first-ranked first.
     pub fn name(&self, letters: &str) -> &[String] {
         self.names.get(&letters.to_ascii_lowercase()).map_or(&[], Vec::as_slice)
     }
@@ -305,5 +330,23 @@ mod tests {
         assert!(d.is_english("Hello"));
         assert_eq!(d.korean_count("ㅋㅋ"), 9);
         assert_eq!(d.oecd[0].0, "美");
+    }
+}
+
+#[cfg(test)]
+mod en_ko_tests {
+    use super::EnKo;
+
+    #[test]
+    fn brand_order_and_digits() {
+        let e = EnKo::parse(
+            "#! brands\nAdmiral\t아드미랄\tgaming\nAdmiral\t애드미럴\tsportswear\nA3\t에이쓰리\tcar model\nA1\t에이원\ttelecom\n#! order\nadmiral\t애드미럴, 아드미랄\n",
+        );
+        assert_eq!(e.name("Admiral"), ["애드미럴", "아드미랄"]);
+        // names with digits never match: A doesn't offer the A3
+        assert!(e.name("a").is_empty());
+        // no order section: file order
+        let e = EnKo::parse("#! brands\nAdmiral\t아드미랄\tgaming\nAdmiral\t애드미럴\tsportswear\n");
+        assert_eq!(e.name("admiral"), ["아드미랄", "애드미럴"]);
     }
 }
