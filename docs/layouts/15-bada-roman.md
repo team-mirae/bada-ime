@@ -65,7 +65,10 @@ Built (`engine/src/bada_roman.rs`; key map `15-bada-roman.json`, written by
   first-row hits from 93.4 / 97.0 / 95.9% to 96.3 / 99.9 / 97.8% (Common Voice / common words / law).
 - **Punctuation ends the word.** A key that types a character as it is (⇧. ⇧, ⇧/ … , ⇧ digits, `/`,
   `-` where it doesn't lengthen) commits what shows, then the character, so it can't change the
-  reading before it: `hanguk` ⇧. → 한국.
+  reading before it: `hanguk` ⇧. → 한국. Not when another enabled layout, QWERTY aside, types
+  that key as part of a word (kana's る on `.`, あ on `3`; bada's jamo on the number row): then
+  the key is staged as usual, and a bada roman reading with letters after such a key ranks under
+  the others (`3 6 e` shows 青い, not 36에).
 - **`ts` is a final ㅆ** (`t`, a final ㅅ, and `s` again): `its` 있; before a vowel the default
   gives `s` to the next syllable (`itseo` 잇서) and 있어, a known word, ranks first.
 - **`h` is a final ㅎ** too: `joh` 좋. Before a vowel the default gives `h` to the next syllable

@@ -617,7 +617,14 @@ impl Engine {
                     };
                     let count = self.ko_count(&user, &default);
                     let loose = default.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
-                    let score = if count > 0 {
+                    // A digit or symbol with letters after it: alone, layout 15 would have ended the
+                    // word there; it was staged because another layout types the key (kana's あ on 3),
+                    // so this reading is unlikely (36에, not 青い).
+                    let inside = (0..self.presses.len().saturating_sub(1))
+                        .any(|i| crate::bada_roman::literal(&self.presses[..i], self.presses[i]).is_some());
+                    let score = if inside {
+                        30.0
+                    } else if count > 0 {
                         100.0 + (count as f64).ln()
                     } else if loose {
                         40.0
@@ -1096,9 +1103,13 @@ impl Engine {
         }
         // bada roman: punctuation (and digits) end the word. What shows is committed first, so the
         // character can't re-rank it (한국 stays 한국 when . follows). ⌥; is ·, the one ⌥ key it takes.
-        if key.is_kana_space() && self.over.is_none() && self.candidates(&self.profile).contains(&BADA_ROMAN) {
+        // Not when another enabled layout types the key as part of a word (kana's ぬ on 1, bada's
+        // jamo on the number row): then it's staged as usual. QWERTY doesn't count.
+        let candidates = self.candidates(&self.profile);
+        if key.is_kana_space() && self.over.is_none() && candidates.contains(&BADA_ROMAN) {
             let press = Press { key, shift: mods.shift, alt: mods.alt };
-            if let Some(c) = crate::bada_roman::literal(&self.presses, press) {
+            let others = candidates.iter().any(|&id| id != BADA_ROMAN && id != QWERTY && layout::takes(id, press));
+            if let Some(c) = crate::bada_roman::literal(&self.presses, press).filter(|_| !others) {
                 let mut text = if self.staged() { self.take_shown() } else { String::new() };
                 text.push(c);
                 return consumed(text);
@@ -1828,6 +1839,33 @@ mod tests {
         // after e, - is ㅐ, not punctuation
         letters(&mut e, "se");
         assert_eq!(press(&mut e, Minus).preedit, "새");
+    }
+
+    #[test]
+    fn bada_roman_punctuation_stays_staged_for_kana() {
+        // With kana (20) on, . is る and 3 is あ: they stay staged, and the reading with letters after
+        // a digit or symbol ranks under the others
+        let mut e = bada_roman();
+        let mut s = e.settings().clone();
+        s.enabled = vec![QWERTY, BADA_ROMAN, KANA];
+        e.set_settings(s);
+        letters(&mut e, "h");
+        let out = press(&mut e, Period);
+        assert_eq!((out.commit.as_str(), out.consumed), ("", true));
+        assert!(out.menu.iter().any(|m| m == "くる"), "{:?}", out.menu);
+        e.flush();
+        press(&mut e, Digit3);
+        press(&mut e, Digit6);
+        let out = letters(&mut e, "e");
+        assert_eq!(out.commit, "");
+        assert_ne!(out.preedit, "36에", "{:?}", out.menu);
+        // QWERTY alone beside it doesn't count: . still ends the word
+        let mut s = e.settings().clone();
+        s.enabled = vec![QWERTY, BADA_ROMAN];
+        e.set_settings(s);
+        e.flush();
+        letters(&mut e, "hanguk");
+        assert_eq!(press(&mut e, Period).commit, "한국.");
     }
 
     #[test]
