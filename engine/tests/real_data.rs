@@ -305,7 +305,8 @@ fn typed_out(e: &mut Engine, keys: &[(Key, bool)]) -> String {
 fn english_beside_bada_roman() {
     let d = data();
     for (typed, want) in [("interpolate", "interpolate"), ("serendipity", "serendipity"), ("hanguk", "한국"),
-                          ("saram", "사람"), ("jongsok", "종속"), ("sarang", "사랑"), ("gamsa", "감사")] {
+                          ("saram", "사람"), ("jongsok", "종속"), ("sarang", "사랑"), ("gamsa", "감사"),
+                          ("love", "love"), ("told", "told")] {
         let mut e = Engine::new(d.clone());
         e.pin_dictionary(None);
         let mut s = bada::Settings::default();
@@ -315,3 +316,4 @@ fn english_beside_bada_roman() {
         assert_eq!(typed_out(&mut e, &keys), want, "{typed}");
     }
 }
+    // (love, told: common words from the generated part of en-words.txt, `word<TAB>count`)
