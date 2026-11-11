@@ -32,6 +32,7 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
     /// The profile whose F keys the F Keys page shows and edits.
     private var fEditing = BadaProfiles.macKana
     private var fPopups: [NSPopUpButton] = []
+    private var fPresetButton = NSButton()
     private var profilesBox = NSButton()
     private var linkPopups: [String: NSPopUpButton] = [:]
     private var keyLabels: [String: NSTextField] = [:]
@@ -364,6 +365,9 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
             stack.addArrangedSubview(row)
             return popup
         }
+        fPresetButton = NSButton(title: "Japanese IME preset (F6–F10, Japanese Kana)", target: self, action: #selector(japanesePreset(_:)))
+        fPresetButton.toolTip = "F6 hiragana, F7 katakana, F8 half-width katakana, F9 full-width Latin, F10 half-width Latin"
+        stack.addArrangedSubview(fPresetButton)
         stack.addArrangedSubview(help("⇧, ⌥ and ⌃ with an F key: up to the bound method (bada defines none, so they're swallowed)."))
         refreshFKeys(settings)
 
@@ -457,6 +461,27 @@ final class SettingsWindow: NSObject, NSWindowDelegate, NSTabViewDelegate {
             if let item = popup.itemArray.first(where: { $0.representedObject as? String == current }) { popup.select(item) }
             popup.isEnabled = editable && keys.intercept
         }
+        fPresetButton.isEnabled = editable
+    }
+
+    /// The usual keys of macOS's and Windows' Japanese input methods (spec §6.5), bound to Japanese
+    /// (Kana)'s actions, for the profile the page edits: F6 hiragana … F10 half-width Latin.
+    @objc private func japanesePreset(_ sender: Any?) {
+        var settings = BadaSettings.current
+        let preset = BadaFKeys(intercept: true, keys: [
+            "F6": "20.hiragana", "F7": "20.katakana", "F8": "20.halfwidth-katakana",
+            "F9": "20.fullwidth-latin", "F10": "20.halfwidth-latin",
+        ])
+        if fEditing == BadaProfiles.macKana {
+            settings.intercept_f = preset.intercept
+            settings.fkeys = preset.keys
+        } else if settings.profiles[fEditing]?.f_keys != nil {
+            settings.profiles[fEditing]?.f_keys = preset
+        } else {
+            return   // the profile uses かな's F keys: nothing of its own to set
+        }
+        BadaSettings.current = settings
+        refreshFKeys(settings)
     }
 
     @objc private func fProfileChanged(_ sender: NSPopUpButton) {
