@@ -70,6 +70,9 @@ Built (`engine/src/bada_roman.rs`; key map `15-bada-roman.json`, written by
   gives `s` to the next syllable (`itseo` 잇서) and 있어, a known word, ranks first.
 - **`h` is a final ㅎ** too: `joh` 좋. Before a vowel the default gives `h` to the next syllable
   (`joha` 조하), and 좋아 is offered as another reading.
+- **`j` and `z` are a final ㅈ** too, as `t` is (owner, 2026-11-11): `naj` 낮, `jaj` 잦. Before a
+  vowel the default gives them to the next syllable (`naja` 나자), and 낮아 is offered as another
+  reading. `nj` is still ㄵ (`anj` 앉).
 - **`;` separates syllables**: `han;guk` 한국, `hang;uk` 항욱. `-` and `'` don't (unlike Korean
   Roman, 18).
 - **`-` lengthens ㅔ and ㅖ** into ㅐ and ㅒ, as ー does in Korean (Kana), 19: `e-` 애, `se-` 새,

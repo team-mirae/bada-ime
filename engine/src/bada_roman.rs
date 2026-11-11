@@ -48,7 +48,7 @@ const CODAS: &[(&str, &[char])] = &[
     ("ps", &['ㅄ']), ("bs", &['ㅄ']), ("nh", &['ㄶ']), ("nj", &['ㄵ']), ("ks", &['ㄳ']),
     ("k", &['ㄱ', 'ㅋ', 'ㄲ']), ("g", &['ㄱ']), ("n", &['ㄴ']), ("t", &['ㅅ', 'ㄷ', 'ㅆ', 'ㅈ', 'ㅊ', 'ㅌ', 'ㅎ']),
     ("d", &['ㄷ']), ("l", &['ㄹ']), ("r", &['ㄹ']), ("m", &['ㅁ', 'ㅂ']), ("p", &['ㅂ', 'ㅍ']), ("b", &['ㅂ']),
-    ("s", &['ㅅ']), ("h", &['ㅎ']),
+    ("s", &['ㅅ']), ("h", &['ㅎ']), ("j", &['ㅈ']), ("z", &['ㅈ']),
 ];
 
 /// The romaji shortcuts (`ja-shortcuts.tsv`): romaji → its syllables, the most frequent first.
@@ -440,6 +440,16 @@ mod tests {
         assert_eq!(default("zzigae"), "찌개");
         assert_eq!(default("azza"), "아짜");
         assert_eq!(default("zz"), default("jj"));
+        // j and z are a final ㅈ too, as t is
+        assert_eq!(default("naj"), "낮");
+        assert_eq!(default("naz"), "낮");
+        assert_eq!(default("nat"), "낫");
+        assert!(all("nat").contains(&"낮".to_string()));
+        assert_eq!(default("jaj"), "잦");
+        assert_eq!(default("anj"), "앉");
+        assert_eq!(default("naja"), "나자");
+        assert!(all("naja").contains(&"낮아".to_string()));
+        assert!(all("naza").contains(&"낮아".to_string()));
         assert!(all("joha").contains(&"좋아".to_string()));
         assert_eq!(default("joha"), "조하");
         // ⇧⌥: the shifted character; ⌥ alone isn't taken
