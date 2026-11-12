@@ -21,6 +21,11 @@
 - `engine/data/ko-words.tsv`: `python3 engine/tools/build_ko_words.py` (reads the jis-moonshot corpora).
   Then `python3 engine/tools/build_jamo_lm.py` (the typo model, `ko-jamo-4gram.bin`, from ko-words.tsv).
 - `engine/data/en-words.txt`'s `#! rare` section: `python3 engine/tools/build_en_rare.py` (from macOS's `/usr/share/dict/words`).
+- `engine/data/key-models.bin` (the layout-set ranker, spec §7.0; built into the engine):
+  `tools/analysis/.venv/bin/python engine/tools/build_keymodel.py` (a few minutes; reads the jis-moonshot corpora,
+  `engine/tools/cache/robot`, ko-words.tsv and the layout JSONs). It leaves out the sentences the layout sets are
+  measured on, listed in `engine/tools/cache/robot-sets/exclude-sentences.txt` (held-out corpora: `robot-sets/test`,
+  for `ROBOT_SETS_CORPORA`). Rebuild after changing a layout's keys or ko-words.tsv.
 - `engine/data/en-ko/shared-order.tsv` (layout 15, brands sharing a name): `python3 engine/tools/build_shared_order.py`
   (from `brands/*.tsv` and the curated `shared-rank.tsv`); rerun after editing either.
 - `engine/data/emoji.tsv`, `unicode-names.tsv`: `python3 engine/tools/build_unicode_data.py` (Unicode files in

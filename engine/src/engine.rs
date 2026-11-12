@@ -12,7 +12,8 @@ use serde::{Deserialize, Serialize};
 use crate::data::Data;
 use crate::japanese;
 use crate::key::{Key, Mods};
-use crate::layout::{self, BADA, BADA_ROMAN, K3S_JIS, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI, SYMBOLS, UNICODE};
+use crate::keymodel::KeyModels;
+use crate::layout::{self, BADA, BADA_PLAIN, BADA_ROMAN, K3S_JIS, KANA, KANA_KOREAN, KOREAN_ROMAN, KTS, LEGACY_KOREAN, LEGACY_MOONSHOT, Press, QWERTY, ROMAJI, SYMBOLS, UNICODE};
 use crate::userdict::{Language, Strength, UserDict};
 use crate::width::{Width, convert};
 
@@ -48,7 +49,7 @@ pub struct Settings {
 impl Default for Settings {
     fn default() -> Settings {
         Settings {
-            enabled: vec![BADA],
+            enabled: vec![BADA_PLAIN],
             profiles: BTreeMap::new(),
             weights: HashMap::new(),
             default_muhenkan: QWERTY,
@@ -73,6 +74,21 @@ const COMMON_ROWS: usize = 3;
 const CONVERSIONS: usize = 6;
 /// Japanese: how far down the conversions the user's own words are looked for.
 const USER_CONVERSIONS: usize = 32;
+
+/// The key models (§7.0, keymodel.rs). A layout's evidence is KEY_POINTS for every nat of its share
+/// among the layouts that read the keys: one ten times less likely than the rest loses about 11.
+const KEY_POINTS: f64 = 5.0;
+/// What a word that goes on after the last staged key counts for, beside one that ends there. A
+/// commit only ever sees a word that has ended; while it's being typed, the keys so far say more.
+const KEY_GOES_ON: f64 = 0.02;
+/// The most a layout loses to the key models: less than SET_SCORE, so its first reading stays
+/// above zero, where a layout weighted 0 is.
+const KEY_FLOOR: f64 = 60.0;
+/// In a set, where every layout's first reading starts before its evidence; more when the tiers
+/// know it as a word (85 and up), more again when the word is the user's own (§8).
+const SET_SCORE: f64 = 80.0;
+const SET_KNOWN: f64 = 5.0;
+const SET_OWN: f64 = 40.0;
 
 /// A henkan profile (§6.6): its own candidates, or a link to another profile.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
@@ -122,6 +138,12 @@ pub const ACTIONS: &[(u32, &str, &str)] = &[
     (BADA_ROMAN, "finals", "Final consonants only, syllables without one dropped: staged text, else selection (한국 → ㄴㄱ)"),
     (BADA_ROMAN, "fullwidth-latin", "Full-width Latin (the keys as QWERTY)"),
     (BADA_ROMAN, "halfwidth-latin", "Half-width Latin (the keys as QWERTY)"),
+    (BADA_PLAIN, "qwerty-fullwidth", "QWERTY, full-width"),
+    (BADA_PLAIN, "qwerty-halfwidth", "QWERTY, half-width"),
+    (BADA_PLAIN, "initials", "Initial consonants only: staged text, else selection (한국 → ㅎㄱ)"),
+    (BADA_PLAIN, "vowels", "Vowels only: staged text, else selection (한국 → ㅏㅜ)"),
+    (BADA_PLAIN, "finals", "Final consonants only, syllables without one dropped: staged text, else selection (한국 → ㄴㄱ)"),
+    (BADA_PLAIN, "commit-bare", "Commit as typed, implied ㅇ dropped (가어 → 가ㅓ)"),
     (LEGACY_KOREAN, "commit", "Commit as typed (this layout's reading, no ranking)"),
     (LEGACY_KOREAN, "commit-bare", "Commit as typed, implied ㅇ dropped (가어 → 가ㅓ)"),
     (LEGACY_MOONSHOT, "commit", "Commit as typed (this layout's reading, no ranking)"),
@@ -204,7 +226,7 @@ fn syllable_distance(a: &str, b: &str) -> usize {
     row[b.len()]
 }
 
-/// Layout 15's actions that keep one jamo of each syllable.
+/// The actions of layouts 15 and 16 that keep one jamo of each syllable.
 fn keep(action: &str) -> Option<crate::bada_roman::Keep> {
     use crate::bada_roman::Keep;
     match action {
@@ -506,6 +528,11 @@ impl Engine {
         format!("{}{}", self.prefix, entry.map_or("", |e| e.text.as_str()))
     }
 
+    /// Whether the entry that shows is layout `id`'s.
+    fn shows(&self, id: u32) -> bool {
+        self.index >= 0 && self.entries.get(self.index as usize).is_some_and(|e| e.source == Some(id))
+    }
+
     fn clear(&mut self) {
         self.prefix.clear();
         self.presses.clear();
@@ -528,6 +555,40 @@ impl Engine {
     /// How often a Korean word is seen: the built-in count plus the user dictionary's.
     fn ko_count(&self, user: &Option<std::sync::Arc<UserDict>>, word: &str) -> u32 {
         self.data.korean_count(word) + user.as_ref().map_or(0, |u| u.count(Language::Korean, word))
+    }
+
+    /// The key models' evidence for each candidate (§7.0): KEY_POINTS × ln of its share when the
+    /// staged keys are scored under the model of every candidate that reads them. None for a
+    /// candidate that doesn't read the keys or has no model (19, the searches), and for all of
+    /// them unless two have one: a layout alone is ranked as it always was.
+    fn key_evidence(&self, enabled: &[u32]) -> Vec<Option<f64>> {
+        let none = vec![None; enabled.len()];
+        let Some(models) = KeyModels::built_in() else { return none };
+        // A press with ⌥ is the key's shifted JIS character in every layout that reads it (kana:
+        // its full-width form), so it says nothing about which layout is meant: the models see
+        // the other keys.
+        let plain = self.presses.iter().filter(|p| !p.alt);
+        let Some(symbols) = plain.map(|&p| crate::keymodel::symbol(p)).collect::<Option<Vec<u8>>>() else {
+            return none;
+        };
+        if symbols.is_empty() {
+            return none;
+        }
+        let scores: Vec<Option<f64>> = enabled
+            .iter()
+            .map(|&id| {
+                let reads = self.presses.iter().all(|&p| layout::takes(id, p));
+                // The keys as the start of a word, which ends at the last one or (counted less) goes on.
+                let whole = |(keys, end): (f64, f64)| keys + (end.exp() * (1.0 - KEY_GOES_ON) + KEY_GOES_ON).ln();
+                models.score(id, &symbols).filter(|_| reads).map(whole)
+            })
+            .collect();
+        if scores.iter().flatten().count() < 2 {
+            return none;
+        }
+        let best = scores.iter().flatten().copied().fold(f64::NEG_INFINITY, f64::max);
+        let total = best + scores.iter().flatten().map(|s| (s - best).exp()).sum::<f64>().ln();
+        scores.iter().map(|s| s.map(|s| (KEY_POINTS * (s - total)).max(-KEY_FLOOR))).collect()
     }
 
     fn recompute(&mut self) {
@@ -553,6 +614,7 @@ impl Engine {
             return;
         }
         let enabled = self.candidates(&self.profile);
+        let evidence = self.key_evidence(&enabled);
         let mut entries: Vec<Entry> = Vec::new();
         let user = match &self.pinned {
             Some(pinned) => pinned.clone(),
@@ -714,7 +776,7 @@ impl Engine {
                         }
                     }
                 }
-                KTS | LEGACY_KOREAN | LEGACY_MOONSHOT | BADA | K3S_JIS => {
+                KTS | LEGACY_KOREAN | LEGACY_MOONSHOT | BADA | K3S_JIS | BADA_PLAIN => {
                     let text = layout::compose_presses(id, &self.presses);
                     let count = self.ko_count(&user, &text);
                     let loose = text.chars().any(|c| ('\u{3131}'..='\u{3163}').contains(&c));
@@ -854,19 +916,32 @@ impl Engine {
             entries[start..].iter_mut().for_each(|e| {
                 e.source.get_or_insert(id);
             });
+            let language = match id {
+                QWERTY => Language::English,
+                KANA | ROMAJI => Language::Japanese,
+                _ => Language::Korean,
+            };
+            // In a set the key models compare the layouts (§7.0). This layout's rows move together,
+            // so its own order stays: its first reading to SET_SCORE, more for a known word and
+            // for a word of the user's. The evidence itself comes after the weight.
+            let first = entries[start..].iter().max_by(|a, b| a.score.total_cmp(&b.score)).map(|e| (e.score, e.text.clone()));
+            let evidence = evidence[rank].zip(first).map(|(evidence, (top, text))| {
+                let known = if top > 84.0 { SET_KNOWN } else { 0.0 };
+                let own = if user.as_ref().is_some_and(|u| u.count(language, &text) > 0) { SET_OWN } else { 0.0 };
+                entries[start..].iter_mut().for_each(|e| e.score += SET_SCORE + known + own + tie - top);
+                evidence
+            });
             // The layout's weight (§5.3), on everything it raised.
             let weight = self.settings.weights.get(&id).copied().filter(|w| w.is_finite()).map_or(1.0, |w| w.clamp(0.0, 10.0));
             if weight != 1.0 {
                 entries[start..].iter_mut().for_each(|e| e.score *= weight);
             }
+            if let Some(evidence) = evidence {
+                entries[start..].iter_mut().for_each(|e| e.score += evidence);
+            }
             // The user's negative words (docs/dictionary-contract.md): soft ones far down, strong
             // ones gone.
             if let Some(u) = &user {
-                let language = match id {
-                    QWERTY => Language::English,
-                    KANA | ROMAJI => Language::Japanese,
-                    _ => Language::Korean,
-                };
                 let mut i = start;
                 while i < entries.len() {
                     match u.negative(language, &entries[i].text) {
@@ -1173,12 +1248,22 @@ impl Engine {
         // bada roman: punctuation (and digits) end the word. What shows is committed first, so the
         // character can't re-rank it (한국 stays 한국 when . follows). ⌥; is ·, the one ⌥ key it takes.
         // Not when another enabled layout types the key as part of a word (kana's ぬ on 1, bada's
-        // jamo on the number row): then it's staged as usual. QWERTY doesn't count.
+        // jamo on the number row): then it's staged as usual. QWERTY counts only while its own
+        // reading shows, before the key and with it (It's, U.S.): then it is typing through the key.
         let candidates = self.candidates(&self.profile);
         if key.is_kana_space() && self.over.is_none() && candidates.contains(&BADA_ROMAN) {
             let press = Press { key, shift: mods.shift, alt: mods.alt };
             let others = candidates.iter().any(|&id| id != BADA_ROMAN && id != QWERTY && layout::takes(id, press));
             if let Some(c) = crate::bada_roman::literal(&self.presses, press).filter(|_| !others) {
+                if self.shows(QWERTY) {
+                    self.presses.push(press);
+                    self.recompute();
+                    if self.shows(QWERTY) {
+                        return consumed(String::new());
+                    }
+                    self.presses.pop();
+                    self.recompute();
+                }
                 let mut text = if self.has_staged() { self.take_shown() } else { String::new() };
                 text.push(c);
                 return consumed(text);
@@ -1349,6 +1434,38 @@ impl Engine {
             }
             return out;
         }
+        if method == BADA_PLAIN {
+            // docs/layouts/16-bada-plain.md: bada's QWERTY actions, bada roman's jamo actions and
+            // the legacy layouts' commit-bare.
+            let width = match action {
+                "qwerty-fullwidth" => Some(Width::Full),
+                "qwerty-halfwidth" => Some(Width::Half),
+                _ => None,
+            };
+            if let Some(w) = width {
+                if !self.presses.is_empty() {
+                    self.over = Some(Override::Qwerty(w));
+                    self.recompute();
+                }
+            } else if action == "commit-bare" {
+                if !self.presses.is_empty() {
+                    out.commit = format!("{}{}", self.prefix, layout::compose_bare(method, &self.presses));
+                    self.clear();
+                }
+            } else if let Some(keep) = keep(action) {
+                if self.has_staged() {
+                    let text = self.shown();
+                    self.prefix = crate::bada_roman::keep_jamo(&text, keep);
+                    self.presses.clear();
+                    self.over = None;
+                    self.recompute();
+                } else {
+                    out.need_selection = Some(action.to_string());
+                    self.waiting = out.need_selection.clone();
+                }
+            }
+            return out;
+        }
         if SCRIPT_FORM_METHODS.contains(&method) {
             if !self.presses.is_empty() {
                 self.over = Some(match action {
@@ -1498,6 +1615,8 @@ mod tests {
         );
         let mut e = Engine::new(Arc::new(data));
         e.pin_dictionary(None);
+        // Bada (13) enabled: what most of these tests type on.
+        e.set_settings(Settings { enabled: vec![BADA], ..Settings::default() });
         e
     }
     fn press(e: &mut Engine, k: Key) -> Output {
@@ -1591,6 +1710,7 @@ mod tests {
         assert!(out.consumed);
         assert_eq!(out.preedit, "ㅎ");
         let mut s = Settings::default();
+        s.enabled = vec![BADA];
         s.fkeys.insert("F7".into(), "pass".into());
         s.fkeys.insert("F8".into(), "13.raw".into());
         s.fkeys.insert("F9".into(), "13.qwerty-halfwidth".into());
@@ -1610,6 +1730,7 @@ mod tests {
         }
         assert_eq!(press(&mut e3, F9).preedit, "vhk");
         let mut s = Settings::default();
+        s.enabled = vec![BADA];
         s.intercept_f = false;
         e3.set_settings(s);
         assert!(!press(&mut e3, F6).consumed);
@@ -1619,6 +1740,7 @@ mod tests {
     fn prediction_actions_commit() {
         let mut e = engine();
         let mut s = Settings::default();
+        s.enabled = vec![BADA];
         s.fkeys.insert("F6".into(), "13.prediction-1".into());
         e.set_settings(s);
         // 안녕하세요: ㅇㅏㄴ ㄴㅕㅇ ㅎㅏ ㅅㅔ ㅇㅛ
@@ -1633,6 +1755,7 @@ mod tests {
     fn hanja_staged_selection_and_oecd() {
         let mut e = engine();
         let mut s = Settings::default();
+        s.enabled = vec![BADA];
         s.fkeys.insert("F7".into(), "13.hanja".into());
         e.set_settings(s);
         // 학교: ㅎ ㅏ ㄱ ㄱ ㅛ
@@ -1703,6 +1826,35 @@ mod tests {
     }
 
     #[test]
+    fn kana_shift_option_stays_staged() {
+        // ⇧⌥ + a number or symbol key on kana (20): its shifted JIS character, full-width, staged
+        // with the kana (docs/layouts/20-kana.md). ⇧/ is ・, so ？ has no other key.
+        let mut e = engine();
+        let mut s = Settings::default();
+        s.enabled = vec![KANA];
+        e.set_settings(s);
+        let alt_shift = Mods { alt: true, shift: true, ..Mods::NONE };
+        press(&mut e, KeyT);
+        let out = e.key(Slash, alt_shift);
+        assert_eq!((out.commit.as_str(), out.preedit.as_str(), out.consumed), ("", "か？", true));
+        // typing goes on after it
+        assert_eq!(press(&mut e, KeyT).preedit, "か？か");
+        // ⌥ without ⇧ still commits what's staged and goes to the app (spec §6.3)
+        let out = e.key(Slash, Mods { alt: true, ..Mods::NONE });
+        assert_eq!((out.commit.as_str(), out.consumed), ("か？か", false));
+        // Beside QWERTY the kana reading stays, and the key models go by the other keys (a key
+        // with ⌥ is the same character in every layout): こんにちは？, not byiaf?
+        let mut s = e.settings().clone();
+        s.enabled = vec![QWERTY, KANA];
+        e.set_settings(s);
+        for k in [KeyB, KeyY, KeyI, KeyA, KeyF] {
+            press(&mut e, k);
+        }
+        let out = e.key(Slash, alt_shift);
+        assert_eq!((out.preedit.as_str(), out.menu.iter().any(|m| m == "byiaf?")), ("こんにちは？", true), "{:?}", out.menu);
+    }
+
+    #[test]
     fn henkan_profiles_link_and_switch() {
         let mut e = engine();
         let mut s = Settings::default();
@@ -1752,7 +1904,7 @@ mod tests {
         }
         assert_eq!(e.entries[0].text, "han");
         // bada weighted up past it
-        s.weights.insert(BADA, 3.0);   // its loose-jamo reading scores 40; ×3 beats the word's 90
+        s.weights.insert(BADA, 3.0);   // its reading starts from 80 in a set; ×3 beats the word, whatever the keys look like
         e.set_settings(s.clone());
         assert_ne!(e.entries[0].text, "han");
         // and QWERTY weighted to nothing ranks last
@@ -1760,6 +1912,52 @@ mod tests {
         s.weights.insert(QWERTY, 0.0);
         e.set_settings(s);
         assert_eq!(e.entries.last().unwrap().text, "han");
+    }
+
+    #[test]
+    fn key_models_compare_the_layouts_of_a_set() {
+        // QWERTY's `the` is bada's 판, a known word here: the keys look English, so `the` shows.
+        // Bada's keys for 감사합니다 don't, so Korean shows (§7.0).
+        let data = Data::parse("판\t50\n감사합니다\t70\n", "the\n", "", "");
+        let mut e = Engine::new(Arc::new(data));
+        e.pin_dictionary(None);
+        let mut s = Settings::default();
+        s.enabled = vec![QWERTY, BADA];
+        e.set_settings(s);
+        for k in [KeyT, KeyH, KeyE] {
+            press(&mut e, k);
+        }
+        assert_eq!(e.shown(), "the");
+        assert_eq!(e.entries[1].text, "판");
+        e.flush();
+        for k in [KeyD, KeyH, KeyG, KeyR, KeyH, KeyV, KeyH, KeyB, KeyE, KeyM, KeyA, KeyH] {
+            press(&mut e, k);
+        }
+        assert_eq!(e.shown(), "감사합니다");
+    }
+
+    #[test]
+    fn a_layout_alone_keeps_its_tiers() {
+        // 한 is a known word: 100 + ln(count), with one layout reading the keys
+        let mut e = engine();
+        for k in [KeyV, KeyH, KeyK] {
+            press(&mut e, k);
+        }
+        assert_eq!(e.entries[0].score, 100.0 + 30f64.ln());
+        // ... and beside a layout that has no key model (a search)
+        let mut s = Settings::default();
+        s.enabled = vec![BADA, SYMBOLS];
+        e.set_settings(s.clone());
+        assert_eq!((e.entries[0].text.as_str(), e.entries[0].score), ("한", 100.0 + 30f64.ln()));
+        // Beside QWERTY the key models compare the two: 한 starts from a known word's score in a
+        // set and loses next to nothing, the keys being Korean
+        s.enabled = vec![BADA, QWERTY];
+        e.set_settings(s);
+        let top = &e.entries[0];
+        assert_eq!(top.text, "한");
+        assert!(top.score <= SET_SCORE + SET_KNOWN && top.score > SET_SCORE + SET_KNOWN - 1.0, "{}", top.score);
+        // ... and QWERTY's `vhk` loses no more than KEY_FLOOR
+        assert!((e.entries[1].score - (SET_SCORE - KEY_FLOOR)).abs() < 0.01, "{}", e.entries[1].score);
     }
 
     #[test]
@@ -1809,6 +2007,7 @@ mod tests {
     fn f_keys_per_profile() {
         let mut e = engine();
         let mut s = Settings::default();
+        s.enabled = vec![BADA];
         s.fkeys.insert("F8".into(), "13.raw".into());
         s.profiles.insert("henkan".into(), Profile { link: Some("mac-kana".into()), enabled: vec![], f_keys: Some(FKeys { intercept: false, keys: HashMap::new() }) });
         s.profiles.insert("katakana".into(), Profile { link: Some("mac-kana".into()), enabled: vec![], f_keys: None });
@@ -1938,6 +2137,24 @@ mod tests {
     }
 
     #[test]
+    fn bada_roman_punctuation_stays_staged_while_english_shows() {
+        // Beside QWERTY alone, punctuation ends layout 15's word, but not while QWERTY's reading
+        // shows and still does with the key: It's is typed through
+        let mut e = bada_roman();
+        let mut s = e.settings().clone();
+        s.enabled = vec![QWERTY, BADA_ROMAN];
+        e.set_settings(s);
+        letters(&mut e, "It");
+        let out = shift(&mut e, Digit7);
+        assert_eq!((out.commit.as_str(), out.preedit.as_str()), ("", "It'"));
+        assert_eq!(letters(&mut e, "s").preedit, "It's");
+        assert_eq!(press(&mut e, Space).commit, "It's");
+        // a Korean word showing: the key ends it, as ever
+        letters(&mut e, "hanguk");
+        assert_eq!(shift(&mut e, Digit7).commit, "한국'");
+    }
+
+    #[test]
     fn bada_roman_option_semicolon_is_a_middle_dot() {
         let mut e = bada_roman();
         letters(&mut e, "saengsan");
@@ -2015,6 +2232,53 @@ mod tests {
             press(&mut e, k);
         }
         assert_eq!(press(&mut e, F7).commit, "옫이애");
+    }
+
+    #[test]
+    fn bada_plain_actions() {
+        // docs/layouts/16-bada-plain.md: the QWERTY actions, the jamo actions and commit-bare
+        let mut e = engine();
+        let mut s = Settings::default();
+        assert_eq!(s.enabled, [BADA_PLAIN]);
+        for (key, action) in [("F6", "initials"), ("F7", "commit-bare"), ("F8", "vowels"), ("F9", "qwerty-fullwidth"), ("F10", "qwerty-halfwidth")] {
+            s.fkeys.insert(key.into(), format!("16.{action}"));
+        }
+        e.set_settings(s.clone());
+        // 한국: ㅎ ㅏ ㄴ ㄱ ㅜ ㄱ
+        let hanguk = [KeyH, KeyF, KeyL, KeyK, KeyE, KeyK];
+        hanguk.iter().for_each(|&k| drop(press(&mut e, k)));
+        assert_eq!(press(&mut e, F9).preedit, "ｈｆｌｋｅｋ");
+        assert_eq!(press(&mut e, F10).preedit, "hflkek");
+        e.flush();
+        // one jamo of each syllable stays staged, and typing goes on after it
+        hanguk.iter().for_each(|&k| drop(press(&mut e, k)));
+        let out = press(&mut e, F6);
+        assert_eq!((out.commit.as_str(), out.preedit.as_str()), ("", "ㅎㄱ"));
+        assert_eq!(press(&mut e, KeyF).preedit, "ㅎㄱ아");
+        e.flush();
+        hanguk.iter().for_each(|&k| drop(press(&mut e, k)));
+        assert_eq!(press(&mut e, F8).preedit, "ㅏㅜ");
+        e.flush();
+        s.fkeys.insert("F8".into(), "16.finals".into());
+        e.set_settings(s);
+        hanguk.iter().for_each(|&k| drop(press(&mut e, k)));
+        assert_eq!(press(&mut e, F8).preedit, "ㄴㄱ");
+        e.flush();
+        // nothing staged: the jamo actions ask for the selection
+        assert_eq!(press(&mut e, F6).need_selection.as_deref(), Some("initials"));
+        assert_eq!(e.host_selection("한국").commit, "ㅎㄱ");
+        // commit-bare: 가어 typed ㄱ ㅏ ㅓ commits 가ㅓ; an ㅇ asked for with ⇧ stays, so does 안
+        for k in [KeyK, KeyF, KeyA] {
+            press(&mut e, k);
+        }
+        assert_eq!(press(&mut e, F7).commit, "가ㅓ");
+        press(&mut e, KeyK);
+        press(&mut e, KeyF);
+        shift(&mut e, KeyA);
+        assert_eq!(press(&mut e, F7).commit, "가어");
+        press(&mut e, KeyF);
+        press(&mut e, KeyL);
+        assert_eq!(press(&mut e, F7).commit, "안");
     }
 
     #[test]

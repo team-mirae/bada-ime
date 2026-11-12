@@ -3,8 +3,8 @@ import InputMethodKit
 
 /// The keyboard layout macOS uses while bada ime is selected, which is also what the Keyboard Viewer
 /// shows (tools/make-keylayout.swift). Muhenkan: qwerty.keylayout, ABC with ろ as \\ and ⇧ろ _ (keys the
-/// engine passes on type JIS characters through it). Henkan: bada.keylayout, ABC with bada's
-/// (layout 13) jamo on the unshifted and ⇧ layers, whatever layouts are in use.
+/// engine passes on type JIS characters through it). Henkan: bada.keylayout, ABC with bada plain's
+/// (layout 16) legends on the unshifted and ⇧ layers, whatever layouts are in use.
 enum Keyboards {
     static let abc = "com.apple.keylayout.ABC"
     static let bada = "me.sjun.inputmethod.Bada.keylayout.bada"
@@ -24,11 +24,10 @@ enum Keyboards {
         }
     }
 
-    /// What ABC types for a key that bada.keylayout gives a jamo on this layer, or nil: unshifted,
-    /// every key named in KeyMap that bada (13) takes; with ⇧, J K L ; ¥ (docs/layouts/13-bada.md §2).
+    /// What ABC types for a key that bada.keylayout gives a legend of its own, or nil: every key
+    /// named in KeyMap that bada plain (16) takes, unshifted and with ⇧ (docs/layouts/16-bada-plain.md).
     static func passOn(code: Int, shift: Bool) -> String? {
         guard let name = keyNames[code], badaKeys.contains(name) else { return nil }
-        if shift && !badaShifted.contains(code) { return nil }
         return translate(abc, code, shift ? UInt32(shiftKey >> 8) : 0)
     }
 
@@ -44,7 +43,6 @@ enum Keyboards {
         ["Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal",
          "IntlYen", "BracketLeft", "BracketRight", "Semicolon", "Quote", "Backslash", "Comma", "Period", "Slash", "IntlRo"]
         + "QWERTYUIOPASDFGHJKLZXCVBNM".map { "Key\($0)" })
-    private static let badaShifted: Set<Int> = [kVK_ANSI_J, kVK_ANSI_K, kVK_ANSI_L, kVK_ANSI_Semicolon, kVK_JIS_Yen]
 
     private static func source(_ id: String) -> TISInputSource? {
         let filter = [kTISPropertyInputSourceID as String: id] as CFDictionary
