@@ -89,6 +89,11 @@ const KEY_FLOOR: f64 = 60.0;
 const SET_SCORE: f64 = 80.0;
 const SET_KNOWN: f64 = 5.0;
 const SET_OWN: f64 = 40.0;
+/// A word and its particle (§7.0): how likely a staged run is two layouts' keys, an English word
+/// and then a Korean or Japanese particle, beside one layout's all through: after a known English
+/// word, and after a capitalised name the word lists don't have.
+const SPLIT_KNOWN: f64 = 0.5;
+const SPLIT_NAME: f64 = 0.05;
 
 /// A henkan profile (§6.6): its own candidates, or a link to another profile.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
@@ -375,6 +380,8 @@ pub struct Engine {
     /// A row picked in the menu (§6.4) and its layout: typing on keeps it, as the row that extends
     /// it, else that layout's best (inter → interpolate when QWERTY's row was picked).
     chosen: Option<(String, Option<u32>)>,
+    /// The layout whose reading was fixed last (§6.4): its reading of the keys typed after shows.
+    stuck: Option<u32>,
     /// Waiting for the host's selection for this action.
     waiting: Option<String>,
     /// Muhenkan's open ⌥ + letter variants list.
@@ -399,6 +406,7 @@ impl Engine {
             index: 0,
             pick: None,
             chosen: None,
+            stuck: None,
             waiting: None,
             held: None,
             pinned: None,
@@ -542,6 +550,7 @@ impl Engine {
         self.index = 0;
         self.pick = None;
         self.chosen = None;
+        self.stuck = None;
     }
 
     fn take_shown(&mut self) -> String {
@@ -589,6 +598,62 @@ impl Engine {
         let best = scores.iter().flatten().copied().fold(f64::NEG_INFINITY, f64::max);
         let total = best + scores.iter().flatten().map(|s| (s - best).exp()).sum::<f64>().ln();
         scores.iter().map(|s| s.map(|s| (KEY_POINTS * (s - total)).max(-KEY_FLOOR))).collect()
+    }
+
+    /// A word and its particle (§7.0; JIS Moonshot §5.3): the staged keys as an English word on
+    /// QWERTY and then a Korean or Japanese particle on another enabled layout (Claude에, report를,
+    /// Claudeの). The start is a known English word or a capitalised name (a Japanese particle only
+    /// after a name), and the whole isn't an English word itself. Scored by the key models: the
+    /// start under QWERTY's and the particle under its layout's, each as a word that ends, against
+    /// every layout's reading of all the keys.
+    fn word_and_particle(&self, enabled: &[u32]) -> Option<Entry> {
+        if !enabled.contains(&QWERTY) || self.over.is_some() || self.presses.iter().any(|p| p.alt) {
+            return None;
+        }
+        let models = KeyModels::built_in()?;
+        let symbols = self.presses.iter().map(|&p| crate::keymodel::symbol(p)).collect::<Option<Vec<u8>>>()?;
+        let whole = layout::qwerty(&self.presses);
+        if self.data.is_english(&whole) || self.data.is_english_rare(&whole) {
+            return None;
+        }
+        let ended = |id: u32, keys: &[u8]| models.score(id, keys).map(|(keys, end)| keys + end);
+        // (a known word, the score, the text, Japanese)
+        let mut best: Option<(bool, f64, String, bool)> = None;
+        for at in 2..self.presses.len() {
+            let (head, tail) = self.presses.split_at(at);
+            let start = layout::qwerty(head);
+            let name = start.starts_with(|c: char| c.is_ascii_uppercase());
+            let letters = start.chars().all(|c| c.is_ascii_alphabetic()) || (name && start.chars().all(|c| c.is_ascii_alphanumeric()));
+            let known = self.data.is_english(&start);
+            if !letters || !(known || name) {
+                continue;
+            }
+            for &id in enabled {
+                if !tail.iter().all(|&p| layout::takes(id, p)) {
+                    continue;
+                }
+                let (ending, japanese) = match id {
+                    KANA | ROMAJI => (kana_reading(id, tail), true),
+                    KTS | LEGACY_KOREAN | LEGACY_MOONSHOT | BADA | K3S_JIS | BADA_PLAIN => (layout::compose_presses(id, tail), false),
+                    _ => continue,
+                };
+                let fits = if japanese { name && crate::particles::japanese(&ending) } else { crate::particles::korean(&ending) };
+                let (Some(a), Some(b)) = (ended(QWERTY, &symbols[..at]), ended(id, &symbols[at..])) else { continue };
+                let score = a + b + if known { SPLIT_KNOWN } else { SPLIT_NAME }.ln();
+                if fits && best.as_ref().is_none_or(|b| (known, score) > (b.0, b.1)) {
+                    best = Some((known, score, start.clone() + &ending, japanese));
+                }
+            }
+        }
+        let (_, score, text, japanese) = best?;
+        // Its share among the readings of all the keys, as `key_evidence` shares them.
+        let wholes = enabled.iter().filter(|&&id| self.presses.iter().all(|&p| layout::takes(id, p))).filter_map(|&id| {
+            models.score(id, &symbols).map(|(keys, end)| keys + (end.exp() * (1.0 - KEY_GOES_ON) + KEY_GOES_ON).ln())
+        });
+        let all: Vec<f64> = wholes.chain([score]).collect();
+        let top = all.iter().copied().fold(f64::NEG_INFINITY, f64::max);
+        let total = top + all.iter().map(|s| (s - top).exp()).sum::<f64>().ln();
+        Some(Entry { text, score: SET_SCORE + SET_KNOWN + (KEY_POINTS * (score - total)).max(-KEY_FLOOR), japanese, ..Entry::default() })
     }
 
     fn recompute(&mut self) {
@@ -977,6 +1042,7 @@ impl Engine {
             let hira = kana_reading(method, &self.presses);
             self.negatives = vec![Entry::kana(hira.clone(), 0.0), Entry::kana(japanese::katakana(&hira), 0.0)];
         }
+        entries.extend(self.word_and_particle(&enabled));
         // One row per text, at its best score.
         entries.sort_by(|a, b| b.score.total_cmp(&a.score));
         let mut seen = std::collections::HashSet::new();
@@ -998,14 +1064,25 @@ impl Engine {
             }
         }
         self.entries = entries;
-        // A row picked in the menu stays picked as typing goes on.
-        if let Some((text, source)) = &self.chosen {
-            let at = self.entries.iter().position(|e| e.text.starts_with(text.as_str()))
-                .or_else(|| source.and_then(|s| self.entries.iter().position(|e| e.source == Some(s))));
-            if let Some(i) = at {
-                self.index = i as i32;
-            }
+        // After a fix (§6.4) the layout that was fixed goes on showing: its first row.
+        if let Some(i) = self.stuck.and_then(|s| self.entries.iter().position(|e| e.source == Some(s))) {
+            self.index = i as i32;
         }
+    }
+
+    /// Fixes what shows (§6.4): the staged keys so far keep this text, whatever is typed after
+    /// them, and stay staged. The layout that read them sticks: its reading of the next keys shows.
+    fn fix(&mut self) {
+        if self.presses.is_empty() {
+            return;
+        }
+        let source = if self.index >= 0 { self.entries.get(self.index as usize).and_then(|e| e.source) } else { None };
+        self.prefix = self.shown();
+        self.presses.clear();
+        self.chosen = None;
+        self.over = None;
+        self.stuck = source;
+        self.recompute();
     }
 
     fn finish(&mut self, mut out: Output) -> Output {
@@ -1060,7 +1137,9 @@ impl Engine {
         } else {
             (self.index - 1).max(low)
         };
-        // Remember a row picked below the top; back at the top, nothing is picked.
+        // Remember a row picked below the top; back at the top, nothing is picked. Choosing a row
+        // by hand ends the hold a layout has from an earlier fix.
+        self.stuck = None;
         self.chosen = (self.index > 0)
             .then(|| self.entries.get(self.index as usize).map(|e| (e.text.clone(), e.source)))
             .flatten();
@@ -1184,6 +1263,11 @@ impl Engine {
         if let Some(f) = key.f_index() {
             return self.f_key(f, mods);
         }
+        // ⌃かな: fix what shows (§6.3).
+        if key == Key::Lang1 && mods.ctrl && !mods.alt && !mods.meta && !mods.shift {
+            self.fix();
+            return Output { consumed: true, ..Output::default() };
+        }
         if mods.is_shortcut() {
             return self.commit_then_pass();
         }
@@ -1277,19 +1361,12 @@ impl Engine {
             };
             let any = self.over.is_some() || self.candidates(&self.profile).iter().any(|&id| layout::takes(id, press));
             if any {
+                // A row picked in the menu is fixed by typing on (§6.4): the new key starts after it.
+                if self.chosen.is_some() {
+                    self.fix();
+                }
                 self.presses.push(press);
                 self.recompute();
-                // A picked entry that nothing extends now stays as it was, and the new key starts a
-                // word of its own after it (콕핏 picked, then eui: 콕핏의).
-                if let Some((text, _)) = self.chosen.clone() {
-                    if !self.entries.get(self.index as usize).is_some_and(|e| e.text.starts_with(text.as_str())) {
-                        self.prefix.push_str(&text);
-                        self.presses = vec![press];
-                        self.chosen = None;
-                        self.over = None;
-                        self.recompute();
-                    }
-                }
                 return consumed(String::new());
             }
         }
@@ -2066,14 +2143,44 @@ mod tests {
             press(&mut e, Tab);
         }
         assert_eq!(e.shown(), "inteo");
+        // typing on fixes the pick, and QWERTY goes on reading the keys after it
         press(&mut e, KeyP);
         assert_eq!(e.shown(), "inteop");
-        // back to the top: nothing picked any more
-        while e.index > 0 {
-            e.key(Tab, Mods::SHIFT);
-        }
         press(&mut e, KeyO);
-        assert_ne!(e.shown(), "inteopo");
+        assert_eq!(e.shown(), "inteopo");
+        // ⌫ takes the new keys back, then the fixed text, a character at a time
+        press(&mut e, Backspace);
+        press(&mut e, Backspace);
+        assert_eq!(e.shown(), "inteo");
+        press(&mut e, Backspace);
+        assert_eq!(e.shown(), "inte");
+    }
+
+    #[test]
+    fn control_kana_fixes_what_shows() {
+        // ⌃かな (§6.3): the keys so far keep the text that shows, staged, and its layout sticks
+        let data = Data::parse("인터\t50\n", "inter\n", "", "");
+        let mut e = Engine::new(Arc::new(data));
+        e.pin_dictionary(None);
+        let mut s = Settings::default();
+        s.enabled = vec![QWERTY, BADA_ROMAN];
+        e.set_settings(s);
+        let ctrl = Mods { ctrl: true, ..Mods::NONE };
+        // nothing staged: nothing happens, and the key is taken
+        let out = e.key(Lang1, ctrl);
+        assert_eq!((out.commit.as_str(), out.preedit.as_str(), out.consumed), ("", "", true));
+        for c in "inteo".chars() {
+            press(&mut e, Key::from_code(&format!("Key{}", c.to_ascii_uppercase())));
+        }
+        assert_eq!(e.shown(), "인터");
+        let out = e.key(Lang1, ctrl);
+        assert_eq!((out.commit.as_str(), out.preedit.as_str()), ("", "인터"));
+        // what was fixed doesn't change with the keys after it; bada roman reads them
+        for c in "neun".chars() {
+            press(&mut e, Key::from_code(&format!("Key{}", c.to_ascii_uppercase())));
+        }
+        assert_eq!(e.shown(), "인터는");
+        assert_eq!(press(&mut e, Space).commit, "인터는");
     }
 
     #[test]

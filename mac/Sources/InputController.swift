@@ -63,6 +63,8 @@ final class BadaInputController: IMKInputController {
             if !event.isARepeat {
                 if code == kVK_JIS_Kana && ctrl && alt && shift {
                     switchMode(to: Modes.current.other, client: client)
+                } else if code == kVK_JIS_Kana && ctrl && !alt && !cmd && !shift {
+                    if Modes.current == .henkan { fix(client: client) }   // ⌃かな (spec §6.3)
                 } else if Modes.current == .henkan {
                     languageKey(profileKey ?? BadaProfiles.macKana, shift: shift, client: client)
                 } else {
@@ -107,6 +109,12 @@ final class BadaInputController: IMKInputController {
         "com.apple.Terminal", "com.googlecode.iterm2", "net.kovidgoyal.kitty", "com.github.wez.wezterm",
         "io.alacritty", "org.alacritty", "dev.warp.Warp-Stable", "com.mitchellh.ghostty",
     ]
+
+    /// ⌃かな in henkan mode: fixes what shows (spec §6.3).
+    func fix(client given: IMKTextInput? = nil) {
+        guard let client = given ?? (client() as IMKTextInput?) else { return }
+        apply(engine.key("Lang1", shift: false, ctrl: true, alt: false, meta: false), to: client)
+    }
 
     /// かな again, or ⇧かな, in henkan mode: the next or previous menu entry.
     func cycle(back: Bool, client given: IMKTextInput? = nil) {

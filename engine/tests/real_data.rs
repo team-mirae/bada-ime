@@ -37,6 +37,48 @@ const GAMSAHAMNIDA: [Key; 12] = {
     [KeyD, KeyH, KeyG, KeyR, KeyH, KeyV, KeyH, KeyB, KeyE, KeyM, KeyA, KeyH]
 };
 
+/// A word and its particle (spec §7.0): an English word on QWERTY, then a Korean or Japanese
+/// particle on another layout of the set, in one staged run.
+#[test]
+fn a_word_and_its_particle() {
+    let d = data();
+    let shown = |ids: &[u32], keys: &[(Key, bool)]| {
+        let mut e = Engine::new(d.clone());
+        e.pin_dictionary(None);
+        let mut s = bada::Settings::default();
+        s.enabled = ids.to_vec();
+        e.set_settings(s);
+        e.set_mode(Mode::Henkan);
+        typed(&mut e, keys)
+    };
+    let letters = |text: &str| -> Vec<(Key, bool)> {
+        text.chars()
+            .map(|c| match c {
+                '@' => (Key::BracketLeft, false),
+                c => (Key::from_code(&format!("Key{}", c.to_ascii_uppercase())), c.is_ascii_uppercase()),
+            })
+            .collect()
+    };
+    // bada plain (16): 에 is B, 를 I S I, 는 L S L, 에서 B O A
+    assert_eq!(shown(&[0, 16], &letters("Claudeb")).preedit, "Claude에");
+    assert_eq!(shown(&[0, 16], &letters("reportisi")).preedit, "report를");
+    assert_eq!(shown(&[0, 16], &letters("APIisi")).preedit, "API를");
+    assert_eq!(shown(&[0, 16], &letters("clientboa")).preedit, "client에서");
+    // bada (13): 에 is F O
+    assert_eq!(shown(&[0, 13], &letters("Claudefo")).preedit, "Claude에");
+    // a Japanese particle after a name: で is W @; one key is offered, not shown (の is K)
+    assert_eq!(shown(&[0, 20], &letters("GitHubw@")).preedit, "GitHubで");
+    let out = shown(&[0, 20], &letters("Claudek"));
+    assert_eq!(out.preedit, "Claudek");
+    assert!(out.menu.iter().any(|m| m == "Claudeの"), "{:?}", out.menu);
+    // an English word stays whole, and so does Korean
+    assert_eq!(shown(&[0, 16], &letters("then")).preedit, "then");
+    assert_eq!(shown(&[0, 16, 20], &letters("PowerPoint")).preedit, "PowerPoint");
+    assert_eq!(shown(&[0, 16], &letters("hflkek")).preedit, "한국");
+    // without QWERTY there is no such reading
+    assert_ne!(shown(&[16], &letters("Claudeb")).preedit, "Claude에");
+}
+
 /// The default henkan candidate is bada plain (16; docs/layouts/16-bada-plain.md): vowels under
 /// the left hand, consonants under the right.
 #[test]
