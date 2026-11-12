@@ -17,6 +17,7 @@ pub mod bada_roman;
 pub mod key;
 pub mod keymodel;
 pub mod layout;
+pub mod particles;
 pub mod romaji;
 pub mod search;
 pub mod typo;

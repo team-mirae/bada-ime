@@ -2,7 +2,7 @@
 
 Status: **draft** (2026-11-07). Items marked **[decide]** are not settled: don't implement a guess
 silently. Where the build differs from the design, or has settled an open item for now, the text says
-"as built" (the build is 0.3.0; §7.0 sums it up). The Bada layout itself (id 13) is designed in
+"as built" (the build is 0.3.1; §7.0 sums it up). The Bada layout itself (id 13) is designed in
 [layouts/13-bada.md](layouts/13-bada.md); every layout has its page in [layouts/](layouts/README.md).
 
 ## 1. Names
@@ -234,6 +234,7 @@ JIS Moonshot falls back to the word under the caret; keep that, or do nothing? A
 | Space, Enter, Esc, Tab, … | Commit the preedit as shown, **then** perform the key's normal action |
 | かな, Tab, ↓ | Next entry in the suggestion menu (§6.4) |
 | ⇧かな, ⇧Tab, ↑ | Previous entry; from entry 0 into the negative entries (§6.4) |
+| ⌃かな | **Fixes what shows** (§6.4): the keys so far keep that text and stay staged, and the reading doesn't change. With nothing staged, nothing |
 | ⌫ | Takes back the last staged key, and the preedit is read again without it. With nothing staged, the app's |
 | F keys | Per the F-key bindings (§6.5); by default swallowed, doing nothing |
 | ⌥Space | Commits the preedit, then `　` (U+3000, full-width space) |
@@ -273,11 +274,14 @@ The interpretations of the staged keys form one menu with **signed indexes**:
 
 - Typing lands on **0**. Next (かな, Tab, ↓) goes up from there; previous (⇧かな, ⇧Tab, ↑)
   goes down, and **below 0 into the negative entries**.
-- **A picked entry stays picked** (owner, 2026-11-11). After Next has picked an entry above 0, typing
-  on lands on the best entry that extends it (QWERTY's `inter` picked, then `polate`: `interpolate`;
-  정석 picked, then more letters: 정석기업). If no entry extends it, the pick stays as it is and the
-  new keys start a word of their own after it (`cockpit`'s 콕핏 picked, then `eui`: 콕핏의). Going
-  back to 0 drops the pick; committing ends it.
+- **A picked entry is fixed by typing on** (owner, 2026-11-12; before, 2026-11-11, it could still
+  change when a longer entry extended it). After Next has picked an entry above 0, the next key
+  fixes it: the keys so far keep the picked text, still staged, and the new keys start after it
+  (3 U Q with あなた picked, then more keys: あなた stays). **The layout that was fixed sticks**: its
+  reading of the keys after shows first (QWERTY's `inter` picked, then `polate`: `interpolate`;
+  `cockpit`'s 콕핏 picked, then `eui`: 콕핏의), until a row is chosen by hand again or the text is
+  committed. **⌃かな fixes what shows without picking another row**, the top entry included. ⌫ takes
+  back the keys after a fix, then the fixed text a character at a time.
 - Japanese methods (20 Kana, 21 Romaji) define **−1 hiragana** and **−2 katakana**: from a fresh
   reading, ⇧Tab once is hiragana, twice katakana.
 - **Optional, off by default** (owner, 2026-11-08): Settings → "Script forms below the top entry"
@@ -470,7 +474,7 @@ the output.
   the input method's own events, `~/Library/Logs/BadaIME.log`
   ([troubleshooting.md](troubleshooting.md)).
 
-### 7.0 What 0.3.0 builds
+### 7.0 What 0.3.1 builds
 
 - Layouts **0** (QWERTY), **10** (2-set), **11** (JIS Korean), **12** (JIS Moonshot), **13** (Bada, layouts/13-bada.md), **14** (3-set JIS), **15** (bada roman), **16** (bada plain, layouts/16-bada-plain.md), **18** (Korean Roman), **19** (Kana Korean),
   **20** (Kana), **21** (Romaji), **150** (Symbols) and **151** (Unicode). 20 and 21 convert to kanji (Mozc's dictionary, §11)
@@ -520,6 +524,17 @@ the output.
   the keys say which layout was meant: `the` shows beside bada, not 판; `kareha` is 彼は and
   `hanguk` 한국 with 15 and 21. A layout alone, a layout without a model (19, 150, 151) and any
   layout beside only such layouts keep the table's scores.
+
+  **A word and its particle** (JIS Moonshot §5.3; `engine/src/particles.rs` has its lists). With
+  QWERTY in a set, one staged run may be an English word and then a particle typed on another
+  layout of the set: a Korean particle or ending on 10–14 or 16 (Claude에, report를, client에서;
+  two or three stacked: client들에게), or a Japanese one on 20 or 21 after a capitalised name
+  (GitHubで). The start is a known English word or a capitalised name, and the whole isn't an
+  English word itself (`then` stays `then`). The key models score it: the start under QWERTY's,
+  the particle under its layout's, each as a word that ends, times 0.5 after a known word and 0.05
+  after a name; it ranks as a known word with that share among the readings of all the keys. A
+  particle of one key after a name is offered, not shown (Claude and K: `Claudek`, then Claudeの).
+  Not built from Moonshot: staged phrases (§5.5 there), and 15 and 18, whose letters are QWERTY's.
 
   On the typing robot's layout sets ([robot.md](robot.md#layout-sets): every set of two or three
   production layouts of different languages) the first row is right 93.9% of the time, and each

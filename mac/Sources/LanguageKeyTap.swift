@@ -129,6 +129,8 @@ enum LanguageKeyTap {
                     LanguageKeys.eisu()
                 } else if ctrl && alt && shift {
                     LanguageKeys.toggle()  // HYPER (with ⌘) or MEH (without)
+                } else if ctrl && !alt && !cmd && !shift {
+                    LanguageKeys.fix()  // ⌃かな: fix what shows (spec §6.3)
                 } else if !ctrl && !alt && !cmd {
                     LanguageKeys.kana(shift: shift)
                 }
@@ -156,6 +158,13 @@ enum LanguageKeys {
 
     static func kana(shift: Bool) {
         profile(BadaProfiles.macKana, shift: shift)
+    }
+
+    /// ⌃かな in henkan mode: what shows is fixed and stays staged (spec §6.3).
+    static func fix() {
+        if Modes.selectedNow() == .henkan, let controller = BadaInputController.typing {
+            controller.fix()
+        }
     }
 
     /// かな, or a profile key (spec §6.6): henkan mode in that profile; already there, the next

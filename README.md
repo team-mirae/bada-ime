@@ -29,13 +29,13 @@ which is entered using **かな**, types every single candidate language
 you have setup simultaneously, then ranks them and shows you candidates.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-bada-kana-dark.png">
-  <img src="docs/images/layouts/qwerty-bada-kana-light.png" alt="QWERTY, bada and kana on one HHKB JIS keyboard">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/layouts/qwerty-bada-plain-kana-dark.png">
+  <img src="docs/images/layouts/qwerty-bada-plain-kana-light.png" alt="QWERTY, bada plain and kana on one HHKB JIS keyboard">
 </picture>
 
-This example demonstrates QWERTY (0), bada (13), and Japanese Kana (20)
+This example demonstrates QWERTY (0), bada plain (16), and Japanese Kana (20)
 all typed in **henkan** mode. Thus, `3`, `u`, `q` produce candidates
-`3uq` (QWERTY), `쪄ㅃ` (bada), `あなた` (kana) at the same time, and ranks
+`3uq` (QWERTY), `｢졔`, `あなた` (kana) at the same time, and ranks
 them. Obviously here only Japanese produces a legible phrase, so Japanese would
 rank first.
 
@@ -50,16 +50,13 @@ This example demonstrates QWERTY (0), bada roman (15), and Japanese Kana (20).
 
 [**Try it out!**](https://bada.sjun.me/)
 
-### bada
+### bada plain
 
-How was bada(13) designed? Its main consideration was that your wrists would never
+How was bada plain(16) designed? Its main consideration was that your wrists would never
 have to move. All movement is done by your fingers, either moving up/down or left/right.
 This reduces strain on your hands, and makes typing more comfortable.
 
 Once you are fluent in bada typing, expect less fatigue.
-
-Do not expect faster typing. For faster typing, use 3-set unshifted (14).
-It allows NKRO typing (모아치기), which makes for incredibly fast typing.
 
 ### bada roman
 
@@ -73,6 +70,12 @@ even if you are a fluent Korean speaker, this is a very good setup.
 It also does not mess with your Korean 2-set (KTS) muscle memory, as you aren't memorizing
 key positions. You instead memorize which roman letters map to which Korean jamo, and
 keep your typing in QWERTY, separate from your existing memory of KTS.
+
+### bada
+
+Initial layout which started this project. It had the same goal as bada plain, but it proved
+to be less than ideal during extended sessions. Thus, it was redesigned completely into
+bada plain. The old layout is kept in this repository, but is no longer the default.
 
 ### How to install
 
@@ -162,6 +165,7 @@ dictionary.
 | 10 | Korean (2-set) | KTS, the standard Korean keyboard |
 | 13 | Korean (bada) | [docs/layouts/13-bada.md](docs/layouts/13-bada.md) |
 | 15 | Korean (bada roman) | [docs/layouts/15-bada-roman.md](docs/layouts/15-bada-roman.md) |
+| 16 | Korean (bada plain) | [docs/layouts/16-bada-plain.md](docs/layouts/16-bada-plain.md) |
 | 20 | Japanese (Kana) | JIS kana, with kanji conversion |
 | 21 | Japanese (Romaji) | romaji, with kanji conversion |
 
