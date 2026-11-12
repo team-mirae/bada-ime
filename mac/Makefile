@@ -32,7 +32,7 @@ SHARED     := $(ENGINE)/data/en-ko/shared-order.tsv
 # Rebuilds the app when SENSITIVE changes.
 SENSITIVE_STAMP := $(BUILD)/.sensitive
 ICONS      := $(BUILD)/bada.tiff $(BUILD)/muhenkan.tiff $(BUILD)/henkan.tiff
-# The Keyboard Viewer's legends: bada's (13) jamo in henkan, ABC with ろ as \ _ in muhenkan
+# The Keyboard Viewer's legends: bada plain's (16) in henkan, ABC with ろ as \ _ in muhenkan
 # (tools/make-keylayout.swift).
 KEYLAYOUT  := $(BUILD)/bada.keylayout $(BUILD)/qwerty.keylayout
 # The app's icon, for Settings → About only (the input menu keeps 바: Resources/icons).
@@ -66,8 +66,8 @@ $(BUILD)/make-keylayout: tools/make-keylayout.swift Sources/KeyMap.swift
 	cp tools/make-keylayout.swift $(BUILD)/keylayout/main.swift
 	swiftc -O $(BUILD)/keylayout/main.swift Sources/KeyMap.swift -o $@
 
-$(KEYLAYOUT) &: $(BUILD)/make-keylayout ../docs/layouts/13-bada.json
-	$(BUILD)/make-keylayout ../docs/layouts/13-bada.json $(BUILD)
+$(KEYLAYOUT) &: $(BUILD)/make-keylayout ../docs/layouts/16-bada-plain.json
+	$(BUILD)/make-keylayout ../docs/layouts/16-bada-plain.json $(BUILD)
 
 $(BUILD)/%.tiff: Resources/icons/%.png Resources/icons/%@2x.png
 	tiffutil -cathidpicheck Resources/icons/$*.png Resources/icons/$*@2x.png -out $@

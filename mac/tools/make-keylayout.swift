@@ -1,23 +1,37 @@
 // Writes the keyboard layouts the input method shows (overrideKeyboard), so the Keyboard Viewer
 // shows what bada ime types. Both are macOS's ABC layout as a JIS keyboard has it, with changes:
-//   bada.keylayout (henkan): bada's (layout 13) jamo on the unshifted and ⇧ layers of the keys
-//     that carry them. A key the engine passes on there is typed as ABC types it, by the input
-//     method itself (Keyboards.passOn).
+//   bada.keylayout (henkan): bada plain's (layout 16) legends on the unshifted and ⇧ layers: its
+//     jamo and punctuation, and with ⇧ the syllables and digits. A key the engine passes on there
+//     is typed as ABC types it, by the input method itself (Keyboards.passOn).
 //   qwerty.keylayout (muhenkan): ろ is \ and ⇧ろ _, as the engine types it (ABC gives _ for both).
 // Every other layer (⌥, ⌘, ⌃) and key is ABC's, so shortcuts are unchanged.
 //
-//   (Makefile) build/make-keylayout ../docs/layouts/13-bada.json build/
+//   (Makefile) build/make-keylayout ../docs/layouts/16-bada-plain.json build/
 import Carbon
 import Foundation
 
 let args = CommandLine.arguments
-guard args.count == 3 else { FileHandle.standardError.write("usage: make-keylayout 13-bada.json outdir/\n".data(using: .utf8)!); exit(2) }
+guard args.count == 3 else { FileHandle.standardError.write("usage: make-keylayout 16-bada-plain.json outdir/\n".data(using: .utf8)!); exit(2) }
 
-// bada's legends per key name: [unshifted, ⇧]
+// The layout's legends per key name: [unshifted, ⇧]. A token of role "a" is its consonant and ㅏ,
+// one of role "n" its vowel on ㅇ (docs/layouts/16-bada-plain.md): the legend is the syllable.
+let initials = Array("ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"), vowels = Array("ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ")
+func syllable(_ initial: Character, _ vowel: Character) -> String? {
+    guard let i = initials.firstIndex(of: initial), let v = vowels.firstIndex(of: vowel) else { return nil }
+    return UnicodeScalar(UInt32(0xAC00 + (i * 21 + v) * 28)).map { String($0) }
+}
+func legend(_ token: [String: String]?) -> String? {
+    guard let token, let text = token["t"], let jamo = text.first else { return nil }
+    switch token["r"] {
+    case "a": return syllable(jamo, "ㅏ")
+    case "n": return syllable("ㅇ", jamo)
+    default: return text
+    }
+}
 let json = try JSONSerialization.jsonObject(with: Data(contentsOf: URL(fileURLWithPath: args[1]))) as! [String: Any]
 var bada: [String: [String?]] = [:]
 for (name, layers) in json["keys"] as! [String: [String: [[String: String]]]] {
-    bada[name] = [layers["base"]?.first?["t"], layers["shift"]?.first?["t"]]
+    bada[name] = [legend(layers["base"]?.first), legend(layers["shift"]?.first)]
 }
 
 // ABC, as a JIS keyboard (type 18) types it
@@ -35,7 +49,7 @@ func abcChars(_ code: Int, _ mods: Int) -> String {
 
 // The layers: its modifiers, the Carbon modifiers to translate ABC with, and which of the layout's
 // own layers (0 unshifted, 1 ⇧) it takes, if any. Caps Lock has a layer of its own (ABC's capitals;
-// the layout's own unshifted keys, so ろ stays \ and bada's jamo stay jamo): without it, Caps Lock
+// the layout's own unshifted keys, so ろ stays \ and the jamo stay jamo): without it, Caps Lock
 // would type lowercase (spec §6.7).
 let maps: [(String, Int, Int?)] = [
     ("<modifier keys=\"\"/>", 0, 0),

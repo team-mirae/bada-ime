@@ -15,6 +15,7 @@ pub mod kana_korean;
 pub mod korean_roman;
 pub mod bada_roman;
 pub mod key;
+pub mod keymodel;
 pub mod layout;
 pub mod romaji;
 pub mod search;

@@ -17,7 +17,7 @@ struct BadaFKeys: Codable, Equatable {
 /// The user's settings (spec §5.3, §6.4, §6.5), stored as the engine's JSON in UserDefaults.
 struct BadaSettings: Codable, Equatable {
     /// Henkan candidates (layout ids), in order.
-    var enabled: [UInt32] = [13]
+    var enabled: [UInt32] = [16]
     var default_muhenkan: UInt32 = 0
     /// Henkan profiles (spec §6.6): off by default; 変換 and カタカナ need the key tap (Accessibility).
     var use_profiles = false
@@ -58,7 +58,7 @@ struct BadaSettings: Codable, Equatable {
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        enabled = try c.decodeIfPresent([UInt32].self, forKey: .enabled) ?? [13]
+        enabled = try c.decodeIfPresent([UInt32].self, forKey: .enabled) ?? [16]
         default_muhenkan = try c.decodeIfPresent(UInt32.self, forKey: .default_muhenkan) ?? 0
         weights = try c.decodeIfPresent([String: Double].self, forKey: .weights) ?? [:]
         skin_tones = try c.decodeIfPresent([String].self, forKey: .skin_tones) ?? BadaSettings.allTones
